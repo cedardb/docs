@@ -1,0 +1,42 @@
+baseURL: https://docs.cedardb.com/
+languageCode: en-us
+title: CedarDB Documentation
+theme: hextra
+
+params:
+  page:
+    # full (100%), wide (90rem), normal (1280px)
+    width: wide
+  navbar:
+    displayTitle: false
+    displayLogo: true
+    logo:
+      path: logos/cedardb.svg
+      dark: logos/cedardb_dark.svg
+      link: /
+      height: 20
+      width: 200
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      index: content
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: false
+
+menu:
+  main:
+    - name: Website
+      url: https://cedardb.com/
+      weight: 1
+    - name: Search
+      weight: 4
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/cedardb"
+      params:
+        icon: github
