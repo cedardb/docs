@@ -2,7 +2,8 @@
 title: CedarDB Documentation
 cascade:
   type: docs
-next: /about
+toc: false
+next: /getting_started
 ---
 
 
