@@ -97,7 +97,7 @@ Note that this incurs some network overhead as the data is sent via the PostgreS
 
 The csv import is currently single-threaded, as CedarDB has to correctly handle newlines and escapes. If you are sure that your strings don't contain newlines **and** don't contain the delimiter, you can instead import in text mode which is multi-threaded and thus **much** faster:
 ```sql
-\copy {tablename} from 'your/path/{tablename}.csv' with(format text, delimiter '|', null '');
+copy {tablename} from 'your/path/{tablename}.csv' with(format text, delimiter '|', null '');
 ```
 
 Note that multithreaded import does not yet work when using a backslash in front of copy (i.e. when importing relative to the client).
