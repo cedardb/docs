@@ -3,6 +3,23 @@ title: Guides
 prev: /
 ---
 
+* Creating tables and inserting data
+* Joining multiple tables
+* Window functions
+* Recursive SQL
+* Best practices
+  * Schema design
+  * Bulk Inserts
+  * Indexes
+* Performance troubleshooting
+  * Explain / analyze
+  * Hardware setup
+* Example Datasets
+  * TPC-H
+  * TPC-DS
+  * JOB
+  * Reddit / Taxi / Handelsregister?
+
 ## Configuration
 
 You can see all config parameters in the `sql` REPL tool:

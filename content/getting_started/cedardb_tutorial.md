@@ -1,6 +1,6 @@
 ---
 title: "Tutorial: Creating a Standalone CedarDB"
-linkTitle: "CedarDB Tutorial"
+linkTitle: "Tutorial"
 prev: /getting_started
 weight: 10
 ---
