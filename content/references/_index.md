@@ -1,6 +1,7 @@
 ---
 title: References
 prev: /
+weight: 40
 ---
 
 CedarDB implements SQL language compatibility with PostgreSQL.

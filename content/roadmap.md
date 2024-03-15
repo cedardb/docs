@@ -2,7 +2,7 @@
 title: "Feature Roadmap for CedarDB"
 linkTitle: "Roadmap"
 prev: /
-weight: 10
+weight: 100
 ---
 
 We plan to implement many features in the future:

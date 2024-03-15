@@ -1,6 +1,8 @@
 ---
 title: Guides
 prev: /
+weight: 20
+
 ---
 
 * Creating tables and inserting data

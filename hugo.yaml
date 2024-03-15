@@ -40,3 +40,9 @@ menu:
       url: "https://github.com/cedardb"
       params:
         icon: github
+
+markup:
+  # allow raw html
+  goldmark:
+    renderer:
+      unsafe: true
