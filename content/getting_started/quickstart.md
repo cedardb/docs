@@ -58,6 +58,13 @@ bin/sql --createdb mydb/test.db
 You're now in the SQL shell and ready to enter SQL queries and commands!
 
 {{< callout type="info" >}}
+The SQL shell supports common keyboard shortcuts, e.g., `CTRL-R` to
+search the history or `TAB` for auto completion.
+{{< /callout >}}
+
+
+
+{{< callout type="info" >}}
 If you exit the SQL shell (e.g., via `CTRL-D`) you can reconnect to your database by supplying the database file as argument when restarting the shell: 
 `bin/sql mydb/test.db`
 
@@ -65,35 +72,128 @@ If you exit the SQL shell (e.g., via `CTRL-D`) you can reconnect to your databas
 
 {{% /steps %}}
 
-## Create a table
+## Create some tables
 
-Let's create a 
+Let's create some tables to store a small movie database. You can use normal SQL DDL statements:
 
 ```sql
-create table example
-(
-    i int
+create table movies (
+    title text,
+    year integer,
+    length integer,
+    genre text,
+    primary key(title, year)
 );
-copy example from 'example.csv' delimiter '|' null 'null';
+
+create table stars (
+    name text primary key,
+    wikiLink text,
+    gender char,
+    birthdate date
+);
+
+create table starsIn (
+    movieTitle text,
+    year integer,
+    starName text references stars(name),
+    foreign key (movieTitle, year) references movies(title, year)
+);
 ```
 
 ## Load some data
+After we have created our database, we can fill it with data. For loading data, you have multiple options:
 
-
-
-## Query your dataset
-For an in-depth reference of the syntax, you can refer to the
-[PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-copy.html).
-
-The REPL supports the common readline keyboard shortcuts, e.g., CTRL + R to
-search the history.
-It also supports backslash commands, e.g., to execute commands from a file:
+### Plain Inserts
+For this, use the `INSERT` statement:
 
 ```sql
-\i
-schema_definition.sql
--- For a list of options see:
-\?
+insert into movies values
+('Oppenheimer', 2023, 180, 'Biopic'),
+('Everything Everywhere All at Once', 2022, 139, 'Science Fiction'),
+('Das Boot', 1981, 149, 'Drama');
 ```
 
+### Importing from CSV
+If you have already stored your data as CSV format like such:
+
+```text {filename="stars.csv"}
+'Cilian Murphy','https://en.wikipedia.org/wiki/Cillian_Murphy', 'M', '1976-05-25'
+'Emily Blunt','https://en.wikipedia.org/wiki/Emily_Blunt', 'F', 'F', '1983-02-23'
+'Michelle Yeoh', 'https://en.wikipedia.org/wiki/Michelle_Yeoh', 'F', '1962-08-06'
+'Jürgen Prochnow', 'https://en.wikipedia.org/wiki/Jürgen_Prochnow', 'M', '1941-06-10'
+```
+You can do a bulk import:
+```sql
+copy stars from 'stars.csv' delimiter ',';
+```
+### Importing an SQL dump
+You might have exported your data from another database system as SQL dump:
+
+```sql {filename="dump.sql"}
+insert into starsIn values ('Oppenheimer', 2023, 'Cilian Murphy');
+insert into starsIn values ('Oppenheimer', 2023, 'Emily Blunt');
+insert into starsIn values ('Everything Everywhere All at Once', 2022, 'Michelle Yeoh');
+insert into starsIn values ('Das Boot', 1981, 'Jürgen Prochnow');
+```
+
+CedarDB can directly import and execute such a file from the shell:
+```sql
+\i dump.sql
+```
+
+## Query your dataset
+CedarDB supports standard SQL for querying data.
+
+The following query returns the average length of all movies:
+```sql
+select avg(length) from movies;
+```
+
+```sql
+avg
+156.00
+```
+
+
+CedarDB also supports all features you might expect from a modern SQL database system.
+The following query calculating the average age of actors by genre for example utilizes joins and complex date calculations:
+
+```sql
+select m.genre, avg(extract(year from justify_interval(current_date - birthdate)))
+from movies m 
+    join starsIn si on m.title = si.movieTitle and m.year = si.year
+    join stars s on s.name = si.starName
+group by m.genre;
+```
+
+```sql
+genre           avg
+Biopic          44.50
+Science Fiction 62.00
+Drama           83.00
+```
+
+CedarDBs sophisticated query optimizers can also efficiently evaluate nested queries that other database systems struggle with:
+
+```sql
+select m.title from movies m -- find the oldest movie
+where not exists (
+    select * from movies m2 where m2.year < m.year
+);
+```
+
+```sql
+title
+Das Boot
+```
+
+## Modify your dataset
+* Add/Drop columns
+* Delete data (referential integrity)
+
 ## What's next?
+
+* How to run with server?
+* Insert a big dataset into CedarDB
+* Test out our example datasets
+* More in-depth SQL guide
