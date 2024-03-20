@@ -42,6 +42,8 @@ menu:
         icon: github
 
 markup:
+  highlight:
+    noClasses: false
   # allow raw html
   goldmark:
     renderer:
