@@ -19,7 +19,7 @@ Below, you can see an example of the data:
 
 ## Data Loading
 
-To load the data into CedarDB, you first need to download them locally:
+To load the data into CedarDB, you first need to download it locally:
 ```sh
 curl -O https://daten.offeneregister.de/de_companies_ocdata.jsonl.bz2
 bzip2 --decompress de_companies_ocdata.jsonl.bz2
