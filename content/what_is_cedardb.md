@@ -2,7 +2,7 @@
 title: "What is CedarDB?"
 linkTitle: "What is CedarDB?"
 prev: /
-next: getting_started
+next: technology
 weight: 1
 ---
 
