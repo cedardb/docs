@@ -6,7 +6,8 @@ weight: 30
 
 ---
 
-Here are some recipes to integrate CedarDB into your data stack.
+The Data Cookbook contains a collection of recipes for common tasks typically asked of database systems, along with step-by-step instructions on how to accomplish them using CedarDB.
+
 
 * [Import data from PostgreSQL](./importing_from_postgresql)
 * Import data from CSV

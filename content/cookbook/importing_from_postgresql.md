@@ -1,10 +1,11 @@
 ---
-title: "Tutorial: Importing Data from PostgreSQL into CedarDB"
+title: "Importing Data from PostgreSQL into CedarDB"
 linkTitle: "Importing from PostgreSQL"
 weight: 30
 ---
+In this section, you will learn how to seamlessly transfer data from PostgreSQL to CedarDB.
 
-## Import the schema of your data into CedarDB
+{{% steps %}}
 
 ### Dump the schema from Postgres
 Make sure your Postgres instance is running.
@@ -14,15 +15,19 @@ Then use the Tool `pg_dump` (probably supplied together with PostgreSQL by your 
 pg_dump --schema-only postgres > schema.sql
 ```
 
-NB: postgres is the default database into which new tables are inserted. Replace with other database in above command if applicable.
+
+{{< callout type="info" >}}
+`postgres` is the default database into which PostgreSQL inserts new tables. Replace with other database in above command if you want to export the tables of a different database.
+{{< /callout >}}
 
 ### Adapt the dumped schema
-CedarDB does not support some settings PostgreSQL tries to set. Remove them from the schema dump for now by running the following three `sed` commands:
+CedarDB does not yet support some settings PostgreSQL tries to set. Remove them from the schema dump for now by running the following three `sed` commands:
 ```shell
 sed -i.bak 's/^SET.*$//g' schema.sql
 sed -i.bak 's/.*set_config.*//g' schema.sql
 sed -i.bak 's/^ALTER TABLE .* OWNER TO .*//g' schema.sql
 ```
+
 ### Remove unsupported data types
 CedarDB doesn't support some data types yet, especially no auto generated series. For now remove them, by manually editing schema.sql.
 
@@ -53,17 +58,18 @@ ALTER TABLE public.x ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 ```
 In this case, remove the alter table statement.
 
-**We're more than happy to help you adapt your exported schema, should you run into issues!**
-
-## Dump the data out of PostgreSQL into CSV files
+### Dump the data out of PostgreSQL into CSV files
 Connect with PostgreSQL via `psql`.
 
 Execute the following statement against Postgres for each table you want to export to CedarDB
 ```sql
 \copy {tablename} TO 'your/path/{tablename}.csv' DELIMITER '|' CSV NULL '';
 ```
+{{< callout type="info" >}}
+The `NULL` parameter specifies into which string null values should be serialized. If your data set contains empty strings, choose a different value.
+{{< /callout >}}
 
-## Import data from your freshly dumped files into CedarDB
+### Import data from your freshly dumped files into CedarDB
 
 Now make sure that CedarDB is running. Either let it run in parallel to Postgres and use a different port, or shut down Postgres and then start CedarDB. 
 For the following commands, we assume CedarDB listens at port 5432. If you're using another port, please change the commands accordingly (via the argument ` -p {Portnumber}`). 
@@ -74,7 +80,7 @@ Import the schema you've exported from PostgreSQL and modified earlier
 psql -h localhost -U postgres < schema.sql
 ```
 
-If you get some error messages in the server log, that's okay for now, as long as your tables are created (psql answers with `CREATE TABLE`).
+If you get some error messages in the server log, that's okay for now, as long as your tables are created (`psql` answers with `CREATE TABLE`).
 
 Connect with CedarDB via `psql`, e.g. via 
 ```shell
@@ -100,8 +106,14 @@ The csv import is currently single-threaded, as CedarDB has to correctly handle 
 copy {tablename} from 'your/path/{tablename}.csv' with(format text, delimiter '|', null '');
 ```
 
-Note that multithreaded import does not yet work when using a backslash in front of copy (i.e. when importing relative to the client).
+{{< callout type="warning" >}}
+Multithreaded import does not yet work when using a backslash in front of copy (i.e. when importing relative to the client).
+{{< /callout >}}
 
 
-## Run your queries!
-Your data is now imported into CedarDB. You can run your SQL queries against it. For an overview of the features, please refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/queries.html).
+{{% /steps %}}
+
+
+
+
+Your data is now successfully imported into CedarDB!
