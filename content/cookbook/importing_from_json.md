@@ -51,7 +51,12 @@ When storing data in CedarDB's native storage format, it uses advanced statistic
 efficient execution.  
 
 For the previous example, you can relationalize by creating a table with explicit [data types](/references/datatypes).
-Note that the JSON field access returns `null` when a key is not present.
+
+{{< callout type="info" >}}
+JSON field access returns `null` when a key is not present.
+Depending on your JSON schema, you can also mark columns as `not null`.
+{{< /callout >}}
+
 
 ```sql
 create table stars (
