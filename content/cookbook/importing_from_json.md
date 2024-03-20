@@ -10,7 +10,7 @@ efficient access to fields of the document.
 
 You can import data from a [JSON Lines](https://jsonlines.org/) file:
 
-```json {filename="stars.json"}
+```json lines {filename="stars.json"}
 {"name": "Cilian Murphy", "wikiLink": "https://en.wikipedia.org/wiki/Cillian_Murphy", "gender": "M", "birthdate": "1976-05-25"}
 {"name": "Emily Blunt", "wikiLink": "https://en.wikipedia.org/wiki/Emily_Blunt", "gender": "F", "birthdate": "1983-02-23"}
 {"name": "Michelle Yeoh", "wikiLink": "https://en.wikipedia.org/wiki/Michelle_Yeoh", "gender": "F", "birthdate": "1962-08-06"}
