@@ -13,7 +13,7 @@ params:
     logo:
       path: logos/cedardb.svg
       dark: logos/cedardb_dark.svg
-      link: /
+      link: /docs/
       height: 20
       width: 200
   search:
