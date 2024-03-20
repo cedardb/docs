@@ -1,6 +1,7 @@
 ---
 title: Guides
-prev: /
+prev: /getting_started
+next: /cookbook
 weight: 20
 
 ---

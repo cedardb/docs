@@ -3,9 +3,10 @@ title: CedarDB Documentation
 cascade:
   type: docs
 toc: false
-next: /getting_started
+next: /what_is_cedardb
 ---
 
+Welcome to the CedarDB documentation!
 
 CedarDB is a relational database management system.
 CedarDB supports a large part of standard SQL with a syntax similar to PostgreSQL.

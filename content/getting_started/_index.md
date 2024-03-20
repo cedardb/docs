@@ -1,7 +1,7 @@
 ---
 title: Getting Started
-prev: /
-next: /cedardb_tutorial
+prev: /what_is_cedardb
+next: /quickstart
 weight: 10
 ---
 
