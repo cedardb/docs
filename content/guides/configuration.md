@@ -6,8 +6,8 @@ next: /cookbook
 weight: 30
 ---
 
-In this part of the documentation, we will show you settings to control CedarDB's resource usage, help you collect benchmark results, and highlight some of our advanced configurations.
-Usually, the advanced configurations are not necessary, as CedarDB uses strategies to automatically choose the best settings for you.
+In this part of the documentation, we will show you settings to control CedarDB's resource usage, help you collect benchmark results, and highlight some of our expert configuration options.
+Usually, configuring these options is unnecessary, as CedarDB uses strategies to automatically choose the best settings for you.
 
 
 ## Resource usage
@@ -18,6 +18,7 @@ By default, CedarDB uses 50% of available system memory for our buffer manager.
 If you are running multiple applications on a single instance, you may want to reduce this amount.
 Unlike all other settings, this setting must be set during the startup phase of CedarDB.
 The amount of memory used can be set via an environment variable in your shell.
+The following shell command sets the available buffer size to 1 GB.
 
 ```shell
 export BUFFERSIZE=1G
@@ -50,9 +51,9 @@ create table persons (
 ```
 
 We support different storage types:
-  - `columnar` should be used as the default storage, leveraging the buffer manager and providing ACID guarantees. It is optimized for hybrid and analytic workloads.
+  - `columnar` is the best choice for hybrid and analytical workloads. It leverages the buffer manager and provides ACID guarantees.
   - `paged` uses a PAX-layout that leverages the buffer manager and provides ACID guarantees. It is optimized for OLTP workloads.
-  - `mapped` is an in-memory only relation that should not be used in production.
+  - `mapped` is an in-memory only relation optimized for highest performance that should not be used in production.
 
 
 ## Benchmarking
@@ -60,15 +61,15 @@ We support different storage types:
 
 ### Repetition of queries
 
-To validate results, it is important to run queries multiple times.
-To repeat a query, you can either repeat the execution (*e*), the compilation (*c*), or both (*a*).
+To validate performance, it is important to run queries multiple times.
+To repeat a query, you can either repeat the execution (`e`), the compilation (`c`), or both (`a`).
 To change the repetition mode, simply query this command.
 
 ```sql
 set debug.repeatmode='a';
 ```
 
-The number of repetitions can be easily set with the following command.
+The number of repetitions can be set with the following command.
 
 ```sql
 set debug.repeat=3;
@@ -77,7 +78,7 @@ set debug.repeat=3;
 
 ### Timeout
 
-In the unlikely event of a long-running query, you may want to set a maximum time.
+In the unlikely event of a long-running query, you may want to set a query time after which the query is terminated automatically.
 This can be accomplished with our timeout setting.
 This setting specifies the timeout in milliseconds, with 0 milliseconds disabling the timeout.
 
@@ -131,11 +132,11 @@ Although these settings are usually determined automatically, we will briefly di
 CedarDB is a compiling database, so each query is compiled into machine executable code.
 To do this, we first create our own intermediate representation (think LLVM-IR), which is then compiled into machine code.
 We provide several compilation backends:
-  - Adaptive ('a'): Adaptively chooses the best backend according to the current execution of the query (default).
-  - Interpreted ('i'): Interprets the generated code with very low latency.
-  - DirectEmit ('d'): Directly generates executable machine code from our intermediate representation with low latency and good query execution performance.
-  - Cheap ('c'): Medium latency backend that compiles the intermediate representation with LLVM and few optimizations and good query execution performance.
-  - Optimized ('o'): High latency backend that compiles the intermediate representation with LLVM and many optimizations for superior execution performance.
+  - Adaptive `a`: Adaptively chooses the best backend according to the current execution of the query and changes the execution over the duration of the query. It starts with the fastest latency backend and gradually transitions to faster but higher latency backends (default).
+  - Interpreted `i`: Interprets the generated code with very low latency but achieves only low performance.
+  - DirectEmit `d`: Directly generates executable machine code from our intermediate representation with low latency and good query execution performance.
+  - Cheap `c`: Medium latency backend that compiles the intermediate representation with LLVM and few optimizations and good query execution performance.
+  - Optimized `o`: High latency backend that compiles the intermediate representation with LLVM and many optimizations for superior execution performance.
 
 
 ```sql
@@ -148,9 +149,9 @@ In addition to binary joins, CedarDB also implements multiway joins.
 These joins are particularly useful for graph workloads.
 Because most workloads do not benefit from these types of joins, we use them conservatively.
 If your workload does benefit from such joins, you can direct the database system to use them more actively with the following options:
-  - Cautious ('c'): Conservatively use multiway joins only when these joins clearly outperform binary joins.
-  - Eager ('e'): Use multiway joins more aggressively when the estimated runtime is slightly improved.
-  - Disabled ('d'): Allows only binary joins.
+  - Cautious `c`: Conservatively use multiway joins only when these joins clearly outperform binary joins (default).
+  - Eager `e`: Use multiway joins more aggressively when the estimated runtime is slightly improved.
+  - Disabled `d`: Allows only binary joins.
 
 ```sql
 set debug.multiway='c';
