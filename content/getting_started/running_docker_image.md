@@ -76,18 +76,18 @@ From now on, you can connect from outside to the running CedarDB instance:
 psql -h localhost -U {{username}}
 ```
 
-### Copy data inside the container
+### Copy data into the container
 
-In the following tutorials, we will often use the `copy` operator which requires you to put the data relative to the server.
-Thus, the server can directly access the data without network overhead.
-Although, `\copy` can be used relative to `psql`, we focus on `copy` (without `\`) in this tutorial for faster loading of your data.
-To access the data, we need to copy the downloaded data inside the docker container.
+In the following tutorials, we will often use the `copy` operator to load data into CedarDB, which requires the server to have access to the files.
+This way, the server can directly access the data without network overhead for more performant operations.
+Although `\copy` can be used to copy data relative to the `psql` client, we focus on `copy` (without `\`) in this tutorial for its higher performance.
+To access the data from the server, we first need to copy the downloaded data inside the docker container.
 
 ```shell
 docker cp /your/path/download_folder cedardb_test:/var/lib/umbra/data/
 ```
 
-This command creates a new folder named `download_folder` relative to the CedarDB server.
+This command copies the folder `download_folder` to the CedarDB server, making it accessible without a path prefix.
 
 {{% /steps %}}
 
