@@ -29,12 +29,30 @@ This is intended behaviour, but might generate high load on your machine.
 If you want to keep other applications responsive, consider starting CedarDB with `nice`.
 Alternatively, you can restrict the number of threads that CedarDB uses.
 However, keep in mind that this limits the performance of CedarDB since all queries leverage the full parallelism of the system.
-This stems from our superior morsel-driven parallelization strategy.
+This stems from our superior [morsel-driven](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelization strategy.
 To change the parallelism, simply query the database with the following PostgreSQL-style setting command
 
 ```sql
 set debug.parallel=8;
 ```
+
+## Storage types
+
+CedarDB implements different storage types.
+As you have seen in an earlier chapter of this documentation, you can specify the storage type during the creation of a table.
+
+```sql
+create table persons (
+    id integer primary key generated always as identity,
+    name text
+) with (storage = columnar);
+```
+
+We support different storage types:
+  - `columnar` should be used as the default storage that leverages the buffer manager and provides ACID guarantees. It is optimized for hybrid and analytical workloads.
+  - `paged` uses a PAX-layout that leverages the buffer manager and provides ACID guarantees. It is optimized for OLTP workloads.
+  - `mapped` is an in-memory only relation that should not be used in production.
+
 
 ## Benchmarking
 
@@ -65,7 +83,6 @@ This setting specifies the timeout in milliseconds, and 0 milliseconds disable t
 ```sql
 set debug.timeout=1000;
 ```
-
 
 ## SQL tool
 
@@ -107,7 +124,4 @@ The output of the queries can be redirected to files (or `/dev/null`).
 ### Compilation strategy
 
 ### Multiway joins
-
-
-## Storage types
 
