@@ -89,7 +89,7 @@ For more information and alternative options to server-relatives paths for CSV i
 {{% /steps %}}
 
 ## The Query Workload
-The queries of the Join Order Benchmarks were created, as the name already reveales, to contain challenging join order
+The queries of the Join Order Benchmarks were created, as the name already reveals, to contain challenging join order
 decisions for the optimizer.
 Queries in the join order benchmark, therefore, join at least 4 and up to 17 tables, with an average of 8 joins in a query.
 These queries where designed to include meaningful connection between tables and mimic real analytical task one might 

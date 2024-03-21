@@ -91,7 +91,8 @@ insert into officers
 
 ## Queries
 
-Let's look for Munich's most wanted white-collar criminal [Jan Marsalek](https://www.bka.de/DE/IhreSicherheit/Fahndungen/Personen/BekanntePersonen/Jan_Marsalek_wirecard/Sachverhalt.html)
+Let's look for Munich's most wanted white-collar criminal
+[Jan Marsalek](https://www.bka.de/DE/IhreSicherheit/Fahndungen/Personen/BekanntePersonen/Jan_Marsalek_wirecard/Sachverhalt.html).
 If You See Something Say Something!
 
 ```sql
