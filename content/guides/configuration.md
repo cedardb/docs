@@ -6,7 +6,7 @@ weight: 20
 ---
 
 In this part of the documentation, we will show you settings to control the resource usage of CedarDB, help you to collect benchmark results, and highlight some of our advanced configurations.
-Usually, the advanced configuration are not necessary, as CedarDB employs strategies to automatically choose the best setting for you.
+Usually, the advanced configuration are not necessary as CedarDB employs strategies to automatically choose the best setting for you.
 
 
 ## Resource usage
@@ -121,7 +121,36 @@ The output of the queries can be redirected to files (or `/dev/null`).
 
 ## Advanced configuration
 
+Although these settings are usually determined automatically, we briefly discuss some of our advanced settings.
+
 ### Compilation strategy
 
+CedarDB is a compiling database, such that every query is compiled to machine executable code.
+To do so, we first create our own intermediate representation (think of LLVM-IR) which is then compiled to machine code.
+We offer several compilation backends:
+  - Adaptive ('a'): Adaptively chooses the best backend according to the current execution of the query (default).
+  - Interpreted ('i'): Interprets the generated code with very low latency.
+  - DirectEmit ('d'): Directly generates executable machine code from our intermediate representation with low latency and good query execution performance.
+  - Cheap ('c'): Medium latency backend that compiles the intermediate representation with LLVM and few optimizations and good query execution performance.
+  - Optimized ('o'): High latency backend that compiles the intermediate representation with LLVM and many optimizations for superior execution performance.
+
+
+```sql
+set debug.compilationmode='a';
+```
+
 ### Multiway joins
+
+CedarDB does not only implement binary joins but also multiway joins.
+These joins are especially useful in graph workloads.
+Because most workloads do not benefit by these types of joins, we only use them conservatively.
+If your workload benefits by such joins, you can direct the database system to more actively use such joins with the following options:
+
+  - Cautious ('c'): Conservatively use multiway joins only when these joins clearly outperform binary joins.
+  - Eager ('e'): Use multiway joins more aggressively when the estimated runtime is slightly improved.
+  - Disabled ('d'): Allows only binary joins.
+
+```sql
+set debug.multiway='c';
+```
 
