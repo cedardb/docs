@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="88.918159mm"
-   height="50.925613mm"
-   viewBox="0 0 88.918159 50.925613"
+   width="98.917999mm"
+   height="60.925999mm"
+   viewBox="0 0 98.917999 60.925998"
    version="1.1"
    id="svg8"
-   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
-   sodipodi:docname="unnesting.svg">
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="unnesting.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs2">
     <marker
@@ -35,7 +35,7 @@
        id="path-effect5708"
        is_visible="true"
        lpeversion="1"
-       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,0,0,1"
+       nodesatellites_param="F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1 @ F,0,0,1,0,2,0,1"
        unit="px"
        method="auto"
        mode="F"
@@ -154,7 +154,7 @@
        id="path-effect62864"
        is_visible="true"
        lpeversion="1"
-       nodesatellites_param="F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1"
+       nodesatellites_param="F,0,0,1,0,1.3229167,0,1 @ F,0,0,1,0,1.3229167,0,1 @ F,0,0,1,0,1.3229167,0,1 @ F,0,0,1,0,1.3229167,0,1"
        unit="px"
        method="auto"
        mode="F"
@@ -176,21 +176,24 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="35.779559"
-     inkscape:cy="274.9384"
+     inkscape:cx="54.642857"
+     inkscape:cy="236.42857"
      inkscape:document-units="mm"
      inkscape:current-layer="g1116"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="3440"
-     inkscape:window-height="1369"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1040"
+     inkscape:window-x="0"
+     inkscape:window-y="18"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -199,7 +202,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -207,10 +210,19 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-53.161354,-79.260403)">
+     transform="translate(-48.161434,-74.260209)">
     <g
        id="g1116"
        transform="matrix(0.26458333,0,0,0.26458333,14.15141,65.656923)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.87193;stroke-linejoin:round;-inkscape-stroke:none;paint-order:markers fill stroke"
+         id="rect1"
+         width="373.86331"
+         height="230.2715"
+         x="128.54182"
+         y="32.516357"
+         rx="23.258366"
+         ry="27.534271" />
       <g
          id="g1446"
          transform="translate(359.61431,59.599001)">
@@ -257,11 +269,11 @@
            id="g5779-4"
            transform="rotate(-45,-15.967122,-202.39682)">
           <polygon
-             points="131.99,110.27 128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 "
+             points="128.5,107.66 130.25,105.91 131.99,107.66 131.99,110.27 128.5,110.27 "
              id="polygon108-5-1-3"
              transform="matrix(1,0,0,2.3351114,-303.19106,-152.76116)" />
           <polygon
-             points="128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 "
+             points="131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 "
              id="polygon110-7-3"
              transform="matrix(1,0,0,2.3351114,-303.19106,-246.95955)" />
         </g>
@@ -269,24 +281,24 @@
            id="g5779-3"
            transform="rotate(-45,-103.80917,-197.95625)">
           <polygon
-             points="130.25,105.91 131.99,107.66 131.99,110.27 128.5,110.27 128.5,107.66 "
+             points="131.99,110.27 128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 "
              id="polygon108-5-1-8"
              transform="matrix(1,0,0,2.3351114,-303.19106,-152.76116)" />
           <polygon
-             points="128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 "
+             points="131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 "
              id="polygon110-7-60"
              transform="matrix(1,0,0,2.3351114,-303.19106,-246.95955)" />
         </g>
         <polygon
-           points="131.99,107.66 131.99,110.27 128.5,110.27 128.5,107.66 130.25,105.91 "
+           points="128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 131.99,110.27 "
            id="polygon108-5-1-8-8"
            transform="matrix(1,0,0,2.3351114,-87.12293,-227.45682)" />
         <polygon
-           points="130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 "
+           points="128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 "
            id="polygon110-7-60-8"
            transform="matrix(1,0,0,2.3351114,-87.12293,-321.65521)" />
         <polygon
-           points="128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 "
+           points="128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 "
            id="polygon110-7-60-8-7"
            transform="matrix(-1,0,0,-2.3351114,173.78269,421.24952)" />
         <g
@@ -298,7 +310,7 @@
              sodipodi:nodetypes="cccccc" />
         </g>
         <polygon
-           points="131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 "
+           points="131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 "
            id="polygon110-7-6"
            transform="matrix(1,0,0,2.3351114,-53.38293,-258.66238)" />
         <text
@@ -393,7 +405,7 @@
            id="path84-7-5"
            sodipodi:nodetypes="ccccccc" />
         <polygon
-           points="34.98,54.12 37.26,56.76 35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 "
+           points="35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 34.98,54.12 37.26,56.76 "
            id="polygon86-5"
            transform="rotate(-4.4004043,236.89813,292.65749)" />
         <g
@@ -411,7 +423,7 @@
              d="m 60.446954,54.523582 c 0.56,-0.48 0.1,-1.01 -0.81,-2.07 l 0.56,-0.48 c 1.76,2.25 3.05,3.75 5.03,5.82 l -0.56,0.48 c -0.91,-1.06 -1.37,-1.59 -1.93,-1.1 z"
              id="path84-7-2" />
           <polygon
-             points="34.98,54.12 37.26,56.76 35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 "
+             points="35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 34.98,54.12 37.26,56.76 "
              id="polygon86-5-1"
              transform="translate(13.486954,10.753582)" />
         </g>
@@ -463,20 +475,20 @@
              id="g5779-3-2"
              transform="rotate(-45,-65.329185,-182.01732)">
             <polygon
-               points="131.99,110.27 128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 "
+               points="128.5,107.66 130.25,105.91 131.99,107.66 131.99,110.27 128.5,110.27 "
                id="polygon108-5-1-8-2"
                transform="matrix(1,0,0,2.3351114,-303.19106,-152.76116)" />
             <polygon
-               points="128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 "
+               points="131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 "
                id="polygon110-7-60-4"
                transform="matrix(1,0,0,2.3351114,-303.19106,-246.95955)" />
           </g>
           <polygon
-             points="128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 131.99,110.27 "
+             points="130.25,105.91 131.99,107.66 131.99,110.27 128.5,110.27 128.5,107.66 "
              id="polygon108-5-1-8-8-6"
              transform="matrix(1,0,0,2.3351114,-87.12293,-195.57896)" />
           <polygon
-             points="130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 "
+             points="128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 "
              id="polygon110-7-60-8-76"
              transform="matrix(1,0,0,2.3351114,-87.12293,-289.77735)" />
           <text
@@ -513,11 +525,11 @@
                y="82.777702"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Libertinus Sans';-inkscape-font-specification:'Libertinus Sans'">⨯</tspan></text>
           <polygon
-             points="130.25,105.91 131.99,107.66 131.99,110.27 128.5,110.27 128.5,107.66 "
+             points="131.99,110.27 128.5,110.27 128.5,107.66 130.25,105.91 131.99,107.66 "
              id="polygon108-5-1-8-8-1"
              transform="matrix(1,0,0,2.3351114,-86.951208,-230.08607)" />
           <polygon
-             points="130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 "
+             points="128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 "
              id="polygon110-7-60-8-8"
              transform="matrix(1,0,0,2.3351114,-86.951208,-324.28446)" />
           <text
@@ -554,7 +566,7 @@
              id="path84-7-5-8"
              sodipodi:nodetypes="ccccccc" />
           <polygon
-             points="34.98,54.12 37.26,56.76 35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 "
+             points="35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 34.98,54.12 37.26,56.76 "
              id="polygon86-5-4"
              transform="rotate(-4.4004043,651.76209,308.59642)" />
           <g
@@ -574,7 +586,7 @@
             <g
                id="g62741">
               <polygon
-                 points="131.99,150.61 131.99,153.22 131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 "
+                 points="131.99,154.96 130.25,153.22 128.5,154.96 128.5,153.22 128.5,150.61 131.99,150.61 131.99,153.22 "
                  id="polygon110-7-6-5"
                  transform="matrix(1,0,0,2.3351114,-53.38293,-258.66238)" />
             </g>
@@ -615,7 +627,7 @@
                d="m 60.446954,54.523582 c 0.56,-0.48 0.1,-1.01 -0.81,-2.07 l 0.56,-0.48 c 1.76,2.25 3.05,3.75 5.03,5.82 l -0.56,0.48 c -0.91,-1.06 -1.37,-1.59 -1.93,-1.1 z"
                id="path84-7-2-3" />
             <polygon
-               points="31.67,56.98 32.99,55.83 34.98,54.12 37.26,56.76 35.28,58.48 33.96,59.62 34.14,57.16 "
+               points="34.98,54.12 37.26,56.76 35.28,58.48 33.96,59.62 34.14,57.16 31.67,56.98 32.99,55.83 "
                id="polygon86-5-1-9"
                transform="translate(13.486954,10.753582)" />
           </g>

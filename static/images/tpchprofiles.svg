@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="98.489899mm"
-   height="68.222313mm"
-   viewBox="0 0 98.489899 68.222313"
+   width="108.49mm"
+   height="78.222mm"
+   viewBox="0 0 108.49 78.222"
    version="1.1"
    id="svg5339"
    xml:space="preserve"
-   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
    sodipodi:docname="tpchprofiles.svg"
    inkscape:export-filename="generated/tpchprofiles.png"
    inkscape:export-xdpi="300"
@@ -28,9 +28,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="2.647615"
-     inkscape:cx="185.82762"
-     inkscape:cy="119.16385"
+     inkscape:zoom="1.8721465"
+     inkscape:cx="69.706083"
+     inkscape:cy="212.05605"
      inkscape:window-width="1920"
      inkscape:window-height="1040"
      inkscape:window-x="0"
@@ -280,7 +280,15 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-52.286678,-117.38682)"><g
+     transform="translate(-47.286629,-112.38698)"><rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.495281;stroke-linejoin:round;-inkscape-stroke:none;paint-order:markers fill stroke"
+       id="rect1"
+       width="108.49"
+       height="78.222"
+       x="47.286629"
+       y="112.38698"
+       rx="6.1537757"
+       ry="7.285109" /><g
        clip-path="url(#clip-0)"
        id="g5673"
        transform="matrix(0.35277778,0,0,0.35277778,50.684026,114.38959)"><path
