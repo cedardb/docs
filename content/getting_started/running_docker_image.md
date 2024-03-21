@@ -79,7 +79,7 @@ psql -h localhost -U {{username}}
 ### Copy data inside the container
 
 In the following tutorials, we will often use the `copy` operator which requires you to put the data relative to the server.
-Thus, the server can direly access the data without network overhead.
+Thus, the server can directly access the data without network overhead.
 Although, `\copy` can be used relative to `psql`, we focus on `copy` (without `\`) in this tutorial for faster loading of your data.
 To access the data, we need to copy the downloaded data inside the docker container.
 
