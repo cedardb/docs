@@ -3,23 +3,10 @@ title: Guides
 prev: /getting_started
 next: /guides/example_datasets
 weight: 20
-
 ---
+The guides contain information on all things CedarDB.
 
-* Creating tables and inserting data
-* Joining multiple tables
-* Window functions
-* Recursive SQL
-* Best practices
-  * Schema design
-  * Bulk Inserts
-  * Indexes
-* Performance troubleshooting
-  * Explain / analyze
-  * Hardware setup
-* Example Datasets
-  * TPC-H
-  * TPC-DS
-  * JOB
-  * Reddit / Taxi / Handelsregister?
-
+* [Example Datasets](./example_datasets)
+    * [Handelsregister](./example_datasets/handelsregister)
+    * [Join Order Benchmark](./example_datasets/job)
+* [Configuring CedarDB](./configuration)
