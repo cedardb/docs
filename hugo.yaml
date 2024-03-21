@@ -3,6 +3,9 @@ languageCode: en-us
 title: CedarDB Documentation
 theme: hextra
 
+enableRobotsTXT: true
+enableGitInfo: true
+
 params:
   page:
     # full (100%), wide (90rem), normal (1280px)
