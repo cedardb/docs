@@ -18,6 +18,7 @@ If you want to try out CedarDB for yourself, take a look at the following links:
 {{< cards >}}
   {{< card link="getting_started" title="Getting Started" image="images/getting_started.svg" subtitle="Get up and running with CedarDB in no time!">}}
   {{< card link="guides" title="Guides" image="images/guides.svg" subtitle="In-depth guides to all things CedarDB." >}}
+  {{< card link="cookbook" title="Cookbook" image="images/cookbook.svg"  subtitle="A collection of recipes for common tasks.">}}
   {{< card link="references" title="References" image="images/references.svg"  subtitle="A complete overview over CedarDB's feature set.">}}
 {{< /cards >}}
 
