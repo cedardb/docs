@@ -5,7 +5,8 @@ prev: /
 weight: 100
 ---
 
-We plan to implement many features in the future:
-* Full text search
-* PostgreSQL Replication
-* DataGrip compatability
+We plan to implement many features in the future. We currently prioritize:
+
+* Improved full text search capabilities
+* Implementing PostgreSQL replication
+* Improved DataGrip compatability

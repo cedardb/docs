@@ -8,6 +8,8 @@ CedarDB natively supports storing JSON documents in tables and working with JSON
 Two data types: `json` that stores the documents as text, and `jsonb` which stores a binary representation to allow 
 efficient access to fields of the document.
 
+## Importing JSON
+
 You can import data from a [JSON Lines](https://jsonlines.org/) file:
 
 ```json lines {filename="stars.json"}
