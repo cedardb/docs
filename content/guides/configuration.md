@@ -6,18 +6,18 @@ next: /cookbook
 weight: 30
 ---
 
-In this part of the documentation, we will show you settings to control the resource usage of CedarDB, help you to collect benchmark results, and highlight some of our advanced configurations.
-Usually, the advanced configuration are not necessary as CedarDB employs strategies to automatically choose the best setting for you.
+In this part of the documentation, we will show you settings to control CedarDB's resource usage, help you collect benchmark results, and highlight some of our advanced configurations.
+Usually, the advanced configurations are not necessary, as CedarDB uses strategies to automatically choose the best settings for you.
 
 
 ## Resource usage
 
 ### Buffer Size
 
-By default, CedarDB uses 50% of the available system memory for our internal page cache.
-If you run multiple applications on a single instance, you might want to reduce this amount.
-In contrast to all the other settings, this setting has to be defined during the start up phase of CedarDB.
-The amount of used memory can be defined via an environment variable in your shell.
+By default, CedarDB uses 50% of available system memory for our buffer manager.
+If you are running multiple applications on a single instance, you may want to reduce this amount.
+Unlike all other settings, this setting must be set during the startup phase of CedarDB.
+The amount of memory used can be set via an environment variable in your shell.
 
 ```shell
 export BUFFERSIZE=1G
@@ -28,10 +28,10 @@ export BUFFERSIZE=1G
 CedarDB also uses *all* threads of the system for best performance.
 This is intended behaviour, but might generate high load on your machine.
 If you want to keep other applications responsive, consider starting CedarDB with `nice`.
-Alternatively, you can restrict the number of threads that CedarDB uses.
-However, keep in mind that this limits the performance of CedarDB since all queries leverage the full parallelism of the system.
+Alternatively, you can limit the number of threads CedarDB uses.
+Note, however, that this will limit the performance of CedarDB, since all queries will take advantage of the full parallelism of the system.
 This stems from our superior [morsel-driven](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelization strategy.
-To change the parallelism, simply query the database with the following PostgreSQL-style setting command
+To change the parallelism, simply query the database with the following PostgreSQL-style set command
 
 ```sql
 set debug.parallel=8;
@@ -39,8 +39,8 @@ set debug.parallel=8;
 
 ## Storage types
 
-CedarDB implements different storage types.
-As you have seen in an earlier chapter of this documentation, you can specify the storage type during the creation of a table.
+CedarDB implements several storage types.
+As you have seen in an earlier chapter of this documentation, you can specify the storage type when you create a table.
 
 ```sql
 create table persons (
@@ -50,7 +50,7 @@ create table persons (
 ```
 
 We support different storage types:
-  - `columnar` should be used as the default storage that leverages the buffer manager and provides ACID guarantees. It is optimized for hybrid and analytical workloads.
+  - `columnar` should be used as the default storage, leveraging the buffer manager and providing ACID guarantees. It is optimized for hybrid and analytic workloads.
   - `paged` uses a PAX-layout that leverages the buffer manager and provides ACID guarantees. It is optimized for OLTP workloads.
   - `mapped` is an in-memory only relation that should not be used in production.
 
@@ -68,7 +68,7 @@ To change the repetition mode, simply query this command.
 set debug.repeatmode='a';
 ```
 
-The amount of repetitions can simply be set with the following command.
+The number of repetitions can be easily set with the following command.
 
 ```sql
 set debug.repeat=3;
@@ -77,9 +77,9 @@ set debug.repeat=3;
 
 ### Timeout
 
-In the unlikely event of a long running query, you would like to specify a maximum amount.
-This can be achieved with our timeout setting.
-This setting specifies the timeout in milliseconds, and 0 milliseconds disable the timeout.
+In the unlikely event of a long-running query, you may want to set a maximum time.
+This can be accomplished with our timeout setting.
+This setting specifies the timeout in milliseconds, with 0 milliseconds disabling the timeout.
 
 ```sql
 set debug.timeout=1000;
@@ -87,16 +87,18 @@ set debug.timeout=1000;
 
 ## SQL tool
 
-If you launch our sql tool, we have additional commands that help you benchmark our system.
+When you run our sql tool, we have additional commands that will help you benchmark our system.
 
 ### General commands
 
-A list of possible commands are shown with our help-command.
+For a list of possible commands, use our help command.
+
 ```
 \?
 ```
 
-If you would like to specify a query that is stored within a file, you can load and execute the query with our input command.
+If you want to specify a query that is stored in a file, you can load and run the query with our input command.
+
 ```
 \i path/to/query.sql
 ```
@@ -106,7 +108,7 @@ If you would like to specify a query that is stored within a file, you can load 
 
 
 To record our performance statistics, you can create a CSV with our performance results.
-Simply specify the output CSV with the following setting.
+Just specify the output CSV with the following setting.
 
 ```
 \record path/to/perf.csv
@@ -122,13 +124,13 @@ The output of the queries can be redirected to files (or `/dev/null`).
 
 ## Advanced configuration
 
-Although these settings are usually determined automatically, we briefly discuss some of our advanced settings.
+Although these settings are usually determined automatically, we will briefly discuss some of our advanced settings.
 
 ### Compilation strategy
 
-CedarDB is a compiling database, such that every query is compiled to machine executable code.
-To do so, we first create our own intermediate representation (think of LLVM-IR) which is then compiled to machine code.
-We offer several compilation backends:
+CedarDB is a compiling database, so each query is compiled into machine executable code.
+To do this, we first create our own intermediate representation (think LLVM-IR), which is then compiled into machine code.
+We provide several compilation backends:
   - Adaptive ('a'): Adaptively chooses the best backend according to the current execution of the query (default).
   - Interpreted ('i'): Interprets the generated code with very low latency.
   - DirectEmit ('d'): Directly generates executable machine code from our intermediate representation with low latency and good query execution performance.
@@ -142,11 +144,10 @@ set debug.compilationmode='a';
 
 ### Multiway joins
 
-CedarDB does not only implement binary joins but also multiway joins.
-These joins are especially useful in graph workloads.
-Because most workloads do not benefit by these types of joins, we only use them conservatively.
-If your workload benefits by such joins, you can direct the database system to more actively use such joins with the following options:
-
+In addition to binary joins, CedarDB also implements multiway joins.
+These joins are particularly useful for graph workloads.
+Because most workloads do not benefit from these types of joins, we use them conservatively.
+If your workload does benefit from such joins, you can direct the database system to use them more actively with the following options:
   - Cautious ('c'): Conservatively use multiway joins only when these joins clearly outperform binary joins.
   - Eager ('e'): Use multiway joins more aggressively when the estimated runtime is slightly improved.
   - Disabled ('d'): Allows only binary joins.
