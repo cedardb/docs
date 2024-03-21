@@ -59,4 +59,4 @@ Furthermore, CedarDB implements adaptive query execution. Each query is started 
 This approach ensures that short-running queries are completed quickly without huge compilation overhead, while more complex long-running queries benefit from increased optimization.
 
  ![Codegen in CedarDB](/images/tpchprofiles.svg)
-You can see effect of adaptive query execution in above picture. While compiling and optimizing a query has  
+You can see effect of adaptive query execution in above picture. It compares the same query executed in three different modes. While compiling and optimizing a query has a significant overhead (the bar labeled 'C' in the middle), adaptively compiling the query while it is already running can significantly improve performance even for queries taking only 20 milliseconds!
