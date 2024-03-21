@@ -65,7 +65,7 @@ copy cast_info from 'your/path/cast_info.csv' DELIMITER ',' CSV NULL '' ESCAPE '
 Some strings in the IMDB dataset contain the separator `,`, so you have to use the `CSV` format option instead of the more performant `TEXT` when importing the data.
 {{< /callout >}}
 
-For convenience, we provide an SQL file will all necessary copy commands [load.sql](https://www.cedardb.com/data/job/schema.sql). Please note that you need to modify the include paths from `your/path` to the correct location relative to the CedarDB server.
+For convenience, we provide an SQL file will all necessary copy commands [load.sql](https://www.cedardb.com/data/job/load.sql). Please note that you need to modify the include paths from `your/path` to the correct location relative to the CedarDB server.
 
 {{< callout type="info" >}}
 For more information and alternative options to server-relatives paths for CSV imports, please refer to the [CSV Cookbook]({{< ref "//content/cookbook/working_with_csv.md" >}}).
@@ -79,7 +79,7 @@ The queries of the Join Order Benchmarks were created, as the name already revea
 {{% steps %}}
 
 ### Run the benchmark queries
-All 113 JOB queries are available for [download](). You can either run these queries manually one by one using the usual query interface. E.g., the first query, `1a`, tries to find movies in the top 250 that where not produced by a production company that is not Metro-Goldwyn-Mayer Pictures.
+All 113 JOB queries are available for [download](http://www-db.in.tum.de/~leis/qo/job.tgz). You can either run these queries manually one by one using the usual query interface. E.g., the first query, `1a`, tries to find movies in the top 250 that where not produced by a production company that is not Metro-Goldwyn-Mayer Pictures.
 
 ```sql {filename="1a.sql"}
 SELECT MIN(mc.note) AS production_note, MIN(t.title) AS movie_title, MIN(t.production_year) AS movie_year 
