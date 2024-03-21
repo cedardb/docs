@@ -3,12 +3,16 @@ title: CedarDB Documentation
 cascade:
   type: docs
 toc: false
-next: /what_is_cedardb
+next: /getting_started
 ---
 
 Welcome to the CedarDB documentation! 
-CedarDB is a relational database system (DBMS) speaking SQL.
-In contrast to most other DBMS, CedarDB can process transactions (i.e., newly incoming data) and analytics at the same time without sacrificing performance.
+
+CedarDB is a blazingly fast relational database system (RDBMS) speaking SQL. 
+It can run analytical queries (OLAP) and transactions (OLTP) at the same time while giving strong ACID guarantees (MVCC).
+CedarDB uses PostgreSQL's SQL dialect and speaks the PostgreSQL wire protocol, making it compatible with many PostgreSQL database tools out of the box.
+
+
 
 If you want to try out CedarDB for yourself, take a look at the following links:
 {{< cards >}}
@@ -17,6 +21,5 @@ If you want to try out CedarDB for yourself, take a look at the following links:
   {{< card link="references" title="References" image="images/references.svg"  subtitle="A complete overview over CedarDB's feature set.">}}
 {{< /cards >}}
 
-For more details about CedarDB, take a look at [What is CedarDB?](./what_is_cedardb).
-If you are interested in the concepts behind CedarDB, have a look at [The technology behind CedarDB](./technology).
+If you are interested in the concepts behind CedarDB, have a look at [the technology behind CedarDB](./technology).
 

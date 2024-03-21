@@ -2,8 +2,7 @@
 title: "The Technology behind CedarDB"
 linkTitle: "CedarDB's Technology"
 prev: /
-next: getting_started
-weight: 2
+weight: 50
 ---
 
 There is no single technical innovation responsible for CedarDB's speed.
@@ -41,7 +40,7 @@ CedarDB implements a full-fledged cost-based query optimizer extensively tested 
 
  ![Pointer Swizzling in CedarDB](/images/unnesting.svg)
 
-As shown in the above pictore, CedarDB's optimizer can also fully decorrelate very complex dependent subqueries, reducing them from quadratic runtime to linear runtime. This lets you express complex queries crunching terabytes of data intuitively without worrying about the impact on performance.
+As shown in the above picture, CedarDB's optimizer can also fully decorrelate very complex dependent subqueries, reducing them from quadratic runtime to linear runtime. This lets you express complex queries crunching terabytes of data intuitively without worrying about the impact on performance.
 
 ## Code generation
 Most database systems today execute queries by interpreting them: 
