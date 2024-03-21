@@ -13,7 +13,7 @@ Here are a few highlights:
 ## Many-core execution
 Modern servers usually come with a few dozen to a hundred CPU cores. Database systems have traditionally used inter-query-parallelism to make us of all cores (i.e., each query is executed by its own core). All modern database systems also use intra-query-parallelism (i.e., each query is processed by multiple cores in parallel), which is especially important when issuing few but very compute-intensive analytical queries. However, even this approach quickly runs into [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law): The more cores one has available, the harder it becomes to keep all of them busy.
 
- ![Morsels in CedarDB](/images/morsels.svg)
+ ![Morsels in CedarDB](/images/morsels.svg "Four threads using morsel-driven execution, © André Kohn")
 
 
 CedarDB innovates by implementing morsel-driven parallelism. It divides each query into many morsels of a few thousand tuples each. Whenever a CPU core is done with its current job, it grabs a new morsel, i.e., a small chunk of data waiting to be processed. Since many more morsels are waiting to be processed than CPU cores, CedarDB can ensure that all cores stay busy until the end, as shown in the above picture. 
@@ -30,7 +30,7 @@ Most database systems currently available for purchase originate from a time whe
 
 Legacy database systems often struggle to fully exploit the throughput potential of modern SSDs due to hidden bottlenecks. For instance, to capitalize on the performance of modern SSDs, a database system needs to access them with multiple threads concurrently, leading to contention for the global lock of the buffer manager.
 
- ![Pointer Swizzling in CedarDB](/images/pointer_swizzling.svg)
+ ![Pointer Swizzling in CedarDB](/images/pointer_swizzling.svg "Using pointer swizzling for buffer management © Michael Freitag")
 CedarDB addresses this challenge using [Pointer Swizzling](https://en.wikipedia.org/wiki/Pointer_swizzling), a technique that decentralizes buffer management, making such a global lock obsolete, as seen in the above picture. Each pointer stores information whether the data it points to is currently in memory or swapped out to disk.
 This is one of many innovations ensuring that CedarDB fully capitalizes on the speed and efficiency of modern SSD-based I/O.
 
@@ -38,7 +38,7 @@ This is one of many innovations ensuring that CedarDB fully capitalizes on the s
 ## State-of-the-art query optimizer
 CedarDB implements a full-fledged cost-based query optimizer extensively tested for extremely large queries (> 10'000 joins). The best query optimizer is worthless if it lacks insights about the underlying data. Therefore, CedarDB employs a sophisticated statistics subsystem, providing many estimates to the optimizer that other database systems do not have. For example, CedarDB can estimate relation size after group by operations or cardinalities after filtering for distinct values.
 
- ![Pointer Swizzling in CedarDB](/images/unnesting.svg)
+ ![Unnesting in CedarDB](/images/unnesting.svg "Unnesting a subquery containing an aggregation")
 
 As shown in the above picture, CedarDB's optimizer can also fully decorrelate very complex dependent subqueries, reducing them from quadratic runtime to linear runtime. This lets you express complex queries crunching terabytes of data intuitively without worrying about the impact on performance.
 
@@ -50,12 +50,12 @@ CedarDB, on the other hand, employs data-centric code generation. It generates c
 Each query is thus compiled into a program that exactly does what the query requires (and nothing more).
 This code generation approach completely sidesteps the interpretation overhead of database systems using the more traditional execution models.
 
- ![Codegen in CedarDB](/images/tightloops.svg)
+ ![Codegen in CedarDB](/images/tightloops.svg "Transforming an operator tree into code, © Maximilian Bandle")
 
 
 However, the code generation approach introduces latency, as the code must be generated, optimized, and compiled to machine instructions. CedarDB sidesteps this issue by implementing a custom low-level language optimized for database workloads and designed for fast compilation to CPU instructions.
 Furthermore, CedarDB implements adaptive query execution. Each query is started before compilation is finished and then recompiled multiple times with increasing optimization levels during runtime. 
 This approach ensures that short-running queries are completed quickly without huge compilation overhead, while more complex long-running queries benefit from increased optimization.
 
- ![Codegen in CedarDB](/images/tpchprofiles.svg)
-You can see effect of adaptive query execution in above picture. It compares the same query executed in three different modes. While compiling and optimizing a query has a significant overhead (the bar labeled 'C' in the middle), adaptively compiling the query while it is already running can significantly improve performance even for queries taking only 20 milliseconds!
+ ![Query Compilation in CedarDB](/images/tpchprofiles.svg "Adaptive query compilation, © André Kohn")
+You can see effect of adaptive query execution in the above picture adapted from Kohn et al.'s research paper ["Adaptive Execution of Compiled Queries"](https://db.in.tum.de/~leis/papers/adaptiveexecution.pdf). It compares the same query executed in three different modes. While compiling and optimizing a query has a significant overhead (the bar labeled 'C' in the middle), adaptively compiling the query while it is already running can significantly improve performance even for queries taking only 20 milliseconds!
