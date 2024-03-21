@@ -1,6 +1,6 @@
 ---
 title: Data Cookbook
-prev: /
+prev: /guides/configuration
 next: /importing_from_postgresql
 weight: 30
 

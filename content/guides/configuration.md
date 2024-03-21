@@ -2,7 +2,8 @@
 title: Configuration
 linkTitle: "Configuration"
 prev: /example_datasets
-weight: 20
+next: /cookbook
+weight: 30
 ---
 
 In this part of the documentation, we will show you settings to control the resource usage of CedarDB, help you to collect benchmark results, and highlight some of our advanced configurations.

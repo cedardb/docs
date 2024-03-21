@@ -1,6 +1,7 @@
 ---
 title: "Importing Data from PostgreSQL into CedarDB"
 linkTitle: "Importing from PostgreSQL"
+prev: /cookbook
 weight: 30
 ---
 In this section, you will learn how to seamlessly transfer data from PostgreSQL to CedarDB.

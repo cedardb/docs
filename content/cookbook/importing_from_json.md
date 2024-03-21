@@ -1,6 +1,7 @@
 ---
 title: "Tutorial: Importing JSON Data into CedarDB"
 linkTitle: "Importing from JSON"
+next: /references
 weight: 50
 ---
 

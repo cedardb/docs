@@ -1,6 +1,7 @@
 ---
 title: References
-prev: /
+prev: /cookbook/importing_from_json
+next: /references/datatypes
 weight: 40
 ---
 

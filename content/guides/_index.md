@@ -1,7 +1,7 @@
 ---
 title: Guides
 prev: /getting_started
-next: /cookbook
+next: /guides/example_datasets
 weight: 20
 
 ---

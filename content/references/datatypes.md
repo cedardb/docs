@@ -1,6 +1,8 @@
 ---
 title: "Reference: Data Types"
 linkTitle: "Data Types"
+prev: /references
+next: /technology
 weight: 10
 ---
 
