@@ -34,5 +34,5 @@ The complete list of supported data types in CedarDB is as follows:
 * `text`
 * `time` (with or without time zone)
 * `timestamp` (with or without time zone)
-* `uuid`
+* [`uuid`](uuid)
 * `varchar`
