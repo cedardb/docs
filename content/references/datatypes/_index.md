@@ -12,7 +12,7 @@ We additionally support additional ones popularized by postgres (e.g., `array`, 
 The complete list of supported data types in CedarDB is as follows:
 
 * `array`
-* `bigint`
+* [`bigint`](integer)
 * `bignumeric`
 * `bit`
 * `bit varying`
@@ -23,14 +23,14 @@ The complete list of supported data types in CedarDB is as follows:
 * `character`
 * `date`
 * `double precision`
-* `integer`
+* [`integer`](integer)
 * `interval`
 * `json`
 * `jsonb`
 * `numeric`
 * `decimal`
 * `real`
-* `smallint`
+* [`smallint`](integer)
 * `text`
 * `time` (with or without time zone)
 * `timestamp` (with or without time zone)
