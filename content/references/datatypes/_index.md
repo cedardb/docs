@@ -21,7 +21,7 @@ The complete list of supported data types in CedarDB is as follows:
 * [`char`](text)
 * [`character varying`](text)
 * [`character`](text)
-* `date`
+* [`date`](date)
 * [`decimal`](numeric)
 * [`double precision`](double)
 * [`float`](double)
@@ -36,4 +36,4 @@ The complete list of supported data types in CedarDB is as follows:
 * `time` (with or without time zone)
 * `timestamp` (with or without time zone)
 * [`uuid`](uuid)
-* `varchar`
+* [`varchar`](text)
