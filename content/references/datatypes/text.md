@@ -65,7 +65,9 @@ Short strings therefore have significant performance advantages.
 ## Unicode Collation Support
 
 [Unicode collations](https://en.wikipedia.org/wiki/Collation) allow comparisons of string data.
-In the default collation, strings are ordered lexicographically byte-by-byte by their UTF-8 encoding.
+In the default collation, strings are ordered `binary`, i.e., lexicographically byte-by-byte by their UTF-8 encoding.
+Collates can be specified as [Unicode CLDR locale identifiers](https://unicode.org/reports/tr35/#Canonical_Unicode_Locale_Identifiers)
+with the additional tags `_ci` for case-insensitivity, and `_ai` for accent-insensitivity.
 
 For example, a case-insensitive collate can be useful for text comparison:
 ```sql
@@ -83,8 +85,38 @@ from strings;
 (1 row)
 ```
 
+However, be aware that queries using collates can result in unexpected results, when values *look* different, but 
+are considered equivalent according to the specified collate!
+```sql
+with strings(s) as (values ('foo'), ('FOO'))
+select distinct s collate "en_US_ci"
+from strings;
+```
 
-In addition, the expected ordering of diacritics can also depend on the collate:
+```
+ ?column? 
+----------
+ foo
+(1 row)
+```
+
+An equally valid result would be the upper-case result:
+```
+ ?column? 
+----------
+ FOO
+(1 row)
+```
+
+You can achieve a deterministic result by rewriting the query to output a `min()` aggregate in `binary` collate.
+```sql
+select min(s collate "binary")
+from strings
+group by s collate "en_US_ci";
+```
+
+
+In addition, the expected ordering of diacritics can also depend on the specified collate:
 ```sql
 with strings(s) as (
    values ('cote'),
