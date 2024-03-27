@@ -18,20 +18,21 @@ The complete list of supported data types in CedarDB is as follows:
 * `bit varying`
 * `boolean`
 * `byte array`
-* `char`
-* `character varying`
-* `character`
+* [`char`](text)
+* [`character varying`](text)
+* [`character`](text)
 * `date`
 * [`decimal`](numeric)
-* `double precision`
+* [`double precision`](double)
+* [`float`](double)
 * [`integer`](integer)
 * `interval`
 * `json`
 * `jsonb`
 * [`numeric`](numeric)
-* `real`
+* [`real`](double)
 * [`smallint`](integer)
-* `text`
+* [`text`](text)
 * `time` (with or without time zone)
 * `timestamp` (with or without time zone)
 * [`uuid`](uuid)
