@@ -11,7 +11,7 @@ We additionally support additional ones popularized by postgres (e.g., `array`, 
 
 The complete list of supported data types in CedarDB is as follows:
 
-* `array`
+* [`array`](array)
 * [`bigint`](integer)
 * [`bignumeric`](numeric)
 * `bit`
