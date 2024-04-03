@@ -16,7 +16,7 @@ create table foo(id integer generated always as identity)
 ```
 {{< /callout >}}
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     id uuid default gen_random_uuid()
@@ -35,7 +35,9 @@ select id from example;
 ```
 
 UUIDs are stored as 16&nbsp;Bytes, but always displayed as 32 standard hexadecimal characters.
-For data input, UUIDs are case and hyphen insensitive and can be surrounded by braces:
+
+## Input
+UUIDs are case and hyphen insensitive and can be surrounded by braces:
 
 ```sql
 -- All of the following literals are equivalent

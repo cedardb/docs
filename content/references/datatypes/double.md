@@ -8,11 +8,11 @@ The types `double precision`, `float`, and `real` are floating-point numbers tha
 [IEEE&nbsp;754](https://de.wikipedia.org/wiki/IEEE_754) format.
 
 {{< callout type="warning" >}}
-The `double precision` type is unsuitable for *exact* calculations that are necessary e.g., for monetary values.
+The `double precision` type is unsuitable for *exact* calculations that are necessary for, e.g., monetary values.
 Consider using [`numeric`](numeric) instead.
 {{< /callout >}}
 
-Usage example:
+## Usage Example
 ```sql
 create table constants (
     name text,
@@ -33,6 +33,7 @@ select * from constants;
  avogadro |   6.02214076e+23
 (3 rows)
 ```
+## IEEE Special Values
 
 If you need IEEE&nbsp;754 *special values*, you need to enter them with explicitly typed literal syntax:
 ```sql
@@ -46,8 +47,9 @@ select real 'nan', real 'inf', real '-0';
 (1 row)
 ```
 
+## Precision
 
-Additionally, beware of the limited floating-point precision, where rounding errors can quickly add up, and can lead 
+Beware of the limited floating-point precision, where rounding errors can quickly add up, and can lead 
 to subtle errors.
 Consider, e.g., the following query: 
 
@@ -69,7 +71,9 @@ select sum(i::real) from x;
 
 With exact-precision [`numeric`](numeric) types, the result of the query would be 0.
 However, with `double precision`, the result is only *close to* zero.
-The result also is not stable, since queries run in parallel, and we cannot guarantee an execution order.
+
+The result also is not stable, i.e., can change indeterministically when repeated:
+CedarDB executes queries in parallel and thus cannot guarantee the order in which the numbers are added.
 For the above query, an equally valid result would be:
 
 ```

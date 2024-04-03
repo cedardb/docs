@@ -6,10 +6,12 @@ weight: 10
 ---
 
 Integers are whole numbers that are typically used to represent counters or identifiers.
-CedarDB supports three different widths of integers, a two-byte `smallint`, a four-byte `integer`, and an eight-byte
-`bigint`.
+CedarDB supports three different widths of integers:
+*  A two-byte `smallint`,
+*  a four-byte `integer`, 
+*  and an eight-byte `bigint`.
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     id integer primary key
@@ -39,7 +41,7 @@ Storing values outside of the supported ranges will result in an overflow except
 Operations on integers are range checked, so that e.g., numeric overflows will never cause wrong results.
 To avoid overflows, it might be necessary to cast to a type that can represent a larger range.
 
-Example:
+### Handling Overflows
 ```sql
 create table integers(i) as 
 values (power(2, 29)::int),
@@ -53,7 +55,9 @@ select i + i from integers;
 ```
 ERROR:  numeric overflow
 ```
+You can handle such overflows in multiple ways:
 
+#### Try
 Wrapping the operation in a `try()` produces a `null` value for overflows:
 ```sql
 select try(i + i) from integers;
@@ -62,10 +66,11 @@ select try(i + i) from integers;
     try     
 ------------
  1073741824
-           
+            <---- null
 (2 rows)
 ```
 
+#### Casting
 Casting to `bigint` increases the value range and produces the correct result without an exception:
 
 ```sql

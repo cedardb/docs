@@ -7,7 +7,7 @@ weight: 14
 Date are day-accurate types without time of day references in ISO&nbsp;8601 `YYYY-MM-DD` format.
 CedarDB also accepts [PostgreSQL notation](https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-DATE-TABLE).
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     due_date date
