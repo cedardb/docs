@@ -8,8 +8,7 @@ The types `double precision`, `float`, and `real` are floating-point numbers tha
 [IEEE&nbsp;754](https://de.wikipedia.org/wiki/IEEE_754) format.
 
 {{< callout type="warning" >}}
-The `double precision` type is unsuitable for *exact* calculations that are necessary for, e.g., monetary values.
-Consider using [`numeric`](numeric) instead.
+The `double precision` type is not suitable for conducting precise calculations, which are essential, for instance, when handling monetary values.
 {{< /callout >}}
 
 ## Usage Example
