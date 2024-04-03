@@ -15,7 +15,6 @@ documentation: https://www.postgresql.org/docs/current/queries.html
 * SQL reference
 * Window functions
 * Recursive SQL
-* Clients and drivers
 * Admin GUI tools
 * User management
 
