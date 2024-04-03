@@ -6,13 +6,13 @@ weight: 11
 ---
 
 Numerics are numbers that are typically used to represent counters or identifiers.
-Useful when exact precision is needed and rounding errors need to be exact, e.g., for monetary amounts.
+They are useful when exact precision is needed and rounding errors need to be exact, e.g., when storing monetary amounts.
 Numeric types offer a fixed amount of decimal *precision*, and a fixed *scale* of fractional digits.  
 CedarDB supports two different storage widths, an eight-byte `numeric`, and a sixteen-byte `bignumeric`.
 Type specifications can use both names, as well as `decimal(precision, scale)`, interchangeably.
-The underlying representation will be chosen on the specified precision.
+CedarDB will choose the underlying representation automatically based on the specified precision.
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     price numeric(38, 3),
@@ -50,6 +50,9 @@ We recommend using a precision of 18 or less when possible for your application.
 Storing values outside of the supported ranges will result in an overflow exception.
 Operations on numerics are range checked, so that e.g., numeric overflows will never cause wrong results.
 
+
+## Handling Overflows
+
 Example:
 ```sql
 create table numerics(i) as 
@@ -71,6 +74,6 @@ select try(i + i) from numerics;
 ```
     try     
 ------------
-           
+           <---- null
 (1 row)
 ```

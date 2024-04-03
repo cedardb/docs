@@ -5,11 +5,11 @@ weight: 12
 ---
 
 CedarDB's `text` data type stores string data.
-We consider all strings as Unicode in UTF-8 encoding.
-In addition to the unconstrained `text` data type, we support standard SQL blank-padded 
-`char(length)`, and length constrained `varchar(length)`.
+It considers all strings as Unicode in UTF-8 encoding.
+In addition to the unconstrained `text` data type, CedarDB support standard SQL blank-padded 
+`char(length)`, and length constrained `varchar(length)` types.
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     gender char(1),
@@ -29,8 +29,9 @@ select * from example;
 (2 rows)
 ```
 
+## Text Length
 
-Character lengths in CedarDB are specified in *Unicode code points*.
+CedarDB specifies text length in *Unicode code points*:
 
 ```sql
 select length('🍍'), char_length('🍍'), octet_length('🍍');
@@ -43,12 +44,13 @@ select length('🍍'), char_length('🍍'), octet_length('🍍');
 (1 row)
 ```
 
-In addition, all strings need to be valid UTF-8 sequences, i.e., it is not possible to store
-arbitrary binary data in string columns without additional encoding.
-For such data, consider using `bytea`.
 The maximum *byte length* for strings is 4&nbsp;GiB.
 For compatibility to existing systems, conversions from `char` to `text` strips trailing
 blank-padded spaces.
+
+In addition, all strings need to be valid UTF-8 sequences, i.e., it is not possible to store
+arbitrary binary data in string columns without additional encoding.
+For such data, consider using `bytea`.
 
 ## Performance Considerations
 Text and length-constrained string data types are handled equivalently.
@@ -56,7 +58,7 @@ Strings with explicit length do not provide performance or storage benefits.
 Thus, we generally recommend against length-constraining string columns.
 
 One exception is `char(1)`, which is often used as an enum value.
-Therefore, we store it as a four-byte integer, i.e., one full Unicode code point.
+Therefore, CedarDB stores it as a four-byte integer, i.e., one full Unicode code point.
 
 Independent of length-constraints, CedarDB stores short strings of up to 12&nbsp;Bytes
 inline, whereas larger strings need an indirection.
@@ -85,8 +87,10 @@ from strings;
 (1 row)
 ```
 
-However, be aware that queries using collates can result in unexpected results, when values *look* different, but 
+### Non-deterministic Results
+Be aware that queries using collates can lead to unexpected results, when values *look* different, but 
 are considered equivalent according to the specified collate!
+For example, for the following query, both, the lowercase and the uppercase result are equally valid:
 ```sql
 with strings(s) as (values ('foo'), ('FOO'))
 select distinct s collate "en_US_ci"
@@ -99,8 +103,6 @@ from strings;
  foo
 (1 row)
 ```
-
-An equally valid result would be the upper-case result:
 ```
  ?column? 
 ----------
@@ -115,8 +117,9 @@ from strings
 group by s collate "en_US_ci";
 ```
 
+### Choose the Right Locale
+The expected ordering of diacritics can depend on the specified collate. French Candians, for example, seem to have a specific preference about the lexicographical order of diacritics:
 
-In addition, the expected ordering of diacritics can also depend on the specified collate:
 ```sql
 with strings(s) as (
    values ('cote'),

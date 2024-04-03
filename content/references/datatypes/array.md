@@ -8,7 +8,7 @@ CedarDB supports variable-length arrays, similar to [PostgreSQL](https://www.pos
 Arrays can have arbitrary underlying types, e.g, `int[]` or `text[]`, and an arbitrary number of dimensions.
 Similar to PostgreSQL, the length and dimensions of an array column do not need to be uniform.
 
-Usage example:
+## Usage Example
 ```sql
 create table example (
     numbers int[],
