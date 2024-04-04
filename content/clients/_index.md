@@ -1,6 +1,8 @@
 ---
 title: Clients
 weight: 40
+prev: /example_datasets/handelsregister
+next: /csharp
 ---
 
 CedarDB is compatible with most features of many PostgreSQL-compatible clients and drivers out of the box.
