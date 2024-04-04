@@ -1,8 +1,8 @@
 ---
 title: Configuration
 linkTitle: "Configuration"
-prev: /example_datasets
-next: /cookbook
+prev: /datatypes
+next: /technology
 weight: 30
 ---
 

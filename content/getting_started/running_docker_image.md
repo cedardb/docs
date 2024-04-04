@@ -1,7 +1,7 @@
 ---
 title: "Tutorial: CedarDB Docker Image"
 linkTitle: "Running inside Docker"
-next: /guides
+next: /cookbook
 weight: 30
 ---
 This tutorial explains how to build, configure and run the default CedarDB docker image.

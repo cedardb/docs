@@ -2,7 +2,7 @@
 title: "Example: JSON: German Commercial Register"
 linkTitle: "JSON: German Commercial Register"
 prev: /job
-next: /configuration
+next: /references
 weight: 20
 ---
 
