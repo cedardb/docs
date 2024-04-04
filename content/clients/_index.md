@@ -8,9 +8,5 @@ If you want to take use CedarDB in combination with a specific framework or lang
 
 
 * [C#](./csharp)
-* [Python] (./python)
-* [Java] (./java)
-* [Command Line] (./shell)
-* [C++] (./cpp)
-* [GUI Administration tools] (./gui_tools)
 
+More coming soon!
