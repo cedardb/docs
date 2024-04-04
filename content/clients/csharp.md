@@ -58,14 +58,14 @@ await using var reader = await readCommand.ExecuteReaderAsync();
 while (await reader.ReadAsync())
 {
     Console.WriteLine(
-        string.Format("[{0}]: User {1} wrote message \"{2}\"", 
-            reader.GetDateTime(0), 
-            reader.GetInt64(1), 
-            reader.GetString(2)));
+        "[{0}]: User {1} wrote message \"{2}\"", 
+        reader.GetDateTime(0), 
+        reader.GetInt64(1), 
+        reader.GetString(2));
 }
 ```
 
-## Bulk loading
+## Bulk Loading
 If you need to load a lot of data at once (e.g., for an initial import of your existing data set), inserting tuples one by one is too slow:
 npgsql has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
@@ -75,7 +75,7 @@ using (var writer = conn.BeginTextImport("COPY chatlog (userid, message) FROM ST
 {
     for (int i = 0; i < 1000000; ++i)
     {
-                await writer.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
+        await writer.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
     }
 }       
 ```
@@ -94,6 +94,7 @@ CedarDB will support this mode soon!
 If bulk loading is not an option, but data comes in at such a high rate that network latency becomes an issue, consider *batching*:
 
 ```C#
+await using var transaction = await conn.BeginTransactionAsync();
 await using var batch = new NpgsqlBatch(conn)
 {
     BatchCommands =
@@ -104,7 +105,96 @@ await using var batch = new NpgsqlBatch(conn)
         new("INSERT INTO chatlog (userid, message, ts) VALUES (12,'I am the last!', '2024-04-06 01:03:03')"),
     }
 };
-await using var reader = await batch.ExecuteReaderAsync();
+await batch.ExecuteNonQueryAsync();
+await transaction.CommitAsync();
+```
+Here, npgsql groups multiple statements into a single packet to CedarDB, saving expensive round trips.
+
+{{< callout type="info" >}}
+We recommend executing each batch within an explicit transaction (as shown above). 
+Otherwise, each insert statement is applied in its own transaction, increasing latency.
+Furthermore, by using one transaction per batch, you can ensure that either the whole batch is applied or nothing.
+{{< /callout >}}
+
+
+## Source Code
+
+{{% details title="Open to show the complete sample code" closed="true" %}}
+
+```C#
+using NodaTime;
+using NodaTime.Extensions;
+using Npgsql;
+
+class Sample
+{
+    static async Task Main(string[] args)
+    {
+        // Connect to CedarDB
+        String connString = "Server=127.0.0.1;User Id=<username>; " + 
+            "Password=<password>;Database=<database>;NoResetOnClose=true";
+        
+    var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
+    dataSourceBuilder.UseNodaTime();
+    var dataSource = dataSourceBuilder.Build();
+    var conn = await dataSource.OpenConnectionAsync();
+
+    
+    // Let's create a table
+    await using var createCommand = dataSource.CreateCommand(
+        "CREATE TABLE IF NOT EXISTS chatlog(userid integer, message text, ts timestamptz)");
+    await createCommand.ExecuteNonQueryAsync();
+
+    // Insert some data
+    await using var insertCommand = new NpgsqlCommand("INSERT INTO chatlog VALUES ($1, $2, $3)", conn)
+    {
+        Parameters =
+        {
+            new() { Value = 7, DataTypeName = "integer"},
+            new() { Value = "(☞ﾟ∀ﾟ)☞" },
+            new() { Value = SystemClock.Instance.InUtc().GetCurrentInstant()},
+        }
+    };
+    await insertCommand.ExecuteNonQueryAsync();
+    
+    // Let's query it!
+    await using var readCommand = dataSource.CreateCommand("SELECT ts, userid, message FROM chatlog LIMIT 10");
+    await using var reader = await readCommand.ExecuteReaderAsync();
+
+    while (await reader.ReadAsync())
+    {
+        Console.WriteLine(
+            "[{0}]: User {1} wrote message \"{2}\"", 
+            reader.GetDateTime(0), 
+            reader.GetInt64(1), 
+            reader.GetString(2));
+    }
+    
+    // Do a bulk insert
+    using (var writer = conn.BeginTextImport("COPY chatlog (userid, message, ts) FROM STDIN (FORMAT TEXT)"))
+    {
+        for (int i = 0; i < 1000000; ++i)
+        {
+            await writer.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
+        }
+    }      
+    
+    // Do a batched transaction
+    await using var transaction = await conn.BeginTransactionAsync();
+    await using var batch = new NpgsqlBatch(conn, transaction)
+    {
+        BatchCommands =
+        {
+            new("INSERT INTO chatlog (userid, message, ts) VALUES (9,'I am part of a batch!', '2024-04-03 01:03:03')"),
+            new("INSERT INTO chatlog (userid, message, ts) VALUES (10,'Me too!', '2024-04-04 01:03:03')"),
+            new("INSERT INTO chatlog (userid, message, ts) VALUES (11,'Servus', '2024-04-05 01:03:03')"),
+            new("INSERT INTO chatlog (userid, message, ts) VALUES (12,'I am the last!', '2024-04-06 01:03:03')"),
+        }
+    };
+    await batch.ExecuteNonQueryAsync();
+    await transaction.CommitAsync();
+    }
+}
 ```
 
-Here, npgsql groups multiple statements into a single packet to CedarDB, saving expensive round trips.
+{{% /details %}}
