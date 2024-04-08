@@ -3,7 +3,7 @@ title: "C#"
 linkTitle: "C#"
 weight: 10
 prev: /clients
-next: /references
+next: /python
 ---
 
 CedarDB is compatible with [Npgsql](https://www.npgsql.org/), the open source .NET driver for PostgreSQL.
