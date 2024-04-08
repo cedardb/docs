@@ -72,23 +72,54 @@ If you need to load a lot of data at once (e.g., for an initial import of your e
 npgsql has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
 Use npgsql's bulk loading feature instead:
+
+
+### Binary Mode
 ```C#
-using (var writer = conn.BeginTextImport("COPY chatlog (userid, message) FROM STDIN (FORMAT TEXT)"))
+using (var binaryWriter = conn.BeginBinaryImport("COPY chatlog(userid, message, ts) FROM STDIN (FORMAT BINARY)"))
+{
+    var ts = SystemClock.Instance.InUtc().GetCurrentInstant();
+    for (int i = 0; i < 1000000; ++i)
+    {
+        binaryWriter.StartRow();
+        binaryWriter.Write(i, NpgsqlDbType.Integer); // Specifying a type is optional but strongly recommended
+        binaryWriter.Write("Message", NpgsqlDbType.Text);
+        binaryWriter.Write(ts);
+    }
+    binaryWriter.Complete();
+}  
+```
+
+This feature makes use of CedarDB's Postgres-compatible `COPY` mode to bulk transmit all data, leading to significantly higher throughput:
+
+```
+LOG: 1000000 rows (0.000016 s parsing, 0.000286 s compilation, 0.882862 s transmission, 0.073085 s execution)
+```
+
+{{< callout type="warning" >}}
+Take note of the warning in the [npgsql docs](https://www.npgsql.org/doc/copy.html): It is your responsibility to ensure that npgsql uses the correct type for each row. It is therefore encouraged to specify the exact type of each row.
+{{< /callout >}}
+
+
+### Text Mode
+Alternatively, you can also use *text mode* for transferring the files. This allows you to send one string per tuple and let CedarDB to the parsing.
+
+```C#
+using (var textWriter = conn.BeginTextImport("COPY chatlog (userid, message, ts) FROM STDIN (FORMAT TEXT)"))
 {
     for (int i = 0; i < 1000000; ++i)
     {
-        await writer.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
+        await textWriter.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
     }
-}       
+}
 ```
-This feature makes use of CedarDB's Postgres-compatible `COPY` mode to bulk transmit all data, leading to significantly higher throughput:
+
 ```
-INFO:    1000000 rows (0.000014 s parsing, 0.000248 s compilation, 1.136539 s transmission, 0.035195 s execution)
+LOG: 1000000 rows (0.000016 s parsing, 0.000273 s compilation, 1.250094 s transmission, 0.034226 s execution)
 ```
 
 {{< callout type="info" >}}
-Npgsql also has a very easy to use *binary* copy mode which does not require manual string concatenation and promises to be even faster.
-CedarDB will support this mode soon!
+We recommend using binary copy mode as it significantly faster than text mode due to its terser encoding.
 {{< /callout >}}
 
 
@@ -172,15 +203,30 @@ class Sample
             reader.GetString(2));
     }
     
-    // Do a bulk insert
-    using (var writer = conn.BeginTextImport("COPY chatlog (userid, message, ts) FROM STDIN (FORMAT TEXT)"))
+    // Do a binary bulk insert
+    using (var binaryWriter = conn.BeginBinaryImport("COPY chatlog(userid, message, ts) FROM STDIN (FORMAT BINARY)"))
+    {
+        var ts = SystemClock.Instance.InUtc().GetCurrentInstant();
+        for (int i = 0; i < 1000000; ++i)
+        {
+            binaryWriter.StartRow();
+            binaryWriter.Write(i, NpgsqlDbType.Integer); // Specifying a type is optional but strongly recommended
+            binaryWriter.Write("Message", NpgsqlDbType.Text);
+            binaryWriter.Write(ts);
+        }
+
+        binaryWriter.Complete();
+    }
+
+    // Do a text bulk insert
+    using (var textWriter = conn.BeginTextImport("COPY chatlog (userid, message, ts) FROM STDIN (FORMAT TEXT)"))
     {
         for (int i = 0; i < 1000000; ++i)
         {
-            await writer.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
+            await textWriter.WriteAsync(i + "\t(☞ﾟ∀ﾟ)☞\t2024-04-04 01:03:03\n");
         }
-    }      
-    
+    }
+
     // Do a batched transaction
     await using var transaction = await conn.BeginTransactionAsync();
     await using var batch = new NpgsqlBatch(conn, transaction)
