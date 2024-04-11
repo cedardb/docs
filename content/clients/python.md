@@ -1,8 +1,8 @@
 ---
 title: "Python"
 linkTitle: "Python"
-weight: 20
-prev: /csharp
+weight: 30
+prev: /java
 next: /references
 ---
 

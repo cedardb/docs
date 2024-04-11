@@ -10,6 +10,7 @@ If you want to take use CedarDB in combination with a specific framework or lang
 
 
 * [C#](./csharp)
+* [Java](./java)
 * [Python](./python)
-  
+
 More coming soon!
