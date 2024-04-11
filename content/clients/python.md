@@ -20,7 +20,7 @@ Connect to CedarDB like this:
 ```python
 connstr = "host=localhost port=5432 dbname=<dbname> user=<username> password=<password>"
 with psycopg.connect(connstr) as conn:
-    #Your code using your new connection goes here
+    # Your code using your new connection goes here
 ```
 You now have an open connection to CedarDB that allows you to insert data or query the database.
 
@@ -28,7 +28,7 @@ You now have an open connection to CedarDB that allows you to insert data or que
 Let's use psycopg's `cursor` abstraction to create a new table storing the log of a public chat channel:
 
 ```python
-# with psycopg.connect(connstr) as conn:
+with psycopg.connect(connstr) as conn:
     with conn.cursor() as cur:
         cur.execute("""CREATE TABLE IF NOT EXISTS chatlog(
         userid integer, 
@@ -41,8 +41,8 @@ Let's use psycopg's `cursor` abstraction to create a new table storing the log o
 After creating our table, we can now insert some data:
 
 ```python
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:
         cur.execute(
             "INSERT INTO chatlog VALUES (%s, %s, %s)", (7, "(☞ﾟ∀ﾟ)☞", datetime.datetime.now())
         )
@@ -70,8 +70,8 @@ If you don't do anything of the above, your transaction will be rolled back and 
 Let's query the data we just inserted. We can retrieve multiple records by iterating over our cursor:
 
 ```python
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:
         cur.execute(
             "SELECT ts, userid, message FROM chatlog"
         )
@@ -94,8 +94,8 @@ class Chatline:
     message: str
 
 
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:        
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:        
         cur = conn.cursor(row_factory=class_row(Chatline))
         user42hist = cur.execute("select * from chatlog where userid = 42").fetchall()
         for chatline in user42hist:
@@ -108,13 +108,13 @@ Chatline(ts=datetime.datetime(2024, 4, 8, 11, 47, 46, 135798, tzinfo=zoneinfo.Zo
 
 ## Bulk Loading
 If you need to load a lot of data at once (e.g., for an initial import of your existing data set), inserting tuples one by one is too slow:
-npgsql has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
+psycopg has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
 Use psycopg's `COPY TO` construct instead:
 
 ```python
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:
         ts = datetime.datetime.now()
         with cur.copy("COPY chatlog (ts, userid, message) FROM STDIN") as copy:
             for i in range(0, 1000000):
@@ -153,18 +153,18 @@ Psycopg **version 3** and CedarDB support PostgreSQL's [*pipeline mode*](https:/
 Instead, client and server agree to batch responses and flush them at explicit synchronization points.
 This approach significantly increases throughput.
 
-The easiest ways to make useof pipeline mode is with the  `executemany()` method:
+The easiest ways to make use of pipeline mode is with the  `executemany()` method:
 
 ```python
-#Let's create some data
+# Let's create some data
 ts = datetime.datetime.now()
 new_messages = [(ts, 1, "Hello, I'm user 1")]
 for i in range(0, 1000000):
     new_messages.append((ts + datetime.timedelta(seconds=i), i, "Hello, user 1"))
 
 
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:
         cur.executemany("INSERT INTO chatlog(ts,userid,message) VALUES (%s, %s, %s)", new_messages)
         conn.commit() # throughput: ~6250 inserts/second
 ```
@@ -172,8 +172,8 @@ for i in range(0, 1000000):
 In comparison, the naive approach is quite slow:
 
 ```python
-# with psycopg.connect(connstr) as conn:
-    # with conn.cursor() as cur:
+with psycopg.connect(connstr) as conn:
+    with conn.cursor() as cur:
         for i in range(0,1000000): # don't do this!
             cur.execute("INSERT INTO chatlog(ts,userid,message) VALUES (%s, %s, %s)", new_messages[i]) 
             # throughput: ~4500 inserts/second
