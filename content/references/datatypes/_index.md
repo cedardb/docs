@@ -6,7 +6,7 @@ next: /integer
 weight: 10
 ---
 
-CedarDB strives to support all types specified by the SQL standard.
+CedarDB strives to support all useful data types, some of them specified by the SQL standard.
 We additionally support additional ones popularized by postgres (e.g., `array`, `jsonb`, `uuid`, etc.).
 
 The complete list of supported data types in CedarDB is as follows:

@@ -13,7 +13,7 @@ documentation: https://www.postgresql.org/docs/current/queries.html
 * [Configuration](./configuration)
 * Data formats
 * SQL dumps
-* SQL reference
+* [SQL reference](./sqlreference)
 * Window functions
 * Recursive SQL
 * Admin GUI tools
