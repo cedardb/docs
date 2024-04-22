@@ -1,9 +1,9 @@
 ---
 title: "Reference: SQL Expressions"
 linkTitle: "SQL Expressions"
-prev: /configuration
+prev: /queries
 next: /functions
-weight: 20
+weight: 30
 ---
 
 CedarDB supports many expressions that manipulate data:

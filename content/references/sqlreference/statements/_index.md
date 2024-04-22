@@ -3,7 +3,7 @@ title: "Reference: SQL Statements"
 linkTitle: "SQL Statements"
 prev: /configuration
 next: /expressions
-weight: 10
+weight: 20
 ---
 
 The complete list of supported SQL statements in CedarDB is as follows:

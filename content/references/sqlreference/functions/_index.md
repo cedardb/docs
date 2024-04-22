@@ -3,7 +3,7 @@ title: "Reference: Functions"
 linkTitle: "Functions"
 prev: /expressions
 next: /technology
-weight: 30
+weight: 40
 ---
 
 CedarDB supports many functions operating on scalar values.

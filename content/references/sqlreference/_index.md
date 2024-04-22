@@ -2,7 +2,7 @@
 title: "Reference: SQL"
 linkTitle: "SQL Reference"
 prev: /configuration
-next: /statements
+next: /queries
 weight: 50
 ---
 
