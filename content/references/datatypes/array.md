@@ -17,7 +17,7 @@ create table example (
 insert into example 
     values (array [1, 2, 3], array ['a', 'b', 'c']),
            ('{{1, 3}, {3, 4}}', '{{"a", "b"},{"c", "d"}}');
-select * as first from example;
+select * from example;
 ```
 
 ```
