@@ -16,7 +16,7 @@ The complete list of supported data types in CedarDB is as follows:
 * [`bignumeric`](numeric)
 * [`bit`](bit)
 * [`bit varying`](bit)
-* `boolean`
+* [`boolean`](boolean)
 * `byte array`
 * [`char`](text)
 * [`character varying`](text)
