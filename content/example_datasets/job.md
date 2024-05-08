@@ -39,7 +39,7 @@ To obtain the relevant data simply run
 
 ```shell
 mkdir jobdata && cd jobdata
-curl -O https://homepages.cwi.nl/~boncz/job/imdb.tgz
+curl -O https://bonsai.cedardb.com/job/imdb.tgz
 tar -zxvf imdb.tgz
 ```
 
@@ -92,25 +92,25 @@ For more information and alternative options to server-relatives paths for CSV i
 The queries of the Join Order Benchmarks were created, as the name already reveals, to contain challenging join order
 decisions for the optimizer.
 Queries in the join order benchmark, therefore, join at least 4 and up to 17 tables, with an average of 8 joins in a query.
-These queries where designed to include meaningful connection between tables and mimic real analytical task one might 
+These queries where designed to include meaningful connection between tables and mimic real analytical task one might
 want to know about movies.
 
 {{% steps %}}
 
 ### Run the benchmark queries
-All 113 JOB queries are available for [download](http://www-db.in.tum.de/~leis/qo/job.tgz).
+All 113 JOB queries are available for [download](https://bonsai.cedardb.com/job/job.tgz).
 You can either run these queries manually one by one using the usual query interface.
 E.g., the first query, `1a`, tries to find movies in the top 250 that were not produced by Metro-Goldwyn-Mayer Pictures.
 
 ```sql {filename="1a.sql"}
-SELECT MIN(mc.note) AS production_note, MIN(t.title) AS movie_title, MIN(t.production_year) AS movie_year 
+SELECT MIN(mc.note) AS production_note, MIN(t.title) AS movie_title, MIN(t.production_year) AS movie_year
 FROM company_type AS ct, info_type AS it, movie_companies AS mc, movie_info_idx AS mi_idx, title AS t
 WHERE ct.kind = 'production companies'
     AND it.info = 'top 250 rank'
-    AND mc.note  not like '%(as Metro-Goldwyn-Mayer Pictures)%' 
+    AND mc.note  not like '%(as Metro-Goldwyn-Mayer Pictures)%'
     AND (mc.note like '%(co-production)%' or mc.note like '%(presents)%')
-    AND ct.id = mc.company_type_id 
-    AND t.id = mc.movie_id 
+    AND ct.id = mc.company_type_id
+    AND t.id = mc.movie_id
     AND t.id = mi_idx.movie_id
     AND mc.movie_id = mi_idx.movie_id
     AND it.id = mi_idx.info_type_id;
