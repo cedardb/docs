@@ -2,6 +2,7 @@
 title: "Tutorial: CedarDB as Postgres Read-Replica"
 linkTitle: "Setting Up Read Replication"
 weight: 30
+draft: true
 ---
 # WIP!!
 
@@ -15,7 +16,7 @@ Enable this by setting `wal_level = logical` in the `WRITE-AHEAD LOG` section of
 
 ### Enable md5 password encryption
 Ensure that your replication source uses the legacy **md5** authentification mode.
-This can be easily checked by running the query 
+This can be easily checked by running the query
 ```sql
 SHOW password_encryption;
 ```
@@ -48,7 +49,7 @@ If not already existing, create the table(s) you want to replicate *from* in you
 
 ```sql
 create table foo(a integer, b integer);
-``` 
+```
 
 ### Create a publication
 For each table you want to replicate, you need to create a *Publication*:
