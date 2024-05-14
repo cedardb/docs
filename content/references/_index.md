@@ -11,11 +11,5 @@ documentation: https://www.postgresql.org/docs/current/queries.html
 
 * [Data types](./datatypes)
 * [Configuration](./configuration)
-* Data formats
-* SQL dumps
 * [SQL reference](./sqlreference)
-* Window functions
-* Recursive SQL
-* Admin GUI tools
-* User management
 
