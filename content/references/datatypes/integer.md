@@ -1,6 +1,6 @@
 ---
 title: "Reference: Integer Types"
-linkTitle: "Integer Types"
+linkTitle: "Integer"
 math: true
 weight: 10
 ---

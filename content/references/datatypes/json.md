@@ -1,6 +1,6 @@
 ---
-title: "Reference: Json Types"
-linkTitle: "Json Types"
+title: "Reference: JSON Types"
+linkTitle: "JSON"
 weight: 20
 ---
 

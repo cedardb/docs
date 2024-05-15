@@ -1,6 +1,6 @@
 ---
 title: "Reference: Bit String Types"
-linkTitle: "Bit String Types"
+linkTitle: "Bit String"
 weight: 22
 ---
 

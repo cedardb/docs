@@ -1,6 +1,6 @@
 ---
 title: "Reference: Numeric Types"
-linkTitle: "Numeric Types"
+linkTitle: "Numeric"
 math: true
 weight: 11
 ---

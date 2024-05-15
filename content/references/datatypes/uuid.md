@@ -1,6 +1,6 @@
 ---
 title: "Reference: UUID Type"
-linkTitle: "UUID Type"
+linkTitle: "UUID"
 weight: 24
 ---
 

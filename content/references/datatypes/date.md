@@ -1,6 +1,6 @@
 ---
 title: "Reference: Date Type"
-linkTitle: "Date Type"
+linkTitle: "Date"
 weight: 14
 ---
 

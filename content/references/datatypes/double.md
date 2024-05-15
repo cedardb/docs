@@ -1,6 +1,6 @@
 ---
 title: "Reference: Double Type"
-linkTitle: "Double Type"
+linkTitle: "Double"
 weight: 13
 ---
 

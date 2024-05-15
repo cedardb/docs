@@ -1,6 +1,6 @@
 ---
 title: "Reference: Array Types"
-linkTitle: "Array Types"
+linkTitle: "Array"
 weight: 21
 ---
 

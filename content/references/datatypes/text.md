@@ -1,6 +1,6 @@
 ---
 title: "Reference: Text Types"
-linkTitle: "Text Types"
+linkTitle: "Text"
 weight: 12
 ---
 
