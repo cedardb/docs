@@ -19,8 +19,3 @@ If you want to exclude the page until a certain publication date please add the 
 ```
 publishDate: 2023-10-19T00:40:04-07:00
 ```
-
-
-TODO: how does this hextra stuff work?
-How should we structure docs?
-What is a good template for docs?
