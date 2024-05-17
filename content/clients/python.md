@@ -3,7 +3,7 @@ title: "Python"
 linkTitle: "Python"
 weight: 30
 prev: /java
-next: /references
+next: /grafana
 ---
 
 CedarDB is compatible with [psycopg](https://www.psycopg.org/), Python's most popular PostgreSQL adapter.
@@ -129,7 +129,6 @@ LOG:     1000000 rows (0.000013 s parsing, 0.000310 s compilation, 3.967416 s tr
 ```
 
 
-{{< callout type="info" >}}
 For a moderate performance gain, you can also copy data formatted as raw binary stream. Just append `(FORMAT BINARY)` to the `COPY` statement and specify the data types:
 ```python
 with cur.copy("COPY chatlog (ts, userid, message) FROM STDIN (FORMAT BINARY)") as copy:
@@ -144,8 +143,13 @@ LOG:     1000000 rows (0.000016 s parsing, 0.000344 s compilation, 3.677765 s tr
 ```
 
 Please familiarize yourself with the limits of psycopg's binary copy support in the [official docs](https://www.psycopg.org/psycopg3/docs/basic/copy.html).
-{{< /callout >}}
 
+
+{{< callout type="info" >}}
+`execute()` and `executeMany()` automatically *prepare* statements that are executed multiple times in sequence.
+You can also override this setting by passing `prepare=True|False` to both methods. 
+Take a look [here](../../references/advanced/prepare), why preparing your statements is a *very good thing*.
+{{< /callout >}}
 
 ## Pipelining
 

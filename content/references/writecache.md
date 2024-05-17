@@ -1,7 +1,9 @@
 ---
 title: Write Caching
 linkTitle: "Write Caching"
-weight: 40
+prev: /advanced
+next: /technology
+weight: 70
 ---
 
 Modern storage devices often have high speed caches that hide latency when reading or writing data.

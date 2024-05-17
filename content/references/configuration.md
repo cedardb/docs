@@ -2,7 +2,7 @@
 title: Configuration
 linkTitle: "Configuration"
 prev: /datatypes
-next: /sqlreference
+next: /writecache
 weight: 30
 ---
 
