@@ -1,0 +1,129 @@
+.modal {
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    z-index: 40;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    &.is-active {
+        display: flex;
+    }
+}
+
+.modal-background {
+    background-color: #0c0c0caa;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.modal-card {
+    margin: 0 20px;
+    position: relative;
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: auto;
+
+    @media (min-width: 768px) {
+        width: 750px;
+    }
+
+    @media (max-width: 767px) {
+        max-width: calc(100vh - 20px);
+    }
+}
+
+.modal-close-button {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(10, 10, 10, 0.2);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    pointer-events: auto;
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    outline: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    vertical-align: top;
+    width: 20px;
+
+    &:before {
+        background-color: white;
+        content: "\00d7";
+        display: block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+        transform-origin: center center;
+        height: 2px;
+        width: 50%;
+    }
+
+    &:after {
+        background-color: white;
+        content: "\00d7";
+        display: block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+        transform-origin: center center;
+        height: 2px;
+        width: 50%;
+    }
+
+}
+
+.modal-card-body {
+    background-color: #002230 !important;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal-card {
+
+    max-width: calc(100vh - 60px);
+    max-height: calc(100vh - 100px);
+
+    @media (min-width: 768px) {
+        max-width: 100%;
+        max-height: calc(100vh - 100px);
+        width: 750px;
+    }
+
+    .modal-close-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}

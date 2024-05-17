@@ -9,13 +9,8 @@ This tutorial explains how to build, configure and run the default CedarDB docke
 
 {{% steps %}}
 
-### Download and build the docker image
-
-```shell
-mkdir cedardb && cd cedardb
-wget https://db.in.tum.de/\~fent/Dockerfile
-docker build -t cedardb .
-```
+### Get the docker image
+{{% waitlist %}}
 
 
 ### Run the docker container
