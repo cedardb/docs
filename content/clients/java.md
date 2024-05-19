@@ -2,8 +2,6 @@
 title: "Java"
 linkTitle: "Java"
 weight: 20
-prev: /csharp
-next: /python
 ---
 
 CedarDB is compatible with the [PostgreSQL JDBC](https://jdbc.postgresql.org/) driver.
