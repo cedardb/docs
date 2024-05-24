@@ -5,7 +5,7 @@ prev: advanced
 next: /writecache
 ---
 
-Prepared statements allow you to declare a SQL statement *template* ahead of time once and execute it many times over later on.
+Prepared statements allow you to declare an SQL statement *template* ahead of time once and execute it many times over later on.
 You can think of it like a function call in your favorite programming language:
 ```sql
 prepare add as select $1::int + $2::int as sum;
@@ -57,7 +57,7 @@ execute lookupuser('alonso;drop table users');
 
 ### Increase performance
 SQL statements are usually executed not just once, but multiple times.
-When preparing a statement, CedarDB can do a lot of up front work **once**, instead of each time when the query is executed.
+When preparing a statement, CedarDB can do a lot of upfront work **once**, instead of each time when the query is executed.
 Assume, for example, we want to build a stock market monitoring app and have to keep track of thousands of incoming trades per second:
 
 ```sql
@@ -73,7 +73,7 @@ create table trades
 prepare newTrade as insert into trades values($1, $2, $3, $4, $5);
 ```
 
-Now we can just excute this function for each new incoming trade:
+Now we can just execute this function for each new incoming trade:
 
 ```sql
 EXECUTE newTrade(1715958691, 'BUY', 'AAPL', 3, 189.8700);
@@ -115,19 +115,10 @@ This ensures that all subsequent queries are consistently executed with minimal 
 
 To be able to completely compile the prepared statement, CedarDB enforces static types for all parameters.
 In many cases, CedarDB infers parameter types from the surrounding query, and an explicit type can be omitted.
-However, in some cases it is not possible to infer the data type, which results in an eror:
+However, in some cases it is not possible to infer the data type, which results in an error:
 ```sql
 prepare echo as select $1;
 ERROR:  unable to infer the data type for parameter $1
 ```
 
 In such cases, you can explicitly cast the parameter to a type, e.g.: `$1::int`.
-
-{{< callout type="warning" >}}
-Unlike PostgreSQL, CedarDB currently does not re-plan prepared statements.
-This means that the query plan used by a prepared statement can become outdated.
-If, for example, you prepared an `update` statement on an empty table, CedarDB might decide to do a full table scan to find matches as an index scan is not worth the overhead.
-If you then insert millions of values, an index scan becomes much more preferable.
-
-We are currently implementing re-planning prepared statements. Until then, consider periodically re-preparing statements if your data set changes considerably in short amounts of time.
-{{< /callout >}}
