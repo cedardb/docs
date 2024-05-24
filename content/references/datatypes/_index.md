@@ -7,7 +7,7 @@ weight: 10
 ---
 
 CedarDB strives to support all useful data types, some of them specified by the SQL standard.
-We additionally support additional ones popularized by postgres (e.g., `array`, `jsonb`, `uuid`, etc.).
+We additionally support additional ones popularized by PostgreSQL (e.g., `array`, `jsonb`, `uuid`, etc.).
 
 The complete list of supported data types in CedarDB is as follows:
 
@@ -35,5 +35,5 @@ The complete list of supported data types in CedarDB is as follows:
 * [`uuid`](uuid)
 * [`varchar`](text)
 * [`interval`](interval)
-* `time` (with or without time zone)
-* `timestamp` (with or without time zone)
+* [`time`](time)
+* [`timestamp`](timestamp) (with or without time zone)
