@@ -4,7 +4,7 @@ linkTitle: "Interval"
 weight: 15
 ---
 
-Intervals are a convenient way for arithmetic on [date](date), [time](time), and [timestamp](timestamp) data.
+Intervals are a convenient way for arithmetic on [date](../date), [time](../time), and [timestamp](../timestamp) data.
 You can specify intervals in quantities of calendar units like `day` or `month`, with at most `microseconds`
 granularity.
 You can find a complete list of input units and options in the
