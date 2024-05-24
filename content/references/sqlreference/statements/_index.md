@@ -15,7 +15,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Copy
 * [Create database](createdb)
 * Create function
-* Create index
+* [Create index](createindex)
 * [Create role](createrole) (create user)
 * [Create schema](createschema)
 * Create sequence

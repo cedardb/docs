@@ -17,6 +17,8 @@ create table species (
 );
 ```
 
+After executing this statement, you can find the created table in the `pg_tables` system view.
+
 ## Columns
 
 Column definitions are specified as: `name type constraint`.
