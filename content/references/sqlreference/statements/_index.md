@@ -19,16 +19,16 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * [Create role](createrole) (create user)
 * Create schema
 * Create sequence
-* Create table
+* [Create table](createtable)
 * Create table as
 * Create view
-* Deallocate
+* [Deallocate](/docs/references/advanced/prepare)
 * Delete
 * Drop
-* Execute
+* [Execute](/docs/references/advanced/prepare)
 * Explain
 * Insert
-* Prepare
+* [Prepare](/docs/references/advanced/prepare)
 * Rename
 * Select
 * Set
