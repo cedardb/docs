@@ -8,7 +8,7 @@ weight: 20
 
 The complete list of supported SQL statements in CedarDB is as follows:
 
-* Alter role
+* [Alter role](alterrole) (alter user)
 * Alter table
 * Analyze
 * Call
@@ -16,7 +16,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Create database
 * Create function
 * Create index
-* Create role
+* [Create role](createrole) (create user)
 * Create schema
 * Create sequence
 * Create table
