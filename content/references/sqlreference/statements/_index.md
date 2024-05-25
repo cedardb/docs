@@ -23,7 +23,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Create table as
 * Create view
 * [Deallocate](/docs/references/advanced/prepare)
-* Delete
+* [Delete](delete)
 * Drop
 * [Execute](/docs/references/advanced/prepare)
 * Explain
