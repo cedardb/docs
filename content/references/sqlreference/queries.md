@@ -2,7 +2,7 @@
 title: SQL Queries
 linkTitle: "Queries"
 prev: /sqlreference
-next: /expressions
+next: /statements
 weight: 10
 ---
 

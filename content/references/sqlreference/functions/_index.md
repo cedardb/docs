@@ -2,7 +2,7 @@
 title: "Reference: Functions"
 linkTitle: "Functions"
 prev: /expressions
-next: /technology
+next: references/advanced
 weight: 40
 ---
 
