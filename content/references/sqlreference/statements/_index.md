@@ -12,7 +12,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Alter table
 * Analyze
 * Call
-* Copy
+* [Copy](copy)
 * [Create database](createdb)
 * Create function
 * [Create index](createindex)
@@ -27,7 +27,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Drop
 * [Execute](/docs/references/advanced/prepare)
 * Explain
-* Insert
+* [Insert](insert)
 * [Prepare](/docs/references/advanced/prepare)
 * Rename
 * Select
