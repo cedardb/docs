@@ -10,7 +10,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 
 * [Alter role](alterrole) (alter user)
 * Alter table
-* Analyze
+* [Analyze](analyze)
 * Call
 * [Copy](copy)
 * [Create database](createdb)
