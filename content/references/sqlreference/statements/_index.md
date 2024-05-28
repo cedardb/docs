@@ -32,6 +32,5 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Rename
 * Select
 * [Set/Show setting](settings)
-* [Transaction begin/end/rollback](transaction)
 * [Update](update)
 * Vacuum

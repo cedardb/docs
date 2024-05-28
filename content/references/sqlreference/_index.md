@@ -13,6 +13,7 @@ advanced execution system.
 Here are some high-level topics that go over the typical uses of the database query language:
 
 * [Queries](queries) (`select from where`)
+* [Transaction begin/end/rollback](transaction)
 * [Data Management](statements/insert) (`insert into`)
 * [Schema Management](statements/createtable) (`create table`)
 
