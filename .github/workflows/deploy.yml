@@ -22,12 +22,13 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Publish
-        uses: nogsantos/scp-deploy@master
+      - name: copy files via ssh
+        uses: appleboy/scp-action@v0.1.7
         with:
-          src: ./public/*
           host: ${{ secrets.SSH_HOST }}
-          remote: ${{ secrets.SSH_DIR }}
-          port: ${{ secrets.SSH_PORT }}
-          user: ${{ secrets.SSH_USER }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "./public/*"
+          target: ${{ secrets.SSH_DIR }}
+          
