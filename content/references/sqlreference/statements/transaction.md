@@ -17,6 +17,9 @@ commit;
 
 Without explicit `begin`, all statements are executed in *autocommit* mode, i.e., each statement is executed in a
 separate transaction and implicitly committed.
+When you explicitly `begin` a transaction, you also need to explicitly `commit`, otherwise your changes will not be
+visible.
+Alternatively, you can also use `rollback` to discard any uncommitted changes.
 
 ## Transaction Semantics
 
