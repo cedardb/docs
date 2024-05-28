@@ -23,12 +23,11 @@ jobs:
         run: hugo --minify
 
       - name: copy files via ssh
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
           source: "./public/*"
           target: ${{ secrets.SSH_DIR }}
           
