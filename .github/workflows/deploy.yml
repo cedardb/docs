@@ -24,6 +24,7 @@ jobs:
 
       - name: copy files via ssh
         run: |
+          set -x
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           touch ~/.ssh/id_rsa
