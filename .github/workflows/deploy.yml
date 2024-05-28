@@ -33,4 +33,5 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-          scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/docs/public_html/
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} mkdir -p ${{ secrets.SSH_DIR }}
+          scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}
