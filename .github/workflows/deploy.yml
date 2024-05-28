@@ -26,9 +26,9 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          touch ~/.ssh/private.key
+          touch ~/.ssh/id_rsa
           touch ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/private.key
+          chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/known_hosts
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
