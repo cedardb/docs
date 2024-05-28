@@ -5,9 +5,11 @@ next: /references/datatypes
 weight: 40
 ---
 
-CedarDB implements SQL language compatibility with PostgreSQL.
-For an in-depth overview of the features, please refer to the PostgreSQL
-documentation: https://www.postgresql.org/docs/current/queries.html
+CedarDB builds on SQL compatibility with [PostgreSQL](https://www.postgresql.org/).
+We support the complete [PostgreSQL syntax](https://www.postgresql.org/docs/current/sql-syntax.html), and implement the
+largest part of the [query language](https://www.postgresql.org/docs/current/queries.html).
+
+On the following pages, you can find an in-depth overview of CedarDB's features:
 
 * [Data types](./datatypes)
 * [Configuration](./configuration)

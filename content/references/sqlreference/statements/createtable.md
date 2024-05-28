@@ -1,6 +1,6 @@
 ---
-title: "Reference: Create Database Statement"
-linkTitle: "Create Database"
+title: "Reference: Create Table Statement"
+linkTitle: "Create Table"
 weight: 12
 ---
 
