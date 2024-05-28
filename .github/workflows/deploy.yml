@@ -24,7 +24,12 @@ jobs:
 
       - name: copy files via ssh
         run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          touch ~/.ssh/private.key
+          touch ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/private.key
+          chmod 644 ~/.ssh/known_hosts
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
           scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}
