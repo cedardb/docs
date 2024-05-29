@@ -34,4 +34,4 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} mkdir -p ${{ secrets.SSH_DIR }}
-          scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}
+          rsync -avz --del ./public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}
