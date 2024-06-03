@@ -2,7 +2,7 @@
 title: "Reference: Functions"
 linkTitle: "Functions"
 prev: /expressions
-next: references/advanced
+next: /references/sqlreference/functions/advanced_functions
 weight: 40
 ---
 
@@ -28,3 +28,4 @@ Functions are usually type specific, but are often overloaded to work with diffe
   * generate_series
   * tablesample
   * PostgreSQL support (`pg_`)
+* [Advanced functions](./advanced_functions)
