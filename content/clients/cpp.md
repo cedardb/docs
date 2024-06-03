@@ -55,20 +55,20 @@ auto createTable = "CREATE TABLE IF NOT EXISTS chatlog(userid integer, message t
 transaction.exec(createTable);
 transaction.commit();
 ```
-In the following, we insert a new tuple using the `conn` instance:
+In the following, we first prepare a new insert statement, before we insert a new tuple using the `connection` instance:
 
 ```cpp
 // Create transaction
 pqxx::work transaction(connection);
 
 // Insert data
-string insertData = "INSERT INTO chatlog VALUES ";
-insertData += "(7, '(☞ﾟ∀ﾟ)☞', '"sv;
+connection.prepare("insert", "INSERT INTO chatlog VALUES ($1 , $2, $3)");
+string_view message = "(☞ﾟ∀ﾟ)☞"sv;
+auto id = 0;
 auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 std::stringstream ss;
 ss << std::put_time(std::localtime(&time), "%Y-%m-%d %X%z");
-insertData += ss.str() + "')";
-transaction.exec(insertData);
+transaction.exec_prepared("insert", id, message, ss);
 transaction.commit();
 ```
 
@@ -149,13 +149,13 @@ int main(int argc, char* argv[]) {
             pqxx::work transaction(connection);
 
             // Insert data
-            string insertData = "INSERT INTO chatlog VALUES ";
-            insertData += "(7, '(☞ﾟ∀ﾟ)☞', '"sv;
+            connection.prepare("insert", "INSERT INTO chatlog VALUES ($1 , $2, $3)");
+            string_view message = "(☞ﾟ∀ﾟ)☞"sv;
+            auto id = 0;
             auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());
             std::stringstream ss;
             ss << std::put_time(std::localtime(&time), "%Y-%m-%d %X%z");
-            insertData += ss.str() + "')";
-            transaction.exec(insertData);
+            transaction.exec_prepared("insert", id, message, ss);
             transaction.commit();
         }
         {
