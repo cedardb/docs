@@ -38,7 +38,7 @@ CedarDB provides an optimized implementation to cluster points with any number o
 
 Example:
 ```sql
-select * from cedar.kmeans(table (select id, title, year, length), 5 order by char_length(title), year, length);
+select * from cedar.kmeans(table (select id, title, year, length from movies), 5 order by char_length(title), year, length);
 ```
 
 The `cedar.kmeans` table function takes two arguments and an `order by` clause. The two arguments are the input and the number of clusters.
