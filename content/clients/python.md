@@ -187,6 +187,7 @@ with psycopg.connect(connstr) as conn:
 {{% details title="Open to show the complete sample code" closed="true" %}}
 
 ```python
+# SPDX-License-Identifier: MIT-0
 import psycopg
 import datetime
 from dataclasses import dataclass

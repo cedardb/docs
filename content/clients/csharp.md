@@ -153,6 +153,7 @@ Furthermore, by using one transaction per batch, you can ensure that either the 
 {{% details title="Open to show the complete sample code" closed="true" %}}
 
 ```C#
+// SPDX-License-Identifier: MIT-0
 using NodaTime;
 using NodaTime.Extensions;
 using Npgsql;

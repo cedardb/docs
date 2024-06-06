@@ -13,5 +13,6 @@ If you want to take use CedarDB in combination with a specific framework or lang
 * [C++](./cpp)
 * [Java](./java)
 * [Python](./python)
+* [Rust](./rust)
 
 More coming soon!

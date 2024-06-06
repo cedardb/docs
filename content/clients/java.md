@@ -123,6 +123,7 @@ LOG: 100000 rows (0.000033 s parsing, 0.001294 s compilation, 0.263479 s transmi
 {{% details title="Open to show the complete sample code" closed="true" %}}
 
 ```Java
+// SPDX-License-Identifier: MIT-0
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
 import java.io.*;
