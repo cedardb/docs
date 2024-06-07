@@ -71,7 +71,7 @@ little load, but is mostly bound by the connection latency.
 pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=select
 ```
 ```
-pgbench (15.6 (Ubuntu 15.6-0ubuntu0.23.10.1), server 12.2 umbra d2432c018)
+pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 starting vacuum...end.
 transaction type: <builtin: select only>
 scaling factor: 1
@@ -108,7 +108,7 @@ For typical consumer SSDs, this is >1ms, but enterprise SSDs can have lower writ
 pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update
 ```
 ```
-pgbench (15.6 (Ubuntu 15.6-0ubuntu0.23.10.1), server 12.2 umbra d2432c018)
+pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 starting vacuum...end.
 transaction type: <builtin: simple update>
 scaling factor: 1
