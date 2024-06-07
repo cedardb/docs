@@ -18,7 +18,7 @@ psql -h localhost -d $DBNAME -U $USERNAME
 ```
 
 ```
-psql (16.2 (Ubuntu 16.2-1ubuntu4), server 12.2 umbra v0.1-1779-gd3d7f00ff)
+psql (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 Type "help" for help.
 
 example=# 
