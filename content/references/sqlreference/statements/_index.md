@@ -21,7 +21,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Create sequence
 * [Create table](createtable)
 * Create table as
-* Create view
+* [Create view](createview)
 * [Deallocate](/docs/references/advanced/prepare)
 * [Delete](delete)
 * [Discard](discard)

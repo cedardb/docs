@@ -19,7 +19,7 @@ create user admin with createdb createrole password 'admin';
 ## Options
 
 The create role statement can be used with multiple of the following options.
-Direct options can be specified for both create and [alter role](alterrole):
+Direct options can be specified for both create and [alter role](/docs/references/sqlreference/statements/alterrole):
 
 * superuser, nosuperuser
 * createdb, nocreatedb
