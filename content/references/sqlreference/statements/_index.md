@@ -24,6 +24,7 @@ The complete list of supported SQL statements in CedarDB is as follows:
 * Create view
 * [Deallocate](/docs/references/advanced/prepare)
 * [Delete](delete)
+* [Discard](discard)
 * Drop
 * [Execute](/docs/references/advanced/prepare)
 * Explain
