@@ -9,15 +9,11 @@ CedarDB is compatible with [Npgsql](https://www.npgsql.org/), the open source .N
 ## Connecting
 Connect to CedarDB like this:
 ```C#
-String connString = "Server=127.0.0.1;User Id=<username>;Password=<password>;Database=<dbname>;NoResetOnClose=true";
+String connString = "Server=127.0.0.1;User Id=<username>;Password=<password>;Database=<dbname>";
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
 var dataSource = dataSourceBuilder.Build();
 var conn = await dataSource.OpenConnectionAsync();
 ```
-
-{{< callout type="warning" >}}
-Npgsql uses connection pooling. To avoid leaking state, it resets the connection state when switching the connection thread. However, CedarDB does not yet support the `DISCARD` command used by Postgres to achieve this. Therefore, we have to disable this behavior with the `NoResetOnClose=true` parameter in the connection string for now.
-{{< /callout >}}
 
 You now have an open connection to CedarDB that allows you to insert data or query the database.
 
@@ -164,7 +160,7 @@ class Sample
     {
         // Connect to CedarDB
         String connString = "Server=127.0.0.1;User Id=<username>; " + 
-            "Password=<password>;Database=<database>;NoResetOnClose=true";
+            "Password=<password>;Database=<database>";
         
     var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
     dataSourceBuilder.UseNodaTime();
