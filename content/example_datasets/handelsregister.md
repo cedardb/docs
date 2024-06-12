@@ -72,11 +72,11 @@ insert into companies(company_number, current_status, jurisdiction_code, name, r
                     data->>'name',
                     data->>'registered_address', 
                     data->>'retrieved_at'
-    from register_data;
+    from register_json;
 with officers_json(company_number, officer_json) as (
     select data->>'company_number',
-           json_array_elements((data->'officers')::json)
-    from register_data
+           json_array_elements(data->'officers')
+    from register_json
     where data->'officers' is not null
 )
 insert into officers
