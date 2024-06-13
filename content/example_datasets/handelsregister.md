@@ -52,7 +52,7 @@ create table companies (
     name text,
     registered_address text,
     retrieved_at text
-) with (storage = columnar);
+);
 create table officers (
     company_number text not null,
     name text,
@@ -60,7 +60,7 @@ create table officers (
     position text,
     start_date date,
     type text
-) with (storage = columnar);
+);
 ```
 
 With a relational transformation, we can load the data into CedarDB:
