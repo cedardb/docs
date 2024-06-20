@@ -68,7 +68,7 @@ create table stars (
     wikiLink text,
     gender char,
     birthdate date
-) with (storage = columnar);
+);
 
 insert into stars(name, wikiLink, gender, birthdate) 
     select stars->>'title', stars->>'wikiLink', stars->>'gender', stars->>'birthdate' from stars_json;

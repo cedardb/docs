@@ -29,7 +29,7 @@ create table movies (
     year integer,
     length integer,
     genre text
-) with (storage = columnar);
+);
 ```
 
 ### Copy data into CedarDB

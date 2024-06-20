@@ -79,7 +79,7 @@ create table movies (
     year integer,
     length integer,
     genre text
-) with (storage = columnar);
+);
 
 create table stars (
     id integer primary key,
@@ -87,12 +87,12 @@ create table stars (
     wikiLink text,
     gender char,
     birthdate date
-) with (storage = columnar);
+);
 
 create table starsIn (
     movieId integer references movies,
     starId integer references stars
-) with (storage = columnar);
+);
 ```
 
 ## Load some data

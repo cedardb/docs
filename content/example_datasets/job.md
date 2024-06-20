@@ -28,7 +28,7 @@ CREATE TABLE cast_info (
     note text,
     nr_order integer,
     role_id integer NOT NULL
-) with (storage='columnar');
+);
 ```
 
 {{% steps %}}

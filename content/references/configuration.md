@@ -47,7 +47,7 @@ As you have seen in an earlier chapter of this documentation, you can specify th
 create table persons (
     id integer primary key generated always as identity,
     name text
-) with (storage = columnar);
+);
 ```
 
 We support different storage types:
