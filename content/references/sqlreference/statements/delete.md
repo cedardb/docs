@@ -14,7 +14,8 @@ where status = 'canceled';
 ```
 
 We recommend always specifying a `where` clause for delete statements.
-If you want to delete all rows of a table, consider using `truncate` instead.
+If you want to delete all rows of a table, consider using
+[`truncate`](/docs/references/sqlreference/statements/truncate) instead.
 
 ## Returning Deleted Rows
 
