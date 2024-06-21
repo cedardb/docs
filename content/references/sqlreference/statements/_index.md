@@ -86,7 +86,7 @@ Drop
 [Execute](/docs/references/advanced/prepare)
 : execute a prepared statement
 
-Explain
+[Explain](explain)
 : show the execution plan of a query
 
 Grant
