@@ -127,3 +127,20 @@
         right: 15px;
     }
 }
+
+dl {
+    padding: 0.5em;
+    display: grid;
+    grid-template-columns: max-content auto;
+}
+dt {
+    grid-column: 1;
+    text-align: right;
+}
+dt::after {
+    content: " —";
+}
+dd {
+    padding-left: .4em;
+    grid-column: 2;
+}

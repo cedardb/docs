@@ -1,7 +1,6 @@
 ---
 title: "Reference: Analyze Statement"
 linkTitle: "Analyze"
-weight: 3
 ---
 
 An analyze statement can be used to recompute the query planning statistics of a table.

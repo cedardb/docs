@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Index Statement"
 linkTitle: "Create Index"
-weight: 8
 ---
 
 Indexes speed up finding indexed values in a table.

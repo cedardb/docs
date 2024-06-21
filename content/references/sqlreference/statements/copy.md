@@ -1,7 +1,6 @@
 ---
 title: "Reference: Copy Statement"
 linkTitle: "Copy"
-weight: 5
 ---
 
 Copy statements allow bulk im- and export of tables:

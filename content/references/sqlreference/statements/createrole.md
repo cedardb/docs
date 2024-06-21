@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Role Statement"
 linkTitle: "Create Role"
-weight: 9
 ---
 
 Create role allows adding new database *roles*.

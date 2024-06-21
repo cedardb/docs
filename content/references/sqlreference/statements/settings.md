@@ -1,7 +1,6 @@
 ---
 title: "Reference: Set/Show Setting Statement"
 linkTitle: "Set/Show Setting"
-weight: 24
 ---
 
 The `set` and `show` statements allow you to inspect and change database and session settings.

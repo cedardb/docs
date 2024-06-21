@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Schema Statement"
 linkTitle: "Create Schema"
-weight: 10
 ---
 
 Create Schema allows creating a new schema within a database.

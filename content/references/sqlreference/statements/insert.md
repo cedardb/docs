@@ -1,7 +1,6 @@
 ---
 title: "Reference: Insert Statement"
 linkTitle: "Insert"
-weight: 20
 ---
 
 With insert, you can create new rows of a table.

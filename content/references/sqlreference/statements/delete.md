@@ -1,7 +1,6 @@
 ---
 title: "Reference: Delete Statement"
 linkTitle: "Delete"
-weight: 16
 ---
 
 With delete, you can delete rows of a table.

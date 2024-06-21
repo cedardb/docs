@@ -1,7 +1,6 @@
 ---
 title: "Reference: Truncate Statement"
 linkTitle: "Truncate"
-weight: 25
 ---
 
 Truncate allows clearing all data from a table.

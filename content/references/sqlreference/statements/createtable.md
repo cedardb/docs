@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Table Statement"
 linkTitle: "Create Table"
-weight: 12
 ---
 
 Create table creates a new relation with the specified columns.

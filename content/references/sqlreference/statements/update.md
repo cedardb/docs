@@ -1,7 +1,7 @@
 ---
 title: "Reference: Update Statement"
 linkTitle: "Update"
-weight: 26
+next: references/sqlreference/expressions/
 ---
 
 With Update, you can change the content of rows of a table.

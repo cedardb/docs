@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Table As Statement"
 linkTitle: "Create Table As"
-weight: 13
 ---
 
 `Create table as` allows creating tables with an inferred schema from the output of a query.
@@ -17,6 +16,17 @@ create table recent_movies as
 
 This statement creates a table which resembles the output schema (names and data types) of the query.
 Then, the output of the `select` query is stored in this newly created table.
+
+## Select into
+
+CedarDB also supports the alternative `select into` syntax for compatibility with PostgreSQL:
+
+```sql
+select *
+into recent_movies
+from movies
+where release_date >= now()::date - interval '2' year;
+```
 
 ## Caveats
 

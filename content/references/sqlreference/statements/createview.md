@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create View Statement"
 linkTitle: "Create View"
-weight: 14
 ---
 
 You can use create view to define a *virtual* table, specified by a query.

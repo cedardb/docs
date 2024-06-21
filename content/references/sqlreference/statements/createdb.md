@@ -1,7 +1,6 @@
 ---
 title: "Reference: Create Database Statement"
 linkTitle: "Create Database"
-weight: 6
 ---
 
 Create database allows creating a new *logical* database.

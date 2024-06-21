@@ -1,7 +1,6 @@
 ---
 title: "Reference: Discard Statement"
 linkTitle: "Discard"
-weight: 17
 ---
 
 Discard allows resetting the current database session.
