@@ -43,7 +43,7 @@ If this directory is on a fast SSD, you can skip this step.
 Otherwise, mount the volume at a better place, e.g.:
 
 ```shell
-    docker run -p 5432:5432 -v /mnt/fastssd:/var/lib/umbra/data --name=cedardb_test cedardb
+    docker run -p 5432:5432 -v /mnt/fastssd:/var/lib/cedardb/data --name=cedardb_test cedardb
 ```
 
 Ensure that the docker user has write access for the directory you have chosen.
@@ -64,10 +64,9 @@ then [create a new user](/docs/references/sqlreference/statements/createrole):
 ```sql
 create user {{username}} superuser;
 create database {{username}};
+-- Set a password to connect from outside the container
 alter user {{username}} with password '1234';
 ```
-
-Enter your password twice, then exit shell and docker container via `CTRL-D`.
 
 ### Connect to CedarDB from outside the container
 
@@ -87,7 +86,7 @@ tutorial for its higher performance.
 To access the data from the server, we first need to copy the downloaded data inside the docker container.
 
 ```shell
-docker cp /your/path/download_folder cedardb_test:/var/lib/umbra/data/
+docker cp /your/path/download_folder cedardb_test:/var/lib/cedardb/data/
 ```
 
 This command copies the folder `download_folder` to the CedarDB server, making it accessible without a path prefix.
