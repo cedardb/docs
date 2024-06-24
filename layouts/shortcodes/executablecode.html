@@ -1,0 +1,58 @@
+<div class="sql-code-box" id="codebox-{{  .Get "title" }}">
+<div class="editor-toggle sql-docs-button tooltip" data-target="{{ .Get "title" }}" data-tooltip="Run in CedarDB">
+<span class="tooltiptext">Run in CedarDB</span>
+<img src="/docs/favicon.svg"></img>
+</div>
+<div class="sql-code-code">
+{{.Inner}}
+</div>
+</div>
+<div class="hidden sql-editor-box" id="editorbox-{{  .Get "title" }}">
+<div class="divider-primary is-centered"></div>
+<div style="position: absolute;">
+</div>
+<div id="editor-{{ .Get "title" }}">{{.Inner}}</div>
+<div class="column is-1">
+<div class="sql-editor-button editor-toggle tooltip" data-target="{{ .Get "title" }}">
+<span class="tooltiptext tooltip-right">Close Editor</span>
+<div>✕</div>
+</div>
+<div class="sql-editor-button query-start tooltip" data-target="{{ .Get "title" }}">
+<span class="tooltiptext tooltip-right">Run Query</span>
+<div>⏵</div>
+</div>
+<div class="sql-editor-button query-stop tooltip hidden" data-target="{{ .Get "title" }}">
+<span class="tooltiptext tooltip-right">Stop Query</span>
+<div>⏹</div>
+</div>
+</div>
+<div class="query-results-box">
+<div class="result-placeholder">Use
+<div>⏵</div>
+to run the query
+</div>
+<div class="progress hidden"></div>
+<div class="result-wrapper hidden">
+<div class="result-table-wrapper">
+<table class="result-table" id="query-results-{{ .Get "title" }}">
+</table>
+</div>
+<div class="result-statistics">
+<div class="result-statistics-entry"><b>Query Stats</b></div>
+<div class="result-statistics-entry">
+<b>Compilation:</b>
+<span class="compiletime"></span>
+</div>
+<div class="result-statistics-entry">
+<b>Execution:</b>
+<span class="executiontime"></span>
+</div>
+<div class="result-statistics-entry">
+<b>Rows:</b>
+<span class="rowcount"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="divider-primary is-centered"></div>
+</div>
