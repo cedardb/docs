@@ -229,23 +229,16 @@ dd {
 }
 
 .query-results-box {
-    height: 400px;
-    align-content: center;
+    max-height: 400px;
+    min-height: 200px;
     text-align: center;
     overflow-y: scroll;
-}
-
-.result-table-wrapper {
-    height: calc(100% - 35px);
-    overflow-x: scroll;
 }
 
 .result-table {
     font-size: .8rem;
     padding: 5px;
-    margin-bottom: 5px;
     width: 100%;
-    overflow: visible;
 }
 
 .result-statistics {
@@ -305,13 +298,25 @@ margin-left: -60px;
 }
 
 .result-wrapper {
-    height: 100%;
+    height: calc(100% - 35px);
+    min-height: 200px;
     position: relative;
 }
 
+.result-table-wrapper {
+    height: calc(100% - 35px);
+    overflow-x: scroll;
+}
+
 .result-statistics {
+    display: flex;
     font-size: .8rem;
-    margin-top: 5px;
+    margin-top: 5px;    
+    width: calc(100% - 12px);
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    height: 30px;
 }
 
 .result-statistics-entry {
