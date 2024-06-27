@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editor.setValue(sql + "\n");
             editor.setOption("maxLines", 20);
             editor.setOption("minLines", 5);
+            editor.setOption("showPrintMargin", false)
             editor.clearSelection();
         });
     });
@@ -78,12 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             var editor = ace.edit('editor-' + $runbutton.getAttribute("data-target"));
 
+            searchPath = $runbutton.getAttribute("data-schema");
+
             $.ajax(
                 {
-                    url: "https://umbra.db.in.tum.de/api/query",
+                    url: "https://mdf.cedardb.com/api/query",
                     method: "post",
                     crossDomain: true,
-                    data: "set search_path = tpchSf1, public;\n" + editor.getValue(),
+                    data: "set search_path = " + searchPath + ", public;\n" + editor.getValue(),
                     success: (data, status) => {
                         $runbutton.classList.remove("hidden");
                         $box.querySelector(".query-stop").classList.add("hidden");

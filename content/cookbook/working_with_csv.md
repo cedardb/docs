@@ -62,7 +62,7 @@ Multithreaded import does not yet work when using a backslash in front of copy (
 ### Start working with your data
 Once you have successfully copied your data into CedarDB, you can get to work. Modify or query your data however you like. For example, find a good and long fantasy movie for a rainy day:
 
-{{% executablecode title="movies" %}}
+{{% executablecode title="movies" schema="docs" %}}
 ```sql
 select title, length, year from movies where genre = 'Fantasy' and length > 180;
 ```
@@ -105,11 +105,10 @@ movieId,starId
 ### Querying a CSV view
 You can query external CSV files efficiently using the `cedar.csvview` function. Similar to the data import, you need to specify both the delimiter and the schema, this time as arguments of the function. You can read all data in the `starsIn.csv` like this:
 
-{{% executablecode title="csvview" %}}
+
 ```sql
 select * from cedar.csvview('your/path/starsIn.csv', 'delimiter ",", header', 'movieId integer not null, starId integer not null');
 ```
-{{% /executablecode %}}
 
 The `header` option again tells CedarDB to treat the first line as the column names and ignore it as a data point.
 
@@ -118,13 +117,11 @@ The `header` option again tells CedarDB to treat the first line as the column na
 
 To include these csv views in a query, it is best to include them as a common table expression. Finding any movie starring an actor born after 1970 can then be achieved like this:
 
-{{% executablecode title="csvview2" %}}
 ```sql
 with starsIn as (select * from cedar.csvview('your/path/starsIn.csv', 'delimiter ",", header', 'movieId integer not null, starId integer not null')),
      stars   as (select * from cedar.csvview('your/path/stars.csv', 'delimiter ",", header', 'id integer, name text, wikiLink text, gender char, birthdate date'))
 select movies.title, movies.year from movies, stars, starsIn where starsIn.starId = stars.id and starsIn.movieId = movies.id and extract(year from stars.birthdate) > 1970;
 ```
-{{% /executablecode %}}
 
 {{% /steps %}}
 

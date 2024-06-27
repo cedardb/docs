@@ -1,10 +1,14 @@
 <div class="sql-code-box" id="codebox-{{  .Get "title" }}">
-<div class="editor-toggle sql-docs-button tooltip" data-target="{{ .Get "title" }}" data-tooltip="Run in CedarDB">
-<span class="tooltiptext">Run in CedarDB</span>
-<img src="/docs/favicon.svg"></img>
-</div>
 <div class="sql-code-code">
 {{.Inner}}
+</div>
+<div class="editor-toggle sql-docs-button" data-target="{{ .Get "title" }}">
+<div class="sql-docs-button-content">
+<img class="button-logo" src="/docs/favicon.svg"></img>
+<div class="sql-docs-button-text">
+Try it in CedarDB
+</div>
+</div>
 </div>
 </div>
 <div class="hidden sql-editor-box" id="editorbox-{{  .Get "title" }}">
@@ -17,7 +21,7 @@
 <span class="tooltiptext tooltip-right">Close Editor</span>
 <div>✕</div>
 </div>
-<div class="sql-editor-button query-start tooltip" data-target="{{ .Get "title" }}">
+<div class="sql-editor-button query-start tooltip" data-target="{{ .Get "title" }}"  data-schema="{{ .Get "schema" }}">
 <span class="tooltiptext tooltip-right">Run Query</span>
 <div>⏵</div>
 </div>
