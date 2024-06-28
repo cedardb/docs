@@ -62,7 +62,7 @@ Multithreaded import does not yet work when using a backslash in front of copy (
 ### Start working with your data
 Once you have successfully copied your data into CedarDB, you can get to work. Modify or query your data however you like. For example, find a good and long fantasy movie for a rainy day:
 
-{{% executablecode title="movies" schema="blog" %}}
+{{% executablecode title="movies" schema="docs" %}}
 ```sql
 select title, length, year from movies where genre = 'Fantasy' and length > 180;
 ```
