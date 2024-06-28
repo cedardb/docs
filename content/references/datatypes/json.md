@@ -8,6 +8,7 @@ CedarDB supports [JSON](https://datatracker.ietf.org/doc/html/rfc7159) as a flex
 CedarDB has two storage types, `json` as a text representation and `jsonb` as a binary representation.
 
 ## Usage Example
+
 ```sql
 create table example (
     doc jsonb
@@ -23,3 +24,6 @@ select doc, doc->'x' from example;
  {"x":1} | 1
 (1 row)
 ```
+
+For more information on how to work with JSON, take a look at our
+[JSON function reference](/docs/references/sqlreference/functions/json).

@@ -9,7 +9,7 @@ weight: 30
 CedarDB supports many expressions that manipulate data:
 
 * Abs (`@`)
-* Access (`->`)
+* [Access `->`, `->>`](/docs/references/sqlreference/functions/json#dictionary-access)
 * And (`&&`)
 * At time zone
 * Between, between symmetric
