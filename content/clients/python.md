@@ -1,7 +1,7 @@
 ---
 title: "Python"
 linkTitle: "Python"
-weight: 30
+weight: 10
 ---
 
 CedarDB is compatible with [psycopg](https://www.psycopg.org/), Python's most popular PostgreSQL adapter.

@@ -1,9 +1,7 @@
 ---
 title: "Grafana"
 linkTitle: "Grafana"
-weight: 40
-prev: /python
-next: /psql
+weight: 100
 ---
 
 CedarDB is compatible with [Grafana](https://grafana.com/), the popular dashboard building solution. You can use Grafana's PostgreSQL connector to visualize the data stored in CedarDB.

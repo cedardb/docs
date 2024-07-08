@@ -1,7 +1,7 @@
 ---
 title: "Rust"
 linkTitle: "Rust"
-weight: 60
+weight: 10
 ---
 
 You can use CedarDB with [tokio-postgres](https://docs.rs/tokio-postgres/), a popular PostgreSQL adapter for Rust.

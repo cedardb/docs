@@ -1,7 +1,7 @@
 ---
 title: "psql Terminal Client"
 linkTitle: "psql"
-weight: 40
+weight: 100
 ---
 
 [psql](https://www.postgresql.org/docs/current/app-psql.html) is a terminal based interactive client for your database,
