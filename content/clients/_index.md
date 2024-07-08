@@ -13,6 +13,7 @@ Programming languages:
 * [C#](csharp)
 * [C++](cpp)
 * [Java](java)
+* [JavaScript](js)
 * [Python](python)
 * [R](r)
 * [Rust](rust)
