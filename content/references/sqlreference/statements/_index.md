@@ -38,7 +38,7 @@ Call
 [Create database](createdb)
 : define a new database
 
-Create function
+[Create function](createfunction)
 : define a new function
 
 [Create group](createrole)
