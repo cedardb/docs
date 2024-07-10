@@ -20,5 +20,6 @@ Programming languages:
 
 Tools:
 
+* [DBeaver](dbeaver)
 * [Grafana](grafana)
 * [psql](psql)
