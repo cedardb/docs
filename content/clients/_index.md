@@ -20,6 +20,7 @@ Programming languages:
 
 Tools:
 
+* [DataGrip](datagrip)
 * [DBeaver](dbeaver)
 * [Grafana](grafana)
 * [psql](psql)
