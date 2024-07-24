@@ -14,7 +14,7 @@ We recommend always upgrading to the latest version at release.
 
 ### Get the current Dockerfile
 Download the CedarDB Dockerfile below
-{{< downloadbutton filename="Dockerfile" href="https://download.cedardb.com/Dockerfile" >}}
+{{< downloadbutton filename="Dockerfile" href="https://cedardb.com/download/Dockerfile" >}}
 Download
 {{< /downloadbutton >}}
 
