@@ -1,0 +1,25 @@
+{{$releasenotes := .Site.Data.releasenotes}}
+{{ range $index, $element := (sort (sort $releasenotes "date" "desc") "Foundational" "desc") }}
+{{ if or (and (eq 0 $index) (eq ($.Get "current") "true")) (and (ne 0 $index) (ne ($.Get "current") "true")) }}
+    <h4>{{ $element.version }}</h4>
+    <i>{{ time.Format "2 Jan 2006" (time.AsTime $element.date) }}</i>
+    {{ if $element.breaksdb }}
+    <div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+        <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+              ⚠️
+            </div></div>
+        <div class="hx-w-full hx-min-w-0 hx-leading-7">
+          <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+            <b>This release is incompatible with previous CedarDB database formats!</b><br>
+            Please refer to the <a href="database_upgrade">database upgrade guide</a> for more information.
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    <ul>
+        {{ range $note := $element.notes }}
+        <li>{{ $note }} </li>
+        {{ end }}
+    </ul>
+{{ end }}
+{{ end }}

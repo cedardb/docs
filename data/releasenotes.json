@@ -1,0 +1,21 @@
+[
+	{
+		"version": "alpha/2024-07-12",
+		"date": "2024-07-12",
+		"notes": [
+			"lore",
+			"ipsum",
+			"dolor"
+		]
+	},
+	{
+		"version": "alpha/2024-06-24",
+		"date": "2024-06-24",
+		"breaksdb": true,
+		"notes": [
+			"lore1",
+			"ipsum1",
+			"dolor1"
+		]
+	}
+]
