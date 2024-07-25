@@ -1,7 +1,7 @@
 ---
 title: "Tutorial: Benchmarking with pgbench"
 linkTitle: "pgbench"
-weight: 40
+weight: 100
 ---
 
 `pgbench` is a benchmarking utility [included with PostgreSQL](https://www.postgresql.org/docs/current/pgbench.html),

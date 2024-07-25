@@ -1,8 +1,7 @@
 ---
 title: "Tutorial: Importing JSON Data into CedarDB"
 linkTitle: "Importing from JSON"
-next: /example_datasets
-weight: 50
+weight: 12
 ---
 
 CedarDB natively supports storing JSON documents in tables and working with JSON in SQL.

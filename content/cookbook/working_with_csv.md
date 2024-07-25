@@ -1,7 +1,7 @@
 ---
 title: "Tutorial: Working with CSV files in CedarDB"
 linkTitle: "Working with CSV files"
-weight: 30
+weight: 11
 ---
 CedarDB allows you to import CSVs into database relations for permanent storage, harness them as temporary external sources for dynamic data manipulation, and effortlessly export query results to CSV files.
 

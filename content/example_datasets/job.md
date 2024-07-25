@@ -44,7 +44,7 @@ tar -zxvf imdb.tgz
 ```
 
 {{< callout type="info" >}}
-The compressed tarball to download is about 1.2&nbsp;GB, which decompresses to about 3.7&nbsp;GB.
+The compressed tarball is about 1.2&nbsp;GB to download, which decompresses to about 3.7&nbsp;GB.
 {{< /callout >}}
 
 ### Import the schema to CedarDB
