@@ -27,7 +27,7 @@ A non-binding English translation of this license is available [here](https://ce
 Build the docker image using the Dockerfile downloaded from the link above.
 
 ```shell
-docker build --tag cedar /path/to/Dockerfile
+docker build --tag cedardb /path/to/Dockerfile/directory
 ```
 
 
