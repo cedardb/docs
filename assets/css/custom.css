@@ -144,3 +144,21 @@ dd {
     padding-left: .4em;
     grid-column: 2;
 }
+
+.download-button {
+    background-color: #fb773e;
+    color: whitesmoke;
+    svg {
+        fill: whitesmoke;
+    }
+
+    &:hover {
+        color: white;
+        opacity: .8;
+        svg {
+            fill: white;
+        }
+    }
+
+
+}
