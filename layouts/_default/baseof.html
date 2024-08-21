@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+  {{- partial "head.html" . -}}
+  <body dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
+    {{- partial "navbar.html" . -}}
+    {{- block "main" . }}{{ end -}}
+    {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
+      {{ partial "footer.html" . }}
+    {{ end }}
+    <script async defer src="https://sa.cedardb.com/latest.js"></script>
+    <script async defer src="https://sa.cedardb.com/auto-events.js"></script>
+    <noscript><img src="https://sa.cedardb.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    
+    {{ if .Params.asciinema }}
+    <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/asciinema-player.css" />
+    {{ end }}
+
+  </body>
+  {{ partial "scripts.html" . }}
+</html>
