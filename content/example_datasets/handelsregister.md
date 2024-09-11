@@ -1,5 +1,5 @@
 ---
-title: "Example: JSON: German Commercial Register"
+title: "JSON: German Commercial Register"
 linkTitle: "JSON: German Commercial Register"
 prev: /job
 next: /clients

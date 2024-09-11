@@ -13,4 +13,5 @@ Whether you're a developer looking to test CedarDB's performance with large data
 Example datasets:
  * [Handelsregister](./handelsregister)
  * [Join Order Benchmark](./job)
+ * [GloVe: Global Vectors for Word Representation](./glove)
 
