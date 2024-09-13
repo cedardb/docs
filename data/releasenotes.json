@@ -1,4 +1,31 @@
 [
+	{
+		"version": "alpha/2024-09-13",
+		"date": "2024-09-13",
+		"breaksdb": true,
+		"notes": [
+			"<b>New Feature:</b> Implemented the functionality of the <a href=https://github.com/pgvector/pgvector>pgvector</a> extension. For a feature description take a look at the <a href=../references/datatypes/vector>vector datatype reference</a>, the <a href=../references/advanced/pgvector>pgvector extension compatibility docs</a>, or follow <a href=../example_datasets/glove>our new vector tutorial</a>.",
+			"<b>New Feature:</b> Restructured database file storage: All files of a given database are stored in the same directory to declutter your server. Existing database files will be converted to the new format automatically on startup, no manual intervention required.",
+			"<b>New Feature:</b> Added support for quantified expressions over subqueries and arrays: <br /> <tt>with tmp(x) as (select array[1,2,3]) select 1 = ANY(x) from tmp</tt>.",
+			"<b>New Feature:</b> Implicitly cast string constants in binary expressions: You can now, for example, write <tt> 123 + '456'</tt>.",
+			"<b>New Feature:</b> Better type deduction for unknown types: Parameters now seamlessly work in function calls. For example <tt>lower($1)</tt> now treats the parameter as a string.",
+			"<b>New Feature:</b> Added support for row results in subqueries and non constant arrays: <br /> <tt>select (r.r).\"2\", (r.r).\"1\", (r.r).\"0\" from (select row('foo','bar','baz')) r(r)\"</tt> returns <tt> baz bar foo </tt>.",
+			"<b>Maintenance:</b> Introduce recovery log versioning to reduce the likelihood of having to break backwards compatibility in the future.",
+			"<b>Performance:</b> Optimizer: Improved cardinality estimation for very selective predicates. This sometimes improves execution plans, where we observed cases of 10x speedup",
+			"<b>Performance:</b> Implemented a heuristic that inlines CTEs that materialize a large state but are cheap to recalculate. This improves TPC-DS Q95's performance by about 10x, for example.",
+			"<b>Performance:</b> More aggressively use band joins where beneficial, even if the query does not contain <tt>between</tt> conditions.",
+			"<b>Performance:</b> Optimize concat calls with single arguments: <tt> concat(x)</tt> becomes <tt> cast(x as text)</tt>.",
+			"<b>PostgreSQL compatibility:</b> Honor Postgres <tt>AS NOT MATERIALIZED</tt> hint in CTEs.",
+			"<b>PostgreSQL compatibility:</b> Timestamp calculations are now done in UTC instead of local time in accordance with the Postgres docs.",
+			"<b>PostgreSQL compatibility:</b> When adding intervals to timestamps, the months, days, and microseconds fields of the interval value are handled in turn.",
+			"<b>PostgreSQL compatibility:</b> Correctly output regclass and regtype names: For example, <tt>pg_typeof(42)</tt> now returns <tt>'int4'</tt> instead of a cryptic identifier.",
+			"<b>PostgreSQL compatibility:</b> <tt>trim()</tt> now allows for Postgres' alternative syntax: Instead of <tt>trim('x' from 'xfoox')</tt> you can now also write <tt>trim('xfoox','x')</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>to_regtype()</tt> function.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>pg_typeof()</tt> function.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>nameconcatoid()</tt> function.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
 
 	{
 		"version": "alpha/2024-07-24",
