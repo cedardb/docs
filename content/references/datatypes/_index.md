@@ -37,3 +37,4 @@ The complete list of supported data types in CedarDB is as follows:
 * [`interval`](interval)
 * [`time`](time)
 * [`timestamp`](timestamp) (with or without time zone)
+* [`vector`](vector)
