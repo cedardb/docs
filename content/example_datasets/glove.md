@@ -60,11 +60,10 @@ import numpy as np
 import psycopg
 import pgvector.psycopg
 
-
 if __name__ == '__main__':
-     # use your own credentials here 
+    # use your own credentials here
     connstr = "host=/tmp port=5432 dbname=postgres user=postgres"
-    
+
     with psycopg.connect(connstr) as conn:
         pgvector.psycopg.register_vector(conn)
         with conn.cursor() as cur:
@@ -84,9 +83,9 @@ if __name__ == '__main__':
                         copy.write_row((word, vec2))
             conn.commit()
 
-            cur.execute ("create index on words(word)")
+            cur.execute("commit; begin bulk write")
+            cur.execute("create index on words(word)")
             conn.commit()
-        
 ```
 
 {{% /steps %}}
