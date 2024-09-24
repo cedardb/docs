@@ -1,8 +1,6 @@
 ---
 title: Prepared Statements
-weight: 60
-prev: advanced
-next: pgvector
+next: /references/writecache
 ---
 
 Prepared statements allow you to declare an SQL statement *template* ahead of time once and execute it many times over later on.

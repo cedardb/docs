@@ -1,8 +1,5 @@
 ---
 title: Pgvector Extension
-weight: 80
-prev: prepare
-next: /references/writecache
 ---
 
 CedarDB supports working with vectors using the syntax from the [pgvector
