@@ -42,7 +42,7 @@ copy register_json from 'de_companies_ocdata.jsonl';
 ## Relational Schema
 
 A relational schema allows efficient queries on the data.
-A simplified schema for the JSON data looks as follows: 
+A simplified schema for the JSON data looks as follows:
 
 ```sql
 create table companies (
@@ -65,17 +65,17 @@ create table officers (
 
 With a relational transformation, we can load the data into CedarDB:
 ```sql
-insert into companies(company_number, current_status, jurisdiction_code, name, registered_address, retrieved_at) 
+insert into companies(company_number, current_status, jurisdiction_code, name, registered_address, retrieved_at)
     select distinct data->>'company_number',
-                    data->>'current_status', 
+                    data->>'current_status',
                     data->>'jurisdiction_code',
                     data->>'name',
-                    data->>'registered_address', 
+                    data->>'registered_address',
                     data->>'retrieved_at'
     from register_json;
 with officers_json(company_number, officer_json) as (
     select data->>'company_number',
-           json_array_elements(data->'officers')
+           jsonb_array_elements(data->'officers')
     from register_json
     where data->'officers' is not null
 )
@@ -83,7 +83,7 @@ insert into officers
     select company_number,
            officer_json->>'name',
            officer_json->'other_attributes'->>'city',
-           officer_json->>'position', 
+           officer_json->>'position',
            officer_json->>'start_date',
            officer_json->>'type'
     from officers_json;

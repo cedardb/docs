@@ -23,7 +23,7 @@ select data->'name' from json_data;
 ```
 
 ```
-   name    
+   name
 -----------
  "philipp"
  "max"
@@ -44,7 +44,7 @@ select data->'friends'->0 from json_data;
 ```
 
 ```
- 0 
+ 0
 ---
  2
  1
@@ -62,7 +62,7 @@ select data->>'name' from json_data;
 ```
 
 ```
-  name   
+  name
 ---------
  philipp
  max
@@ -79,7 +79,7 @@ select data::text from json_data limit 1;
 ```
 
 ```
-                      text                       
+                      text
 -------------------------------------------------
  {"id": 1, "name": "philipp", "friends": [2, 3]}
 (1 row)
@@ -95,11 +95,11 @@ equivalent, but the access operations are slower, since they need to re-parse th
 The `json_array_length()` function allows calculating the number of elements in a JSON array:
 
 ```sql
-select json_array_length(data->'friends') from json_data;
+select json_array_length((data->'friends')::JSON) from json_data;
 ```
 
 ```
- json_array_length 
+ json_array_length
 -------------------
                  2
                  1
@@ -108,19 +108,19 @@ select json_array_length(data->'friends') from json_data;
 ```
 
 JSON arrays can sometimes be hard to work with in SQL, since they are not in a normalized relational model.
-To relationalize arrays, you can use the `json_array_elements()` function, which transforms a row with a JSON array to
+To relationalize arrays, you can use the `json_array_elements()` or `jsonb_array_elements()` functions, which transforms a row with a JSON or JSONB array to
 multiple rows with the elements of the array.
 This is similar to the `unnest()` function for SQL arrays.
 
 For the example, you can get a `friends_with` relation from the json array:
 
 ```sql
-select data->'id', json_array_elements(data->'friends')
+select data->'id', jsonb_array_elements(data->'friends')
 from json_data;
 ```
 
 ```
- id | json_array_elements 
+ id | json_array_elements
 ----+---------------------
  1  | 2
  1  | 3

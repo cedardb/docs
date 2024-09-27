@@ -5,7 +5,7 @@ weight: 12
 ---
 
 CedarDB natively supports storing JSON documents in tables and working with JSON in SQL.
-Two data types: `json` that stores the documents as text, and `jsonb` which stores a binary representation to allow 
+Two data types: `json` that stores the documents as text, and `jsonb` which stores a binary representation to allow
 efficient access to fields of the document.
 
 ## Importing JSON
@@ -30,7 +30,7 @@ Now you can use the json documents in SQL queries:
 select star->>'name' as name from stars_json where star->>'gender' = 'F';
 ```
 ```sql
-     name      
+     name
 ---------------
  Emily Blunt
  Michelle Yeoh
@@ -39,7 +39,7 @@ select star->>'name' as name from stars_json where star->>'gender' = 'F';
 
 CedarDB supports the [PostgreSQL syntax](https://www.postgresql.org/docs/current/functions-json.html) for JSON attribute
 access with `->` and text with `->>`.
-Additionally, the `json_array_elements()` function to transforms JSON arrays to SQL tables.
+Additionally, the `json_array_elements()` function to transforms JSON arrays to SQL tables (similar for JSONB `jsonb_array_elements()`).
 
 {{< callout type="info" >}}
 Support for path expressions (the `#>` operator) and [SQL/JSON path expressions](https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-SQLJSON-PATH)
@@ -49,8 +49,8 @@ is planned for a future CedarDB release.
 ## Relationalize JSON
 
 To efficiently execute queries on data, we recommend to transform JSON documents to relational tables.
-When storing data in CedarDB's native storage format, it uses advanced statistics and columnar data storage for 
-efficient execution.  
+When storing data in CedarDB's native storage format, it uses advanced statistics and columnar data storage for
+efficient execution.
 
 For the previous example, you can relationalize by creating a table with explicit [data types](/references/datatypes).
 
@@ -69,6 +69,6 @@ create table stars (
     birthdate date
 );
 
-insert into stars(name, wikiLink, gender, birthdate) 
+insert into stars(name, wikiLink, gender, birthdate)
     select stars->>'title', stars->>'wikiLink', stars->>'gender', stars->>'birthdate' from stars_json;
 ```
