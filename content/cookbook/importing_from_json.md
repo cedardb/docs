@@ -21,7 +21,7 @@ You can import data from a [JSON Lines](https://jsonlines.org/) file:
 
 Load the data into a table:
 ```sql
-create table stars_json as (star json);
+create table stars_json (star json);
 copy stars_json from 'stars.json';
 ```
 
@@ -70,5 +70,5 @@ create table stars (
 );
 
 insert into stars(name, wikiLink, gender, birthdate) 
-    select stars->>'title', stars->>'wikiLink', stars->>'gender', stars->>'birthdate' from stars_json;
+    select star->>'title', star->>'wikiLink', star->>'gender', star->>'birthdate' from stars_json;
 ```
