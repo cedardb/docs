@@ -1,5 +1,32 @@
 [
 	{
+		"version": "alpha/2024-10-11",
+		"date": "2024-10-11",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Added support for <a href=/docs/references/advanced/asof_join/  target=_blank>AsOf joins</a>.",
+			"<b>New Feature:</b> Added support for <a href=https://www.postgresql.org/docs/current/sql-insert.html#SQL-ON-CONFLICT target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>.",
+			"<b>New Feature:</b> Added support for additional <a href=/docs/references/sqlreference/functions/aggregation/ target=_blank>aggregation functions</a>.",
+			"<b>Maintenance:</b> Update the timezone database to version 2024b.",
+			"<b>Maintenance:</b> Fix daylight savings time handling for regions with daylight savings differences other than 1 hour.",
+			"<b>Performance:</b> Improve join unnesting for dependent joins.",
+			"<b>Performance:</b> Various cardinality estimation improvements.",
+			"<b>Performance:</b> Add vectorization support for pg_vector-type cosine distance calcultions.",
+			"<b>Performance:</b> Lazily compile user-defined functions.",
+			"<b>PostgreSQL compatibility:</b> Support array-constructing subqueries: <tt>select array(values(1),(1));</tt> returns <tt>{1,1}</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>has_column_privilege()</tt> function.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>has_has_privilege()</tt> function.",
+			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_attribute</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_type</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Full support for <tt>pg_timezone_names</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Full support for <tt>pg_timezone_abbrevs</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Added support for <tt>default</tt> keyword in <tt>INSERT</tt> statements.",
+			"<b>PostgreSQL compatibility:</b> Use PostgreSQL-compliant sort order for <tt>bytea</tt> type.",
+			"<b>PostgreSQL compatibility:</b> Fix output of <tt>current_schema()</tt> function.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-09-13",
 		"date": "2024-09-13",
 		"breaksdb": true,
