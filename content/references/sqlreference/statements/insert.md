@@ -32,6 +32,22 @@ While these names can be omitted, we recommend always explicitly specifying the 
 Without a column list, swapping similarly typed columns (e.g., year and length) can lead to subtle bugs.
 In addition, omitted columns will be filled with default generated values.
 
+## On Conflict
+
+Inserting duplicate values into a table might cause conflicts when the table has a primary key or unique constraint
+defined.
+The default action for such conflicts is to report an error and abort the current transaction.
+Alternatively, you can specify an `on conflict` clause which explicitly handles the conflicting values as an *Upsert*.
+The following example inserts two users with unique ids, skipping all tuples with already existing user ids.
+
+```sql
+insert into employees(id, name)
+values (1, 'Chris'), (2, 'Philipp')
+on conflict do nothing;
+```
+
+You can find the full documentation for `on conflict` in the [upsert reference](../upsert).
+
 ## Returning
 
 Insert also supports a returning clause, which can be helpful to extract generated columns from inserted rows.

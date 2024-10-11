@@ -4,8 +4,8 @@
 		"date": "2024-10-11",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <a href=/docs/references/advanced/asof_join/  target=_blank>AsOf joins</a>.",
-			"<b>New Feature:</b> Added support for <a href=https://www.postgresql.org/docs/current/sql-insert.html#SQL-ON-CONFLICT target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>.",
+			"<b>New Feature:</b> Added support for <a href=/docs/references/advanced/asof_join/ target=_blank>AsOf joins</a>.",
+			"<b>New Feature:</b> Added support for <a href=/docs/references/sqlreference/statements/upsert target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>.",
 			"<b>New Feature:</b> Added support for additional <a href=/docs/references/sqlreference/functions/aggregation/ target=_blank>aggregation functions</a>.",
 			"<b>Maintenance:</b> Update the timezone database to version 2024b.",
 			"<b>Maintenance:</b> Fix daylight savings time handling for regions with daylight savings differences other than 1 hour.",
