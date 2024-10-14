@@ -38,7 +38,7 @@ Inserting duplicate values into a table might cause conflicts when the table has
 defined.
 The default action for such conflicts is to report an error and abort the current transaction.
 Alternatively, you can specify an `on conflict` clause which explicitly handles the conflicting values as an *Upsert*.
-The following example inserts two users with unique ids, while skipping already existing user ids.
+The following example inserts two users with unique ids, skipping all tuples with already existing user ids.
 
 ```sql
 insert into employees(id, name)
@@ -46,7 +46,7 @@ values (1, 'Chris'), (2, 'Philipp')
 on conflict do nothing;
 ```
 
-You can find the full documentation in the [upsert reference](upsert).
+You can find the full documentation for `on conflict` in the [upsert reference](../upsert).
 
 ## Returning
 
