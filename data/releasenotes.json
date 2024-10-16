@@ -29,7 +29,7 @@
 			"<b>Performance:</b> Lazily compile user-defined functions.",
 			"<b>PostgreSQL compatibility:</b> Support array-constructing subqueries: <tt>select array(values(1),(1));</tt> returns <tt>{1,1}</tt>.",
 			"<b>PostgreSQL compatibility:</b> Added <tt>has_column_privilege()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>has_has_privilege()</tt> function.",
+			"<b>PostgreSQL compatibility:</b> Added <tt>has_function_privilege()</tt> function.",
 			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_attribute</tt> system table.",
 			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_type</tt> system table.",
 			"<b>PostgreSQL compatibility:</b> Full support for <tt>pg_timezone_names</tt> system table.",
