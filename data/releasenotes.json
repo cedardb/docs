@@ -1,5 +1,19 @@
 [
 	{
+		"version": "alpha/2024-10-16",
+		"date": "2024-10-16",
+		"breaksdb": false,
+		"notes": [
+			"<b>Maintenance:</b> Check for newer CedarDB versions on Docker startup.",
+			"<b>Maintenance:</b> Fix rare cases of lost tuples in UPSERT queries.",
+			"<b>Maintenance:</b> Use consistent sort order for BLOB types.",
+			"<b>Performance:</b> Lazily compile prepared statements.",
+			"<b>PostgreSQL compatibility:</b> Use PostgreSQL-compliant BigNumeric type truncation.",
+			"<b>PostgreSQL compatibility:</b> Support <tt>regclass</tt> casts for system tables.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-10-11",
 		"date": "2024-10-11",
 		"breaksdb": false,
