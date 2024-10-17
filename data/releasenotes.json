@@ -1,5 +1,13 @@
 [
 	{
+		"version": "alpha/2024-10-17",
+		"date": "2024-10-17",
+		"breaksdb": false,
+		"notes": [
+			"<b>Maintenance:</b> Stability fix for replanning prepared statements with UPSERTs."
+		]
+	},
+	{
 		"version": "alpha/2024-10-16",
 		"date": "2024-10-16",
 		"breaksdb": false,
