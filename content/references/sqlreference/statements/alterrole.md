@@ -13,7 +13,7 @@ For example, you can give a role elevated privileges:
 alter role admin with superuser;
 ```
 
-For a full list of permissions, see [create role](createrole).
+For a full list of permissions, see [create role](../createrole).
 
 ## Permissions
 

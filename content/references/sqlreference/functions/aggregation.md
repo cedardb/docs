@@ -130,7 +130,7 @@ the (x, y) points.
 `regr_sxx`
 : Compute the *sum of squares* of the `x` variable , i.e., `sum(x^2) - sum(x)^2/count(*).`
 
-`regr_svxy`
+`regr_sxy`
 : Compute the *sum of products* of `x` times `y`, i.e., `sum(x*y) - sum(x) * sum(y)/count(*)`.
 
 `stddev(x)`
