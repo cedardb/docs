@@ -44,16 +44,16 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | RENAME TO       | Yes               |             |
 
 ### Privileges
-| **Feature**           | **Support State** | **Details**                                                          |
-|-----------------------|-------------------|----------------------------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole) |
-| OWNER TO              | Yes               |                                                                      |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/sqlreference/statements/alterrole)  |
-| GRANT                 | Yes               | Only GRANT role to other_role                                        |
-| REVOKE                | No                |                                                                      |
-| SET ROLE              | No                |                                                                      |
-| INHERIT               | Yes               | /docs/references/sqlreference/statements/createrole/                 |
-| Row Security Policies | No                |                                                                      |
+| **Feature**           | **Support State** | **Details**                                                           |
+|-----------------------|-------------------|-----------------------------------------------------------------------|
+| CREATE ROLE           | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole)  |
+| OWNER TO              | Yes               |                                                                       |
+| ALTER ROLE            | Yes               | [Documentation](/docs/references/sqlreference/statements/alterrole)   |
+| GRANT                 | Yes               | Only GRANT role to other_role                                         |
+| REVOKE                | No                |                                                                       |
+| SET ROLE              | No                |                                                                       |
+| INHERIT               | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole/) |
+| Row Security Policies | No                |                                                                       |
 
 
 ### Indexes
