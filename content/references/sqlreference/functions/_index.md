@@ -9,7 +9,7 @@ weight: 40
 CedarDB supports many functions operating on scalar values.
 Functions are usually type specific, but are often overloaded to work with different parameters.
 
-* Aggregation functions
+* [Aggregation functions](./aggregation)
 * Type specific functions
   * Array functions
   * Bit string functions
