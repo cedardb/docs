@@ -19,3 +19,5 @@ If you want to exclude the page until a certain publication date please add the 
 ```
 publishDate: 2023-10-19T00:40:04-07:00
 ```
+
+If you plan to use large tables, please create and edit them using [TableGenerator](https://www.tablesgenerator.com/markdown_tables) or similar tools to ensure well-formatted tables in the docs.
