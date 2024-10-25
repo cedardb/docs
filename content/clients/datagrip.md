@@ -5,7 +5,7 @@ weight: 100
 ---
 
 You can connect to CedarDB using [DataGrip](https://www.jetbrains.com/datagrip/), the powerful cross-platform JetBrains
-IDE dor databases.
+IDE for databases.
 You can use DataGrip to connect to CedarDB and view your database, manage your schema, and insert or update values in
 tables.
 
