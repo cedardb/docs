@@ -1,5 +1,23 @@
 [
 	{
+		"version": "alpha/2024-11-05",
+		"date": "2024-11-05",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Improved internal memory allocation: CedarDB now tracks memory consumption during query execution and aborts queries consuming too much working memory.",
+			"<b>New Feature:</b> Add <tt>VACUUM</tt> statement. It manually triggers data compression of newly inserted data that hasn't been queried often yet.",
+			"<b>Performance:</b> Greatly speed up queries of the pattern <tt> SELECT * FROM foo LIMIT 1</tt>.",
+			"<b>Performance:</b> Improve estimates on tables with unique constraints.",
+			"<b>Performance:</b> Reduce write-ahead log size. CedarDB now tries to prune the log much more eagerly to reduce disk space consumption.",
+			"<b>PostgreSQL compatibility:</b> Add name datatype to <tt>pg_type</tt> system table. Required by some ORMs using JDBC (e.g., \"Exposed\") to infer maximum length of table names and columns.",
+			"<b>PostgreSQL compatibility:</b> Allow parsing dates from strings specifying a full timestamp. Used by some ORMs such as \"Exposed\" to construct dates.",
+			"<b>Maintenance:</b> Fix case where created functions couldn't be dropped.",
+			"<b>Maintenance:</b> Fix deadlock when client connection unexpectedly drops.",
+			"<b>Maintenance:</b> Upgraded to LLVM 19.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-10-17",
 		"date": "2024-10-17",
 		"breaksdb": false,
