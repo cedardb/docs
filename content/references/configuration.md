@@ -38,24 +38,6 @@ To change the parallelism, simply query the database with the following PostgreS
 set debug.parallel=8;
 ```
 
-## Storage types
-
-CedarDB implements several storage types.
-As you have seen in an earlier chapter of this documentation, you can specify the storage type when you create a table.
-
-```sql
-create table persons (
-    id integer primary key generated always as identity,
-    name text
-);
-```
-
-We support different storage types:
-  - `columnar` is the best choice for hybrid and analytical workloads. It leverages the buffer manager and provides ACID guarantees.
-  - `paged` uses a PAX-layout that leverages the buffer manager and provides ACID guarantees. It is optimized for OLTP workloads.
-  - `mapped` is an in-memory only relation optimized for highest performance that should not be used in production.
-
-
 ## Benchmarking
 
 
