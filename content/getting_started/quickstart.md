@@ -11,56 +11,52 @@ This guide will cover the essential steps to get CedarDB running on your system 
 
 ## Prerequisites
 
-CedarDB currently supports Linux. You can run it standalone without any system setup dependencies.
+You need [Docker](https://docs.docker.com/engine/install/) and the `psql` command line tool to run CedarDB.
 
-{{< callout type="info" >}}
-We have extensively tested CedarDB on Ubuntu, Debian, and Arch Linux.
-As runtime environment, CedarDB only needs a glibc as shipped by Debian
-oldstable (glibc 2.31, released early 2020) or newer.
-{{< /callout >}}
+On Ubuntu, you can install the `psql` command line tool with `apt install postgresql-client`.
 
-
-
-CedarDB has two main executables that users can use to interact with the database, located in the `bin` directory:
-`sql` and `server`.
-For this guide, we will use the `sql` executable. 
-It provides an interactive shell to directly open and query a database using SQL.
 
 ## Setup
 
 {{% steps %}}
 
-### Create a database directory
+### Get the docker file
 
-CedarDB stores all files of a user's database within a single directory. Create a new one:
+{{% waitlist %}}
+
+
+### Build the docker image
+
+Go to the path where you have downloaded the CedarDB docker file and run 
 ```shell
-mkdir mydb
+docker build -t cedardb .
 ```
-{{< callout type="info" >}}
-CedarDB is optimized for modern storage hardware. To ensure you get CedarDB's best performance, place this directory on a reasonably modern SSD.
-{{< /callout >}}
 
-### Initialize the database
+### Launch the docker container
 
-Start CedarDB, instructing it to initialize a new database called `test`:
 ```shell
-bin/sql --createdb mydb/test.db
+# Start the container
+docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
 ```
-You're now in the SQL shell and ready to enter SQL queries and commands!
+This will create a temporary database that is automatically wiped when the docker container is stopped.
 
 {{< callout type="info" >}}
-The SQL shell supports common keyboard shortcuts, e.g., `CTRL-R` to
-search the history or `TAB` for auto-completion.
+If you want to create a permanent database surviving docker container restarts, take a look at the [Docker documentation page](./running_docker_image#make-the-database-persistent)
 {{< /callout >}}
 
+### Connect to CedarDB
 
+```shell
+psql -h localhost -U postgres
+# <Enter the CEDAR_PASSWORD (test) as password>
 
-{{< callout type="info" >}}
-If you exit the SQL shell (e.g., via `CTRL-D`), you can reconnect to your database by supplying the database file as an argument when restarting the shell: 
-`bin/sql mydb/test.db`
-
-{{< /callout >}}
-
+postgres= SELECT 1 as foo;
+ foo 
+-----
+   1
+(1 row)
+```
+Congrats, you're now ready to process some data!
 {{% /steps %}}
 
 ## Create some tables
@@ -107,14 +103,14 @@ insert into movies values
 If you have already stored your data as CSV format like such:
 
 ```text {filename="stars.csv"}
-1, 'Cilian Murphy','https://en.wikipedia.org/wiki/Cillian_Murphy', 'M', '1976-05-25'
-2, 'Emily Blunt','https://en.wikipedia.org/wiki/Emily_Blunt', 'F', 'F', '1983-02-23'
-3, 'Michelle Yeoh', 'https://en.wikipedia.org/wiki/Michelle_Yeoh', 'F', '1962-08-06'
-4, 'Jürgen Prochnow', 'https://en.wikipedia.org/wiki/Jürgen_Prochnow', 'M', '1941-06-10'
+1,Cilian Murphy,https://en.wikipedia.org/wiki/Cillian_Murphy,M,1976-05-25
+2,Emily Blunt,https://en.wikipedia.org/wiki/Emily_Blunt,F,1983-02-23
+3,Michelle Yeoh,https://en.wikipedia.org/wiki/Michelle_Yeoh,F,1962-08-06
+4,Jürgen Prochnow,https://en.wikipedia.org/wiki/Jürgen_Prochnow,M,1941-06-10
 ```
 You can do a bulk import:
 ```sql
-copy stars from 'stars.csv' delimiter ',';
+\copy stars from 'stars.csv' delimiter ',';
 ```
 ### Importing an SQL dump
 You might have exported your data from another database system as SQL dump:
