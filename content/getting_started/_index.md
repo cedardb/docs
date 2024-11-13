@@ -10,7 +10,6 @@ This documentation will provide you with step-by-step instructions and best prac
 
 
 * If you're eager to jump right in and start using CedarDB, the  [Quick Start](./quickstart) section will guide you through the installation process and basic configuration settings. Follow along to get CedarDB up and running in no time.
-* Learn how to set up [CedarDB as a standalone server](./clientserver), configuring it to meet your specific requirements. 
 * Discover how to run [CedarDB inside Docker](./running_docker_image) for easy deployment and management.
 
 

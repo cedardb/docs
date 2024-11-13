@@ -26,11 +26,6 @@ CedarDB has two main executables that users can use to interact with the databas
 For this guide, we will use the `sql` executable. 
 It provides an interactive shell to directly open and query a database using SQL.
 
-{{< callout type="info" >}}
-If you want to learn how to use CedarDB in a more traditional client/server setup, refer to [CedarDB as Server](../clientserver)
-{{< /callout >}}
-
-
 ## Setup
 
 {{% steps %}}
@@ -222,7 +217,6 @@ where not exists
 
 ## What's next?
 
-* If you want to learn how to run CedarDB as standalone server and integrate it into your software stack, take a look at [CedarDB as Server](../clientserver).
 * Ready to move beyond simplistic examples? Navigate to the recipes in the [Data Cookbook](../../cookbook) to import your own substantial datasets.
 * Seeking further inspiration or aiming to benchmark CedarDB in complex scenarios? Delve into our curated [sample datasets](../../guides/exampledatasets).
 * For an in-depth understanding of CedarDB's features and utilization guidelines, refer to the detailed explanations in the [guide](../../guides) section.
