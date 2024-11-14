@@ -39,7 +39,7 @@ To obtain the relevant data simply run
 
 ```shell
 mkdir jobdata && cd jobdata
-curl -O https://bonsai.cedardb.com/job/imdb.tgz
+curl -OL https://bonsai.cedardb.com/job/imdb.tgz
 tar -zxvf imdb.tgz
 ```
 
