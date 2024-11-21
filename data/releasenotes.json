@@ -1,5 +1,18 @@
 [
 	{
+		"version": "alpha/2024-11-21",
+		"date": "2024-11-21",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add support for <tt>psql</tt> builtin describe commands <tt>\\d table</tt> and <tt>\\d+ table</tt>.",
+			"<b>PostgreSQL compatibility:</b> Include attribute defaults in the <tt>pg_attrdef</tt> system table.",
+			"<b>Performance:</b> Reduce transaction tail latency: When the overall write-ahead log size becomes too large, writing transactions are now throttled instead of paused.",
+			"<b>Maintenance:</b> Fix a rare deadlock during concurrent compression of inserts.",
+			"<b>Maintenance:</b> Fix a crash when inserting strings just smaller than 64 KB.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-11-15",
 		"date": "2024-11-15",
 		"breaksdb": false,
