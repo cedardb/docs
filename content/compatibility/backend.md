@@ -16,7 +16,7 @@ Since CedarDB does not share the PostgreSQL codebase and internal structures, so
 | pg_am                    | Yes               | Yes                    | amhandler unset |
 | pg_amop                  | Yes               | No                     |                 |
 | pg_amproc                | Yes               | No                     |                 |
-| pg_attrdef               | Yes               | No                     |                 |
+| pg_attrdef               | Yes               | Yes                    |                 |
 | pg_attribute             | Yes               | Yes                    |                 |
 | pg_authid                | Yes               | Yes                    |                 |
 | pg_auth_members          | Yes               | No                     |                 |
