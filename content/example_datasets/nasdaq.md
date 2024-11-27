@@ -23,7 +23,7 @@ The exact format of *orders* differ between exchanges, but it generally has the 
 | 1  | AAPL   | 9:30:00:000 | BUY  | 5        | 225.49 | null        |
 | 2  | AAPL   | 9:30:00:010 | SELL | 2        | 225.52 | null        |
 
-In this example, order 1 wants to buy 5 apple stocks at $225.49 and order 2 wants to sell at $225.52.
+In this example, order 1 wants to buy 5 apple shares at $225.49 and order 2 wants to sell at $225.52.
 Since they don't agree on a price, they aren't matched and both pending orders are active in the system at the same time.
 
 Whenever orders *are* matched, we get an *execution event* with roughly the following format:
@@ -32,7 +32,7 @@ Whenever orders *are* matched, we get an *execution event* with roughly the foll
 | ----------- | ------- | -------- |
 | 9:30:00:100 | 1       | 2        |
 
-It seems like someone took the issuer of order 1 up on their offer and bought 2 stocks for a price of $225.49.
+It seems like someone took the issuer of order 1 up on their offer and bought 2 shares for a price of $225.49.
 The state of the order book now looks like this:
 
 | ID | Ticker | Timestamp   | Side | Quantity | Price  | PrevOrderId |
@@ -204,7 +204,7 @@ This cuts the import time from ~3 minutes to 1 minute!
 ## Queries
 Let's run some queries to gain some insight!
 
-### What was the stock value of Apple at end of day?
+### What was the price of one Apple share at end of day?
 
 The canonical stock price is by definition the price of the last executed order, i.e. the price where the timestamp is the largest.
 Since executions usually don't come with a price attached (except for some special cases), 
@@ -247,7 +247,7 @@ Time: 28.361 ms
 
 ### Most executions of a single order
 
-An order can be executed multiple times (e.g., a market participant creates sell order for 1000 Apple stocks which are then bought one by one by 1000 different buyers).
+An order can be executed multiple times (e.g., a market participant creates sell order for 1000 Apple shares which are then bought one by one by 1000 different buyers).
 Let's print a histogram on how often orders are executed:
 
 ```sql
