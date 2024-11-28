@@ -59,25 +59,19 @@ Buy processing the order and execution streams, we can reconstruct the complete 
 
 ## Obtaining the data
 
-You can download the dataset directly from [NASDAQ](https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/).
+You can use the `prepare.sh` script from the examples repository to automatically download, extract, and preprocess the dataset:
+
+```shell
+git clone git@github.com:cedardb/examples.git
+cd examples/nasdaq
+./prepare.sh
+```
+
+It downloads the dataset directly from [NASDAQ](https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/).
 There is data for multiple full trading days (approx. one a year).
 We chose January 30, 2020 since it was the most busy and recent trading day available.
 
-To obtain the data, run
 
-
-```shell
-wget https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/01302020.NASDAQ_ITCH50.gz
-gunzip 01302020.NASDAQ_ITCH50.gz
-```
-
-{{< callout type="info" >}}
-The gzip archive is about 5.2&nbsp;GB to download, which decompresses to about 13&nbsp;GB.
-{{< /callout >}}
-
-
-
-## The dataset
 The data comes in the [NASDAQ ITCH v5.0 protocol](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf) format:
 
 ```
@@ -92,8 +86,14 @@ $ hexdump -C -n 100 01302020.NASDAQ_ITCH50
 00000064
 ```
 
-We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser/parser.py) to transform this into human readable CSV files.
+We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser.py) to transform this into human readable CSV files.
+It is automatically invoked by the `prepare.sh` script.
 
+{{< callout type="info" >}}
+The gzip archive is about 5.2&nbsp;GB to download, which decompresses to about 13&nbsp;GB and deserializes to 16&nbsp;GB of CSV.
+{{< /callout >}}
+
+## The schema
 
 Here's the corresponding SQL schema for the csv tables:
 
