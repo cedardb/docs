@@ -58,7 +58,7 @@ In this example, we're assuming an empty database. If you already have a CedarDB
 ### Start CedarDB
 
 ```shell
-./server -createdb /home/dbs/grafanatest --address=:: # or omit 'createdb' if you already created the database earlier
+docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
 ```
 
 ### Connect via psql and create a Grafana user
@@ -66,7 +66,7 @@ In this example, we're assuming an empty database. If you already have a CedarDB
 Connect to CedardB via [psql](/docs/clients/psql):
 
 ```shell
-psql -h /tmp -U postgres
+psql -h localhost -U postgres
 ```
 
 Create a new user for Grafana:

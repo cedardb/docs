@@ -75,7 +75,7 @@ const { default: pg } = await import("pg");
 const { Client } = pg;
 
 // Connect to CedarDB
-const client = new Client({host: '/tmp', user: 'postgres', database: 'postgres'});
+const client = new Client({host: 'localhost', user: 'postgres', database: 'postgres'});
 await client.connect();
 
 // Create a table and insert some data
