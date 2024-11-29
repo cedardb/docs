@@ -42,7 +42,7 @@ A scale factor of 100 thus inserts 10M rows with about 200MB of data.
 
 In addition to the scale, you also need to specify the connection parameters, username and database name:
 ```shell
-pgbench --initialize -h /tmp -U postgres postgres --scale=100
+pgbench --initialize -h localhost -U postgres postgres --scale=100
 ```
 ```
 dropping old tables...
@@ -68,7 +68,7 @@ This executes a simple in-memory primary-key lookup, which is not very taxing fo
 little load, but is mostly bound by the connection latency.
 
 ```shell
-pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=select
+pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=select
 ```
 ```
 pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
@@ -91,7 +91,7 @@ With many concurrent benchmark threads and connections, this workload becomes le
 picture that allows you to judge how the system scales in a read-heavy scenario:
 
 ```shell
-pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=select --jobs=20 --client=200
+pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=select --jobs=20 --client=200
 ```
 ```
 tps = 1183279.095676 (without initial connection time)
@@ -105,7 +105,7 @@ This needs synchronous writes to storage.
 For typical consumer SSDs, this is >1ms, but enterprise SSDs can have lower write latency.
 
 ```shell
-pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update
+pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update
 ```
 ```
 pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
@@ -128,7 +128,7 @@ Again, scaling the number of concurrent writes allows much higher throughput, si
 bound.
 
 ```shell
-pgbench -h /tmp -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update --jobs=20 --client=200
+pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update --jobs=20 --client=200
 ```
 ```
 tps = 45882.003693 (without initial connection time)
