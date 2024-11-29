@@ -222,7 +222,7 @@ The ClickBench website shows the results as a minimum of three runs, which you c
 
 ```shell
 for i in {1..3}; do
-   psql -h /tmp -U postgres -c '\timing' -c "SELECT COUNT(DISTINCT UserID) FROM hits;" | grep 'Time';
+   psql -h localhost -U postgres -c '\timing' -c "SELECT COUNT(DISTINCT UserID) FROM hits;" | grep 'Time';
 done
 ```
 
@@ -231,7 +231,7 @@ done
 Now let's also do a full run with all queries and report the total time:
 
 ```shell
-cat <(echo '\\timing') queries.sql | psql -h /tmp -U postgres | grep 'Time' | awk '{print "Q" NR-1 " " $0; sum += $2;} END {print "Total: " sum " ms = " NR*60000/sum " qpm";}'
+cat <(echo '\\timing') queries.sql | psql -h localhost -U postgres | grep 'Time' | awk '{print "Q" NR-1 " " $0; sum += $2;} END {print "Total: " sum " ms = " NR*60000/sum " qpm";}'
 ```
 
 ```
@@ -291,7 +291,7 @@ Their results use the [geometric mean](https://en.wikipedia.org/wiki/Geometric_m
 You can use the following command to get comparable qpm numbers.
 
 ```shell
-cat <(echo '\\timing') queries.sql | psql -h /tmp -U postgres | grep 'Time' | awk '{sum += log($2);} END {print "Geometric mean: " exp(1)^(sum/NR) " ms = " 60000/exp(1)^(sum/NR) " qpm ";}'
+cat <(echo '\\timing') queries.sql | psql -h localhost -U postgres | grep 'Time' | awk '{sum += log($2);} END {print "Geometric mean: " exp(1)^(sum/NR) " ms = " 60000/exp(1)^(sum/NR) " qpm ";}'
 ```
 
 ```

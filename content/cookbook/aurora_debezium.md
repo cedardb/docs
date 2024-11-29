@@ -134,6 +134,10 @@ services:
      - type: bind
        source: /home/ubuntu/db
        target: /var/lib/cedardb/data
+    environment:
+     - CEDAR_USER=postgres
+     - CEDAR_PASSWORD=postgres
+     - CEDAR_DB=postgres
   connect:
     image: quay.io/debezium/connect:2.7
     ports:
@@ -158,18 +162,12 @@ Then, start all services with the following command:
 docker compose up
 ```
 
-### Connecting to and setting up CedarDB:
+### Install psql to talk to CedarDB and Postgres:
 
-We now need to create a user in CedarDB Debezium can use for replication.
-
-1. Install psql: `sudo apt install posgresql-common postgresql-client-16`
+```shell
+sudo apt install posgresql-common postgresql-client-16
+```
    
-2. Find the container id of the cedar image via `docker ps`: In my case it's `90ae1249bddb`.
-   
-3. Create the correct user in the docker image: `sudo docker exec -it 90ae psql -h /tmp -U postgres`
-   
-4. Set a password: `alter user postgres with password 'postgres';`
-
 
 ### Creating a Source and Sink Configuration for Debezium
 
@@ -287,7 +285,7 @@ INSERT INTO lineitem (lineitem_id,  transaction_id, product_id, quantity, unit_p
 
 ### Checking Replication in CedarDB
 
-Now connect to CedarDB (e.g., via `docker exec -it 90ae psql -h /tmp -U postgres`) and check the replicated table:
+Now connect to CedarDB (e.g., via `PGPASSWORD=postgres psql -h localhost -U postgres`) and check the replicated table:
 
 ```sql
 select * from lineitem;
