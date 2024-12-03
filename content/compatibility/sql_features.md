@@ -245,7 +245,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | mod           | Yes               |                          |
 | pi            | Yes               |                          |
 | power         | Yes               |                          |
-| radians       | No                |                          |
+| radians       | Yes               |                          |
 | round         | Yes               |                          |
 | scale         | No                |                          |
 | sign          | Yes               |                          |
