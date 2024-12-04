@@ -1,5 +1,26 @@
 [
 	{
+		"version": "alpha/2024-12-05",
+		"date": "2024-12-05",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> The docker image is now compatible with external <tt>pg_isready</tt> health checks. Previously, CedarDB would be started and stopped multiple times during setup while being externally reachable. This caused <tt>pg_isready</tt> to prematurely declare CedarDB being up and subsequent connections to fail.",
+			"<b>New Feature:</b> Log messages are now prefixed with a timestamp.",
+			"<b>New Feature:</b> More detailed CSV import error messages: When the format is wrong, CedarDB now returns the offending column and the detailed issue.",
+			"<b>PostgreSQL compatibility:</b> Sequence names now automatically convert to oids. You can now write <tt>CREATE SEQUENCE serial; select nextval('serial');</tt>",
+			"<b>PostgreSQL compatibility:</b> Support for <tt>factorial(n)</tt>, in addition to the already existing <tt>n!</tt> and <tt>!!n</tt>.",
+			"<b>PostgreSQL compatibility:</b> Subtracting two dates now returns an integer with the difference in days, instead of an interval.",
+			"<b>PostgreSQL compatibility:</b> <tt>split_part</tt> now allows for negative arguments to search backward from the end and correctly returns <tt>null</tt> in some corner cases.",
+			"<b>Maintenance:</b> Fixed a bug where docker containers would not start correctly on Windows.",
+			"<b>Maintenance:</b> Removed a few spurious asserts which gave the impression something went wrong when everything was in fact fine.",
+			"<b>Maintenance:</b> Fixed a crash for queries which would join at least two tables using the <tt>json_array_elements</tt> set generating function.",
+			"<b>Maintenance:</b> Fixed a rare deadlock when creating indexes. This could happen when re-creating an index after dropping it.",
+			"<b>Maintenance:</b> Fixed an issue where dropped indexes were wrongly restored when a concurrent transaction also modifying it was aborted.",
+			"<b>Maintenance:</b> Fixed a case where CedarDB tried to truncate a log too early and subsequently failed an assert.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-11-21",
 		"date": "2024-11-21",
 		"breaksdb": false,
