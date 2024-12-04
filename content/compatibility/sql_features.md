@@ -646,12 +646,12 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | json_path                 | No                |             |
 
 #### Sequence Manipulation
-| **Feature** | **Support State** | **Details**           |
-|-------------|-------------------|-----------------------|
-| nextval     | Yes               | Only with sequence ID |
-| setval      | No                |                       |
-| currval     | No                |                       |
-| lastval     | No                |                       |
+| **Feature** | **Support State** | **Details** |
+|-------------|-------------------|-------------|
+| nextval     | Yes               |             |
+| setval      | No                |             |
+| currval     | No                |             |
+| lastval     | No                |             |
 
 #### Conditional
 | **Feature** | **Support State** | **Details** |
