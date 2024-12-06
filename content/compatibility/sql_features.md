@@ -257,27 +257,27 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | random_normal | No                |                          |
 | setseed       | No                |                          |
 | acos          | Yes               |                          |
-| acosd         | No                |                          |
+| acosd         | Yes               |                          |
 | asin          | Yes               |                          |
-| asind         | No                |                          |
+| asind         | Yes               |                          |
 | atan          | Yes               |                          |
-| atand         | No                |                          |
+| atand         | Yes               |                          |
 | atan2         | Yes               |                          |
-| atan2d        | No                |                          |
+| atan2d        | Yes               |                          |
 | cos           | Yes               |                          |
-| cosd          | No                |                          |
+| cosd          | Yes               | Because of rounding errors, cosd is not exactly 0 for its zero points. |
 | cot           | Yes               |                          |
-| cotd          | No                |                          |
+| cotd          | Yes               | For the values where cotd is undefined, the value of the C++ library is returned. |
 | sin           | Yes               |                          |
-| sind          | No                |                          |
+| sind          | Yes               | Because of rounding errors, cosd is not exactly 0 for its zero points. |
 | tan           | Yes               |                          |
-| tand          | No                |                          |
-| sinh          | No                |                          |
-| cosh          | No                |                          |
-| tanh          | No                |                          |
-| asinh         | No                |                          |
-| acosh         | No                |                          |
-| atanh         | No                |                          |
+| tand          | Yes               | For the values where tand is undefined, the value of the C++ library is returned. |
+| sinh          | Yes               |                          |
+| cosh          | Yes               |                          |
+| tanh          | Yes               |                          |
+| asinh         | Yes               |                          |
+| acosh         | Yes               |                          |
+| atanh         | Yes               |                          |
 
 #### String
 | **Feature**           | **Support State** |                                           **Details** |
