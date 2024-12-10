@@ -133,7 +133,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 |-----------------------------------------|-------------------|----------------------------------------------------------------:|
 | array                                   | Yes               | [Array Documentation](/docs/references/datatypes/array)         |
 | bigint                                  | Yes               | [Integer Documentation](/docs/references/datatypes/integer)     |
-| bigserial                               | No                |                                                                 |
+| bigserial                               | Yes               |                                                                 |
 | bit [ (n) ]                             | Yes               | [Bit Documentation](/docs/references/datatypes/bit)             |
 | bit varying [ (n) ]                     | Yes               | [Bit Documentation](/docs/references/datatypes/bit)             |
 | boolean                                 | Yes               | [Boolean Documentation](/docs/references/datatypes/boolean)     |
@@ -163,8 +163,8 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | polygon                                 | No                |                                                                 |
 | real                                    | Yes               | [Double Documentation](/docs/references/datatypes/double)       |
 | smallint                                | Yes               | [Integer Documentation](/docs/references/datatypes/integer)     |
-| smallserial                             | No                |                                                                 |
-| serial                                  | No                |                                                                 |
+| smallserial                             | Yes               |                                                                 |
+| serial                                  | Yes               |                                                                 |
 | text                                    | Yes               | [Text Documentation](/docs/references/datatypes/text)           |
 | time [ (p) ] [ without time zone ]      | Yes               | [Time Documentation](/docs/references/datatypes/time)           |
 | time [ (p) ] with time zone             | Yes               | [Time Documentation](/docs/references/datatypes/time)           |
