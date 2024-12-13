@@ -1,5 +1,37 @@
 [
 	{
+		"version": "alpha/2024-12-16",
+		"date": "2024-12-16",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add support for the <tt>serial</tt>, <tt>smallserial</tt>, and <tt>bigserial</tt> data types.",
+			"<b>New Feature:</b> Add trigonometric functions with degrees: <tt>acosd, asind, atand, cosd, cotd, sind, tand</tt>.",
+			"<b>New Feature:</b> Add hyperbolic trigonometric functions: <tt>sinh, cosh, tanh, asinh, acosh, atanh</tt>.",
+			"<b>New Feature:</b> Add support for <tt>generate_subscripts()</tt>.",
+			"<b>New Feature:</b> Very basic support for the <a href=https://orm.drizzle.team/>Drizzle</a> ORM.",
+			"<b>Performance:</b> Doing inserts in batches of 128 or more elements is now considerably faster.",
+			"<b>Performance:</b> <tt>coalesce</tt> expressions with large number of arguments are now optimized in linear instead of quadratic time.",
+			"<b>PostgreSQL compatibility:</b> support parsing oids from namespace literals: <tt>select 'pg_temp'::regnamespace </tt>.",
+			"<b>PostgreSQL compatibility:</b> calling <tt>json_array_elements()</tt> on null now returns an empty string.",
+			"<b>PostgreSQL compatibility:</b> malformed protocol messages now return the <tt>ProtocolViolation</tt> error code instead of <tt>InternalError</tt>.",
+			"<b>PostgreSQL compatibility:</b> Failing to authenticate now returns the correct error codes.",
+			"<b>PostgreSQL compatibility:</b> It is now possible to bind up to 65535 parameters to a prepared statement, instead of the previous maximum of 32767.",
+			"<b>PostgreSQL compatibility:</b> The <tt>pg_columnkeys</tt> column in the <tt>pg_constraint</tt> and <tt>pg_index</tt> system tables are now 1-indexed instead of 0-indexed.",
+			"<b>PostgreSQL compatibility:</b> Add <tt>has_sequence_privilege()</tt> builtin function.",
+			"<b>PostgreSQL compatibility:</b> Add <tt>pg_sequence_last_value()</tt> builtin function.",
+			"<b>PostgreSQL compatibility:</b> Update the <tt>pg_sequence</tt> system view to return meaningful data.",
+			"<b>PostgreSQL compatibility:</b> List sequences in the <tt>pg_class</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_get_serial_sequence()</tt> builtin function.",
+			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_stat_user_indexes</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_stat_all_indexes</tt> system table.",
+			"<b>Maintenance:</b> Fix an exception when parsing <tt>SET</tt> statements.",
+			"<b>Maintenance:</b> Malformed client messages are now handed gracefully and close the connection instead of triggering an assertion failure.",
+			"<b>Maintenance:</b> Automatically abort queries that run into a live lock. This could happen when trying to evict buffer pages while all buffer pages where pinned.",
+			"<b>Maintenance:</b> Parsing alter role statements setting the connection limit to values lower than -1 now throws the expected error instead of triggering an assert.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-12-05",
 		"date": "2024-12-05",
 		"breaksdb": false,
