@@ -220,3 +220,26 @@ explain (format json) select ...
   "query":true
 }
 ```
+
+## Step
+
+By default, `explain` shows the plan including all optimizations.
+To see the plan after different optimization steps, the step can the specified as an argument:
+
+```sql
+explain (step <step_value>) select ...
+```
+
+For `step_value`, the number of optimization steps to be performed can be passed as an integer.
+Alternatively, the name of the last step to be applied can be used.
+The possible values are:
+- NoOptimizations
+- ExpressionSimplification
+- Unnesting
+- PredicatePushdown
+- InitialJoinTree
+- SidewayInformationPassing
+- OperatorReordering
+- EarlyProbing
+- CommonSubtreeElimination
+- PhysicalOperatorMapping
