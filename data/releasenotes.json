@@ -1,5 +1,21 @@
 [
 	{
+		"version": "alpha/2024-12-24",
+		"date": "2024-12-24",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> We have added support for explain statements after different query optimization steps. For example, <tt>explain (step Unnesting) select * from foo, bar where foo.a = bar.b</tt> shows the query tree after the 'Unnesting' optimization step but before the 'Predicate Pushdown' step. For the syntax and available steps, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain/#step>our docs</a>.",
+			"<b>Performance:</b> The logic deciding whether to use an index for a join is now more sophisticated. Previously, it could happen that CedarDB suddenly switched to a very disadvantageous query plan once a relation's size reached 10% of the available main memory. CedarDB now also takes the cost of buffer thrashing into account, not only a relation's size.",
+			"<b>Performance:</b> CedarDB is now more careful on when it holds an exclusive lock on the database schema during DDL statements, improving performance of DDL queries.",
+			"<b>PostgreSQL compatibility:</b> Support for non constant values for <tt>limit</tt> offset: It is now possible to prepare queries like <tt> select * from foo limit $1 offset $2</tt>. This was e.g. required by <a href=https://orm.drizzle.team/drizzle-studio/overview>Drizzle Studio</a>.",
+			"<b>PostgreSQL compatibility:</b> Add <tt>pg_column_is_updatable()</tt> builtin function.",
+			"<b>Maintenance:</b> Fix a bug in the null-handling logic of <tt>IN</tt> expressions which triggered a faulty assert. Also occured in instances where no explicit <tt>IN</tt> expression was present but CedarDB optimized a different expression into such an expression.",
+			"<b>Maintenance:</b> Tables created in the temporary <tt>pg_temp</tt> namespace can now actually be referenced in queries and aren't lost to the aether.",
+			"<b>Maintenance:</b> Fix a race condition in the group commit queue where a thread waiting for a sync to disk was notified before it started to wait. This could lead to deadlocks of bulk transactions ",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-12-16",
 		"date": "2024-12-16",
 		"breaksdb": false,
