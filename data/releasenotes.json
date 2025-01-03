@@ -1,5 +1,24 @@
 [
 	{
+		"version": "alpha/2025-01-03",
+		"date": "2025-01-03",
+		"breaksdb": false,
+		"notes": [
+			"<b>Performance:</b> Vectorize printing of UUIDs. This drastically speeds up performance for queries returning a lot of UUIDs.",
+			"<b>Performance:</b> Refined optimizer logic on when to employ an index scan when buffer size is limited to further reduce buffer thrashing.",
+			"<b>Maintenance:</b> Columns can now be called 'step' again.",
+			"<b>Maintenance:</b> Fixed a bug where index scans in combination with a <tt>limit</tt> without <tt>order by</tt> clause did not produce all matching tuples.",
+			"<b>Maintenance:</b> Fixed a bug where index range scans in combination with a <tt>limit</tt> did not produce all matching tuples.",
+			"<b>Maintenance:</b> Fixed a bug where inserting null values reported a unique constraint violation if the index enforcing uniqueness was created after rows had already been inserted.",
+			"<b>Maintenance:</b> Fixed several bugs in unnesting of asof joins.",
+			"<b>Maintenance:</b> Fixed a crash when calling <tt>pg_get_view_def</tt> on views with long names.",
+			"<b>Maintenance:</b> Fixed a bug where using non constant <tt>limit</tt> or <tt>offset</tt> declarations triggered an assert.",
+			"<b>Maintenance:</b> Fixed a race condition when changing settings concurrently.",
+			"<b>Maintenance:</b> Fixed a bug where queries operating on tables with multiple unique and non-unique indexes would skip some rows.",
+			"Various bug fixes, stability, and performance improvements."
+		]
+	},
+	{
 		"version": "alpha/2024-12-24",
 		"date": "2024-12-24",
 		"breaksdb": false,
