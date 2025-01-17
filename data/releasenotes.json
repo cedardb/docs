@@ -1,5 +1,30 @@
 [
 	{
+		"version": "alpha/2025-01-17",
+		"date": "2025-01-17",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> CedarDB now asynchronously loads data from disk into its page cache. This makes queries that touch data that is not currently cached up to 4x faster!",
+			"<b>New Feature:</b> Output of <tt>explain</tt> is now flatter, allowing you to more easily read query plans of complex queries. For a full overview and instructions on how to get back the old behavior, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain>our docs</a>.",
+			"<b>New Feature:</b> You can now cast integers to bitstrings: <tt>select 29::bit(4)</tt>.",
+			"<b>New Feature:</b> Support for read-only transaction via <tt>set transaction_read_only</tt>.",
+			"<b>New Feature:</b> <tt>explain analyze</tt> now returns more detailed information about execution times.",
+			"<b>PostgreSQL compatibility:</b> System tables and views are now shown in <tt>pg_class</tt>.",
+			"<b>PostgreSQL compatibility:</b> Allow parsing values of type <tt>time</tt> from strings that also specify a date.",
+			"<b>PostgreSQL compatibility:</b> Correct handling of namespaces and owners in system tables.",
+			"<b>PostgreSQL compatibility:</b> <tt>pg_table_is_visible()</tt> now correctly observes <tt>search_path</tt>.",
+			"<b>PostgreSQL compatibility:</b> Enforce precision of numerics when casting them from strings or integral types.",
+			"<b>PostgreSQL compatibility:</b> Ensure that <tt>oid</tt>s in system tables are always larger than 0. Required by some clients.",
+			"<b>PostgreSQL compatibility:</b> Support binary output of the <tt>ByteArray</tt> and <tt>Time</tt> datatypes.",
+			"<b>PostgreSQL compatibility:</b> Looking up functions now works with fully qualified names as well: <tt>select 'pg_catalog.sum(int)'::regproc;</tt>",
+			"<b>PostgreSQL compatibility:</b> Add <tt>array_in</tt> dummy function in <tt>pg_proc</tt> and <tt>pg_types</tt>. Required by some JDBC queries inferring whether a given type is an array type.",
+			"<b>Maintenance:</b> Print nicer error message when exceeding the maximum precision of a numeric.",
+			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in <tt>generate_subscripts()</tt>.",
+			"<b>Maintenance:</b> Got rid of pesky irrelevant message about perf counters not being able to be initialized.</tt>",
+			"<b>Maintenance:</b> Fixed a bug where the state of sequences was not correctly recovered after a system crash."
+		]
+	},
+	{
 		"version": "alpha/2025-01-03",
 		"date": "2025-01-03",
 		"breaksdb": false,
