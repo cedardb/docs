@@ -1,5 +1,37 @@
 [
 	{
+		"version": "alpha/2025-02-04",
+		"date": "2025-02-04",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> CedarDB's explain output includes more details: <ul> <li> <tt>explain</tt> now shows internally generated CTEs.</li> <li> <tt>explain analyze</tt> now shows the memory usage of hash joins and <tt>group by</tt> aggregations.</li><li><tt>explain analyze</tt> now reports the I/O statistics of table scans.</li></ul>",
+			"<b>New Feature:</b> You can now directly query csv files located on the server via <tt>select * from '/path/to/filename.csv'</tt>.",
+			"<b>New Feature:</b> Introduced the <tt>debug.log_slow_queries</tt> setting. It will log all queries which took longer than x milliseconds to execute on the server- and on the client side. Activate via <tt>set debug.log_slow_queries = min_time_in_milliseconds</tt>. <i>Warning: This is a global setting!</i>",
+
+
+			"<b>PostgreSQL compatibility:</b> Add <tt>pg_prepared_statements</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Correctly consider the <tt>weight</tt> parameter when deserializing numerics received in binary format.",
+			"<b>PostgreSQL compatibility:</b> <tt>pg_index</tt> now correctly reports index orders (ascending or descending).",
+			"<b>PostgreSQL compatibility:</b> The row description message of the wire protocol now correctly reports the base table columns of query results. This is required by e.g. JDBC to update ResultSets of a Query.",
+			"<b>PostgreSQL compatibility:</b> Text output of timestamps now correctly truncates trailing zeroes in the microsecond field.",
+			"<b>PostgreSQL compatibility:</b> <tt>pg_type</tt> now correctly reports the name of array types.",
+			"<b>PostgreSQL compatibility:</b> Return a more readable error message when a varchar exceeds its max length.",
+			"<b>PostgreSQL compatibility:</b> Startup messages may now contain integral timezone offsets instead of just a name.",
+			"<b>PostgreSQL compatibility:</b> CedarDB will now correctly send a ParameterStatus message to the client if a setting has been updated.",
+			"<b>PostgreSQL compatibility:</b> Extend the parsing logic of date style settings.",
+			"<b>Performance:</b> CedarDB now uses <tt>O_DIRECT</tt> on all systems that support it.",
+			"<b>Performance:</b> Improved selection of unique indexes. CedarDB previously only considered indexes with an explicit constraint as unique. Now, we also consider if the index attributes include a key, which allows choosing better index scans.",
+			"<b>Performance:</b> CedarDB now prefers covering and smaller indexes for index joins instead of always preferring primary keys.",
+			"<b>Performance:</b> CedarDB will now prefer using a covering index for index scans where possible. The previous index selection strategy caused us to sometimes access the underlying table even if a covering index was available that guaranteed no table lookup would be required.",
+			"<b>Performance:</b> Prefer using a table scan over an index scan if we have a very selective restriction on a table that is not covered by the index.",
+			"<b>Maintenance:</b> Fix an issue where CedarDB created overly many memory mappings. This resulted in unnecessary out of memory errors on strict Linux configurations. This only became an issue when creating more than 10'000 tables.",
+			"<b>Maintenance:</b> Fix a bug where we didn't parse <tt>drop operator</tt> correctly.",
+			"<b>Maintenance:</b> Output offset in the seconds range on timestamp with timezones. This broke timestamps in timezones who had adjustements in the past which were not evenly divisble by minutes. One example is Casablanca, where the timezone was adjusted by 20 seconds in 1913.",
+			"<b>Maintenance:</b> Fix a bug where we didn't consider some tuples in <tt>union all</tt> in rare edge cases.",
+			"<b>Maintenance:</b> Fix some edge cases for array input from strings where the parser, e.g., didn't consider tab-stops as white-space."
+		]
+	},
+	{
 		"version": "alpha/2025-01-23",
 		"date": "2025-01-23",
 		"breaksdb": false,
