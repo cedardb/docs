@@ -32,6 +32,7 @@ The complete list of supported data types in CedarDB is as follows:
 * [`real`](double)
 * [`smallint`](integer)
 * [`text`](text)
+* [`tinyint`](integer)
 * [`uuid`](uuid)
 * [`varchar`](text)
 * [`interval`](interval)

@@ -7,9 +7,10 @@ weight: 10
 
 Integers are whole numbers that are typically used to represent counters or identifiers.
 CedarDB supports three different widths of integers:
-*  A two-byte `smallint`,
-*  a four-byte `integer`, 
-*  and an eight-byte `bigint`.
+*  single-byte `tinyint`
+*  two-byte `smallint`
+*  four-byte `integer`
+*  eight-byte `bigint`
 
 ## Usage Example
 ```sql
@@ -33,6 +34,7 @@ select id from example;
 
 | Type       |       Min |        Max |
 |------------|----------:|-----------:|
+| `tinyint`  |  $-2^{7}$ |  $2^{7}-1$ |
 | `smallint` | $-2^{15}$ | $2^{15}-1$ |
 | `integer`  | $-2^{31}$ | $2^{31}-1$ |
 | `bigint`   | $-2^{63}$ | $2^{63}-1$ |
