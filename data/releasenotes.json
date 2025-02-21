@@ -1,4 +1,27 @@
 [
+    	{
+		"version": "alpha/2025-02-20",
+		"date": "2025-02-20",
+		"breaksdb": false,
+		"notes": [
+            "<b>PostgreSQL compatibility:</b> We made various compatibility time zone and interval changes such that we can pass the JDBC time tests.",
+			"<b>PostgreSQL compatibility:</b> We now allow $ symbols in identifiers.",
+			"<b>PostgreSQL compatibility:</b> You can now write nested comments in your SQL queries.",
+			"<b>PostgreSQL compatibility:</b> Simplified index size checking by parsing names as regclass oids in <tt>pg_table_size('foo_pkey')</tt>." ,
+			"<b>PostgreSQL compatibility:</b> PostgreSQL's parse messages are often sent without typemod. We now use the generic type as default.",
+            "<b>PostgreSQL compatibility:</b> We now print arrays and calculate the <tt>array_length</tt> according to PostgreSQL. Our array printer used to differ for arrays that have special characters, are empty, or have null values.",
+            "<b>PostgreSQL compatibility:</b> We now allow changing several transaction behavior settings with <tt>SET TRANSACTION</tt> statements and changing the default session behavior with <tt>SET SESSION CHARACTERISTICS AS TRANSACTION</tt> statements.",
+            "<b>PostgreSQL compatibility:</b> OIDs of system tables are now identical to the ones PostgreSQL uses.",
+            "<b>Performance:</b> If the join build side is empty, we skip evaluating the probe side completely when this is safe to do.",
+            "<b>Performance:</b> We revised operations that use the sequentially consistent memory model, replacing sequentially consistent stores and loads (where possible) with more performant acquire/release operations.",
+            "<b>Maintenance:</b> Fixed a rare race condition where the current file descriptor was closed and data was read. This could cause incorrect results to be returned. Because the likelihood of this increased in constrained memory settings, we now use more rigorous integration tests that put more stress on the memory subsystem.",
+            "<b>Maintenance:</b> Fixed a bug when we transformed an asof join conditions to a regular join condition.",
+            "<b>Maintenance:</b> We fixed a rare race condition in our group commit that could cause queries to be live-locked until the next transaction commits.",
+            "<b>Maintenance:</b> When processing insert on conflict, we only returned the updated rows instead of all rows.",
+            "<b>Maintenance:</b> Fixed a bug where we used a cached functional dependency after unnesting the query which could trigger an assert.",
+            "Various bug fixes, stability, and performance improvements."
+		]
+	},
 	{
 		"version": "alpha/2025-02-04",
 		"date": "2025-02-04",
@@ -57,8 +80,8 @@
 			"<b>Performance:</b> Skip over subtrees guaranteed to generate no results during execution.",
 			"<b>Maintenance:</b> Work around a bug in LLVM calling conventions. See the corresponding <a href='https://github.com/llvm/llvm-project/issues/123935'>issue</a> in the LLVM repo.",
 			"<b>Maintenance:</b> Print nicer error message when exceeding the maximum precision of a numeric.",
-			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in <tt>generate_subscripts()</tt>.",			
-			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in upserts.",			
+			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in <tt>generate_subscripts()</tt>.",
+			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in upserts.",
 			"<b>Maintenance:</b> Fix a bug where we wrongly optimized multi-column conditions to <tt>IN</tt> expressions.",
 			"<b>Maintenance:</b> Got rid of pesky irrelevant message about perf counters not being able to be initialized.</tt>",
 			"<b>Maintenance:</b> Fixed a bug where the state of sequences was not correctly recovered after a system crash."
@@ -287,7 +310,6 @@
 			"<b>PostgreSQL compatibility:</b> Added for pg_proc system table",
 			"<b>PostgreSQL compatibility:</b> Added pg_function_is_visible() function",
 			"Various bug fixes and stability improvements"
-			 
 		]
 	},
 	{
