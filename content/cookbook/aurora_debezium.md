@@ -100,7 +100,7 @@ If not, here are the steps to enable it:
    
     Call it, e.g., `logicalreplication`, set the engine type to `Aurora PostgreSQL`, the family to your PostgreSQL version, e.g. `aurora-postgresql15` and the type to `DB Cluster Parameter Group`.
 
-    Then, within that parameter group, change the parameter `ds.logical_replication` to `1`.
+    Then, within that parameter group, change the parameter `rds.logical_replication` to `1`.
 
 2. Apply this group to your cluster
 3. Restart your cluster (or wait for the next maintenance window)
