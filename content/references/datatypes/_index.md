@@ -29,6 +29,7 @@ The complete list of supported data types in CedarDB is as follows:
 * [`json`](json)
 * [`jsonb`](json)
 * [`numeric`](numeric)
+* [`oid`](oid)
 * [`real`](double)
 * [`smallint`](integer)
 * [`text`](text)
