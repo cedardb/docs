@@ -18,6 +18,7 @@ Here are some high-level topics that go over the typical uses of the database qu
 * [Schema Management](statements/createtable) (`create table`)
 
 You can also find a complete reference of CedarDBs supported query language:
+* [Syntax](./syntax)
 * [Statements](./statements)
 * [Expressions](./expressions)
 * [Functions](./functions)
