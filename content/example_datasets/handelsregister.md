@@ -30,7 +30,7 @@ The bzip2 compressed download is about 250&nbsp;MB, which decompresses to about 
 
 You can query the JSON file directly:
 ```sql
-select data from cedar.csvview('de_companies_ocdata.jsonl') d(data) limit 3;
+select data from csvview('de_companies_ocdata.jsonl') d(data) limit 3;
 ```
 
 Or load it into CedarDB:
