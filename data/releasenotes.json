@@ -1,5 +1,15 @@
 [
 	{
+		"version": "alpha/2025-03-26",
+		"date": "2025-03-25",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Print dynamic filters in <tt>explain verbose</tt>.",
+			"<b>Maintenance:</b> Fixed a bug where old databases that contained deleted indexes could not be loaded in the newest version of CedarDB.",
+			"<b>Maintenance:</b> Fixed parsing ISO8601 intervals with more than 24 trailing zeroes."
+		]
+	},
+	{
 		"version": "alpha/2025-03-25",
 		"date": "2025-03-25",
 		"breaksdb": false,
