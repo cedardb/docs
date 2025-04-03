@@ -10,107 +10,91 @@ Since CedarDB does not share the PostgreSQL codebase and internal structures, so
 
 
 ## System Tables
-| **Feature**              | **Support State** | **Meaningful Entries** | **Details**     |
-|--------------------------|-------------------|------------------------|-----------------|
-| pg_aggregate             | Yes               | No                     |                 |
-| pg_am                    | Yes               | Yes                    | amhandler unset |
-| pg_amop                  | Yes               | No                     |                 |
-| pg_amproc                | Yes               | No                     |                 |
-| pg_attrdef               | Yes               | No                     |                 |
-| pg_attribute             | Yes               | Yes                    |                 |
-| pg_authid                | Yes               | Yes                    |                 |
-| pg_auth_members          | Yes               | No                     |                 |
-| pg_cast                  | Yes               | No                     |                 |
-| pg_class                 | Yes               | Yes                    |                 |
-| pg_collation             | Yes               | Yes                    |                 |
-| pg_constraint            | Yes               | Yes                    |                 |
-| pg_conversion            | Yes               | No                     |                 |
-| pg_database              | Yes               | Yes                    |                 |
-| pg_db_role_setting       | Yes               | No                     |                 |
-| pg_default_acl           | Yes               | No                     |                 |
-| pg_depend                | Yes               | No                     |                 |
-| pg_description           | Yes               | Yes                    |                 |
-| pg_enum                  | Yes               | No                     |                 |
-| pg_event_trigger         | Yes               | No                     |                 |
-| pg_extension             | Yes               | No                     |                 |
-| pg_foreign_data_wrapper  | Yes               | No                     |                 |
-| pg_foreign_server        | Yes               | No                     |                 |
-| pg_foreign_table         | Yes               | No                     |                 |
-| pg_index                 | Yes               | Yes                    |                 |
-| pg_inherits              | Yes               | No                     |                 |
-| pg_init_privs            | Yes               | No                     |                 |
-| pg_language              | Yes               | No                     |                 |
-| pg_largeobject           | Yes               | No                     |                 |
-| pg_largeobject_metadata  | Yes               | No                     |                 |
-| pg_namespace             | Yes               | Yes                    |                 |
-| pg_opclass               | Yes               | No                     |                 |
-| pg_operator              | Yes               | No                     |                 |
-| pg_opfamily              | Yes               | No                     |                 |
-| pg_parameter_acl         | Yes               | No                     |                 |
-| pg_partitioned_table     | Yes               | No                     |                 |
-| pg_policy                | Yes               | No                     |                 |
-| pg_proc                  | Yes               | Yes                    |                 |
-| pg_publication           | Yes               | No                     |                 |
-| pg_publication_namespace | Yes               | No                     |                 |
-| pg_publication_rel       | Yes               | No                     |                 |
-| pg_range                 | Yes               | No                     |                 |
-| pg_replication_origin    | Yes               | No                     |                 |
-| pg_rewrite               | Yes               | No                     |                 |
-| pg_seclabel              | Yes               | No                     |                 |
-| pg_sequence              | Yes               | No                     |                 |
-| pg_shdepend              | Yes               | No                     |                 |
-| pg_shdescription         | Yes               | No                     |                 |
-| pg_shseclabel            | Yes               | No                     |                 |
-| pg_statistic             | Yes               | No                     |                 |
-| pg_statistic_ext         | Yes               | No                     |                 |
-| pg_statistic_ext_data    | Yes               | No                     |                 |
-| pg_subscription          | Yes               | No                     |                 |
-| pg_subscription_rel      | Yes               | No                     |                 |
-| pg_tablespace            | Yes               | No                     |                 |
-| pg_transform             | Yes               | No                     |                 |
-| pg_trigger               | Yes               | No                     |                 |
-| pg_ts_config             | Yes               | No                     |                 |
-| pg_ts_config_map         | Yes               | No                     |                 |
-| pg_ts_dict               | Yes               | No                     |                 |
-| pg_ts_parser             | Yes               | No                     |                 |
-| pg_ts_template           | Yes               | No                     |                 |
-| pg_type                  | Yes               | Yes                    |                 |
-| pg_user_mapping          | Yes               | No                     |                 |
+| **Feature**                                                                                               | **Support State** | **Meaningful Entries** | **Details**                                                                               |
+|-----------------------------------------------------------------------------------------------------------|-------------------|------------------------|-------------------------------------------------------------------------------------------|
+| [pg_aggregate](https://www.postgresql.org/docs/current/catalog-pg-aggregate.html)                         | ✅                 | ❌                      | Stores information about aggregate functions.                                             |
+| [pg_am](https://www.postgresql.org/docs/current/catalog-pg-am.html)                                       | ✅                 | ✅                      | Contains information about access methods; amhandler is unset.                            |
+| [pg_amop](https://www.postgresql.org/docs/current/catalog-pg-amop.html)                                   | ✅                 | ❌                      | Stores information about operators associated with access methods.                        |
+| [pg_amproc](https://www.postgresql.org/docs/current/catalog-pg-amproc.html)                               | ✅                 | ❌                      | Contains information about support procedures associated with access methods.             |
+| [pg_attrdef](https://www.postgresql.org/docs/current/catalog-pg-attrdef.html)                             | ✅                 | ❌                      | Stores column default values.                                                             |
+| [pg_attribute](https://www.postgresql.org/docs/current/catalog-pg-attribute.html)                         | ✅                 | ✅                      | Contains information about table columns.                                                 |
+| [pg_authid](https://www.postgresql.org/docs/current/catalog-pg-authid.html)                               | ✅                 | ✅                      | Stores information about database roles.                                                  |
+| [pg_auth_members](https://www.postgresql.org/docs/current/catalog-pg-auth-members.html)                   | ✅                 | ❌                      | Tracks role memberships.                                                                  |
+| [pg_cast](https://www.postgresql.org/docs/current/catalog-pg-cast.html)                                   | ✅                 | ❌                      | Contains information about type casts.                                                    |
+| [pg_class](https://www.postgresql.org/docs/current/catalog-pg-class.html)                                 | ✅                 | ✅                      | Stores information about tables, indexes, sequences, and other relations.                 |
+| [pg_collation](https://www.postgresql.org/docs/current/catalog-pg-collation.html)                         | ✅                 | ✅                      | Contains information about collations.                                                    |
+| [pg_constraint](https://www.postgresql.org/docs/current/catalog-pg-constraint.html)                       | ✅                 | ✅                      | Stores information about table constraints.                                               |
+| [pg_conversion](https://www.postgresql.org/docs/current/catalog-pg-conversion.html)                       | ✅                 | ❌                      | Contains information about encoding conversions.                                          |
+| [pg_database](https://www.postgresql.org/docs/current/catalog-pg-database.html)                           | ✅                 | ✅                      | Stores information about databases.                                                       |
+| [pg_db_role_setting](https://www.postgresql.org/docs/current/catalog-pg-db-role-setting.html)             | ✅                 | ❌                      | Contains per-role and per-database configuration settings.                                |
+| [pg_default_acl](https://www.postgresql.org/docs/current/catalog-pg-default-acl.html)                     | ✅                 | ❌                      | Stores default access privileges.                                                         |
+| [pg_depend](https://www.postgresql.org/docs/current/catalog-pg-depend.html)                               | ✅                 | ❌                      | Tracks dependencies between database objects.                                             |
+| [pg_description](https://www.postgresql.org/docs/current/catalog-pg-description.html)                     | ✅                 | ✅                      | Stores optional descriptions (comments) for database objects.                             |
+| [pg_enum](https://www.postgresql.org/docs/current/catalog-pg-enum.html)                                   | ✅                 | ❌                      | Contains information about enum types.                                                    |
+| [pg_event_trigger](https://www.postgresql.org/docs/current/catalog-pg-event-trigger.html)                 | ✅                 | ❌                      | Stores information about event triggers.                                                  |
+| [pg_extension](https://www.postgresql.org/docs/current/catalog-pg-extension.html)                         | ✅                 | ❌                      | Contains information about installed extensions.                                          |
+| [pg_foreign_data_wrapper](https://www.postgresql.org/docs/current/catalog-pg-foreign-data-wrapper.html)   | ✅                 | ❌                      | Stores information about foreign-data wrappers.                                           |
+| [pg_foreign_server](https://www.postgresql.org/docs/current/catalog-pg-foreign-server.html)               | ✅                 | ❌                      | Contains information about foreign servers.                                               |
+| [pg_foreign_table](https://www.postgresql.org/docs/current/catalog-pg-foreign-table.html)                 | ✅                 | ❌                      | Stores information about foreign tables.                                                  |
+| [pg_index](https://www.postgresql.org/docs/current/catalog-pg-index.html)                                 | ✅                 | ✅                      | Contains information about indexes.                                                       |
+| [pg_inherits](https://www.postgresql.org/docs/current/catalog-pg-inherits.html)                           | ✅                 | ❌                      | Tracks table inheritance hierarchies.                                                     |
+| [pg_init_privs](https://www.postgresql.org/docs/current/catalog-pg-init-privs.html)                       | ✅                 | ❌                      | Stores initial privileges of database objects.                                            |
+| [pg_language](https://www.postgresql.org/docs/current/catalog-pg-language.html)                           | ✅                 | ❌                      | Contains information about procedural languages.                                          |
+| [pg_largeobject](https://www.postgresql.org/docs/current/catalog-pg-largeobject.html)                     | ✅                 | ❌                      | Stores large object data.                                                                 |
+| [pg_largeobject_metadata](https://www.postgresql.org/docs/current/catalog-pg-largeobject-metadata.html)   | ✅                 | ❌                      | Contains metadata for large objects.                                                      |
+| [pg_namespace](https://www.postgresql.org/docs/current/catalog-pg-namespace.html)                         | ✅                 | ✅                      | Stores information about schemas.                                                         |
+| [pg_opclass](https://www.postgresql.org/docs/current/catalog-pg-opclass.html)                             | ✅                 | ❌                      | Contains information about operator classes.                                              |
+| [pg_operator](https://www.postgresql.org/docs/current/catalog-pg-operator.html)                           | ✅                 | ❌                      | Stores information about operators.                                                       |
+| [pg_opfamily](https://www.postgresql.org/docs/current/catalog-pg-opfamily.html)                           | ✅                 | ❌                      | Contains information about operator families.                                             |
+| [pg_parameter_acl](https://www.postgresql.org/docs/current/catalog-pg-parameter-acl.html)                 | ✅                 | ❌                      | Stores access privileges for server parameters.                                           |
+| [pg_partitioned_table](https://www.postgresql.org/docs/current/catalog-pg-partitioned-table.html)         | ✅                 | ❌                      | Contains information about partitioned tables.                                            |
+| [pg_policy](https://www.postgresql.org/docs/current/catalog-pg-policy.html)                               | ✅                 | ❌                      | Stores information about row-level security policies.                                     |
+| [pg_proc](https://www.postgresql.org/docs/current/catalog-pg-proc.html)                                   | ✅                 | ✅                      | Contains information about functions and procedures.                                      |
+| [pg_publication](https://www.postgresql.org/docs/current/catalog-pg-publication.html)                     | ✅                 | ❌                      | Contains all publications created in the database.                                        |
+| [pg_publication_namespace](https://www.postgresql.org/docs/current/catalog-pg-publication-namespace.html) | ✅                 | ❌                      | Maps schemas to publications, supporting a many-to-many relationship.                     |
+| [pg_publication_rel](https://www.postgresql.org/docs/current/catalog-pg-publication-rel.html)             | ✅                 | ❌                      | Maps relations (tables) to publications, supporting a many-to-many relationship.          |
+| [pg_range](https://www.postgresql.org/docs/current/catalog-pg-range.html)                                 | ✅                 | ❌                      | Stores information about range types, supplementing entries in pg_type.                   |
+| [pg_replication_origin](https://www.postgresql.org/docs/current/catalog-pg-replication-origin.html)       | ✅                 | ❌                      | Contains all replication origins created, shared across all databases in a cluster.       |
+| [pg_rewrite](https://www.postgresql.org/docs/current/catalog-pg-rewrite.html)                             | ✅                 | ❌                      | Stores rewrite rules for tables and views.                                                |
+| [pg_seclabel](https://www.postgresql.org/docs/current/catalog-pg-seclabel.html)                           | ✅                 | ❌                      | Stores security labels on database objects, manipulable with the SECURITY LABEL command.  |
+| [pg_sequence](https://www.postgresql.org/docs/current/catalog-pg-sequence.html)                           | ✅                 | ❌                      | Contains information about sequences, with additional details in pg_class.                |
+| [pg_shdepend](https://www.postgresql.org/docs/current/catalog-pg-shdepend.html)                           | ✅                 | ❌                      | Records dependency relationships between database objects and shared objects, like roles. |
+| [pg_shdescription](https://www.postgresql.org/docs/current/catalog-pg-shdescription.html)                 | ✅                 | ❌                      | Stores optional                                                                           |
 
 ## System Views
-| **Feature**                     | **Support State** | **Meaningful Entries** | **Details** |
-|---------------------------------|-------------------|------------------------|-------------|
-| pg_available_extensions         | No                | No                     |             |
-| pg_available_extension_versions | No                | No                     |             |
-| pg_backend_memory_contexts      | No                | No                     |             |
-| pg_config                       | No                | No                     |             |
-| pg_cursors                      | No                | No                     |             |
-| pg_file_settings                | No                | No                     |             |
-| pg_group                        | Yes               | Yes                    |             |
-| pg_hba_file_rules               | No                | No                     |             |
-| pg_indexes                      | Yes               | Yes                    |             |
-| pg_locks                        | Yes               | No                     |             |
-| pg_matviews                     | Yes               | No                     |             |
-| pg_policies                     | Yes               | No                     |             |
-| pg_prepared_statements          | No                | No                     |             |
-| pg_prepared_xacts               | No                | No                     |             |
-| pg_publication_tables           | No                | No                     |             |
-| pg_replication_origin_status    | No                | No                     |             |
-| pg_replication_slots            | No                | No                     |             |
-| pg_roles                        | Yes               | Yes                    |             |
-| pg_rules                        | No                | No                     |             |
-| pg_seclabels                    | No                | No                     |             |
-| pg_sequences                    | No                | No                     |             |
-| pg_settings                     | Yes               | Yes                    |             |
-| pg_shadow                       | Yes               | Yes                    |             |
-| pg_shmem_allocations            | No                | No                     |             |
-| pg_stats                        | No                | No                     |             |
-| pg_stats_ext                    | No                | No                     |             |
-| pg_stats_ext_exprs              | No                | No                     |             |
-| pg_tables                       | Yes               | Yes                    |             |
-| pg_timezone_abbrevs             | Yes               | Yes                    |             |
-| pg_timezone_names               | Yes               | Yes                    |             |
-| pg_user                         | Yes               | Yes                    |             |
-| pg_user_mappings                | No                | No                     |             |
-| pg_views                        | Yes               | Yes                    |             |
-| pg_wait_events                  | No                | No                     |             |
+| **Feature**                                                                                                          | **Support State** | **Meaningful Entries** | **Details**                                                                     |
+|----------------------------------------------------------------------------------------------------------------------|-------------------|------------------------|---------------------------------------------------------------------------------|
+| [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | ❌                 | ❌                      | Lists available extensions.                                                     |
+| [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | ❌                 | ❌                      | Shows available versions of extensions.                                         |
+| [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)           | ❌                 | ❌                      | Displays memory contexts of the backend.                                        |
+| [pg_config](https://www.postgresql.org/docs/current/view-pg-config.html)                                             | ❌                 | ❌                      | Provides access to compile-time configuration parameters.                       |
+| [pg_cursors](https://www.postgresql.org/docs/current/view-pg-cursors.html)                                           | ❌                 | ❌                      | Lists open cursors.                                                             |
+| [pg_file_settings](https://www.postgresql.org/docs/current/view-pg-file-settings.html)                               | ❌                 | ❌                      | Summarizes contents of configuration files.                                     |
+| [pg_group](https://www.postgresql.org/docs/current/view-pg-group.html)                                               | ✅                 | ✅                      | Displays groups of database users.                                              |
+| [pg_hba_file_rules](https://www.postgresql.org/docs/current/view-pg-hba-file-rules.html)                             | ❌                 | ❌                      | Summarizes client authentication configuration file contents.                   |
+| [pg_indexes](https://www.postgresql.org/docs/current/view-pg-indexes.html)                                           | ✅                 | ✅                      | Shows information about indexes.                                                |
+| [pg_locks](https://www.postgresql.org/docs/current/view-pg-locks.html)                                               | ✅                 | ❌                      | Displays locks currently held or awaited.                                       |
+| [pg_matviews](https://www.postgresql.org/docs/current/view-pg-matviews.html)                                         | ✅                 | ❌                      | Lists materialized views.                                                       |
+| [pg_policies](https://www.postgresql.org/docs/current/view-pg-policies.html)                                         | ✅                 | ❌                      | Displays information about policies.                                            |
+| [pg_prepared_statements](https://www.postgresql.org/docs/current/view-pg-prepared-statements.html)                   | ❌                 | ❌                      | Lists prepared statements.                                                      |
+| [pg_prepared_xacts](https://www.postgresql.org/docs/current/view-pg-prepared-xacts.html)                             | ❌                 | ❌                      | Shows prepared transactions.                                                    |
+| [pg_publication_tables](https://www.postgresql.org/docs/current/view-pg-publication-tables.html)                     | ❌                 | ❌                      | Displays publications and their associated tables.                              |
+| [pg_replication_origin_status](https://www.postgresql.org/docs/current/view-pg-replication-origin-status.html)       | ❌                 | ❌                      | Provides information about replication origins, including replication progress. |
+| [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html)                       | ❌                 | ❌                      | Displays replication slot information.                                          |
+| [pg_roles](https://www.postgresql.org/docs/current/view-pg-roles.html)                                               | ✅                 | ✅                      | Lists database roles.                                                           |
+| [pg_rules](https://www.postgresql.org/docs/current/view-pg-rules.html)                                               | ❌                 | ❌                      | Shows information about rules.                                                  |
+| [pg_seclabels](https://www.postgresql.org/docs/current/view-pg-seclabels.html)                                       | ❌                 | ❌                      | Displays security labels.                                                       |
+| [pg_sequences](https://www.postgresql.org/docs/current/view-pg-sequences.html)                                       | ❌                 | ❌                      | Lists sequences.                                                                |
+| [pg_settings](https://www.postgresql.org/docs/current/view-pg-settings.html)                                         | ✅                 | ✅                      | Provides access to parameter settings.                                          |
+| [pg_shadow](https://www.postgresql.org/docs/current/view-pg-shadow.html)                                             | ✅                 | ✅                      | Displays database users.                                                        |
+| [pg_shmem_allocations](https://www.postgresql.org/docs/current/view-pg-shmem-allocations.html)                       | ❌                 | ❌                      | Shows shared memory allocations.                                                |
+| [pg_stats](https://www.postgresql.org/docs/current/view-pg-stats.html)                                               | ❌                 | ❌                      | Provides planner statistics.                                                    |
+| [pg_stats_ext](https://www.postgresql.org/docs/current/view-pg-stats-ext.html)                                       | ❌                 | ❌                      | Displays extended planner statistics.                                           |
+| [pg_stats_ext_exprs](https://www.postgresql.org/docs/current/view-pg-stats-ext-exprs.html)                           | ❌                 | ❌                      | Shows extended planner statistics for expressions.                              |
+| [pg_tables](https://www.postgresql.org/docs/current/view-pg-tables.html)                                             | ✅                 | ✅                      | Lists tables.                                                                   |
+| [pg_timezone_abbrevs](https://www.postgresql.org/docs/current/view-pg-timezone-abbrevs.html)                         | ✅                 | ✅                      | Displays time zone abbreviations.                                               |
+| [pg_timezone_names](https://www.postgresql.org/docs/current/view-pg-timezone-names.html)                             | ✅                 | ✅                      | Lists time zone names.                                                          |
+| [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                                 | ✅                 | ✅                      | Shows database users.                                                           |
+| [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                               | ❌                 | ❌                      | Displays user mappings.                                                         |
+| [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                               | ✅                 | ✅                      | Lists views.                                                                    |
+| [pg_wait_events](https://www.postgresql.org/docs/current/view-pg-wait-events.html)                                   | ❌                 | ❌                      | Displays wait events.                                                           |
