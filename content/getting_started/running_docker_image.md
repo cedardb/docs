@@ -10,46 +10,9 @@ This tutorial explains how to build, run, and configure the CedarDB docker image
 
 ## Quick start
 
-The following steps will create an empty database called `postgres` 
-which you can connect to using the `postgres` user with the password `test`.
-The database will be deleted when you stop the Docker container.
-
-{{% steps %}}
-
-
-### Get the docker file
-
-{{% waitlist %}}
-
-
-### Build the docker image
-
-Go to the path where you have downloaded the CedarDB docker file and run 
-```shell
-docker build -t cedardb .
-```
-
-### Launch the docker container
-
-Minimal working example:
-
-
-```shell
-# Start the container
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
-
-# Connect to CedarDB
-psql -h localhost -U postgres
-# <Enter test as password>
-
-postgres= SELECT 1 as foo;
- foo 
------
-   1
-(1 row)
-```
-
-{{% /steps %}}
+{{< callout type="info" >}}
+For the quick start follow the [Quick Start](./quickstart.md) page.
+{{< /callout >}}
 
 ## Configuration
 
