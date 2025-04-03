@@ -3,10 +3,14 @@
 This repository contains the code for the [CedarDB documentation](https://cedardb.com/docs).
 The documentation is built by the static-site-generator Hugo and uses the [Hextra](https://imfing.github.io/hextra/docs/guide/) theme.
 
-Run with:
+Clone repository:
 ```shell
 git clone --recurse-submodules git@github.com:cedardb/docs.git
-cd docs
+```
+
+Run a web server:
+```
+cd docs_staging
 hugo server
 ```
 
