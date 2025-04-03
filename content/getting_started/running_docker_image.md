@@ -10,46 +10,9 @@ This tutorial explains how to build, run, and configure the CedarDB docker image
 
 ## Quick start
 
-The following steps will create an empty database called `postgres` 
-which you can connect to using the `postgres` user with the password `test`.
-The database will be deleted when you stop the Docker container.
-
-{{% steps %}}
-
-
-### Get the docker file
-
-{{% waitlist %}}
-
-
-### Build the docker image
-
-Go to the path where you have downloaded the CedarDB docker file and run 
-```shell
-docker build -t cedardb .
-```
-
-### Launch the docker container
-
-Minimal working example:
-
-
-```shell
-# Start the container
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
-
-# Connect to CedarDB
-psql -h localhost -U postgres
-# <Enter test as password>
-
-postgres= SELECT 1 as foo;
- foo 
------
-   1
-(1 row)
-```
-
-{{% /steps %}}
+{{< callout type="info" >}}
+For the quick start follow the [Quick Start](/docs/getting_started/quickstart) page.
+{{< /callout >}}
 
 ## Configuration
 
@@ -58,7 +21,7 @@ Here's a few ways to customize the CedarDB docker image for your specific use ca
 
 ### Make the database persistent
 
-If you want your database to survive beyond the lifetime of your docker container, 
+If you want your database to survive beyond the lifetime of your docker container,
 you can mount a directory of the host system for CedarDB to store the database files in:
 
 ```shell
@@ -73,7 +36,7 @@ If the directory already contains a database, CedarDB will start the existing on
 
 `[INFO] CedarDB Database directory appears to contain a database; Skipping initialization.`
 
-In this case, it expects you to use the credentials of the existing database 
+In this case, it expects you to use the credentials of the existing database
 and **will not** use the username or password passed via the environment variable.
 {{< /callout >}}
 
@@ -89,7 +52,7 @@ You have three ways to initialize the database with your credentials: Via enviro
 ```shell
 docker run --rm -p 5432:5432 -e CEDAR_USER=test -e CEDAR_PASSWORD=test -e CEDAR_DB=db --name cedardb_test cedardb
 ```
-This command initializes a new superuser with the name `test`, the password `test` and a logical database with named `db`. 
+This command initializes a new superuser with the name `test`, the password `test` and a logical database with named `db`.
 
 You can then connect as follows:
 ```shell
@@ -98,7 +61,7 @@ psql -h localhost -U test -d db
 
 The parameters `CEDAR_USER` and `CEDAR_DB` are optional:
 - If `CEDAR_USER` isn't set, the default `postgres` is used instead.
-- If `CEDAR_DB` isn't set, the value of `CEDAR_USER` is used instead. 
+- If `CEDAR_DB` isn't set, the value of `CEDAR_USER` is used instead.
 
 
 #### Via domain socket
@@ -129,7 +92,7 @@ You can manage such files e.g. via [Docker secrets](https://docs.docker.com/engi
 
 ### Preloading data
 
-You may want to pre-populate your database with some data. 
+You may want to pre-populate your database with some data.
 Whenever a CedarDB Docker container initializes a new database, it considers all files in the `/docker-entrypoint-initdb.d/` for preloading.
 You can use this to create your own Docker image with your own data that inherits from the CedarDB image.
 
@@ -186,7 +149,7 @@ psql -h localhost -U postgres
 
 postgres= \d
          List of relations
- Schema |  Name  | Type  |  Owner   
+ Schema |  Name  | Type  |  Owner
 --------+--------+-------+----------
  public | foo    | table | postgres
  public | movies | table | postgres
@@ -194,7 +157,7 @@ postgres= \d
 
 
 postgres= select * from movies;
- id |               title               | year | length |      genre      
+ id |               title               | year | length |      genre
 ----+-----------------------------------+------+--------+-----------------
   1 | Oppenheimer                       | 2023 |    180 | Biopic
   2 | Everything Everywhere All at Once | 2022 |    139 | Science Fiction
@@ -202,7 +165,7 @@ postgres= select * from movies;
 (3 rows)
 
 postgres= select * from foo;
- a 
+ a
 ---
  7
 (1 row)
