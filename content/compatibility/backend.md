@@ -6,7 +6,9 @@ weight: 93
 Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_features), CedarDB also supports a large part of the PostgreSQL backend system catalog, which is often used by external tools and clients to interact with the database system.
 This page provides an overview of the currently supported system tables and views.
 
-Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have meaningful content and exist only for compatibility reasons. Catalog entries without meaningful content are marked as such.
+🟢 -- Fully supported features.
+🟡 -- Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have meaningful content and exist only for compatibility reasons.
+🔴 -- Catalog entries without meaningful content.
 
 
 ## System Tables
@@ -63,38 +65,38 @@ Since CedarDB does not share the PostgreSQL codebase and internal structures, so
 
 
 ## System Views
-| Feature                                                                                                          | Support State | Details                                                                     |
-|------------------------------------------------------------------------------------------------------------------|---------------|------------------------------------------------------------------------------|
-| [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)           | 🔴            | Lists available extensions.                                                 |
-| [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | 🔴       | Shows available versions of extensions.                                     |
-| [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)     | 🔴            | Displays memory contexts of the backend.                                    |
-| [pg_config](https://www.postgresql.org/docs/current/view-pg-config.html)                                       | 🔴            | Provides access to compile-time configuration parameters.                   |
-| [pg_cursors](https://www.postgresql.org/docs/current/view-pg-cursors.html)                                     | 🔴            | Lists open cursors.                                                         |
-| [pg_file_settings](https://www.postgresql.org/docs/current/view-pg-file-settings.html)                         | 🔴            | Summarizes contents of configuration files.                                 |
-| [pg_group](https://www.postgresql.org/docs/current/view-pg-group.html)                                         | 🟢            | Displays groups of database users.                                          |
-| [pg_hba_file_rules](https://www.postgresql.org/docs/current/view-pg-hba-file-rules.html)                       | 🔴            | Summarizes client authentication configuration file contents.               |
-| [pg_indexes](https://www.postgresql.org/docs/current/view-pg-indexes.html)                                     | 🟢            | Shows information about indexes.                                            |
-| [pg_locks](https://www.postgresql.org/docs/current/view-pg-locks.html)                                         | 🟡            | Displays locks currently held or awaited.                                   |
-| [pg_matviews](https://www.postgresql.org/docs/current/view-pg-matviews.html)                                   | 🟡            | Lists materialized views.                                                   |
-| [pg_policies](https://www.postgresql.org/docs/current/view-pg-policies.html)                                   | 🟡            | Displays information about policies.                                        |
-| [pg_prepared_statements](https://www.postgresql.org/docs/current/view-pg-prepared-statements.html)             | 🟡            | Lists prepared statements.                                                  |
-| [pg_prepared_xacts](https://www.postgresql.org/docs/current/view-pg-prepared-xacts.html)                       | 🔴            | Shows prepared transactions.                                                |
-| [pg_publication_tables](https://www.postgresql.org/docs/current/view-pg-publication-tables.html)               | 🔴            | Displays publications and their associated tables.                          |
-| [pg_replication_origin_status](https://www.postgresql.org/docs/current/view-pg-replication-origin-status.html) | 🔴            | Provides information about replication origins, including replication progress. |
-| [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html)                 | 🔴            | Displays replication slot information.                                      |
-| [pg_roles](https://www.postgresql.org/docs/current/view-pg-roles.html)                                         | 🟢            | Lists database roles.                                                       |
-| [pg_rules](https://www.postgresql.org/docs/current/view-pg-rules.html)                                         | 🔴            | Shows information about rules.                                              |
-| [pg_seclabels](https://www.postgresql.org/docs/current/view-pg-seclabels.html)                                 | 🔴            | Displays security labels.                                                   |
-| [pg_sequences](https://www.postgresql.org/docs/current/view-pg-sequences.html)                                 | 🟡            | Lists sequences.                                                            |
-| [pg_settings](https://www.postgresql.org/docs/current/view-pg-settings.html)                                   | 🟢            | Provides access to parameter settings.                                      |
-| [pg_shadow](https://www.postgresql.org/docs/current/view-pg-shadow.html)                                       | 🟢            | Displays database users.                                                    |
-| [pg_shmem_allocations](https://www.postgresql.org/docs/current/view-pg-shmem-allocations.html)                 | 🔴            | Shows shared memory allocations.                                            |
-| [pg_stats](https://www.postgresql.org/docs/current/view-pg-stats.html)                                         | 🔴            | Provides planner statistics.                                                |
-| [pg_stats_ext](https://www.postgresql.org/docs/current/view-pg-stats-ext.html)                                 | 🔴            | Displays extended planner statistics.                                       |
-| [pg_stats_ext_exprs](https://www.postgresql.org/docs/current/view-pg-stats-ext-exprs.html)                     | 🔴            | Shows extended planner statistics for expressions.                          |
-| [pg_tables](https://www.postgresql.org/docs/current/view-pg-tables.html)                                       | 🟢            | Lists tables.                                                               |
-| [pg_timezone_abbrevs](https://www.postgresql.org/docs/current/view-pg-timezone-abbrevs.html)                   | 🟢            | Displays time zone abbreviations.                                           |
-| [pg_timezone_names](https://www.postgresql.org/docs/current/view-pg-timezone-names.html)                       | 🟢            | Lists time zone names.                                                      |
-| [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                           | 🟢            | Shows database users.                                                       |
-| [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                         | 🔴            | Displays user mappings.                                                     |
-| [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                         | 🟢            | Lists views.                                                                |
+| Feature                                                                                                              | Support State | Details                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------------------------------------------------|
+| [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | 🔴            | Lists available extensions.                                                     |
+| [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | 🔴            | Shows available versions of extensions.                                         |
+| [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)           | 🔴            | Displays memory contexts of the backend.                                        |
+| [pg_config](https://www.postgresql.org/docs/current/view-pg-config.html)                                             | 🔴            | Provides access to compile-time configuration parameters.                       |
+| [pg_cursors](https://www.postgresql.org/docs/current/view-pg-cursors.html)                                           | 🔴            | Lists open cursors.                                                             |
+| [pg_file_settings](https://www.postgresql.org/docs/current/view-pg-file-settings.html)                               | 🔴            | Summarizes contents of configuration files.                                     |
+| [pg_group](https://www.postgresql.org/docs/current/view-pg-group.html)                                               | 🟢            | Displays groups of database users.                                              |
+| [pg_hba_file_rules](https://www.postgresql.org/docs/current/view-pg-hba-file-rules.html)                             | 🔴            | Summarizes client authentication configuration file contents.                   |
+| [pg_indexes](https://www.postgresql.org/docs/current/view-pg-indexes.html)                                           | 🟢            | Shows information about indexes.                                                |
+| [pg_locks](https://www.postgresql.org/docs/current/view-pg-locks.html)                                               | 🟡            | Displays locks currently held or awaited.                                       |
+| [pg_matviews](https://www.postgresql.org/docs/current/view-pg-matviews.html)                                         | 🟡            | Lists materialized views.                                                       |
+| [pg_policies](https://www.postgresql.org/docs/current/view-pg-policies.html)                                         | 🟡            | Displays information about policies.                                            |
+| [pg_prepared_statements](https://www.postgresql.org/docs/current/view-pg-prepared-statements.html)                   | 🟡            | Lists prepared statements.                                                      |
+| [pg_prepared_xacts](https://www.postgresql.org/docs/current/view-pg-prepared-xacts.html)                             | 🔴            | Shows prepared transactions.                                                    |
+| [pg_publication_tables](https://www.postgresql.org/docs/current/view-pg-publication-tables.html)                     | 🔴            | Displays publications and their associated tables.                              |
+| [pg_replication_origin_status](https://www.postgresql.org/docs/current/view-pg-replication-origin-status.html)       | 🔴            | Provides information about replication origins, including replication progress. |
+| [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html)                       | 🔴            | Displays replication slot information.                                          |
+| [pg_roles](https://www.postgresql.org/docs/current/view-pg-roles.html)                                               | 🟢            | Lists database roles.                                                           |
+| [pg_rules](https://www.postgresql.org/docs/current/view-pg-rules.html)                                               | 🔴            | Shows information about rules.                                                  |
+| [pg_seclabels](https://www.postgresql.org/docs/current/view-pg-seclabels.html)                                       | 🔴            | Displays security labels.                                                       |
+| [pg_sequences](https://www.postgresql.org/docs/current/view-pg-sequences.html)                                       | 🟡            | Lists sequences.                                                                |
+| [pg_settings](https://www.postgresql.org/docs/current/view-pg-settings.html)                                         | 🟢            | Provides access to parameter settings.                                          |
+| [pg_shadow](https://www.postgresql.org/docs/current/view-pg-shadow.html)                                             | 🟢            | Displays database users.                                                        |
+| [pg_shmem_allocations](https://www.postgresql.org/docs/current/view-pg-shmem-allocations.html)                       | 🔴            | Shows shared memory allocations.                                                |
+| [pg_stats](https://www.postgresql.org/docs/current/view-pg-stats.html)                                               | 🔴            | Provides planner statistics.                                                    |
+| [pg_stats_ext](https://www.postgresql.org/docs/current/view-pg-stats-ext.html)                                       | 🔴            | Displays extended planner statistics.                                           |
+| [pg_stats_ext_exprs](https://www.postgresql.org/docs/current/view-pg-stats-ext-exprs.html)                           | 🔴            | Shows extended planner statistics for expressions.                              |
+| [pg_tables](https://www.postgresql.org/docs/current/view-pg-tables.html)                                             | 🟢            | Lists tables.                                                                   |
+| [pg_timezone_abbrevs](https://www.postgresql.org/docs/current/view-pg-timezone-abbrevs.html)                         | 🟢            | Displays time zone abbreviations.                                               |
+| [pg_timezone_names](https://www.postgresql.org/docs/current/view-pg-timezone-names.html)                             | 🟢            | Lists time zone names.                                                          |
+| [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                                 | 🟢            | Shows database users.                                                           |
+| [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                               | 🔴            | Displays user mappings.                                                         |
+| [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                               | 🟢            | Lists views.                                                                    |
