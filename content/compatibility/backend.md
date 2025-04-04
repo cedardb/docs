@@ -6,11 +6,10 @@ weight: 93
 Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_features), CedarDB also supports a large part of the PostgreSQL backend system catalog, which is often used by external tools and clients to interact with the database system.
 This page provides an overview of the currently supported system tables and views.
 
-🟢 -- Fully supported features.
+- 🟢 **Fully supported features.**
+- 🟡 **Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have meaningful content and exist only for compatibility reasons.**
+- 🔴 **Catalog entries without meaningful content.**
 
-🟡 -- Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have meaningful content and exist only for compatibility reasons.
-
-🔴 -- Catalog entries without meaningful content.
 
 
 ## System Tables
