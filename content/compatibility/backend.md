@@ -7,7 +7,9 @@ Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_feat
 This page provides an overview of the currently supported system tables and views.
 
 🟢 -- Fully supported features.
+
 🟡 -- Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have meaningful content and exist only for compatibility reasons.
+
 🔴 -- Catalog entries without meaningful content.
 
 
