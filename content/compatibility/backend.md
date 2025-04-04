@@ -63,7 +63,23 @@ This page provides an overview of the currently supported system tables and view
 | [pg_seclabel](https://www.postgresql.org/docs/current/catalog-pg-seclabel.html)                           | 🟡            | Stores security labels on database objects, manipulable with the SECURITY LABEL command.  |
 | [pg_sequence](https://www.postgresql.org/docs/current/catalog-pg-sequence.html)                           | 🟢            | Contains information about sequences, with additional details in pg_class.                |
 | [pg_shdepend](https://www.postgresql.org/docs/current/catalog-pg-shdepend.html)                           | 🟡            | Records dependency relationships between database objects and shared objects, like roles. |
-| [pg_shdescription](https://www.postgresql.org/docs/current/catalog-pg-shdescription.html)                 | 🟡            | Stores optional                                                                           |
+| [pg_shdescription](https://www.postgresql.org/docs/current/catalog-pg-shdescription.html)                 | 🟡            | Stores optional descriptions (comments) for shared database objects.                      |
+| [pg_shseclabel](https://www.postgresql.org/docs/current/catalog-pg-shseclabel.html)                       | 🟡            | Stores security labels for shared database objects.                                       |
+| [pg_statistic](https://www.postgresql.org/docs/current/catalog-pg-statistic.html)                         | 🟡            | Stores statistical data about the contents of the database, used by the query planner.    |
+| [pg_statistic_ext](https://www.postgresql.org/docs/current/catalog-pg-statistic-ext.html)                 | 🟡            | Stores extended statistics for columns, aiding in more accurate query planning.           |
+| [pg_statistic_ext_data](https://www.postgresql.org/docs/current/catalog-pg-statistic-ext-data.html)       | 🟡            | Contains data for extended statistics objects.                                            |
+| [pg_subscription](https://www.postgresql.org/docs/current/catalog-pg-subscription.html)                   | 🟡            | Stores information about logical replication subscriptions.                               |
+| [pg_subscription_rel](https://www.postgresql.org/docs/current/catalog-pg-subscription-rel.html)           | 🟡            | Tracks the state of individual relations in a subscription.                               |
+| [pg_tablespace](https://www.postgresql.org/docs/current/catalog-pg-tablespace.html)                       | 🟡            | Stores information about the available tablespaces.                                       |
+| [pg_transform](https://www.postgresql.org/docs/current/catalog-pg-transform.html)                         | 🟡            | Stores information about transforms between data types and procedural languages.          |
+| [pg_trigger](https://www.postgresql.org/docs/current/catalog-pg-trigger.html)                             | 🟡            | Contains information about triggers on tables.                                            |
+| [pg_ts_config](https://www.postgresql.org/docs/current/catalog-pg-ts-config.html)                         | 🟡            | Stores text search configurations.                                                        |
+| [pg_ts_config_map](https://www.postgresql.org/docs/current/catalog-pg-ts-config-map.html)                 | 🟡            | Maps text search configurations to dictionaries.                                          |
+| [pg_ts_dict](https://www.postgresql.org/docs/current/catalog-pg-ts-dict.html)                             | 🟡            | Stores text search dictionaries.                                                          |
+| [pg_ts_parser](https://www.postgresql.org/docs/current/catalog-pg-ts-parser.html)                         | 🟡            | Contains text search parsers.                                                             |
+| [pg_ts_template](https://www.postgresql.org/docs/current/catalog-pg-ts-template.html)                     | 🟡            | Stores text search templates.                                                             |
+| [pg_type](https://www.postgresql.org/docs/current/catalog-pg-type.html)                                   | 🟢            | Stores information about data types.                                                      |
+| [pg_user_mapping](https://www.postgresql.org/docs/current/catalog-pg-user-mapping.html)                   | 🟡            | Contains information about user mappings for foreign data access.                         |
 
 
 ## System Views
