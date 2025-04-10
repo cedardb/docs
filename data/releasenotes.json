@@ -1,7 +1,31 @@
 [
 	{
+		"version": "alpha/2025-04-10b",
+		"date": "2025-04-10",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Support for natively running CedarDB without Docker: <tt> curl https://get.cedardb.com | bash </tt> will install CedarDB on your system. You can then run <tt>./cedardb</tt> to start the server.",
+			"<b>New Feature:</b> Streamlined docker build process. No need to re-download the Dockerfile after a new release. Re-running <tt>docker build</tt> will always create an up-to-date image.",
+			"<b>New Feature:</b> Experimental ARM support! Both the native binary and docker image now natively run on ARM64 systems.",
+			"<b>New Feature:</b> CedarDB can now bulk create indexes larger than main memory by spooling intermediate data to disk.",
+			"<b>PostgreSQL compatibility:</b> CedarDB now supports schema-qualified column names: <tt> select schema.table.column from schema.table</tt>.",
+			"<b>PostgreSQL compatibility:</b> Implemented the postgres-internal functions <tt>pg_get_function_arguments(), pg_get_function_identity_arguments(), pg_get_function_result(), pg_get_function_sqlbody(), pg_prepared_statement(), pg_timezone_abbrevs(), pg_timezone_names()</tt>.",
+			"<b>PostgreSQL compatibility:</b> Implemented the <tt>pg_language</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Improved output of the <tt>pg_proc</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Stubbed a slew of postgres-internal system functions: <tt>pg_available_extensions(), pg_available_extension_versions(), pg_config(), pg_cursor(), pg_get_backend_memory_contexts(), pg_get_replication_slots(), pg_get_shmem_allocations(), pg_hba_file_rules() ,pg_prepared_xact(), pg_show_all_file_settings(), pg_show_all_settings(), pg_show_replication_origin_status(), pg_is_wal_replay_paused(), pg_stat_get_activity()</tt>",
+			"<b>Maintenance:</b> Fixed a crash in <tt>regex_split</tt>.",
+			"<b>Maintenance:</b> Fixed a crash in array comparisons.",
+			"<b>Maintenance:</b> Fixed a bug where CedarDB's loading serialized query plans could lead to a crash.",
+
+			"<b>Maintenance:</b> Fixed a bug where CedarDB wasn't able to unnest highly correlated expressions.",
+			"<b>Maintenance:</b> Fixed a bug where we didn't correctly store precision/scale of array types across database restarts in some cases.",
+			"<b>Maintenance:</b> Fixed a rare crash where we double-freed a string that represented a null value.",
+			"<b>Maintenance:</b> <tt>cedardb --version</tt> now reports a more human-readable version identifier instead of just a git commit id."
+		]
+	},
+	{
 		"version": "alpha/2025-03-26",
-		"date": "2025-03-25",
+		"date": "2025-03-26",
 		"breaksdb": false,
 		"notes": [
 			"<b>New Feature:</b> Print dynamic filters in <tt>explain verbose</tt>.",
