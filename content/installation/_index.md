@@ -41,6 +41,18 @@ docker build --tag cedardb /path/to/Dockerfile/directory
 
 Follow our [Running in docker](/docs/getting_started/running_docker_image) guide to get CedarDB up and running.
 
+### Activate your enterprise license
+
+To activate your license within a Docker container, it’s recommended to pass the license key using an additional enviornment flag during the `docker run` command.
+```Shell
+-e LICENSE_KEY='<your_key>'
+```
+
+For example, you can start your container with an active license like this:
+```Shell
+docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test -e LICENSE_KEY='<your_key>' --name cedardb_test cedardb
+```
+
 {{% /steps %}}
 
 
@@ -59,9 +71,19 @@ curl https://get.cedardb.com | bash
 
 Follow our [Running CedarDB natively](/docs/getting_started/running_natively) guide to get CedarDB up and running.
 
+
+### Activate your enterprise license
+
+To activate your license, it's recommended to set the license key using the following environment variable at startup.
+```
+LICENSE_KEY='<your_key>'
+```
+Alternatively, you can use the [SQL set command](/docs/references/sqlreference/statements/settings) `set license.key='<your_key>'`.
+Note: This SQL setting is not persisted across database restarts.
+
 {{% /steps %}}
 
-Congratulations, you are now running CedarDB! 
+Congratulations, you are now running CedarDB!
 From here, either dig in with your own datasets, e.g., [imported from PostgreSQL](/docs/cookbook/importing_from_postgresql), or start with one of our [example datasets](/docs/example_datasets).
 
 
