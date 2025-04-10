@@ -214,5 +214,5 @@ where not exists
 ## What's next?
 
 * Ready to move beyond simplistic examples? Navigate to the recipes in the [Data Cookbook](../../cookbook) to import your own substantial datasets.
-* Seeking further inspiration or aiming to benchmark CedarDB in complex scenarios? Delve into our curated [sample datasets](../../guides/exampledatasets).
-* For an in-depth understanding of CedarDB's features and utilization guidelines, refer to the detailed explanations in the [guide](../../guides) section.
+* Seeking further inspiration or aiming to benchmark CedarDB in complex scenarios? Delve into our curated [sample datasets](../../example_datasets).
+* For an in-depth understanding of CedarDB's features and utilization guidelines, refer to the detailed explanations in the [reference](../../references) section.
