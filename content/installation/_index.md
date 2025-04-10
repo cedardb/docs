@@ -6,14 +6,17 @@ sitemap_disable: true
 sidebar:
     exclude: true
 ---
-This page contains the installation instructions and release notes for CedarDB.
-We recommend always upgrading to the latest version at release.
-
 {{% callout type="info" %}}
 Unless otherwise agreed, CedarDB is licensed under the [CedarDB Demo license](/legal/agreements/cedardb_demo_lizenz.pdf).<br>
 A non-binding English translation of this license is available [here](https://cedardb.com/legal/agreements/cedardb_demo_license.pdf).
 {{% /callout %}}
 
+{{% callout type="warning" %}}
+CedarDB now includes license checks. If you have access to CedarDB, but are not subscribed to our waitlist, please get in touch on our [community Slack](https://bonsai.cedardb.com/slack).
+{{% /callout %}}
+
+This page contains the installation instructions and release notes for CedarDB.
+We recommend always upgrading to the latest version at release.
 
 You have two options for running CedarDB: as a standalone binary or in Docker.
 - [**Docker (recommended):**](#docker) This method offers several convenience features, including automated database upgrades and parameterized user initialization. If you're using macOS, Docker is required.
