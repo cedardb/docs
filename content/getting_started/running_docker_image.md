@@ -1,7 +1,6 @@
 ---
 title: "Tutorial: CedarDB Docker Image"
 linkTitle: "Running inside Docker"
-next: /cookbook
 weight: 30
 ---
 
