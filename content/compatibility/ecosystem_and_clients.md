@@ -19,8 +19,8 @@ Through both [SQL dialect](../sql_features) and [backend](../backend) compatibil
 ### Applications
 | **Application** | **Version** | **Support State** | **Details**                              |
 |-----------------|-------------|-------------------|------------------------------------------|
-| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/dbeaver/)  |
-| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/datagrip/) |
+| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/datagrip/)  |
+| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/dbeaver/) |
 | Grafana         | 10.4.2      | Partial           | [Documentation](/docs/clients/grafana/)  |
 
 ### Programming Language Libraries
