@@ -52,7 +52,7 @@ To efficiently execute queries on data, we recommend to transform JSON documents
 When storing data in CedarDB's native storage format, it uses advanced statistics and columnar data storage for 
 efficient execution.  
 
-For the previous example, you can relationalize by creating a table with explicit [data types](/references/datatypes).
+For the previous example, you can relationalize by creating a table with explicit [data types](../../references/datatypes).
 
 {{< callout type="info" >}}
 JSON field access returns `null` when a key is not present.
