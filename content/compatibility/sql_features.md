@@ -72,7 +72,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | **Feature**            | **Support State** | **Details**                                                                                                  |
 |------------------------|-------------------|--------------------------------------------------------------------------------------------------------------|
 | CREATE SCHEMA          | Yes               | [Documentation](/docs/references/sqlreference/statements/createschema/)                                      |
-| DROP SCHEMA            | No                |                                                                                                              |
+| DROP SCHEMA            | Yes               | Only if the schema is empty                                                                                  |
 | search_path            | Yes               | [Documentation](/docs/references/sqlreference/statements/createschema/#using-schemas)                        |
 | Table Inheritance      | No                |                                                                                                              |
 | Table Partitioning     | Yes               | Only at creation, only by hash                                                                               |
@@ -649,7 +649,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | nextval     | Yes               |             |
-| setval      | No                |             |
+| setval      | Yes               |             |
 | currval     | No                |             |
 | lastval     | No                |             |
 
@@ -805,6 +805,6 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | **Feature**        | **Support State** | **Details** |
 |--------------------|-------------------|-------------|
 | generate_series    | Yes               |             |
-| generate_subscript | No                |             |
+| generate_subscript | Yes               |             |
 
 
