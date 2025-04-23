@@ -1,5 +1,21 @@
 [
 	{
+		"version": "alpha/2025-04-23",
+		"date": "2025-04-23",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Added support for <tt>COPY FROM <...> WITH ENCODING 'UTF8/UNICODE/SQLASCII'</tt>.",
+			"<b>New Feature:</b> Add support for most <tt>information_schema</tt> tables, as defined by the SQL standard. You can see the implementation progress <a href=../compatibility/backend>here</a>.",
+			"<b>New Feature:</b> Interactive mode no longer prints timing numbers per default. If you want to re-enable it, you can do so via \"<tt>\\timing on</tt>\" in interactive mode.",
+			"<b>New Feature:</b> Looking up values in arrays via <tt>ALL/ANY</tt> now works: <tt>select 'a' = ANY('{a, b}')</tt>.",
+			"<b>New Feature:</b> Add support for expanding row expressions with <tt>.*</tt>. The following now works: <tt>select (tablefun()).*</tt>",
+			"<b>PostgreSQL compatibility:</b> Implemented the postgres functions <tt>has_database_privilege()</tt>, <tt>pg_get_publication_tables()</tt>, <tt>pg_get_ruledef()</tt> and <tt>has_server_privilege()</tt>.",
+			"<b>PostgreSQL compatibility:</b> Casting the <tt>regproc</tt>,<tt>regprocedure</tt> and <tt>regnamespace</tt> types to text now returns the procedure resp. namespace name instead of just an internal identifier.",
+			"<b>PostgreSQL compatibility:</b> Columns of system tables now always have the correct <tt>oid</tt> type, instead of being just an integer. This is required by a few clients who depend on the right behavior when casting attributes from system tables to text.",
+			"<b>Maintenance:</b> Casting <tt>oid</tt>s of sequences to strings no longer triggers an assert."
+		]
+	},
+	{
 		"version": "alpha/2025-04-10b",
 		"date": "2025-04-10",
 		"breaksdb": false,
