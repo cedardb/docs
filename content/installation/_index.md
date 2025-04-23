@@ -36,7 +36,7 @@ Download
 Build the docker image using the Dockerfile downloaded from the link above.
 
 ```shell
-docker build --tag cedardb /path/to/Dockerfile/directory
+docker build --no-cache --tag cedardb .
 ```
 
 
