@@ -3,15 +3,21 @@ title: Core SQL Compatibility
 prev: /compatibility
 weight: 91
 ---
-CedarDB implements the SQL dialect of PostgreSQL. While we are able to syntactically parse any PostgreSQL-compliant statement, not all underlying functionality is implemented yet.
+
+CedarDB implements the SQL dialect of PostgreSQL.
+While we are able to syntactically parse any PostgreSQL-compliant statement, not all underlying functionality is
+implemented yet.
 
 This page gives a **non-exhaustive** overview of currently supported core SQL functionality.
 CedarDB strives for full PostgreSQL compatibility, and features not currently supported will be added over time.
 
-For PostgreSQL-specific functionality, such as system table support, see the [backend compatibility](../backend) page.
+For PostgreSQL-specific functionality, such as system table support, see
+the [system table compatibility](../system-table) page.
 
 ## Data Definition
+
 ### Table Creation & Deletion
+
 | **Feature**           | **Support State** | **Details**                                                                                 |
 |-----------------------|-------------------|---------------------------------------------------------------------------------------------|
 | CREATE TABLE          | Yes               | [Documentation](/docs/references/sqlreference/statements/createtable/)                      |
@@ -28,6 +34,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | System Columns        | Yes               | Only meaningful for tableoid and ctid                                                       |
 
 ### Table Modification (ALTER TABLE)
+
 | **Feature**     | **Support State** | **Details** |
 |-----------------|-------------------|-------------|
 | ADD COLUMN      | Yes               |             |
@@ -44,6 +51,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | RENAME TO       | Yes               |             |
 
 ### Privileges
+
 | **Feature**           | **Support State** | **Details**                                                           |
 |-----------------------|-------------------|-----------------------------------------------------------------------|
 | CREATE ROLE           | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole)  |
@@ -55,8 +63,8 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | INHERIT               | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole/) |
 | Row Security Policies | No                |                                                                       |
 
-
 ### Indexes
+
 | **Feature**            | **Support State** | **Details**                                                                                |
 |------------------------|-------------------|--------------------------------------------------------------------------------------------|
 | CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation](/docs/references/sqlreference/statements/createindex/) |
@@ -69,6 +77,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | Partial Indexes        | No                |                                                                                            |
 
 ### Misc
+
 | **Feature**            | **Support State** | **Details**                                                                                                  |
 |------------------------|-------------------|--------------------------------------------------------------------------------------------------------------|
 | CREATE SCHEMA          | Yes               | [Documentation](/docs/references/sqlreference/statements/createschema/)                                      |
@@ -85,6 +94,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | Prepared Statements    | Yes               |                                                                                                              |
 
 ## Data Manipulation
+
 | **Feature** | **Support State** | **Details**                                                                 |
 |-------------|-------------------|-----------------------------------------------------------------------------|
 | INSERT      | Yes               | [Documentation](/docs/references/sqlreference/statements/insert/)           |
@@ -97,6 +107,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | ON CONFLICT | Yes               | [Documentation](/docs/references/sqlreference/statements/upsert/)           |
 
 ## Queries
+
 | **Feature**               | **Support State** | **Details**                                                                      |
 |---------------------------|-------------------|----------------------------------------------------------------------------------|
 | Table & View References   | Yes               |                                                                                  |
@@ -124,61 +135,61 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | OFFSET                    | Yes               |                                                                                  |
 | Table Generating Function | Yes               |                                                                                  |
 
-
 ## Data Types
 
 ### Types
 
 | **Feature**                             | **Support State** |                                                     **Details** |
 |-----------------------------------------|-------------------|----------------------------------------------------------------:|
-| array                                   | Yes               | [Array Documentation](/docs/references/datatypes/array)         |
-| bigint                                  | Yes               | [Integer Documentation](/docs/references/datatypes/integer)     |
+| array                                   | Yes               |         [Array Documentation](/docs/references/datatypes/array) |
+| bigint                                  | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | bigserial                               | Yes               |                                                                 |
-| bit [ (n) ]                             | Yes               | [Bit Documentation](/docs/references/datatypes/bit)             |
-| bit varying [ (n) ]                     | Yes               | [Bit Documentation](/docs/references/datatypes/bit)             |
-| boolean                                 | Yes               | [Boolean Documentation](/docs/references/datatypes/boolean)     |
+| bit [ (n) ]                             | Yes               |             [Bit Documentation](/docs/references/datatypes/bit) |
+| bit varying [ (n) ]                     | Yes               |             [Bit Documentation](/docs/references/datatypes/bit) |
+| boolean                                 | Yes               |     [Boolean Documentation](/docs/references/datatypes/boolean) |
 | box                                     | No                |                                                                 |
-| bytea                                   | Yes               | [Blob Documentation](/docs/references/datatypes/blob)           |
-| character [ (n) ]                       | Yes               | [Text Documentation](/docs/references/datatypes/text)           |
-| character varying [ (n) ]               | Yes               | [Text Documentation](/docs/references/datatypes/text)           |
+| bytea                                   | Yes               |           [Blob Documentation](/docs/references/datatypes/blob) |
+| character [ (n) ]                       | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
+| character varying [ (n) ]               | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
 | cidr                                    | No                |                                                                 |
 | circle                                  | No                |                                                                 |
-| date                                    | Yes               | [Date Documentation](/docs/references/datatypes/date)           |
-| double precision                        | Yes               | [Double Documentation](/docs/references/datatypes/double)       |
+| date                                    | Yes               |           [Date Documentation](/docs/references/datatypes/date) |
+| double precision                        | Yes               |       [Double Documentation](/docs/references/datatypes/double) |
 | inet                                    | No                |                                                                 |
-| integer                                 | Yes               | [Integer Documentation](/docs/references/datatypes/integer)     |
-| interval [ fields ] [ (p) ]             | Yes               | [Interval Documentation](/docs/references/datatypes/interval)   |
-| json                                    | Yes               | [JSON Documentation](/docs/references/datatypes/json)           |
-| jsonb                                   | Yes               | [JSON Documentation](/docs/references/datatypes/json)           |
+| integer                                 | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
+| interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation](/docs/references/datatypes/interval) |
+| json                                    | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |
+| jsonb                                   | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |
 | line                                    | No                |                                                                 |
 | lseg                                    | No                |                                                                 |
 | macaddr                                 | No                |                                                                 |
 | macaddr8                                | No                |                                                                 |
 | money                                   | No                |                                                                 |
-| numeric [ (p, s) ]                      | Yes               | [Numeric Documentation](/docs/references/datatypes/numeric)     |
+| numeric [ (p, s) ]                      | Yes               |     [Numeric Documentation](/docs/references/datatypes/numeric) |
 | path                                    | No                |                                                                 |
 | pg_lsn                                  | No                |                                                                 |
 | pg_snapshot                             | No                |                                                                 |
 | point                                   | No                |                                                                 |
 | polygon                                 | No                |                                                                 |
-| real                                    | Yes               | [Double Documentation](/docs/references/datatypes/double)       |
-| smallint                                | Yes               | [Integer Documentation](/docs/references/datatypes/integer)     |
+| real                                    | Yes               |       [Double Documentation](/docs/references/datatypes/double) |
+| smallint                                | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | smallserial                             | Yes               |                                                                 |
 | serial                                  | Yes               |                                                                 |
-| text                                    | Yes               | [Text Documentation](/docs/references/datatypes/text)           |
-| time [ (p) ] [ without time zone ]      | Yes               | [Time Documentation](/docs/references/datatypes/time)           |
-| time [ (p) ] with time zone             | Yes               | [Time Documentation](/docs/references/datatypes/time)           |
+| text                                    | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
+| time [ (p) ] [ without time zone ]      | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
+| time [ (p) ] with time zone             | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
 | timestamp [ (p) ] [ without time zone ] | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
 | timestamp [ (p) ] with time zone        | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
 | tsquery                                 | No                |                                                                 |
 | tsvector                                | No                |                                                                 |
 | txid_snapshot                           | No                |                                                                 |
-| uuid                                    | Yes               | [UUID Documentation](/docs/references/datatypes/uuid)           |
+| uuid                                    | Yes               |           [UUID Documentation](/docs/references/datatypes/uuid) |
 | xml                                     | No                |                                                                 |
 
 ### Operators & Functions
 
 #### Logical
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | AND         | Yes               |             |
@@ -186,6 +197,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | NOT         | Yes               |             |
 
 #### Comparison
+
 | **Feature**     | **Support State** | **Details** |
 |-----------------|-------------------|-------------|
 | <               | Yes               |             |
@@ -209,77 +221,79 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | IS NOT UNKNOWN  | Yes               |             |
 
 #### Mathematical
-| **Feature**   | **Support State** |              **Details** |
-|---------------|-------------------|-------------------------:|
-| +             | Yes               |                          |
-| -             | Yes               |                          |
-| *             | Yes               |                          |
-| /             | Yes               |                          |
-| %             | Yes               |                          |
-| ^             | Yes               |                          |
-| \|/           | Yes               |                          |
-| \|\|/         | Yes               |                          |
-| @             | Yes               |                          |
-| &             | Yes               |                          |
-| \|            | Yes               |                          |
-| #             | Yes               |                          |
-| ~             | Yes               |                          |
-| \<\<          | Yes               |                          |
-| \>\>          | Yes               |                          |
-| abs           | Yes               |                          |
-| cbrt          | Yes               |                          |
-| ceil          | Yes               |                          |
-| degrees       | Yes               |                          |
-| div           | Yes               |                          |
-| erf           | No                |                          |
-| erfc          | No                |                          |
-| exp           | Yes               |                          |
-| factorial     | Yes               | Also exists as ! operand |
-| floor         | Yes               |                          |
-| gcd           | No                |                          |
-| lcm           | No                |                          |
-| ln            | Yes               |                          |
-| log           | Yes               |                          |
-| log10         | Yes               |                          |
-| min_scale     | No                |                          |
-| mod           | Yes               |                          |
-| pi            | Yes               |                          |
-| power         | Yes               |                          |
-| radians       | Yes               |                          |
-| round         | Yes               |                          |
-| scale         | No                |                          |
-| sign          | Yes               |                          |
-| sqrt          | Yes               |                          |
-| trim_scale    | No                |                          |
-| trunc         | Yes               |                          |
-| width_bucket  | Yes               |                          |
-| random        | Yes               |                          |
-| random_normal | No                |                          |
-| setseed       | No                |                          |
-| acos          | Yes               |                          |
-| acosd         | Yes               |                          |
-| asin          | Yes               |                          |
-| asind         | Yes               |                          |
-| atan          | Yes               |                          |
-| atand         | Yes               |                          |
-| atan2         | Yes               |                          |
-| atan2d        | Yes               |                          |
-| cos           | Yes               |                          |
-| cosd          | Yes               | Because of rounding errors, cosd is not exactly 0 for its zero points. |
-| cot           | Yes               |                          |
+
+| **Feature**   | **Support State** |                                                                       **Details** |
+|---------------|-------------------|----------------------------------------------------------------------------------:|
+| +             | Yes               |                                                                                   |
+| -             | Yes               |                                                                                   |
+| *             | Yes               |                                                                                   |
+| /             | Yes               |                                                                                   |
+| %             | Yes               |                                                                                   |
+| ^             | Yes               |                                                                                   |
+| \|/           | Yes               |                                                                                   |
+| \|\|/         | Yes               |                                                                                   |
+| @             | Yes               |                                                                                   |
+| &             | Yes               |                                                                                   |
+| \|            | Yes               |                                                                                   |
+| #             | Yes               |                                                                                   |
+| ~             | Yes               |                                                                                   |
+| \<\<          | Yes               |                                                                                   |
+| \>\>          | Yes               |                                                                                   |
+| abs           | Yes               |                                                                                   |
+| cbrt          | Yes               |                                                                                   |
+| ceil          | Yes               |                                                                                   |
+| degrees       | Yes               |                                                                                   |
+| div           | Yes               |                                                                                   |
+| erf           | No                |                                                                                   |
+| erfc          | No                |                                                                                   |
+| exp           | Yes               |                                                                                   |
+| factorial     | Yes               |                                                          Also exists as ! operand |
+| floor         | Yes               |                                                                                   |
+| gcd           | No                |                                                                                   |
+| lcm           | No                |                                                                                   |
+| ln            | Yes               |                                                                                   |
+| log           | Yes               |                                                                                   |
+| log10         | Yes               |                                                                                   |
+| min_scale     | No                |                                                                                   |
+| mod           | Yes               |                                                                                   |
+| pi            | Yes               |                                                                                   |
+| power         | Yes               |                                                                                   |
+| radians       | Yes               |                                                                                   |
+| round         | Yes               |                                                                                   |
+| scale         | No                |                                                                                   |
+| sign          | Yes               |                                                                                   |
+| sqrt          | Yes               |                                                                                   |
+| trim_scale    | No                |                                                                                   |
+| trunc         | Yes               |                                                                                   |
+| width_bucket  | Yes               |                                                                                   |
+| random        | Yes               |                                                                                   |
+| random_normal | No                |                                                                                   |
+| setseed       | No                |                                                                                   |
+| acos          | Yes               |                                                                                   |
+| acosd         | Yes               |                                                                                   |
+| asin          | Yes               |                                                                                   |
+| asind         | Yes               |                                                                                   |
+| atan          | Yes               |                                                                                   |
+| atand         | Yes               |                                                                                   |
+| atan2         | Yes               |                                                                                   |
+| atan2d        | Yes               |                                                                                   |
+| cos           | Yes               |                                                                                   |
+| cosd          | Yes               |            Because of rounding errors, cosd is not exactly 0 for its zero points. |
+| cot           | Yes               |                                                                                   |
 | cotd          | Yes               | For the values where cotd is undefined, the value of the C++ library is returned. |
-| sin           | Yes               |                          |
-| sind          | Yes               | Because of rounding errors, cosd is not exactly 0 for its zero points. |
-| tan           | Yes               |                          |
+| sin           | Yes               |                                                                                   |
+| sind          | Yes               |            Because of rounding errors, cosd is not exactly 0 for its zero points. |
+| tan           | Yes               |                                                                                   |
 | tand          | Yes               | For the values where tand is undefined, the value of the C++ library is returned. |
-| sinh          | Yes               |                          |
-| cosh          | Yes               |                          |
-| tanh          | Yes               |                          |
-| asinh         | Yes               |                          |
-| acosh         | Yes               |                          |
-| atanh         | Yes               |                          |
+| sinh          | Yes               |                                                                                   |
+| cosh          | Yes               |                                                                                   |
+| tanh          | Yes               |                                                                                   |
+| asinh         | Yes               |                                                                                   |
+| acosh         | Yes               |                                                                                   |
+| atanh         | Yes               |                                                                                   |
 
 #### String
+
 | **Feature**           | **Support State** |                                           **Details** |
 |-----------------------|-------------------|------------------------------------------------------:|
 | \|\|                  | Yes               |                                                       |
@@ -317,7 +331,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | regexp_like           | No                |                                                       |
 | regexp_match          | Yes               |                                                       |
 | regexp_matches        | Yes               |                                                       |
-| regexp_replace        | Yes               | Currently not supporting replacing N'th match         |
+| regexp_replace        | Yes               |         Currently not supporting replacing N'th match |
 | regexp_split_to_array | Yes               |                                                       |
 | regexp_split_to_table | Yes               |                                                       |
 | regexp_substr         | Yes               |                                                       |
@@ -337,6 +351,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | unistr                | No                |                                                       |
 
 #### Bytea
+
 | **Feature**  | **Support State** |             **Details** |
 |--------------|-------------------|------------------------:|
 | \|\|         | Yes               |                         |
@@ -360,13 +375,14 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | sha384       | No                |                         |
 | sha512       | No                |                         |
 | substr       | Yes               |                         |
-| convert      | Yes               | Only for UTF8           |
-| convert_from | Yes               | Only for UTF8           |
-| convert_to   | Yes               | Only for UTF8           |
+| convert      | Yes               |           Only for UTF8 |
+| convert_from | Yes               |           Only for UTF8 |
+| convert_to   | Yes               |           Only for UTF8 |
 | encode       | Yes               |                         |
 | decode       | Yes               |                         |
 
 #### Bit
+
 | **Feature**  | **Support State** | **Details** |
 |--------------|-------------------|------------:|
 | \|\|         | No                |             |
@@ -387,12 +403,14 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | set_bit      | Yes               |             |
 
 #### Pattern Matching
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | LIKE        | Yes               |             |
 | SIMILAR TO  | Yes               |             |
 
 #### Data Type Formatting
+
 | **Feature**  | **Support State** | **Details** |
 |--------------|-------------------|-------------|
 | to_char      | No                |             |
@@ -401,6 +419,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | to_timestamp | No                |             |
 
 #### Date/Time
+
 | **Feature**           | **Support State** | **Details**      |
 |-----------------------|-------------------|------------------|
 | +                     | Yes               |                  |
@@ -438,14 +457,15 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | EXTRACT               | Yes               | Without timezone |
 
 #### Enum
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | enum_first  | No                |             |
 | enum_last   | No                |             |
 | enum_range  | No                |             |
 
-
 #### Geometric
+
 | **Feature**  | **Support State** | **Details** |
 |--------------|-------------------|-------------|
 | +            | No                |             |
@@ -500,6 +520,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | polygon      | No                |             |
 
 #### Network
+
 | **Feature**      | **Support State** | **Details** |
 |------------------|-------------------|-------------|
 | \<\<             | No                |             |
@@ -526,6 +547,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | text             | No                |             |
 
 #### Text Search
+
 | **Feature**           | **Support State** | **Details** |
 |-----------------------|-------------------|-------------|
 | @@                    | No                |             |
@@ -564,6 +586,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | ts_stat               | No                |             |
 
 #### UUID
+
 | **Feature**            | **Support State** | **Details** |
 |------------------------|-------------------|-------------|
 | get_random_uuid        | Yes               |             |
@@ -571,6 +594,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | uuid_extract_version   | No                |             |
 
 #### XML
+
 | **Feature**        | **Support State** | **Details** |
 |--------------------|-------------------|-------------|
 | xmltext            | No                |             |
@@ -590,6 +614,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | XMLTABLE           | No                |             |
 
 #### JSON
+
 | **Feature**               | **Support State** | **Details** |
 |---------------------------|-------------------|-------------|
 | ->                        | Yes               |             |
@@ -646,6 +671,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | json_path                 | No                |             |
 
 #### Sequence Manipulation
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | nextval     | Yes               |             |
@@ -654,6 +680,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | lastval     | No                |             |
 
 #### Conditional
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | CASE        | Yes               |             |
@@ -663,6 +690,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | LEAST       | Yes               |             |
 
 #### Array
+
 | **Feature**       | **Support State** | **Details**              |
 |-------------------|-------------------|--------------------------|
 | @>                | Yes               |                          |
@@ -689,6 +717,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | unnest            | Yes               | No multi-array expansion |
 
 #### Range
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | @>          | No                |             |
@@ -716,6 +745,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 #### Aggregate Functions
 
 ##### Generic
+
 | **Feature**           | **Support State** |                                                                                                        **Details** |
 |-----------------------|-------------------|-------------------------------------------------------------------------------------------------------------------:|
 | any_value             | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
@@ -740,6 +770,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | xmlagg                | No                |                                                                                                                    |
 
 ##### Statistical
+
 | **Feature**    | **Support State** |                                                                                                     **Details** |
 |----------------|-------------------|----------------------------------------------------------------------------------------------------------------:|
 | corr           | No                |                                                                                                                 |
@@ -762,6 +793,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | var_samp       | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
 
 ##### Ordered-Set
+
 | **Feature**     | **Support State** |                                                                                                               **Details** |
 |-----------------|-------------------|--------------------------------------------------------------------------------------------------------------------------:|
 | mode            | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation//#ordered-set-aggregate-functions) |
@@ -769,6 +801,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | percentile_disc | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation//#ordered-set-aggregate-functions) |
 
 #### Window
+
 | **Feature**  | **Support State** | **Details** |
 |--------------|-------------------|-------------|
 | row_number   | Yes               |             |
@@ -784,6 +817,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | nth_value    | Yes               |             |
 
 #### Subquery
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | EXISTS      | Yes               |             |
@@ -793,6 +827,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | ALL         | Yes               |             |
 
 #### Array Comparison
+
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
 | EXISTS      | Yes               |             |
@@ -802,6 +837,7 @@ For PostgreSQL-specific functionality, such as system table support, see the [ba
 | ALL         | Yes               |             |
 
 #### Set Returning
+
 | **Feature**        | **Support State** | **Details** |
 |--------------------|-------------------|-------------|
 | generate_series    | Yes               |             |
