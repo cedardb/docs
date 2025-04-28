@@ -100,41 +100,42 @@ System views provide convenient access to system information.
 System tables often contain numeric identifiers, e.g., for the owner of tables.
 The views instead use more human-readable symbolic names.
 
-| Feature                                                                                                              | Support State | Details                                                                                                                 |
-|----------------------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------|
-| [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | 🟡            | Lists available extensions.                                                                                             |
-| [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | 🟡            | Shows available versions of extensions.                                                                                 |
-| [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)           | 🟡            | Displays memory contexts of the backend.                                                                                |
-| [pg_config](https://www.postgresql.org/docs/current/view-pg-config.html)                                             | 🔴            | Provides access to compile-time configuration parameters.                                                               |
-| [pg_cursors](https://www.postgresql.org/docs/current/view-pg-cursors.html)                                           | 🔴            | Lists open cursors.                                                                                                     |
-| [pg_file_settings](https://www.postgresql.org/docs/current/view-pg-file-settings.html)                               | 🔴            | Summarizes contents of configuration files.                                                                             |
-| [pg_group](https://www.postgresql.org/docs/current/view-pg-group.html)                                               | 🟢            | Displays groups of database users.                                                                                      |
-| [pg_hba_file_rules](https://www.postgresql.org/docs/current/view-pg-hba-file-rules.html)                             | 🔴            | Summarizes client authentication configuration file contents.                                                           |
-| [pg_indexes](https://www.postgresql.org/docs/current/view-pg-indexes.html)                                           | 🟢            | Shows information about indexes.                                                                                        |
-| [pg_locks](https://www.postgresql.org/docs/current/view-pg-locks.html)                                               | 🟡            | Displays locks currently held or awaited.                                                                               |
-| [pg_matviews](https://www.postgresql.org/docs/current/view-pg-matviews.html)                                         | 🟡            | Lists materialized views.                                                                                               |
-| [pg_policies](https://www.postgresql.org/docs/current/view-pg-policies.html)                                         | 🟡            | Displays information about policies.                                                                                    |
-| [pg_prepared_statements](https://www.postgresql.org/docs/current/view-pg-prepared-statements.html)                   | 🟡            | Lists prepared statements.                                                                                              |
-| [pg_prepared_xacts](https://www.postgresql.org/docs/current/view-pg-prepared-xacts.html)                             | 🔴            | Shows prepared transactions.                                                                                            |
-| [pg_publication_tables](https://www.postgresql.org/docs/current/view-pg-publication-tables.html)                     | 🔴            | Displays publications and their associated tables.                                                                      |
-| [pg_replication_origin_status](https://www.postgresql.org/docs/current/view-pg-replication-origin-status.html)       | 🔴            | Provides information about replication origins, including replication progress.                                         |
-| [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html)                       | 🔴            | Displays replication slot information.                                                                                  |
-| [pg_roles](https://www.postgresql.org/docs/current/view-pg-roles.html)                                               | 🟢            | Lists database roles.                                                                                                   |
-| [pg_rules](https://www.postgresql.org/docs/current/view-pg-rules.html)                                               | 🟡            | Shows information about rules.                                                                                          |
-| [pg_seclabels](https://www.postgresql.org/docs/current/view-pg-seclabels.html)                                       | 🔴            | Displays security labels. Internal error: unknown function pg_type_is_visible                                           |
-| [pg_sequences](https://www.postgresql.org/docs/current/view-pg-sequences.html)                                       | 🟡            | Lists sequences.                                                                                                        |
-| [pg_settings](https://www.postgresql.org/docs/current/view-pg-settings.html)                                         | 🟢            | Provides access to parameter settings.                                                                                  |
-| [pg_shadow](https://www.postgresql.org/docs/current/view-pg-shadow.html)                                             | 🟢            | Displays database users.                                                                                                |
-| [pg_shmem_allocations](https://www.postgresql.org/docs/current/view-pg-shmem-allocations.html)                       | 🟡            | Shows shared memory allocations.                                                                                        |
-| [pg_stats](https://www.postgresql.org/docs/current/view-pg-stats.html)                                               | 🔴            | Provides planner statistics. Internal error: unknown function row_security_active                                       |
-| [pg_stats_ext](https://www.postgresql.org/docs/current/view-pg-stats-ext.html)                                       | 🔴            | Displays extended planner statistics. Internal error: unknown function pg_mcv_list_items                                |
-| [pg_stats_ext_exprs](https://www.postgresql.org/docs/current/view-pg-stats-ext-exprs.html)                           | 🔴            | Shows extended planner statistics for expressions. Internal error: unknown function pg_get_statisticsobjdef_expressions |
-| [pg_tables](https://www.postgresql.org/docs/current/view-pg-tables.html)                                             | 🟢            | Lists tables.                                                                                                           |
-| [pg_timezone_abbrevs](https://www.postgresql.org/docs/current/view-pg-timezone-abbrevs.html)                         | 🟢            | Displays time zone abbreviations.                                                                                       |
-| [pg_timezone_names](https://www.postgresql.org/docs/current/view-pg-timezone-names.html)                             | 🟢            | Lists time zone names.                                                                                                  |
-| [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                                 | 🟢            | Shows database users.                                                                                                   |
-| [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                               | 🟡            | Displays user mappings.                                                                                                 |
-| [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                               | 🟢            | Lists views.                                                                                                            |
+| Feature                                                                                                              | Support State | Details                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------------------------------------------------|
+| [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | 🟡            | Lists available extensions.                                                     |
+| [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | 🟡            | Shows available versions of extensions.                                         |
+| [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)           | 🟡            | Displays memory contexts of the backend.                                        |
+| [pg_config](https://www.postgresql.org/docs/current/view-pg-config.html)                                             | 🔴            | Provides access to compile-time configuration parameters.                       |
+| [pg_cursors](https://www.postgresql.org/docs/current/view-pg-cursors.html)                                           | 🔴            | Lists open cursors.                                                             |
+| [pg_file_settings](https://www.postgresql.org/docs/current/view-pg-file-settings.html)                               | 🔴            | Summarizes contents of configuration files.                                     |
+| [pg_group](https://www.postgresql.org/docs/current/view-pg-group.html)                                               | 🟢            | Displays groups of database users.                                              |
+| [pg_hba_file_rules](https://www.postgresql.org/docs/current/view-pg-hba-file-rules.html)                             | 🔴            | Summarizes client authentication configuration.                                 |
+| [pg_ident_file_mappings](https://www.postgresql.org/docs/current/view-pg-ident-file-mappings.html)                   | 🟡            | Summarizes client user name mapping configuration.                              |
+| [pg_indexes](https://www.postgresql.org/docs/current/view-pg-indexes.html)                                           | 🟢            | Shows information about indexes.                                                |
+| [pg_locks](https://www.postgresql.org/docs/current/view-pg-locks.html)                                               | 🟡            | Displays locks currently held or awaited.                                       |
+| [pg_matviews](https://www.postgresql.org/docs/current/view-pg-matviews.html)                                         | 🟡            | Lists materialized views.                                                       |
+| [pg_policies](https://www.postgresql.org/docs/current/view-pg-policies.html)                                         | 🟡            | Displays information about policies.                                            |
+| [pg_prepared_statements](https://www.postgresql.org/docs/current/view-pg-prepared-statements.html)                   | 🟡            | Lists prepared statements.                                                      |
+| [pg_prepared_xacts](https://www.postgresql.org/docs/current/view-pg-prepared-xacts.html)                             | 🔴            | Shows prepared transactions.                                                    |
+| [pg_publication_tables](https://www.postgresql.org/docs/current/view-pg-publication-tables.html)                     | 🔴            | Displays publications and their associated tables.                              |
+| [pg_replication_origin_status](https://www.postgresql.org/docs/current/view-pg-replication-origin-status.html)       | 🔴            | Provides information about replication origins, including replication progress. |
+| [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html)                       | 🔴            | Displays replication slot information.                                          |
+| [pg_roles](https://www.postgresql.org/docs/current/view-pg-roles.html)                                               | 🟢            | Lists database roles.                                                           |
+| [pg_rules](https://www.postgresql.org/docs/current/view-pg-rules.html)                                               | 🟡            | Shows information about rules.                                                  |
+| [pg_seclabels](https://www.postgresql.org/docs/current/view-pg-seclabels.html)                                       | 🟡            | Displays security labels.                                                       |
+| [pg_sequences](https://www.postgresql.org/docs/current/view-pg-sequences.html)                                       | 🟡            | Lists sequences.                                                                |
+| [pg_settings](https://www.postgresql.org/docs/current/view-pg-settings.html)                                         | 🟢            | Provides access to parameter settings.                                          |
+| [pg_shadow](https://www.postgresql.org/docs/current/view-pg-shadow.html)                                             | 🟢            | Displays database users.                                                        |
+| [pg_shmem_allocations](https://www.postgresql.org/docs/current/view-pg-shmem-allocations.html)                       | 🟡            | Shows shared memory allocations.                                                |
+| [pg_stats](https://www.postgresql.org/docs/current/view-pg-stats.html)                                               | 🔴            | Provides planner statistics.                                                    |
+| [pg_stats_ext](https://www.postgresql.org/docs/current/view-pg-stats-ext.html)                                       | 🟡            | Displays extended planner statistics.                                           |
+| [pg_stats_ext_exprs](https://www.postgresql.org/docs/current/view-pg-stats-ext-exprs.html)                           | 🟡            | Shows extended planner statistics for expressions.                              |
+| [pg_tables](https://www.postgresql.org/docs/current/view-pg-tables.html)                                             | 🟢            | Lists tables.                                                                   |
+| [pg_timezone_abbrevs](https://www.postgresql.org/docs/current/view-pg-timezone-abbrevs.html)                         | 🟢            | Displays time zone abbreviations.                                               |
+| [pg_timezone_names](https://www.postgresql.org/docs/current/view-pg-timezone-names.html)                             | 🟢            | Lists time zone names.                                                          |
+| [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                                 | 🟢            | Shows database users.                                                           |
+| [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                               | 🟡            | Displays user mappings.                                                         |
+| [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                               | 🟢            | Lists views.                                                                    |
 
 ## Information Schema
 
@@ -153,70 +154,70 @@ select * from information_schema.tables;
 
 {{< /callout >}}
 
-| Table name                            | Support State | Details                                                                            |
-|---------------------------------------|---------------|------------------------------------------------------------------------------------|
-| information_schema_catalog_name       | 🟢            |                                                                                    |
-| administrable_role_authorizations     | 🟢            |                                                                                    |
-| applicable_roles                      | 🟢            |                                                                                    |
-| attributes                            | 🟡            |                                                                                    |
-| character_sets                        | 🟢            |                                                                                    |
-| check_constraint_routine_usage        | 🟡            |                                                                                    |
-| check_constraints                     | 🟢            |                                                                                    |
-| collations                            | 🟢            |                                                                                    |
-| collation_character_set_applicability | 🟢            |                                                                                    |
-| column_column_usage                   | 🟡            |                                                                                    |
-| column_domain_usage                   | 🟡            |                                                                                    |
-| column_options                        | 🟡            |                                                                                    |
-| column_privileges                     | 🟡            |                                                                                    |
-| column_udt_usage                      | 🟢            |                                                                                    |
-| columns                               | 🟢            |                                                                                    |
-| constraint_column_usage               | 🟢            |                                                                                    |
-| constraint_table_usage                | 🟢            |                                                                                    |
-| data_type_privileges                  | 🟢            |                                                                                    |
-| domain_constraints                    | 🟡            |                                                                                    |
-| domain_udt_usage                      | 🟡            |                                                                                    |
-| domains                               | 🟡            |                                                                                    |
-| element_types                         | 🟢            |                                                                                    |
-| enabled_roles                         | 🟢            |                                                                                    |
-| foreign_data_wrapper_options          | 🔴            | Internal error: unknown function has_foreign_data_wrapper_privilege(integer, text) |
-| foreign_data_wrappers                 | 🔴            | Internal error: unknown function has_foreign_data_wrapper_privilege(integer, text) |
-| foreign_server_options                | 🟡            |                                                                                    |
-| foreign_servers                       | 🟡            |                                                                                    |
-| foreign_table_options                 | 🟡            |                                                                                    |
-| foreign_tables                        | 🟡            |                                                                                    |
-| key_column_usage                      | 🟢            |                                                                                    |
-| parameters                            | 🟢            |                                                                                    |
-| referential_constraints               | 🟢            |                                                                                    |
-| role_column_grants                    | 🟡            |                                                                                    |
-| role_routine_grants                   | 🟡            |                                                                                    |
-| role_table_grants                     | 🟡            |                                                                                    |
-| role_udt_grants                       | 🟡            |                                                                                    |
-| role_usage_grants                     | 🟢            |                                                                                    |
-| routine_column_usage                  | 🟡            |                                                                                    |
-| routine_privileges                    | 🟡            |                                                                                    |
-| routine_routine_usage                 | 🟡            |                                                                                    |
-| routine_sequence_usage                | 🟡            |                                                                                    |
-| routine_table_usage                   | 🟡            |                                                                                    |
-| routines                              | 🟢            |                                                                                    |
-| schemata                              | 🟢            |                                                                                    |
-| sequences                             | 🟢            |                                                                                    |
-| sql_features                          | 🟡            |                                                                                    |
-| sql_implementation_info               | 🟡            |                                                                                    |
-| sql_parts                             | 🟡            |                                                                                    |
-| sql_sizing                            | 🟡            |                                                                                    |
-| table_constraints                     | 🟢            |                                                                                    |
-| table_privileges                      | 🟡            |                                                                                    |
-| tables                                | 🟢            |                                                                                    |
-| transforms                            | 🟡            |                                                                                    |
-| triggered_update_columns              | 🟡            |                                                                                    |
-| triggers                              | 🟡            |                                                                                    |
-| udt_privileges                        | 🟡            |                                                                                    |
-| usage_privileges                      | 🟡            |                                                                                    |
-| user_defined_types                    | 🟡            |                                                                                    |
-| user_mapping_options                  | 🟡            |                                                                                    |
-| user_mappings                         | 🟡            |                                                                                    |
-| view_column_usage                     | 🟡            |                                                                                    |
-| view_routine_usage                    | 🟡            |                                                                                    |
-| view_table_usage                      | 🟡            |                                                                                    |
-| views                                 | 🟢            |                                                                                    |
+| Table name                            | Support State | Details |
+|---------------------------------------|---------------|---------|
+| information_schema_catalog_name       | 🟢            |         |
+| administrable_role_authorizations     | 🟢            |         |
+| applicable_roles                      | 🟢            |         |
+| attributes                            | 🟡            |         |
+| character_sets                        | 🟢            |         |
+| check_constraint_routine_usage        | 🟡            |         |
+| check_constraints                     | 🟢            |         |
+| collations                            | 🟢            |         |
+| collation_character_set_applicability | 🟢            |         |
+| column_column_usage                   | 🟡            |         |
+| column_domain_usage                   | 🟡            |         |
+| column_options                        | 🟡            |         |
+| column_privileges                     | 🟡            |         |
+| column_udt_usage                      | 🟢            |         |
+| columns                               | 🟢            |         |
+| constraint_column_usage               | 🟢            |         |
+| constraint_table_usage                | 🟢            |         |
+| data_type_privileges                  | 🟢            |         |
+| domain_constraints                    | 🟡            |         |
+| domain_udt_usage                      | 🟡            |         |
+| domains                               | 🟡            |         |
+| element_types                         | 🟢            |         |
+| enabled_roles                         | 🟢            |         |
+| foreign_data_wrapper_options          | 🟡            |         |
+| foreign_data_wrappers                 | 🟡            |         |
+| foreign_server_options                | 🟡            |         |
+| foreign_servers                       | 🟡            |         |
+| foreign_table_options                 | 🟡            |         |
+| foreign_tables                        | 🟡            |         |
+| key_column_usage                      | 🟢            |         |
+| parameters                            | 🟢            |         |
+| referential_constraints               | 🟢            |         |
+| role_column_grants                    | 🟡            |         |
+| role_routine_grants                   | 🟡            |         |
+| role_table_grants                     | 🟡            |         |
+| role_udt_grants                       | 🟡            |         |
+| role_usage_grants                     | 🟢            |         |
+| routine_column_usage                  | 🟡            |         |
+| routine_privileges                    | 🟡            |         |
+| routine_routine_usage                 | 🟡            |         |
+| routine_sequence_usage                | 🟡            |         |
+| routine_table_usage                   | 🟡            |         |
+| routines                              | 🟢            |         |
+| schemata                              | 🟢            |         |
+| sequences                             | 🟢            |         |
+| sql_features                          | 🟡            |         |
+| sql_implementation_info               | 🟡            |         |
+| sql_parts                             | 🟡            |         |
+| sql_sizing                            | 🟡            |         |
+| table_constraints                     | 🟢            |         |
+| table_privileges                      | 🟡            |         |
+| tables                                | 🟢            |         |
+| transforms                            | 🟡            |         |
+| triggered_update_columns              | 🟡            |         |
+| triggers                              | 🟡            |         |
+| udt_privileges                        | 🟡            |         |
+| usage_privileges                      | 🟡            |         |
+| user_defined_types                    | 🟡            |         |
+| user_mapping_options                  | 🟡            |         |
+| user_mappings                         | 🟡            |         |
+| view_column_usage                     | 🟡            |         |
+| view_routine_usage                    | 🟡            |         |
+| view_table_usage                      | 🟡            |         |
+| views                                 | 🟢            |         |
 
