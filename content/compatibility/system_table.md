@@ -1,12 +1,15 @@
 ---
-title: Backend Compatibility
+title: System Table Compatibility
 next: /roadmap
 weight: 93
 ---
 
 Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_features), CedarDB also supports a large
-part of the PostgreSQL backend system catalog, which is often used by external tools and clients to interact with the
-database system.
+part of the PostgreSQL system table catalog in the `pg_catalog` schema.
+These system tables contain information about the *system* state in the form of metadata.
+This metadata is often used by external tools and clients to interact with the database system for introspection and
+reflection, e.g., to show which tables exist.
+
 This page provides an overview of the currently supported system tables and views.
 
 - 🟢 **Fully supported features.**
@@ -15,6 +18,14 @@ This page provides an overview of the currently supported system tables and view
 - 🔴 **Catalog entries without meaningful content.**
 
 ## System Tables
+
+System tables provide a raw view into the state of the database system.
+In contrast to PostgreSQL, system tables in CedarDB are *read-only*, and can only be indirectly influenced through
+[DDL statements](/docs/references/sqlreference/statements/).
+
+System tables often contain many low-level details.
+For more accessible and friendly access to the same information, consider using the
+built-in [system views](#system-views), or the SQL-standard [information schema](#information-schema).
 
 | Feature                                                                                                   | Support State | Details                                                                                   |
 |-----------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------|
@@ -85,6 +96,10 @@ This page provides an overview of the currently supported system tables and view
 
 ## System Views
 
+System views provide convenient access to system information.
+System tables often contain numeric identifiers, e.g., for the owner of tables.
+The views instead use more human-readable symbolic names.
+
 | Feature                                                                                                              | Support State | Details                                                                                                                 |
 |----------------------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------|
 | [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | 🟡            | Lists available extensions.                                                                                             |
@@ -128,12 +143,15 @@ For compatibility, CedarDB follows
 the [PostgreSQL Information Schema](https://www.postgresql.org/docs/current/information-schema.html),
 which matches the [ISO/IEC 9075-11](https://www.iso.org/standard/76586.html) standard.
 
+{{< callout type="info" >}}
 The information schema views are *not* included in the default search path, so queries on it need to use the
 fully qualified name:
 
 ```sql
 select * from information_schema.tables;
 ```
+
+{{< /callout >}}
 
 | Table name                            | Support State | Details                                                                            |
 |---------------------------------------|---------------|------------------------------------------------------------------------------------|
