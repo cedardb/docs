@@ -1,8 +1,6 @@
 ---
 title: "Reference: SQL Expressions"
 linkTitle: "SQL Expressions"
-prev: /statements
-next: /functions
 weight: 30
 ---
 

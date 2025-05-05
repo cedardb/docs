@@ -1,8 +1,6 @@
 ---
 title: "Reference: SQL"
 linkTitle: "SQL Reference"
-prev: /configuration
-next: /queries
 weight: 50
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: "Reference: Transactions"
 linkTitle: "Transactions"
-prev: /queries
-next: /statements
 weight: 15
 ---
 

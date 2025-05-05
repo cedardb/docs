@@ -1,7 +1,6 @@
 ---
 title: "GloVe: Global Vectors for Word Representation"
 linkTitle: "GloVe: Global Vectors for Word Representation"
-prev: /example_datasets
 weight: 30
 ---
 The GloVe dataset consists of a set of pre-trained word vectors using the famous [GloVe unsupervised learning algorithm](https://nlp.stanford.edu/projects/glove/).

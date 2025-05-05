@@ -1,6 +1,5 @@
 ---
 title: Prepared Statements
-next: /references/writecache
 ---
 
 Prepared statements allow you to declare an SQL statement *template* ahead of time once and execute it many times over later on.

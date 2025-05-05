@@ -1,7 +1,6 @@
 ---
 title: "Reference: Alter Role Statement"
 linkTitle: "Alter Role"
-prev: references/sqlreference/statements/
 ---
 
 Alter role allows modifying a database *role*.

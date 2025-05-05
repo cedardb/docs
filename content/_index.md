@@ -3,7 +3,6 @@ title: CedarDB Documentation
 cascade:
   type: docs
 toc: false
-next: /getting_started
 ---
 
 Welcome to the CedarDB documentation! 
@@ -16,7 +15,7 @@ CedarDB uses PostgreSQL's SQL dialect and speaks the PostgreSQL wire protocol, m
 
 If you want to try out CedarDB for yourself, take a look at the following links:
 {{< cards >}}
-  {{< card link="getting_started" title="Getting Started" image="images/getting_started.svg" subtitle="Get up and running with CedarDB in no time!">}}
+  {{< card link="get_started" title="Getting Started" image="images/getting_started.svg" subtitle="Get up and running with CedarDB in no time!">}}
   {{< card link="cookbook" title="Cookbook" image="images/cookbook.svg"  subtitle="A collection of recipes for common tasks.">}}
   {{< card link="references" title="References" image="images/references.svg" subtitle="A complete overview over CedarDB's feature set." >}}
   {{< card link="example_datasets" title="Example Datasets" image="images/example.svg"  subtitle="In-depth examples to explore CedarDB.">}}

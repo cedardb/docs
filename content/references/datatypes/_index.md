@@ -1,8 +1,6 @@
 ---
 title: "Reference: Data Types"
 linkTitle: "Data Types"
-prev: /references
-next: /integer
 weight: 10
 ---
 

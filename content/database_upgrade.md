@@ -2,16 +2,10 @@
 title: "CedarDB Database Upgrade"
 linkTitle: "Database Upgrade"
 weight: 110
-sitemap_disable: true
-sidebar:
-    exclude: true
 ---
 This page contains instructions for upgrading to a newer version of CedarDB that is not backward compatible with previous database formats.
-Please check this page whenever a new release is listed in the release notes as incompatible with previous versions, as we will also be improving the process for upgrading database versions.
+Please check this page whenever a new release is listed in the release notes as incompatible with previous versions.
 
-{{% callout type="warning" %}}
-CedarDB releases are still in alpha, and some releases will break with the old database file format. To ensure a smooth upgrade process, please keep track of your DDL statements to re-create your schema if necessary.
-{{% /callout %}}
 
 ## Export your data
 For now, upgrading the database format requires exporting all user data held in tables.
@@ -69,7 +63,7 @@ For docker deployments, `your/path` is the path which was mounted as a docker vo
 
 ### Install latest version
 
-Please follow the [installation guide](..) to install and start the latest CedarDB version.
+Please follow the [installation guide](../get_started) to install and start the latest CedarDB version.
 
 {{% /steps %}}
 

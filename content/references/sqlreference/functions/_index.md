@@ -1,8 +1,6 @@
 ---
 title: "Reference: Functions"
 linkTitle: "Functions"
-prev: /expressions
-next: /references/sqlreference/functions/advanced_functions
 weight: 40
 ---
 

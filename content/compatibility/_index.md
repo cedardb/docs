@@ -1,8 +1,6 @@
 ---
 title: PostgreSQL Compatibility
-prev: /technology
-next: /compatibility/sql_features
-weight: 90
+weight: 45
 ---
 
 CedarDB is compatible with the PostgreSQL wire protocol version 3.0 and large parts of the PostgreSQL SQL dialect.

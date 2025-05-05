@@ -1,8 +1,6 @@
 ---
 title: "JSON: German Commercial Register"
 linkTitle: "JSON: German Commercial Register"
-prev: /job
-next: /clients
 weight: 20
 ---
 

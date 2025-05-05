@@ -1,7 +1,5 @@
 ---
 title: Data Cookbook
-prev: /getting_started/running_docker_image/
-next: /importing_from_postgresql
 weight: 20
 
 ---

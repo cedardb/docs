@@ -1,7 +1,5 @@
 ---
 title: References
-prev: /clients/csharp
-next: /references/datatypes
 weight: 40
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: "Reference: SQL Statements"
 linkTitle: "SQL Statements"
-prev: references/sqlreference/queries/
-next: /alterrole
 weight: 20
 ---
 

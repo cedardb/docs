@@ -1,8 +1,6 @@
 ---
 title: Advanced Features
 weight: 60
-prev: /sqlreference
-next: /asof_join
 ---
 
 CedarDB supports many advanced features.
