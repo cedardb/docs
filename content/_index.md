@@ -3,7 +3,6 @@ title: CedarDB Documentation
 cascade:
   type: docs
 toc: false
-next: /getting_started
 ---
 
 Welcome to the CedarDB documentation! 

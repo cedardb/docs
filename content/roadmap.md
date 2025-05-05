@@ -1,7 +1,6 @@
 ---
 title: "Feature Roadmap for CedarDB"
 linkTitle: "Roadmap"
-prev: /compatibility
 weight: 100
 ---
 

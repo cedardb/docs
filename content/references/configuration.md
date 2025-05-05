@@ -12,16 +12,23 @@ Usually, configuring these options is unnecessary, as CedarDB uses strategies to
 
 ## Resource usage
 
-### Buffer Size
+### Memory usage
 
-By default, CedarDB uses 50% of available system memory for our buffer manager.
+By default, CedarDB uses 40% of available system memory as buffer manager and 40% as working memory used for query processing.
 If you are running multiple applications on a single instance, you may want to reduce this amount.
 Unlike all other settings, this setting must be set during the startup phase of CedarDB.
 The amount of memory used can be set via an environment variable in your shell.
+
 The following shell command sets the available buffer size to 1 GB.
 
 ```shell
 export BUFFERSIZE=1G
+```
+
+The next command sets the available working memory to 3 GB:
+
+```shell
+export DATABASE_WORKMEMSIZE=3G
 ```
 
 ### Degree of parallelism

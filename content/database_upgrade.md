@@ -2,9 +2,6 @@
 title: "CedarDB Database Upgrade"
 linkTitle: "Database Upgrade"
 weight: 110
-sitemap_disable: true
-sidebar:
-    exclude: true
 ---
 This page contains instructions for upgrading to a newer version of CedarDB that is not backward compatible with previous database formats.
 Please check this page whenever a new release is listed in the release notes as incompatible with previous versions, as we will also be improving the process for upgrading database versions.
