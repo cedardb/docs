@@ -1,7 +1,6 @@
 ---
 title: "Reference: Upsert Statement"
 linkTitle: "Upsert"
-next: references/sqlreference/expressions/
 ---
 
 Upserts allow [inserting](../insert) values into tables with a custom [update](../update) logic that will be applied to

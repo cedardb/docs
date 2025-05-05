@@ -33,7 +33,7 @@ Afterward, you have an open connection to your database, where you can enter any
 ## Creating a database
 
 psql is a handy too for one-time setup tasks like to create your database, set up user accounts, and to create schemas.
-See [here](/docs/getting_started/quickstart).
+See [here](/docs/get_started/quickstart).
 Nevertheless, we recommend to keep such configuration in a separate `.sql` file in your version control system.
 In interactive mode, you can execute all SQL commands from such a file with the `\i` command:
 

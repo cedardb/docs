@@ -1,6 +1,5 @@
 ---
 title: System Table Compatibility
-next: /roadmap
 weight: 93
 ---
 
@@ -12,10 +11,9 @@ reflection, e.g., to show which tables exist.
 
 This page provides an overview of the currently supported system tables and views.
 
-- 🟢 **Fully supported features.**
-- 🟡 **Since CedarDB does not share the PostgreSQL codebase and internal structures, some tables and views cannot have
-  meaningful content and exist only for compatibility reasons.**
-- 🔴 **Catalog entries without meaningful content.**
+- 🟢 **Supported**
+- 🟡 **Stubbed for compatibility**: These do not contain actual content and exist solely for compatibility purposes, as CedarDB does not share PostgreSQL's codebase or internal architecture
+- 🔴 **Not yet supported**
 
 ## System Tables
 

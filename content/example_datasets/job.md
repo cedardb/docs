@@ -1,7 +1,6 @@
 ---
 title: Join Order Benchmark
 linkTitle: "Join Order Benchmark"
-prev: /example_datasets
 weight: 10
 ---
 Aside from the well-known industry benchmarks for analytical systems, TPC-H and TPC-DS, the

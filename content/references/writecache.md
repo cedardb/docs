@@ -1,8 +1,6 @@
 ---
 title: Write Caching
 linkTitle: "Write Caching"
-prev: /advanced
-next: /technology
 weight: 70
 ---
 

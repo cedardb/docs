@@ -1,7 +1,5 @@
 ---
 title: Example Datasets
-prev: /cookbook
-next: /job
 weight: 30
 ---
 

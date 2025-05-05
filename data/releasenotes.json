@@ -1,5 +1,33 @@
 [
 	{
+		"version": "v2025-05-14",
+		"date": "2025-05-14",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add support for the <tt>client_min_messages</tt> setting. It controls the minimum severity a message must have to be sent to a connecting client.",
+			"<b>New Feature:</b> Streamlined command line args: <tt>--createdb</tt> will now open existing database files.",
+			"<b>New Feature:</b> CedarDB now supports function calls in the <tt>FROM</tt> clause: <tt>select * from sqrt(4);</tt>.",
+			"<b>New Feature:</b> SQL statements with syntax errors are now also added to the history in interactive mode. You can now browse to them and edit them from within the shell. Previously, only statements that have been executed successfully were added.",
+			"<b>New Feature:</b> CedarDB now supports prepared statements using the construct <tt>first X rows only offset Y</tt> which is used e.g. by Hibernate for pagination.",
+			"<b>PostgreSQL compatibility:</b> Stubbed the Postgres system tables <tt>pg_stats_ext</tt> and <tt>pg_stats_ext_exprs</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added the Postgres function <tt>pg_type_is_visible()</tt>.",
+			"<b>PostgreSQL compatibility:</b> Stubbed the Postgres functions <tt>row_security_active()</tt>, <tt>pg_mcv_list_items()</tt>, <tt>pg_ident_file_mappings()</tt>, <tt>pg_stat_get_numscans()</tt> and <tt>has_foreign_data_wrapper_privilege()</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added all Postgres builtin UDFs that Postgres's <tt>information_schema</tt> relies on.",
+			"<b>PostgreSQL compatibility:</b> Report the correct default collate of <tt>en_US.UTF-8</tt> in the <tt>pg_database</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> Stubbed the  <tt>default_table_access_method</tt> setting which is required by <tt>pg_dump</tt> but irrelevant for CedarDB.",
+			"<b>PostgreSQL compatibility:</b> Use Postgres-compatible <tt>oid</tt>s in the <tt>pg_database</tt> system table.",
+			"<b>PostgreSQL compatibility:</b> <tt>pg_relation_size()</tt> and <tt>pg_index_size()</tt> now also support sequences.",
+			"<b>Performance:</b> Reduced memory consumption of queries with aggregations.",
+			"<b>Maintenance:</b> CedarDB now creates statistics for system tables. This significantly speed up some tools that joined a lot of system tables as CedarDB now generates better query plans.",
+			"<b>Maintenance:</b> Fixed a rare bug where queries with <tt>IN</tt> expressions crashed.",
+			"<b>Maintenance:</b> Fixed a bug in the docker image where CedarDB was stuck in an endless loop updating the database schema if it crashed before.",
+			"<b>Maintenance:</b> Fixed a rare bug where deleted tuples could reappear under some circumstances.",
+			"<b>Maintenance:</b> Fixed a bug where the optimizer crashed on queries with a provable empty result set under some circumstances.",
+			"<b>Maintenance:</b> Fixed a bug where tables could become owner-less when the owner's password was changed.",
+			"<b>Maintenance:</b> Fixed a bug where CedarDB could have failed gracefully but didn't and instead terminated if the system ran out of memory."
+		]
+	},
+	{
 		"version": "alpha/2025-04-23",
 		"date": "2025-04-23",
 		"breaksdb": false,
@@ -291,7 +319,7 @@
 		"date": "2024-11-15",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> This release comes with a new Docker image that more closely mirrors the behavior of the official Postgres image. You can now pass the superuser name and password as environment variabls at container startup instead of having to create them manually inside Docker! For a full list of changes and new features, check out our new <a href=/docs/getting_started/running_docker_image/ target=_blank> Docker docs</a>.",
+			"<b>New Feature:</b> This release comes with a new Docker image that more closely mirrors the behavior of the official Postgres image. You can now pass the superuser name and password as environment variabls at container startup instead of having to create them manually inside Docker! For a full list of changes and new features, check out our new <a href=/docs/get_started/install_with_docker/ target=_blank> Docker docs</a>.",
 			"<b>New Feature:</b> The Docker image now correctly exports the <tt>PG_HOST</tt> environment variable. When using psql from inside the Docker container, you no longer need to write <tt>-h /tmp</tt>.",
 			"<b>Performance:</b> More aggressive autocompression of tables. Previously, CedarDB only compressed tuples during bulk inserts, scan-intensive queries or when the user manually executed <tt>VACUUM</tt>. CedarDB now also autocompresses tuples after small inserts, which considerably improves table scan performance and significantly reduces storage consumption for write-intensive workloads",
 			"<b>PostgreSQL compatibility:</b> Constructing an array from empty input now returns an empty array instead of null, e.g. <tt>select array(select * from unnest(ARRAY[]::text[]));</tt>",

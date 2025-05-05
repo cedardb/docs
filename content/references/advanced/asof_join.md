@@ -1,6 +1,5 @@
 ---
 title: AsOf Join
-prev: advanced
 ---
 
 CedarDB supports AsOf joins for fuzzy merges, usually on time series.

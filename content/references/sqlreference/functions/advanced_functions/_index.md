@@ -1,8 +1,6 @@
 ---
 title: "Functions: Advanced Functions"
 linkTitle: "Advanced Functions"
-prev: /functions
-next: /references/advanced
 weight: 40
 ---
 

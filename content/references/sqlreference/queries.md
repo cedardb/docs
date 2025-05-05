@@ -1,8 +1,6 @@
 ---
 title: SQL Queries
 linkTitle: "Queries"
-prev: /sqlreference
-next: /transaction
 weight: 10
 ---
 

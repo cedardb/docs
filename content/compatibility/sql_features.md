@@ -1,6 +1,5 @@
 ---
 title: Core SQL Compatibility
-prev: /compatibility
 weight: 91
 ---
 

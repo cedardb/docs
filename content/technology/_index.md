@@ -1,7 +1,6 @@
 ---
 title: "The Technology behind CedarDB"
 linkTitle: "CedarDB's Technology"
-prev: /references/datatypes
 weight: 50
 ---
 
