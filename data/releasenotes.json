@@ -1,4 +1,15 @@
 [
+		{
+		"version": "v2025-05-28",
+		"date": "2025-05-28",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> We've added the <tt>encode_geohash</tt> function! You can now compute a <a href=https://en.wikipedia.org/wiki/Geohash>geohash</a> from a latitude/longitude pair and a precision: <tt>select encode_geohash(48.317009, 11.662260, 5) -- returns u286c.</tt>",
+			"<b>PostgreSQL compatibility:</b> CedarDB now correctly reports the version number of Postgres it's compatible with as <tt>160001</tt> instead of <tt>16001</tt>. This caused issues with a few clients that wrongly assumed CedarDB was only compatible with a Postgres version older than version 1(!).",
+			"<b>Maintenance:</b> Fixed a bug where CedarDB would crash when running an explain statement without a format type: <tt>explain (format) select ...</tt>.",
+			"<b>Maintenance:</b> Fixed a bug where recursive SQL queries that relied on the duplicate elimination of <tt>union</tt> wouldn't terminate in some circumstances."
+		]
+	},
 	{
 		"version": "v2025-05-14",
 		"date": "2025-05-14",
