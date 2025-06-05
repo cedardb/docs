@@ -453,7 +453,7 @@ the [system table compatibility](../system-table) page.
 | transaction_timestamp | No                |                  |
 | to_timestamp          | Yes               |                  |
 | OVERLAPS              | Yes               |                  |
-| EXTRACT               | Yes               | Without timezone |
+| EXTRACT               | Yes               |                  |
 
 #### Enum
 
