@@ -1,5 +1,21 @@
 [
-		{
+	{
+		"version": "v2025-06-24",
+		"date": "2025-06-24",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Support for <tt>extract(timezone, ..)</tt> for the <tt>timestamptz</tt> type.",
+			"<b>New Feature:</b> Support for the <tt>transaction_timeout</tt> setting.",
+			"<b>New Feature:</b> Support for <tt>to_json()</tt>.",
+			"<b>PostgreSQL compatibility:</b> <tt>oid</tt>s can now be compared with all integer datatypes. This fixes the pgsql plugin of visual studio code.",
+			"<b>PostgreSQL compatibility:</b> Support for subqueries in the <tt>unnest()</tt> function: <tt>select unnest((SELECT ARRAY[1,2]));</tt>. This fixes issues with <tt>pg_cli</tt>.",
+			"<b>PostgreSQL compatibility:</b> Add server protocol support to the postgres-specific legacy types <tt>int2vector</tt> and <tt>oidvector</tt> in addition to the existing value support.",
+			"<b>PostgreSQL compatibility:</b> Allow connections via TLSv1.2. CedarDB previously only allowed TLSv1.3 connections which caused issues with some clients such as AWS DMS.",
+			"<b>Maintenance:</b> Solved an issue where CedarDB would sometimes fail to catch exceptions inside transactions. One of the rare case where the compiler was actually at fault: <a href=https://gcc.gnu.org/bugzilla/show_bug.cgi?id=119151>GCC Bug 119151</a>.",
+			"<b>Maintenance:</b> Fixed a bug where <tt>pg_get_indexdef()</tt> with invalid column ids would trigger an assert."
+		]
+	},
+	{
 		"version": "v2025-05-28",
 		"date": "2025-05-28",
 		"breaksdb": false,
