@@ -630,7 +630,7 @@ the [system table compatibility](../system-table) page.
 | #-                        | No                |             |
 | @?                        | No                |             |
 | @@                        | No                |             |
-| to_json                   | No                |             |
+| to_json                   | Yes               |             |
 | to_jsonb                  | No                |             |
 | array_to_json             | No                |             |
 | json_array                | No                |             |
