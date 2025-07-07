@@ -128,3 +128,21 @@ from json_data;
  2  | 1
 (4 rows)
 ```
+
+## Containment
+The jsonb_contains answers whether a given `jsonb` document is structurally contained within another `jsonb` document.
+
+For example, the following query finds the name of the people that consider Max as a friend.
+```sql
+select data->'name' from json_data where jsonb_contains(data, '{"friends": [2]}');
+```
+```
+   name    
+-----------
+ "philipp"
+(1 row)
+```
+
+The `@>` operator performs the same operation when applied to json data. 
+
+For the full semantics, refer to the PostgreSQL documentation: [PostgreSQL JSONB containment](https://www.postgresql.org/docs/17/datatype-json.html#JSON-CONTAINMENT)
