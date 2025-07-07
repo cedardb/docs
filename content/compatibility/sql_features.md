@@ -620,8 +620,8 @@ the [system table compatibility](../system-table) page.
 | -\>\>                     | Yes               |             |
 | #>                        | No                |             |
 | #\>\>                     | No                |             |
-| @>                        | No                |             |
-| <@                        | No                |             |
+| @>                        | Yes               |             |
+| <@                        | Yes               |             |
 | ?                         | No                |             |
 | ?\|                       | No                |             |
 | ?&                        | No                |             |
