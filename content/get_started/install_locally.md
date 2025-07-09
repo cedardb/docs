@@ -64,9 +64,13 @@ Without the flag, CedarDB will only open an existing database and fail if none i
 
 To launch an ephemeral, in-memory database:
 ```shell
-./cedardb --interactive
+./cedardb --interactive --inmemory
 ```
 This database exists only for the duration of the session and will be discarded upon exit.
+
+{{< callout type="info" >}}
+Since this database is held completely in-memory, working with large data sets can quickly exhaust system memory and cause OOM.
+{{< /callout >}}
 
 ### Running SQL in the shell
 
