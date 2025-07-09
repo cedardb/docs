@@ -1,5 +1,21 @@
 [
 	{
+		"version": "v2025-07-09",
+		"date": "2025-07-09",
+		"breaksdb": false,
+		"notes": [
+			"When not specifying any database location on the CLI, CedarDB now creates and uses a default database at <tt>~/.cedardb/db</tt>. You can now use a temporary in-memory using the <tt>--inmemory</tt> switch. (Note that this is prone to running OOM)",
+			"<b>New Feature:</b> Preliminary support for <tt>pg_advisory_lock(bigint)</tt>.",
+			"<b>New Feature:</b> Added support support for <tt>jsonb @> jsonb</tt> aka <tt>jsonb_contains()</tt>.",
+			"<b>New Feature:</b> Added support support for <tt>json_build_object(variadic any)</tt>.",
+			"<b>New Feature:</b> Added support for out-of-memory <tt>GROUP BY</tt>.",
+			"<b>Maintenance:</b> Fixed a deadlock in our buffer manager.",
+			"<b>Maintenance:</b> Fix assertion failure for subqueries in <tt>UPDATE</tt>.",
+			"<b>Maintenance:</b> Removed jemalloc.",
+			"<b>Maintenance:</b> Upgrade to LLVM20 and GCC15."
+		]
+	},
+	{
 		"version": "v2025-06-24",
 		"date": "2025-06-24",
 		"breaksdb": false,
