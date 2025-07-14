@@ -35,6 +35,6 @@ The CedarDB docker image also works on macOS.
 CedarDB can be installed in multiple environments:
 - [Run locally](../get_started/install_locally) on your own hardware
 - [Use Docker](../get_started/install_with_docker) for a quick setup
-- [Deploy to the cloud](../get_started/install_on_aws) on your preferred infrastructure
+- [Deploy to the cloud](../get_started/operate_in_cloud) on your preferred infrastructure
 
 For the fastest setup, follow the [Quickstart Guide](../get_started/quickstart).
