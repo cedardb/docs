@@ -22,7 +22,7 @@ Looking for advanced features or enterprise support? Check out the **Enterprise 
 |                              | Community Edition                                                                     | Enterprise Edition        |
 |------------------------------|---------------------------------------------------------------------------------------|---------------------------|
 | <b>Maximum Data Set Size</b> | 64 GiB                                                                                | unlimited                 |
-| <b>Support</b>               | [Community Slack](https://bonsai.cedardb.com/slack)                                   | Per terms of your license |
+| <b>Commercial Support</b>    | [Contact Us](mailto:sales@cedardb.com) (consider joining our [Community Slack](https://bonsai.cedardb.com/slack))       | Per terms of your license |
 | <b>License</b>               | [Community Edition license](https://cedardb.com/legal/agreements/community_tcs.pdf)   | Paid enterprise license   |
 
 
