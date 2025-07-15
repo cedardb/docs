@@ -13,6 +13,11 @@ Pull the official CedarDB image:
 ```shell
 docker pull cedardb/cedardb
 ```
+
+{{< callout type="info" >}}
+By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing.md" >}}).
+{{< /callout >}}
+
 Start a container:
 
 ```shell

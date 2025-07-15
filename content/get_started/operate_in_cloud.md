@@ -51,6 +51,10 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
   {{< /tab >}}
 {{< /tabs >}}
 
+{{< callout type="info" >}}
+By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing.md" >}}).
+{{< /callout >}}
+
 ---
 
 ## Instance sizing guidelines

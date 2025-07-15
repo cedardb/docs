@@ -17,6 +17,10 @@ To automatically download and decompress the appropriate version, run:
 curl https://get.cedardb.com | bash
 ```
 
+{{< callout type="info" >}}
+By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing.md" >}}).
+{{< /callout >}}
+
 CedarDB supports two modes of operation:
 - **Interactive mode:** A SQL shell for direct, manual interaction with the database.
 - **Server mode:** A PostgreSQL-compatible server for external clients.

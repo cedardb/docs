@@ -16,6 +16,10 @@ To automatically download and decompress the appropriate CedarDB version, run:
 curl https://get.cedardb.com | bash
 ```
 
+{{< callout type="info" >}}
+By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing.md" >}}).
+{{< /callout >}}
+
 Then start an interactive SQL shell connected to a temporary database:
 
 ```shell
