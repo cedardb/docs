@@ -1,13 +1,27 @@
 [
 	{
+		"version": "v2025-07-23",
+		"date": "2025-07-23",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Added support for <tt>jsonb ? text</tt> aka <tt>jsonb_exists(jsonb, text)</tt>.",
+			"<b>New Feature:</b> Added support for <tt>jsonb ?| array</tt> aka <tt>jsonb_exists_any(jsonb, array)</tt>.",
+			"<b>New Feature:</b> Added support for <tt>jsonb ?& array</tt> aka <tt>jsonb_exists_all(jsonb, array)</tt>.",
+			"<b>Performance:</b> Reduced disk and memory consumption or large index bulk loads.",
+			"<b>Maintenance:</b> Fixed crash in rollback of index bulkloads.",
+			"<b>Maintenance:</b> Fixed a nasty data corruption during repeated recovery. During recovery after an unclean shutdown, CedarDB did not immediately discard partially written logs. In case of a second unclean shutdown, those inconsistent log entries might have lead to inconsistent state.",
+			"<b>Maintenance:</b> Fixed build for legacy distributions."
+		]
+	},
+	{
 		"version": "v2025-07-09",
 		"date": "2025-07-09",
 		"breaksdb": false,
 		"notes": [
 			"When not specifying any database location on the CLI, CedarDB now creates and uses a default database at <tt>~/.cedardb/db</tt>. You can now use a temporary in-memory using the <tt>--inmemory</tt> switch. (Note that this is prone to running OOM)",
 			"<b>New Feature:</b> Preliminary support for <tt>pg_advisory_lock(bigint)</tt>.",
-			"<b>New Feature:</b> Added support support for <tt>jsonb @> jsonb</tt> aka <tt>jsonb_contains()</tt>.",
-			"<b>New Feature:</b> Added support support for <tt>json_build_object(variadic any)</tt>.",
+			"<b>New Feature:</b> Added support for <tt>jsonb @> jsonb</tt> aka <tt>jsonb_contains()</tt>.",
+			"<b>New Feature:</b> Added support for <tt>json_build_object(variadic any)</tt>.",
 			"<b>New Feature:</b> Added support for out-of-memory <tt>GROUP BY</tt>.",
 			"<b>Maintenance:</b> Fixed a deadlock in our buffer manager.",
 			"<b>Maintenance:</b> Fix assertion failure for subqueries in <tt>UPDATE</tt>.",
