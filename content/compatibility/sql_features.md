@@ -622,9 +622,9 @@ the [system table compatibility](../system-table) page.
 | #\>\>                     | No                |             |
 | @>                        | Yes               |             |
 | <@                        | Yes               |             |
-| ?                         | No                |             |
-| ?\|                       | No                |             |
-| ?&                        | No                |             |
+| ?                         | Yes               |             |
+| ?\|                       | Yes               |             |
+| ?&                        | Yes               |             |
 | \|\|                      | No                |             |
 | -                         | No                |             |
 | #-                        | No                |             |

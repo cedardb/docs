@@ -10,7 +10,8 @@ create table json_data(data jsonb); -- json behaves similar, but is stored in pl
 insert into json_data
 values ('{"id":1, "name": "philipp", "friends": [2, 3]}'),
        ('{"id":2, "name": "max", "friends": [1]}'),
-       ('{"id":3, "name": "moritz", "friends": [1]}');
+       ('{"id":3, "name": "moritz", "friends": [1, 4]}'),
+       ('{"id":4, "name": "christian", "friends": [3], "nick": "chris"}');
 ```
 
 ## Dictionary Access
@@ -23,12 +24,13 @@ select data->'name' from json_data;
 ```
 
 ```
-   name    
------------
+    name     
+-------------
  "philipp"
  "max"
  "moritz"
-(3 rows)
+ "christian"
+(4 rows)
 ```
 
 Note the double quotes (`"`) around the printed values.
@@ -49,7 +51,8 @@ select data->'friends'->0 from json_data;
  2
  1
  1
-(3 rows)
+ 3
+(4 rows)
 ```
 
 ## Text Access
@@ -67,7 +70,8 @@ select data->>'name' from json_data;
  philipp
  max
  moritz
-(3 rows)
+ christian
+(4 rows)
 ```
 
 ## Conversions
@@ -103,8 +107,9 @@ select json_array_length(data->'friends') from json_data;
 -------------------
                  2
                  1
+                 2
                  1
-(3 rows)
+(4 rows)
 ```
 
 JSON arrays can sometimes be hard to work with in SQL, since they are not in a normalized relational model.
@@ -122,15 +127,17 @@ from json_data;
 ```
  id | json_array_elements 
 ----+---------------------
+ 3  | 1
+ 3  | 4
  1  | 2
  1  | 3
- 3  | 1
+ 4  | 3
  2  | 1
-(4 rows)
+(6 rows)
 ```
 
-## Containment
-The jsonb_contains answers whether a given `jsonb` document is structurally contained within another `jsonb` document.
+## Containment and Existence
+The `jsonb_contains` function answers whether a given `jsonb` document is structurally contained within another `jsonb` document.
 
 For example, the following query finds the name of the people that consider Max as a friend.
 ```sql
@@ -145,4 +152,69 @@ select data->'name' from json_data where jsonb_contains(data, '{"friends": [2]}'
 
 The `@>` operator performs the same operation when applied to json data. 
 
-For the full semantics, refer to the PostgreSQL documentation: [PostgreSQL JSONB containment](https://www.postgresql.org/docs/17/datatype-json.html#JSON-CONTAINMENT)
+The `jsonb_exists` function and the equivalent `?` operator can determine if a given jsonb document has a given text as an object key or as an array value.
+
+```sql
+select data->'name', data->'nick' from json_data where data ? 'nick';
+```
+```
+    name     |  nick   
+-------------+---------
+ "christian" | "chris"
+(1 row)
+```
+
+Additionally, CedarDB supports the `jsonb_exists_all` (`?&` operator) and `jsonb_exists_any` (`?|`) variants, which check for the existence of all (or any) of a given set of keys. 
+```sql
+select data->'name', data->'nick' from json_data
+where jsonb_exists_any(data, ARRAY['nick', 'name']);
+```
+```
+    name     |  nick   
+-------------+---------
+ "philipp"   | 
+ "max"       | 
+ "moritz"    | 
+ "christian" | "chris"
+(4 rows)
+```
+
+```sql
+select data->'name', data->'nick' from json_data
+where jsonb_exists_all(data, ARRAY['nick', 'name']);
+```
+```
+    name     |  nick   
+-------------+---------
+ "christian" | "chris"
+(1 rows)
+```
+For the full semantics, refer to the PostgreSQL documentation: [PostgreSQL JSONB containment and existence](https://www.postgresql.org/docs/17/datatype-json.html#JSON-CONTAINMENT)
+
+## Concatenation
+The `jsonb_concat` operation concatenates two jsonb documents. To use it, call the `jsonb_concat` function or by providing `jsonb` as input to the `||` operator.
+```sql
+select data || '{"country": "Germany"}' from jsonb_data.
+```
+```
+                                       ?column?                                        
+---------------------------------------------------------------------------------------
+ {"id": 1, "name": "philipp", "country": "Germany", "friends": [2, 3]}
+ {"id": 2, "name": "max", "country": "Germany", "friends": [1]}
+ {"id": 3, "name": "moritz", "country": "Germany", "friends": [1, 4]}
+ {"id": 4, "name": "christian", "nick": "chris", "country": "Germany", "friends": [3]}
+(4 rows)
+```
+
+```sql
+select (data->'friends') || (data->>'id')::jsonb as me_and_my_friends from json_data;
+```
+```
+ me_and_my_friends 
+-------------------
+ [2, 3, 1]
+ [1, 2]
+ [1, 4, 3]
+ [3, 4]
+(4 rows)
+```
