@@ -7,8 +7,8 @@
 			"<b>New Feature:</b> Added support for <tt>jsonb ? text</tt> aka <tt>jsonb_exists(jsonb, text)</tt>.",
 			"<b>New Feature:</b> Added support for <tt>jsonb ?| array</tt> aka <tt>jsonb_exists_any(jsonb, array)</tt>.",
 			"<b>New Feature:</b> Added support for <tt>jsonb ?& array</tt> aka <tt>jsonb_exists_all(jsonb, array)</tt>.",
-			"<b>Performance:</b> Reduced disk and memory consumption or large index bulk loads.",
-			"<b>Maintenance:</b> Fixed crash in rollback of index bulkloads.",
+			"<b>Performance:</b> Reduced disk and memory consumption of large index bulk loads.",
+			"<b>Maintenance:</b> Fixed crash in rollback of index bulk loads.",
 			"<b>Maintenance:</b> Fixed a nasty data corruption during repeated recovery. During recovery after an unclean shutdown, CedarDB did not immediately discard partially written logs. In case of a second unclean shutdown, those inconsistent log entries might have lead to inconsistent state.",
 			"<b>Maintenance:</b> Fixed build for legacy distributions."
 		]
