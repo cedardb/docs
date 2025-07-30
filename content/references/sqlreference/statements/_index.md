@@ -49,10 +49,13 @@ Call
 : create a new database role
 
 [Create schema](createschema)
-: create a new namespace 
+: create a new namespace
 
 Create sequence
 : define a new sequence generator
+
+[Create server](createserver)
+: create a new remote server
 
 [Create table](createtable)
 : define a new table
