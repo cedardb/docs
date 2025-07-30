@@ -47,13 +47,13 @@ Do not throw an error if a table with the same name already exists:
 create table table_name if not exists (...);
 ```
 
-Hash-partition the table by one of its columns.
-Partitioning can make data access for queries using a fixed `partition_id` faster, but will slow down any access where
-the partition is not known.
+Create a table that stores all compressed data on remote server, which was created with name `remote_storage` (see [create server](../createserver) for more infos):
 
 ```sql
-create table table_name (...) partition by hash (partition_id);
+create table table_name (...) with (server = remote_storage);
 ```
+
+
 
 ## Permissions
 
