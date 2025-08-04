@@ -49,5 +49,5 @@ CedarDB supports many expressions that manipulate data:
 * Shift right bitwise (`>>`)
 * Similar to
 * Square root (`|/`)
-* Try
+* [Try](try)
 * Unique subquery

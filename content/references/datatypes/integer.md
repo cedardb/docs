@@ -58,7 +58,7 @@ ERROR:  numeric overflow
 You can handle such overflows in multiple ways:
 
 #### Try
-Wrapping the operation in a `try()` produces a `null` value for overflows:
+Wrapping the operation in a [`try()`](/docs/references/sqlreference/expressions/try/) produces a `null` value for overflows:
 ```sql
 select try(i + i) from integers;
 ```
