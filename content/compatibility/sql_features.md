@@ -291,7 +291,7 @@ the [system table compatibility](../system-table) page.
 | acosh         | Yes               |                                                                                   |
 | atanh         | Yes               |                                                                                   |
 
-#### String
+#### Text
 
 | **Feature**           | **Support State** |                                           **Details** |
 |-----------------------|-------------------|------------------------------------------------------:|
@@ -325,15 +325,6 @@ the [system table compatibility](../system-table) page.
 | quote_ident           | Yes               |                                                       |
 | quote_literal         | Yes               |                                                       |
 | quote_nullable        | Yes               |                                                       |
-| regexp_count          | No                |                                                       |
-| regexp_instr          | No                |                                                       |
-| regexp_like           | No                |                                                       |
-| regexp_match          | Yes               |                                                       |
-| regexp_matches        | Yes               |                                                       |
-| regexp_replace        | Yes               |         Currently not supporting replacing N'th match |
-| regexp_split_to_array | Yes               |                                                       |
-| regexp_split_to_table | Yes               |                                                       |
-| regexp_substr         | Yes               |                                                       |
 | repeat                | Yes               |                                                       |
 | replace               | Yes               |                                                       |
 | reverse               | Yes               |                                                       |
@@ -403,10 +394,19 @@ the [system table compatibility](../system-table) page.
 
 #### Pattern Matching
 
-| **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
-| LIKE        | Yes               |             |
-| SIMILAR TO  | Yes               |             |
+| **Feature**           | **Support State** |                                   **Details** |
+|-----------------------|-------------------|----------------------------------------------:|
+| LIKE                  | Yes               |                                               |
+| SIMILAR TO            | Yes               |                                               |
+| regexp_count          | No                |                                               |
+| regexp_instr          | No                |                                               |
+| regexp_like           | Yes               |                                               |
+| regexp_match          | Yes               |                                               |
+| regexp_matches        | Yes               |                                               |
+| regexp_replace        | Yes               | Currently not supporting replacing N'th match |
+| regexp_split_to_array | Yes               |                                               |
+| regexp_split_to_table | Yes               |                                               |
+| regexp_substr         | Yes               |                                               |
 
 #### Data Type Formatting
 
