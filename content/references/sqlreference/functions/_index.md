@@ -18,7 +18,7 @@ Functions are usually type specific, but are often overloaded to work with diffe
   * Interval functions
   * [JSON functions](json)
   * Numeric functions
-  * Text functions
+  * [Text functions](./text)
   * Time functions
   * Timestamp functions
   * UUID functions
