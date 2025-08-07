@@ -1,5 +1,21 @@
 [
 	{
+		"version": "v2025-08-07",
+		"date": "2025-08-07",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Added support to read <a href=\"../references/advanced/s3/\">relations from S3</a> using <tt>create server</tt>.",
+			"<b>New Feature:</b> Added support for the <tt>real</tt> (float4) floating point datatype. CedarDB previously used double precision for single precision numbers.",
+			"<b>New Feature:</b> Added support for <tt>jsonb || jsonb</tt> aka <tt>jsonb_concat(jsonb, jsonb, ...)</tt>.",
+			"<b>New Feature:</b> Added support for <tt>regexp_like(text, text)</tt>.",
+			"<b>Performance:</b> Reduced memory consumption for large text-heavy CSV scans.",
+			"<b>Performance:</b> Reduced memory consumption and improved performance of group by spooling.",
+			"<b>PostgreSQL compatibility:</b> Fixed OID to integer comparisons to handle negative numbers consistently.",
+			"<b>Maintenance:</b> Fixed float multiplications of NaN with zero and integer conversions near extreme values.",
+			"<b>Maintenance:</b> Fixed tryCast semantics to be null-returning."
+		]
+	},
+	{
 		"version": "v2025-07-23",
 		"date": "2025-07-23",
 		"breaksdb": false,
