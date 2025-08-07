@@ -1,11 +1,11 @@
 ---
-title: "Reference: Double Type"
-linkTitle: "Double"
+title: "Reference: Float Type"
+linkTitle: "Float"
 weight: 13
 ---
 
-The types `double precision`, `float`, and `real` are floating-point numbers that are stored in an eight-byte
-[IEEE&nbsp;754](https://de.wikipedia.org/wiki/IEEE_754) format.
+The types `double precision`, `float`, and `real` are floating-point numbers. Depending on the precision, they are stored in an four or eight-byte
+[IEEE&nbsp;754](https://en.wikipedia.org/wiki/IEEE_754) format.
 
 {{< callout type="warning" >}}
 The `double precision` type is not suitable for conducting precise calculations, which are essential, for instance, when handling monetary values.
@@ -25,11 +25,11 @@ select * from constants;
 ```
 
 ```
-   name   |      value       
-----------+------------------
- pi       | 3.14159265358979
- planck   |   6.62607015e-34
- avogadro |   6.02214076e+23
+   name   |    value 
+----------+--------------
+ pi       |     3.14159
+ planck   | 6.62607e-34
+ avogadro | 6.02214e+23
 (3 rows)
 ```
 ## IEEE Special Values
@@ -48,6 +48,15 @@ select real 'nan', real 'inf', real '-0';
 
 ## Precision
 
+Depending on the type size, the precision varies.
+
+| Data Type          | Approximate Precision | Storage Size | Notes                                                    |
+|--------------------|-----------------------|--------------|----------------------------------------------------------|
+| `REAL`             | ~6 decimal digits     | 4 bytes      | Typically referred to as `float` in C                    |
+| `DOUBLE PRECISION` | ~15 decimal digits    | 8 bytes      | Typically referred to as `double` in C                   |
+| `FLOAT(p)`         | Depends on `p`        | 4 or 8 bytes | `p ≤ 24` => `REAL`, `24 < p ≤ 53` => `DOUBLE PRECISION`. |
+
+
 Beware of the limited floating-point precision, where rounding errors can quickly add up, and can lead 
 to subtle errors.
 Consider, e.g., the following query: 
@@ -58,7 +67,7 @@ with x(i) as (
            (0.2), 
            (-0.3)
 ) 
-select sum(i::real) from x;
+select sum(i::double precision) from x;
 ```
 
 ```
