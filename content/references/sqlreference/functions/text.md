@@ -9,7 +9,7 @@ functions.
 
 ## Functions and Operators
 
-### string_to_table()
+#### string_to_table()
 
 **Arguments**: (_string_ text, _delimiter_ text [, _null_string_ text ]))
 
