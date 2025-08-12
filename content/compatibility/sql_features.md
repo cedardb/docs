@@ -332,7 +332,7 @@ the [system table compatibility](../system-table) page.
 | split_part            | Yes               |                                                       |
 | starts_with           | Yes               |                                                       |
 | string_to_array       | Yes               |                                                       |
-| string_to_table       | No                |                                                       |
+| string_to_table       | Yes               |                                                       |
 | strpos                | Yes               |                                                       |
 | substr                | Yes               |                                                       |
 | to_ascii              | No                |                                                       |
