@@ -66,6 +66,32 @@ select regexp_count('The General Sherman tree is the largest tree in the world.'
 (1 row)
 ```
 
+#### regexp_instr()
+
+**Arguments**:
+(_string_ text, _pattern_ text [, _start_ integer [, _N_ integer [, _endoption_ integer
+[, _flags_ text [, _subexpr_ integer ]]]]])
+
+The `regexp_instr()` function determines the position of a _pattern_ in a _string_.
+If a _start_ parameter is provided, the search starts at that offset in the _string_,  else from the beginning
+of the _string_. If _N_ is specified, the function determines the *N*th match with the _pattern_, otherwise the first match
+is determined. If the _endoption_ is not set or set to 0, the position of the match's first character is returned,
+else it must be set to 1, implying the position after the match's last character is returned.
+The _flags_ parameter changes the function's semantics; for example, the `i` flag makes the pattern
+matching case-insensitive. The _subexpr_ allows to specify the subexpression of interest within the _pattern_ and
+defaults to 0, which leads to identifying the position of the whole match regardless of parenthesized subexpressions.
+
+```sql
+select regexp_instr('The General Sherman tree is the largest tree in the world.', 'Tree', 23, 1, 1, 'i') as foo;
+```
+
+```
+ foo 
+-----
+ 45
+(1 row)
+```
+
 #### regexp_like()
 
 **Arguments**: (_string_ text, _pattern_ text [, _flags_ text]))

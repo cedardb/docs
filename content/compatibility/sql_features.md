@@ -399,7 +399,7 @@ the [system table compatibility](../system-table) page.
 | LIKE                  | Yes               |                                               |
 | SIMILAR TO            | Yes               |                                               |
 | regexp_count          | Yes               |                                               |
-| regexp_instr          | No                |                                               |
+| regexp_instr          | Yes               |                                               |
 | regexp_like           | Yes               |                                               |
 | regexp_match          | Yes               |                                               |
 | regexp_matches        | Yes               |                                               |
