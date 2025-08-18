@@ -15,6 +15,8 @@ This page provides an overview of the currently supported system tables and view
 - 🟡 **Stubbed for compatibility**: These do not contain actual content and exist solely for compatibility purposes, as CedarDB does not share PostgreSQL's codebase or internal architecture
 - 🔴 **Not yet supported**
 
+Additionally, CedarDB exposes information that are not available in PostgreSQL in its CedarDB system tables.
+
 ## System Tables
 
 System tables provide a raw view into the state of the database system.
@@ -92,6 +94,16 @@ built-in [system views](#system-views), or the SQL-standard [information schema]
 | [pg_type](https://www.postgresql.org/docs/current/catalog-pg-type.html)                                   | 🟢            | Stores information about data types.                                                      |
 | [pg_user_mapping](https://www.postgresql.org/docs/current/catalog-pg-user-mapping.html)                   | 🟡            | Contains information about user mappings for foreign data access.                         |
 
+### CedarDB System Tables
+
+CedarDB provides additional information in its system-specific system tables.
+As the PostgreSQL system tables, those system tables are *read-only*.
+
+#### cedardb_compression_info
+
+This system table contains information about the compression of each column of each table.
+Note that CedarDB can use different compression schemes on the same column and that uncompressed tuples are only shown here if they are in a DataBlock with compressed columns.
+
 ## System Views
 
 System views provide convenient access to system information.
@@ -134,6 +146,12 @@ The views instead use more human-readable symbolic names.
 | [pg_user](https://www.postgresql.org/docs/current/view-pg-user.html)                                                 | 🟢            | Shows database users.                                                           |
 | [pg_user_mappings](https://www.postgresql.org/docs/current/view-pg-user-mappings.html)                               | 🟡            | Displays user mappings.                                                         |
 | [pg_views](https://www.postgresql.org/docs/current/view-pg-views.html)                                               | 🟢            | Lists views.                                                                    |
+
+### CedarDB System Views
+
+#### cedardb_compression_infos
+
+This system view gives an easier usable representation of the compression ratio of the entries in the `cedardb_compression_info` system table.
 
 ## Information Schema
 
