@@ -4,14 +4,17 @@ linkTitle: "Float"
 weight: 13
 ---
 
-The types `double precision`, `float`, and `real` are floating-point numbers. Depending on the precision, they are stored in an four or eight-byte
+The types `double precision`, `float`, and `real` are floating-point numbers. Depending on the precision, they are
+stored in an four or eight-byte
 [IEEE&nbsp;754](https://en.wikipedia.org/wiki/IEEE_754) format.
 
 {{< callout type="warning" >}}
-The `double precision` type is not suitable for conducting precise calculations, which are essential, for instance, when handling monetary values.
+The `double precision` type is not suitable for conducting precise calculations, which are essential, for instance, when
+handling monetary values.
 {{< /callout >}}
 
 ## Usage Example
+
 ```sql
 create table constants (
     name text,
@@ -32,9 +35,11 @@ select * from constants;
  avogadro | 6.02214e+23
 (3 rows)
 ```
+
 ## IEEE Special Values
 
 If you need IEEE&nbsp;754 *special values*, you need to enter them with explicitly typed literal syntax:
+
 ```sql
 select real 'nan', real 'inf', real '-0';
 ```
@@ -56,10 +61,9 @@ Depending on the type size, the precision varies.
 | `DOUBLE PRECISION` | ~15 decimal digits    | 8 bytes      | Typically referred to as `double` in C                   |
 | `FLOAT(p)`         | Depends on `p`        | 4 or 8 bytes | `p ≤ 24` => `REAL`, `24 < p ≤ 53` => `DOUBLE PRECISION`. |
 
-
-Beware of the limited floating-point precision, where rounding errors can quickly add up, and can lead 
+Beware of the limited floating-point precision, where rounding errors can quickly add up, and can lead
 to subtle errors.
-Consider, e.g., the following query: 
+Consider, e.g., the following query:
 
 ```sql
 with x(i) as (
@@ -88,5 +92,22 @@ For the above query, an equally valid result would be:
          sum          
 ----------------------
  2.77555756156289e-17
+(1 row)
+```
+
+## PostgreSQL Compatibility
+
+Floating-point values in PostgreSQL can cause over- or underflow errors.
+CedarDB differs from PostgreSQL in this aspect, and follows the IEEE 754 defaults instead.
+The following example shows the behavior of CedarDB where PostgreSQL would give an error:
+
+```sql
+select 1/0::float, 0/0::float, pow(-10, 999);
+```
+
+```
+ ?column? | ?column? |    pow    
+----------+----------+-----------
+ Infinity |      NaN | -Infinity
 (1 row)
 ```
