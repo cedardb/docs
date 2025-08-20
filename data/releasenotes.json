@@ -1,5 +1,23 @@
 [
 	{
+		"version": "v2025-08-20",
+		"date": "2025-08-20",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#regexp_count\"><tt>regexp_count</tt> and <tt>regexp_instr</tt></a>.",
+			"<b>New Feature:</b> Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#string_to_table\"><tt>string_to_table</tt></a>.",
+            "<b>New Feature:</b> Added support for <tt>drop server</tt>.",
+            "<b>New Feature:</b> Added a custom system table <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_infos</tt></a> to show database compressions infos.",
+			"<b>PostgreSQL compatibility:</b> Fixed <tt>last_value</tt> column in <tt>pg_sequence</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added support for multiple arrays in <tt>unnest(anyarray, ...)</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added support for user-defined functions in <tt>FROM</tt>.",
+			"<b>PostgreSQL compatibility:</b> Added support for implicit conversions from <tt>text</tt> to <tt>regclass</tt> for <tt>pg_total_relation_size(regclass)</tt> and related functions.",
+			"<b>Maintenance:</b> Fixed overly large memory consumption in <tt>COPY FROM STDIN</tt>, i.e., psql's <tt>\\copy</tt> mode.",
+			"<b>Maintenance:</b> Prepare for snapshot isolation for DDL statements, unlocking tons of new DDL functionality to be shipped in future releases.",
+			"<b>Maintenance:</b> Fixed unchecked overflows when converting float8 to float4."
+		]
+	},
+  {
 		"version": "v2025-08-07",
 		"date": "2025-08-07",
 		"breaksdb": false,
