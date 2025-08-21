@@ -1,7 +1,11 @@
 {{$releasenotes := .Site.Data.releasenotes}}
 {{ range $index, $element := (sort (sort $releasenotes "date" "desc") "Foundational" "desc") }}
 {{ if or (and (eq 0 $index) (eq ($.Get "current") "true")) (and (ne 0 $index) (ne ($.Get "current") "true")) }}
-    <h4>{{ $element.version }}</h4>
+    <h4>
+        {{ $element.version }}
+        <span class="absolute -mt-20" id="{{ $element.version }}"></span>
+        <a href="#{{ $element.version }}" class="subheading-anchor" aria-label="Permalink for this section"></a>
+    </h4>
     <i>{{ time.Format "2 Jan 2006" (time.AsTime $element.date) }}</i>
     {{ if $element.breaksdb }}
     <div class="overflow-x-auto mt-6 flex rounded-lg border py-2 ltr:pr-4 rtl:pl-4 contrast-more:border-current contrast-more:dark:border-current border-yellow-100 bg-yellow-50 text-yellow-900 dark:border-yellow-200/30 dark:bg-yellow-700/30 dark:text-yellow-200">
