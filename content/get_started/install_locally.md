@@ -118,7 +118,7 @@ psql -h /tmp -U postgres
 You can then create users and databases:
 
 ```sql
-create user test superuser with password '1234'; -- Or use fine-grained privileges
+create user test with password '1234' superuser; -- Or use fine-grained privileges
 create database test;
 ```
 
