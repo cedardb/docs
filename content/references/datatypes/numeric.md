@@ -77,3 +77,12 @@ select try(i + i) from numerics;
            <---- null
 (1 row)
 ```
+
+## PostgreSQL Compatibility
+
+PostgreSQL allows `NaN`, `+Infinity`, and `-Infinity` as special numeric values.
+Since all operations on numerics are bounds-checked, these values cannot occur during regular operations.
+However, PostgreSQL still allows entering them directly.
+
+CedarDB forbids entering these values as numeric data types.
+See [Float](/docs/references/datatypes/float) for data types supporting those special values. 
