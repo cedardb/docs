@@ -101,8 +101,38 @@ As the PostgreSQL system tables, those system tables are *read-only*.
 
 #### cedardb_compression_info
 
-This system table contains information about the compression of each column of each table.
-Note that CedarDB can use different compression schemes on the same column and that uncompressed tuples are only shown here if they are in a DataBlock with compressed columns.
+This system table contains information about how tables and columns are compressed in CedarDB.
+Note that CedarDB can use different compression schemes within the same column and that this table currently only includes statistics on cold data.
+For more information on cold and hot data, see [this blog post](https://cedardb.com/blog/colibri/).
+
+| Column              | Type    | Description                                                                                                                                                           |
+|---------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| oid                 | Integer | The [Object Identifier](https://www.postgresql.org/docs/current/datatype-oid.html)  of the table.                                                                     |
+| tablename           | Text    | The name of the table.                                                                                                                                                |
+| attributename       | Text    | The name of the attribute.                                                                                                                                            |
+| datatype            | Text    | The type of the attribute.                                                                                                                                            |
+| encoding            | Text    | The encoding scheme used for compression.                                                                                                                             |
+| compressedvaluesize | Text    | The maximum number of bytes required to encode a compressed value. For instance, if a dictionary has at most 256 keys, each value can be encoded using just one byte. |
+| compressedsize      | Bigint  | The size of the compressed data in bytes.                                                                                                                             |
+| uncompressedsize    | Bigint  | The size of the uncompressed data in bytes. For strings, this includes additional meta data to be able to query the data.                                             |
+| tuplecount          | Bigint  | The number of compressed tuples.                                                                                                                                      |
+
+This is an excerpt of the output for [TPCH](https://www.tpc.org/tpch/) with scale factor 1:
+
+```
+oid         tablename   attributename   datatype    encoding                compressedvaluesize compressedsize  uncompressedsize    tuplecount
+-----
+268435460   partsupp    ps_comment      text        simple dictionary       fourbyte            104230496       107284124           768830
+268435460   partsupp    ps_supplycost   numeric     truncate                fourbyte            3075344         6150640             768830
+268435460   partsupp    ps_availqty     integer     truncate                twobyte             1537680         3075320             768830
+268435460   partsupp    ps_suppkey      integer     truncate                twobyte             1537680         3075320             768830
+268435460   partsupp    tid             bigint      increment               zerobytes           0               6150640             768830
+268435460   partsupp    ps_partkey      integer     frameofreference        twobyte             1537680         3075320             768830
+268435462   orders      tid             bigint      increment               zerobytes           0               12000000            1500000
+268435462   orders      o_clerk         char        sortedstring dictionary twobyte             3114096         46495400            1500000
+268435462   orders      o_comment       text        simple dictionary       fourbyte            90643872        96751711            1500000
+...
+```
 
 ## System Views
 
