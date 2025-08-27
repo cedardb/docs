@@ -1,4 +1,28 @@
 [
+		{
+		"version": "v2025-08-27",
+		"date": "2025-08-27",
+		"breaksdb": false,
+		"notes": [
+            "<b>New Feature:</b> The <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_info</tt></a> system table now shows the uncompressed size of text columns.",
+            "<b>New Feature:</b> <a href=\"https://cedardb.com/docs/references/advanced/s3/\">S3-backed tables</a> now appear in the system tables <tt>pg_foreign_server</tt>, <tt>pg_foreing_data_wrapper</tt> and <tt>pg_foreign_table</tt>.",
+            "<b>New Feature:</b> The write-ahead-log is now directly truncated after a successful recovery. This drastically reduces WAL bloat when restarting after a system crash.",
+			"<b>PostgreSQL compatibility:</b> Restored compatibility with rsql.",
+			"<b>PostgreSQL compatibility:</b> The Docker image now (correctly) ignores the <tt>PGHOST</tt> environment variable.",
+			"<b>PostgreSQL compatibility:</b> The <tt>pg_indexes</tt> system table now has a <tt>tablespaces</tt> column.",
+			"<b>PostgreSQL compatibility:</b> Databases are automatically seeded with all PostgreSQL <a href=https://www.postgresql.org/docs/current/predefined-roles.html>pre-defined roles</a>.",
+			"<b>PostgreSQL compatibility:</b> The <tt>pg_auth_members</tt> system table shows role memberships now.",
+			"<b>PostgreSQL compatibility:</b> Make sure <tt>select pg_typeof(last_value) from sequence</tt> always returns <tt>bigint</tt> regardless of the sequence type.",
+			"<b>PostgreSQL compatibility:</b> <tt>ceil()</tt>, <tt>floor()</tt>, and <tt>trunc()</tt> now discard fractional digits like Postgres does.",
+			"<b>PostgreSQL compatibility:</b> The <tt>vector</tt> (pgvector) type can now cast to arbitrary numeric types including 32-bit floats.",
+			"<b>Maintenance:</b> CedarDB now prints the offending string when parsing an invalid JSON value fails during data ingestion.",
+			"<b>Maintenance:</b> Fixed a bug where querying <tt>information_schema.tables</tt> triggered an assertion when the database contained tables with columns of the serial type.",
+			"<b>Maintenance:</b> Fixed a bug where opening a database didn't succeed after changing the owner of a table.",
+			"<b>Maintenance:</b> Improved support for Amazon DMS.",
+			"<b>Maintenance:</b> Fixed a bug where exiting the interactive shell would print a <tt>malloc()</tt> error."
+		]
+	},
+
 	{
 		"version": "v2025-08-20",
 		"date": "2025-08-20",
