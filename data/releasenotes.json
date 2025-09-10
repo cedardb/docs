@@ -1,5 +1,25 @@
 [
-		{
+	{
+		"version": "v2025-09-10",
+		"date": "2025-09-10",
+		"breaksdb": false,
+		"notes": [
+            "<b>New Feature:</b> Added <tt>to_char(timestamp[tz], text)</tt>.",
+			"<b>Performance</b>: Improved performance of regex matching, speeding up some queries by up to 2%.",
+			"<b>Performance</b>: Improved performance of float-to-float comparisons by up to 20%.",
+			"<b>PostgreSQL compatibility:</b> Improve overload resolution in function arguments. For example, <tt>select sin(null);</tt> now works without an explicit cast.",
+			"<b>PostgreSQL compatibility:</b> <tt>factorial(n)</tt> now returns a <tt>numeric</tt> instead of a <tt>bigint</tt>.",
+			"<b>Maintenance:</b> Fixed a bug where <tt>COPY FROM</tt> didn't work for temporary tables.",
+			"<b>Maintenance:</b> Fixed handling of null arrays in quantified expressions: <tt>select 1 = ANY(NULL)</tt> now correctly returns <tt>NULL</tt>.",
+			"<b>Maintenance:</b> Fixed a bug where the query optimizer bailed after generating selectivity estimates larger than 1 on equality estimations.",
+			"<b>Maintenance:</b> Ensure that <tt>NaN</tt> is handled correctly in <tt>float</tt>-to-<tt>float</tt> comparisons.",
+			"<b>Maintenance:</b> Fixed a bug where the converting a <tt>timestamp</tt> to <tt>timestamptz</tt> via <tt>at time zone</tt> miscalculated the timezone offset.",
+			"<b>Maintenance:</b> Ensure <tt>union</tt> always removes duplicates, even if CedarDB can optimize the union operator away.",
+			"<b>Maintenance:</b> Fixed an overeager warning in the buffer manager.",
+			"<b>Maintenance:</b> Fixed a rare race condition that could trigger when the buffer manager repurposed previously used buffer pages."
+		]
+	},
+	{
 		"version": "v2025-08-27",
 		"date": "2025-08-27",
 		"breaksdb": false,
@@ -22,7 +42,6 @@
 			"<b>Maintenance:</b> Fixed a bug where exiting the interactive shell would print a <tt>malloc()</tt> error."
 		]
 	},
-
 	{
 		"version": "v2025-08-20",
 		"date": "2025-08-20",
