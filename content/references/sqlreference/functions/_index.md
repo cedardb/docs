@@ -20,7 +20,7 @@ Functions are usually type specific, but are often overloaded to work with diffe
   * Numeric functions
   * [Text functions](./text)
   * Time functions
-  * Timestamp functions
+  * [Timestamp functions](timestamp)
   * UUID functions
 * Miscellaneous functions
   * generate_series

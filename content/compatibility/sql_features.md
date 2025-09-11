@@ -410,12 +410,12 @@ the [system table compatibility](../system-table) page.
 
 #### Data Type Formatting
 
-| **Feature**  | **Support State** | **Details** |
-|--------------|-------------------|-------------|
-| to_char      | No                |             |
-| to_date      | No                |             |
-| to_number    | No                |             |
-| to_timestamp | No                |             |
+| **Feature**  | **Support State** | **Details**        |
+|--------------|-------------------|--------------------|
+| to_char      | Yes               | Most used patterns |
+| to_date      | No                |                    |
+| to_number    | No                |                    |
+| to_timestamp | No                |                    |
 
 #### Date/Time
 
