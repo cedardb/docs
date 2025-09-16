@@ -4,7 +4,7 @@ linkTitle: "Operate in the Cloud"
 weight: 40
 ---
 
-You can easily deploy CedarDB on your own AWS EC2 instances.
+You can easily deploy CedarDB on your own AWS EC2 or GCP instances.
 
 ## Installation
 
@@ -75,18 +75,26 @@ As a starting point:
 * Use the memory-optimized [`r7a`](https://instances.vantage.sh/aws/ec2/r7a.4xlarge) family if you have a large working set but latency is not as big of a concern.
 * Use a network-optimized [`c6in`](https://instances.vantage.sh/aws/ec2/c6in.8xlarge) or [`m6in`](https://instances.vantage.sh/aws/ec2/m6in.8xlarge) family if you store your data on S3 and process large amounts of data.
 
+### Recommended GCP instance types
+
+As a starting point:
+* Use the [`c4-standard`](https://cloud.google.com/compute/docs/general-purpose-machines#c4-standard) range of instances with the `c4-standard-48` as a good baseline for medium workloads.
+* Choose the compute-optimized [`c4-highcpu`](https://cloud.google.com/compute/docs/general-purpose-machines#c4-highcpu) family for compute-heavy workloads where RAM demand is lower.
+* Use the memory-optimized [`c4-highmem`](https://cloud.google.com/compute/docs/general-purpose-machines#c4-highmem) family if you have a large working set.
+
+
 ## Storage guidelines
 
 For an overview of AWS storage types, see: [EBS volume types](https://aws.amazon.com/ebs/volume-types/).
+For an overview of GCP Compute Engine storage types, see: [Durable block storage](https://cloud.google.com/compute/docs/disks)
 
-Recommendations by use case:
-
+AWS recommendations by use case:
 - **Analytical, read-heavy workloads:** Use `gp3` volumes. They are cost-efficient and sufficient when the working set fits into memory.
 - **High durability and transactional throughput:** Use `io2` volumes with enough provisioned IOPS to ensure consistent latency and reliability.
 - **Ephemeral storage for temporary workloads:** If you don't need persistence across instance shutdowns, instances with attached ephemeral NVMe SSDs offer fast, low-latency storage at a lower price. This is a good fit for: Batch workloads, temporary database instances, or situations where data is already backed up elsewhere.
 
 
 {{% callout type="info" %}}
-Want to store your data on S3 instead for increased performance and much lower cost?
+Want to store your data on AWS S3 or Google Cloud Storage instead for increased performance and much lower cost?
 [Contact us](mailto:sales@cedardb.com) for a preview of CedarDB's S3-backed relations!
 {{% /callout %}}
