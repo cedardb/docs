@@ -50,6 +50,35 @@ We recommend using a precision of 18 or less when possible for your application.
 Storing values outside of the supported ranges will result in an overflow exception.
 Operations on numerics are range checked, so that e.g., numeric overflows will never cause wrong results.
 
+## Precision and Scale Changes in Operations
+
+Operations such as addition or multiplication on numeric types can potentially alter the precision and scale of the output type, as keeping them unchanged can lead to unnecessary overflows.
+For example, the product of two or more numeric values can easily exceed the precision of the input values, resulting in an overflow, even though the system is capable of storing higher precision.
+In such cases, many systems, including PostgreSQL, automatically increase the precision and scale to fit the result.
+The table below illustrates how CedarDB selects the precision and scale of the result type for numeric operations involving numeric values `n1` and `n2` with respective precisions `p1` and `p2` and scales `s1` and `s2`.
+
+| **Operation**                                | **Precision**                           | **Scale**           |
+|----------------------------------------------|-----------------------------------------|---------------------|
+| n1 + n2                                      | max(s1, s2) + max(p1 - s1, p2 - s2) + 1 | max(s1, s2)         |
+| n1 - n2                                      | max(s1, s2) + max(p1 - s1, p2 - s2) + 1 | max(s1, s2)         |
+| n1 * n2                                      | p1 + p2                                 | s1 + s2             |
+| n1 / n2                                      | p1 - s1 + s2 + max(6, s1 + p2 + 1)      | max(6, s1 + p2 + 1) |
+| n1 % n2                                      | min(p1 - s1, p2 - s2) + max(s1, s2)     | max(s1, s2)         |
+| Other operations (such as UNION, CASE, etc.) | max(s1, s2) + max(p1 - s1, p2 - s2)     | max(s1, s2)         |
+
+
+As numerics in CedarDB have a maximum precision of 38, the resulting precisions and scales can sometimes exceed the system limits. In these cases, CedarDB adapts the scale and precision through a set of rules.
+
+### Rules for All Operations Except Multiplication and Division
+
+If the resulting precision exceeds 38, it is clipped to 38 and the scale is reduced by this amount. If the scale would become negative, it is instead set to 0.
+For example, if the resulting precision were 42 and the scale were 6, the precision would be reduced by 4 to 38, and the scale would also be reduced by 4 to 2.
+
+### Rules for Multiplication and Divisions
+
+1. If the scale is larger than 6, and `precision - scale` is larger than 32, the scale is set to 6 and the precision set to 38.
+2. If the scale is not larger than 6 but `precision - scale` is still larger than 32, the precision is set to 38 and the scale value is not modified.
+3. In all other cases, the scale is set to `min(scale, 38 - (precision - scale))` and then the precision to `min(38, precision)`.
 
 ## Handling Overflows
 
