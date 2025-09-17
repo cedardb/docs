@@ -1,4 +1,16 @@
 [
+		{
+		"version": "v2025-09-17",
+		"date": "2025-09-17",
+		"breaksdb": false,
+		"notes": [
+            "<b>New Feature:</b> Added support for tables on <a href=\"https://cedardb.com/docs/references/advanced/gs/\">Google Cloud Storage</a>.",
+			"<b>Maintenance:</b> CedarDB is now much more cautious about when to use bulk transactions during <tt>COPY</tt> statements. This enables parallel loading for most scenarios where CedarDB previously rejected a second <tt>COPY</tt> statement due to an already active bulk transaction.",
+			"<b>Maintenance:</b> CedarDB now correctly detects correlated UDF arguments within CTEs and will now return a \"Feature Not Supported\" error instead of throwing an assertion.",
+            "<b>Maintenance:</b> <tt>asof joins</tt> where one side only has a single tuple now return the correct results in all cases.",
+			"<b>Maintenance:</b> CedarDB now correctly handles arbitrarily nested <tt>PREPARE</tt> statements. You can now <tt>EXECUTE</tt> a <tt>PREPARE</tt>d <tt>EXECUTE</tt> statement."
+		]
+	},
 	{
 		"version": "v2025-09-10",
 		"date": "2025-09-10",
