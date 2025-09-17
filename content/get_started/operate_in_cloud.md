@@ -85,8 +85,8 @@ As a starting point:
 
 ## Storage guidelines
 
-For an overview of AWS storage types, see: [EBS volume types](https://aws.amazon.com/ebs/volume-types/).
-For an overview of GCP Compute Engine storage types, see: [Durable block storage](https://cloud.google.com/compute/docs/disks)
+For an overview of AWS storage types, see [the EBS volume types](https://aws.amazon.com/ebs/volume-types/).
+For an overview of GCP Compute Engine storage types, read the [durable block storage docs](https://cloud.google.com/compute/docs/disks).
 
 AWS recommendations by use case:
 - **Analytical, read-heavy workloads:** Use `gp3` volumes. They are cost-efficient and sufficient when the working set fits into memory.
@@ -95,6 +95,6 @@ AWS recommendations by use case:
 
 
 {{% callout type="info" %}}
-Want to store your data on AWS S3 or Google Cloud Storage instead for increased performance and much lower cost?
-[Contact us](mailto:sales@cedardb.com) for a preview of CedarDB's S3-backed relations!
+Want to store your data on [AWS S3](../../references/advanced/s3/) or [Google Cloud Storage](../../references/advanced/gs/) instead for increased performance and much lower cost?
+[Sign up](https://console.cedardb.com) for our Enterprise trial license or [contact us](mailto:sales@cedardb.com)!
 {{% /callout %}}
