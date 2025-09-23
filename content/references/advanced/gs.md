@@ -1,5 +1,6 @@
 ---
 title: Tables on Google Cloud Storage
+weight: 10
 ---
 
 

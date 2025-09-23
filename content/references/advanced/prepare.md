@@ -1,5 +1,6 @@
 ---
 title: Prepared Statements
+weight: 10
 ---
 
 Prepared statements allow you to declare an SQL statement *template* ahead of time once and execute it many times over later on.
@@ -47,9 +48,9 @@ query = "select * from users where name =" + username;
 **Safe, with prepared statements**:
 ```sql
 prepare lookupuser as select * from users where name = $1;
-execute lookupuser('alonso;drop table users'); 
--- the whole string is interpreted as name, 
--- the attacker cannot escape the query! 
+execute lookupuser('alonso;drop table users');
+-- the whole string is interpreted as name,
+-- the attacker cannot escape the query!
 ```
 
 ### Increase performance

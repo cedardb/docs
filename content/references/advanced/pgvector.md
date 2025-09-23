@@ -1,5 +1,6 @@
 ---
 title: Pgvector Extension
+weight: 20
 ---
 
 CedarDB supports working with vectors using the syntax from the [pgvector
