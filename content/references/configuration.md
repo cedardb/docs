@@ -26,7 +26,7 @@ cat ~/.cedardb/config
 # Comment only line
 "verbosity" = "debug5" # Inline comment
 "buffersize" = "1G" # Buffer pool size (cf. Memory Usage section)
-"database.workmemsize" = "3G"
+"workmemsize" = "3G"
 "license.key" = "<your_key>"
 ```
 
@@ -46,7 +46,7 @@ The following example has the same effect as the previous one with the config fi
 ```
 export VERBOSITY=debug5
 export BUFFERSIZE=1G
-export DATABASE_WORKMEMSIZE=3G
+export WORKMEMSIZE=3G
 export LICENSE_KEY=<your_key>
 ```
 
@@ -104,7 +104,7 @@ These settings must be set before starting CedarDB.
 | **Setting Name**    | **Description**                                  | **Unit**                                | **Default**             |
 |---------------------|--------------------------------------------------|-----------------------------------------|-------------------------|
 | `buffersize`      | Buffer manager pool size                         | Size with unit suffix (5G, 256M, 1024K) | 45% of available memory |
-| `database.workmemsize` | Amount of memory to be used before spooling disk | Same as above                           | 45% of available memory |
+| `workmemsize` | Amount of memory to be used before spooling disk | Same as above                           | 45% of available memory |
 
 
 ## Degree of parallelism
