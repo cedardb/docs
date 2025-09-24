@@ -19,28 +19,30 @@ CedarDB is available in three editions to suit different needs, from free usage 
 - To start an **Enterprise Trial**, visit the [self-service console](https://console.cedardb.com) for a 90-day trial license.
 
 ## Activate your license
+After receiving your license key, activate it by setting the license.key option to the token provided.
+In the following, we show the concrete steps needed to configure the license setting.
+For more information on setting configuration options, see our [configuration reference](/docs/references/configuration).
 
-### Via environment variable
+{{< tabs items="Configuration File (preferred), Environment Variable" >}}
+{{< tab >}}
+Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup.  In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
+```shell
+echo "\"license.key\" = \"<your_key>\"" >> ~/.cedardb/config
+```
+{{< /tab >}}
+{{< tab >}}
+An alternative is to set the license in an environment variable.
+If you are running CedarDB directly on your host machine, then export your license key before starting CedarDB like this:
+```shell
+export LICENSE_KEY='<your_key>'
+./cedardb <your args>
+```
 
-Once you have your license key, you can activate it using an environment variable.
-The method depends on how you're running CedarDB:
-
-{{< tabs items="Native,Docker" >}}
-  {{< tab >}} 
-
-    Export your license key before starting CedarDB like this:
-    ```shell
-    export LICENSE_KEY='<your_key>'
-    ./cedardb <your args>
-    ```
-  {{< /tab >}}
-  {{< tab >}}
-
-Pass the license key as environment variable when starting CedarDB (e.g., via `docker run`):
+If you use docker, then pass the license key as environment variable when starting CedarDB (e.g., via `docker run`):
 ```Shell
 docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test -e LICENSE_KEY='<your_key>' cedardb/cedardb
 ```
-  {{< /tab >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ---
@@ -48,23 +50,10 @@ docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test -e LICENSE_KEY='<your_key>' 
 At startup, CedarDB logs the license activation:
 
 ```
-LOG:     initializing license.key=<your_key> from environment variable
+LOG:     initializing license.key=<your_key> from config file
 INFO:    License registered to Customer Name, valid until 2025-08-20.
 INFO:    You're running CEDARDB ENTERPRISE EDITION.
 ```
-
-### Via SQL
-You can also activate a license while CedarDB is already running (e.g., without restarting) using SQL as a superuser:
-
-```sql
-set license.key='<your_key>'
-```
-
-{{% callout type="warning" %}}
-This method does **not** persist across restarts.
-Be sure to also set the environment variable to ensure your license is re-applied when CedarDB restarts.
-{{% /callout %}}
-
 
 ## Monitor your license
 
