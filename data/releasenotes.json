@@ -1,5 +1,26 @@
 [
-		{
+	{
+		"version": "v2025-09-24",
+		"date": "2025-09-24",
+		"breaksdb": false,
+		"notes": [
+            "<b>New Feature:</b> CedarDB now allows for persistent configuration parameters via a config file. Read more on the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>.",
+			"<b>PostgreSQL compatibility:</b> CedarDB now treats parameter of type <tt>unknown</tt> as <tt>text</tt> like Postgres does.",
+			"<b>PostgreSQL compatibility:</b> The <tt>pg_prepared_statements</tt> system table now reports the result type of prepared statements.",
+
+			"<b>Performance:</b> Improved automated dictionary compression leading to up to 20% better compression ratios and 12% increased table scan performance.",
+			"<b>Performance:</b> Recursive CTEs that include unused columns are now significantly faster.",
+			"<b>Maintenance:</b> Renamed some settings that previously had to be prefaced with <tt>debug.</tt> to have more intuitive names. You can find a list of all settings at the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>.",
+			"<b>Maintenance:</b> CedarDB now returns the correct row count for statements that affected more than <tt>2^31</tt> rows.",
+			"<b>Maintenance:</b> Fixed a bug that triggered an assertion in the undocumented Postgres functions <tt>float4send</tt>, <tt>float8send</tt>, and <tt>pg_options_to_table</tt>.",
+			"<b>Maintenance:</b> Fixed a bug that triggered an assertion when casting a <tt>vector</tt> with a fixed number of dimensions to a <tt>vector</tt> with variable dimensions.",
+			"<b>Maintenance:</b> Fixed a bug where CedarDB didn't correctly handle nullability in <tt>greatest()</tt> and <tt>least()</tt> under some circumstances.",
+			"<b>Maintenance:</b> Fixed a bug where new schemas couldn't be created after a restart.",
+			"<b>Maintenance:</b> CedarDB now accepts startup messages consisting of multiple fragmented TCP packets.",
+			"<b>Maintenance:</b> Fixed a rare case where CedarDB failed an assertion when preparing a statement with an argument of type <tt>char(1)</tt>."
+		]
+	},
+	{
 		"version": "v2025-09-17",
 		"date": "2025-09-17",
 		"breaksdb": false,
