@@ -1,5 +1,21 @@
 [
 	{
+		"version": "v2025-09-30",
+		"date": "2025-09-30",
+		"breaksdb": false,
+		"notes": [
+		        "<b>New Feature:</b> Add support for timestamptz arguments in <tt>date_trunc</tt> and <tt>age</tt></b>",
+			"<b>PostgreSQL compatibility:</b> Adhere to PostgreSQL behaviour for empty-array-specification-and-cast combinations, e.g., <tt>[]::text</tt>.</b>",
+			"<b>PostgreSQL compatibility:</b> Return row count for <tt>CREATE (TEMPORARY) TABLE AS</tt> statements.</b>",
+			"<b>PostgreSQL compatibility:</b> Allow using table aliases in <tt>DISTINCT ON</tt> clauses.</b>",
+			"<b>Performance:</b> Allow constant folding for all integer types, not only int4.",
+			"<b>Performance:</b> Improve performance of table scans on compressed data by up to 25%.",
+			"<b>Maintenance:</b> Long-running read-only transactions no longer block log truncation, drastically reducing peak log size on disk in some cases.",
+			"<b>Maintenance:</b> Fix a bug triggering asserts in an edge case in temporary tables",
+			"<b>Maintenance:</b> Fix date_trunc behaviour for BC timestamps and dates"
+		]
+	},
+	{
 		"version": "v2025-09-24",
 		"date": "2025-09-24",
 		"breaksdb": false,
