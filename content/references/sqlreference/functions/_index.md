@@ -10,7 +10,7 @@ Functions are usually type specific, but are often overloaded to work with diffe
 * [Aggregation functions](./aggregation)
 * Type specific functions
   * Array functions
-  * Bit string functions
+  * [Bit string functions](bitstring)
   * Byte array functions
   * Date functions
   * Double / real functions

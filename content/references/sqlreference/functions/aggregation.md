@@ -20,7 +20,7 @@ group by customer_id;
 ```
 
 {{< callout type="info" >}}
-Most aggregation function ignore `null` values and return `null` when they aggregated zero values.
+Most aggregation functions ignore `null` values and return `null` when they aggregated zero values.
 {{< /callout >}}
 
 ## General-purpose functions
