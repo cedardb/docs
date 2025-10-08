@@ -1,4 +1,16 @@
 [
+		{
+		"version": "v2025-10-07",
+		"date": "2025-10-07",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Improved the install script. It now supports a non-interactive mode for automatic installation, creating a symlink in <tt>/usr/local/bin</tt>, and installing cedardb as systemd socket-activated service.",
+			"<b>New Feature:</b> Added support for the <tt>&</tt> operator on bit strings: <tt>select b'101' & b'100';</tt>.",
+			"<b>Performance:</b> Speed up expressions of type <tt>timestamptz at time zone</tt> by 35% by caching the local time zone.",
+			"<b>PostgreSQL Compatibility:</b> CedarDB is now more lenient in which non-standard COPY FROM messages it accepts, enabling to bulk copy data from GO's pgx.",
+			"<b>Maintenance:</b> Don't crash on multi-line comments at statement start"
+		]
+	},
 	{
 		"version": "v2025-09-30",
 		"date": "2025-09-30",
