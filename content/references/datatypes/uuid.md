@@ -45,6 +45,7 @@ create table example2 (
 
 insert into example2 select ;
 insert into example2 select uuidv7();
+-- To shift the current timestamp
 insert into example2 select uuidv7('-1 hour');
 select id from example2;
 ---
