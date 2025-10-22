@@ -1,5 +1,26 @@
 [
 		{
+		"version": "v2025-10-22",
+		"date": "2025-10-22",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add `uuidv7` to generate UUIDv7 containing timestamps",
+			"<b>New Feature:</b> Add `great_circle_distance` to calculate geospatial distances between two points represented as latitude, longitude pairs.",
+			"<b>New Feature:</b> Add <tt>transaction_timeout</tt> and <tt>idle_in_transaction_session_timeout</tt> session settings. When set to any time span, connections with long-running or idling transactions are automatically closed, e.g. to reduce WAL bloat: <tt> SET idle_in_transaction_session_timeout TO '6h'</tt>. Off by default.",
+			"<b>New Feature:</b> Add support for the `#` operator on bit strings: `select b'101' # b'100';`",
+			"<b>New Feature:</b> Add support for the `|` operator on bit strings: `select b'101' | b'100';`",
+			"<b>PostgreSQL Compatibility:</b> Improve binary function overload resolution",
+			"<b>Performance:</b> Improve scheduling under high query load to reduce P99 latencies.",
+			"<b>Performance:</b> Adding foreign key constraints does not require a bulk writer anymore",
+			"<b>Performance:</b> Improve automated frame of reference compression leading to up to 57 % better compression ratios and 23 % increased table scan performance.",
+			"<b>Performance:</b> Speed up daylight-savings time rule evaluation for timestamps with time zone. This can improve performance for time series workloads by up to 40%.",
+			"<b>Maintenance:</b> Update timezone database to 2025b",
+			"<b>Maintenance:</b> Harden prepared statements against parallel DDL operations",
+			"<b>Maintenance:</b> Fix rare cases of out-of-bound reads during query processing",
+			"<b>Maintenance:</b> Allow using alias when directly using file names in from clause, e.g. `select c.* from 'file.csv' c`"
+		]
+	},
+		{
 		"version": "v2025-10-07",
 		"date": "2025-10-07",
 		"breaksdb": false,
