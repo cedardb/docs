@@ -15,6 +15,9 @@ The complete list of supported SQL statements in CedarDB is as follows:
 Alter table
 : modify a table definition
 
+[Alter table rename column](altertable)
+: rename a column of a given table
+
 [Alter user](alterrole)
 : modify a database role
 
