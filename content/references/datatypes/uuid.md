@@ -48,7 +48,6 @@ insert into example2 select uuidv7();
 -- To shift the current timestamp
 insert into example2 select uuidv7('-1 hour');
 select id from example2;
----
 ```
 
 ```
@@ -73,4 +72,39 @@ select uuid 'a0eebc999c0b4ef8bb6d6bb9bd380a11';
 select uuid 'a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11';
 select uuid '{a0eebc99-9c0b4ef8-bb6d6bb9-bd380a11}';
 ```
+
+## UUID Extraction Functions
+
+### uuid_extract_version
+Provided with a valid UUID, `uuid_extract_version` extracts the version in a `smallint`. Otherwise the function returns `NULL`.
+
+```sql
+select uuid_extract_version(gen_random_uuid());
+----
+4
+
+select uuid_extract_version(uuidv7());
+----
+7
+
+select uuid_extract_version('11111111-1111-5111-8111-111111111111'::uuid) --invalid uuid
+----
+NULL
+```
+
+### uuid_extract_timestamp
+`uuid_extract_timestamp` extracts the timestamp with time zone of a uuid of version 1 or 7. Otherwise, the function returns `NULL`.
+
+```sql
+SET timezone = 'Europe/Berlin'; --The timestamp displayed depends on the timezone
+
+SELECT uuid_extract_timestamp('C232AB00-9414-11EC-B3C8-9F6BDECED846'::uuid); --version 1
+----    
+Tuesday, February 22, 2022 2:22:22.00 PM GMT+05:00
+
+SELECT uuid_extract_timestamp('017F22E2-79B0-7CC3-98C4-DC0C0C07398F'::uuid); --version 7
+----
+Tuesday, February 22, 2022 2:22:22.00 PM GMT+05:00
+```
+
 
