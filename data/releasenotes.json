@@ -1,5 +1,29 @@
 [
-		{
+	{
+		"version": "v2025-11-06",
+		"date": "2025-11-06",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add pg_drop_caches() to clear buffer caches without restarting the database system",
+			"<b>New Feature:</b> Add full support for PostgreSQL advisory locks, including the ability to wait until a resource is freed and detect deadlocks",
+			"<b>New Feature:</b> Add support for RENAME COLUMN as part of ALTER TABLE",
+			"<b>New Feature:</b> Add support for sum(bool)",
+			"<b>New Feature:</b> Add unsigned types to SQL: uint1, uint2, uint4, uint8",
+			"<b>Performance:</b> Faster comparison of EXTRACT (YEAR ...) with constants",
+			"<b>Performance:</b> Improved auto-compression of small inserts",
+			"<b>Maintenance:</b> Check casts from TinyInt to Numeric for numeric precision loss",
+			"<b>Maintenance:</b> Fix a crash for complex recursive queries",
+			"<b>Maintenance:</b> Fix a crash in generate_series(from, to) with complex from or to expressions",
+			"<b>Maintenance:</b> Fix an assertion when optimizing sum(1)",
+			"<b>Maintenance:</b> Fix data corruption after UPDATE",
+			"<b>Maintenance:</b> Fix rare cases of missing results when using volatile functions, such as <tt>now()</tt>, in filters used to prune compressed data",
+			"<b>Maintenance:</b> Fix rare overflow check in try cast from numeric to integers: <tt>select cast((128::numeric) as int1 or null);</tt>",
+			"<b>Maintenance:</b> Improve cardinality estimation for COPY FROM STDIN. This allows better parallel small inserts",
+			"<b>Maintenance:</b> Fix rare segfaults of single tuple IndexScans due to a wrong latching behavior",
+			"<b>Maintenance:</b> Update to LLVM 21"
+        ]
+	},
+	{
 		"version": "v2025-10-22",
 		"date": "2025-10-22",
 		"breaksdb": false,
@@ -20,7 +44,7 @@
 			"<b>Maintenance:</b> Allow using alias when directly using file names in from clause, e.g. `select c.* from 'file.csv' c`"
 		]
 	},
-		{
+    {
 		"version": "v2025-10-07",
 		"date": "2025-10-07",
 		"breaksdb": false,
