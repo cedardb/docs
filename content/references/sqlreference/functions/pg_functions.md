@@ -15,7 +15,7 @@ To prevent race conditions or conflicting DDL changes, these tools use advisory 
 
 There are two ways to acquire an advisory lock in CedarDB: _at the session level_ or _at the transaction level_.
 
-- _Session_-level advisory locks are held until explicitly released or the session ends.  
+- _Session_-level advisory locks are held until explicitly released or the session ends. When a client disconnects, the session is closed and all locks held by it are automatically released. 
   They are not subject to transaction semantics—if a transaction that acquired a session-level lock is rolled back, the lock remains held.  
   Likewise, an unlock operation remains effective even if the transaction later fails.  
   A lock can be acquired multiple times by the same session; each acquisition must be matched by a corresponding unlock before the lock is fully released.
