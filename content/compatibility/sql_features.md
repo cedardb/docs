@@ -91,6 +91,7 @@ the [system table compatibility](../system-table) page.
 | Custom Types           | No                |                                                                                                              |
 | Triggers               | No                |                                                                                                              |
 | Prepared Statements    | Yes               |                                                                                                              |
+| Advisory Locks         | Yes               | [Documentation](/docs/references/sqlreference/functions/pg_functions/#advisory-locks)                                                                                        |
 
 ## Data Manipulation
 
