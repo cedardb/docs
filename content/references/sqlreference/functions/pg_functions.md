@@ -1,9 +1,9 @@
 ---
-title: "Reference: PostgreSQL Administration Functions"
-linkTitle: "PostgreSQL Administration Functions"
+title: "Reference: PostgreSQL Functions"
+linkTitle: "PostgreSQL Functions"
 ---
 
-CedarDB supports a variety of PostgreSQL administration functions. This page currently only describes a prominent subset of those functions.
+CedarDB supports a variety of PostgreSQL functions. This page currently only describes a prominent subset of those functions.
 
 ## Advisory Locks
 

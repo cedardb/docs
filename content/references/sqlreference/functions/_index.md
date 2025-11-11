@@ -25,5 +25,5 @@ Functions are usually type specific, but are often overloaded to work with diffe
 * Miscellaneous functions
   * generate_series
   * tablesample
-  * PostgreSQL support (`pg_`)
+  * [PostgreSQL support (`pg_`)](./pg_functions)
 * [Advanced functions](./advanced_functions)
