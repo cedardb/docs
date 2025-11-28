@@ -1,5 +1,31 @@
 [
 	{
+		"version": "v2025-11-24",
+		"date": "2025-11-24",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Preserve SQL names of common table expressions in <tt>EXPLAIN</tt> output",
+			"<b>New Feature:</b> Support for row expression inside <tt>SELECT</tt>: <tt>SELECT (1, 2);</tt>",
+			"<b>New Feature:</b> Add support for directly selecting from table generating functions: Queries like <tt>select pg_get_keywords()</tt> now work",
+			"<b>Performance:</b> Regular write transactions require much less main memory per inserted or delete tuple",
+			"<b>PostgreSQL Compatibility:</b> Ignore casts for output column names if a better name is available, fixing issues with <tt>pg_dump</tt>",
+			"<b>Maintenance:</b> Ensure that <tt>DISCARD ALL</tt> also resets all advisory locks held by the current session",
+			"<b>Maintenance:</b> Fix parsing multidimensional array literals like <tt>select ARRAY[[], []]::varchar[][];</tt>",
+			"<b>Maintenance:</b> Fix cases where comparing a numeric with a constant of different sign could lead to wrong results",
+			"<b>Maintenance:</b> <tt>VACUUM</tt> now automatically reclaims space of truncated tables",
+			"<b>Maintenance:</b> <tt>array_positions()</tt>, <tt>array_remove()</tt> and <tt>array_replace()</tt> no longer crash when called on null arrays",
+			"<b>Maintenance:</b> Fixed crash in <tt>\\copy</tt> and <tt>copy from stdin</tt> when loading into table with indexes",
+			"<b>Maintenance:</b> Removed duplicates in the <tt>pg_type</tt> system table which caused issues with some PostgreSQL tools",
+			"<b>Maintenance:</b> Fixed a bug where schema changes after recovering from an unclean database shutdown could have lead to schema corruption",
+			"<b>Maintenance:</b> Fixed a crash when accessing JSONB certain data",
+			"<b>Maintenance:</b> Fixed a crash in <tt>LIKE</tt> expression with underscore",
+			"<b>Maintenance:</b> Fixed multiple race conditions in the storage layer that could lead to a database crash.",
+			"<b>Maintenance:</b> Fixed a crash in <tt>array_agg()</tt> with empty array inputs",
+			"<b>Maintenance:</b> Fixed a rare assertion error for certain recursive CTEs with unused columns",
+			"<b>Maintenance:</b> CedarDB now accepts <tt>CREATE DATABASE ENCODING UTF8</tt>"
+        ]
+	},
+	{
 		"version": "v2025-11-06",
 		"date": "2025-11-06",
 		"breaksdb": false,
