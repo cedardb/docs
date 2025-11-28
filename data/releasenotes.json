@@ -8,7 +8,6 @@
 			"<b>New Feature:</b> Support for row expression inside <tt>SELECT</tt>: <tt>SELECT (1, 2);</tt>",
 			"<b>New Feature:</b> Add support for directly selecting from table generating functions: Queries like <tt>select pg_get_keywords()</tt> now work",
 			"<b>Performance:</b> Regular write transactions require much less main memory per inserted or delete tuple",
-			"<b>PostgreSQL Compatibility:</b> Default permissions for public roles are set for all catalog objects",
 			"<b>PostgreSQL Compatibility:</b> Ignore casts for output column names if a better name is available, fixing issues with <tt>pg_dump</tt>",
 			"<b>Maintenance:</b> Ensure that <tt>DISCARD ALL</tt> also resets all advisory locks held by the current session",
 			"<b>Maintenance:</b> Fix parsing multidimensional array literals like <tt>select ARRAY[[], []]::varchar[][];</tt>",
