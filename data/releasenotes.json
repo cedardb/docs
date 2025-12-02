@@ -1,5 +1,23 @@
 [
 	{
+		"version": "v2025-12-02",
+		"date": "2025-12-02",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Support <tt>ALTER OWNER</tt> for views",
+			"<b>Performance:</b> Improve JSONB object access performance by up to 20%",
+			"<b>PostgreSQL Compatibility:</b> Respect default escape character <tt>\\</tt> for <tt>COPY FROM STDIN</tt> statements",
+			"<b>PostgreSQL Compatibility:</b> Support casts from jsonb to numeric and boolean",
+			"<b>PostgreSQL Compatibility:</b> Add support for <tt>WITH ORDINALITY</tt> for <tt>json(b)_array_elements</tt> functions.",
+			"<b>Maintenance:</b> Ignore misformed values, such as invalid JSON documents, when evaluating samples for query planning.",
+			"<b>Maintenance:</b> <tt>VACUUM</tt> now removes no longer visible compressed blocks",
+			"<b>Maintenance:</b> Fix nullability in complex boolean expressions",
+			"<b>Maintenance:</b> Fix a crash when defining named table constraints",
+			"<b>Maintenance:</b> Fix a rare OOB read when scanning compressed data.",
+			"<b>Maintenance:</b> Fix a crash when executing prepared statements with concurrent schema changes"
+        ]
+	},
+	{
 		"version": "v2025-11-24",
 		"date": "2025-11-24",
 		"breaksdb": false,
