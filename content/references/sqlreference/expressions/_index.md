@@ -12,7 +12,7 @@ CedarDB supports many expressions that manipulate data:
 * At time zone
 * Between, between symmetric
 * Bit and (`&`) on [bitsrings](/docs/references/sqlreference/functions/bitstring#bit--bit)
-* Bit or (`|`) on [bitstrings]](/docs/references/sqlreference/functions/bitstring#bit--bit-1)
+* Bit or (`|`) on [bitstrings](/docs/references/sqlreference/functions/bitstring#bit--bit-1)
 * Bit xor (`#`) on [bitstrings](/docs/references/sqlreference/functions/bitstring#bit--bit-2)
 * Case-insensitive like (`ilike`, `~~*`), negated (`not ilike`, `!~~*`)
 * Case-insensitive regular expression (`~*`), negated (`!~*`)
