@@ -1,5 +1,24 @@
 [
 	{
+		"version": "v2025-12-10",
+		"date": "2025-12-10",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Slice multi-dimensional arrays.",
+			"<b>Performance:</b> Add compression for floating-point numbers (Adaptive Lossless Floating-Point Compression).",
+			"<b>PostgreSQL Compatibility:</b> <tt>trim_array</tt> now correctly observes dimension offsets, i.e. <tt>trim_array([10:12]={1,2,3},2)</tt> now returns <tt>{2,3}</tt>.",
+			"<b>PostgreSQL Compatibility:</b> Treat <tt>ctid</tt> column as a functional dependency key for the whole table, allowing query patterns like <tt>select any_column from any_table group by ctid</tt>.",
+			"<b>PostgreSQL Compatibility:</b> Add more types to <tt>pg_type</tt> including missing array types.",
+			"<b>Maintenance:</b> Fix an assertion error with prepared statements caused by concurrent DDL statements.",
+			"<b>Maintenance:</b> Increase overall stability of array handling by fixing several cases for out of bounds memory access when handling arrays.",
+			"<b>Maintenance:</b> Array containment checks now correctly handle null values, i.e., <tt>select ARRAY[1,4,null] @> ARRAY[0,1,0];</tt> is now <tt>false</tt>.",
+			"<b>Maintenance:</b> Fixed a bug where concatenating arrays of different types would silently garble the result. CedarDB now instead reports an error.",
+			"<b>Maintenance:</b> <tt>array_position(s)</tt> now correctly handles cases where needle and/or haystack are <tt>null</tt>.",
+			"<b>Maintenance:</b> <tt>array_to_string</tt> now correctly drops <tt>null</tt> values if no null substitute is provided instead of printing the empty string, i.e.: <tt>array_to_string('{1,NULL}',',')</tt> now returns <tt>'1'</tt> instead of <tt>1,</tt>.",
+			"<b>Maintenance:</b> Clear table data after calling <tt>DROP TABLE</tt> to reduce space consumption."
+		]
+	},
+	{
 		"version": "v2025-12-02",
 		"date": "2025-12-02",
 		"breaksdb": false,
@@ -15,7 +34,7 @@
 			"<b>Maintenance:</b> Fix a crash when defining named table constraints",
 			"<b>Maintenance:</b> Fix a rare OOB read when scanning compressed data.",
 			"<b>Maintenance:</b> Fix a crash when executing prepared statements with concurrent schema changes"
-        ]
+		]
 	},
 	{
 		"version": "v2025-11-24",
@@ -41,7 +60,7 @@
 			"<b>Maintenance:</b> Fixed a crash in <tt>array_agg()</tt> with empty array inputs",
 			"<b>Maintenance:</b> Fixed a rare assertion error for certain recursive CTEs with unused columns",
 			"<b>Maintenance:</b> CedarDB now accepts <tt>CREATE DATABASE ENCODING UTF8</tt>"
-        ]
+		]
 	},
 	{
 		"version": "v2025-11-06",
@@ -65,7 +84,7 @@
 			"<b>Maintenance:</b> Improve cardinality estimation for COPY FROM STDIN. This allows better parallel small inserts",
 			"<b>Maintenance:</b> Fix rare segfaults of single tuple IndexScans due to a wrong latching behavior",
 			"<b>Maintenance:</b> Update to LLVM 21"
-        ]
+		]
 	},
 	{
 		"version": "v2025-10-22",
