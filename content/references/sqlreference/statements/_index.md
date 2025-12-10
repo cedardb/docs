@@ -15,6 +15,9 @@ The complete list of supported SQL statements in CedarDB is as follows:
 Alter table
 : modify a table definition
 
+[Alter type](/docs/references/datatypes/enums/#alter-enum-types)
+: modify a user-defined type
+
 [Alter table rename column](altertable)
 : rename a column of a given table
 
@@ -66,6 +69,9 @@ Create sequence
 [Create table as](createtableas)
 : create and populate a new table with contents from a query
 
+[Create type](/docs/references/datatypes/enums/#creation-of-enum-types)
+: define a new datatype
+
 [Create user](createrole)
 : create a new database role
 
@@ -83,6 +89,9 @@ Create sequence
 
 Drop
 : remove schema definitions
+
+[Drop Type](/docs/references/datatypes/enums/#deletion-of-enum-types)
+: remove a user-defined type
 
 [End](/docs/references/sqlreference/transaction)
 : commit the transaction
