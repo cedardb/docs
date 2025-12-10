@@ -50,14 +50,6 @@ minor
 
 Values of the same enum type are comparable. Their ordering corresponds the order in which they were listed at creation time. Values of different enum types are incomparable. Similarly, an enum cannot be compared with a builin type.
 
-```sql
-select 'critical'::importance > 'major'::importance;
-```
-```
-?column?
--------
-t
-```
 
 ```sql
 select id from tasks where priority >= 'major';
@@ -76,15 +68,6 @@ select id from tasks where priority > 1;
 ```
 ```
 ERROR: cannot compare enum importance and integer
-```
-
-```sql
-create type work_status as enum ('sick', 'vacation', 'remote', 'in_office');
-select 'sick'::work_status = 'minor'::importance;
-```
-
-```
-ERROR: cannot compare enum work_status and enum importance
 ```
 ## Deletion of Enum types
 
@@ -120,10 +103,8 @@ alter type importance to task_importance;
 ### Add label to Enum type
 A new label can be added to an existing enum via
 ```sql
-alter type enum_name [if not exists] add value added_enum_label;
+alter type enum_name add value [if not exists] added_enum_label [{before|after} existing_enum_lavel];
 ```
-
-The newly inserted enum label is the new maximum in this enum type. 
+Unless a position within the sortorder is specified, the newly inserted enum label is the new maximum in this enum type. 
 If the label is already present, the insertion fails with an error. Specifying "if not exists" suppresses this error.
-Unlike in postgres, inserting a new enum label between two existing labels is not possible, besides dropping the type and creating a new type with the same name.
 
