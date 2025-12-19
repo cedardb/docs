@@ -1,5 +1,26 @@
 [
 	{
+		"version": "v2025-12-19",
+		"date": "2025-12-19",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add <tt>VACUUM (CHECK_INTEGRITY)</tt> to verify database integrity.",
+			"<b>Performance:</b> Table scans on partitioned tables are now up to 1000 times faster.",
+			"<b>Performance:</b> Improve performance of complex queries on system tables.",
+			"<b>PostgreSQL Compatibility:</b> Support <tt>ALTER SEQUENCE OWNER TO</tt>.",
+			"<b>Maintenance:</b> Fix missing default values in <tt>ALTER TABLE ADD COLUMN</tt> with specified default values.",
+			"<b>Maintenance:</b> Fix a race condition where we loaded data with <tt>COPY</tt> to tables without writing their index entries.",
+			"<b>Maintenance:</b> Fix incorrect empty results for index scans in partitioned relations when the partition key is not bound.",
+			"<b>Maintenance:</b> Fix an issue during database shutdown that could cause some recently modified pages not to be persisted. This often manifested as missing index entries after restart.",
+			"<b>Maintenance:</b> Fix a table corruption when a crash occurs shortly after a truncate.",
+			"<b>Maintenance:</b> Fix a rare race condition when maintenance tasks were still running during shutdown.",
+			"<b>Maintenance:</b> Running <tt>DROP TABLE</tt> in bulk transactions no longer disrupts concurrent readers.",
+			"<b>Maintenance:</b> Fix pgAdmin4 metadata query resulting in no printed results.",
+			"<b>Maintenance:</b> Fix columnar comparison of array values.",
+			"<b>Maintenance:</b> Fix type coercion of <tt>ARRAY[NULL]</tt>."
+		]
+	},
+	{
 		"version": "v2025-12-10",
 		"date": "2025-12-10",
 		"breaksdb": false,
