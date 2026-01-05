@@ -87,7 +87,7 @@ select uuid_extract_version(uuidv7());
 ----
 7
 
-select uuid_extract_version('11111111-1111-5111-8111-111111111111'::uuid) --invalid uuid
+select uuid_extract_version('11111111-1111-1111-1111-111111111111'::uuid); --invalid uuid
 ----
 NULL
 ```
@@ -100,11 +100,11 @@ SET timezone = 'Europe/Berlin'; --The timestamp displayed depends on the timezon
 
 SELECT uuid_extract_timestamp('C232AB00-9414-11EC-B3C8-9F6BDECED846'::uuid); --version 1
 ----    
-Tuesday, February 22, 2022 2:22:22.00 PM GMT+05:00
+2022-02-22 20:22:22+01
 
 SELECT uuid_extract_timestamp('017F22E2-79B0-7CC3-98C4-DC0C0C07398F'::uuid); --version 7
 ----
-Tuesday, February 22, 2022 2:22:22.00 PM GMT+05:00
+2022-02-22 20:22:22+01
 ```
 
 
