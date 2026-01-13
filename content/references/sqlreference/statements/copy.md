@@ -36,3 +36,8 @@ Copy supports a number of options controlling the format.
   The escape character for the `csv` format. By default `"`.
   This can be used to escape the quote character.
 
+CedarDB also supports a best-effort import mode:
+
+* `(on_error ignore)`:
+  By default, Copy aborts when encountering invalid rows.
+  With this option, rows containing mismatching elements will be skipped on a best-effort basis.
