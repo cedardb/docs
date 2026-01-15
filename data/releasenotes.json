@@ -1,5 +1,28 @@
 [
 	{
+		"version": "v2026-01-15",
+		"date": "2026-01-15",
+		"breaksdb": false,
+		"notes": [
+			"<b>Performance:</b> Late materialize result columns not used in the query for up to 1000x query speedup",
+			"<b>PostgreSQL Compatibility:</b> Add support for COPY (ON_ERROR ignore) to load CSVs on a best-effort basis",
+			"<b>PostgreSQL Compatibility:</b> Support NegotiateProtocolVersion message for protocol version 3.2 introduced with Postgres 18",
+			"<b>PostgreSQL Compatibility:</b> Synchronize CedarDB SQL parser grammar with Postgres 18",
+			"<b>PostgreSQL Compatibility:</b> Support partitioned relations in psql description mode",
+			"<b>Maintenance:</b> Fix a rare segfault when accessing versions left by rollbacked transactions inserting and deleting same tuples in the same transaction.",
+			"<b>Maintenance:</b> Fix a bug that could be triggered by an <tt>UPDATE ON CONFLICT</tt> with many columns.",
+			"<b>Maintenance:</b> Prevent crash caused by strings exceeding 4 GB during query execution",
+			"<b>Maintenance:</b> Fix a bug where updating the partition key column could move tuples to the wrong partition.",
+			"<b>Maintenance:</b> Fix a bug where we sent telemetry at a higher frequency than intended.",
+			"<b>Maintenance:</b> Fix a bug in outer join null handling caused by the psql command <tt>&bsol;d TABLENAME</tt>.",
+			"<b>Maintenance:</b> Fix return value of ascii function with empty string",
+			"<b>Maintenance:</b> Fix array concat with NULL",
+			"<b>Maintenance:</b> Fix handling null values when compressing two or more ALP compressed columns.",
+			"<b>Maintenance:</b> Fix a bug that could be triggered when updating neighboring versions whose lifetimes differ.",
+			"<b>Maintenance:</b> Fix a rare race condition when drop table maintenance task were running during shutdown"
+		]
+	},
+	{
 		"version": "v2025-12-19",
 		"date": "2025-12-19",
 		"breaksdb": false,
