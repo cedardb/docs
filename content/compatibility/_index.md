@@ -33,6 +33,10 @@ functions. While these are probably not relevant to most users of either CedarDB
 developers rely heavily on this functionality. For more details, see the [system table compatibility](system_table)
 page.
 
+## Row Level Security
+
+Postgres allows users to define access restrictions on a row basis via row level security. For details, see the [Row Level Security](row_level_security) page.
+
 ## Unsupported features
 
 PostgreSQL has accumulated a lot of features over its decades of development, and we do not consider all of them
