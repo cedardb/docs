@@ -7,10 +7,11 @@ weight: 11
 
 Numerics are numbers that are typically used to represent counters or identifiers.
 They are useful when exact precision is needed and rounding errors need to be exact, e.g., when storing monetary amounts.
-Numeric types offer a fixed amount of decimal *precision*, and a fixed *scale* of fractional digits.  
-CedarDB supports two different storage widths, an eight-byte `numeric`, and a sixteen-byte `bignumeric`.
-Type specifications can use both names, as well as `decimal(precision, scale)`, interchangeably.
-CedarDB will choose the underlying representation automatically based on the specified precision.
+Numeric types offer a fixed amount of decimal *precision*, and a fixed *scale* of fractional digits. Decimal *precision*
+is the total count of significant digits in the number to both sides of the decimal point. The *scale* is the count of
+decimal digits in the fractional part of the number. CedarDB supports two different storage widths, an eight-byte 
+`numeric`, and a sixteen-byte `bignumeric`. Type specifications can use both names, as well as `decimal(precision, scale)`, 
+interchangeably. CedarDB will choose the underlying representation automatically based on the specified precision.
 
 ## Usage Example
 ```sql
@@ -34,12 +35,12 @@ select * from example;
 
 ## Value Range
 
-| Type (precision, scale) |                                       Min |                                      Max | Underlying |
-|-------------------------|------------------------------------------:|-----------------------------------------:|-----------:|
-| `numeric(18, 0)`        |                      -9223372036854775808 |                      9223372036854775807 |     8 Byte |
-| `numeric(18, 3)`        |                     -9223372036854775.808 |                     9223372036854775.807 |     8 Byte |
-| `numeric(38, 0)`        |  -170141183460469231731687303715884105728 |  170141183460469231731687303715884105727 |    16 Byte |
-| `numeric(38, 6)`        | -170141183460469231731687303715884.105728 | 170141183460469231731687303715884.105727 |    16 Byte |
+| Type (precision, scale) |                                      Min |                                     Max | Underlying |
+|-------------------------|-----------------------------------------:|----------------------------------------:|-----------:|
+| `numeric(18, 0)`        |                      -999999999999999999 |                      999999999999999999 |     8 Byte |
+| `numeric(18, 3)`        |                     -999999999999999.999 |                     999999999999999.999 |     8 Byte |
+| `numeric(38, 0)`        |  -99999999999999999999999999999999999999 |  99999999999999999999999999999999999999 |    16 Byte |
+| `numeric(38, 6)`        | -99999999999999999999999999999999.999999 | 99999999999999999999999999999999.999999 |    16 Byte |
 
 {{< callout type="info" >}}
 Operations on 16&nbsp;Byte types are expensive to compute.
@@ -109,7 +110,10 @@ select try(i + i) from numerics;
 
 ## PostgreSQL Compatibility
 
-PostgreSQL allows `NaN`, `+Infinity`, and `-Infinity` as special numeric values.
+PostgreSQL offers a maximum precision of 131072 and scale of 16383, where CedarDB restricts precision and scale to a 
+maximum of 38, for performance reasons.
+
+Additionally, PostgreSQL allows `NaN`, `+Infinity`, and `-Infinity` as special numeric values.
 Since all operations on numerics are bounds-checked, these values cannot occur during regular operations.
 However, PostgreSQL still allows entering them directly.
 
