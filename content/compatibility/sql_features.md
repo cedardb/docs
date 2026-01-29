@@ -249,7 +249,7 @@ the [system table compatibility](../system-table) page.
 | exp           | Yes               |                                                                                   |
 | factorial     | Yes               |                                                          Also exists as ! operand |
 | floor         | Yes               |                                                                                   |
-| gcd           | No                |                                                                                   |
+| gcd           | Yes               |               Missing support for numeric input type. Supports int4, uint8, int8. |
 | lcm           | No                |                                                                                   |
 | ln            | Yes               |                                                                                   |
 | log           | Yes               |                                                                                   |
