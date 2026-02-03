@@ -1,5 +1,19 @@
 [
 
+		{
+		"version": "v2026-02-03",
+		"date": "2026-02-03",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add gcd(int, int) and gcd(bigint, bigint) to calculate the greatest common divisor.",
+			"<b>New Feature:</b> <tt>CREATE INDEX</tt> and <tt>ALTER TABLE</tt> don't lock the entire database any more and can operate on different tables concurrently.",
+			"<b>New Feature:</b> The performance optimization <tt>BEGIN BULK WRITE</tt> is now obsolete and is replaced by automatic fine-grained locks within regular transactions. You can re-enable the bulk writer by setting <tt>usebulkwriter = true</tt> in your config file and restarting CedarDB.",
+			"<b>Performance:</b> Fix an issue where escaped characters could result in a wrong CSV file line estimate affecting <tt>COPY</tt> efficiency.",
+			"<b>Maintenance:</b> Fix parsing <tt>MATCH</tt> in <tt>CREATE TABLE</tt> statements.",
+			"<b>Maintenance:</b> Fix a bug that prevented deleted compressed data from being freed on disk.",
+			"<b>Maintenance:</b> Update CedarDB libraries and reduce size of the Docker image."
+		]
+	},
 	{
 		"version": "v2026-01-22",
 		"date": "2026-01-22",
