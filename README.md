@@ -10,7 +10,6 @@ git clone --recurse-submodules git@github.com:cedardb/docs.git
 
 Run a web server:
 ```
-cd docs_staging
 hugo server
 ```
 
