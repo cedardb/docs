@@ -6,11 +6,6 @@ weight: 20
 CedarDB supports working with vectors using the syntax from the [pgvector
 Postgres extension](https://github.com/pgvector/pgvector).
 
-{{<callout type="info">}}
-Currently, CedarDB has no vector similarity index, so vector similarity
-searches will be slow for data sets larger than a few gigabytes.
-{{</callout>}}
-
 All vectors are represented as a bracket-enclosed, comma-separated list of
 float values with the SQL type `vector`. You can optionally specify the number
 of dimensions of the vector type, e.g., `vector(42)`. Values that have the type
@@ -169,6 +164,12 @@ select '[1,2,3]'::vector <#> '[4,5,6]'::vector;
 select inner_product('[1,2,3]'::vector, '[4,5,6]'::vector);
 -- Result: 32
 ```
+
+{{<callout type="info">}}
+Currently, CedarDB has no vector similarity index. This may reduce vector similarity
+search performance when scanning multiple gigabytes of data.
+{{</callout>}}
+
 
 ### Miscellaneous Functions
 
