@@ -25,7 +25,7 @@
 			"<b>Maintenance:</b> Fix a bug where comparison of int128 values in Numerics failed.",
 			"<b>Maintenance:</b> Fix a bug in FSST compression that was caused by false positives when matching a byte sequence to symbols.",
 			"<b>Maintenance:</b> Fix crash due to malformed WHERE clause in UPDATE and DELETE statements.",
-			"<b>Maintenance:</b> Fixed bug that crashed database when <tt>current_schemas</tt> function was used with invalid argument type.",
+			"<b>Maintenance:</b> Fixed bug that crashed the database when the <tt>current_schemas</tt> function was used with an invalid argument type.",
 			"<b>Maintenance:</b> Reduce docker image size.",
 			"<b>Maintenance:</b> Fix a crash during optimization of nested set operations.",
 			"<b>Maintenance:</b> Fix a bug where the sign of an interval's month field was flipped when cast to a string.",
