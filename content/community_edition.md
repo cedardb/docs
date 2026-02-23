@@ -3,16 +3,34 @@ title: "CedarDB Community Edition"
 weight: 5
 ---
 
-CedarDB is a SQL database system designed for modern data management needs. 
+{{< tabs items="Docker,Local Install,Cloud Setup" >}}
+{{< tab >}}
+```shell
+docker pull cedardb/cedardb
+```
+...and visit our [**Run With Docker**](../get_started/install_with_docker) guide for more details.
+{{< /tab >}}
+{{< tab >}}
+```
+curl https://get.cedardb.com | bash
+```
+...and visit our [**Local Install**](../get_started/install_locally) guide for more details.
+{{< /tab >}}
+{{< tab >}}
+Visit [**Operate in the Cloud**](../get_started/operate_in_cloud) for more details.
+{{< /tab >}}
+{{< /tabs >}}
 
-## Community Edition
+<br>
+
+---
 
 The **CedarDB Community Edition**
 - is free forever
 - requires no signup
 - is ready to run on any machine.
 
-It is the right choice for everything from solo projects to small-scale production workloads. No strings attached!
+It is **the right choice** for everything from solo projects to small-scale production workloads. No strings attached!
 
 
 {{% callout type="info" %}}
