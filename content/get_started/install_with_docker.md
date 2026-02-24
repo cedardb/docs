@@ -30,7 +30,7 @@ Connect using a PostgreSQL client:
 PGPASSWORD=test psql -h localhost -U postgres
 
 postgres= SELECT 1 as foo;
- foo 
+ foo
 -----
    1
 (1 row)
@@ -49,6 +49,7 @@ To retain your database across container restarts, mount a host directory to sto
 mkdir -p /opt/cedardb
 docker run --rm -p 5432:5432 -v /opt/cedardb:/var/lib/cedardb/data -e CEDAR_PASSWORD=test cedardb/cedardb
 ```
+
 This stores the database in `/opt/cedardb` on your host.
 
 {{< callout type="info" >}}
@@ -61,15 +62,16 @@ In this case, CedarDB ignores the `CEDAR_USER` and `CEDAR_PASSWORD` environment 
 the existing credentials to be used.
 {{< /callout >}}
 
-
 {{< callout type="info" >}}
 Ensure the mounted database directory resides on a reasonably fast SSD for best performance.
 {{< /callout >}}
 
 ### Custom credentials
+
 You can configure the initial user and database using environment variables, domain sockets, or secrets.
 
 #### Environment variables
+
 ```shell
 docker run --rm -p 5432:5432 \
   -e CEDAR_USER=test \
@@ -77,21 +79,24 @@ docker run --rm -p 5432:5432 \
   -e CEDAR_DB=db \
   cedardb/cedardb
 ```
+
 This command creates a superuser `test` with password `test` and a a database named `db`.
 
 Connect like this:
+
 ```shell
 psql -h localhost -U test -d db
 ```
 
 The parameters `CEDAR_USER` and `CEDAR_DB` are optional:
+
 - If `CEDAR_USER` is not set, it defaults to `postgres`.
 - If `CEDAR_DB` is not set, it defaults to the value of `CEDAR_USER`.
 
-
 #### Domain socket authentication
 
-To avoid passing credentials in the shell  (e.g., because you don't want it to appear in your history), you can run CedarDB in domain socket-only mode:
+To avoid passing credentials in the shell (e.g., because you don't want it to appear in your history), you can run CedarDB in domain socket-only mode:
+
 ```shell
 docker run --rm -p 5432:5432 \
   -e CEDAR_DOMAIN_SOCKET_ONLY=yes \
@@ -100,10 +105,13 @@ docker run --rm -p 5432:5432 \
 ```
 
 Then connect from the same host using the domain socket:
+
 ```shell
 docker exec -it cedardb psql -U postgres
 ```
+
 Once connected, you can [manually create users and databases](/docs/references/sqlreference/statements/createrole):
+
 ```sql
 create user {{username}} superuser with password '1234';
 create database {{username}};
@@ -112,28 +120,36 @@ create database {{username}};
 #### Docker secrets
 
 CedarDB can also read credentials from files, ideal for secret management:
+
 ```shell
 docker run --rm -p 5432:5432 \
   -e CEDAR_USER_FILE=/run/secrets/user_file \
   -e CEDAR_PASSWORD_FILE=/run/secrets/password_file \
   -e CEDAR_DB=/run/secrets/db_file cedardb/cedardb
 ```
+
 You can manage such files using [Docker secrets](https://docs.docker.com/engine/swarm/secrets/).
 
 ### Preloading data
-CedarDB supports auto-initializing a new database with SQL and shell scripts.
-Any file in `/docker-entrypoint-initdb.d/` is executed or sourced during container setup.
 
-#### Example: Build a custom image
+CedarDB supports auto-initializing a new database with SQL and shell scripts. Additionally, the docker image accepts `xz`, `gzip`, or `zstd` compressed SQL files.
+Files in `/docker-entrypoint-initdb.d/` are executed or sourced during container setup. Supported file extensions are `.sh`, `.sql`, `.sql.gz`, `sql.xz` and `sql.zst`.
+
+`.sh` files can use the `process_sql` function to run modified SQL statements that need shell pre-processing, e.g. by expanding shell or env variables.
+
+#### Example with .sh and .sql files:
 
 Create a `movies/` directory with the following files:
 
 ```shell {filename="movies/foo.sh"}
 #!/bin/bash
 set -e
-psql -v ON_ERROR_STOP=1 --username "$CEDAR_USER" --dbname "$CEDAR_DB" <<-EOSQL
-	CREATE TABLE foo(a int);
-	INSERT INTO foo VALUES (7);
+TABLE_NAME=foo
+VALUE=7
+
+process_sql <<-EOSQL
+  CREATE TABLE ${TABLE_NAME}(a int);
+  INSERT INTO ${TABLE_NAME} VALUES (${VALUE});
 EOSQL
 ```
 
@@ -152,19 +168,16 @@ insert into movies values
 (3, 'Das Boot', 1981, 149, 'Drama');
 ```
 
-```Dockerfile {filename="movies/Dockerfile"}
-FROM cedardb/cedardb
-COPY movies.sql foo.sh /docker-entrypoint-initdb.d/
-```
-
 Then build and run:
 
 ```shell
-docker build -t cedardb-movies movies/
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test cedardb-movies
+docker run -v ./movies/:/docker-entrypoint-initdb.d/ \
+  -p 5432:5432 -e CEDAR_PASSWORD=test \
+  --rm cedardb/cedardb
 ```
 
 Connect and inspect the data:
+
 ```shell
 # Connect to CedarDB
 psql -h localhost -U postgres
@@ -194,9 +207,6 @@ postgres= select * from foo;
 (1 row)
 
 ```
-
-In addition to plain shell scripts and sql files, the CedarDB docker image also accepts `xz`, `gzip`, or `zstd` compressed sql files.
-A file must have one of the following extensions: `.sql`, `.sql.gz`, `sql.xz`, `sql.zst`, or `.sh`.
 
 {{< callout type="info" >}}
 If you have obtained an enterprise license, refer to the [licensing page](../../licensing) for a step-by-step guide on how to activate it.
