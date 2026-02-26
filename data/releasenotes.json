@@ -1,6 +1,28 @@
 [
-
-		{
+	{
+		"version": "v2026-03-03",
+		"date": "2026-03-03",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Support <tt>FORCE_NULL</tt> and <tt>FORCE_NOT_NULL</tt> options for <tt>COPY FROM</tt>.",
+			"<b>New Feature:</b> Add support to expand '*' in file names, e.g., <tt>SELECT col1, col2 FROM 'part*.parquet'</tt>.",
+			"<b>New Feature:</b> Add brotli decompresion support to parquet.",
+			"<b>New Feature:</b> Add <tt>process_sql</tt> for data preloading with <a href='/docs/get_started/install_with_docker/#preloading-data'>docker init scripts</a>.",
+			"<b>Performance:</b> Decrease memory footprint of new connections",
+			"<b>PostgreSQL Compatibility:</b> Add support for named primary key, foreign key and unique constraints in <tt>CREATE TABLE</tt> and <tt>ALTER TABLE</tt> statements.",
+			"<b>Maintenance:</b> Add version information of subcomponents to <tt>cedardb -version</tt> command line output",
+			"<b>Maintenance:</b> Fix missing results for open range predicates answered through index scans on columns with custom null ordering, i.e., <tt>x &lt; 3</tt> on an index with <tt>x ASC NULLS FIRST</tt>.",
+			"<b>Maintenance:</b> Enable <tt>row_to_json</tt> to accept composite type expansions, like <tt>table.*</tt>.",
+			"<b>Maintenance:</b> Fix a rare race condition that left duplicates in primary index by concurrent `INSERT INTO .. ON CONFLICT .. DO UPDATE` patterns that updated the same key.",
+			"<b>Maintenance:</b> Add proper handling for unsupported named check constraints in <tt>ALTER TABLE ADD CONSTRAINT &lt;name&gt; CHECK &lt;...&gt;</tt>.",
+			"<b>Maintenance:</b> Fix rare snapshot inconsistency with high number of short-lived concurrent connections.",
+			"<b>Maintenance:</b> Fix <tt>cotd</tt> and <tt>cot</tt> behavior for multiples of 180 degrees.",
+			"<b>Maintenance:</b> Fix nullability behavior of text similarity functions.",
+			"<b>Maintenance:</b> Fix an assertion that triggered during optimization of recursive cte's with unused columns.",
+			"<b>Maintenance:</b> Fix unnesting of row expressions in complex queries."
+            ]
+        },
+	{
 		"version": "v2026-02-18",
 		"date": "2026-02-18",
 		"breaksdb": false,
@@ -39,7 +61,8 @@
 			"<b>Maintenance:</b> Fix <tt>pg_advisory_lock</tt> with NULL inputs.",
 			"<b>Maintenance:</b> Fix UUID ordering bug for UUIDs with most significant bit set to 1."
 		]
-	},{
+	},
+	{
 		"version": "v2026-02-03",
 		"date": "2026-02-03",
 		"breaksdb": false,
