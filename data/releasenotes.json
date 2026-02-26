@@ -1,6 +1,25 @@
 [
 
 		{
+		"version": "v2026-02-26",
+		"date": "2026-02-26",
+		"breaksdb": false,
+		"notes": [
+            "<b>New Feature:</b> Add support for named primary key, foreign key and unique constraints in <tt>CREATE TABLE</tt> and <tt>ALTER TABLE</tt> statements.",
+            "<b>New Feature:</b> Support <tt>FORCE_NULL</tt> and <tt>FORCE_NOT_NULL</tt> options for <tt>COPY FROM</tt>.",
+            "<b>New Feature:</b> Add support to expand '*' in file names, e.g., <tt>SELECT * FROM 'part*.parquet'</tt>.",
+            "<b>New Feature:</b> Add brotli decompresion support to parquet.",
+            "<b>New Feature:</b> Add <tt>process_sql</tt> to shell commands for docker init scripts.",
+            "<b>Maintenance:</b> Fix missing results for open range predicates answered through index scans on columns with custom null ordering, i.e., <tt>x &lt; 3</tt> on an index with <tt>x ASC NULLS FIRST</tt>.",
+            "<b>Maintenance:</b> Enable <tt>row_to_json</tt> to accept composite type expansions, like <tt>table.*</tt>.",
+            "<b>Maintenance:</b> Fixed a rare condition that left duplicates in primary index by `INSERT INTO .. ON CONFLICT .. DO UPDATE` patterns that updated the same key.",
+            "<b>Maintenance:</b> Add proper handling for unsupported named check constraints in <tt>ALTER TABLE ADD CONSTRAINT &lt;name&gt; CHECK &lt;...&gt;</tt>.",
+            "<b>Maintenance:</b> Fix a rare race condition in MVCC.",
+            "<b>Maintenance:</b> Fix <tt>cotd</tt> and <tt>cot</tt> behavior for multiples of 180 degrees.",
+            "<b>Maintenance:</b> Fix nullability behavior of text similarity functions."
+            ]
+        },
+		{
 		"version": "v2026-02-18",
 		"date": "2026-02-18",
 		"breaksdb": false,
