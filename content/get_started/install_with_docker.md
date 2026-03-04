@@ -93,30 +93,6 @@ The parameters `CEDAR_USER` and `CEDAR_DB` are optional:
 - If `CEDAR_USER` is not set, it defaults to `postgres`.
 - If `CEDAR_DB` is not set, it defaults to the value of `CEDAR_USER`.
 
-#### Domain socket authentication
-
-To avoid passing credentials in the shell (e.g., because you don't want it to appear in your history), you can run CedarDB in domain socket-only mode:
-
-```shell
-docker run --rm -p 5432:5432 \
-  -e CEDAR_DOMAIN_SOCKET_ONLY=yes \
-  --name cedardb \
-  cedardb/cedardb
-```
-
-Then connect from the same host using the domain socket:
-
-```shell
-docker exec -it cedardb psql -U postgres
-```
-
-Once connected, you can [manually create users and databases](/docs/references/sqlreference/statements/createrole):
-
-```sql
-create user {{username}} superuser with password '1234';
-create database {{username}};
-```
-
 #### Docker secrets
 
 CedarDB can also read credentials from files, ideal for secret management:
@@ -130,14 +106,45 @@ docker run --rm -p 5432:5432 \
 
 You can manage such files using [Docker secrets](https://docs.docker.com/engine/swarm/secrets/).
 
-### Preloading data
+### Initialization scripts
 
 CedarDB supports auto-initializing a new database with SQL and shell scripts. Additionally, the docker image accepts `xz`, `gzip`, or `zstd` compressed SQL files.
 Files in `/docker-entrypoint-initdb.d/` are executed or sourced during container setup. Supported file extensions are `.sh`, `.sql`, `.sql.gz`, `sql.xz` and `sql.zst`.
 
 `.sh` files can use the `process_sql` function to run modified SQL statements that need shell pre-processing, e.g. by expanding shell or env variables.
 
-#### Example with .sh and .sql files:
+#### Example: Creating an additional user at DB initialization
+
+Initialization files let you create additional [users and databases](/docs/references/sqlreference/statements/createrole) during first-time setup. Provide usernames and passwords via environment variables or Docker secrets.
+
+```shell {filename="users/create-user.sh"}
+#!/bin/bash
+set -e
+
+process_sql <<-EOSQL
+  create role ${NEW_USER} login with password '${NEW_USER_PWD}';
+  create database ${NEW_USER};
+EOSQL
+```
+
+Then run:
+
+```shell
+docker run -v ./users/:/docker-entrypoint-initdb.d/ \
+  -p 5432:5432 -e CEDAR_PASSWORD=test \
+  -e NEW_USER=nonroot -e NEW_USER_PWD=1234 \
+  --rm cedardb/cedardb
+```
+
+Connect with the new user:
+
+```shell
+# Connect to CedarDB
+psql -h localhost -U nonroot -d nonroot
+# Enter '1234' as password
+```
+
+#### Example: Preloading data with .sh and .sql files
 
 Create a `movies/` directory with the following files:
 
@@ -168,7 +175,7 @@ insert into movies values
 (3, 'Das Boot', 1981, 149, 'Drama');
 ```
 
-Then build and run:
+Then run:
 
 ```shell
 docker run -v ./movies/:/docker-entrypoint-initdb.d/ \
