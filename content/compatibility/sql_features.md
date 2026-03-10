@@ -672,12 +672,13 @@ the [system table compatibility](../system-table) page.
 
 #### Sequence Manipulation
 
-| **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
-| nextval     | Yes               |             |
-| setval      | Yes               |             |
-| currval     | No                |             |
-| lastval     | No                |             |
+| **Feature**            | **Support State** | **Details** |
+|------------------------|-------------------|-------------|
+| nextval                | Yes               |             |
+| setval                 | Yes               |             |
+| currval                | No                |             |
+| lastval                | No                |             |
+| pg_get_serial_sequence | Yes               |             |
 
 #### Conditional
 
@@ -842,5 +843,3 @@ the [system table compatibility](../system-table) page.
 |--------------------|-------------------|-------------|
 | generate_series    | Yes               |             |
 | generate_subscript | Yes               |             |
-
-
