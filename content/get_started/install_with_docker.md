@@ -109,7 +109,7 @@ You can manage such files using [Docker secrets](https://docs.docker.com/engine/
 ### Initialization scripts
 
 CedarDB supports auto-initializing a new database with SQL and shell scripts. Additionally, the docker image accepts `xz` or `gzip` compressed SQL files.
-Files in `/docker-entrypoint-initdb.d/` are executed or sourced during container setup. Supported file extensions are `.sh`, `.sql`, `.sql.xz` and `sql.qz`.
+Files in `/docker-entrypoint-initdb.d/` are executed or sourced during container setup. Supported file extensions are `.sh`, `.sql`, `.sql.xz` and `sql.gz`.
 
 `.sh` files can use the `process_sql` function to run modified SQL statements that need shell pre-processing, e.g. by expanding shell or env variables.
 
