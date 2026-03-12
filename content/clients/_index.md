@@ -17,6 +17,10 @@ Programming languages:
 * [R](r)
 * [Rust](rust)
 
+ORMs:
+
+* [Drizzle](drizzle)
+
 Tools:
 
 * [DataGrip](datagrip)
