@@ -33,6 +33,30 @@ multiple columns:
 * `foreign key(...) references other_table(...)`
 * `not null`
 
+The `unique`, `primary key`, `foreign key`, and `check` constraints can optionally be given a name using the `constraint` keyword:
+
+```sql
+create table orders (
+    id        int,
+    customer  int,
+    item      int,
+    constraint orders_pk primary key (id),
+    constraint orders_customer_fk foreign key (customer) references customers (id),
+    constraint orders_item_fk foreign key (item) references items (id),
+    constraint orders_unique unique (customer, item),
+    constraint orders_id_positive check (id > 0)
+);
+```
+
+The `constraint <name>` part can be omitted entirely, in which case CedarDB automatically assigns a default name using the same conventions as PostgreSQL:
+- Primary key: `tablename_pkey`
+- Unique: `tablename_colname_key`
+- Foreign key: `tablename_colname_fkey`
+- Check: `tablename_colname_check`
+
+These default names can be used just like explicit names, e.g., to drop a constraint with `alter table ... drop constraint <name>`.
+Naming is not supported for `not null`.
+
 ## Options
 
 Create a temporary table that will be dropped when the current client disconnects:
