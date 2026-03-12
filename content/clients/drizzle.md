@@ -7,12 +7,13 @@ weight: 10
 [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM with a SQL-like query API and schema migration tooling.
 
 {{< callout type="info" >}}
-Drizzle support is currently **under active development**. We already have **full query API support**, with the following features coming soon (in development):
+Drizzle support is currently **under active development**, already offering **full query API support**. 
+However, certain advanced features are not yet available:
 - Inter-table dependencies (e.g., foreign keys in schema definitions)
 - Schema migrations / introspection (`drizzle-kit pull`)
 {{< /callout >}}
 
-The [official getting-started tutorial](https://orm.drizzle.team/docs/get-started/postgresql-new) works out of the box with CedarDB.
+The [official getting-started tutorial](https://orm.drizzle.team/docs/get-started/postgresql-new) works out of the box with CedarDB:
 
 ## Setting up CedarDB
 
