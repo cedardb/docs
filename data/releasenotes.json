@@ -1,5 +1,36 @@
 [
 	{
+		"version": "v2026-03-19",
+		"date": "2026-03-19",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add support for <tt>OVERRIDE SYSTEM VALUE</tt> and <tt>OVERRIDE USER VALUE</tt> for <tt>INSERT</tt> statements.",
+			"<b>New Feature:</b> Implement <tt>SEQUENCE NAME</tt> option for generated columns",
+			"<b>New Feature:</b> Add support for <tt>GENERATED ALWAYS AS IDENTITY</tt> columns.",
+			"<b>New Feature:</b> Implement <tt>pg_stat_activity</tt>.",
+			"<b>New Feature:</b> Implement <tt>pg_stat_ssl</tt>.",
+			"<b>New Feature:</b> Improve hinting for common error situations.",
+			"<b>Performance:</b> Improve the performance of table scans with compressed data ~5 %.",
+			"<b>PostgreSQL Compatibility:</b> Add support for <tt>pg_get_serial_sequence</tt> function.",
+			"<b>PostgreSQL Compatibility:</b> Allow for non-constant inputs in sequence functions, e.g., <tt>PREPARE nextseq as SELECT nextval($1)</tt>.",
+			"<b>PostgreSQL Compatibility:</b> Implement <tt>pg_backend_pid()</tt>.",
+			"<b>PostgreSQL Compatibility:</b> Implement <tt>pg_stat_get_activity()</tt>.",
+			"<b>PostgreSQL Compatibility:</b> Align system table column types with postgres system table column types.",
+			"<b>PostgreSQL Compatibility:</b> Fix output of <tt>pg_show_all_settings</tt> to improve compatibility with pgAdmin.",
+			"<b>PostgreSQL Compatibility:</b> Fix entries of columns <tt>attidentity</tt>, <tt>atthasdef</tt> and <tt>attgenerated</tt> in <tt>pg_attribute</tt> system table.",
+			"<b>Maintenance:</b> Fix parsing legacy parquet files without nullability statistics and dictionary encoding.",
+			"<b>Maintenance:</b> Parquet Reader accepts files with wrong Page Metadata written by DuckDB until 2024.",
+			"<b>Maintenance:</b> Reduce log-noise in docker image caused by health check queries.",
+			"<b>Maintenance:</b> Fix cases of timestamps with timezone overeagerly converting to daylight savings time on the day of a DST switch.",
+			"<b>Maintenance:</b> Fix an error where <tt>INSERT INTO x DEFAULT VALUES</tt> did not insert a row.",
+			"<b>Maintenance:</b> Change <tt>generate_subscripts</tt> function return type to int32.",
+			"<b>Maintenance:</b> Fix JSON representation of arrays with lower bounds other than 1.",
+			"<b>Maintenance:</b> Fix a bug where the ordinality result column of <tt>unnest(array) WITH ORDINALITY</tt> was not usable in outer operators.",
+			"<b>Maintenance:</b> Fix <tt>ALTER TABLE ... ADD COLUMN ... DEFAULT ... </tt> with different column and default value types.",
+			"<b>Maintenance:</b> Fix printing enum columns to CSVs."
+            ]
+        },
+	{
 		"version": "v2026-03-03",
 		"date": "2026-03-03",
 		"breaksdb": false,
