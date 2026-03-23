@@ -8,9 +8,7 @@ weight: 10
 
 {{< callout type="info" >}}
 Drizzle support is currently **under active development**, already offering **full query API support**. 
-However, certain advanced features are not yet available:
-- Inter-table dependencies (e.g., foreign keys in schema definitions)
-- Schema migrations / introspection (`drizzle-kit pull`)
+However, certain advanced features are not yet available. Schema migrations (e.g. via `drizzle-kit push`) might not work as expected.
 {{< /callout >}}
 
 The [official getting-started tutorial](https://orm.drizzle.team/docs/get-started/postgresql-new) works out of the box with CedarDB:
@@ -171,11 +169,9 @@ await db.delete(usersTable).where(eq(usersTable.email, 'alice@example.com'));
 
 CedarDB's Drizzle support is actively being developed. The following are known limitations:
 
-**Foreign keys and inter-table dependencies** are not yet supported. Schemas with `references()` between tables will not work correctly.
+**Schema migrations** (`drizzle-kit push`) are not fully supported. While Drizzle can read an existing CedarDB schema and generate TypeScript definitions from it, it may sometimes not be able to automatically update the schema of an existing database.
 
-**Schema introspection** (`drizzle-kit pull`) is not supported. Drizzle cannot read an existing CedarDB schema and generate TypeScript definitions from it.
-
-**Raw DDL via `db.execute`** is available as a workaround for schema changes that Drizzle does not expose natively:
+**Raw DDL via `db.execute`** is available as a workaround for schema migrations:
 
 ```typescript
 import { sql } from 'drizzle-orm';
