@@ -11,6 +11,7 @@ step-by-step instructions on how to accomplish them using CedarDB.
 * [Importing and working with CSV data](working_with_csv)
 * [Import data from JSON](importing_from_json)
 * [Replicating data from Amazon Aurora PostgreSQL via Debezium](aurora_debezium)
+* [Use AWS DMS to replicate data from RDS PostgreSQL to CedarDB](aws_dms)
 
 In addition, you can also find some recipes for performance evaluation:
 
