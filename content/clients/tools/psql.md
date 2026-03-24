@@ -93,7 +93,7 @@ You can also show a list of all tables in the current database:
 Most commands also have a more verbose variant with a `+` (e.g., `\d+`), which will show more details like the table
 size in bytes.
 For a full list of psql backslash commands, see the
-[psql docs]((https://www.postgresql.org/docs/current/app-psql.html)).
+[psql docs](https://www.postgresql.org/docs/current/app-psql.html).
 
 ## Using psql interactively
 
