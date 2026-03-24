@@ -5,7 +5,7 @@
 * Set up a CedarDB instance in EC2 using whichever approach suits you.  I prefer CloudFormation
 templates, for their repeatability.
 * When the CedarDB instance is running, note its VPC and deploy the remaining components into that same VPC.
-* Configure an RDS Postgres instance.
+* Deploy an RDS Postgres instance, **or** enable logical replication for your existing instance.
 * Create a schema in RDS and load it with some data.
 * Verify that schema and data gets replicated from RDS Postgres to CedarDB.
 
@@ -34,10 +34,9 @@ Note the following values for the CedarDB instance:
 Finally, click the "Create replication instance" button. This process will take a while, so you can continue
 and check on the replication instance later.
 
-## Configure an RDS Postgres instance
+## Configure an RDS parameter group
 
-But **First**, use the AWS EC2 console to set up an **RDS _parameter group_** which will be
-used to enable logical replication to DMS.
+This **RDS _parameter group_** which will enable logical replication to DMS.
 
 ![Create parameter group 1](./img/rds_parameter_group_1.jpg)
 
@@ -49,7 +48,10 @@ used to enable logical replication to DMS.
 
 ![Enable logical replication](./img/rds_parameter_group_5.jpg)
 
-**Next**, configure an RDS Postgres instance.
+## Deploy a new RDS Postgres instance
+
+**If you want to use your existing RDS Postgres instance**, skip this section and head down to
+[Configure your existing RDS Postgres instance](#configure-your-existing-rds-postgres-instance).
 
 ![Navigate to RDS](./img/rds_create_postgres_0.jpg)
 
@@ -74,6 +76,16 @@ used to enable logical replication to DMS.
 ![Create database](./img/rds_create_postgres_9.jpg)
 
 Now, wait a while for the RDS Postgres instance to come up.
+
+## Configure your existing RDS Postgres instance
+
+![RDS Modify Step 1](./img/rds_modify_1.jpg)
+
+![RDS Modify Step 2](./img/rds_modify_2.jpg)
+
+![RDS Modify Step 3](./img/rds_modify_3.jpg)
+
+![RDS Modify Step 4](./img/rds_modify_4.jpg)
 
 ## (optional) Load a data set into the RDS instance
 
