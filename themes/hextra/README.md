@@ -1,5 +1,6 @@
 <div align="center">
   <h1 align="center">Hextra</h1>
+  <sup align="center"><a href="README.md">English</a> | <a href="README.zh-cn.md">简体中文</a> ｜ <a href="README.fa.md">فارسی</a></sup>
   <p align="center">Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.</p>
 
 Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
@@ -22,6 +23,7 @@ Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
 - **Full-text Search** - Built-in offline full-text search powered by FlexSearch, no extra configuration required.
 - **Battery-included** - Markdown, syntax highlighting, LaTeX math formulae, diagrams and Shortcodes elements to enhance your content. Table of contents, breadcrumbs, pagination, sidebar navigation and more are all automatically generated.
 - **Multi-language and SEO Ready** - Multi-language sites made easy with Hugo's multilingual mode. Out-of-the-box support is included for SEO tags, Open Graph, and Twitter Cards.
+- **Accessibility Support** - Interactive components use semantic markup, keyboard-friendly behavior, and automated accessibility checks to keep the UI usable across common assistive workflows.
 
 ## Quick Start
 
