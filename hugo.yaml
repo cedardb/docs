@@ -10,6 +10,8 @@ params:
   page:
     # full (100%), wide (90rem), normal (1280px)
     width: wide
+  theme:
+    displayToggle: false
   navbar:
     displayTitle: false
     displayLogo: true
@@ -34,12 +36,15 @@ menu:
     - name: Website
       url: https://cedardb.com/
       weight: 1
+    - name: Blog
+      url: https://cedardb.com/blog
+      weight: 2
     - name: Search
-      weight: 4
+      weight: 3
       params:
         type: search
     - name: GitHub
-      weight: 5
+      weight: 4
       url: "https://github.com/cedardb"
       params:
         icon: github
