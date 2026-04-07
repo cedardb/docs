@@ -1,3 +1,623 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+
+:root {
+    --primary-hue: 21deg;
+    --primary-saturation: 96%;
+    --cedar-accent: #fb773e;
+    --cedar-accent-soft: rgba(251, 119, 62, 0.14);
+    --cedar-ink: #192134;
+    --cedar-ink-soft: #5d6474;
+    --cedar-line: rgba(25, 33, 52, 0.1);
+    --cedar-panel: #f6f8fb;
+    --cedar-panel-strong: #ffffff;
+    --cedar-max: 90rem;
+    --cedar-font-display: "Sora", ui-sans-serif, sans-serif;
+    --cedar-font-body: "Inter", ui-sans-serif, sans-serif;
+    --cedar-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    --cedar-terminal-bg: #101724;
+    --cedar-terminal-fg: #dce6f3;
+}
+
+.dark {
+    --primary-hue: 21deg;
+    --primary-saturation: 96%;
+    --cedar-accent-soft: rgba(251, 119, 62, 0.18);
+    --cedar-ink: #eef2ff;
+    --cedar-ink-soft: rgba(226, 232, 240, 0.72);
+    --cedar-line: rgba(255, 255, 255, 0.1);
+    --cedar-panel: #121a28;
+    --cedar-panel-strong: #0d1522;
+}
+
+body {
+    background: #ffffff;
+    color: var(--cedar-ink);
+    font-family: var(--cedar-font-body);
+}
+
+.dark body {
+    background: #0d1522;
+}
+
+html {
+    font-family: var(--cedar-font-body);
+}
+
+main,
+article,
+.sidebar-container,
+.hextra-toc,
+.hextra-footer {
+    background: transparent !important;
+}
+
+a {
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.nav-container,
+.cedar-home__eyebrow,
+.cedar-home__index,
+.cedar-home__button {
+    font-family: var(--cedar-font-display);
+}
+
+code,
+pre,
+pre code,
+kbd,
+.cedar-home__terminal,
+.cedar-home__terminal pre,
+.content code,
+.content pre,
+.content pre code {
+    font-family: var(--cedar-font-mono);
+}
+
+.content a,
+.cedar-footer a:hover,
+.cedar-footer a:focus-visible {
+    color: var(--cedar-accent);
+}
+
+.nav-container {
+    padding: 0;
+    border-bottom: 1px solid var(--cedar-line);
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.nav-container-blur {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.dark .nav-container,
+.dark .nav-container-blur {
+    background: rgba(13, 21, 34, 0.96);
+}
+
+.nav-container nav {
+    height: 4rem;
+    max-width: var(--cedar-max);
+}
+
+.nav-container nav > a:not([title="GitHub"]) {
+    border-radius: 0;
+}
+
+.nav-container nav > a:not([title="GitHub"]):hover {
+    background: transparent;
+    color: var(--cedar-accent);
+}
+
+.dark .nav-container nav > a:not([title="GitHub"]):hover {
+    background: transparent;
+}
+
+.search-wrapper button,
+.search-wrapper input {
+    border-color: var(--cedar-line) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar-container,
+.toc {
+    backdrop-filter: none;
+}
+
+.sidebar-container .hextra-scrollbar,
+.hextra-toc > div,
+.hextra-toc .sticky,
+.sidebar-container [data-toggle-animation="show"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-top-color: var(--cedar-line) !important;
+}
+
+.sidebar-container a,
+.toc a,
+.content {
+    color: inherit;
+}
+
+.sidebar-container a {
+    border-radius: 0 !important;
+}
+
+.sidebar-container {
+    border-right: 1px solid var(--cedar-line);
+}
+
+.dark .sidebar-container {
+    border-right-color: var(--cedar-line);
+}
+
+.sidebar-active-item {
+    border-left: 0;
+    box-shadow: inset 2px 0 0 var(--cedar-accent);
+    background: rgba(251, 119, 62, 0.04) !important;
+}
+
+.dark .sidebar-active-item {
+    background: rgba(251, 119, 62, 0.08) !important;
+}
+
+.sidebar-container > div,
+.toc > div,
+.content pre,
+.content blockquote,
+.hextra-card,
+.hextra-feature-card,
+.pagination a,
+.pagination span {
+    border-color: var(--cedar-line) !important;
+}
+
+.content pre,
+.content blockquote,
+.hextra-card,
+.hextra-feature-card {
+    background: var(--cedar-panel);
+    box-shadow: none !important;
+}
+
+.content pre {
+    border-width: 1px;
+    border-radius: 0;
+}
+
+.content table {
+    display: table;
+    width: auto;
+    max-width: 100%;
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+}
+
+.content table tr {
+    background: transparent !important;
+}
+
+.content table th {
+    background: rgba(25, 33, 52, 0.03);
+}
+
+.cedar-emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1.1em;
+    line-height: 1;
+    vertical-align: -0.12em;
+}
+
+.cedar-callout {
+    align-items: flex-start;
+    column-gap: 0.6rem;
+}
+
+.cedar-callout__emoji {
+    font-size: 1.05em;
+    transform: translateY(0.18em);
+}
+
+.cedar-callout__icon {
+    flex: 0 0 auto;
+    padding-left: 0.9rem;
+}
+
+.dark .content table th {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.content table th,
+.content table td {
+    border-color: var(--cedar-line) !important;
+}
+
+.content h1 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 3vw, 3.25rem);
+    line-height: 1.02;
+    color: var(--cedar-ink);
+}
+
+.cedar-docs-breadcrumb {
+    margin-bottom: 1.25rem;
+}
+
+.content h2,
+.content h3 {
+    scroll-margin-top: 6rem;
+}
+
+.content h2 {
+    margin-top: 3rem;
+    padding-top: 0;
+    border-top: 0;
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+}
+
+.content p,
+.content li {
+    color: var(--cedar-ink);
+}
+
+.content code {
+    border: 1px solid var(--cedar-line);
+    border-radius: 0;
+    background: rgba(25, 33, 52, 0.05);
+}
+
+.dark .content code {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.content pre code {
+    border: 0;
+    background: transparent;
+}
+
+.content .hextra-card,
+.content .hextra-feature-card {
+    border-radius: 0;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.content .hextra-card:hover,
+.content .hextra-feature-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 119, 62, 0.35) !important;
+}
+
+.cedar-home-page {
+    display: flex;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.cedar-home-main {
+    width: 100%;
+    min-width: 0;
+}
+
+.cedar-home {
+    width: 100%;
+}
+
+.cedar-home__hero,
+.cedar-home__band {
+    width: 100%;
+}
+
+
+.cedar-home__hero-inner,
+.cedar-home__band {
+    max-width: var(--cedar-max);
+    margin: 0 auto;
+}
+
+.cedar-home__hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 3rem;
+    align-items: center;
+    padding: clamp(2.5rem, 6vw, 5rem) 1.5rem;
+}
+
+.cedar-home__copy {
+    max-width: 40rem;
+}
+
+.cedar-home__eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cedar-accent);
+}
+
+.cedar-home__copy h1 {
+    margin: 0;
+    color: var(--cedar-ink);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.97;
+    letter-spacing: -0.04em;
+}
+
+
+.cedar-home__lede {
+    max-width: 38rem;
+    margin: 1.35rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--cedar-ink-soft);
+}
+
+.cedar-home__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+}
+
+.cedar-home__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--cedar-line);
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-decoration: none;
+    color: var(--cedar-ink);
+    background: transparent;
+    transition:
+        border-color 0.18s ease,
+        color 0.18s ease,
+        background-color 0.18s ease;
+}
+
+.cedar-home__button:hover {
+    border-color: rgba(251, 119, 62, 0.4);
+    color: var(--cedar-accent);
+}
+
+.cedar-home__button--primary {
+    border-color: var(--cedar-accent);
+    color: #ffffff;
+    background: var(--cedar-accent);
+}
+
+.cedar-home__button--primary:hover {
+    color: #ffffff;
+    background: #e56a34;
+}
+
+.cedar-home__terminal {
+    border: 1px solid var(--cedar-line);
+    background: var(--cedar-terminal-bg);
+    color: var(--cedar-terminal-fg);
+}
+
+.cedar-home__terminal-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cedar-home__terminal-label {
+    font-size: 0.72rem;
+    font-family: var(--cedar-font-mono);
+    color: rgba(220, 230, 243, 0.35);
+    letter-spacing: 0.04em;
+}
+
+/* Terminal syntax highlighting */
+.cedar-t-prompt { color: rgba(220, 230, 243, 0.35); user-select: none; }
+.cedar-t-kw     { color: #7baef8; }
+.cedar-t-type   { color: #7baef8; }
+.cedar-t-fn     { color: #c8a8f8; }
+
+.cedar-home__terminal pre {
+    margin: 0;
+    padding: 1.25rem 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.cedar-home__band {
+    padding: 3rem 1.5rem;
+}
+
+
+.cedar-home__section-head {
+    margin-bottom: 1.25rem;
+}
+
+/* Paths — sequential onboarding steps */
+.cedar-home__path-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.cedar-home__path {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--cedar-line);
+    text-decoration: none;
+    color: inherit;
+}
+
+.cedar-home__path:hover h3 {
+    color: var(--cedar-accent);
+}
+
+.cedar-home__index {
+    display: inline-block;
+    margin-bottom: 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cedar-accent);
+}
+
+.cedar-home__path h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    color: var(--cedar-ink);
+}
+
+.cedar-home__path p {
+    margin: 0;
+    line-height: 1.75;
+    color: var(--cedar-ink-soft);
+}
+
+/* Reference — lookup list, not sequential steps */
+.cedar-home__ref-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.cedar-home__ref-item {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    padding: 0.85rem 0;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.15s ease;
+}
+
+.cedar-home__ref-item + .cedar-home__ref-item {
+    border-top: 1px solid var(--cedar-line);
+}
+
+.cedar-home__ref-item:hover .cedar-home__ref-title {
+    color: var(--cedar-accent);
+}
+
+.cedar-home__ref-title {
+    flex: 0 0 11rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--cedar-font-display);
+    color: var(--cedar-ink);
+    transition: color 0.15s ease;
+}
+
+.cedar-home__ref-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--cedar-ink-soft);
+}
+
+/* Latest — compact anchor at the foot */
+.cedar-home__band--releases {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.cedar-home__releases-note {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cedar-ink-soft);
+}
+
+.cedar-home__releases-note a {
+    color: var(--cedar-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--cedar-line);
+    text-underline-offset: 0.2em;
+}
+
+.cedar-home__releases-note a:hover {
+    color: var(--cedar-accent);
+    text-decoration-color: var(--cedar-accent);
+}
+
+.cedar-footer {
+    margin-top: 4rem;
+    padding: 0 1.5rem 1.5rem;
+}
+
+.cedar-footer__inner,
+.cedar-footer__meta {
+    width: min(var(--cedar-max), 100%);
+    margin: 0 auto;
+}
+
+.cedar-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
+    gap: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid var(--cedar-line);
+}
+
+.cedar-footer__copy {
+    max-width: 24rem;
+    margin-top: 0.9rem;
+    color: var(--cedar-ink-soft);
+}
+
+.cedar-footer__links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.cedar-footer__links h2 {
+    margin: 0 0 0.85rem;
+    font-size: 0.95rem;
+}
+
+.cedar-footer__links a,
+.cedar-footer__meta-links a {
+    display: block;
+    margin: 0.4rem 0;
+    color: var(--cedar-ink-soft);
+    text-decoration: none;
+}
+
+.cedar-footer__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--cedar-line);
+    color: var(--cedar-ink-soft);
+    font-size: 0.9rem;
+}
+
+.cedar-footer__meta-links {
+    display: flex;
+    gap: 1rem;
+}
+
 .modal {
     align-items: center;
     display: none;
@@ -102,12 +722,14 @@
 }
 
 .modal-card-body {
-    background-color: #002230 !important;
+    background-color: var(--cedar-terminal-bg) !important;
+    color: var(--cedar-terminal-fg);
+    border: 1px solid var(--cedar-line);
     flex-grow: 1;
     flex-shrink: 1;
     overflow: auto;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .modal-card {
@@ -161,4 +783,167 @@ dd {
     }
 
 
+}
+
+@media (max-width: 1023px) {
+    .cedar-home__hero-inner,
+    .cedar-footer__inner,
+    .cedar-footer__links,
+    .cedar-home__path-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cedar-home__ref-item {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .cedar-home__ref-title {
+        flex: none;
+    }
+
+    .cedar-home__hero-inner {
+        gap: 2rem;
+    }
+
+    .cedar-footer__meta {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-container {
+        padding-top: 0;
+    }
+
+    .cedar-home__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cedar-home__actions a {
+        width: 100%;
+    }
+
+    .cedar-home__hero-inner,
+    .cedar-home__band {
+        padding-inline: 1rem;
+    }
+
+    .cedar-footer {
+        padding-inline: 1rem;
+    }
+
+}
+
+/* ── Delight ─────────────────────────────────────────────────────────── */
+
+@keyframes cedar-fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cedar-blink {
+    0%, 49%  { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* Staggered page entrance — section by section */
+
+/* Hero */
+.cedar-home__copy h1 {
+    animation: cedar-fade-up 0.4s ease both 0.05s;
+}
+.cedar-home__lede {
+    animation: cedar-fade-up 0.4s ease both 0.22s;
+}
+.cedar-home__actions {
+    animation: cedar-fade-up 0.4s ease both 0.32s;
+}
+.cedar-home__terminal {
+    animation: cedar-fade-up 0.4s ease both 0.18s;
+}
+
+/* Paths section */
+.cedar-home__band--paths .cedar-home__eyebrow {
+    animation: cedar-fade-up 0.4s ease both 0.45s;
+}
+.cedar-home__path:nth-child(1) {
+    animation: cedar-fade-up 0.4s ease both 0.52s;
+}
+.cedar-home__path:nth-child(2) {
+    animation: cedar-fade-up 0.4s ease both 0.62s;
+}
+.cedar-home__path:nth-child(3) {
+    animation: cedar-fade-up 0.4s ease both 0.72s;
+}
+
+/* Reference section */
+.cedar-home__band--detail .cedar-home__eyebrow {
+    animation: cedar-fade-up 0.4s ease both 0.78s;
+}
+.cedar-home__ref-item:nth-child(1) {
+    animation: cedar-fade-up 0.4s ease both 0.85s;
+}
+.cedar-home__ref-item:nth-child(2) {
+    animation: cedar-fade-up 0.4s ease both 0.93s;
+}
+.cedar-home__ref-item:nth-child(3) {
+    animation: cedar-fade-up 0.4s ease both 1.01s;
+}
+
+/* Releases footer */
+.cedar-home__band--releases {
+    animation: cedar-fade-up 0.4s ease both 1.08s;
+}
+
+/* Blinking cursor at end of terminal */
+.cedar-home__terminal pre code::after {
+    content: '▌';
+    display: inline-block;
+    animation: cedar-blink 1.1s step-end infinite;
+    color: rgba(220, 230, 243, 0.45);
+    margin-left: 1px;
+}
+
+/* Directional arrow on path card hover */
+.cedar-home__path h3::after {
+    content: ' →';
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    color: var(--cedar-accent);
+    font-weight: 400;
+}
+
+.cedar-home__path:hover h3::after {
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .cedar-home__copy h1,
+    .cedar-home__lede,
+    .cedar-home__actions,
+    .cedar-home__terminal,
+    .cedar-home__band--paths .cedar-home__eyebrow,
+    .cedar-home__path,
+    .cedar-home__band--detail .cedar-home__eyebrow,
+    .cedar-home__ref-item,
+    .cedar-home__band--releases {
+        animation: none;
+    }
+
+    .cedar-home__terminal pre code::after {
+        animation: none;
+        opacity: 0;
+    }
+
+    .cedar-home__path h3::after {
+        transition: none;
+    }
 }
