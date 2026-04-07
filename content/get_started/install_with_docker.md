@@ -26,7 +26,7 @@ docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
 
 Connect using a PostgreSQL client:
 
-```shell
+```postgresql
 PGPASSWORD=test psql -h localhost -U postgres
 
 postgres= SELECT 1 as foo;

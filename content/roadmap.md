@@ -10,11 +10,11 @@ Information about intermediate status of features and minor features will be ava
 
 We categorise the status of the features on this page as planned, in progress, and fully available:
 
-| **State**          |               **Icon** |
-|--------------------|-----------------------:|
-| Planned            |    {{< iconplanned >}} |
+| **State**          |       **Icon**        |
+|--------------------|:---------------------:|
+| Planned            |  {{< iconplanned >}}  |
 | Under Construction | {{< iconinprogress >}} |
-| Available          |       {{< icondone >}} |
+| Available          |   {{< icondone >}}    |
 
 A more detailed overview of our PostgreSQL compatibility level can be found on the
 separate [Compatibility](../compatibility/) page.
@@ -37,30 +37,30 @@ CedarDB.
 
 ### Data Model & Domain-Specific Features
 
-| **Feature**                  |              **State** | **Details**                                                |
-|------------------------------|-----------------------:|------------------------------------------------------------|
-| AsOf joins                   |       {{< icondone >}} | [Documentation](/docs/references/advanced/asof_join/)      |
-| Fulltext search              |    {{< iconplanned >}} |                                                            |
-| Enhanced graph query support |    {{< iconplanned >}} |                                                            |
+| **Feature**                  |      **State**       | **Details**                                                |
+|------------------------------|:--------------------:|------------------------------------------------------------|
+| AsOf joins                   |   {{< icondone >}}   | [Documentation](/docs/references/advanced/asof_join/)      |
+| Fulltext search              | {{< iconplanned >}}  |                                                            |
+| Enhanced graph query support | {{< iconplanned >}}  |                                                            |
 | Range types                  | {{< iconinprogress >}} |                                                            |
 | Schema evolution             | {{< iconinprogress >}} | [Documentation](/docs/references/sqlreference/statements/) |
 | Vector support               | {{< iconinprogress >}} | [Documentation](/docs/references/advanced/pgvector/)       |
 
 ### Data Formats
 
-| **Feature**           |              **State** | **Details**                                                |
-|-----------------------|-----------------------:|------------------------------------------------------------|
-| Parquet reader        |    {{< iconplanned >}} |                                                            |
-| Parquet writer        |    {{< iconplanned >}} |                                                            |
-| Iceberg support       |    {{< iconplanned >}} |                                                            |
+| **Feature**           |      **State**       | **Details**                                                |
+|-----------------------|:--------------------:|------------------------------------------------------------|
+| Parquet reader        | {{< iconplanned >}}  |                                                            |
+| Parquet writer        | {{< iconplanned >}}  |                                                            |
+| Iceberg support       | {{< iconplanned >}}  |                                                            |
 | pg_dump compatibility | {{< iconinprogress >}} | [Documentation](/docs/cookbook/importing_from_postgresql/) |
 
 ### Connectivity
 
-| **Feature**                    |              **State** | **Details**                                        |
-|--------------------------------|-----------------------:|----------------------------------------------------|
-| PostgreSQL system tables       |       {{< icondone >}} | [Documentation](/docs/compatibility/system_table/) |
-| information_schema support     |       {{< icondone >}} | [Documentation](/docs/compatibility/system_table/) |
+| **Feature**                    |      **State**       | **Details**                                        |
+|--------------------------------|:--------------------:|----------------------------------------------------|
+| PostgreSQL system tables       |   {{< icondone >}}   | [Documentation](/docs/compatibility/system_table/) |
+| information_schema support     |   {{< icondone >}}   | [Documentation](/docs/compatibility/system_table/) |
 | PostgreSQL Logical replication | {{< iconinprogress >}} |                                                    |
 | Support for more CDC tools     | {{< iconinprogress >}} | [Documentation](/docs/cookbook/aurora_debezium/)   |
 
@@ -73,8 +73,8 @@ production use of CedarDB. These features may not be available to all CedarDB us
 
 ### Operations
 
-| **Feature**                 |           **State** | **Details** |
-|-----------------------------|--------------------:|-------------|
+| **Feature**                 |     **State**      | **Details** |
+|-----------------------------|:------------------:|-------------|
 | Read replication to CedarDB | {{< iconplanned >}} |             |
 | Automatic failover          | {{< iconplanned >}} |             |
 | Automatic backups           | {{< iconplanned >}} |             |
@@ -84,8 +84,8 @@ production use of CedarDB. These features may not be available to all CedarDB us
 
 ### Multi Tenancy
 
-| **Feature**                            |              **State** | **Details** |
-|----------------------------------------|-----------------------:|-------------|
-| Resource limits for individual tenants |    {{< iconplanned >}} |             |
+| **Feature**                            |      **State**       | **Details** |
+|----------------------------------------|:--------------------:|-------------|
+| Resource limits for individual tenants | {{< iconplanned >}}  |             |
 | Extended role & grant management       | {{< iconinprogress >}} |             |
-| Fair scheduling over multiple tenants  |    {{< iconplanned >}} |             |
+| Fair scheduling over multiple tenants  | {{< iconplanned >}}  |             |

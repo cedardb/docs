@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
+    {{ partial "sidebar.html" (dict "context" .) }}
+    {{ partial "toc.html" . }}
+    <article class="cedar-docs-article w-full break-words flex min-w-0 justify-center pb-8">
+      <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
+        <div class="cedar-docs-breadcrumb">
+          {{ partial "breadcrumb.html" . }}
+        </div>
+        <div class="content">
+          <h1>{{ .Title }}</h1>
+          {{ .Content }}
+        </div>
+        {{ partial "components/last-updated.html" . }}
+        {{ partial "components/pager.html" . }}
+        {{ partial "components/comments.html" . }}
+      </main>
+    </article>
+  </div>
+{{ end }}
