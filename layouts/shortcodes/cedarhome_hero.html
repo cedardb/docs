@@ -1,0 +1,35 @@
+<section class="cedar-home__hero">
+  <div class="cedar-home__hero-inner">
+    <div class="cedar-home__copy not-prose">
+      <h1>CedarDB for developers and operators.</h1>
+      <p class="cedar-home__lede">
+        Everything you need to install, connect, and operate CedarDB from first query to production.
+      </p>
+      <div class="cedar-home__actions">
+        <a class="cedar-home__button cedar-home__button--primary" href="/docs/get_started/quickstart/">Quickstart</a>
+        <a class="cedar-home__button" href="/docs/references/">Read the Reference</a>
+      </div>
+    </div>
+    <div class="cedar-home__terminal not-prose" aria-label="CedarDB quickstart example">
+      <div class="cedar-home__terminal-bar">
+        <span class="cedar-home__terminal-label">cedardb</span>
+      </div>
+      <pre><code><span class="cedar-t-prompt">$</span> curl https://get.cedardb.com | bash
+<span class="cedar-t-prompt">$</span> ./cedar/cedardb --interactive
+
+<span class="cedar-t-kw">create table</span> movies (
+  id <span class="cedar-t-type">integer</span> <span class="cedar-t-kw">primary key</span>,
+  title <span class="cedar-t-type">text</span>, year <span class="cedar-t-type">int</span>, genre <span class="cedar-t-type">text</span>);
+<span class="cedar-t-kw">create table</span> stars (
+  id <span class="cedar-t-type">integer</span> <span class="cedar-t-kw">primary key</span>,
+  name <span class="cedar-t-type">text</span>, birthdate <span class="cedar-t-type">date</span>);
+<span class="cedar-t-kw">create table</span> starsIn (
+  movie_id <span class="cedar-t-type">int</span>, star_id <span class="cedar-t-type">int</span>);
+<span class="cedar-t-kw">select</span> genre, <span class="cedar-t-fn">avg</span>(<span class="cedar-t-fn">age</span>(birthdate)) avg_age
+<span class="cedar-t-kw">from</span> movies
+  <span class="cedar-t-kw">join</span> starsIn <span class="cedar-t-kw">on</span> movies.id = movie_id
+  <span class="cedar-t-kw">join</span> stars <span class="cedar-t-kw">on</span> star_id = stars.id
+<span class="cedar-t-kw">group by</span> genre;</code></pre>
+    </div>
+  </div>
+</section>
