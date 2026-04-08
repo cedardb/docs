@@ -8,7 +8,7 @@ linkTitle: "Releases"
 You can automatically [install the latest release](/docs/get_started/install_locally) using our helper script:
 
 ```shell
-curl https://get.cedardb.com | bash
+curl -fsSL https://get.cedardb.com | bash
 ```
 
 Or use the [CedarDB Docker container](/docs/get_started/install_with_docker):

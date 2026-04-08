@@ -14,7 +14,7 @@ It runs out of the box on any Linux distribution with **glibc >= 2.27** (release
 
 To automatically download and decompress the appropriate version, run:
 ```shell
-curl https://get.cedardb.com | bash
+curl -fsSL https://get.cedardb.com | bash
 ```
 
 {{< callout type="info" >}}

@@ -13,7 +13,7 @@ It covers the essential setup steps and walks you through simple examples to beg
 To automatically download and decompress the appropriate CedarDB version, run:
 
 ```shell
-curl https://get.cedardb.com | bash
+curl -fsSL https://get.cedardb.com | bash
 ```
 
 {{< callout type="info" >}}

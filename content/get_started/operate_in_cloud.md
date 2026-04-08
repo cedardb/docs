@@ -26,7 +26,7 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
 
     Download and launch CedarDB:
     ```shell
-    curl https://get.cedardb.com | bash
+    curl -fsSL https://get.cedardb.com | bash
     ./cedar/cedardb mydb --address=::
     ```
 

@@ -12,7 +12,7 @@ docker pull cedardb/cedardb
 {{< /tab >}}
 {{< tab >}}
 ```
-curl https://get.cedardb.com | bash
+curl -fsSL https://get.cedardb.com | bash
 ```
 ...and visit our [**Local Install**](../get_started/install_locally) guide for more details.
 {{< /tab >}}

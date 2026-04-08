@@ -561,7 +561,7 @@
 		"date": "2025-04-10",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Support for natively running CedarDB without Docker: <tt> curl https://get.cedardb.com | bash </tt> will install CedarDB on your system. You can then run <tt>./cedardb</tt> to start the server.",
+			"<b>New Feature:</b> Support for natively running CedarDB without Docker: <tt> curl -fsSL https://get.cedardb.com | bash </tt> will install CedarDB on your system. You can then run <tt>./cedardb</tt> to start the server.",
 			"<b>New Feature:</b> Streamlined docker build process. No need to re-download the Dockerfile after a new release. Re-running <tt>docker build</tt> will always create an up-to-date image.",
 			"<b>New Feature:</b> Experimental ARM support! Both the native binary and docker image now natively run on ARM64 systems.",
 			"<b>New Feature:</b> CedarDB can now bulk create indexes larger than main memory by spooling intermediate data to disk.",
