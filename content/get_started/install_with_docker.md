@@ -21,7 +21,7 @@ By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing
 Start a container:
 
 ```shell
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
 ```
 
 Connect using a PostgreSQL client:
@@ -47,7 +47,7 @@ To retain your database across container restarts, mount a host directory to sto
 
 ```shell
 mkdir -p /opt/cedardb
-docker run --rm -p 5432:5432 -v /opt/cedardb:/var/lib/cedardb/data -e CEDAR_PASSWORD=test cedardb/cedardb
+docker run --rm -p 127.0.0.1:5432:5432 -v /opt/cedardb:/var/lib/cedardb/data -e CEDAR_PASSWORD=test cedardb/cedardb
 ```
 
 This stores the database in `/opt/cedardb` on your host.
@@ -73,7 +73,7 @@ You can configure the initial user and database using environment variables, dom
 #### Environment variables
 
 ```shell
-docker run --rm -p 5432:5432 \
+docker run -p 127.0.0.1:5432:5432 \
   -e CEDAR_USER=test \
   -e CEDAR_PASSWORD=test \
   -e CEDAR_DB=db \
@@ -98,7 +98,7 @@ The parameters `CEDAR_USER` and `CEDAR_DB` are optional:
 CedarDB can also read credentials from files, ideal for secret management:
 
 ```shell
-docker run --rm -p 5432:5432 \
+docker run -p 127.0.0.1:5432:5432 \
   -e CEDAR_USER_FILE=/run/secrets/user_file \
   -e CEDAR_PASSWORD_FILE=/run/secrets/password_file \
   -e CEDAR_DB=/run/secrets/db_file cedardb/cedardb
@@ -131,9 +131,9 @@ Then run:
 
 ```shell
 docker run -v ./users/:/docker-entrypoint-initdb.d/ \
-  -p 5432:5432 -e CEDAR_PASSWORD=test \
+  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test \
   -e NEW_USER=nonroot -e NEW_USER_PWD=1234 \
-  --rm cedardb/cedardb
+  cedardb/cedardb
 ```
 
 Connect with the new user:
@@ -179,8 +179,8 @@ Then run:
 
 ```shell
 docker run -v ./movies/:/docker-entrypoint-initdb.d/ \
-  -p 5432:5432 -e CEDAR_PASSWORD=test \
-  --rm cedardb/cedardb
+  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test \
+  cedardb/cedardb
 ```
 
 Connect and inspect the data:

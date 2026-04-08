@@ -182,7 +182,7 @@ Let's load the data into CedarDB:
 If we mount the data directly into the CedarDB docker container, we can considerably speed up the import process:
 
 ```shell
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=postgres -v /path/to/the/csvs:/data cedardb
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=postgres -v /path/to/the/csvs:/data cedardb
 ```
 
 ```sql
