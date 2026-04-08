@@ -44,7 +44,7 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
     Start a CedarDB container:
 
     ```shell
-    docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
+    docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD cedardb/cedardb
     ```
     For advanced usage and customization, refer to the [Docker setup guide](../install_with_docker).
 

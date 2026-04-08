@@ -21,13 +21,13 @@ By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing
 Start a container:
 
 ```shell
-docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD cedardb/cedardb
 ```
 
 Connect using a PostgreSQL client:
 
 ```shell
-PGPASSWORD=test psql -h localhost -U postgres
+PGPASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD psql -h localhost -U postgres
 
 postgres= SELECT 1 as foo;
  foo
@@ -47,7 +47,7 @@ To retain your database across container restarts, mount a host directory to sto
 
 ```shell
 mkdir -p /opt/cedardb
-docker run --rm -p 127.0.0.1:5432:5432 -v /opt/cedardb:/var/lib/cedardb/data -e CEDAR_PASSWORD=test cedardb/cedardb
+docker run --rm -p 127.0.0.1:5432:5432 -v /opt/cedardb:/var/lib/cedardb/data -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD cedardb/cedardb
 ```
 
 This stores the database in `/opt/cedardb` on your host.
@@ -75,7 +75,7 @@ You can configure the initial user and database using environment variables, dom
 ```shell
 docker run -p 127.0.0.1:5432:5432 \
   -e CEDAR_USER=test \
-  -e CEDAR_PASSWORD=test \
+  -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD \
   -e CEDAR_DB=db \
   cedardb/cedardb
 ```
@@ -131,8 +131,8 @@ Then run:
 
 ```shell
 docker run -v ./users/:/docker-entrypoint-initdb.d/ \
-  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test \
-  -e NEW_USER=nonroot -e NEW_USER_PWD=1234 \
+  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD \
+  -e NEW_USER=nonroot -e NEW_USER_PWD=REPLACE_WITH_SECURE_USER_PASSWORD \
   cedardb/cedardb
 ```
 
@@ -141,7 +141,7 @@ Connect with the new user:
 ```shell
 # Connect to CedarDB
 psql -h localhost -U nonroot -d nonroot
-# Enter '1234' as password
+# Enter 'REPLACE_WITH_SECURE_USER_PASSWORD' as password
 ```
 
 #### Example: Preloading data with .sh and .sql files
@@ -179,7 +179,7 @@ Then run:
 
 ```shell
 docker run -v ./movies/:/docker-entrypoint-initdb.d/ \
-  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test \
+  -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD \
   cedardb/cedardb
 ```
 
@@ -188,7 +188,7 @@ Connect and inspect the data:
 ```shell
 # Connect to CedarDB
 psql -h localhost -U postgres
-# Enter 'test' as password
+# Enter 'REPLACE_WITH_SECURE_CEDAR_PASSWORD' as password
 
 postgres= \d
          List of relations

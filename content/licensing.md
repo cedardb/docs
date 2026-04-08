@@ -49,7 +49,7 @@ If you use docker, then pass the license key as environment variable when starti
 touch cedardb_license.env
 chmod 600 cedardb_license.env
 echo "LICENSE_KEY=<your_key>" >> cedardb_license.env
-docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test --env-file ./cedardb_license.env cedardb/cedardb
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD --env-file ./cedardb_license.env cedardb/cedardb
 ```
 
 {{< /tab >}}

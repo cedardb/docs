@@ -58,7 +58,7 @@ In this example, we're assuming an empty database. If you already have a CedarDB
 ### Start CedarDB
 
 ```shell
-docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=REPLACE_WITH_SECURE_CEDAR_PASSWORD --name cedardb_test cedardb
 ```
 
 ### Connect via psql and create a Grafana user
