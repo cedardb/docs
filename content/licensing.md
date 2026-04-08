@@ -5,12 +5,11 @@ weight: 1000
 
 CedarDB is available in three editions to suit different needs, from free usage to full enterprise:
 
-| Type              | Description                                                                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| Community Edition | Free version of CedarDB with a 64 GiB database size limit and no enterprise features. Includes access to documentation and Slack for support. Find the license terms [here](https://cedardb.com/legal/agreements/community_tcs.pdf).   |
-| Enterprise        | Full-featured CedarDB with all enterprise capabilities. License must be renewed as negotiated. Includes dedicated Enterprise support.                    |
-| Enterprise Trial  | Time-limited trial of CedarDB Enterprise with all features. Includes Community Edition support (documentation and Slack).                                    |
-
+| Type              | Description                                                                                                                                                                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Community Edition | Free version of CedarDB with a 64 GiB database size limit and no enterprise features. Includes access to documentation and Slack for support. Find the license terms [here](https://cedardb.com/legal/agreements/community_tcs.pdf). |
+| Enterprise        | Full-featured CedarDB with all enterprise capabilities. License must be renewed as negotiated. Includes dedicated Enterprise support.                                                                                                |
+| Enterprise Trial  | Time-limited trial of CedarDB Enterprise with all features. Includes Community Edition support (documentation and Slack).                                                                                                            |
 
 ## Obtain a license
 
@@ -19,29 +18,40 @@ CedarDB is available in three editions to suit different needs, from free usage 
 - To start an **Enterprise Trial**, visit the [self-service console](https://console.cedardb.com) for a 90-day trial license.
 
 ## Activate your license
+
 After receiving your license key, activate it by setting the license.key option to the token provided.
 In the following, we show the concrete steps needed to configure the license setting.
 For more information on setting configuration options, see our [configuration reference](/docs/references/configuration).
 
 {{< tabs items="Configuration File (preferred), Environment Variable" >}}
 {{< tab >}}
-Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup.  In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
+Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup. In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
+
 ```shell
-echo "\"license.key\" = \"<your_key>\"" >> ~/.cedardb/config
+touch ~/.cedardb/config
+chmod 600 ~/.cedardb/config
+echo '"license.key" = "<your_key>"' >> ~/.cedardb/config
 ```
+
 {{< /tab >}}
 {{< tab >}}
 An alternative is to set the license in an environment variable.
 If you are running CedarDB directly on your host machine, then export your license key before starting CedarDB like this:
+
 ```shell
 export LICENSE_KEY='<your_key>'
 ./cedardb <your args>
 ```
 
 If you use docker, then pass the license key as environment variable when starting CedarDB (e.g., via `docker run`):
+
 ```Shell
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test -e LICENSE_KEY='<your_key>' cedardb/cedardb
+touch cedardb_license.env
+chmod 600 cedardb_license.env
+echo "LICENSE_KEY=<your_key>" >> cedardb_license.env
+docker run -p 127.0.0.1:5432:5432 -e CEDAR_PASSWORD=test --env-file ./cedardb_license.env cedardb/cedardb
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -61,7 +71,6 @@ You can see your license expiration date at the [CedarDB console](https://consol
 
 ![console license page](/images/license.png)
 
-
 ## Renew your expired license
 
 - To renew your **Enterprise** license, [contact sales](mailto:sales@cedardb.com).
@@ -71,19 +80,19 @@ You can see your license expiration date at the [CedarDB console](https://consol
 ## FAQs
 
 ### What happens if I exceed the Community Edition data size limits?
-Your database will enter *read-only* mode. You won’t be able to insert, update, or delete data, but:
+
+Your database will enter _read-only_ mode. You won’t be able to insert, update, or delete data, but:
 
 - You can still query your data.
-- You can export it using SQL statements like `COPY OUT` (to CSV) or tools like `pg_dump` (to SQL). 
-
+- You can export it using SQL statements like `COPY OUT` (to CSV) or tools like `pg_dump` (to SQL).
 
 ### What happens when my Enterprise trial license expires?
+
 Your database automatically reverts to the **Community Edition**:
 
 - Enterprise features are disabled.
 - If your database exceeds the 64 GiB limit, it will become read-only.
 - You retain all your data, even if it exceeds the Community Edition limit.
-
 
 ### Can I chain multiple trials?
 
