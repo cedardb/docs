@@ -38,6 +38,7 @@ range of PostgreSQL connectors for end-user tools like Grafana and programming l
 | Java         | JDBC           | 42.7.4      | Full              | [Documentation](/docs/clients/java/)    |
 | JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation](/docs/clients/js/)      |
 |              | drizzle-orm    | 0.45.1      | Partial           | [Documentation](/docs/clients/drizzle/) |
+|              | prisma-orm     | 7.7.0       | Partial           | [Documentation](/docs/clients/prisma/)  |
 | Python       | psycopg2       | 2.9.10      | Full              |                                         |
 |              | psycopg        | 3.2.3       | Full              | [Documentation](/docs/clients/python/)  |
 | R            | RPostgres      | 1.4.7       | Full              | [Documentation](/docs/clients/r/)       |
