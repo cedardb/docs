@@ -20,6 +20,7 @@ Programming languages:
 ORMs:
 
 * [Drizzle](drizzle)
+* [Prisma](prisma)
 
 Tools:
 
