@@ -1,5 +1,35 @@
 [
 	{
+		"version": "v2026-04-20",
+		"date": "2026-04-20",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add support for <tt>ALTER FUNCTION</tt> statement.",
+			"<b>New Feature:</b> Add support for <tt>pg_stat_database</tt> system table.",
+			"<b>New Feature:</b> Add support for one-level <tt>ON UPDATE CASCADE</tt> on foreign keys.",
+			"<b>New Feature:</b> Release storage space to the OS with <tt>VACUUM</tt> (<tt>TRUNCATE</tt>).",
+			"<b>New Feature:</b> Reclaim pages of indexes and tables after <tt>ALTER TABLE</tt> statements.",
+			"<b>PostgreSQL Compatibility:</b> Enable uint4, int4, uint8 and int8 return types for <tt>generate_series(...)</tt> based on input types.",
+			"<b>PostgreSQL Compatibility:</b> Fix <tt>pg_index.indclass</tt> entries.",
+			"<b>PostgreSQL Compatibility:</b> Result columns of multiple table functions are now evaluated in lock-step, replacing the cross product between results with a full outer join.",
+			"<b>PostgreSQL Compatibility:</b> Fix content of <tt>pg_class.reloptions</tt> system table column.",
+			"<b>PostgreSQL Compatibility:</b> Fix <tt>context</tt> field of <tt>pg_settings</tt> system table.",
+			"<b>PostgreSQL Compatibility:</b> Add class row types to <tt>pg_types</tt> and <tt>pg_class.reltype</tt>.",
+			"<b>Maintenance:</b> Fix crash on invalid typemod inputs to <tt>pg_catalog.format_type</tt>.",
+			"<b>Maintenance:</b> Fix a race condition that could lead to a crash during an index read.",
+			"<b>Maintenance:</b> Defining views that depend on system tables no longer triggers an assert.",
+			"<b>Maintenance:</b> Fix optimizer crash on large <tt>DELETE CASCADE</tt>.",
+			"<b>Maintenance:</b> Fix unknown parameter type coercion for <tt>PREPARE</tt> statements that <tt>INSERT INTO</tt> non-null columns.",
+			"<b>Maintenance:</b> Resolve several issues within nested recursive queries that could trigger timeouts and runtime errors.",
+			"<b>Maintenance:</b> Fix inconsistency of owner of table and its dependent objects, e.g., indexes.",
+			"<b>Maintenance:</b> Fix comparison of UUIDs greater than <tt>'7FFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF'</tt> in tablescans.",
+			"<b>Maintenance:</b> <tt>generate_subscript</tt> now properly handles arrays with non-1-based lower bound.",
+			"<b>Maintenance:</b> Replace dead link in error messages.",
+			"<b>Maintenance:</b> Fix startup crash on Debian Bookworm due to wrong io_uring version check.",
+			"<b>Maintenance:</b> Remove erroneous <tt>unlinkat</tt> warnings when deleting compressed data."
+		]
+	},
+	{
 		"version": "v2026-04-02",
 		"date": "2026-04-02",
 		"breaksdb": false,
