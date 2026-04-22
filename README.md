@@ -5,7 +5,7 @@ The documentation is built by the static-site-generator [Hugo](https://gohugo.io
 
 Clone repository:
 ```shell
-git clone --recurse-submodules git@github.com:cedardb/docs.git
+git clone git@github.com:cedardb/docs.git
 ```
 
 Run a web server:
