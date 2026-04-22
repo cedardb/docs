@@ -21,7 +21,7 @@ Additionally, CedarDB exposes information that are not available in PostgreSQL i
 
 System tables provide a raw view into the state of the database system.
 In contrast to PostgreSQL, system tables in CedarDB are *read-only*, and can only be indirectly influenced through
-[DDL statements](/docs/references/sqlreference/statements/).
+[DDL statements](/docs/references/objects/).
 
 System tables often contain many low-level details.
 For more accessible and friendly access to the same information, consider using the

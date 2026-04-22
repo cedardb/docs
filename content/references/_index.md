@@ -9,7 +9,14 @@ largest part of the [query language](https://www.postgresql.org/docs/current/que
 
 On the following pages, you can find an in-depth overview of CedarDB's features:
 
-* [Data types](./datatypes)
+* [Advanced features](./advanced)
+* [Catalog objects](./objects)
 * [Configuration](./configuration)
-* [SQL reference](./sqlreference)
-
+* [Data types](./datatypes)
+* [DML](./dml) — `insert`, `copy`, `update`, `delete`, `truncate`, `upsert`
+* [Expressions](./expressions)
+* [Functions](./functions)
+* [Queries](./queries) — `select`, `from`, `where`
+* [Sessions](./sessions) — `discard`, `set`, `show`
+* [Transactions](./transactions) — `begin`, `commit`, `rollback`
+* [Utility](./utility) — `analyze`, `explain`

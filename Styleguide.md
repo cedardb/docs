@@ -44,7 +44,7 @@ Strengths may be highlighted in best-practices content.
 - **Backticks** for inline technical names: `statement_timeout`, `psql`, `pg_catalog`.
 - **"CedarDB"** (not "Cedar DB", "cedar"). **"PostgreSQL"** (not "Postgres", "PG")
   in prose. Technical names like `pg_catalog` or `psql` are fine as-is.
-- **Page titles:** title case. **Subsection headings:** sentence case.
+- **Page titles:** title case. **Subsection headings:** sentence case — except on object reference pages (tables, roles, indexes, …) where top-level subsections are named after the SQL statement they cover: `## CREATE TABLE`, `## ALTER TABLE`, `## DROP TABLE`. Use the exact SQL keyword in uppercase.
 - **Sentences:** keep them short. One idea per sentence. Under 25 words as a target.
 
 ---

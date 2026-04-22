@@ -9,8 +9,9 @@ These example datasets cover various domains and come in different formats, allo
 Whether you're a developer looking to test CedarDB's performance with large datasets or a researcher exploring data analysis techniques, these example datasets provide valuable resources for getting started. You can use them to run queries, perform analytics, and evaluate CedarDB's suitability for your specific use case.
 
 Example datasets:
+ * [CH-benCHmark](./chbenchmark)
+ * [GloVe: Global Vectors for Word Representation](./glove)
  * [Handelsregister](./handelsregister)
  * [Join Order Benchmark](./job)
- * [GloVe: Global Vectors for Word Representation](./glove)
  * [NASDAQ Level 3 Order Data](./nasdaq)
 

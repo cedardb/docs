@@ -43,7 +43,7 @@ CedarDB.
 | Fulltext search              | {{< iconplanned >}}  |                                                            |
 | Enhanced graph query support | {{< iconplanned >}}  |                                                            |
 | Range types                  | {{< iconinprogress >}} |                                                            |
-| Schema evolution             | {{< iconinprogress >}} | [Documentation](/docs/references/sqlreference/statements/) |
+| Schema evolution             | {{< iconinprogress >}} | [Documentation](/docs/references/objects/) |
 | Vector support               | {{< iconinprogress >}} | [Documentation](/docs/references/advanced/pgvector/)       |
 
 ### Data Formats
