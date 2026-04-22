@@ -97,7 +97,7 @@ select i + i from integers;
 ERROR:  numeric overflow
 ```
 
-Wrapping the operation in a [`try()`](/docs/references/sqlreference/expressions/try/) produces a `null` value for overflows:
+Wrapping the operation in a [`try()`](/docs/references/expressions/try/) produces a `null` value for overflows:
 ```sql
 select try(i + i) from numerics;
 ```

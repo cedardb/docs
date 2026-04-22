@@ -57,7 +57,7 @@ create table starsIn (
 Once the schema is in place, we can populate it using one of the following methods:
 
 ### Plain Inserts
-Use standard [`INSERT`](../../references/sqlreference/statements/insert) statements:
+Use standard [`INSERT`](../../references/dml/insert) statements:
 
 ```sql
 insert into movies values
@@ -137,13 +137,13 @@ This means you can focus on the essential aspect: the business logic driving you
 
 
 ### Updates
-Update existing rows using the [`UPDATE`](../../references/sqlreference/statements/update) statement. For example:
+Update existing rows using the [`UPDATE`](../../references/dml/update) statement. For example:
 ```sql
 update stars set name = '杨紫琼' where name = 'Michelle Yeoh';
 ```
 
 ### Deletes
-Delete rows using [`DELETE`](../../references/sqlreference/statements/delete).
+Delete rows using [`DELETE`](../../references/dml/delete).
 For instance, to remove movies not linked to any stars:
 ```sql
 delete from movies m

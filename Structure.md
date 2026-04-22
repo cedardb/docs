@@ -11,7 +11,7 @@ where new pages go.
 content/
 ├── _index.md                    # Landing page
 ├── community_edition.md         # Community edition info
-├── technology.md                # Architecture and internals
+├── technology/                  # Architecture and internals (one page per topic)
 ├── roadmap.md                   # Feature roadmap
 ├── database_upgrade.md          # Upgrade procedures
 ├── licensing.md                 # License information
@@ -80,6 +80,14 @@ further pages within the folder as additional drivers, ORMs, or frameworks are
 documented for that language. Language-specific ORMs always live inside the
 relevant language folder, not in a separate top-level ORMs section.
 
+### technology/
+
+Architecture and internals. Explain *how* CedarDB works: execution engine,
+storage, query compilation, parallelism. One page per topic, with `_index.md`
+as the section overview. These pages are narrative and conceptual — link out
+to `references/` for authoritative feature documentation rather than
+duplicating it here.
+
 ### best_practices/
 
 Optimization guidelines, recommended patterns, and where CedarDB excels.
@@ -126,9 +134,9 @@ See the Styleguide for rules on maintaining accuracy.
 
 ---
 
-## Reference Section: Object-First Organization
+## Reference Section: Catalog Objects
 
-DDL documentation is organized by database object, not by SQL command. All
+DDL documentation is organized by catalog object, not by SQL command. All
 operations on an object (CREATE, ALTER, DROP) live on the same page or in
 tightly linked pages within the same directory.
 
@@ -153,7 +161,7 @@ references/
 │   ├── vector.md                # pgvector-compatible
 │   └── enums.md                 # user-defined enum types
 │
-├── objects/                     # One page per database object
+├── objects/                     # One page per catalog object (DDL-managed)
 │   ├── _index.md
 │   ├── tables.md                # CREATE, ALTER, DROP TABLE, constraints, partitioning
 │   ├── indexes.md               # CREATE, DROP INDEX, types, partial, expression
@@ -163,32 +171,45 @@ references/
 │   ├── roles.md                 # CREATE, ALTER, DROP ROLE, GRANT, REVOKE
 │   ├── sequences.md             # CREATE, ALTER, DROP SEQUENCE, nextval, currval
 │   ├── functions.md             # CREATE, ALTER, DROP FUNCTION/PROCEDURE, DO, CALL
+│   ├── policies.md              # CREATE, ALTER, DROP POLICY, row level security
 │   ├── triggers.md              # CREATE, ALTER, DROP TRIGGER
 │   └── types.md                 # CREATE, ALTER, DROP TYPE, domains, enums, composites
 │
-├── sqlreference/
+├── queries/                    # SELECT query syntax (one page per clause)
 │   ├── _index.md
-│   ├── queries/                 # SELECT query syntax (one page per clause)
-│   │   ├── _index.md
-│   │   ├── select.md            # SELECT clause, DISTINCT, column aliases
-│   │   ├── from.md              # FROM clause, all JOIN types, LATERAL
-│   │   ├── where.md             # WHERE clause, filter conditions
-│   │   ├── groupby.md           # GROUP BY, HAVING
-│   │   ├── orderby.md           # ORDER BY, LIMIT, OFFSET
-│   │   ├── with.md              # CTEs, recursive CTEs
-│   │   ├── setops.md            # UNION, INTERSECT, EXCEPT
-│   │   └── window.md            # Window functions, OVER clause
-│   ├── dml/                     # Data manipulation (one page per statement)
-│   │   ├── _index.md
-│   │   ├── insert.md            # INSERT INTO, INSERT ... SELECT
-│   │   ├── copy.md              # COPY TO / FROM
-│   │   ├── update.md            # UPDATE ... SET
-│   │   ├── delete.md            # DELETE FROM
-│   │   └── upsert.md            # INSERT ... ON CONFLICT (upsert / MERGE)
-│   ├── transactions.md          # BEGIN, COMMIT, ROLLBACK, savepoints, isolation levels
-│   └── expressions/             # SQL expression features
-│       ├── _index.md
-│       └── try.md               # CedarDB-specific TRY expression
+│   ├── select.md               # SELECT clause, DISTINCT, column aliases
+│   ├── from.md                 # FROM clause, all JOIN types, LATERAL
+│   ├── where.md                # WHERE clause, filter conditions
+│   ├── groupby.md              # GROUP BY, HAVING
+│   ├── orderby.md              # ORDER BY, LIMIT, OFFSET
+│   ├── with.md                 # CTEs, recursive CTEs
+│   ├── setops.md               # UNION, INTERSECT, EXCEPT
+│   └── window.md               # Window functions, OVER clause
+│
+├── dml/                        # Data manipulation (one page per statement)
+│   ├── _index.md
+│   ├── insert.md               # INSERT INTO, INSERT ... SELECT
+│   ├── copy.md                 # COPY TO / FROM
+│   ├── update.md               # UPDATE ... SET
+│   ├── delete.md               # DELETE FROM
+│   ├── truncate.md             # TRUNCATE TABLE
+│   └── upsert.md               # INSERT ... ON CONFLICT (upsert / MERGE)
+│
+├── transactions.md             # BEGIN, COMMIT, ROLLBACK, savepoints, isolation levels
+│
+├── utility/                    # Query plan inspection and planner statistics
+│   ├── _index.md
+│   ├── analyze.md              # ANALYZE (recompute query planning statistics)
+│   └── explain.md              # EXPLAIN (show the execution plan of a query)
+│
+├── sessions/                   # Session management commands
+│   ├── _index.md
+│   ├── discard.md              # DISCARD (reset session state)
+│   └── settings.md             # SET, SHOW, RESET (inspect and change settings)
+│
+├── expressions/                # SQL expression features
+│   ├── _index.md
+│   └── try.md                  # CedarDB-specific TRY expression
 │
 ├── functions/                   # One page per function category
 │   ├── _index.md
@@ -201,7 +222,9 @@ references/
 │   ├── array.md                 # Array functions and operators
 │   ├── system.md                # pg_backend_pid, version, has_*_privilege, ...
 │   ├── bitstring.md             # Bit string functions
-│   └── conditional.md           # CASE, COALESCE, NULLIF, GREATEST, LEAST
+│   ├── conditional.md           # CASE, COALESCE, NULLIF, GREATEST, LEAST
+│   └── advanced_functions/      # CedarDB-specific IO, analytics, and utility functions
+│       └── _index.md
 │
 ├── advanced/                    # CedarDB-specific and non-standard features
 │   ├── _index.md
@@ -211,13 +234,14 @@ references/
 │   ├── pgvector.md              # Vector similarity search
 │   ├── asof_join.md             # AsOf join
 │   ├── prepare.md               # Prepared statements
+│   ├── createserver.md          # CREATE SERVER (S3 foreign data wrapper)
 │   └── benchmarking.md          # Interactive benchmarking
 │
 ├── configuration.md             # Server configuration parameters
 └── writecache.md                # Write caching behavior
 ```
 
-### Why object-first?
+### Why catalog-object-first?
 
 When a user is working with tables, they want to find CREATE TABLE, ALTER TABLE,
 constraints, and partitioning in one place. Command-first organization (separate
@@ -232,7 +256,7 @@ jump directly to it.
 
 ## Content Placement Decision Tree
 
-1. **Is it about a database object (table, index, view, role, schema, sequence, function, trigger, type)?**
+1. **Is it about a catalog object (table, index, view, role, schema, sequence, function, trigger, type, policy)?**
    Go to `references/objects/<object>.md`
 
 2. **Is it a data type?**
@@ -242,13 +266,13 @@ jump directly to it.
    Go to `references/functions/<category>.md`
 
 4. **Is it about a SELECT query clause (SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, CTE, set operations, window functions)?**
-   Go to `references/sqlreference/queries/<clause>.md`
+   Go to `references/queries/<clause>.md`
 
 5. **Is it about writing data (INSERT, COPY, UPDATE, DELETE, upsert)?**
-   Go to `references/sqlreference/dml/<statement>.md`
+   Go to `references/dml/<statement>.md`
 
 6. **Is it about transaction control?**
-   Go to `references/sqlreference/transactions.md`
+   Go to `references/transactions.md`
 
 7. **Is it a CedarDB-specific feature with no PostgreSQL equivalent?**
    Go to `references/advanced/<feature>.md`
@@ -299,6 +323,25 @@ jump directly to it.
 
 ---
 
+## Page Ordering
+
+Within every directory, sub-pages are ordered alphabetically by their
+`linkTitle` (falling back to `title`). This applies to both the sidebar and
+to any hand-written member list in an `_index.md`.
+
+- The sidebar uses `.ByLinkTitle` for sub-levels via a site override of the
+  Hextra `sidebar.html` partial (`layouts/partials/sidebar.html`). The
+  top-level nav continues to use `weight` so editorial ordering (Get
+  Started first, Licensing last) is preserved.
+- Hand-written bullet lists in `_index.md` pages must mirror the sidebar
+  order — list items alphabetically by the visible link text. Keep them in
+  sync when adding or renaming pages.
+- Do not set per-page `weight:` on sub-pages to force a different order. If
+  a sub-page should appear first for editorial reasons, rename its
+  `linkTitle` rather than fighting the sort.
+
+---
+
 ## File Naming
 
 - Lowercase, snake_case when more than one word is needed (`asof_join.md`,
@@ -336,7 +379,7 @@ PostgreSQL documentation.
 ## CedarDB-Specific vs. PG-Compatible Features
 
 Features that have a PostgreSQL equivalent live in the standard reference
-structure (`objects/`, `functions/`, `sqlreference/`). CedarDB-specific
+structure (`objects/`, `functions/`, `queries/`, `dml/`). CedarDB-specific
 behavior or additions are noted inline using a "PostgreSQL Differences"
 section on the same page.
 
