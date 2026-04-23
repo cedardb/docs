@@ -216,7 +216,7 @@ SELECT DATE_TRUNC('minute', EventTime) AS M, COUNT(*) AS PageViews FROM hits WHE
 
 {{% /details %}}
 
-You can run the queries on your own setup with [`psql`](/docs/clients/psql), which supports tracking the time it takes
+You can run the queries on your own setup with [`psql`](/docs/clients/tools/psql), which supports tracking the time it takes
 to execute a query using the built-in `\timing` command.
 The ClickBench website shows the results as a minimum of three runs, which you can measure with the following bash script:
 

@@ -26,7 +26,7 @@ select doc, doc->'x' from example;
 ```
 
 For more information on how to work with JSON, take a look at our
-[JSON function reference](/docs/references/sqlreference/functions/json).
+[JSON function reference](/docs/references/functions/json).
 
 ## JSONB
 

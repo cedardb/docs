@@ -35,7 +35,7 @@ page.
 
 ## Row Level Security
 
-Postgres allows users to define access restrictions on a row basis via row level security. For details, see the [Row Level Security](row_level_security) page.
+CedarDB supports row level security as defined by PostgreSQL. See the [Row Level Security compatibility](row_level_security) page for the status matrix, and the [Policies reference](/docs/references/objects/policies) for full syntax and semantics.
 
 ## Unsupported features
 

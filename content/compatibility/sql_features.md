@@ -19,15 +19,15 @@ the [system table compatibility](../system-table) page.
 
 | **Feature**           | **Support State** | **Details**                                                                                 |
 |-----------------------|-------------------|---------------------------------------------------------------------------------------------|
-| CREATE TABLE          | Yes               | [Documentation](/docs/references/sqlreference/statements/createtable/)                      |
+| CREATE TABLE          | Yes               | [Documentation](/docs/references/objects/tables/)                      |
 | DROP TABLE            | Yes               |                                                                                             |
 | Default Values        | Yes               |                                                                                             |
 | GENERATED             | Yes               | only AS IDENTITY                                                                            |
 | Check Constraints     | No                |                                                                                             |
-| Not-Null Constraints  | Yes               | [Documentation](/docs/references/sqlreference/statements/createtable/)                      |
-| Unique Constraints    | Yes               | [Documentation](/docs/references/sqlreference/statements/createtable/)                      |
-| Primary Keys          | Yes               | [Documentation](/docs/references/sqlreference/statements/createtable/)                      |
-| Foreign Keys          | Yes               | Without ON DELETE<br>[Documentation](/docs/references/sqlreference/statements/createtable/) |
+| Not-Null Constraints  | Yes               | [Documentation](/docs/references/objects/tables/)                      |
+| Unique Constraints    | Yes               | [Documentation](/docs/references/objects/tables/)                      |
+| Primary Keys          | Yes               | [Documentation](/docs/references/objects/tables/)                      |
+| Foreign Keys          | Yes               | Without ON DELETE<br>[Documentation](/docs/references/objects/tables/) |
 | Named Constraints     | No                |                                                                                             |
 | Exclusion Constraints | No                |                                                                                             |
 | System Columns        | Yes               | Only meaningful for tableoid and ctid                                                       |
@@ -53,24 +53,24 @@ the [system table compatibility](../system-table) page.
 
 | **Feature**           | **Support State** | **Details**                                                           |
 |-----------------------|-------------------|-----------------------------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole)  |
+| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)  |
 | OWNER TO              | Yes               |                                                                       |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/sqlreference/statements/alterrole)   |
+| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)   |
 | GRANT                 | Yes               | Only GRANT role to other_role                                         |
 | REVOKE                | No                |                                                                       |
 | SET ROLE              | No                |                                                                       |
-| INHERIT               | Yes               | [Documentation](/docs/references/sqlreference/statements/createrole/) |
+| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/) |
 | Row Security Policies | No                |                                                                       |
 
 ### Indexes
 
 | **Feature**            | **Support State** | **Details**                                                                                |
 |------------------------|-------------------|--------------------------------------------------------------------------------------------|
-| CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation](/docs/references/sqlreference/statements/createindex/) |
+| CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation](/docs/references/objects/indexes/) |
 | GIN                    | No                |                                                                                            |
 | BRIN                   | No                |                                                                                            |
-| Multicolumn Indexes    | Yes               | [Documentation](/docs/references/sqlreference/statements/createindex/)                     |
-| Ordered Indexes        | Yes               | [Documentation](/docs/references/sqlreference/statements/createindex/#column-order)        |
+| Multicolumn Indexes    | Yes               | [Documentation](/docs/references/objects/indexes/)                     |
+| Ordered Indexes        | Yes               | [Documentation](/docs/references/objects/indexes/#column-order)        |
 | Unique Indexes         | Yes               |                                                                                            |
 | Indexes on Expressions | No                |                                                                                            |
 | Partial Indexes        | No                |                                                                                            |
@@ -79,52 +79,52 @@ the [system table compatibility](../system-table) page.
 
 | **Feature**            | **Support State** | **Details**                                                                                                  |
 |------------------------|-------------------|--------------------------------------------------------------------------------------------------------------|
-| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/sqlreference/statements/createschema/)                                      |
+| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                      |
 | DROP SCHEMA            | Yes               | Only if the schema is empty                                                                                  |
-| search_path            | Yes               | [Documentation](/docs/references/sqlreference/statements/createschema/#using-schemas)                        |
+| search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                        |
 | Table Inheritance      | No                |                                                                                                              |
 | Table Partitioning     | Yes               | Only at creation, only by hash                                                                               |
 | Foreign Data Wrappers  | No                |                                                                                                              |
-| Views                  | Yes               | [Documentation](/docs/references/sqlreference/statements/createview/)                                        |
-| Databases              | Yes               | [Documentation](/docs/references/sqlreference/statements/createdb/)                                          |
-| Functions & Procedures | Yes               | [Documentation](/docs/references/sqlreference/statements/createfunction/) <br> Also in cedar_script language |
+| Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                        |
+| Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                          |
+| Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language |
 | Custom Types           | No                |                                                                                                              |
 | Triggers               | No                |                                                                                                              |
 | Prepared Statements    | Yes               |                                                                                                              |
-| Advisory Locks         | Yes               | [Documentation](/docs/references/sqlreference/functions/pg_functions/#advisory-locks)                                                                                        |
+| Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                                                                                        |
 
 ## Data Manipulation
 
 | **Feature** | **Support State** | **Details**                                                                 |
 |-------------|-------------------|-----------------------------------------------------------------------------|
-| INSERT      | Yes               | [Documentation](/docs/references/sqlreference/statements/insert/)           |
-| UPDATE      | Yes               | [Documentation](/docs/references/sqlreference/statements/update/)           |
-| DELETE      | Yes               | [Documentation](/docs/references/sqlreference/statements/delete/)           |
-| TRUNCATE    | Yes               | [Documentation](/docs/references/sqlreference/statements/truncate/)         |
-| RETURNING   | Yes               | [Documentation](/docs/references/sqlreference/statements/insert/#returning) |
-| COPY FROM   | Yes               | [Documentation](/docs/references/sqlreference/statements/copy/)             |
-| COPY TO     | Yes               | [Documentation](/docs/references/sqlreference/statements/copy/)             |
-| ON CONFLICT | Yes               | [Documentation](/docs/references/sqlreference/statements/upsert/)           |
+| INSERT      | Yes               | [Documentation](/docs/references/dml/insert/)           |
+| UPDATE      | Yes               | [Documentation](/docs/references/dml/update/)           |
+| DELETE      | Yes               | [Documentation](/docs/references/dml/delete/)           |
+| TRUNCATE    | Yes               | [Documentation](/docs/references/dml/truncate/)         |
+| RETURNING   | Yes               | [Documentation](/docs/references/dml/insert/#returning) |
+| COPY FROM   | Yes               | [Documentation](/docs/references/dml/copy/)             |
+| COPY TO     | Yes               | [Documentation](/docs/references/dml/copy/)             |
+| ON CONFLICT | Yes               | [Documentation](/docs/references/dml/upsert/)           |
 
 ## Queries
 
 | **Feature**               | **Support State** | **Details**                                                                      |
 |---------------------------|-------------------|----------------------------------------------------------------------------------|
 | Table & View References   | Yes               |                                                                                  |
-| Inner Joins               | Yes               | [Documentation](/docs/references/sqlreference/queries/#joins)                    |
-| Outer Joins               | Yes               | [Documentation](/docs/references/sqlreference/queries/#joins)                    |
-| Semijoins                 | Yes               | [Documentation](/docs/references/sqlreference/queries/#joins)                    |
+| Inner Joins               | Yes               | [Documentation](/docs/references/queries/#joins)                    |
+| Outer Joins               | Yes               | [Documentation](/docs/references/queries/#joins)                    |
+| Semijoins                 | Yes               | [Documentation](/docs/references/queries/#joins)                    |
 | Antijoins                 | Yes               |                                                                                  |
 | Table Functions           | Yes               |                                                                                  |
 | Lateral Subqueries        | Yes               |                                                                                  |
 | User-Specified Aliases    | Yes               |                                                                                  |
-| GROUP BY                  | Yes               | [Documentation](/docs/references/sqlreference/queries/#group-by)                 |
-| HAVING                    | Yes               | [Documentation](/docs/references/sqlreference/queries/#group-by)                 |
+| GROUP BY                  | Yes               | [Documentation](/docs/references/queries/#group-by)                 |
+| HAVING                    | Yes               | [Documentation](/docs/references/queries/#group-by)                 |
 | GROUPING SETS             | Yes               |                                                                                  |
 | CUBE                      | Yes               |                                                                                  |
 | ROLLUP                    | Yes               |                                                                                  |
-| WINDOW Functions          | Yes               | [Documentation](/docs/references/sqlreference/queries/#window-functions)         |
-| WITH                      | Yes               | [Documentation](/docs/references/sqlreference/queries/#common-table-expressions) |
+| WINDOW Functions          | Yes               | [Documentation](/docs/references/queries/#window-functions)         |
+| WITH                      | Yes               | [Documentation](/docs/references/queries/#common-table-expressions) |
 | WITH RECURSIVE            | Yes               |                                                                                  |
 | UNION                     | Yes               |                                                                                  |
 | UNION ALL                 | Yes               |                                                                                  |
@@ -749,25 +749,25 @@ the [system table compatibility](../system-table) page.
 
 | **Feature**           | **Support State** |                                                                                                        **Details** |
 |-----------------------|-------------------|-------------------------------------------------------------------------------------------------------------------:|
-| any_value             | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| array_agg             | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| avg                   | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| bit_and               | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| bit_or                | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| bit_xor               | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| bool_and              | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| bool_or               | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| count(*)              | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| count("any")          | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
+| any_value             | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| array_agg             | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| avg                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| bit_and               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| bit_or                | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| bit_xor               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| bool_and              | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| bool_or               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| count(*)              | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| count("any")          | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | json(b)_agg           | No                |                                                                                                                    |
 | json(b)_objectagg     | No                |                                                                                                                    |
 | json(b)_object_agg    | No                |                                                                                                                    |
 | json_arrayagg         | No                |                                                                                                                    |
-| max                   | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| min                   | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
+| max                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| min                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | range(_intersect)_agg | No                |                                                                                                                    |
-| string_agg            | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
-| sum                   | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#general-purpose-functions) |
+| string_agg            | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
+| sum                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | xmlagg                | No                |                                                                                                                    |
 
 ##### Statistical
@@ -775,31 +775,31 @@ the [system table compatibility](../system-table) page.
 | **Feature**    | **Support State** |                                                                                                     **Details** |
 |----------------|-------------------|----------------------------------------------------------------------------------------------------------------:|
 | corr           | No                |                                                                                                                 |
-| covar_pop      | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| covar_samp     | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_avgx      | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_avgy      | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_count     | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_intercept | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_r2        | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_slope     | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_sxx       | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| regr_sxy       | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
+| covar_pop      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| covar_samp     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_avgx      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_avgy      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_count     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_intercept | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_r2        | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_slope     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_sxx       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_sxy       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
 | regr_syy       | No                |                                                                                                                 |
-| stddev         | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| stddev_pop     | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| stddev_samp    | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| variance       | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| var_pop        | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
-| var_samp       | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation/#statistical-aggregates) |
+| stddev         | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| stddev_pop     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| stddev_samp    | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| variance       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| var_pop        | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| var_samp       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
 
 ##### Ordered-Set
 
 | **Feature**     | **Support State** |                                                                                                               **Details** |
 |-----------------|-------------------|--------------------------------------------------------------------------------------------------------------------------:|
-| mode            | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_cont | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_disc | Yes               | [Aggregate Function Documentation](/docs/references/sqlreference/functions/aggregation//#ordered-set-aggregate-functions) |
+| mode            | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| percentile_cont | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| percentile_disc | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
 
 #### Window
 

@@ -12,19 +12,14 @@ Programming languages:
 * [C#](csharp)
 * [C++](cpp)
 * [Java](java)
-* [JavaScript](js)
+* [JavaScript](javascript) — [Drizzle](javascript/drizzle), [Prisma](javascript/prisma)
 * [Python](python)
 * [R](r)
 * [Rust](rust)
 
-ORMs:
-
-* [Drizzle](drizzle)
-* [Prisma](prisma)
-
 Tools:
 
-* [DataGrip](datagrip)
-* [DBeaver](dbeaver)
-* [Grafana](grafana)
-* [psql](psql)
+* [DataGrip](tools/datagrip)
+* [DBeaver](tools/dbeaver)
+* [Grafana](tools/grafana)
+* [psql](tools/psql)

@@ -146,5 +146,5 @@ The REPL supports:
 \?                       -- View available commands
 ```
 
-For more details, see the [SQL Reference](/docs/references/sqlreference/).
+For more details, see the [SQL Reference](/docs/references/).
 

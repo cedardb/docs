@@ -25,9 +25,9 @@ range of PostgreSQL connectors for end-user tools like Grafana and programming l
 
 | **Application** | **Version** | **Support State** | **Details**                              |
 |-----------------|-------------|-------------------|------------------------------------------|
-| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/datagrip/) |
-| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/dbeaver/)  |
-| Grafana         | 10.4.2      | Partial           | [Documentation](/docs/clients/grafana/)  |
+| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/tools/datagrip/) |
+| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/tools/dbeaver/)  |
+| Grafana         | 10.4.2      | Partial           | [Documentation](/docs/clients/tools/grafana/)  |
 
 ### Programming Language Libraries
 
@@ -36,9 +36,9 @@ range of PostgreSQL connectors for end-user tools like Grafana and programming l
 | C#           | Npgsql         | 8.0.4       | Full              | [Documentation](/docs/clients/csharp/)  |
 | C++          | libpqxx        | 7.9.1       | Full              | [Documentation](/docs/clients/cpp/)     |
 | Java         | JDBC           | 42.7.4      | Full              | [Documentation](/docs/clients/java/)    |
-| JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation](/docs/clients/js/)      |
-|              | drizzle-orm    | 0.45.1      | Partial           | [Documentation](/docs/clients/drizzle/) |
-|              | prisma-orm     | 7.7.0       | Partial           | [Documentation](/docs/clients/prisma/)  |
+| JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation](/docs/clients/javascript/)          |
+|              | drizzle-orm    | 0.45.1      | Partial           | [Documentation](/docs/clients/javascript/drizzle/)  |
+|              | prisma-orm     | 7.7.0       | Partial           | [Documentation](/docs/clients/javascript/prisma/)              |
 | Python       | psycopg2       | 2.9.10      | Full              |                                         |
 |              | psycopg        | 3.2.3       | Full              | [Documentation](/docs/clients/python/)  |
 | R            | RPostgres      | 1.4.7       | Full              | [Documentation](/docs/clients/r/)       |
