@@ -202,6 +202,16 @@ All users:  [
 ]
 ```
 
+## Prisma Studio
+
+To browse and edit your data visually, run:
+
+```shell
+npx prisma studio
+```
+
+This opens a browser UI using the connection string from `.env`.
+
 ## Known Limitations
 
 CedarDB's Prisma support is actively being developed. The following are known limitations:
