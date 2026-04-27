@@ -1,5 +1,18 @@
 [
 	{
+		"version": "v2026-04-27",
+		"date": "2026-04-27",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Add <tt>json_agg</tt> and <tt>json_build_array</tt> functions.",
+			"<b>Maintenance:</b> Fix rare cases of livelocks occurring under high insert load on partitioned tables.",
+			"<b>Maintenance:</b> Remove hidden system columns like <tt>ctid</tt> from row outputs.",
+			"<b>Maintenance:</b> Fix a bug in foreign key constraint checks when column order differs between the referenced and referencing table.",
+			"<b>Maintenance:</b> Fix output of internal helper function <tt>pg_relation_is_updatable</tt>.",
+			"<b>Maintenance:</b> Fix crash on <tt>BEGIN TRANSACTION</tt> statement in interactive mode."
+		]
+	},
+	{
 		"version": "v2026-04-20",
 		"date": "2026-04-20",
 		"breaksdb": false,
