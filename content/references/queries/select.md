@@ -14,7 +14,7 @@ select name, length from movies where id = 42;
 For fast single-element access with `where`, consider specifying `id` as primary key or adding an explicit index.
 {{< /callout >}}
 
-You can also use [expressions](../expressions) or [functions](/docs/references/functions) to transform your data:
+You can also use [expressions](../../expressions) or [functions](/docs/references/functions) to transform your data:
 ```sql
 select date_trunc('month', release_date) from movies;
 ```

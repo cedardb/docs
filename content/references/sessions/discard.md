@@ -17,7 +17,7 @@ discard all;
 * `all`
   Discard all session state. This includes [prepared statements](/docs/references/advanced/prepare),
   [temporary tables](/docs/references/objects/tables/#options), and
-  [session settings](./settings).
+  [session settings](../settings).
   After a discard all, the session behaves like a fresh connection.
   This is useful when a connection is shared between multiple client threads that all depend on having a pristine
   connection.

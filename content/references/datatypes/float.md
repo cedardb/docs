@@ -81,7 +81,7 @@ select sum(i::double precision) from x;
 (1 row)
 ```
 
-With exact-precision [`numeric`](numeric) types, the result of the query would be 0.
+With exact-precision [`numeric`](../numeric) types, the result of the query would be 0.
 However, with `double precision`, the result is only *close to* zero.
 
 The result also is not stable, i.e., can change indeterministically when repeated:

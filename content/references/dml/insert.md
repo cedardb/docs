@@ -13,7 +13,7 @@ values ('Barbie', 2023, 114, 'Comedy'),
        ('The Boy and the Heron', 2023, 124, 'Anime');
 ```
 
-When inserting many values verbatim, consider using a [copy statement](./copy)
+When inserting many values verbatim, consider using a [copy statement](../copy)
 instead to reduce parsing overhead.
 
 You can also insert rows from the result of arbitrary queries:
@@ -46,7 +46,7 @@ values (1, 'Chris'), (2, 'Philipp')
 on conflict do nothing;
 ```
 
-You can find the full documentation for `on conflict` in the [upsert reference](./upsert).
+You can find the full documentation for `on conflict` in the [upsert reference](../upsert).
 
 ## Returning
 

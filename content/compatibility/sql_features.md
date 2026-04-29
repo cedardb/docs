@@ -11,7 +11,7 @@ This page gives a **non-exhaustive** overview of currently supported core SQL fu
 CedarDB strives for full PostgreSQL compatibility, and features not currently supported will be added over time.
 
 For PostgreSQL-specific functionality, such as system table support, see
-the [system table compatibility](../system-table) page.
+the [system table compatibility](../system_table) page.
 
 ## Data Definition
 
@@ -154,7 +154,7 @@ the [system table compatibility](../system-table) page.
 | cidr                                    | No                |                                                                 |
 | circle                                  | No                |                                                                 |
 | date                                    | Yes               |           [Date Documentation](/docs/references/datatypes/date) |
-| double precision                        | Yes               |       [Double Documentation](/docs/references/datatypes/double) |
+| double precision                        | Yes               |        [Double Documentation](/docs/references/datatypes/float) |
 | inet                                    | No                |                                                                 |
 | integer                                 | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation](/docs/references/datatypes/interval) |
@@ -171,7 +171,7 @@ the [system table compatibility](../system-table) page.
 | pg_snapshot                             | No                |                                                                 |
 | point                                   | No                |                                                                 |
 | polygon                                 | No                |                                                                 |
-| real                                    | Yes               |       [Double Documentation](/docs/references/datatypes/double) |
+| real                                    | Yes               |         [Float Documentation](/docs/references/datatypes/float) |
 | smallint                                | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | smallserial                             | Yes               |                                                                 |
 | serial                                  | Yes               |                                                                 |

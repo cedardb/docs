@@ -3,7 +3,7 @@ title: "Reference: Upsert Statement"
 linkTitle: "Upsert"
 ---
 
-Upserts allow [inserting](./insert) values into tables with a custom [update](./update) logic that will be applied to
+Upserts allow [inserting](../insert) values into tables with a custom [update](../update) logic that will be applied to
 conflicting existing values.
 This allows, e.g., idempotent inserts, or to keep track of stateful data without knowledge of the previous state.
 
@@ -57,7 +57,7 @@ Alternatively, you can specify the constraint using its name, e.g., `userId_pkey
 
 A query can reference both the existing value and the not-inserted value in the `do update` clause.
 The non-inserted value can be accessed via the temporary `excluded` table, and can be combined with an arbitrary
-expression, including subselects (similar to [Updates](./update)).
+expression, including subselects (similar to [Updates](../update)).
 
 A trailing `returning` clause will then return final value in the table, so either the inserted one, or the result of
 the update.
