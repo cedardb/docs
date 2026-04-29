@@ -1,0 +1,48 @@
+{{- $destClean := strings.Trim .Destination "()" -}}
+{{- $u := urls.Parse $destClean -}}
+{{- $basePath := (urls.Parse site.BaseURL).Path -}}
+
+{{- if and (not (strings.HasPrefix $destClean "http")) (not (hasPrefix $u.Path "HAHAHUGOSHORTCODE")) -}}
+  {{- with $u.Path -}}
+
+    {{- /* Resolve to a content-root-relative path. Absolute paths strip the base prefix;
+           relative paths are joined against the page's rendered URL first. */}}
+    {{- $rel := "" -}}
+    {{- $relInner := "" -}}
+    {{- if hasPrefix . "/" -}}
+      {{- $rel = strings.TrimRight "/" (strings.TrimPrefix $basePath .) -}}
+      {{- $relInner = $rel -}}
+    {{- else -}}
+      {{- $rel      = strings.TrimRight "/" (strings.TrimPrefix $basePath (path.Join $.Page.RelPermalink .)) -}}
+      {{- $relInner = strings.TrimRight "/" (strings.TrimPrefix $basePath (path.Join $.PageInner.RelPermalink .)) -}}
+    {{- end -}}
+
+    {{- /* Discard if resolution escaped the content root (e.g. wrong page context from
+           markdownify inside a shortcode). */}}
+    {{- if or (hasPrefix $rel      "/") (hasPrefix $rel      "..") -}}{{- $rel = "" -}}{{- end -}}
+    {{- if or (hasPrefix $relInner "/") (hasPrefix $relInner "..") -}}{{- $relInner = "" -}}{{- end -}}
+
+    {{- /* Accept the link if either resolution finds a page. Page and PageInner differ
+           when a section _index.md is processed — trying both avoids false positives. */}}
+    {{- $p := or (site.GetPage $rel) (site.GetPage $relInner) -}}
+    {{- if $p -}}
+      {{- with $u.Fragment -}}
+        {{- if not ($p.Fragments.Identifiers.Contains .) -}}
+          {{- warnf "Broken anchor '#%s' on page '%s' (linked from %s)" . $u.Path $.PageInner.File.Path -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else if or $rel $relInner -}}
+      {{- warnf "Broken internal link '%s' in %s" $u.Path $.PageInner.File.Path -}}
+    {{- end -}}
+
+  {{- else -}}
+    {{- with $u.Fragment -}}
+      {{- if not ($.PageInner.Fragments.Identifiers.Contains .) -}}
+        {{- warnf "Broken same-page anchor '#%s' in %s" . $.PageInner.File.Path -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with . -}}
+  <a href="{{ .Destination | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- end -}}
