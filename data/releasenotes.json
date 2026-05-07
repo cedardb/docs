@@ -1,5 +1,23 @@
 [
 	{
+		"version": "v2026-05-07",
+		"date": "2026-05-07",
+		"breaksdb": false,
+		"notes": [
+			"<b>New Feature:</b> Use ARM neon vector instructions for vectorized execution of integer table scan predicates on ARM machines.",
+			"<b>PostgreSQL Compatibility:</b> Change return type of <tt>EXTRACT(EPOCH FROM interval '<interval>')</tt> from double precision to numeric.",
+			"<b>PostgreSQL Compatibility:</b> Implement <tt>json_arrayagg</tt> support.",
+			"<b>Maintenance:</b> Fix bad optional access in an edge case when re-optimizing prepared statements containing an index scan.",
+			"<b>Maintenance:</b> Fix missing results for long strings with filter optimization.",
+			"<b>Maintenance:</b> Fixed an issue where running cheap queries in a hot loop could lead to large memory allocations.",
+			"<b>Maintenance:</b> Fix bug in recovery when remote servers were dropped.",
+			"<b>Maintenance:</b> Fix potential live locks in the buffer manager due to stale index structures.",
+			"<b>Maintenance:</b> Fix duplicated ordinality results of <tt>generate_series</tt> and invalid lockstep execution of <tt>generate_series</tt> in combination with other set returning functions.",
+			"<b>Maintenance:</b> Set columns that are made to a primary key via <tt>ALTER TABLE</tt> to not nullable.",
+			"<b>Maintenance:</b> Name columns in <tt>cedardb_compression_infos</tt> system view."
+		]
+	},
+	{
 		"version": "v2026-04-27",
 		"date": "2026-04-27",
 		"breaksdb": false,
