@@ -49,6 +49,16 @@ menu:
       params:
         icon: github
 
+outputFormats:
+  ReleasenotesJSON:
+    mediaType: "application/json"
+    baseName: "releasenotes"
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home: [html, rss, ReleasenotesJSON]
+
 markup:
   highlight:
     noClasses: false
