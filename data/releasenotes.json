@@ -4,12 +4,30 @@
 		"date": "2026-04-27",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add <tt>json_agg</tt> and <tt>json_build_array</tt> functions.",
-			"<b>Maintenance:</b> Fix rare cases of livelocks occurring under high insert load on partitioned tables.",
-			"<b>Maintenance:</b> Remove hidden system columns like <tt>ctid</tt> from row outputs.",
-			"<b>Maintenance:</b> Fix a bug in foreign key constraint checks when column order differs between the referenced and referencing table.",
-			"<b>Maintenance:</b> Fix output of internal helper function <tt>pg_relation_is_updatable</tt>.",
-			"<b>Maintenance:</b> Fix crash on <tt>BEGIN TRANSACTION</tt> statement in interactive mode."
+			{
+				"type": "feat",
+				"note": "Add <tt>json_agg</tt> and <tt>json_build_array</tt> functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare cases of livelocks occurring under high insert load on partitioned tables."
+			},
+			{
+				"type": "fix",
+				"note": "Remove hidden system columns like <tt>ctid</tt> from row outputs."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug in foreign key constraint checks when column order differs between the referenced and referencing table."
+			},
+			{
+				"type": "fix",
+				"note": "Fix output of internal helper function <tt>pg_relation_is_updatable</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix crash on <tt>BEGIN TRANSACTION</tt> statement in interactive mode."
+			}
 		]
 	},
 	{
@@ -17,29 +35,98 @@
 		"date": "2026-04-20",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for <tt>ALTER FUNCTION</tt> statement.",
-			"<b>New Feature:</b> Add support for <tt>pg_stat_database</tt> system table.",
-			"<b>New Feature:</b> Add support for one-level <tt>ON UPDATE CASCADE</tt> on foreign keys.",
-			"<b>New Feature:</b> Release storage space to the OS with <tt>VACUUM</tt> (<tt>TRUNCATE</tt>).",
-			"<b>New Feature:</b> Reclaim pages of indexes and tables after <tt>ALTER TABLE</tt> statements.",
-			"<b>PostgreSQL Compatibility:</b> Enable uint4, int4, uint8 and int8 return types for <tt>generate_series(...)</tt> based on input types.",
-			"<b>PostgreSQL Compatibility:</b> Fix <tt>pg_index.indclass</tt> entries.",
-			"<b>PostgreSQL Compatibility:</b> Result columns of multiple table functions are now evaluated in lock-step, replacing the cross product between results with a full outer join.",
-			"<b>PostgreSQL Compatibility:</b> Fix content of <tt>pg_class.reloptions</tt> system table column.",
-			"<b>PostgreSQL Compatibility:</b> Fix <tt>context</tt> field of <tt>pg_settings</tt> system table.",
-			"<b>PostgreSQL Compatibility:</b> Add class row types to <tt>pg_types</tt> and <tt>pg_class.reltype</tt>.",
-			"<b>Maintenance:</b> Fix crash on invalid typemod inputs to <tt>pg_catalog.format_type</tt>.",
-			"<b>Maintenance:</b> Fix a race condition that could lead to a crash during an index read.",
-			"<b>Maintenance:</b> Defining views that depend on system tables no longer triggers an assert.",
-			"<b>Maintenance:</b> Fix optimizer crash on large <tt>DELETE CASCADE</tt>.",
-			"<b>Maintenance:</b> Fix unknown parameter type coercion for <tt>PREPARE</tt> statements that <tt>INSERT INTO</tt> non-null columns.",
-			"<b>Maintenance:</b> Resolve several issues within nested recursive queries that could trigger timeouts and runtime errors.",
-			"<b>Maintenance:</b> Fix inconsistency of owner of table and its dependent objects, e.g., indexes.",
-			"<b>Maintenance:</b> Fix comparison of UUIDs greater than <tt>'7FFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF'</tt> in tablescans.",
-			"<b>Maintenance:</b> <tt>generate_subscript</tt> now properly handles arrays with non-1-based lower bound.",
-			"<b>Maintenance:</b> Replace dead link in error messages.",
-			"<b>Maintenance:</b> Fix startup crash on Debian Bookworm due to wrong io_uring version check.",
-			"<b>Maintenance:</b> Remove erroneous <tt>unlinkat</tt> warnings when deleting compressed data."
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER FUNCTION</tt> statement."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>pg_stat_database</tt> system table."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for one-level <tt>ON UPDATE CASCADE</tt> on foreign keys."
+			},
+			{
+				"type": "feat",
+				"note": "Release storage space to the OS with <tt>VACUUM</tt> (<tt>TRUNCATE</tt>)."
+			},
+			{
+				"type": "feat",
+				"note": "Reclaim pages of indexes and tables after <tt>ALTER TABLE</tt> statements."
+			},
+			{
+				"type": "pg",
+				"note": "Enable uint4, int4, uint8 and int8 return types for <tt>generate_series(...)</tt> based on input types."
+			},
+			{
+				"type": "pg",
+				"note": "Fix <tt>pg_index.indclass</tt> entries."
+			},
+			{
+				"type": "pg",
+				"note": "Result columns of multiple table functions are now evaluated in lock-step, replacing the cross product between results with a full outer join."
+			},
+			{
+				"type": "pg",
+				"note": "Fix content of <tt>pg_class.reloptions</tt> system table column."
+			},
+			{
+				"type": "pg",
+				"note": "Fix <tt>context</tt> field of <tt>pg_settings</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Add class row types to <tt>pg_types</tt> and <tt>pg_class.reltype</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix crash on invalid typemod inputs to <tt>pg_catalog.format_type</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a race condition that could lead to a crash during an index read."
+			},
+			{
+				"type": "fix",
+				"note": "Defining views that depend on system tables no longer triggers an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Fix optimizer crash on large <tt>DELETE CASCADE</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix unknown parameter type coercion for <tt>PREPARE</tt> statements that <tt>INSERT INTO</tt> non-null columns."
+			},
+			{
+				"type": "fix",
+				"note": "Resolve several issues within nested recursive queries that could trigger timeouts and runtime errors."
+			},
+			{
+				"type": "fix",
+				"note": "Fix inconsistency of owner of table and its dependent objects, e.g., indexes."
+			},
+			{
+				"type": "fix",
+				"note": "Fix comparison of UUIDs greater than <tt>'7FFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF'</tt> in tablescans."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>generate_subscript</tt> now properly handles arrays with non-1-based lower bound."
+			},
+			{
+				"type": "fix",
+				"note": "Replace dead link in error messages."
+			},
+			{
+				"type": "fix",
+				"note": "Fix startup crash on Debian Bookworm due to wrong io_uring version check."
+			},
+			{
+				"type": "fix",
+				"note": "Remove erroneous <tt>unlinkat</tt> warnings when deleting compressed data."
+			}
 		]
 	},
 	{
@@ -47,131 +134,443 @@
 		"date": "2026-04-02",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for PostgreSQL-compatible role-based access control through GRANT and REVOKE.",
-			"<b>New Feature:</b> Add support for cascading deletes.",
-			"<b>New Feature:</b> Add support for input and output of array types in postgres binary format.",
-			"<b>New Feature:</b> Support <tt>if not exists</tt> in <tt>create role</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Improve implicit column names instead of returning '?column?'.",
-			"<b>PostgreSQL Compatibility:</b> Allow INSERT / UPDATE / DELETE in CTEs.",
-			"<b>PostgreSQL Compatibility:</b> Add support for simple <tt>create table like</tt> statements.",
-			"<b>PostgreSQL Compatibility:</b> Add support for <tt>CREATE OR REPLACE FUNCTION</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Add support for the <tt>aclexplode</tt> function.",
-			"<b>PostgreSQL Compatibility:</b> Add support for the <tt>pg_get_functiondef</tt> function.",
-			"<b>PostgreSQL Compatibility:</b> <tt>DROP TABLE IF EXISTS</tt> does not error on invalid schemas any more.",
-			"<b>PostgreSQL Compatibility:</b> <tt>array_ndims</tt> and <tt>array_dims</tt> functions now return <tt>NULL</tt> for empty arrays with no dimensions.",
-			"<b>PostgreSQL Compatibility:</b> Fix oid functions to check the search path.",
-			"<b>PostgreSQL Compatibility:</b> Add additional information about foreign keys to <tt>pg_constraints</tt> system table.",
-			"<b>PostgreSQL Compatibility:</b> Fix conversion of <tt>char(1)</tt> with zero byte '\\0' content to <tt>text</tt> and other types.",
-			"<b>PostgreSQL Compatibility:</b> <tt>length()</tt> function for <tt>character</tt> now returns the length of the stored character sequence instead of the precision of the type.",
-			"<b>PostgreSQL Compatibility:</b> Comparisons of <tt>text</tt> and <tt>varchar</tt> with <tt>character</tt> and <tt>char</tt> no longer strip whitespace from the right side of the string.",
-			"<b>Maintenance:</b> Avoid <tt>No such file or directory</tt> warnings for connections via domain sockets.",
-			"<b>Maintenance:</b> Fix database checkpoints potentially missing page modifications.",
-			"<b>Maintenance:</b> Add <tt>parquet_scan</tt> and <tt>read_parquet</tt> alias for <tt>parquet_view</tt>.",
-			"<b>Maintenance:</b> Fixes in parquet dictionary parsing and detection of malformed headers.",
-			"<b>Maintenance:</b> Allow table-qualified expressions in <tt>ORDER BY</tt> clause in <tt>DISTINCT</tt> query (e.g. <tt>SELECT DISTINCT … ORDER BY t.col</tt>).",
-			"<b>Maintenance:</b> Dropping a primary key constraint after at least one incoming foreign key constraint has been dropped no longer triggers an assert.",
-			"<b>Maintenance:</b> <tt>UPDATE</tt> with <tt>RETURNING</tt> now properly returns table-qualified column references.",
-			"<b>Maintenance:</b> Evaluating random() after an outer join no longer triggers an assert.",
-			"<b>Maintenance:</b> Fix bug where multiple unnest() calls in a subquery could lead to an internal error.",
-			"<b>Maintenance:</b> Update timezone information to timezone db version 2026a.",
-			"<b>Maintenance:</b> Parquet: Read files with V2 headers and mixed compressed and uncompressed pages.",
-			"<b>Maintenance:</b> Parquet handles files with missing dictionary offset correctly.",
-			"<b>Maintenance:</b> Add a fallback path to avoid <tt>unable to allocate memory</tt> errors.",
-			"<b>Maintenance:</b> Enable single-character split for non-matching regex in <tt>regexp_split_to_array</tt>."
-            ]
-        },
+			{
+				"type": "feat",
+				"note": "Add support for PostgreSQL-compatible role-based access control through GRANT and REVOKE."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for cascading deletes."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for input and output of array types in postgres binary format."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>if not exists</tt> in <tt>create role</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Improve implicit column names instead of returning '?column?'."
+			},
+			{
+				"type": "pg",
+				"note": "Allow INSERT / UPDATE / DELETE in CTEs."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for simple <tt>create table like</tt> statements."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for <tt>CREATE OR REPLACE FUNCTION</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for the <tt>aclexplode</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for the <tt>pg_get_functiondef</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>DROP TABLE IF EXISTS</tt> does not error on invalid schemas any more."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>array_ndims</tt> and <tt>array_dims</tt> functions now return <tt>NULL</tt> for empty arrays with no dimensions."
+			},
+			{
+				"type": "pg",
+				"note": "Fix oid functions to check the search path."
+			},
+			{
+				"type": "pg",
+				"note": "Add additional information about foreign keys to <tt>pg_constraints</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Fix conversion of <tt>char(1)</tt> with zero byte '\\0' content to <tt>text</tt> and other types."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>length()</tt> function for <tt>character</tt> now returns the length of the stored character sequence instead of the precision of the type."
+			},
+			{
+				"type": "pg",
+				"note": "Comparisons of <tt>text</tt> and <tt>varchar</tt> with <tt>character</tt> and <tt>char</tt> no longer strip whitespace from the right side of the string."
+			},
+			{
+				"type": "fix",
+				"note": "Avoid <tt>No such file or directory</tt> warnings for connections via domain sockets."
+			},
+			{
+				"type": "fix",
+				"note": "Fix database checkpoints potentially missing page modifications."
+			},
+			{
+				"type": "fix",
+				"note": "Add <tt>parquet_scan</tt> and <tt>read_parquet</tt> alias for <tt>parquet_view</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixes in parquet dictionary parsing and detection of malformed headers."
+			},
+			{
+				"type": "fix",
+				"note": "Allow table-qualified expressions in <tt>ORDER BY</tt> clause in <tt>DISTINCT</tt> query (e.g. <tt>SELECT DISTINCT … ORDER BY t.col</tt>)."
+			},
+			{
+				"type": "fix",
+				"note": "Dropping a primary key constraint after at least one incoming foreign key constraint has been dropped no longer triggers an assert."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>UPDATE</tt> with <tt>RETURNING</tt> now properly returns table-qualified column references."
+			},
+			{
+				"type": "fix",
+				"note": "Evaluating random() after an outer join no longer triggers an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Fix bug where multiple unnest() calls in a subquery could lead to an internal error."
+			},
+			{
+				"type": "fix",
+				"note": "Update timezone information to timezone db version 2026a."
+			},
+			{
+				"type": "fix",
+				"note": "Parquet: Read files with V2 headers and mixed compressed and uncompressed pages."
+			},
+			{
+				"type": "fix",
+				"note": "Parquet handles files with missing dictionary offset correctly."
+			},
+			{
+				"type": "fix",
+				"note": "Add a fallback path to avoid <tt>unable to allocate memory</tt> errors."
+			},
+			{
+				"type": "fix",
+				"note": "Enable single-character split for non-matching regex in <tt>regexp_split_to_array</tt>."
+			}
+		]
+	},
 	{
 		"version": "v2026-03-19",
 		"date": "2026-03-19",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for <tt>OVERRIDE SYSTEM VALUE</tt> and <tt>OVERRIDE USER VALUE</tt> for <tt>INSERT</tt> statements.",
-			"<b>New Feature:</b> Implement <tt>SEQUENCE NAME</tt> option for generated columns",
-			"<b>New Feature:</b> Add support for <tt>GENERATED ALWAYS AS IDENTITY</tt> columns.",
-			"<b>New Feature:</b> Implement <tt>pg_stat_activity</tt>.",
-			"<b>New Feature:</b> Implement <tt>pg_stat_ssl</tt>.",
-			"<b>New Feature:</b> Improve hinting for common error situations.",
-			"<b>Performance:</b> Improve the performance of table scans with compressed data ~5 %.",
-			"<b>PostgreSQL Compatibility:</b> Add support for <tt>pg_get_serial_sequence</tt> function.",
-			"<b>PostgreSQL Compatibility:</b> Allow for non-constant inputs in sequence functions, e.g., <tt>PREPARE nextseq as SELECT nextval($1)</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Implement <tt>pg_backend_pid()</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Implement <tt>pg_stat_get_activity()</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Align system table column types with postgres system table column types.",
-			"<b>PostgreSQL Compatibility:</b> Fix output of <tt>pg_show_all_settings</tt> to improve compatibility with pgAdmin.",
-			"<b>PostgreSQL Compatibility:</b> Fix entries of columns <tt>attidentity</tt>, <tt>atthasdef</tt> and <tt>attgenerated</tt> in <tt>pg_attribute</tt> system table.",
-			"<b>Maintenance:</b> Fix parsing legacy parquet files without nullability statistics and dictionary encoding.",
-			"<b>Maintenance:</b> Parquet Reader accepts files with wrong Page Metadata written by DuckDB until 2024.",
-			"<b>Maintenance:</b> Reduce log-noise in docker image caused by health check queries.",
-			"<b>Maintenance:</b> Fix cases of timestamps with timezone overeagerly converting to daylight savings time on the day of a DST switch.",
-			"<b>Maintenance:</b> Fix an error where <tt>INSERT INTO x DEFAULT VALUES</tt> did not insert a row.",
-			"<b>Maintenance:</b> Change <tt>generate_subscripts</tt> function return type to int32.",
-			"<b>Maintenance:</b> Fix JSON representation of arrays with lower bounds other than 1.",
-			"<b>Maintenance:</b> Fix a bug where the ordinality result column of <tt>unnest(array) WITH ORDINALITY</tt> was not usable in outer operators.",
-			"<b>Maintenance:</b> Fix <tt>ALTER TABLE ... ADD COLUMN ... DEFAULT ... </tt> with different column and default value types.",
-			"<b>Maintenance:</b> Fix printing enum columns to CSVs."
-            ]
-        },
+			{
+				"type": "feat",
+				"note": "Add support for <tt>OVERRIDE SYSTEM VALUE</tt> and <tt>OVERRIDE USER VALUE</tt> for <tt>INSERT</tt> statements."
+			},
+			{
+				"type": "feat",
+				"note": "Implement <tt>SEQUENCE NAME</tt> option for generated columns"
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>GENERATED ALWAYS AS IDENTITY</tt> columns."
+			},
+			{
+				"type": "feat",
+				"note": "Implement <tt>pg_stat_activity</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Implement <tt>pg_stat_ssl</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Improve hinting for common error situations."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of table scans with compressed data ~5 %."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for <tt>pg_get_serial_sequence</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Allow for non-constant inputs in sequence functions, e.g., <tt>PREPARE nextseq as SELECT nextval($1)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implement <tt>pg_backend_pid()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implement <tt>pg_stat_get_activity()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Align system table column types with postgres system table column types."
+			},
+			{
+				"type": "pg",
+				"note": "Fix output of <tt>pg_show_all_settings</tt> to improve compatibility with pgAdmin."
+			},
+			{
+				"type": "pg",
+				"note": "Fix entries of columns <tt>attidentity</tt>, <tt>atthasdef</tt> and <tt>attgenerated</tt> in <tt>pg_attribute</tt> system table."
+			},
+			{
+				"type": "fix",
+				"note": "Fix parsing legacy parquet files without nullability statistics and dictionary encoding."
+			},
+			{
+				"type": "fix",
+				"note": "Parquet Reader accepts files with wrong Page Metadata written by DuckDB until 2024."
+			},
+			{
+				"type": "fix",
+				"note": "Reduce log-noise in docker image caused by health check queries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix cases of timestamps with timezone overeagerly converting to daylight savings time on the day of a DST switch."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an error where <tt>INSERT INTO x DEFAULT VALUES</tt> did not insert a row."
+			},
+			{
+				"type": "fix",
+				"note": "Change <tt>generate_subscripts</tt> function return type to int32."
+			},
+			{
+				"type": "fix",
+				"note": "Fix JSON representation of arrays with lower bounds other than 1."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where the ordinality result column of <tt>unnest(array) WITH ORDINALITY</tt> was not usable in outer operators."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>ALTER TABLE ... ADD COLUMN ... DEFAULT ... </tt> with different column and default value types."
+			},
+			{
+				"type": "fix",
+				"note": "Fix printing enum columns to CSVs."
+			}
+		]
+	},
 	{
 		"version": "v2026-03-03",
 		"date": "2026-03-03",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Support <tt>FORCE_NULL</tt> and <tt>FORCE_NOT_NULL</tt> options for <tt>COPY FROM</tt>.",
-			"<b>New Feature:</b> Add support to expand '*' in file names, e.g., <tt>SELECT col1, col2 FROM 'part*.parquet'</tt>.",
-			"<b>New Feature:</b> Add brotli decompresion support to parquet.",
-			"<b>New Feature:</b> Add <tt>process_sql</tt> for data preloading with <a href='/docs/get_started/install_with_docker/#preloading-data'>docker init scripts</a>.",
-			"<b>Performance:</b> Decrease memory footprint of new connections",
-			"<b>PostgreSQL Compatibility:</b> Add support for named primary key, foreign key and unique constraints in <tt>CREATE TABLE</tt> and <tt>ALTER TABLE</tt> statements.",
-			"<b>Maintenance:</b> Add version information of subcomponents to <tt>cedardb -version</tt> command line output",
-			"<b>Maintenance:</b> Fix missing results for open range predicates answered through index scans on columns with custom null ordering, i.e., <tt>x &lt; 3</tt> on an index with <tt>x ASC NULLS FIRST</tt>.",
-			"<b>Maintenance:</b> Enable <tt>row_to_json</tt> to accept composite type expansions, like <tt>table.*</tt>.",
-			"<b>Maintenance:</b> Fix a rare race condition that left duplicates in primary index by concurrent `INSERT INTO .. ON CONFLICT .. DO UPDATE` patterns that updated the same key.",
-			"<b>Maintenance:</b> Add proper handling for unsupported named check constraints in <tt>ALTER TABLE ADD CONSTRAINT &lt;name&gt; CHECK &lt;...&gt;</tt>.",
-			"<b>Maintenance:</b> Fix rare snapshot inconsistency with high number of short-lived concurrent connections.",
-			"<b>Maintenance:</b> Fix <tt>cotd</tt> and <tt>cot</tt> behavior for multiples of 180 degrees.",
-			"<b>Maintenance:</b> Fix nullability behavior of text similarity functions.",
-			"<b>Maintenance:</b> Fix an assertion that triggered during optimization of recursive cte's with unused columns.",
-			"<b>Maintenance:</b> Fix unnesting of row expressions in complex queries."
-            ]
-        },
+			{
+				"type": "feat",
+				"note": "Support <tt>FORCE_NULL</tt> and <tt>FORCE_NOT_NULL</tt> options for <tt>COPY FROM</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support to expand '*' in file names, e.g., <tt>SELECT col1, col2 FROM 'part*.parquet'</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add brotli decompresion support to parquet."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>process_sql</tt> for data preloading with <a href='/docs/get_started/install_with_docker/#preloading-data'>docker init scripts</a>."
+			},
+			{
+				"type": "perf",
+				"note": "Decrease memory footprint of new connections"
+			},
+			{
+				"type": "pg",
+				"note": "Add support for named primary key, foreign key and unique constraints in <tt>CREATE TABLE</tt> and <tt>ALTER TABLE</tt> statements."
+			},
+			{
+				"type": "fix",
+				"note": "Add version information of subcomponents to <tt>cedardb -version</tt> command line output"
+			},
+			{
+				"type": "fix",
+				"note": "Fix missing results for open range predicates answered through index scans on columns with custom null ordering, i.e., <tt>x &lt; 3</tt> on an index with <tt>x ASC NULLS FIRST</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Enable <tt>row_to_json</tt> to accept composite type expansions, like <tt>table.*</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition that left duplicates in primary index by concurrent `INSERT INTO .. ON CONFLICT .. DO UPDATE` patterns that updated the same key."
+			},
+			{
+				"type": "fix",
+				"note": "Add proper handling for unsupported named check constraints in <tt>ALTER TABLE ADD CONSTRAINT &lt;name&gt; CHECK &lt;...&gt;</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare snapshot inconsistency with high number of short-lived concurrent connections."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>cotd</tt> and <tt>cot</tt> behavior for multiples of 180 degrees."
+			},
+			{
+				"type": "fix",
+				"note": "Fix nullability behavior of text similarity functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assertion that triggered during optimization of recursive cte's with unused columns."
+			},
+			{
+				"type": "fix",
+				"note": "Fix unnesting of row expressions in complex queries."
+			}
+		]
+	},
 	{
 		"version": "v2026-02-18",
 		"date": "2026-02-18",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> CedarDB binary checks for current version.",
-			"<b>Performance:</b> Replace internal UUID representation for better performance.",
-			"<b>Performance:</b> Improved BigNumeric runtime performance.",
-			"<b>Performance:</b> Improve performance of filters on boolean columns.",
-			"<b>Performance:</b> Cardinality estimation for expressions on intervals is now more exact.",
-			"<b>Performance:</b> Add partition pruning for IN and BETWEEN predicates.",
-			"<b>Performance:</b> Speed up for FSST decompression.",
-			"<b>PostgreSQL Compatibility:</b> Added support for <tt>pg_database_size()</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Ensure search path compatibility with PostgreSQL in a lot of edge cases.",
-			"<b>PostgreSQL Compatibility:</b> Fix quoting of identifiers in OID output, <tt>pg_get_indexdef</tt> and similar functions.",
-			"<b>PostgreSQL Compatibility:</b> Fix edge cases in parsing OIDs from schema-qualified object names and object names with reserved keywords.",
-			"<b>PostgreSQL Compatibility:</b> Use the same naming as PostgreSQL for types in Type-OID output and the <tt>format_type</tt> function.",
-			"<b>PostgreSQL Compatibility:</b> Added missing interval extraction functions: <tt>microsecond, millisecond, week, quarter, decade, century, millenium</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Added support the <tt>postgres_verbose</tt> interval style.",
-			"<b>PostgreSQL Compatibility:</b> Accept <tt>NaN, -Infinity, Infinity</tt> as JSON literals.",
-			"<b>Maintenance:</b> Fix a rare race condition that crashed recovery.",
-			"<b>Maintenance:</b> Fix sequence naming for <tt>generated always</tt> columns of tables which name includes a <tt>\"</tt> character.",
-			"<b>Maintenance:</b> Fix a bug where comparison of int128 values in Numerics failed.",
-			"<b>Maintenance:</b> Fix a bug in FSST compression that was caused by false positives when matching a byte sequence to symbols.",
-			"<b>Maintenance:</b> Fix crash due to malformed WHERE clause in UPDATE and DELETE statements.",
-			"<b>Maintenance:</b> Fixed bug that crashed the database when the <tt>current_schemas</tt> function was used with an invalid argument type.",
-			"<b>Maintenance:</b> Reduce docker image size.",
-			"<b>Maintenance:</b> Fix a crash during optimization of nested set operations.",
-			"<b>Maintenance:</b> Fix a bug where the sign of an interval's month field was flipped when cast to a string.",
-			"<b>Maintenance:</b> Comparison of intervals now normalizes intervals. The previous behavior lead to edge cases where <tt>'35 days' < '1 month'</tt>.",
-			"<b>Maintenance:</b> Correctly handle overflows in interval multiplication and division.",
-			"<b>Maintenance:</b> Out of bounds access error messages for bit fields now print the correct bounds.",
-			"<b>Maintenance:</b> Fix <tt>ALTER TABLE ADD COLUMN IF NOT EXISTS</tt>.",
-			"<b>Maintenance:</b> Fix crash when reoptimizing a prepared statement's join into an index join.",
-			"<b>Maintenance:</b> Fix unnesting map operators for rare edge cases.",
-			"<b>Maintenance:</b> Fix a rare race condition that corrupted indexes.",
-			"<b>Maintenance:</b> Fix <tt>pg_advisory_lock</tt> with NULL inputs.",
-			"<b>Maintenance:</b> Fix UUID ordering bug for UUIDs with most significant bit set to 1."
+			{
+				"type": "feat",
+				"note": "CedarDB binary checks for current version."
+			},
+			{
+				"type": "perf",
+				"note": "Replace internal UUID representation for better performance."
+			},
+			{
+				"type": "perf",
+				"note": "Improved BigNumeric runtime performance."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of filters on boolean columns."
+			},
+			{
+				"type": "perf",
+				"note": "Cardinality estimation for expressions on intervals is now more exact."
+			},
+			{
+				"type": "perf",
+				"note": "Add partition pruning for IN and BETWEEN predicates."
+			},
+			{
+				"type": "perf",
+				"note": "Speed up for FSST decompression."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for <tt>pg_database_size()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Ensure search path compatibility with PostgreSQL in a lot of edge cases."
+			},
+			{
+				"type": "pg",
+				"note": "Fix quoting of identifiers in OID output, <tt>pg_get_indexdef</tt> and similar functions."
+			},
+			{
+				"type": "pg",
+				"note": "Fix edge cases in parsing OIDs from schema-qualified object names and object names with reserved keywords."
+			},
+			{
+				"type": "pg",
+				"note": "Use the same naming as PostgreSQL for types in Type-OID output and the <tt>format_type</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Added missing interval extraction functions: <tt>microsecond, millisecond, week, quarter, decade, century, millenium</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added support the <tt>postgres_verbose</tt> interval style."
+			},
+			{
+				"type": "pg",
+				"note": "Accept <tt>NaN, -Infinity, Infinity</tt> as JSON literals."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition that crashed recovery."
+			},
+			{
+				"type": "fix",
+				"note": "Fix sequence naming for <tt>generated always</tt> columns of tables which name includes a <tt>\"</tt> character."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where comparison of int128 values in Numerics failed."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug in FSST compression that was caused by false positives when matching a byte sequence to symbols."
+			},
+			{
+				"type": "fix",
+				"note": "Fix crash due to malformed WHERE clause in UPDATE and DELETE statements."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed bug that crashed the database when the <tt>current_schemas</tt> function was used with an invalid argument type."
+			},
+			{
+				"type": "fix",
+				"note": "Reduce docker image size."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash during optimization of nested set operations."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where the sign of an interval's month field was flipped when cast to a string."
+			},
+			{
+				"type": "fix",
+				"note": "Comparison of intervals now normalizes intervals. The previous behavior lead to edge cases where <tt>'35 days' < '1 month'</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Correctly handle overflows in interval multiplication and division."
+			},
+			{
+				"type": "fix",
+				"note": "Out of bounds access error messages for bit fields now print the correct bounds."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>ALTER TABLE ADD COLUMN IF NOT EXISTS</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix crash when reoptimizing a prepared statement's join into an index join."
+			},
+			{
+				"type": "fix",
+				"note": "Fix unnesting map operators for rare edge cases."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition that corrupted indexes."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>pg_advisory_lock</tt> with NULL inputs."
+			},
+			{
+				"type": "fix",
+				"note": "Fix UUID ordering bug for UUIDs with most significant bit set to 1."
+			}
 		]
 	},
 	{
@@ -179,13 +578,34 @@
 		"date": "2026-02-03",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add gcd(int, int) and gcd(bigint, bigint) to calculate the greatest common divisor.",
-			"<b>New Feature:</b> <tt>CREATE INDEX</tt> and <tt>ALTER TABLE</tt> don't lock the entire database any more and can operate on different tables concurrently.",
-			"<b>New Feature:</b> The performance optimization <tt>BEGIN BULK WRITE</tt> is now obsolete and is replaced by automatic fine-grained locks within regular transactions. You can re-enable the bulk writer by setting <tt>usebulkwriter = true</tt> in your config file and restarting CedarDB.",
-			"<b>Performance:</b> Fix an issue where escaped characters could result in a wrong CSV file line estimate affecting <tt>COPY</tt> efficiency.",
-			"<b>Maintenance:</b> Fix parsing <tt>MATCH</tt> in <tt>CREATE TABLE</tt> statements.",
-			"<b>Maintenance:</b> Fix a bug that prevented deleted compressed data from being freed on disk.",
-			"<b>Maintenance:</b> Update CedarDB libraries and reduce size of the Docker image."
+			{
+				"type": "feat",
+				"note": "Add gcd(int, int) and gcd(bigint, bigint) to calculate the greatest common divisor."
+			},
+			{
+				"type": "feat",
+				"note": "<tt>CREATE INDEX</tt> and <tt>ALTER TABLE</tt> don't lock the entire database any more and can operate on different tables concurrently."
+			},
+			{
+				"type": "feat",
+				"note": "The performance optimization <tt>BEGIN BULK WRITE</tt> is now obsolete and is replaced by automatic fine-grained locks within regular transactions. You can re-enable the bulk writer by setting <tt>usebulkwriter = true</tt> in your config file and restarting CedarDB."
+			},
+			{
+				"type": "perf",
+				"note": "Fix an issue where escaped characters could result in a wrong CSV file line estimate affecting <tt>COPY</tt> efficiency."
+			},
+			{
+				"type": "fix",
+				"note": "Fix parsing <tt>MATCH</tt> in <tt>CREATE TABLE</tt> statements."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug that prevented deleted compressed data from being freed on disk."
+			},
+			{
+				"type": "fix",
+				"note": "Update CedarDB libraries and reduce size of the Docker image."
+			}
 		]
 	},
 	{
@@ -193,19 +613,58 @@
 		"date": "2026-01-22",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Significantly improved compression for text columns using FSST with dictionary encoding.",
-			"<b>New Feature:</b> Add support for enums, allowing for the creation and use of labelling datatypes wherever required.",
-			"<b>New Feature:</b> Add built-in function <tt>hamming_distance</tt>, computing the hamming distance between two inputs of type <tt>bytea</tt>.",
-			"<b>Performance:</b> Improve performance for hash joins with wide tables.",
-			"<b>Performance:</b> Reduced versioning memory footprint when reinserting after mass deletes in a relation.",
-			"<b>Performance:</b> Use finer-grained checks for prepared statement invalidation within a long-running transaction.",
-			"<b>PostgreSQL Compatibility:</b> support <tt>ALTER DATABASE ... OWNER TO</tt> and <tt>RENAME TO</tt>.",
-			"<b>PostgreSQL Compatibility:</b> support <tt>ALTER TABLE DROP CONSTRAINT</tt>.",
-			"<b>PostgreSQL Compatibility:</b> support <tt>DROP DATABASE</tt> of empty databases.",
-			"<b>Maintenance:</b> pg_constraints does not contain duplicates anymore if a table was altered.",
-			"<b>Maintenance:</b> Fix missing tuples when scanning partitioned relations using an index.",
-			"<b>Maintenance:</b> Invalidate and reprepare prepared statements affected by session setting changes.",
-			"<b>Maintenance:</b> Reuse storage of deleted indexes."
+			{
+				"type": "feat",
+				"note": "Significantly improved compression for text columns using FSST with dictionary encoding."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for enums, allowing for the creation and use of labelling datatypes wherever required."
+			},
+			{
+				"type": "feat",
+				"note": "Add built-in function <tt>hamming_distance</tt>, computing the hamming distance between two inputs of type <tt>bytea</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance for hash joins with wide tables."
+			},
+			{
+				"type": "perf",
+				"note": "Reduced versioning memory footprint when reinserting after mass deletes in a relation."
+			},
+			{
+				"type": "perf",
+				"note": "Use finer-grained checks for prepared statement invalidation within a long-running transaction."
+			},
+			{
+				"type": "pg",
+				"note": "support <tt>ALTER DATABASE ... OWNER TO</tt> and <tt>RENAME TO</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "support <tt>ALTER TABLE DROP CONSTRAINT</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "support <tt>DROP DATABASE</tt> of empty databases."
+			},
+			{
+				"type": "fix",
+				"note": "pg_constraints does not contain duplicates anymore if a table was altered."
+			},
+			{
+				"type": "fix",
+				"note": "Fix missing tuples when scanning partitioned relations using an index."
+			},
+			{
+				"type": "fix",
+				"note": "Invalidate and reprepare prepared statements affected by session setting changes."
+			},
+			{
+				"type": "fix",
+				"note": "Reuse storage of deleted indexes."
+			}
 		]
 	},
 	{
@@ -213,22 +672,70 @@
 		"date": "2026-01-15",
 		"breaksdb": false,
 		"notes": [
-			"<b>Performance:</b> Late materialize result columns not used in the query for up to 1000x query speedup.",
-			"<b>PostgreSQL Compatibility:</b> Add support for COPY (ON_ERROR ignore) to load CSVs on a best-effort basis.",
-			"<b>PostgreSQL Compatibility:</b> Support NegotiateProtocolVersion message for protocol version 3.2 introduced with Postgres 18.",
-			"<b>PostgreSQL Compatibility:</b> Synchronize CedarDB SQL parser grammar with Postgres 18.",
-			"<b>PostgreSQL Compatibility:</b> Support partitioned relations in psql description mode.",
-			"<b>Maintenance:</b> Fix a rare segfault when accessing versions left by rollbacked transactions inserting and deleting same tuples in the same transaction.",
-			"<b>Maintenance:</b> Fix a bug that could be triggered by an <tt>UPDATE ON CONFLICT</tt> with many columns.",
-			"<b>Maintenance:</b> Prevent crash caused by strings exceeding 4 GB during query execution.",
-			"<b>Maintenance:</b> Fix a bug where updating the partition key column could move tuples to the wrong partition.",
-			"<b>Maintenance:</b> Fix a bug where we sent telemetry at a higher frequency than intended.",
-			"<b>Maintenance:</b> Fix a bug in outer join null handling caused by the psql command <tt>&bsol;d TABLENAME</tt>.",
-			"<b>Maintenance:</b> Fix return value of ascii function with empty string.",
-			"<b>Maintenance:</b> Fix array concat with NULL.",
-			"<b>Maintenance:</b> Fix handling null values when compressing two or more ALP compressed columns.",
-			"<b>Maintenance:</b> Fix a bug that could be triggered when updating neighboring versions whose lifetimes differ.",
-			"<b>Maintenance:</b> Fix a rare race condition when drop table maintenance task were running during shutdown."
+			{
+				"type": "perf",
+				"note": "Late materialize result columns not used in the query for up to 1000x query speedup."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for COPY (ON_ERROR ignore) to load CSVs on a best-effort basis."
+			},
+			{
+				"type": "pg",
+				"note": "Support NegotiateProtocolVersion message for protocol version 3.2 introduced with Postgres 18."
+			},
+			{
+				"type": "pg",
+				"note": "Synchronize CedarDB SQL parser grammar with Postgres 18."
+			},
+			{
+				"type": "pg",
+				"note": "Support partitioned relations in psql description mode."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare segfault when accessing versions left by rollbacked transactions inserting and deleting same tuples in the same transaction."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug that could be triggered by an <tt>UPDATE ON CONFLICT</tt> with many columns."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent crash caused by strings exceeding 4 GB during query execution."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where updating the partition key column could move tuples to the wrong partition."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where we sent telemetry at a higher frequency than intended."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug in outer join null handling caused by the psql command <tt>&bsol;d TABLENAME</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix return value of ascii function with empty string."
+			},
+			{
+				"type": "fix",
+				"note": "Fix array concat with NULL."
+			},
+			{
+				"type": "fix",
+				"note": "Fix handling null values when compressing two or more ALP compressed columns."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug that could be triggered when updating neighboring versions whose lifetimes differ."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition when drop table maintenance task were running during shutdown."
+			}
 		]
 	},
 	{
@@ -236,20 +743,62 @@
 		"date": "2025-12-19",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add <tt>VACUUM (CHECK_INTEGRITY)</tt> to verify database integrity.",
-			"<b>Performance:</b> Table scans on partitioned tables are now up to 1000 times faster.",
-			"<b>Performance:</b> Improve performance of complex queries on system tables.",
-			"<b>PostgreSQL Compatibility:</b> Support <tt>ALTER SEQUENCE OWNER TO</tt>.",
-			"<b>Maintenance:</b> Fix missing default values in <tt>ALTER TABLE ADD COLUMN</tt> with specified default values.",
-			"<b>Maintenance:</b> Fix a race condition where we loaded data with <tt>COPY</tt> to tables without writing their index entries.",
-			"<b>Maintenance:</b> Fix incorrect empty results for index scans in partitioned relations when the partition key is not bound.",
-			"<b>Maintenance:</b> Fix an issue during database shutdown that could cause some recently modified pages not to be persisted. This often manifested as missing index entries after restart.",
-			"<b>Maintenance:</b> Fix a table corruption when a crash occurs shortly after a truncate.",
-			"<b>Maintenance:</b> Fix a rare race condition when maintenance tasks were still running during shutdown.",
-			"<b>Maintenance:</b> Running <tt>DROP TABLE</tt> in bulk transactions no longer disrupts concurrent readers.",
-			"<b>Maintenance:</b> Fix pgAdmin4 metadata query resulting in no printed results.",
-			"<b>Maintenance:</b> Fix columnar comparison of array values.",
-			"<b>Maintenance:</b> Fix type coercion of <tt>ARRAY[NULL]</tt>."
+			{
+				"type": "feat",
+				"note": "Add <tt>VACUUM (CHECK_INTEGRITY)</tt> to verify database integrity."
+			},
+			{
+				"type": "perf",
+				"note": "Table scans on partitioned tables are now up to 1000 times faster."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of complex queries on system tables."
+			},
+			{
+				"type": "pg",
+				"note": "Support <tt>ALTER SEQUENCE OWNER TO</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix missing default values in <tt>ALTER TABLE ADD COLUMN</tt> with specified default values."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a race condition where we loaded data with <tt>COPY</tt> to tables without writing their index entries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix incorrect empty results for index scans in partitioned relations when the partition key is not bound."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an issue during database shutdown that could cause some recently modified pages not to be persisted. This often manifested as missing index entries after restart."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a table corruption when a crash occurs shortly after a truncate."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition when maintenance tasks were still running during shutdown."
+			},
+			{
+				"type": "fix",
+				"note": "Running <tt>DROP TABLE</tt> in bulk transactions no longer disrupts concurrent readers."
+			},
+			{
+				"type": "fix",
+				"note": "Fix pgAdmin4 metadata query resulting in no printed results."
+			},
+			{
+				"type": "fix",
+				"note": "Fix columnar comparison of array values."
+			},
+			{
+				"type": "fix",
+				"note": "Fix type coercion of <tt>ARRAY[NULL]</tt>."
+			}
 		]
 	},
 	{
@@ -257,18 +806,54 @@
 		"date": "2025-12-10",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Slice multi-dimensional arrays.",
-			"<b>Performance:</b> Add compression for floating-point numbers (Adaptive Lossless Floating-Point Compression).",
-			"<b>PostgreSQL Compatibility:</b> <tt>trim_array</tt> now correctly observes dimension offsets, i.e. <tt>trim_array([10:12]={1,2,3},2)</tt> now returns <tt>{2,3}</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Treat <tt>ctid</tt> column as a functional dependency key for the whole table, allowing query patterns like <tt>select any_column from any_table group by ctid</tt>.",
-			"<b>PostgreSQL Compatibility:</b> Add more types to <tt>pg_type</tt> including missing array types.",
-			"<b>Maintenance:</b> Fix an assertion error with prepared statements caused by concurrent DDL statements.",
-			"<b>Maintenance:</b> Increase overall stability of array handling by fixing several cases for out of bounds memory access when handling arrays.",
-			"<b>Maintenance:</b> Array containment checks now correctly handle null values, i.e., <tt>select ARRAY[1,4,null] @> ARRAY[0,1,0];</tt> is now <tt>false</tt>.",
-			"<b>Maintenance:</b> Fixed a bug where concatenating arrays of different types would silently garble the result. CedarDB now instead reports an error.",
-			"<b>Maintenance:</b> <tt>array_position(s)</tt> now correctly handles cases where needle and/or haystack are <tt>null</tt>.",
-			"<b>Maintenance:</b> <tt>array_to_string</tt> now correctly drops <tt>null</tt> values if no null substitute is provided instead of printing the empty string, i.e.: <tt>array_to_string('{1,NULL}',',')</tt> now returns <tt>'1'</tt> instead of <tt>1,</tt>.",
-			"<b>Maintenance:</b> Clear table data after calling <tt>DROP TABLE</tt> to reduce space consumption."
+			{
+				"type": "feat",
+				"note": "Slice multi-dimensional arrays."
+			},
+			{
+				"type": "perf",
+				"note": "Add compression for floating-point numbers (Adaptive Lossless Floating-Point Compression)."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>trim_array</tt> now correctly observes dimension offsets, i.e. <tt>trim_array([10:12]={1,2,3},2)</tt> now returns <tt>{2,3}</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Treat <tt>ctid</tt> column as a functional dependency key for the whole table, allowing query patterns like <tt>select any_column from any_table group by ctid</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Add more types to <tt>pg_type</tt> including missing array types."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assertion error with prepared statements caused by concurrent DDL statements."
+			},
+			{
+				"type": "fix",
+				"note": "Increase overall stability of array handling by fixing several cases for out of bounds memory access when handling arrays."
+			},
+			{
+				"type": "fix",
+				"note": "Array containment checks now correctly handle null values, i.e., <tt>select ARRAY[1,4,null] @> ARRAY[0,1,0];</tt> is now <tt>false</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where concatenating arrays of different types would silently garble the result. CedarDB now instead reports an error."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>array_position(s)</tt> now correctly handles cases where needle and/or haystack are <tt>null</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>array_to_string</tt> now correctly drops <tt>null</tt> values if no null substitute is provided instead of printing the empty string, i.e.: <tt>array_to_string('{1,NULL}',',')</tt> now returns <tt>'1'</tt> instead of <tt>1,</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Clear table data after calling <tt>DROP TABLE</tt> to reduce space consumption."
+			}
 		]
 	},
 	{
@@ -276,17 +861,50 @@
 		"date": "2025-12-02",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Support <tt>ALTER OWNER</tt> for views.",
-			"<b>Performance:</b> Improve JSONB object access performance by up to 20%.",
-			"<b>PostgreSQL Compatibility:</b> Respect default escape character <tt>\\</tt> for <tt>COPY FROM STDIN</tt> statements.",
-			"<b>PostgreSQL Compatibility:</b> Support casts from jsonb to numeric and boolean.",
-			"<b>PostgreSQL Compatibility:</b> Add support for <tt>WITH ORDINALITY</tt> for <tt>json(b)_array_elements</tt> functions.",
-			"<b>Maintenance:</b> Ignore misformed values, such as invalid JSON documents, when evaluating samples for query planning.",
-			"<b>Maintenance:</b> <tt>VACUUM</tt> now removes no longer visible compressed blocks.",
-			"<b>Maintenance:</b> Fix nullability in complex boolean expressions.",
-			"<b>Maintenance:</b> Fix a crash when defining named table constraints.",
-			"<b>Maintenance:</b> Fix a rare OOB read when scanning compressed data.",
-			"<b>Maintenance:</b> Fix a crash when executing prepared statements with concurrent schema changes."
+			{
+				"type": "feat",
+				"note": "Support <tt>ALTER OWNER</tt> for views."
+			},
+			{
+				"type": "perf",
+				"note": "Improve JSONB object access performance by up to 20%."
+			},
+			{
+				"type": "pg",
+				"note": "Respect default escape character <tt>\\</tt> for <tt>COPY FROM STDIN</tt> statements."
+			},
+			{
+				"type": "pg",
+				"note": "Support casts from jsonb to numeric and boolean."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for <tt>WITH ORDINALITY</tt> for <tt>json(b)_array_elements</tt> functions."
+			},
+			{
+				"type": "fix",
+				"note": "Ignore misformed values, such as invalid JSON documents, when evaluating samples for query planning."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>VACUUM</tt> now removes no longer visible compressed blocks."
+			},
+			{
+				"type": "fix",
+				"note": "Fix nullability in complex boolean expressions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when defining named table constraints."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare OOB read when scanning compressed data."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when executing prepared statements with concurrent schema changes."
+			}
 		]
 	},
 	{
@@ -294,25 +912,82 @@
 		"date": "2025-11-24",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Preserve SQL names of common table expressions in <tt>EXPLAIN</tt> output.",
-			"<b>New Feature:</b> Support for row expression inside <tt>SELECT</tt>: <tt>SELECT (1, 2);</tt>.",
-			"<b>New Feature:</b> Add support for directly selecting from table generating functions: Queries like <tt>select pg_get_keywords()</tt> now work.",
-			"<b>Performance:</b> Regular write transactions require much less main memory per inserted or delete tuple.",
-			"<b>PostgreSQL Compatibility:</b> Ignore casts for output column names if a better name is available, fixing issues with <tt>pg_dump</tt>.",
-			"<b>Maintenance:</b> Ensure that <tt>DISCARD ALL</tt> also resets all advisory locks held by the current session.",
-			"<b>Maintenance:</b> Fix parsing multidimensional array literals like <tt>select ARRAY[[], []]::varchar[][];</tt>.",
-			"<b>Maintenance:</b> Fix cases where comparing a numeric with a constant of different sign could lead to wrong results.",
-			"<b>Maintenance:</b> <tt>VACUUM</tt> now automatically reclaims space of truncated tables.",
-			"<b>Maintenance:</b> <tt>array_positions()</tt>, <tt>array_remove()</tt> and <tt>array_replace()</tt> no longer crash when called on null arrays.",
-			"<b>Maintenance:</b> Fixed crash in <tt>\\copy</tt> and <tt>copy from stdin</tt> when loading into table with indexes.",
-			"<b>Maintenance:</b> Removed duplicates in the <tt>pg_type</tt> system table which caused issues with some PostgreSQL tools.",
-			"<b>Maintenance:</b> Fixed a bug where schema changes after recovering from an unclean database shutdown could have lead to schema corruption.",
-			"<b>Maintenance:</b> Fixed a crash when accessing JSONB certain data.",
-			"<b>Maintenance:</b> Fixed a crash in <tt>LIKE</tt> expression with underscore.",
-			"<b>Maintenance:</b> Fixed multiple race conditions in the storage layer that could lead to a database crash.",
-			"<b>Maintenance:</b> Fixed a crash in <tt>array_agg()</tt> with empty array inputs.",
-			"<b>Maintenance:</b> Fixed a rare assertion error for certain recursive CTEs with unused columns.",
-			"<b>Maintenance:</b> CedarDB now accepts <tt>CREATE DATABASE ENCODING UTF8</tt>."
+			{
+				"type": "feat",
+				"note": "Preserve SQL names of common table expressions in <tt>EXPLAIN</tt> output."
+			},
+			{
+				"type": "feat",
+				"note": "Support for row expression inside <tt>SELECT</tt>: <tt>SELECT (1, 2);</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for directly selecting from table generating functions: Queries like <tt>select pg_get_keywords()</tt> now work."
+			},
+			{
+				"type": "perf",
+				"note": "Regular write transactions require much less main memory per inserted or delete tuple."
+			},
+			{
+				"type": "pg",
+				"note": "Ignore casts for output column names if a better name is available, fixing issues with <tt>pg_dump</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Ensure that <tt>DISCARD ALL</tt> also resets all advisory locks held by the current session."
+			},
+			{
+				"type": "fix",
+				"note": "Fix parsing multidimensional array literals like <tt>select ARRAY[[], []]::varchar[][];</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix cases where comparing a numeric with a constant of different sign could lead to wrong results."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>VACUUM</tt> now automatically reclaims space of truncated tables."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>array_positions()</tt>, <tt>array_remove()</tt> and <tt>array_replace()</tt> no longer crash when called on null arrays."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed crash in <tt>\\copy</tt> and <tt>copy from stdin</tt> when loading into table with indexes."
+			},
+			{
+				"type": "fix",
+				"note": "Removed duplicates in the <tt>pg_type</tt> system table which caused issues with some PostgreSQL tools."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where schema changes after recovering from an unclean database shutdown could have lead to schema corruption."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash when accessing JSONB certain data."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash in <tt>LIKE</tt> expression with underscore."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed multiple race conditions in the storage layer that could lead to a database crash."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash in <tt>array_agg()</tt> with empty array inputs."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare assertion error for certain recursive CTEs with unused columns."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now accepts <tt>CREATE DATABASE ENCODING UTF8</tt>."
+			}
 		]
 	},
 	{
@@ -320,23 +995,74 @@
 		"date": "2025-11-06",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add pg_drop_caches() to clear buffer caches without restarting the database system.",
-			"<b>New Feature:</b> Add full support for PostgreSQL advisory locks, including the ability to wait until a resource is freed and detect deadlocks.",
-			"<b>New Feature:</b> Add support for RENAME COLUMN as part of ALTER TABLE.",
-			"<b>New Feature:</b> Add support for sum(bool).",
-			"<b>New Feature:</b> Add unsigned types to SQL: uint1, uint2, uint4, uint8.",
-			"<b>Performance:</b> Faster comparison of EXTRACT (YEAR ...) with constants.",
-			"<b>Performance:</b> Improved auto-compression of small inserts.",
-			"<b>Maintenance:</b> Check casts from TinyInt to Numeric for numeric precision loss.",
-			"<b>Maintenance:</b> Fix a crash for complex recursive queries.",
-			"<b>Maintenance:</b> Fix a crash in generate_series(from, to) with complex from or to expressions.",
-			"<b>Maintenance:</b> Fix an assertion when optimizing sum(1)",
-			"<b>Maintenance:</b> Fix data corruption after UPDATE.",
-			"<b>Maintenance:</b> Fix rare cases of missing results when using volatile functions, such as <tt>now()</tt>, in filters used to prune compressed data.",
-			"<b>Maintenance:</b> Fix rare overflow check in try cast from numeric to integers: <tt>select cast((128::numeric) as int1 or null);</tt>.",
-			"<b>Maintenance:</b> Improve cardinality estimation for COPY FROM STDIN. This allows better parallel small inserts.",
-			"<b>Maintenance:</b> Fix rare segfaults of single tuple IndexScans due to a wrong latching behavior.",
-			"<b>Maintenance:</b> Update to LLVM 21."
+			{
+				"type": "feat",
+				"note": "Add pg_drop_caches() to clear buffer caches without restarting the database system."
+			},
+			{
+				"type": "feat",
+				"note": "Add full support for PostgreSQL advisory locks, including the ability to wait until a resource is freed and detect deadlocks."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for RENAME COLUMN as part of ALTER TABLE."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for sum(bool)."
+			},
+			{
+				"type": "feat",
+				"note": "Add unsigned types to SQL: uint1, uint2, uint4, uint8."
+			},
+			{
+				"type": "perf",
+				"note": "Faster comparison of EXTRACT (YEAR ...) with constants."
+			},
+			{
+				"type": "perf",
+				"note": "Improved auto-compression of small inserts."
+			},
+			{
+				"type": "fix",
+				"note": "Check casts from TinyInt to Numeric for numeric precision loss."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash for complex recursive queries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in generate_series(from, to) with complex from or to expressions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assertion when optimizing sum(1)"
+			},
+			{
+				"type": "fix",
+				"note": "Fix data corruption after UPDATE."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare cases of missing results when using volatile functions, such as <tt>now()</tt>, in filters used to prune compressed data."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare overflow check in try cast from numeric to integers: <tt>select cast((128::numeric) as int1 or null);</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Improve cardinality estimation for COPY FROM STDIN. This allows better parallel small inserts."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare segfaults of single tuple IndexScans due to a wrong latching behavior."
+			},
+			{
+				"type": "fix",
+				"note": "Update to LLVM 21."
+			}
 		]
 	},
 	{
@@ -344,32 +1070,89 @@
 		"date": "2025-10-22",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add `uuidv7` to generate UUIDv7 containing timestamps.",
-			"<b>New Feature:</b> Add `great_circle_distance` to calculate geospatial distances between two points represented as latitude, longitude pairs.",
-			"<b>New Feature:</b> Add <tt>transaction_timeout</tt> and <tt>idle_in_transaction_session_timeout</tt> session settings. When set to any time span, connections with long-running or idling transactions are automatically closed, e.g. to reduce WAL bloat: <tt> SET idle_in_transaction_session_timeout TO '6h'</tt>. Off by default.",
-			"<b>New Feature:</b> Add support for the `#` operator on bit strings: `select b'101' # b'100';`",
-			"<b>New Feature:</b> Add support for the `|` operator on bit strings: `select b'101' | b'100';`",
-			"<b>PostgreSQL Compatibility:</b> Improve binary function overload resolution",
-			"<b>Performance:</b> Improve scheduling under high query load to reduce P99 latencies.",
-			"<b>Performance:</b> Adding foreign key constraints does not require a bulk writer anymore",
-			"<b>Performance:</b> Improve automated frame of reference compression leading to up to 57 % better compression ratios and 23 % increased table scan performance.",
-			"<b>Performance:</b> Speed up daylight-savings time rule evaluation for timestamps with time zone. This can improve performance for time series workloads by up to 40%.",
-			"<b>Maintenance:</b> Update timezone database to 2025b",
-			"<b>Maintenance:</b> Harden prepared statements against parallel DDL operations",
-			"<b>Maintenance:</b> Fix rare cases of out-of-bound reads during query processing",
-			"<b>Maintenance:</b> Allow using alias when directly using file names in from clause, e.g. `select c.* from 'file.csv' c`"
+			{
+				"type": "feat",
+				"note": "Add `uuidv7` to generate UUIDv7 containing timestamps."
+			},
+			{
+				"type": "feat",
+				"note": "Add `great_circle_distance` to calculate geospatial distances between two points represented as latitude, longitude pairs."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>transaction_timeout</tt> and <tt>idle_in_transaction_session_timeout</tt> session settings. When set to any time span, connections with long-running or idling transactions are automatically closed, e.g. to reduce WAL bloat: <tt> SET idle_in_transaction_session_timeout TO '6h'</tt>. Off by default."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for the `#` operator on bit strings: `select b'101' # b'100';`"
+			},
+			{
+				"type": "feat",
+				"note": "Add support for the `|` operator on bit strings: `select b'101' | b'100';`"
+			},
+			{
+				"type": "pg",
+				"note": "Improve binary function overload resolution"
+			},
+			{
+				"type": "perf",
+				"note": "Improve scheduling under high query load to reduce P99 latencies."
+			},
+			{
+				"type": "perf",
+				"note": "Adding foreign key constraints does not require a bulk writer anymore"
+			},
+			{
+				"type": "perf",
+				"note": "Improve automated frame of reference compression leading to up to 57 % better compression ratios and 23 % increased table scan performance."
+			},
+			{
+				"type": "perf",
+				"note": "Speed up daylight-savings time rule evaluation for timestamps with time zone. This can improve performance for time series workloads by up to 40%."
+			},
+			{
+				"type": "fix",
+				"note": "Update timezone database to 2025b"
+			},
+			{
+				"type": "fix",
+				"note": "Harden prepared statements against parallel DDL operations"
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare cases of out-of-bound reads during query processing"
+			},
+			{
+				"type": "fix",
+				"note": "Allow using alias when directly using file names in from clause, e.g. `select c.* from 'file.csv' c`"
+			}
 		]
 	},
-    {
+	{
 		"version": "v2025-10-07",
 		"date": "2025-10-07",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Improved the install script. It now supports a non-interactive mode for automatic installation, creating a symlink in <tt>/usr/local/bin</tt>, and installing cedardb as systemd socket-activated service.",
-			"<b>New Feature:</b> Added support for the <tt>&</tt> operator on bit strings: <tt>select b'101' & b'100';</tt>.",
-			"<b>Performance:</b> Speed up expressions of type <tt>timestamptz at time zone</tt> by 35% by caching the local time zone.",
-			"<b>PostgreSQL Compatibility:</b> CedarDB is now more lenient in which non-standard COPY FROM messages it accepts, enabling to bulk copy data from GO's pgx.",
-			"<b>Maintenance:</b> Don't crash on multi-line comments at statement start"
+			{
+				"type": "feat",
+				"note": "Improved the install script. It now supports a non-interactive mode for automatic installation, creating a symlink in <tt>/usr/local/bin</tt>, and installing cedardb as systemd socket-activated service."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for the <tt>&</tt> operator on bit strings: <tt>select b'101' & b'100';</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Speed up expressions of type <tt>timestamptz at time zone</tt> by 35% by caching the local time zone."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB is now more lenient in which non-standard COPY FROM messages it accepts, enabling to bulk copy data from GO's pgx."
+			},
+			{
+				"type": "fix",
+				"note": "Don't crash on multi-line comments at statement start"
+			}
 		]
 	},
 	{
@@ -377,15 +1160,42 @@
 		"date": "2025-09-30",
 		"breaksdb": false,
 		"notes": [
-		        "<b>New Feature:</b> Add support for timestamptz arguments in <tt>date_trunc</tt> and <tt>age</tt></b>",
-			"<b>PostgreSQL compatibility:</b> Adhere to PostgreSQL behaviour for empty-array-specification-and-cast combinations, e.g., <tt>[]::text</tt>.</b>",
-			"<b>PostgreSQL compatibility:</b> Return row count for <tt>CREATE (TEMPORARY) TABLE AS</tt> statements.</b>",
-			"<b>PostgreSQL compatibility:</b> Allow using table aliases in <tt>DISTINCT ON</tt> clauses.</b>",
-			"<b>Performance:</b> Allow constant folding for all integer types, not only int4.",
-			"<b>Performance:</b> Improve performance of table scans on compressed data by up to 25%.",
-			"<b>Maintenance:</b> Long-running read-only transactions no longer block log truncation, drastically reducing peak log size on disk in some cases.",
-			"<b>Maintenance:</b> Fix a bug triggering asserts in an edge case in temporary tables",
-			"<b>Maintenance:</b> Fix date_trunc behaviour for BC timestamps and dates"
+			{
+				"type": "feat",
+				"note": "Add support for timestamptz arguments in <tt>date_trunc</tt> and <tt>age</tt></b>"
+			},
+			{
+				"type": "pg",
+				"note": "Adhere to PostgreSQL behaviour for empty-array-specification-and-cast combinations, e.g., <tt>[]::text</tt>.</b>"
+			},
+			{
+				"type": "pg",
+				"note": "Return row count for <tt>CREATE (TEMPORARY) TABLE AS</tt> statements.</b>"
+			},
+			{
+				"type": "pg",
+				"note": "Allow using table aliases in <tt>DISTINCT ON</tt> clauses.</b>"
+			},
+			{
+				"type": "perf",
+				"note": "Allow constant folding for all integer types, not only int4."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of table scans on compressed data by up to 25%."
+			},
+			{
+				"type": "fix",
+				"note": "Long-running read-only transactions no longer block log truncation, drastically reducing peak log size on disk in some cases."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug triggering asserts in an edge case in temporary tables"
+			},
+			{
+				"type": "fix",
+				"note": "Fix date_trunc behaviour for BC timestamps and dates"
+			}
 		]
 	},
 	{
@@ -393,20 +1203,58 @@
 		"date": "2025-09-24",
 		"breaksdb": false,
 		"notes": [
-            "<b>New Feature:</b> CedarDB now allows for persistent configuration parameters via a config file. Read more on the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>.",
-			"<b>PostgreSQL compatibility:</b> CedarDB now treats parameter of type <tt>unknown</tt> as <tt>text</tt> like Postgres does.",
-			"<b>PostgreSQL compatibility:</b> The <tt>pg_prepared_statements</tt> system table now reports the result type of prepared statements.",
-
-			"<b>Performance:</b> Improved automated dictionary compression leading to up to 20% better compression ratios and 12% increased table scan performance.",
-			"<b>Performance:</b> Recursive CTEs that include unused columns are now significantly faster.",
-			"<b>Maintenance:</b> Renamed some settings that previously had to be prefaced with <tt>debug.</tt> to have more intuitive names. You can find a list of all settings at the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>.",
-			"<b>Maintenance:</b> CedarDB now returns the correct row count for statements that affected more than <tt>2^31</tt> rows.",
-			"<b>Maintenance:</b> Fixed a bug that triggered an assertion in the undocumented Postgres functions <tt>float4send</tt>, <tt>float8send</tt>, and <tt>pg_options_to_table</tt>.",
-			"<b>Maintenance:</b> Fixed a bug that triggered an assertion when casting a <tt>vector</tt> with a fixed number of dimensions to a <tt>vector</tt> with variable dimensions.",
-			"<b>Maintenance:</b> Fixed a bug where CedarDB didn't correctly handle nullability in <tt>greatest()</tt> and <tt>least()</tt> under some circumstances.",
-			"<b>Maintenance:</b> Fixed a bug where new schemas couldn't be created after a restart.",
-			"<b>Maintenance:</b> CedarDB now accepts startup messages consisting of multiple fragmented TCP packets.",
-			"<b>Maintenance:</b> Fixed a rare case where CedarDB failed an assertion when preparing a statement with an argument of type <tt>char(1)</tt>."
+			{
+				"type": "feat",
+				"note": "CedarDB now allows for persistent configuration parameters via a config file. Read more on the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now treats parameter of type <tt>unknown</tt> as <tt>text</tt> like Postgres does."
+			},
+			{
+				"type": "pg",
+				"note": "The <tt>pg_prepared_statements</tt> system table now reports the result type of prepared statements."
+			},
+			{
+				"type": "perf",
+				"note": "Improved automated dictionary compression leading to up to 20% better compression ratios and 12% increased table scan performance."
+			},
+			{
+				"type": "perf",
+				"note": "Recursive CTEs that include unused columns are now significantly faster."
+			},
+			{
+				"type": "fix",
+				"note": "Renamed some settings that previously had to be prefaced with <tt>debug.</tt> to have more intuitive names. You can find a list of all settings at the <a href= https://cedardb.com/docs/references/configuration/>configuration docs page</a>."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now returns the correct row count for statements that affected more than <tt>2^31</tt> rows."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug that triggered an assertion in the undocumented Postgres functions <tt>float4send</tt>, <tt>float8send</tt>, and <tt>pg_options_to_table</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug that triggered an assertion when casting a <tt>vector</tt> with a fixed number of dimensions to a <tt>vector</tt> with variable dimensions."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB didn't correctly handle nullability in <tt>greatest()</tt> and <tt>least()</tt> under some circumstances."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where new schemas couldn't be created after a restart."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now accepts startup messages consisting of multiple fragmented TCP packets."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare case where CedarDB failed an assertion when preparing a statement with an argument of type <tt>char(1)</tt>."
+			}
 		]
 	},
 	{
@@ -414,11 +1262,26 @@
 		"date": "2025-09-17",
 		"breaksdb": false,
 		"notes": [
-            "<b>New Feature:</b> Added support for tables on <a href=\"https://cedardb.com/docs/references/advanced/gs/\">Google Cloud Storage</a>.",
-			"<b>Maintenance:</b> CedarDB is now much more cautious about when to use bulk transactions during <tt>COPY</tt> statements. This enables parallel loading for most scenarios where CedarDB previously rejected a second <tt>COPY</tt> statement due to an already active bulk transaction.",
-			"<b>Maintenance:</b> CedarDB now correctly detects correlated UDF arguments within CTEs and will now return a \"Feature Not Supported\" error instead of throwing an assertion.",
-            "<b>Maintenance:</b> <tt>asof joins</tt> where one side only has a single tuple now return the correct results in all cases.",
-			"<b>Maintenance:</b> CedarDB now correctly handles arbitrarily nested <tt>PREPARE</tt> statements. You can now <tt>EXECUTE</tt> a <tt>PREPARE</tt>d <tt>EXECUTE</tt> statement."
+			{
+				"type": "feat",
+				"note": "Added support for tables on <a href=\"https://cedardb.com/docs/references/advanced/gs/\">Google Cloud Storage</a>."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB is now much more cautious about when to use bulk transactions during <tt>COPY</tt> statements. This enables parallel loading for most scenarios where CedarDB previously rejected a second <tt>COPY</tt> statement due to an already active bulk transaction."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now correctly detects correlated UDF arguments within CTEs and will now return a \"Feature Not Supported\" error instead of throwing an assertion."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>asof joins</tt> where one side only has a single tuple now return the correct results in all cases."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now correctly handles arbitrarily nested <tt>PREPARE</tt> statements. You can now <tt>EXECUTE</tt> a <tt>PREPARE</tt>d <tt>EXECUTE</tt> statement."
+			}
 		]
 	},
 	{
@@ -426,19 +1289,58 @@
 		"date": "2025-09-10",
 		"breaksdb": false,
 		"notes": [
-            "<b>New Feature:</b> Added <tt>to_char(timestamp[tz], text)</tt>.",
-			"<b>Performance</b>: Improved performance of regex matching, speeding up some queries by up to 2%.",
-			"<b>Performance</b>: Improved performance of float-to-float comparisons by up to 20%.",
-			"<b>PostgreSQL compatibility:</b> Improve overload resolution in function arguments. For example, <tt>select sin(null);</tt> now works without an explicit cast.",
-			"<b>PostgreSQL compatibility:</b> <tt>factorial(n)</tt> now returns a <tt>numeric</tt> instead of a <tt>bigint</tt>.",
-			"<b>Maintenance:</b> Fixed a bug where <tt>COPY FROM</tt> didn't work for temporary tables.",
-			"<b>Maintenance:</b> Fixed handling of null arrays in quantified expressions: <tt>select 1 = ANY(NULL)</tt> now correctly returns <tt>NULL</tt>.",
-			"<b>Maintenance:</b> Fixed a bug where the query optimizer bailed after generating selectivity estimates larger than 1 on equality estimations.",
-			"<b>Maintenance:</b> Ensure that <tt>NaN</tt> is handled correctly in <tt>float</tt>-to-<tt>float</tt> comparisons.",
-			"<b>Maintenance:</b> Fixed a bug where the converting a <tt>timestamp</tt> to <tt>timestamptz</tt> via <tt>at time zone</tt> miscalculated the timezone offset.",
-			"<b>Maintenance:</b> Ensure <tt>union</tt> always removes duplicates, even if CedarDB can optimize the union operator away.",
-			"<b>Maintenance:</b> Fixed an overeager warning in the buffer manager.",
-			"<b>Maintenance:</b> Fixed a rare race condition that could trigger when the buffer manager repurposed previously used buffer pages."
+			{
+				"type": "feat",
+				"note": "Added <tt>to_char(timestamp[tz], text)</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Improved performance of regex matching, speeding up some queries by up to 2%."
+			},
+			{
+				"type": "perf",
+				"note": "Improved performance of float-to-float comparisons by up to 20%."
+			},
+			{
+				"type": "pg",
+				"note": "Improve overload resolution in function arguments. For example, <tt>select sin(null);</tt> now works without an explicit cast."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>factorial(n)</tt> now returns a <tt>numeric</tt> instead of a <tt>bigint</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where <tt>COPY FROM</tt> didn't work for temporary tables."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed handling of null arrays in quantified expressions: <tt>select 1 = ANY(NULL)</tt> now correctly returns <tt>NULL</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where the query optimizer bailed after generating selectivity estimates larger than 1 on equality estimations."
+			},
+			{
+				"type": "fix",
+				"note": "Ensure that <tt>NaN</tt> is handled correctly in <tt>float</tt>-to-<tt>float</tt> comparisons."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where the converting a <tt>timestamp</tt> to <tt>timestamptz</tt> via <tt>at time zone</tt> miscalculated the timezone offset."
+			},
+			{
+				"type": "fix",
+				"note": "Ensure <tt>union</tt> always removes duplicates, even if CedarDB can optimize the union operator away."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed an overeager warning in the buffer manager."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare race condition that could trigger when the buffer manager repurposed previously used buffer pages."
+			}
 		]
 	},
 	{
@@ -446,22 +1348,70 @@
 		"date": "2025-08-27",
 		"breaksdb": false,
 		"notes": [
-            "<b>New Feature:</b> The <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_info</tt></a> system table now shows the uncompressed size of text columns.",
-            "<b>New Feature:</b> <a href=\"https://cedardb.com/docs/references/advanced/s3/\">S3-backed tables</a> now appear in the system tables <tt>pg_foreign_server</tt>, <tt>pg_foreing_data_wrapper</tt> and <tt>pg_foreign_table</tt>.",
-            "<b>New Feature:</b> The write-ahead-log is now directly truncated after a successful recovery. This drastically reduces WAL bloat when restarting after a system crash.",
-			"<b>PostgreSQL compatibility:</b> Restored compatibility with rsql.",
-			"<b>PostgreSQL compatibility:</b> The Docker image now (correctly) ignores the <tt>PGHOST</tt> environment variable.",
-			"<b>PostgreSQL compatibility:</b> The <tt>pg_indexes</tt> system table now has a <tt>tablespaces</tt> column.",
-			"<b>PostgreSQL compatibility:</b> Databases are automatically seeded with all PostgreSQL <a href=https://www.postgresql.org/docs/current/predefined-roles.html>pre-defined roles</a>.",
-			"<b>PostgreSQL compatibility:</b> The <tt>pg_auth_members</tt> system table shows role memberships now.",
-			"<b>PostgreSQL compatibility:</b> Make sure <tt>select pg_typeof(last_value) from sequence</tt> always returns <tt>bigint</tt> regardless of the sequence type.",
-			"<b>PostgreSQL compatibility:</b> <tt>ceil()</tt>, <tt>floor()</tt>, and <tt>trunc()</tt> now discard fractional digits like Postgres does.",
-			"<b>PostgreSQL compatibility:</b> The <tt>vector</tt> (pgvector) type can now cast to arbitrary numeric types including 32-bit floats.",
-			"<b>Maintenance:</b> CedarDB now prints the offending string when parsing an invalid JSON value fails during data ingestion.",
-			"<b>Maintenance:</b> Fixed a bug where querying <tt>information_schema.tables</tt> triggered an assertion when the database contained tables with columns of the serial type.",
-			"<b>Maintenance:</b> Fixed a bug where opening a database didn't succeed after changing the owner of a table.",
-			"<b>Maintenance:</b> Improved support for Amazon DMS.",
-			"<b>Maintenance:</b> Fixed a bug where exiting the interactive shell would print a <tt>malloc()</tt> error."
+			{
+				"type": "feat",
+				"note": "The <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_info</tt></a> system table now shows the uncompressed size of text columns."
+			},
+			{
+				"type": "feat",
+				"note": "<a href=\"https://cedardb.com/docs/references/advanced/s3/\">S3-backed tables</a> now appear in the system tables <tt>pg_foreign_server</tt>, <tt>pg_foreing_data_wrapper</tt> and <tt>pg_foreign_table</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "The write-ahead-log is now directly truncated after a successful recovery. This drastically reduces WAL bloat when restarting after a system crash."
+			},
+			{
+				"type": "pg",
+				"note": "Restored compatibility with rsql."
+			},
+			{
+				"type": "pg",
+				"note": "The Docker image now (correctly) ignores the <tt>PGHOST</tt> environment variable."
+			},
+			{
+				"type": "pg",
+				"note": "The <tt>pg_indexes</tt> system table now has a <tt>tablespaces</tt> column."
+			},
+			{
+				"type": "pg",
+				"note": "Databases are automatically seeded with all PostgreSQL <a href=https://www.postgresql.org/docs/current/predefined-roles.html>pre-defined roles</a>."
+			},
+			{
+				"type": "pg",
+				"note": "The <tt>pg_auth_members</tt> system table shows role memberships now."
+			},
+			{
+				"type": "pg",
+				"note": "Make sure <tt>select pg_typeof(last_value) from sequence</tt> always returns <tt>bigint</tt> regardless of the sequence type."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>ceil()</tt>, <tt>floor()</tt>, and <tt>trunc()</tt> now discard fractional digits like Postgres does."
+			},
+			{
+				"type": "pg",
+				"note": "The <tt>vector</tt> (pgvector) type can now cast to arbitrary numeric types including 32-bit floats."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now prints the offending string when parsing an invalid JSON value fails during data ingestion."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where querying <tt>information_schema.tables</tt> triggered an assertion when the database contained tables with columns of the serial type."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where opening a database didn't succeed after changing the owner of a table."
+			},
+			{
+				"type": "fix",
+				"note": "Improved support for Amazon DMS."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where exiting the interactive shell would print a <tt>malloc()</tt> error."
+			}
 		]
 	},
 	{
@@ -469,33 +1419,93 @@
 		"date": "2025-08-20",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#regexp_count\"><tt>regexp_count</tt> and <tt>regexp_instr</tt></a>.",
-			"<b>New Feature:</b> Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#string_to_table\"><tt>string_to_table</tt></a>.",
-            "<b>New Feature:</b> Added support for <tt>drop server</tt>.",
-            "<b>New Feature:</b> Added a custom system table <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_infos</tt></a> to show database compressions infos.",
-			"<b>PostgreSQL compatibility:</b> Fixed <tt>last_value</tt> column in <tt>pg_sequence</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added support for multiple arrays in <tt>unnest(anyarray, ...)</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added support for user-defined functions in <tt>FROM</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added support for implicit conversions from <tt>text</tt> to <tt>regclass</tt> for <tt>pg_total_relation_size(regclass)</tt> and related functions.",
-			"<b>Maintenance:</b> Fixed overly large memory consumption in <tt>COPY FROM STDIN</tt>, i.e., psql's <tt>\\copy</tt> mode.",
-			"<b>Maintenance:</b> Prepare for snapshot isolation for DDL statements, unlocking tons of new DDL functionality to be shipped in future releases.",
-			"<b>Maintenance:</b> Fixed unchecked overflows when converting float8 to float4."
+			{
+				"type": "feat",
+				"note": "Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#regexp_count\"><tt>regexp_count</tt> and <tt>regexp_instr</tt></a>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#string_to_table\"><tt>string_to_table</tt></a>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>drop server</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added a custom system table <a href=\"https://cedardb.com/docs/compatibility/system_table/#cedardb_compression_info\"><tt>cedardb_compression_infos</tt></a> to show database compressions infos."
+			},
+			{
+				"type": "pg",
+				"note": "Fixed <tt>last_value</tt> column in <tt>pg_sequence</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for multiple arrays in <tt>unnest(anyarray, ...)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for user-defined functions in <tt>FROM</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for implicit conversions from <tt>text</tt> to <tt>regclass</tt> for <tt>pg_total_relation_size(regclass)</tt> and related functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed overly large memory consumption in <tt>COPY FROM STDIN</tt>, i.e., psql's <tt>\\copy</tt> mode."
+			},
+			{
+				"type": "fix",
+				"note": "Prepare for snapshot isolation for DDL statements, unlocking tons of new DDL functionality to be shipped in future releases."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed unchecked overflows when converting float8 to float4."
+			}
 		]
 	},
-  {
+	{
 		"version": "v2025-08-07",
 		"date": "2025-08-07",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support to read <a href=\"../references/advanced/s3/\">relations from S3</a> using <tt>create server</tt>.",
-			"<b>New Feature:</b> Added support for the <tt>real</tt> (float4) floating point datatype. CedarDB previously used double precision for single precision numbers.",
-			"<b>New Feature:</b> Added support for <tt>jsonb || jsonb</tt> aka <tt>jsonb_concat(jsonb, jsonb, ...)</tt>.",
-			"<b>New Feature:</b> Added support for <tt>regexp_like(text, text)</tt>.",
-			"<b>Performance:</b> Reduced memory consumption for large text-heavy CSV scans.",
-			"<b>Performance:</b> Reduced memory consumption and improved performance of group by spooling.",
-			"<b>PostgreSQL compatibility:</b> Fixed OID to integer comparisons to handle negative numbers consistently.",
-			"<b>Maintenance:</b> Fixed float multiplications of NaN with zero and integer conversions near extreme values.",
-			"<b>Maintenance:</b> Fixed tryCast semantics to be null-returning."
+			{
+				"type": "feat",
+				"note": "Added support to read <a href=\"../references/advanced/s3/\">relations from S3</a> using <tt>create server</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for the <tt>real</tt> (float4) floating point datatype. CedarDB previously used double precision for single precision numbers."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>jsonb || jsonb</tt> aka <tt>jsonb_concat(jsonb, jsonb, ...)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>regexp_like(text, text)</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Reduced memory consumption for large text-heavy CSV scans."
+			},
+			{
+				"type": "perf",
+				"note": "Reduced memory consumption and improved performance of group by spooling."
+			},
+			{
+				"type": "pg",
+				"note": "Fixed OID to integer comparisons to handle negative numbers consistently."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed float multiplications of NaN with zero and integer conversions near extreme values."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed tryCast semantics to be null-returning."
+			}
 		]
 	},
 	{
@@ -503,13 +1513,34 @@
 		"date": "2025-07-23",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <tt>jsonb ? text</tt> aka <tt>jsonb_exists(jsonb, text)</tt>.",
-			"<b>New Feature:</b> Added support for <tt>jsonb ?| array</tt> aka <tt>jsonb_exists_any(jsonb, array)</tt>.",
-			"<b>New Feature:</b> Added support for <tt>jsonb ?& array</tt> aka <tt>jsonb_exists_all(jsonb, array)</tt>.",
-			"<b>Performance:</b> Reduced disk and memory consumption of large index bulk loads.",
-			"<b>Maintenance:</b> Fixed crash in rollback of index bulk loads.",
-			"<b>Maintenance:</b> Fixed a nasty data corruption during repeated recovery. During recovery after an unclean shutdown, CedarDB did not immediately discard partially written logs. In case of a second unclean shutdown, those inconsistent log entries might have lead to inconsistent state.",
-			"<b>Maintenance:</b> Fixed build for legacy distributions."
+			{
+				"type": "feat",
+				"note": "Added support for <tt>jsonb ? text</tt> aka <tt>jsonb_exists(jsonb, text)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>jsonb ?| array</tt> aka <tt>jsonb_exists_any(jsonb, array)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>jsonb ?& array</tt> aka <tt>jsonb_exists_all(jsonb, array)</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Reduced disk and memory consumption of large index bulk loads."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed crash in rollback of index bulk loads."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a nasty data corruption during repeated recovery. During recovery after an unclean shutdown, CedarDB did not immediately discard partially written logs. In case of a second unclean shutdown, those inconsistent log entries might have lead to inconsistent state."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed build for legacy distributions."
+			}
 		]
 	},
 	{
@@ -517,15 +1548,42 @@
 		"date": "2025-07-09",
 		"breaksdb": false,
 		"notes": [
-			"When not specifying any database location on the CLI, CedarDB now creates and uses a default database at <tt>~/.cedardb/db</tt>. You can now use a temporary in-memory using the <tt>--inmemory</tt> switch. (Note that this is prone to running OOM)",
-			"<b>New Feature:</b> Preliminary support for <tt>pg_advisory_lock(bigint)</tt>.",
-			"<b>New Feature:</b> Added support for <tt>jsonb @> jsonb</tt> aka <tt>jsonb_contains()</tt>.",
-			"<b>New Feature:</b> Added support for <tt>json_build_object(variadic any)</tt>.",
-			"<b>New Feature:</b> Added support for out-of-memory <tt>GROUP BY</tt>.",
-			"<b>Maintenance:</b> Fixed a deadlock in our buffer manager.",
-			"<b>Maintenance:</b> Fix assertion failure for subqueries in <tt>UPDATE</tt>.",
-			"<b>Maintenance:</b> Removed jemalloc.",
-			"<b>Maintenance:</b> Upgrade to LLVM20 and GCC15."
+			{
+				"type": "feat",
+				"note": "When not specifying any database location on the CLI, CedarDB now creates and uses a default database at <tt>~/.cedardb/db</tt>. You can now use a temporary in-memory using the <tt>--inmemory</tt> switch. (Note that this is prone to running OOM)"
+			},
+			{
+				"type": "feat",
+				"note": "Preliminary support for <tt>pg_advisory_lock(bigint)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>jsonb @> jsonb</tt> aka <tt>jsonb_contains()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>json_build_object(variadic any)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for out-of-memory <tt>GROUP BY</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a deadlock in our buffer manager."
+			},
+			{
+				"type": "fix",
+				"note": "Fix assertion failure for subqueries in <tt>UPDATE</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Removed jemalloc."
+			},
+			{
+				"type": "fix",
+				"note": "Upgrade to LLVM20 and GCC15."
+			}
 		]
 	},
 	{
@@ -533,15 +1591,42 @@
 		"date": "2025-06-24",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Support for <tt>extract(timezone, ..)</tt> for the <tt>timestamptz</tt> type.",
-			"<b>New Feature:</b> Support for the <tt>transaction_timeout</tt> setting.",
-			"<b>New Feature:</b> Support for <tt>to_json()</tt>.",
-			"<b>PostgreSQL compatibility:</b> <tt>oid</tt>s can now be compared with all integer datatypes. This fixes the pgsql plugin of visual studio code.",
-			"<b>PostgreSQL compatibility:</b> Support for subqueries in the <tt>unnest()</tt> function: <tt>select unnest((SELECT ARRAY[1,2]));</tt>. This fixes issues with <tt>pg_cli</tt>.",
-			"<b>PostgreSQL compatibility:</b> Add server protocol support to the postgres-specific legacy types <tt>int2vector</tt> and <tt>oidvector</tt> in addition to the existing value support.",
-			"<b>PostgreSQL compatibility:</b> Allow connections via TLSv1.2. CedarDB previously only allowed TLSv1.3 connections which caused issues with some clients such as AWS DMS.",
-			"<b>Maintenance:</b> Solved an issue where CedarDB would sometimes fail to catch exceptions inside transactions. One of the rare case where the compiler was actually at fault: <a href=https://gcc.gnu.org/bugzilla/show_bug.cgi?id=119151>GCC Bug 119151</a>.",
-			"<b>Maintenance:</b> Fixed a bug where <tt>pg_get_indexdef()</tt> with invalid column ids would trigger an assert."
+			{
+				"type": "feat",
+				"note": "Support for <tt>extract(timezone, ..)</tt> for the <tt>timestamptz</tt> type."
+			},
+			{
+				"type": "feat",
+				"note": "Support for the <tt>transaction_timeout</tt> setting."
+			},
+			{
+				"type": "feat",
+				"note": "Support for <tt>to_json()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>oid</tt>s can now be compared with all integer datatypes. This fixes the pgsql plugin of visual studio code."
+			},
+			{
+				"type": "pg",
+				"note": "Support for subqueries in the <tt>unnest()</tt> function: <tt>select unnest((SELECT ARRAY[1,2]));</tt>. This fixes issues with <tt>pg_cli</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Add server protocol support to the postgres-specific legacy types <tt>int2vector</tt> and <tt>oidvector</tt> in addition to the existing value support."
+			},
+			{
+				"type": "pg",
+				"note": "Allow connections via TLSv1.2. CedarDB previously only allowed TLSv1.3 connections which caused issues with some clients such as AWS DMS."
+			},
+			{
+				"type": "fix",
+				"note": "Solved an issue where CedarDB would sometimes fail to catch exceptions inside transactions. One of the rare case where the compiler was actually at fault: <a href=https://gcc.gnu.org/bugzilla/show_bug.cgi?id=119151>GCC Bug 119151</a>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where <tt>pg_get_indexdef()</tt> with invalid column ids would trigger an assert."
+			}
 		]
 	},
 	{
@@ -549,10 +1634,22 @@
 		"date": "2025-05-28",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> We've added the <tt>encode_geohash</tt> function! You can now compute a <a href=https://en.wikipedia.org/wiki/Geohash>geohash</a> from a latitude/longitude pair and a precision: <tt>select encode_geohash(48.317009, 11.662260, 5) -- returns u286c.</tt>",
-			"<b>PostgreSQL compatibility:</b> CedarDB now correctly reports the version number of Postgres it's compatible with as <tt>160001</tt> instead of <tt>16001</tt>. This caused issues with a few clients that wrongly assumed CedarDB was only compatible with a Postgres version older than version 1(!).",
-			"<b>Maintenance:</b> Fixed a bug where CedarDB would crash when running an explain statement without a format type: <tt>explain (format) select ...</tt>.",
-			"<b>Maintenance:</b> Fixed a bug where recursive SQL queries that relied on the duplicate elimination of <tt>union</tt> wouldn't terminate in some circumstances."
+			{
+				"type": "feat",
+				"note": "We've added the <tt>encode_geohash</tt> function! You can now compute a <a href=https://en.wikipedia.org/wiki/Geohash>geohash</a> from a latitude/longitude pair and a precision: <tt>select encode_geohash(48.317009, 11.662260, 5) -- returns u286c.</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now correctly reports the version number of Postgres it's compatible with as <tt>160001</tt> instead of <tt>16001</tt>. This caused issues with a few clients that wrongly assumed CedarDB was only compatible with a Postgres version older than version 1(!)."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB would crash when running an explain statement without a format type: <tt>explain (format) select ...</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where recursive SQL queries that relied on the duplicate elimination of <tt>union</tt> wouldn't terminate in some circumstances."
+			}
 		]
 	},
 	{
@@ -560,27 +1657,90 @@
 		"date": "2025-05-14",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for the <tt>client_min_messages</tt> setting. It controls the minimum severity a message must have to be sent to a connecting client.",
-			"<b>New Feature:</b> Streamlined command line args: <tt>--createdb</tt> will now open existing database files.",
-			"<b>New Feature:</b> CedarDB now supports function calls in the <tt>FROM</tt> clause: <tt>select * from sqrt(4);</tt>.",
-			"<b>New Feature:</b> SQL statements with syntax errors are now also added to the history in interactive mode. You can now browse to them and edit them from within the shell. Previously, only statements that have been executed successfully were added.",
-			"<b>New Feature:</b> CedarDB now supports prepared statements using the construct <tt>first X rows only offset Y</tt> which is used e.g. by Hibernate for pagination.",
-			"<b>PostgreSQL compatibility:</b> Stubbed the Postgres system tables <tt>pg_stats_ext</tt> and <tt>pg_stats_ext_exprs</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added the Postgres function <tt>pg_type_is_visible()</tt>.",
-			"<b>PostgreSQL compatibility:</b> Stubbed the Postgres functions <tt>row_security_active()</tt>, <tt>pg_mcv_list_items()</tt>, <tt>pg_ident_file_mappings()</tt>, <tt>pg_stat_get_numscans()</tt> and <tt>has_foreign_data_wrapper_privilege()</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added all Postgres builtin UDFs that Postgres's <tt>information_schema</tt> relies on.",
-			"<b>PostgreSQL compatibility:</b> Report the correct default collate of <tt>en_US.UTF-8</tt> in the <tt>pg_database</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Stubbed the  <tt>default_table_access_method</tt> setting which is required by <tt>pg_dump</tt> but irrelevant for CedarDB.",
-			"<b>PostgreSQL compatibility:</b> Use Postgres-compatible <tt>oid</tt>s in the <tt>pg_database</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> <tt>pg_relation_size()</tt> and <tt>pg_index_size()</tt> now also support sequences.",
-			"<b>Performance:</b> Reduced memory consumption of queries with aggregations.",
-			"<b>Maintenance:</b> CedarDB now creates statistics for system tables. This significantly speed up some tools that joined a lot of system tables as CedarDB now generates better query plans.",
-			"<b>Maintenance:</b> Fixed a rare bug where queries with <tt>IN</tt> expressions crashed.",
-			"<b>Maintenance:</b> Fixed a bug in the docker image where CedarDB was stuck in an endless loop updating the database schema if it crashed before.",
-			"<b>Maintenance:</b> Fixed a rare bug where deleted tuples could reappear under some circumstances.",
-			"<b>Maintenance:</b> Fixed a bug where the optimizer crashed on queries with a provable empty result set under some circumstances.",
-			"<b>Maintenance:</b> Fixed a bug where tables could become owner-less when the owner's password was changed.",
-			"<b>Maintenance:</b> Fixed a bug where CedarDB could have failed gracefully but didn't and instead terminated if the system ran out of memory."
+			{
+				"type": "feat",
+				"note": "Add support for the <tt>client_min_messages</tt> setting. It controls the minimum severity a message must have to be sent to a connecting client."
+			},
+			{
+				"type": "feat",
+				"note": "Streamlined command line args: <tt>--createdb</tt> will now open existing database files."
+			},
+			{
+				"type": "feat",
+				"note": "CedarDB now supports function calls in the <tt>FROM</tt> clause: <tt>select * from sqrt(4);</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "SQL statements with syntax errors are now also added to the history in interactive mode. You can now browse to them and edit them from within the shell. Previously, only statements that have been executed successfully were added."
+			},
+			{
+				"type": "feat",
+				"note": "CedarDB now supports prepared statements using the construct <tt>first X rows only offset Y</tt> which is used e.g. by Hibernate for pagination."
+			},
+			{
+				"type": "pg",
+				"note": "Stubbed the Postgres system tables <tt>pg_stats_ext</tt> and <tt>pg_stats_ext_exprs</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added the Postgres function <tt>pg_type_is_visible()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Stubbed the Postgres functions <tt>row_security_active()</tt>, <tt>pg_mcv_list_items()</tt>, <tt>pg_ident_file_mappings()</tt>, <tt>pg_stat_get_numscans()</tt> and <tt>has_foreign_data_wrapper_privilege()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added all Postgres builtin UDFs that Postgres's <tt>information_schema</tt> relies on."
+			},
+			{
+				"type": "pg",
+				"note": "Report the correct default collate of <tt>en_US.UTF-8</tt> in the <tt>pg_database</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Stubbed the  <tt>default_table_access_method</tt> setting which is required by <tt>pg_dump</tt> but irrelevant for CedarDB."
+			},
+			{
+				"type": "pg",
+				"note": "Use Postgres-compatible <tt>oid</tt>s in the <tt>pg_database</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_relation_size()</tt> and <tt>pg_index_size()</tt> now also support sequences."
+			},
+			{
+				"type": "perf",
+				"note": "Reduced memory consumption of queries with aggregations."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now creates statistics for system tables. This significantly speed up some tools that joined a lot of system tables as CedarDB now generates better query plans."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare bug where queries with <tt>IN</tt> expressions crashed."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug in the docker image where CedarDB was stuck in an endless loop updating the database schema if it crashed before."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare bug where deleted tuples could reappear under some circumstances."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where the optimizer crashed on queries with a provable empty result set under some circumstances."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where tables could become owner-less when the owner's password was changed."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB could have failed gracefully but didn't and instead terminated if the system ran out of memory."
+			}
 		]
 	},
 	{
@@ -588,15 +1748,42 @@
 		"date": "2025-04-23",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <tt>COPY FROM <...> WITH ENCODING 'UTF8/UNICODE/SQLASCII'</tt>.",
-			"<b>New Feature:</b> Add support for most <tt>information_schema</tt> tables, as defined by the SQL standard. You can see the implementation progress <a href=../compatibility/backend>here</a>.",
-			"<b>New Feature:</b> Interactive mode no longer prints timing numbers per default. If you want to re-enable it, you can do so via \"<tt>\\timing on</tt>\" in interactive mode.",
-			"<b>New Feature:</b> Looking up values in arrays via <tt>ALL/ANY</tt> now works: <tt>select 'a' = ANY('{a, b}')</tt>.",
-			"<b>New Feature:</b> Add support for expanding row expressions with <tt>.*</tt>. The following now works: <tt>select (tablefun()).*</tt>",
-			"<b>PostgreSQL compatibility:</b> Implemented the postgres functions <tt>has_database_privilege()</tt>, <tt>pg_get_publication_tables()</tt>, <tt>pg_get_ruledef()</tt> and <tt>has_server_privilege()</tt>.",
-			"<b>PostgreSQL compatibility:</b> Casting the <tt>regproc</tt>,<tt>regprocedure</tt> and <tt>regnamespace</tt> types to text now returns the procedure resp. namespace name instead of just an internal identifier.",
-			"<b>PostgreSQL compatibility:</b> Columns of system tables now always have the correct <tt>oid</tt> type, instead of being just an integer. This is required by a few clients who depend on the right behavior when casting attributes from system tables to text.",
-			"<b>Maintenance:</b> Casting <tt>oid</tt>s of sequences to strings no longer triggers an assert."
+			{
+				"type": "feat",
+				"note": "Added support for <tt>COPY FROM <...> WITH ENCODING 'UTF8/UNICODE/SQLASCII'</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for most <tt>information_schema</tt> tables, as defined by the SQL standard. You can see the implementation progress <a href=../compatibility/backend>here</a>."
+			},
+			{
+				"type": "feat",
+				"note": "Interactive mode no longer prints timing numbers per default. If you want to re-enable it, you can do so via \"<tt>\\timing on</tt>\" in interactive mode."
+			},
+			{
+				"type": "feat",
+				"note": "Looking up values in arrays via <tt>ALL/ANY</tt> now works: <tt>select 'a' = ANY('{a, b}')</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for expanding row expressions with <tt>.*</tt>. The following now works: <tt>select (tablefun()).*</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Implemented the postgres functions <tt>has_database_privilege()</tt>, <tt>pg_get_publication_tables()</tt>, <tt>pg_get_ruledef()</tt> and <tt>has_server_privilege()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Casting the <tt>regproc</tt>,<tt>regprocedure</tt> and <tt>regnamespace</tt> types to text now returns the procedure resp. namespace name instead of just an internal identifier."
+			},
+			{
+				"type": "pg",
+				"note": "Columns of system tables now always have the correct <tt>oid</tt> type, instead of being just an integer. This is required by a few clients who depend on the right behavior when casting attributes from system tables to text."
+			},
+			{
+				"type": "fix",
+				"note": "Casting <tt>oid</tt>s of sequences to strings no longer triggers an assert."
+			}
 		]
 	},
 	{
@@ -604,23 +1791,70 @@
 		"date": "2025-04-10",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Support for natively running CedarDB without Docker: <tt> curl https://get.cedardb.com | bash </tt> will install CedarDB on your system. You can then run <tt>./cedardb</tt> to start the server.",
-			"<b>New Feature:</b> Streamlined docker build process. No need to re-download the Dockerfile after a new release. Re-running <tt>docker build</tt> will always create an up-to-date image.",
-			"<b>New Feature:</b> Experimental ARM support! Both the native binary and docker image now natively run on ARM64 systems.",
-			"<b>New Feature:</b> CedarDB can now bulk create indexes larger than main memory by spooling intermediate data to disk.",
-			"<b>PostgreSQL compatibility:</b> CedarDB now supports schema-qualified column names: <tt> select schema.table.column from schema.table</tt>.",
-			"<b>PostgreSQL compatibility:</b> Implemented the postgres-internal functions <tt>pg_get_function_arguments(), pg_get_function_identity_arguments(), pg_get_function_result(), pg_get_function_sqlbody(), pg_prepared_statement(), pg_timezone_abbrevs(), pg_timezone_names()</tt>.",
-			"<b>PostgreSQL compatibility:</b> Implemented the <tt>pg_language</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Improved output of the <tt>pg_proc</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Stubbed a slew of postgres-internal system functions: <tt>pg_available_extensions(), pg_available_extension_versions(), pg_config(), pg_cursor(), pg_get_backend_memory_contexts(), pg_get_replication_slots(), pg_get_shmem_allocations(), pg_hba_file_rules() ,pg_prepared_xact(), pg_show_all_file_settings(), pg_show_all_settings(), pg_show_replication_origin_status(), pg_is_wal_replay_paused(), pg_stat_get_activity()</tt>",
-			"<b>Maintenance:</b> Fixed a crash in <tt>regex_split</tt>.",
-			"<b>Maintenance:</b> Fixed a crash in array comparisons.",
-			"<b>Maintenance:</b> Fixed a bug where CedarDB's loading serialized query plans could lead to a crash.",
-
-			"<b>Maintenance:</b> Fixed a bug where CedarDB wasn't able to unnest highly correlated expressions.",
-			"<b>Maintenance:</b> Fixed a bug where we didn't correctly store precision/scale of array types across database restarts in some cases.",
-			"<b>Maintenance:</b> Fixed a rare crash where we double-freed a string that represented a null value.",
-			"<b>Maintenance:</b> <tt>cedardb --version</tt> now reports a more human-readable version identifier instead of just a git commit id."
+			{
+				"type": "feat",
+				"note": "Support for natively running CedarDB without Docker: <tt> curl https://get.cedardb.com | bash </tt> will install CedarDB on your system. You can then run <tt>./cedardb</tt> to start the server."
+			},
+			{
+				"type": "feat",
+				"note": "Streamlined docker build process. No need to re-download the Dockerfile after a new release. Re-running <tt>docker build</tt> will always create an up-to-date image."
+			},
+			{
+				"type": "feat",
+				"note": "Experimental ARM support! Both the native binary and docker image now natively run on ARM64 systems."
+			},
+			{
+				"type": "feat",
+				"note": "CedarDB can now bulk create indexes larger than main memory by spooling intermediate data to disk."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now supports schema-qualified column names: <tt> select schema.table.column from schema.table</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implemented the postgres-internal functions <tt>pg_get_function_arguments(), pg_get_function_identity_arguments(), pg_get_function_result(), pg_get_function_sqlbody(), pg_prepared_statement(), pg_timezone_abbrevs(), pg_timezone_names()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implemented the <tt>pg_language</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Improved output of the <tt>pg_proc</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Stubbed a slew of postgres-internal system functions: <tt>pg_available_extensions(), pg_available_extension_versions(), pg_config(), pg_cursor(), pg_get_backend_memory_contexts(), pg_get_replication_slots(), pg_get_shmem_allocations(), pg_hba_file_rules() ,pg_prepared_xact(), pg_show_all_file_settings(), pg_show_all_settings(), pg_show_replication_origin_status(), pg_is_wal_replay_paused(), pg_stat_get_activity()</tt>"
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash in <tt>regex_split</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash in array comparisons."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB's loading serialized query plans could lead to a crash."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB wasn't able to unnest highly correlated expressions."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where we didn't correctly store precision/scale of array types across database restarts in some cases."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare crash where we double-freed a string that represented a null value."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>cedardb --version</tt> now reports a more human-readable version identifier instead of just a git commit id."
+			}
 		]
 	},
 	{
@@ -628,9 +1862,18 @@
 		"date": "2025-03-26",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Print dynamic filters in <tt>explain verbose</tt>.",
-			"<b>Maintenance:</b> Fixed a bug where old databases that contained deleted indexes could not be loaded in the newest version of CedarDB.",
-			"<b>Maintenance:</b> Fixed parsing ISO8601 intervals with more than 24 trailing zeroes."
+			{
+				"type": "feat",
+				"note": "Print dynamic filters in <tt>explain verbose</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where old databases that contained deleted indexes could not be loaded in the newest version of CedarDB."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed parsing ISO8601 intervals with more than 24 trailing zeroes."
+			}
 		]
 	},
 	{
@@ -638,47 +1881,170 @@
 		"date": "2025-03-25",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <tt>DROP ROLE</tt>.",
-			"<b>New Feature:</b> Added support for <tt>DROP GROUP</tt>.",
-			"<b>New Feature:</b> Added support for <tt>DROP SCHEMA</tt> as long as the schema is empty.",
-			"<b>New Feature:</b> Added support for <tt>DROP SEQUENCE</tt>.",
-			"<b>New Feature:</b> Added support for <tt>pg_get_constraintdef()</tt>. As a consequence of this, '\\d' in <tt>psql</tt> now shows foreign keys.",
-            "<b>PostgreSQL compatibility:</b> <tt>pg_table_size()</tt> now works with system tables.",
-            "<b>PostgreSQL compatibility:</b> <tt>COPY</tt> now works with system tables: <tt>copy pg_class to stdout;</tt>",
-            "<b>PostgreSQL compatibility:</b> Added support for <tt>DROP INDEX CONCURRENTLY</tt> which is a no-op since CedarDB always drops indexes concurrently, but is required by some tools.",
-            "<b>PostgreSQL compatibility:</b> Added stubbed <tt>pg_get_triggerdef()</tt> function. This is required by some tools like <tt>pg_dump</tt>.",
-			"<b>PostgreSQL compatibility:</b> Stubbed <tt>pg_partition_ancestor()</tt> system function. CedarDB partitions transparently, so this always returns an empty table.",
-            "<b>PostgreSQL compatibility:</b> Added support for <tt>with ordinality</tt> in <tt>pg_partition_ancestor()</tt> system function.",
-			"<b>PostgreSQL compatibility:</b> Added support for <tt>with ordinality</tt> in <tt>array_unnest()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Server now correctly reports compatibility with PostgreSQL 16.1 instead of 11.3 under all circumstances.",
-			"<b>PostgreSQL compatibility:</b> Get rid of the custom namespace <tt>cedar</tt> which caused issues with some tools.",
-            "<b>PostgreSQL compatibility:</b> Allow casts from oids inside strings.",
-			"<b>PostgreSQL compatibility:</b> CedarDB no longer prints implicitly created foreign key indexes in <tt>pg_class</tt> and <tt>pg_index</tt>.",
-			"<b>PostgreSQL compatibility:</b> Print the full name when calling <tt>pg_get_indexdef()</tt> on a table that is not in the search path.",
-			"<b>PostgreSQL compatibility:</b> <tt>pg_table_is_visible</tt> now works on indexes and sequences.",
-			"<b>PostgreSQL compatibility:</b> Use Postgres's special legacy <tt>oidvector</tt> and <tt>int2vector</tt> types in <tt>pg_index</tt>.",
-			"<b>PostgreSQL compatibility:</b> CedarDB now correctly enforces unique names across tables, views, indexes, and sequences. <emph>If you previously two of those objects with the same name, they have been renamed!</emph>. So if you had a table and a sequence both called <tt>foo</tt>, the sequence is now called <tt>foo1</tt>.",
-			"<b>PostgreSQL compatibility:</b> <tt>SELECT * FROM <sequence></tt> now works and returns the same table output as PostgreSQL.",
-			"<b>PostgreSQL compatibility:</b> Sequence limits now behave identical to Postgres.",
-			"<b>PostgreSQL compatibility:</b> Implement <tt>pg_opclass</tt> system table.",
-			"<b>Performance:</b> Streamlined counting characters with SSE.",
-			"<b>Performance:</b> Added support for AES hardware accelerated hashing via gxhash.",
-			"<b>Performance:</b> Expressions of the type <tt>regex_replace(in, pattern, '\\1')</tt> are no optimized to <tt>regexp_substr()</tt>.",
-			"<b>Performance:</b> Leading and trailing wildcards in <tt>regexp_substr()</tt> are now dropped.",
-			"<b>Performance:</b> CedarDB now accepts comments which contain invalid UTF-8.",
-			"<b>Maintenance:</b> Updated ICU version to 76.1, introducing support for new unicode characters.",
-			"<b>Maintenance:</b> Fixed off-by-one error in <tt>regexp_substr()</tt>.",
-			"<b>Maintenance:</b> Ensure sequences now have an explicit start value.",
-			"<b>Maintenance:</b> Severely hardened UTF-8 validation.",
-			"<b>Maintenance:</b> Fixed on OOB access when parsing ISO8601 intervals which lead to a crash.",
-			"<b>Maintenance:</b> Fixed a bug where generate_series() didn't correctly work when used in conjunction with arrays that weren't 1-indexed.",
-			"<b>Maintenance:</b> Fixed a bug where the undocumented Postgres function <tt>_pg_expandarray</tt> didn't correctly work on array that weren't 1-indexed.",
-			"<b>Maintenance:</b> Fixed a bug where nulls weren't correctly ordered when using radix sort.",
-			"<b>Maintenance:</b> Fixed a bug in <tt>regexp_match()</tt> and <tt>regexp_split_to_array()</tt> where they caused an error when used on values originating in a table.",
-			"<b>Maintenance:</b> Fixed a bug where function lookups without an explicit namespace didn't find the function.",
-			"<b>Maintenance:</b> Fixed quantified expressions over string arrays: <tt>insert into testtext values (array['test',null,'averylongstring']), (array['test']); select 'x' = ANY(x) from testtext;</tt> now works.",
-			"<b>Maintenance:</b> Fixed an error when casting from or to <tt>TEXT[]</tt> arrays.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Added support for <tt>DROP ROLE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>DROP GROUP</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>DROP SCHEMA</tt> as long as the schema is empty."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>DROP SEQUENCE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <tt>pg_get_constraintdef()</tt>. As a consequence of this, '\\d' in <tt>psql</tt> now shows foreign keys."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_table_size()</tt> now works with system tables."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>COPY</tt> now works with system tables: <tt>copy pg_class to stdout;</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Added support for <tt>DROP INDEX CONCURRENTLY</tt> which is a no-op since CedarDB always drops indexes concurrently, but is required by some tools."
+			},
+			{
+				"type": "pg",
+				"note": "Added stubbed <tt>pg_get_triggerdef()</tt> function. This is required by some tools like <tt>pg_dump</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Stubbed <tt>pg_partition_ancestor()</tt> system function. CedarDB partitions transparently, so this always returns an empty table."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for <tt>with ordinality</tt> in <tt>pg_partition_ancestor()</tt> system function."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for <tt>with ordinality</tt> in <tt>array_unnest()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Server now correctly reports compatibility with PostgreSQL 16.1 instead of 11.3 under all circumstances."
+			},
+			{
+				"type": "pg",
+				"note": "Get rid of the custom namespace <tt>cedar</tt> which caused issues with some tools."
+			},
+			{
+				"type": "pg",
+				"note": "Allow casts from oids inside strings."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB no longer prints implicitly created foreign key indexes in <tt>pg_class</tt> and <tt>pg_index</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Print the full name when calling <tt>pg_get_indexdef()</tt> on a table that is not in the search path."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_table_is_visible</tt> now works on indexes and sequences."
+			},
+			{
+				"type": "pg",
+				"note": "Use Postgres's special legacy <tt>oidvector</tt> and <tt>int2vector</tt> types in <tt>pg_index</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now correctly enforces unique names across tables, views, indexes, and sequences. <emph>If you previously two of those objects with the same name, they have been renamed!</emph>. So if you had a table and a sequence both called <tt>foo</tt>, the sequence is now called <tt>foo1</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>SELECT * FROM <sequence></tt> now works and returns the same table output as PostgreSQL."
+			},
+			{
+				"type": "pg",
+				"note": "Sequence limits now behave identical to Postgres."
+			},
+			{
+				"type": "pg",
+				"note": "Implement <tt>pg_opclass</tt> system table."
+			},
+			{
+				"type": "perf",
+				"note": "Streamlined counting characters with SSE."
+			},
+			{
+				"type": "perf",
+				"note": "Added support for AES hardware accelerated hashing via gxhash."
+			},
+			{
+				"type": "perf",
+				"note": "Expressions of the type <tt>regex_replace(in, pattern, '\\1')</tt> are no optimized to <tt>regexp_substr()</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Leading and trailing wildcards in <tt>regexp_substr()</tt> are now dropped."
+			},
+			{
+				"type": "perf",
+				"note": "CedarDB now accepts comments which contain invalid UTF-8."
+			},
+			{
+				"type": "fix",
+				"note": "Updated ICU version to 76.1, introducing support for new unicode characters."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed off-by-one error in <tt>regexp_substr()</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Ensure sequences now have an explicit start value."
+			},
+			{
+				"type": "fix",
+				"note": "Severely hardened UTF-8 validation."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed on OOB access when parsing ISO8601 intervals which lead to a crash."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where generate_series() didn't correctly work when used in conjunction with arrays that weren't 1-indexed."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where the undocumented Postgres function <tt>_pg_expandarray</tt> didn't correctly work on array that weren't 1-indexed."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where nulls weren't correctly ordered when using radix sort."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug in <tt>regexp_match()</tt> and <tt>regexp_split_to_array()</tt> where they caused an error when used on values originating in a table."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where function lookups without an explicit namespace didn't find the function."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed quantified expressions over string arrays: <tt>insert into testtext values (array['test',null,'averylongstring']), (array['test']); select 'x' = ANY(x) from testtext;</tt> now works."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed an error when casting from or to <tt>TEXT[]</tt> arrays."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -686,22 +2052,70 @@
 		"date": "2025-02-20",
 		"breaksdb": false,
 		"notes": [
-            "<b>PostgreSQL compatibility:</b> We made various compatibility time zone and interval changes such that we can pass the JDBC time tests.",
-			"<b>PostgreSQL compatibility:</b> We now allow $ symbols in identifiers.",
-			"<b>PostgreSQL compatibility:</b> You can now write nested comments in your SQL queries.",
-			"<b>PostgreSQL compatibility:</b> Simplified index size checking by parsing names as regclass oids in <tt>pg_table_size('foo_pkey')</tt>." ,
-			"<b>PostgreSQL compatibility:</b> PostgreSQL's parse messages are often sent without typemod. We now use the generic type as default.",
-            "<b>PostgreSQL compatibility:</b> We now print arrays and calculate the <tt>array_length</tt> according to PostgreSQL. Our array printer used to differ for arrays that have special characters, are empty, or have null values.",
-            "<b>PostgreSQL compatibility:</b> We now allow changing several transaction behavior settings with <tt>SET TRANSACTION</tt> statements and changing the default session behavior with <tt>SET SESSION CHARACTERISTICS AS TRANSACTION</tt> statements.",
-            "<b>PostgreSQL compatibility:</b> OIDs of system tables are now identical to the ones PostgreSQL uses.",
-            "<b>Performance:</b> If the join build side is empty, we skip evaluating the probe side completely when this is safe to do.",
-            "<b>Performance:</b> We revised operations that use the sequentially consistent memory model, replacing sequentially consistent stores and loads (where possible) with more performant acquire/release operations.",
-            "<b>Maintenance:</b> Fixed a rare race condition where the current file descriptor was closed and data was read. This could cause incorrect results to be returned. Because the likelihood of this increased in constrained memory settings, we now use more rigorous integration tests that put more stress on the memory subsystem.",
-            "<b>Maintenance:</b> Fixed a bug when we transformed an asof join conditions to a regular join condition.",
-            "<b>Maintenance:</b> We fixed a rare race condition in our group commit that could cause queries to be live-locked until the next transaction commits.",
-            "<b>Maintenance:</b> When processing insert on conflict, we only returned the updated rows instead of all rows.",
-            "<b>Maintenance:</b> Fixed a bug where we used a cached functional dependency after unnesting the query which could trigger an assert.",
-            "Various bug fixes, stability, and performance improvements."
+			{
+				"type": "pg",
+				"note": "We made various compatibility time zone and interval changes such that we can pass the JDBC time tests."
+			},
+			{
+				"type": "pg",
+				"note": "We now allow $ symbols in identifiers."
+			},
+			{
+				"type": "pg",
+				"note": "You can now write nested comments in your SQL queries."
+			},
+			{
+				"type": "pg",
+				"note": "Simplified index size checking by parsing names as regclass oids in <tt>pg_table_size('foo_pkey')</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "PostgreSQL's parse messages are often sent without typemod. We now use the generic type as default."
+			},
+			{
+				"type": "pg",
+				"note": "We now print arrays and calculate the <tt>array_length</tt> according to PostgreSQL. Our array printer used to differ for arrays that have special characters, are empty, or have null values."
+			},
+			{
+				"type": "pg",
+				"note": "We now allow changing several transaction behavior settings with <tt>SET TRANSACTION</tt> statements and changing the default session behavior with <tt>SET SESSION CHARACTERISTICS AS TRANSACTION</tt> statements."
+			},
+			{
+				"type": "pg",
+				"note": "OIDs of system tables are now identical to the ones PostgreSQL uses."
+			},
+			{
+				"type": "perf",
+				"note": "If the join build side is empty, we skip evaluating the probe side completely when this is safe to do."
+			},
+			{
+				"type": "perf",
+				"note": "We revised operations that use the sequentially consistent memory model, replacing sequentially consistent stores and loads (where possible) with more performant acquire/release operations."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare race condition where the current file descriptor was closed and data was read. This could cause incorrect results to be returned. Because the likelihood of this increased in constrained memory settings, we now use more rigorous integration tests that put more stress on the memory subsystem."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug when we transformed an asof join conditions to a regular join condition."
+			},
+			{
+				"type": "fix",
+				"note": "We fixed a rare race condition in our group commit that could cause queries to be live-locked until the next transaction commits."
+			},
+			{
+				"type": "fix",
+				"note": "When processing insert on conflict, we only returned the updated rows instead of all rows."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where we used a cached functional dependency after unnesting the query which could trigger an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -709,31 +2123,98 @@
 		"date": "2025-02-04",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> CedarDB's explain output includes more details: <ul> <li> <tt>explain</tt> now shows internally generated CTEs.</li> <li> <tt>explain analyze</tt> now shows the memory usage of hash joins and <tt>group by</tt> aggregations.</li><li><tt>explain analyze</tt> now reports the I/O statistics of table scans.</li></ul>",
-			"<b>New Feature:</b> You can now directly query csv files located on the server via <tt>select * from '/path/to/filename.csv'</tt>.",
-			"<b>New Feature:</b> Introduced the <tt>debug.log_slow_queries</tt> setting. It will log all queries which took longer than x milliseconds to execute on the server- and on the client side. Activate via <tt>set debug.log_slow_queries = min_time_in_milliseconds</tt>. <i>Warning: This is a global setting!</i>",
-
-
-			"<b>PostgreSQL compatibility:</b> Add <tt>pg_prepared_statements</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Correctly consider the <tt>weight</tt> parameter when deserializing numerics received in binary format.",
-			"<b>PostgreSQL compatibility:</b> <tt>pg_index</tt> now correctly reports index orders (ascending or descending).",
-			"<b>PostgreSQL compatibility:</b> The row description message of the wire protocol now correctly reports the base table columns of query results. This is required by e.g. JDBC to update ResultSets of a Query.",
-			"<b>PostgreSQL compatibility:</b> Text output of timestamps now correctly truncates trailing zeroes in the microsecond field.",
-			"<b>PostgreSQL compatibility:</b> <tt>pg_type</tt> now correctly reports the name of array types.",
-			"<b>PostgreSQL compatibility:</b> Return a more readable error message when a varchar exceeds its max length.",
-			"<b>PostgreSQL compatibility:</b> Startup messages may now contain integral timezone offsets instead of just a name.",
-			"<b>PostgreSQL compatibility:</b> CedarDB will now correctly send a ParameterStatus message to the client if a setting has been updated.",
-			"<b>PostgreSQL compatibility:</b> Extend the parsing logic of date style settings.",
-			"<b>Performance:</b> CedarDB now uses <tt>O_DIRECT</tt> on all systems that support it.",
-			"<b>Performance:</b> Improved selection of unique indexes. CedarDB previously only considered indexes with an explicit constraint as unique. Now, we also consider if the index attributes include a key, which allows choosing better index scans.",
-			"<b>Performance:</b> CedarDB now prefers covering and smaller indexes for index joins instead of always preferring primary keys.",
-			"<b>Performance:</b> CedarDB will now prefer using a covering index for index scans where possible. The previous index selection strategy caused us to sometimes access the underlying table even if a covering index was available that guaranteed no table lookup would be required.",
-			"<b>Performance:</b> Prefer using a table scan over an index scan if we have a very selective restriction on a table that is not covered by the index.",
-			"<b>Maintenance:</b> Fix an issue where CedarDB created overly many memory mappings. This resulted in unnecessary out of memory errors on strict Linux configurations. This only became an issue when creating more than 10'000 tables.",
-			"<b>Maintenance:</b> Fix a bug where we didn't parse <tt>drop operator</tt> correctly.",
-			"<b>Maintenance:</b> Output offset in the seconds range on timestamp with timezones. This broke timestamps in timezones who had adjustements in the past which were not evenly divisble by minutes. One example is Casablanca, where the timezone was adjusted by 20 seconds in 1913.",
-			"<b>Maintenance:</b> Fix a bug where we didn't consider some tuples in <tt>union all</tt> in rare edge cases.",
-			"<b>Maintenance:</b> Fix some edge cases for array input from strings where the parser, e.g., didn't consider tab-stops as white-space."
+			{
+				"type": "feat",
+				"note": "CedarDB's explain output includes more details: <ul> <li> <tt>explain</tt> now shows internally generated CTEs.</li> <li> <tt>explain analyze</tt> now shows the memory usage of hash joins and <tt>group by</tt> aggregations.</li><li><tt>explain analyze</tt> now reports the I/O statistics of table scans.</li></ul>"
+			},
+			{
+				"type": "feat",
+				"note": "You can now directly query csv files located on the server via <tt>select * from '/path/to/filename.csv'</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Introduced the <tt>debug.log_slow_queries</tt> setting. It will log all queries which took longer than x milliseconds to execute on the server- and on the client side. Activate via <tt>set debug.log_slow_queries = min_time_in_milliseconds</tt>. <i>Warning: This is a global setting!</i>"
+			},
+			{
+				"type": "pg",
+				"note": "Add <tt>pg_prepared_statements</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Correctly consider the <tt>weight</tt> parameter when deserializing numerics received in binary format."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_index</tt> now correctly reports index orders (ascending or descending)."
+			},
+			{
+				"type": "pg",
+				"note": "The row description message of the wire protocol now correctly reports the base table columns of query results. This is required by e.g. JDBC to update ResultSets of a Query."
+			},
+			{
+				"type": "pg",
+				"note": "Text output of timestamps now correctly truncates trailing zeroes in the microsecond field."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_type</tt> now correctly reports the name of array types."
+			},
+			{
+				"type": "pg",
+				"note": "Return a more readable error message when a varchar exceeds its max length."
+			},
+			{
+				"type": "pg",
+				"note": "Startup messages may now contain integral timezone offsets instead of just a name."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB will now correctly send a ParameterStatus message to the client if a setting has been updated."
+			},
+			{
+				"type": "pg",
+				"note": "Extend the parsing logic of date style settings."
+			},
+			{
+				"type": "perf",
+				"note": "CedarDB now uses <tt>O_DIRECT</tt> on all systems that support it."
+			},
+			{
+				"type": "perf",
+				"note": "Improved selection of unique indexes. CedarDB previously only considered indexes with an explicit constraint as unique. Now, we also consider if the index attributes include a key, which allows choosing better index scans."
+			},
+			{
+				"type": "perf",
+				"note": "CedarDB now prefers covering and smaller indexes for index joins instead of always preferring primary keys."
+			},
+			{
+				"type": "perf",
+				"note": "CedarDB will now prefer using a covering index for index scans where possible. The previous index selection strategy caused us to sometimes access the underlying table even if a covering index was available that guaranteed no table lookup would be required."
+			},
+			{
+				"type": "perf",
+				"note": "Prefer using a table scan over an index scan if we have a very selective restriction on a table that is not covered by the index."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an issue where CedarDB created overly many memory mappings. This resulted in unnecessary out of memory errors on strict Linux configurations. This only became an issue when creating more than 10'000 tables."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where we didn't parse <tt>drop operator</tt> correctly."
+			},
+			{
+				"type": "fix",
+				"note": "Output offset in the seconds range on timestamp with timezones. This broke timestamps in timezones who had adjustements in the past which were not evenly divisble by minutes. One example is Casablanca, where the timezone was adjusted by 20 seconds in 1913."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where we didn't consider some tuples in <tt>union all</tt> in rare edge cases."
+			},
+			{
+				"type": "fix",
+				"note": "Fix some edge cases for array input from strings where the parser, e.g., didn't consider tab-stops as white-space."
+			}
 		]
 	},
 	{
@@ -741,32 +2222,110 @@
 		"date": "2025-01-23",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> CedarDB now asynchronously loads data from disk into its page cache. This makes queries that touch data that is not currently cached up to 4x faster!",
-			"<b>New Feature:</b> Output of <tt>explain</tt> is now flatter, allowing you to more easily read query plans of complex queries. For a full overview and instructions on how to get back the old behavior, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain>our docs</a>.",
-			"<b>New Feature:</b> You can now cast integers to bitstrings: <tt>select 29::bit(4)</tt>.",
-			"<b>New Feature:</b> Support for read-only transactions via <tt>set transaction_read_only</tt>.",
-			"<b>New Feature:</b> <tt>explain analyze</tt> now returns more detailed information about execution times.",
-			"<b>New Feature:</b> Add support for a <tt>tinyint</tt> type.",
-			"<b>PostgreSQL compatibility:</b> System tables and views are now shown in <tt>pg_class</tt>.",
-			"<b>PostgreSQL compatibility:</b> Allow parsing values of type <tt>time</tt> from strings that also specify a date.",
-			"<b>PostgreSQL compatibility:</b> Correct handling of namespaces and owners in system tables.",
-			"<b>PostgreSQL compatibility:</b> <tt>pg_table_is_visible()</tt> now correctly observes <tt>search_path</tt>.",
-			"<b>PostgreSQL compatibility:</b> Enforce precision of numerics when casting them from strings or integral types.",
-			"<b>PostgreSQL compatibility:</b> Ensure that no table with <tt>oid</tt> 0 is printend in system tables since 0 signals an invalid oid. Required by some clients.",
-			"<b>PostgreSQL compatibility:</b> Support binary output of the <tt>ByteArray</tt>, <tt>JSON</tt>, and <tt>Time</tt> datatypes.",
-			"<b>PostgreSQL compatibility:</b> Looking up functions now works with fully qualified names as well: <tt>select 'pg_catalog.sum(int)'::regproc;</tt>",
-			"<b>PostgreSQL compatibility:</b> Allow using relation names in function calls without explicit casting to regclass: <tt>pg_table_size('foo');</tt>",
-			"<b>PostgreSQL compatibility:</b> Add <tt>array_in</tt> dummy function in <tt>pg_proc</tt> and <tt>pg_types</tt>. Required by some JDBC queries inferring whether a given type is an array type.",
-			"<b>PostgreSQL compatibility:</b> Support SQL standard compliant way to set the time zone.",
-			"<b>Performance:</b> Improve index selecion for index scans.",
-			"<b>Performance:</b> Skip over subtrees guaranteed to generate no results during execution.",
-			"<b>Maintenance:</b> Work around a bug in LLVM calling conventions. See the corresponding <a href='https://github.com/llvm/llvm-project/issues/123935'>issue</a> in the LLVM repo.",
-			"<b>Maintenance:</b> Print nicer error message when exceeding the maximum precision of a numeric.",
-			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in <tt>generate_subscripts()</tt>.",
-			"<b>Maintenance:</b> Fix a bug with <tt>null</tt> handling in upserts.",
-			"<b>Maintenance:</b> Fix a bug where we wrongly optimized multi-column conditions to <tt>IN</tt> expressions.",
-			"<b>Maintenance:</b> Got rid of pesky irrelevant message about perf counters not being able to be initialized.</tt>",
-			"<b>Maintenance:</b> Fixed a bug where the state of sequences was not correctly recovered after a system crash."
+			{
+				"type": "feat",
+				"note": "CedarDB now asynchronously loads data from disk into its page cache. This makes queries that touch data that is not currently cached up to 4x faster!"
+			},
+			{
+				"type": "feat",
+				"note": "Output of <tt>explain</tt> is now flatter, allowing you to more easily read query plans of complex queries. For a full overview and instructions on how to get back the old behavior, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain>our docs</a>."
+			},
+			{
+				"type": "feat",
+				"note": "You can now cast integers to bitstrings: <tt>select 29::bit(4)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support for read-only transactions via <tt>set transaction_read_only</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "<tt>explain analyze</tt> now returns more detailed information about execution times."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for a <tt>tinyint</tt> type."
+			},
+			{
+				"type": "pg",
+				"note": "System tables and views are now shown in <tt>pg_class</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Allow parsing values of type <tt>time</tt> from strings that also specify a date."
+			},
+			{
+				"type": "pg",
+				"note": "Correct handling of namespaces and owners in system tables."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_table_is_visible()</tt> now correctly observes <tt>search_path</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Enforce precision of numerics when casting them from strings or integral types."
+			},
+			{
+				"type": "pg",
+				"note": "Ensure that no table with <tt>oid</tt> 0 is printend in system tables since 0 signals an invalid oid. Required by some clients."
+			},
+			{
+				"type": "pg",
+				"note": "Support binary output of the <tt>ByteArray</tt>, <tt>JSON</tt>, and <tt>Time</tt> datatypes."
+			},
+			{
+				"type": "pg",
+				"note": "Looking up functions now works with fully qualified names as well: <tt>select 'pg_catalog.sum(int)'::regproc;</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Allow using relation names in function calls without explicit casting to regclass: <tt>pg_table_size('foo');</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Add <tt>array_in</tt> dummy function in <tt>pg_proc</tt> and <tt>pg_types</tt>. Required by some JDBC queries inferring whether a given type is an array type."
+			},
+			{
+				"type": "pg",
+				"note": "Support SQL standard compliant way to set the time zone."
+			},
+			{
+				"type": "perf",
+				"note": "Improve index selecion for index scans."
+			},
+			{
+				"type": "perf",
+				"note": "Skip over subtrees guaranteed to generate no results during execution."
+			},
+			{
+				"type": "fix",
+				"note": "Work around a bug in LLVM calling conventions. See the corresponding <a href='https://github.com/llvm/llvm-project/issues/123935'>issue</a> in the LLVM repo."
+			},
+			{
+				"type": "fix",
+				"note": "Print nicer error message when exceeding the maximum precision of a numeric."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with <tt>null</tt> handling in <tt>generate_subscripts()</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with <tt>null</tt> handling in upserts."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where we wrongly optimized multi-column conditions to <tt>IN</tt> expressions."
+			},
+			{
+				"type": "fix",
+				"note": "Got rid of pesky irrelevant message about perf counters not being able to be initialized.</tt>"
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where the state of sequences was not correctly recovered after a system crash."
+			}
 		]
 	},
 	{
@@ -774,18 +2333,54 @@
 		"date": "2025-01-03",
 		"breaksdb": false,
 		"notes": [
-			"<b>Performance:</b> Vectorize printing of UUIDs. This drastically speeds up performance for queries returning a lot of UUIDs.",
-			"<b>Performance:</b> Refined optimizer logic on when to employ an index scan when buffer size is limited to further reduce buffer thrashing.",
-			"<b>Maintenance:</b> Columns can now be called 'step' again.",
-			"<b>Maintenance:</b> Fixed a bug where index scans in combination with a <tt>limit</tt> without <tt>order by</tt> clause did not produce all matching tuples.",
-			"<b>Maintenance:</b> Fixed a bug where index range scans in combination with a <tt>limit</tt> did not produce all matching tuples.",
-			"<b>Maintenance:</b> Fixed a bug where inserting null values reported a unique constraint violation if the index enforcing uniqueness was created after rows had already been inserted.",
-			"<b>Maintenance:</b> Fixed several bugs in unnesting of asof joins.",
-			"<b>Maintenance:</b> Fixed a crash when calling <tt>pg_get_view_def</tt> on views with long names.",
-			"<b>Maintenance:</b> Fixed a bug where using non constant <tt>limit</tt> or <tt>offset</tt> declarations triggered an assert.",
-			"<b>Maintenance:</b> Fixed a race condition when changing settings concurrently.",
-			"<b>Maintenance:</b> Fixed a bug where queries operating on tables with multiple unique and non-unique indexes would skip some rows.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "perf",
+				"note": "Vectorize printing of UUIDs. This drastically speeds up performance for queries returning a lot of UUIDs."
+			},
+			{
+				"type": "perf",
+				"note": "Refined optimizer logic on when to employ an index scan when buffer size is limited to further reduce buffer thrashing."
+			},
+			{
+				"type": "fix",
+				"note": "Columns can now be called 'step' again."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where index scans in combination with a <tt>limit</tt> without <tt>order by</tt> clause did not produce all matching tuples."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where index range scans in combination with a <tt>limit</tt> did not produce all matching tuples."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where inserting null values reported a unique constraint violation if the index enforcing uniqueness was created after rows had already been inserted."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed several bugs in unnesting of asof joins."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash when calling <tt>pg_get_view_def</tt> on views with long names."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where using non constant <tt>limit</tt> or <tt>offset</tt> declarations triggered an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a race condition when changing settings concurrently."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where queries operating on tables with multiple unique and non-unique indexes would skip some rows."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -793,15 +2388,42 @@
 		"date": "2024-12-24",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> We have added support for explain statements after different query optimization steps. For example, <tt>explain (step Unnesting) select * from foo, bar where foo.a = bar.b</tt> shows the query tree after the 'Unnesting' optimization step but before the 'Predicate Pushdown' step. For the syntax and available steps, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain/#step>our docs</a>.",
-			"<b>Performance:</b> The logic deciding whether to use an index for a join is now more sophisticated. Previously, it could happen that CedarDB suddenly switched to a very disadvantageous query plan once a relation's size reached 10% of the available main memory. CedarDB now also takes the cost of buffer thrashing into account, not only a relation's size.",
-			"<b>Performance:</b> CedarDB is now more careful on when it holds an exclusive lock on the database schema during DDL statements, improving performance of DDL queries.",
-			"<b>PostgreSQL compatibility:</b> Support for non constant values for <tt>limit</tt> offset: It is now possible to prepare queries like <tt> select * from foo limit $1 offset $2</tt>. This was e.g. required by <a href=https://orm.drizzle.team/drizzle-studio/overview>Drizzle Studio</a>.",
-			"<b>PostgreSQL compatibility:</b> Add <tt>pg_column_is_updatable()</tt> builtin function.",
-			"<b>Maintenance:</b> Fix a bug in the null-handling logic of <tt>IN</tt> expressions which triggered a faulty assert. Also occured in instances where no explicit <tt>IN</tt> expression was present but CedarDB optimized a different expression into such an expression.",
-			"<b>Maintenance:</b> Tables created in the temporary <tt>pg_temp</tt> namespace can now actually be referenced in queries and aren't lost to the aether.",
-			"<b>Maintenance:</b> Fix a race condition in the group commit queue where a thread waiting for a sync to disk was notified before it started to wait. This could lead to deadlocks of bulk transactions ",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "We have added support for explain statements after different query optimization steps. For example, <tt>explain (step Unnesting) select * from foo, bar where foo.a = bar.b</tt> shows the query tree after the 'Unnesting' optimization step but before the 'Predicate Pushdown' step. For the syntax and available steps, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain/#step>our docs</a>."
+			},
+			{
+				"type": "perf",
+				"note": "The logic deciding whether to use an index for a join is now more sophisticated. Previously, it could happen that CedarDB suddenly switched to a very disadvantageous query plan once a relation's size reached 10% of the available main memory. CedarDB now also takes the cost of buffer thrashing into account, not only a relation's size."
+			},
+			{
+				"type": "perf",
+				"note": "CedarDB is now more careful on when it holds an exclusive lock on the database schema during DDL statements, improving performance of DDL queries."
+			},
+			{
+				"type": "pg",
+				"note": "Support for non constant values for <tt>limit</tt> offset: It is now possible to prepare queries like <tt> select * from foo limit $1 offset $2</tt>. This was e.g. required by <a href=https://orm.drizzle.team/drizzle-studio/overview>Drizzle Studio</a>."
+			},
+			{
+				"type": "pg",
+				"note": "Add <tt>pg_column_is_updatable()</tt> builtin function."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug in the null-handling logic of <tt>IN</tt> expressions which triggered a faulty assert. Also occured in instances where no explicit <tt>IN</tt> expression was present but CedarDB optimized a different expression into such an expression."
+			},
+			{
+				"type": "fix",
+				"note": "Tables created in the temporary <tt>pg_temp</tt> namespace can now actually be referenced in queries and aren't lost to the aether."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a race condition in the group commit queue where a thread waiting for a sync to disk was notified before it started to wait. This could lead to deadlocks of bulk transactions"
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -809,31 +2431,106 @@
 		"date": "2024-12-16",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for the <tt>serial</tt>, <tt>smallserial</tt>, and <tt>bigserial</tt> data types.",
-			"<b>New Feature:</b> Add trigonometric functions with degrees: <tt>acosd, asind, atand, cosd, cotd, sind, tand</tt>.",
-			"<b>New Feature:</b> Add hyperbolic trigonometric functions: <tt>sinh, cosh, tanh, asinh, acosh, atanh</tt>.",
-			"<b>New Feature:</b> Add support for <tt>generate_subscripts()</tt>.",
-			"<b>New Feature:</b> Very basic support for the <a href=https://orm.drizzle.team/>Drizzle</a> ORM.",
-			"<b>Performance:</b> Doing inserts in batches of 128 or more elements is now considerably faster.",
-			"<b>Performance:</b> <tt>coalesce</tt> expressions with large number of arguments are now optimized in linear instead of quadratic time.",
-			"<b>PostgreSQL compatibility:</b> support parsing oids from namespace literals: <tt>select 'pg_temp'::regnamespace </tt>.",
-			"<b>PostgreSQL compatibility:</b> calling <tt>json_array_elements()</tt> on null now returns an empty string.",
-			"<b>PostgreSQL compatibility:</b> malformed protocol messages now return the <tt>ProtocolViolation</tt> error code instead of <tt>InternalError</tt>.",
-			"<b>PostgreSQL compatibility:</b> Failing to authenticate now returns the correct error codes.",
-			"<b>PostgreSQL compatibility:</b> It is now possible to bind up to 65535 parameters to a prepared statement, instead of the previous maximum of 32767.",
-			"<b>PostgreSQL compatibility:</b> The <tt>pg_columnkeys</tt> column in the <tt>pg_constraint</tt> and <tt>pg_index</tt> system tables are now 1-indexed instead of 0-indexed.",
-			"<b>PostgreSQL compatibility:</b> Add <tt>has_sequence_privilege()</tt> builtin function.",
-			"<b>PostgreSQL compatibility:</b> Add <tt>pg_sequence_last_value()</tt> builtin function.",
-			"<b>PostgreSQL compatibility:</b> Update the <tt>pg_sequence</tt> system view to return meaningful data.",
-			"<b>PostgreSQL compatibility:</b> List sequences in the <tt>pg_class</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_get_serial_sequence()</tt> builtin function.",
-			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_stat_user_indexes</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Add stubbed <tt>pg_stat_all_indexes</tt> system table.",
-			"<b>Maintenance:</b> Fix an exception when parsing <tt>SET</tt> statements.",
-			"<b>Maintenance:</b> Malformed client messages are now handed gracefully and close the connection instead of triggering an assertion failure.",
-			"<b>Maintenance:</b> Automatically abort queries that run into a live lock. This could happen when trying to evict buffer pages while all buffer pages where pinned.",
-			"<b>Maintenance:</b> Parsing alter role statements setting the connection limit to values lower than -1 now throws the expected error instead of triggering an assert.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Add support for the <tt>serial</tt>, <tt>smallserial</tt>, and <tt>bigserial</tt> data types."
+			},
+			{
+				"type": "feat",
+				"note": "Add trigonometric functions with degrees: <tt>acosd, asind, atand, cosd, cotd, sind, tand</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add hyperbolic trigonometric functions: <tt>sinh, cosh, tanh, asinh, acosh, atanh</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>generate_subscripts()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Very basic support for the <a href=https://orm.drizzle.team/>Drizzle</a> ORM."
+			},
+			{
+				"type": "perf",
+				"note": "Doing inserts in batches of 128 or more elements is now considerably faster."
+			},
+			{
+				"type": "perf",
+				"note": "<tt>coalesce</tt> expressions with large number of arguments are now optimized in linear instead of quadratic time."
+			},
+			{
+				"type": "pg",
+				"note": "support parsing oids from namespace literals: <tt>select 'pg_temp'::regnamespace </tt>."
+			},
+			{
+				"type": "pg",
+				"note": "calling <tt>json_array_elements()</tt> on null now returns an empty string."
+			},
+			{
+				"type": "pg",
+				"note": "malformed protocol messages now return the <tt>ProtocolViolation</tt> error code instead of <tt>InternalError</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Failing to authenticate now returns the correct error codes."
+			},
+			{
+				"type": "pg",
+				"note": "It is now possible to bind up to 65535 parameters to a prepared statement, instead of the previous maximum of 32767."
+			},
+			{
+				"type": "pg",
+				"note": "The <tt>pg_columnkeys</tt> column in the <tt>pg_constraint</tt> and <tt>pg_index</tt> system tables are now 1-indexed instead of 0-indexed."
+			},
+			{
+				"type": "pg",
+				"note": "Add <tt>has_sequence_privilege()</tt> builtin function."
+			},
+			{
+				"type": "pg",
+				"note": "Add <tt>pg_sequence_last_value()</tt> builtin function."
+			},
+			{
+				"type": "pg",
+				"note": "Update the <tt>pg_sequence</tt> system view to return meaningful data."
+			},
+			{
+				"type": "pg",
+				"note": "List sequences in the <tt>pg_class</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Add stubbed <tt>pg_get_serial_sequence()</tt> builtin function."
+			},
+			{
+				"type": "pg",
+				"note": "Add stubbed <tt>pg_stat_user_indexes</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Add stubbed <tt>pg_stat_all_indexes</tt> system table."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an exception when parsing <tt>SET</tt> statements."
+			},
+			{
+				"type": "fix",
+				"note": "Malformed client messages are now handed gracefully and close the connection instead of triggering an assertion failure."
+			},
+			{
+				"type": "fix",
+				"note": "Automatically abort queries that run into a live lock. This could happen when trying to evict buffer pages while all buffer pages where pinned."
+			},
+			{
+				"type": "fix",
+				"note": "Parsing alter role statements setting the connection limit to values lower than -1 now throws the expected error instead of triggering an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -841,20 +2538,62 @@
 		"date": "2024-12-05",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> The docker image is now compatible with external <tt>pg_isready</tt> health checks. Previously, CedarDB would be started and stopped multiple times during setup while being externally reachable. This caused <tt>pg_isready</tt> to prematurely declare CedarDB being up and subsequent connections to fail.",
-			"<b>New Feature:</b> Log messages are now prefixed with a timestamp.",
-			"<b>New Feature:</b> More detailed CSV import error messages: When the format is wrong, CedarDB now returns the offending column and the detailed issue.",
-			"<b>PostgreSQL compatibility:</b> Sequence names now automatically convert to oids. You can now write <tt>CREATE SEQUENCE serial; select nextval('serial');</tt>",
-			"<b>PostgreSQL compatibility:</b> Support for <tt>factorial(n)</tt>, in addition to the already existing <tt>n!</tt> and <tt>!!n</tt>.",
-			"<b>PostgreSQL compatibility:</b> Subtracting two dates now returns an integer with the difference in days, instead of an interval.",
-			"<b>PostgreSQL compatibility:</b> <tt>split_part</tt> now allows for negative arguments to search backward from the end and correctly returns <tt>null</tt> in some corner cases.",
-			"<b>Maintenance:</b> Fixed a bug where docker containers would not start correctly on Windows.",
-			"<b>Maintenance:</b> Removed a few spurious asserts which gave the impression something went wrong when everything was in fact fine.",
-			"<b>Maintenance:</b> Fixed a crash for queries which would join at least two tables using the <tt>json_array_elements</tt> set generating function.",
-			"<b>Maintenance:</b> Fixed a rare deadlock when creating indexes. This could happen when re-creating an index after dropping it.",
-			"<b>Maintenance:</b> Fixed an issue where dropped indexes were wrongly restored when a concurrent transaction also modifying it was aborted.",
-			"<b>Maintenance:</b> Fixed a case where CedarDB tried to truncate a log too early and subsequently failed an assert.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "The docker image is now compatible with external <tt>pg_isready</tt> health checks. Previously, CedarDB would be started and stopped multiple times during setup while being externally reachable. This caused <tt>pg_isready</tt> to prematurely declare CedarDB being up and subsequent connections to fail."
+			},
+			{
+				"type": "feat",
+				"note": "Log messages are now prefixed with a timestamp."
+			},
+			{
+				"type": "feat",
+				"note": "More detailed CSV import error messages: When the format is wrong, CedarDB now returns the offending column and the detailed issue."
+			},
+			{
+				"type": "pg",
+				"note": "Sequence names now automatically convert to oids. You can now write <tt>CREATE SEQUENCE serial; select nextval('serial');</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Support for <tt>factorial(n)</tt>, in addition to the already existing <tt>n!</tt> and <tt>!!n</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Subtracting two dates now returns an integer with the difference in days, instead of an interval."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>split_part</tt> now allows for negative arguments to search backward from the end and correctly returns <tt>null</tt> in some corner cases."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where docker containers would not start correctly on Windows."
+			},
+			{
+				"type": "fix",
+				"note": "Removed a few spurious asserts which gave the impression something went wrong when everything was in fact fine."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a crash for queries which would join at least two tables using the <tt>json_array_elements</tt> set generating function."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare deadlock when creating indexes. This could happen when re-creating an index after dropping it."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed an issue where dropped indexes were wrongly restored when a concurrent transaction also modifying it was aborted."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a case where CedarDB tried to truncate a log too early and subsequently failed an assert."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -862,12 +2601,30 @@
 		"date": "2024-11-21",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Add support for <tt>psql</tt> builtin describe commands <tt>\\d table</tt> and <tt>\\d+ table</tt>.",
-			"<b>PostgreSQL compatibility:</b> Include attribute defaults in the <tt>pg_attrdef</tt> system table.",
-			"<b>Performance:</b> Reduce transaction tail latency: When the overall write-ahead log size becomes too large, writing transactions are now throttled instead of paused.",
-			"<b>Maintenance:</b> Fix a rare deadlock during concurrent compression of inserts.",
-			"<b>Maintenance:</b> Fix a crash when inserting strings just smaller than 64 KB.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Add support for <tt>psql</tt> builtin describe commands <tt>\\d table</tt> and <tt>\\d+ table</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Include attribute defaults in the <tt>pg_attrdef</tt> system table."
+			},
+			{
+				"type": "perf",
+				"note": "Reduce transaction tail latency: When the overall write-ahead log size becomes too large, writing transactions are now throttled instead of paused."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare deadlock during concurrent compression of inserts."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when inserting strings just smaller than 64 KB."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -875,15 +2632,42 @@
 		"date": "2024-11-15",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> This release comes with a new Docker image that more closely mirrors the behavior of the official Postgres image. You can now pass the superuser name and password as environment variabls at container startup instead of having to create them manually inside Docker! For a full list of changes and new features, check out our new <a href=/docs/get_started/install_with_docker/ target=_blank> Docker docs</a>.",
-			"<b>New Feature:</b> The Docker image now correctly exports the <tt>PG_HOST</tt> environment variable. When using psql from inside the Docker container, you no longer need to write <tt>-h /tmp</tt>.",
-			"<b>Performance:</b> More aggressive autocompression of tables. Previously, CedarDB only compressed tuples during bulk inserts, scan-intensive queries or when the user manually executed <tt>VACUUM</tt>. CedarDB now also autocompresses tuples after small inserts, which considerably improves table scan performance and significantly reduces storage consumption for write-intensive workloads",
-			"<b>PostgreSQL compatibility:</b> Constructing an array from empty input now returns an empty array instead of null, e.g. <tt>select array(select * from unnest(ARRAY[]::text[]));</tt>",
-			"<b>PostgreSQL compatibility:</b> Mirror undocumented Postgres behavior regarding function and table aliases: <tt> select a from foo a </tt> now works.",
-			"<b>Maintenance:</b> Fixed a race condition in the buffer manager where CedarDB could lose updates. This race condition caused the database to shut down and the recovery process to complain about an invalid system state. It was only triggered under heavy memory pressure when a page was incorrectly selected twice for eviction.",
-			"<b>Maintenance:</b> User defined functions are now formatted correctly when printing with <tt>explain (analyze, format sql)</tt>.",
-			"<b>Maintenance:</b> Fixed a rare case where <tt>IN</tt> expressions with nullable inputs could cause a query to abort</tt>.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "This release comes with a new Docker image that more closely mirrors the behavior of the official Postgres image. You can now pass the superuser name and password as environment variabls at container startup instead of having to create them manually inside Docker! For a full list of changes and new features, check out our new <a href=/docs/get_started/install_with_docker/ target=_blank> Docker docs</a>."
+			},
+			{
+				"type": "feat",
+				"note": "The Docker image now correctly exports the <tt>PG_HOST</tt> environment variable. When using psql from inside the Docker container, you no longer need to write <tt>-h /tmp</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "More aggressive autocompression of tables. Previously, CedarDB only compressed tuples during bulk inserts, scan-intensive queries or when the user manually executed <tt>VACUUM</tt>. CedarDB now also autocompresses tuples after small inserts, which considerably improves table scan performance and significantly reduces storage consumption for write-intensive workloads"
+			},
+			{
+				"type": "pg",
+				"note": "Constructing an array from empty input now returns an empty array instead of null, e.g. <tt>select array(select * from unnest(ARRAY[]::text[]));</tt>"
+			},
+			{
+				"type": "pg",
+				"note": "Mirror undocumented Postgres behavior regarding function and table aliases: <tt> select a from foo a </tt> now works."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a race condition in the buffer manager where CedarDB could lose updates. This race condition caused the database to shut down and the recovery process to complain about an invalid system state. It was only triggered under heavy memory pressure when a page was incorrectly selected twice for eviction."
+			},
+			{
+				"type": "fix",
+				"note": "User defined functions are now formatted correctly when printing with <tt>explain (analyze, format sql)</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a rare case where <tt>IN</tt> expressions with nullable inputs could cause a query to abort</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -891,17 +2675,50 @@
 		"date": "2024-11-05",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Improved internal memory allocation: CedarDB now tracks memory consumption during query execution and aborts queries consuming too much working memory.",
-			"<b>New Feature:</b> Add <tt>VACUUM</tt> statement. It manually triggers data compression of newly inserted data that hasn't been queried often yet.",
-			"<b>Performance:</b> Greatly speed up queries of the pattern <tt> SELECT * FROM foo LIMIT 1</tt>.",
-			"<b>Performance:</b> Improve estimates on tables with unique constraints.",
-			"<b>Performance:</b> Reduce write-ahead log size. CedarDB now tries to prune the log much more eagerly to reduce disk space consumption.",
-			"<b>PostgreSQL compatibility:</b> Add name datatype to <tt>pg_type</tt> system table. Required by some ORMs using JDBC (e.g., \"Exposed\") to infer maximum length of table names and columns.",
-			"<b>PostgreSQL compatibility:</b> Allow parsing dates from strings specifying a full timestamp. Used by some ORMs such as \"Exposed\" to construct dates.",
-			"<b>Maintenance:</b> Fix case where created functions couldn't be dropped.",
-			"<b>Maintenance:</b> Fix deadlock when client connection unexpectedly drops.",
-			"<b>Maintenance:</b> Upgraded to LLVM 19.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Improved internal memory allocation: CedarDB now tracks memory consumption during query execution and aborts queries consuming too much working memory."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>VACUUM</tt> statement. It manually triggers data compression of newly inserted data that hasn't been queried often yet."
+			},
+			{
+				"type": "perf",
+				"note": "Greatly speed up queries of the pattern <tt> SELECT * FROM foo LIMIT 1</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Improve estimates on tables with unique constraints."
+			},
+			{
+				"type": "perf",
+				"note": "Reduce write-ahead log size. CedarDB now tries to prune the log much more eagerly to reduce disk space consumption."
+			},
+			{
+				"type": "pg",
+				"note": "Add name datatype to <tt>pg_type</tt> system table. Required by some ORMs using JDBC (e.g., \"Exposed\") to infer maximum length of table names and columns."
+			},
+			{
+				"type": "pg",
+				"note": "Allow parsing dates from strings specifying a full timestamp. Used by some ORMs such as \"Exposed\" to construct dates."
+			},
+			{
+				"type": "fix",
+				"note": "Fix case where created functions couldn't be dropped."
+			},
+			{
+				"type": "fix",
+				"note": "Fix deadlock when client connection unexpectedly drops."
+			},
+			{
+				"type": "fix",
+				"note": "Upgraded to LLVM 19."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -909,7 +2726,10 @@
 		"date": "2024-10-17",
 		"breaksdb": false,
 		"notes": [
-			"<b>Maintenance:</b> Stability fix for replanning prepared statements with UPSERTs."
+			{
+				"type": "fix",
+				"note": "Stability fix for replanning prepared statements with UPSERTs."
+			}
 		]
 	},
 	{
@@ -917,13 +2737,34 @@
 		"date": "2024-10-16",
 		"breaksdb": false,
 		"notes": [
-			"<b>Maintenance:</b> Check for newer CedarDB versions on Docker startup.",
-			"<b>Maintenance:</b> Fix rare cases of lost tuples in UPSERT queries.",
-			"<b>Maintenance:</b> Use consistent sort order for BLOB types.",
-			"<b>Performance:</b> Lazily compile prepared statements.",
-			"<b>PostgreSQL compatibility:</b> Use PostgreSQL-compliant BigNumeric type truncation.",
-			"<b>PostgreSQL compatibility:</b> Support <tt>regclass</tt> casts for system tables.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "fix",
+				"note": "Check for newer CedarDB versions on Docker startup."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare cases of lost tuples in UPSERT queries."
+			},
+			{
+				"type": "fix",
+				"note": "Use consistent sort order for BLOB types."
+			},
+			{
+				"type": "perf",
+				"note": "Lazily compile prepared statements."
+			},
+			{
+				"type": "pg",
+				"note": "Use PostgreSQL-compliant BigNumeric type truncation."
+			},
+			{
+				"type": "pg",
+				"note": "Support <tt>regclass</tt> casts for system tables."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -931,26 +2772,86 @@
 		"date": "2024-10-11",
 		"breaksdb": false,
 		"notes": [
-			"<b>New Feature:</b> Added support for <a href=/docs/references/advanced/asof_join/ target=_blank>AsOf joins</a>.",
-			"<b>New Feature:</b> Added support for <a href=/docs/references/sqlreference/statements/upsert target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>.",
-			"<b>New Feature:</b> Added support for additional <a href=/docs/references/sqlreference/functions/aggregation/ target=_blank>aggregation functions</a>.",
-			"<b>Maintenance:</b> Update the timezone database to version 2024b.",
-			"<b>Maintenance:</b> Fix daylight savings time handling for regions with daylight savings differences other than 1 hour.",
-			"<b>Performance:</b> Improve join unnesting for dependent joins.",
-			"<b>Performance:</b> Various cardinality estimation improvements.",
-			"<b>Performance:</b> Add vectorization support for pg_vector-type cosine distance calcultions.",
-			"<b>Performance:</b> Lazily compile user-defined functions.",
-			"<b>PostgreSQL compatibility:</b> Support array-constructing subqueries: <tt>select array(values(1),(1));</tt> returns <tt>{1,1}</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>has_column_privilege()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>has_function_privilege()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_attribute</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Improve output of <tt>pg_type</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Full support for <tt>pg_timezone_names</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Full support for <tt>pg_timezone_abbrevs</tt> system table.",
-			"<b>PostgreSQL compatibility:</b> Added support for <tt>default</tt> keyword in <tt>INSERT</tt> statements.",
-			"<b>PostgreSQL compatibility:</b> Use PostgreSQL-compliant sort order for <tt>bytea</tt> type.",
-			"<b>PostgreSQL compatibility:</b> Fix output of <tt>current_schema()</tt> function.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Added support for <a href=/docs/references/advanced/asof_join/ target=_blank>AsOf joins</a>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for <a href=/docs/references/sqlreference/statements/upsert target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for additional <a href=/docs/references/sqlreference/functions/aggregation/ target=_blank>aggregation functions</a>."
+			},
+			{
+				"type": "fix",
+				"note": "Update the timezone database to version 2024b."
+			},
+			{
+				"type": "fix",
+				"note": "Fix daylight savings time handling for regions with daylight savings differences other than 1 hour."
+			},
+			{
+				"type": "perf",
+				"note": "Improve join unnesting for dependent joins."
+			},
+			{
+				"type": "perf",
+				"note": "Various cardinality estimation improvements."
+			},
+			{
+				"type": "perf",
+				"note": "Add vectorization support for pg_vector-type cosine distance calcultions."
+			},
+			{
+				"type": "perf",
+				"note": "Lazily compile user-defined functions."
+			},
+			{
+				"type": "pg",
+				"note": "Support array-constructing subqueries: <tt>select array(values(1),(1));</tt> returns <tt>{1,1}</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added <tt>has_column_privilege()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Added <tt>has_function_privilege()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Improve output of <tt>pg_attribute</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Improve output of <tt>pg_type</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Full support for <tt>pg_timezone_names</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Full support for <tt>pg_timezone_abbrevs</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Added support for <tt>default</tt> keyword in <tt>INSERT</tt> statements."
+			},
+			{
+				"type": "pg",
+				"note": "Use PostgreSQL-compliant sort order for <tt>bytea</tt> type."
+			},
+			{
+				"type": "pg",
+				"note": "Fix output of <tt>current_schema()</tt> function."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
 	{
@@ -958,62 +2859,187 @@
 		"date": "2024-09-13",
 		"breaksdb": true,
 		"notes": [
-			"<b>New Feature:</b> Implemented the functionality of the <a href=https://github.com/pgvector/pgvector>pgvector</a> extension. For a feature description take a look at the <a href=../references/datatypes/vector>vector datatype reference</a>, the <a href=../references/advanced/pgvector>pgvector extension compatibility docs</a>, or follow <a href=../example_datasets/glove>our new vector tutorial</a>.",
-			"<b>New Feature:</b> Restructured database file storage: All files of a given database are stored in the same directory to declutter your server. Existing database files will be converted to the new format automatically on startup, no manual intervention required.",
-			"<b>New Feature:</b> Added support for quantified expressions over subqueries and arrays: <br /> <tt>with tmp(x) as (select array[1,2,3]) select 1 = ANY(x) from tmp</tt>.",
-			"<b>New Feature:</b> Implicitly cast string constants in binary expressions: You can now, for example, write <tt> 123 + '456'</tt>.",
-			"<b>New Feature:</b> Better type deduction for unknown types: Parameters now seamlessly work in function calls. For example <tt>lower($1)</tt> now treats the parameter as a string.",
-			"<b>New Feature:</b> Added support for row results in subqueries and non constant arrays: <br /> <tt>select (r.r).\"2\", (r.r).\"1\", (r.r).\"0\" from (select row('foo','bar','baz')) r(r)\"</tt> returns <tt> baz bar foo </tt>.",
-			"<b>Maintenance:</b> Introduce recovery log versioning to reduce the likelihood of having to break backwards compatibility in the future.",
-			"<b>Performance:</b> Optimizer: Improved cardinality estimation for very selective predicates. This sometimes improves execution plans, where we observed cases of 10x speedup",
-			"<b>Performance:</b> Implemented a heuristic that inlines CTEs that materialize a large state but are cheap to recalculate. This improves TPC-DS Q95's performance by about 10x, for example.",
-			"<b>Performance:</b> More aggressively use band joins where beneficial, even if the query does not contain <tt>between</tt> conditions.",
-			"<b>Performance:</b> Optimize concat calls with single arguments: <tt> concat(x)</tt> becomes <tt> cast(x as text)</tt>.",
-			"<b>PostgreSQL compatibility:</b> Honor Postgres <tt>AS NOT MATERIALIZED</tt> hint in CTEs.",
-			"<b>PostgreSQL compatibility:</b> Timestamp calculations are now done in UTC instead of local time in accordance with the Postgres docs.",
-			"<b>PostgreSQL compatibility:</b> When adding intervals to timestamps, the months, days, and microseconds fields of the interval value are handled in turn.",
-			"<b>PostgreSQL compatibility:</b> Correctly output regclass and regtype names: For example, <tt>pg_typeof(42)</tt> now returns <tt>'int4'</tt> instead of a cryptic identifier.",
-			"<b>PostgreSQL compatibility:</b> <tt>trim()</tt> now allows for Postgres' alternative syntax: Instead of <tt>trim('x' from 'xfoox')</tt> you can now also write <tt>trim('xfoox','x')</tt>.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>to_regtype()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>pg_typeof()</tt> function.",
-			"<b>PostgreSQL compatibility:</b> Added <tt>nameconcatoid()</tt> function.",
-			"Various bug fixes, stability, and performance improvements."
+			{
+				"type": "feat",
+				"note": "Implemented the functionality of the <a href=https://github.com/pgvector/pgvector>pgvector</a> extension. For a feature description take a look at the <a href=../references/datatypes/vector>vector datatype reference</a>, the <a href=../references/advanced/pgvector>pgvector extension compatibility docs</a>, or follow <a href=../example_datasets/glove>our new vector tutorial</a>."
+			},
+			{
+				"type": "feat",
+				"note": "Restructured database file storage: All files of a given database are stored in the same directory to declutter your server. Existing database files will be converted to the new format automatically on startup, no manual intervention required."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for quantified expressions over subqueries and arrays: <br /> <tt>with tmp(x) as (select array[1,2,3]) select 1 = ANY(x) from tmp</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Implicitly cast string constants in binary expressions: You can now, for example, write <tt> 123 + '456'</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Better type deduction for unknown types: Parameters now seamlessly work in function calls. For example <tt>lower($1)</tt> now treats the parameter as a string."
+			},
+			{
+				"type": "feat",
+				"note": "Added support for row results in subqueries and non constant arrays: <br /> <tt>select (r.r).\"2\", (r.r).\"1\", (r.r).\"0\" from (select row('foo','bar','baz')) r(r)\"</tt> returns <tt> baz bar foo </tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Introduce recovery log versioning to reduce the likelihood of having to break backwards compatibility in the future."
+			},
+			{
+				"type": "perf",
+				"note": "Optimizer: Improved cardinality estimation for very selective predicates. This sometimes improves execution plans, where we observed cases of 10x speedup"
+			},
+			{
+				"type": "perf",
+				"note": "Implemented a heuristic that inlines CTEs that materialize a large state but are cheap to recalculate. This improves TPC-DS Q95's performance by about 10x, for example."
+			},
+			{
+				"type": "perf",
+				"note": "More aggressively use band joins where beneficial, even if the query does not contain <tt>between</tt> conditions."
+			},
+			{
+				"type": "perf",
+				"note": "Optimize concat calls with single arguments: <tt> concat(x)</tt> becomes <tt> cast(x as text)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Honor Postgres <tt>AS NOT MATERIALIZED</tt> hint in CTEs."
+			},
+			{
+				"type": "pg",
+				"note": "Timestamp calculations are now done in UTC instead of local time in accordance with the Postgres docs."
+			},
+			{
+				"type": "pg",
+				"note": "When adding intervals to timestamps, the months, days, and microseconds fields of the interval value are handled in turn."
+			},
+			{
+				"type": "pg",
+				"note": "Correctly output regclass and regtype names: For example, <tt>pg_typeof(42)</tt> now returns <tt>'int4'</tt> instead of a cryptic identifier."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>trim()</tt> now allows for Postgres' alternative syntax: Instead of <tt>trim('x' from 'xfoox')</tt> you can now also write <tt>trim('xfoox','x')</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Added <tt>to_regtype()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Added <tt>pg_typeof()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Added <tt>nameconcatoid()</tt> function."
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes, stability, and performance improvements."
+			}
 		]
 	},
-
 	{
 		"version": "alpha/2024-07-24",
 		"date": "2024-07-24",
 		"breaksdb": true,
 		"notes": [
-			"<b>Maintenance:</b> Split data file and schema version numbering to reduce the likelihood of having to break backwards compatibility in the future",
-			"<b>PostgreSQL compatibility:</b> Full support for all PostgreSQL timezone abbreviations",
-			"<b>PostgreSQL compatibility:</b> Parse (not-) materialized Common Table Expression hints",
-			"<b>PostgreSQL compatibility:</b> Added for pg_proc system table",
-			"<b>PostgreSQL compatibility:</b> Added pg_function_is_visible() function",
-			"Various bug fixes and stability improvements"
+			{
+				"type": "fix",
+				"note": "Split data file and schema version numbering to reduce the likelihood of having to break backwards compatibility in the future"
+			},
+			{
+				"type": "pg",
+				"note": "Full support for all PostgreSQL timezone abbreviations"
+			},
+			{
+				"type": "pg",
+				"note": "Parse (not-) materialized Common Table Expression hints"
+			},
+			{
+				"type": "pg",
+				"note": "Added for pg_proc system table"
+			},
+			{
+				"type": "pg",
+				"note": "Added pg_function_is_visible() function"
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes and stability improvements"
+			}
 		]
 	},
 	{
 		"version": "alpha/2024-07-12",
 		"date": "2024-07-12",
 		"notes": [
-			"<b>New Feature:</b> Support for SQL UDF table functions in SELECT statements",
-			"<b>New Feature:</b> Allow creating and releasing SAVEPOINTs within transactions",
-			"<b>New Feature:</b> Support quantified expressions over constant arrays",
-			"<b>New Feature:</b> Support 'ON CONFLICT DO NOTHING' for upserts",
-			"<b>PostgreSQL compatibility:</b> Support for parsing 'COPY FREEZE' performance hint",
-			"<b>PostgreSQL compatibility:</b> Support for compound date styles",
-			"<b>PostgreSQL compatibility:</b> The pg_class system table now also shows views",
-			"<b>PostgreSQL compatibility:</b> The pg_constraint system table now also shows indexes",
-			"<b>PostgreSQL compatibility:</b> Added pg_relation_is_updateable() function",
-			"<b>PostgreSQL compatibility:</b> Added pg_my_temp_schema()",
-			"<b>PostgreSQL compatibility:</b> Added pg_description system table",
-			"<b>PostgreSQL compatibility:</b> Added has_schema_privileges() function",
-			"<b>PostgreSQL compatibility:</b> Added has_any_column_privilege() function",
-			"<b>PostgreSQL compatibility:</b> Added pg_get_keywords() function",
-			"<b>Performance:</b> 300x performance improvement for calculating table sizes via pg_total_relation_size()",
-			"Various bug fixes and stability improvements"
+			{
+				"type": "feat",
+				"note": "Support for SQL UDF table functions in SELECT statements"
+			},
+			{
+				"type": "feat",
+				"note": "Allow creating and releasing SAVEPOINTs within transactions"
+			},
+			{
+				"type": "feat",
+				"note": "Support quantified expressions over constant arrays"
+			},
+			{
+				"type": "feat",
+				"note": "Support 'ON CONFLICT DO NOTHING' for upserts"
+			},
+			{
+				"type": "pg",
+				"note": "Support for parsing 'COPY FREEZE' performance hint"
+			},
+			{
+				"type": "pg",
+				"note": "Support for compound date styles"
+			},
+			{
+				"type": "pg",
+				"note": "The pg_class system table now also shows views"
+			},
+			{
+				"type": "pg",
+				"note": "The pg_constraint system table now also shows indexes"
+			},
+			{
+				"type": "pg",
+				"note": "Added pg_relation_is_updateable() function"
+			},
+			{
+				"type": "pg",
+				"note": "Added pg_my_temp_schema()"
+			},
+			{
+				"type": "pg",
+				"note": "Added pg_description system table"
+			},
+			{
+				"type": "pg",
+				"note": "Added has_schema_privileges() function"
+			},
+			{
+				"type": "pg",
+				"note": "Added has_any_column_privilege() function"
+			},
+			{
+				"type": "pg",
+				"note": "Added pg_get_keywords() function"
+			},
+			{
+				"type": "perf",
+				"note": "300x performance improvement for calculating table sizes via pg_total_relation_size()"
+			},
+			{
+				"type": "fix",
+				"note": "Various bug fixes and stability improvements"
+			}
 		]
 	}
 ]

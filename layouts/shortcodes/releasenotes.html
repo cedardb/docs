@@ -20,10 +20,28 @@
         </div>
       </div>
     {{ end }}
-    <ul>
-        {{ range $note := $element.notes }}
-        <li>{{ $note | safeHTML }} </li>
+    {{ $typeOrder := slice "feat" "perf" "pg" "fix" }}
+    {{ $typeLabel := dict "feat" "New Features" "perf" "Performance" "pg" "PostgreSQL Compatibility" "fix" "Maintenance" }}
+    {{ range $type := $typeOrder }}
+      {{ $notes := slice }}
+      {{ range $note := $element.notes }}
+        {{ if eq $note.type $type }}
+          {{ $notes = $notes | append $note.note }}
         {{ end }}
-    </ul>
+      {{ end }}
+      {{ if $notes }}
+      <p><b>{{ index $typeLabel $type }}</b></p>
+      <ul>
+        {{ range $notes }}
+        <li>{{ . | safeHTML }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    {{ end }}
+    {{ range $note := $element.notes }}
+      {{ if not (index $typeLabel $note.type) }}
+      <p style="color:red;"><b>Unknown type "{{ $note.type }}":</b> {{ $note.note | safeHTML }}</p>
+      {{ end }}
+    {{ end }}
 {{ end }}
 {{ end }}
