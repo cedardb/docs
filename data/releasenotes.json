@@ -1,5 +1,83 @@
 [
 	{
+    "date": "2026-05-13",
+    "breaksdb": false,
+    "notes": [
+        {
+            "type": "feat",
+            "note": "Extend <tt>generate_series</tt> to support numerics."
+        },
+        {
+            "type": "feat",
+            "note": "Introduce possibility to set compression settings on table level."
+        },
+        {
+            "type": "feat",
+            "note": "Use ARM neon vector instructions for vectorized execution of integer table scan predicates on ARM machines."
+        },
+        {
+            "type": "perf",
+            "note": "Improve WAL truncation logic by taking available disk space into account, leading to higher sustained transactional throughput for most deployments."
+        },
+        {
+            "type": "perf",
+            "note": "Reduce buffer manager contention under high load, increasing the stability of transactional throughput."
+        },
+        {
+            "type": "perf",
+            "note": "Optimize prefix comparisons with <tt>substr()</tt>, which can now use indexes."
+        },
+        {
+            "type": "pg",
+            "note": "Change return type of <tt>EXTRACT(EPOCH FROM interval '&lt;interval&gt;')</tt> from double precision to numeric."
+        },
+        {
+            "type": "pg",
+            "note": "Implement <tt>json_arrayagg</tt> support."
+        },
+		{
+			"type": "pg",
+			"note": "Ensure table oids remain unchanged when using <tt>ALTER TABLE</tt>."
+		},
+        {
+            "type": "fix",
+            "note": "Fix an index corruption when merging pages with large strings."
+        },
+        {
+            "type": "fix",
+            "note": "Fix a bad optional access in an edge case when re-optimizing prepared statements containing an index scan."
+        },
+        {
+            "type": "fix",
+            "note": "Fix missing results for long strings with filter optimization."
+        },
+        {
+            "type": "fix",
+            "note": "Fix an issue where running cheap queries in a hot loop could lead to large memory allocations."
+        },
+        {
+            "type": "fix",
+            "note": "Fix a bug in recovery when remote servers were dropped."
+        },
+        {
+            "type": "fix",
+            "note": "Fix potential live locks in the buffer manager due to stale index structures."
+        },
+        {
+            "type": "fix",
+            "note": "Fix duplicated ordinality results of <tt>generate_series</tt> and invalid lockstep execution of <tt>generate_series</tt> in combination with other set returning functions."
+        },
+        {
+            "type": "fix",
+            "note": "Set columns that are changed to be a primary key via <tt>ALTER TABLE</tt> to not nullable."
+        },
+        {
+            "type": "fix",
+            "note": "Correct column names in the <tt>cedardb_compression_infos</tt> system view."
+        }
+    	]
+	},
+	{
 		"version": "v2026-04-27",
 		"date": "2026-04-27",
 		"breaksdb": false,
