@@ -721,24 +721,24 @@ the [system table compatibility](../system_table) page.
 
 | **Feature** | **Support State** | **Details** |
 |-------------|-------------------|-------------|
-| @>          | No                |             |
-| <@          | No                |             |
-| &&          | No                |             |
-| \<\<        | No                |             |
-| \>\>        | No                |             |
-| &<          | No                |             |
-| &>          | No                |             |
+| @>          | Yes               |             |
+| <@          | Yes               |             |
+| &&          | Yes               |             |
+| \<\<        | Yes               |             |
+| \>\>        | Yes               |             |
+| &<          | Yes               |             |
+| &>          | Yes               |             |
 | -\|-        | No                |             |
 | +           | No                |             |
 | *           | No                |             |
 | -           | No                |             |
-| lower       | No                |             |
-| upper       | No                |             |
-| isempty     | No                |             |
-| lower_inc   | No                |             |
-| upper_inc   | No                |             |
-| lower_inf   | No                |             |
-| upper_inf   | No                |             |
+| lower       | Yes               |             |
+| upper       | Yes               |             |
+| isempty     | Yes               |             |
+| lower_inc   | Yes               |             |
+| upper_inc   | Yes               |             |
+| lower_inf   | Yes               |             |
+| upper_inf   | Yes               |             |
 | range_merge | No                |             |
 | multirange  | No                |             |
 | unnest      | No                |             |
