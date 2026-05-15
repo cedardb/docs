@@ -1,4 +1,7 @@
-# Enum Types
+---
+title: "Reference: Enum Types"
+linkTitle: "Enums"
+---
 
 Just like in many programming languages, an enum types consist of a static, ordered set of labels defined by the user. 
 They combine the clarity of text with the compactness of numerics, when the inherent meaning of a value is more than should be encoded by a single number, but the number of possible values is relatively small. 
