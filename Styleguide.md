@@ -181,9 +181,11 @@ INSERT INTO trees VALUES (1, 'Oak', 12.4, '2015-03-10');
 
 -- Verify
 SELECT * FROM trees;
---  id | species | height_m |  planted
--- ----+---------+----------+------------
---   1 | Oak     |     12.4 | 2015-03-10
+```
+```
+ id | species | height_m |  planted
+----+---------+----------+------------
+  1 | Oak     |     12.4 | 2015-03-10
 ```
 
 ---
