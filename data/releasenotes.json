@@ -1,5 +1,32 @@
 [
 	{
+		"version": "v2026-05-18",
+		"date": "2026-05-18",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add support for <tt>int4range</tt>, <tt>int8range</tt>, <tt>daterange</tt>, <tt>tsrange</tt> and <tt>tstzrange</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Use ARM neon vector instructions for vectorized execution of float table scan predicates on ARM machines."
+			},
+			{
+				"type": "fix",
+				"note": "Fix the CedarDB version check."
+			},
+			{
+				"type": "fix",
+				"note": "Correctly detect disk write behavior when creating a new database on disk."
+			},
+			{
+				"type": "fix",
+				"note": "Improve performance of vectorized integer table scan attributes for ARM machines."
+			}
+		]
+	},
+	{
 	"version": "v2026-05-13",	
     "date": "2026-05-13",
     "breaksdb": false,
