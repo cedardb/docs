@@ -114,7 +114,7 @@ If you want the path to be relative to the **client**, precede the command with 
 
 Note that this incurs some network overhead as the data is sent via the PostgreSQL wire protocol over the psql connection.
 
-The csv import is currently single-threaded, as CedarDB has to correctly handle newlines and escapes. If you are sure that your strings don't contain newlines **and** don't contain the delimiter, you can instead import in text mode which is multi-threaded and thus **much** faster:
+The csv import is currently single-threaded, as CedarDB has to correctly handle newlines and escapes. If you are sure that your strings don't contain newlines **and** don't contain the delimiter, you can instead import in text mode which is multithreaded and thus **much** faster:
 
 ```sql
 copy {tablename} from 'your/path/{tablename}.csv' with(format text, delimiter '|', null '');

@@ -48,7 +48,7 @@ The underlying reason for this ternary logic is that `null` values are considere
 expression `42 < null` results in a `null` value, since we don't know how an arbitrary value compares to 42.
 Equality comparisons between values follow the same rules, i.e., `x = null` will always result in another `null`, even
 when the value of `x` is `null` as well.
-To opt-out of this behaviour you can use `x is null`, which never returns `null`.
+To opt-out of this behavior you can use `x is null`, which never returns `null`.
 The syntax to compare two values and consider `nulls` equal is somewhat verbose: `x is not distinct from y`.
 
 However, while most functions return `null` for any `null` input, for boolean logic, e.g., in `and`, a single `false`

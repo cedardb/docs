@@ -31,7 +31,7 @@ deallocate add;
 Names of prepared statements are case-*insensitive*: `ADD`, `adD` and `add` refer to the same statement.
 {{< /callout >}}
 
-## Why you might want prepare your statements
+## Why you might want to prepare your statements
 
 Prepared statements especially shine in two use cases:
 

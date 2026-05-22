@@ -29,13 +29,13 @@ The filename is relative to the execution path of the CedarDB server, not to the
 CSV options need to be encoded into a single string, with special characters, e.g. the `"` surrounding delimiters, encoded.
 
 The optional third parameter allows to specify the schema of the CSV file, which is autodetected by default.
-This can be useful if the user has additional information on the properties of the csv file, such as non-nullable colunms.
+This can be useful if the user has additional information on the properties of the csv file, such as non-nullable columns.
 
 ## Advanced Analytical Functions
 
 ### kmeans
 
-CedarDB provides an optimized implementation to cluster points with any number of dimensions using the k-Means clustering algorithm with an euclidean distance.
+CedarDB provides an optimized implementation to cluster points with any number of dimensions using the k-Means clustering algorithm with a Euclidean distance.
 
 Example:
 

@@ -62,7 +62,7 @@ to reference pages for feature details.
 
 ### clients/
 
-Organized into three sub-sections:
+Organized into three subsections:
 
 - **Language folders** (`python/`, `javascript/`, `java/`, etc.) — one folder per
   programming language. The folder's `_index.md` covers the primary driver or
@@ -280,7 +280,7 @@ jump directly to it.
 8. **Is it a configuration parameter?**
    Go to `references/configuration.md`
 
-9. **Is it a multi-step procedure or integration task?**
+9. **Is it a multistep procedure or integration task?**
    Go to `cookbook/<task>.md`
 
 10. **Is it about connecting with a programming language driver or ORM?**
@@ -327,13 +327,13 @@ jump directly to it.
 
 Within every directory, sub-pages are ordered alphabetically by their
 `linkTitle` (falling back to `title`). This applies to both the sidebar and
-to any hand-written member list in an `_index.md`.
+to any handwritten member list in an `_index.md`.
 
-- The sidebar uses `.ByLinkTitle` for sub-levels via a site override of the
+- The sidebar uses `.ByLinkTitle` for sublevels via a site override of the
   Hextra `sidebar.html` partial (`layouts/partials/sidebar.html`). The
   top-level nav continues to use `weight` so editorial ordering (Get
   Started first, Licensing last) is preserved.
-- Hand-written bullet lists in `_index.md` pages must mirror the sidebar
+- Handwritten bullet lists in `_index.md` pages must mirror the sidebar
   order — list items alphabetically by the visible link text. Keep them in
   sync when adding or renaming pages.
 - Do not set per-page `weight:` on sub-pages to force a different order. If

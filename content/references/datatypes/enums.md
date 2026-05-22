@@ -22,14 +22,14 @@ create type importance as enum ('minor', 'major', 'critical');
 
 ## Usage of Enum types
 
-Enums can be used just like any other type inside of tables, views, queries, etc. .
+Enums can be used just like any other type inside of tables, views, queries, etc.
 
 ```sql
 create table tasks (id int, priority importance);
 insert into tasks values (1, 'major'), (2, 'minor'), (3, 'critical'), (4, 'major');
 ```
 
-The enum labels are case sensitive, whereas the enum names are not.
+The enum labels are case-sensitive, whereas the enum names are not.
 
 This does not work:
 

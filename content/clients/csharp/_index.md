@@ -117,7 +117,7 @@ LOG: 1000000 rows (0.000016 s parsing, 0.000273 s compilation, 1.250094 s transm
 ```
 
 {{< callout type="info" >}}
-We recommend using binary copy mode as it significantly faster than text mode due to its terser encoding.
+We recommend using binary copy mode as it is significantly faster than text mode due to its terser encoding.
 {{< /callout >}}
 
 ## Batching

@@ -32,7 +32,7 @@ Then enable TCP connections:
 ./cedardb mydb --address=::
 ```
 
-For more details, see the [install guide]({{< relref "/get_started/install_locally.md" >}}).
+For more details, see the [installation guide]({{< relref "/get_started/install_locally.md" >}}).
 
 ## Installing
 

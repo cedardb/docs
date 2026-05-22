@@ -48,7 +48,7 @@ Operations on 16&nbsp;Byte types are expensive to compute.
 We recommend using a precision of 18 or less when possible for your application.
 {{< /callout >}}
 
-Storing values outside of the supported ranges will result in an overflow exception.
+Storing values outside the supported ranges will result in an overflow exception.
 Operations on numerics are range checked, so that e.g., numeric overflows will never cause wrong results.
 
 ## Precision and Scale Changes in Operations
@@ -71,7 +71,7 @@ As numerics in CedarDB have a maximum precision of 38, the resulting precisions 
 
 ### Rules for All Operations Except Multiplication and Division
 
-If the resulting precision exceeds 38, it is clipped to 38 and the scale is reduced by this amount. If the scale would become negative, it is instead set to 0.
+If the resulting precision exceeds 38, it is clipped to 38 and the scale is reduced by this amount. If the scale becomes negative, it is instead set to 0.
 For example, if the resulting precision were 42 and the scale were 6, the precision would be reduced by 4 to 38, and the scale would also be reduced by 4 to 2.
 
 ### Rules for Multiplication and Divisions

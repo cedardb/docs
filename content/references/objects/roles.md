@@ -23,20 +23,20 @@ create user admin with createdb createrole password 'admin';
 The create role statement can be used with multiple of the following options.
 Direct options can be specified for both create and alter role:
 
-* superuser, nosuperuser
-* createdb, nocreatedb
-* createrole, nocreaterole
-* inherit, noinherit
-* login, nologin
-* replication, noreplication
-* connection limit connlimit (currently not enforced)
-* password 'password', password null
+* `superuser`, `nosuperuser`
+* `createdb`, `nocreatedb`
+* `createrole`, `nocreaterole`
+* `inherit`, `noinherit`
+* `login`, `nologin`
+* `replication`, `noreplication`
+* `connection limit connlimit` (currently not enforced)
+* `password 'password'`, `password null`
 
 When creating a new role, you can additionally specify the hierarchy of its group memberships:
 
-* in role role_name, ...
-* role role_name, ...
-* admin role_name, ...
+* `in role role_name, ...`
+* `role role_name, ...`
+* `admin role_name, ...`
 
 ### Permissions
 

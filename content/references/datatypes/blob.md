@@ -28,11 +28,11 @@ select * from example;
 (3 rows)
 ```
 
-While binary blobs can hold arbitrary data of up to 4GB, we recommend to avoid storing overly large data within your database.
+While binary blobs can hold arbitrary data of up to 4&nbsp;GB, we recommend to avoid storing overly large data within your database.
 For reading queries, CedarDB optimizes columns that are not accessed and blob columns that are not part of the query
 have no performance impact.
 However, such columns still come with downsides when modifying data due to the transactional consistency guarantees that
 CedarDB provides.
 
-As an alternative, consider storing large files (>1MB) on the file system or a cloud object store like S3, and only
+As an alternative, consider storing large files (>1&nbsp;MB) on the file system or a cloud object store like S3, and only
 store a file path or URL in a `text` field.

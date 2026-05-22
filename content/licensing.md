@@ -25,7 +25,7 @@ For more information on setting configuration options, see our [configuration re
 
 {{< tabs >}}
 {{< tab name="Configuration File (preferred)" >}}
-Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup.  In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
+Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup. In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
 
 ```shell
 echo "\"license.key\" = \"<your_key>\"" >> ~/.cedardb/config

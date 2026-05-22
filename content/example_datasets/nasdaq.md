@@ -14,7 +14,7 @@ High-frequency traders, quantitative analysts, and institutional investors depen
 To this end, exchanges like the NASDAQ or NYSE offer live market data which interested parties can then consume with specialized tools to recreate the exchange state, the so-called *order book* in real time.
 
 The holy grail of this live market data is the Level III order book data. It not only shows the current market price of any given stock but all orders that are currently active.
-The exact format of *orders* differ between exchanges, but it generally has the following format:
+The exact format of *orders* differs between exchanges, but it generally has the following format:
 
 | ID | Ticker | Timestamp   | Side | Quantity | Price  | PrevOrderId |
 | -- | ------ | ----------- | ---- | -------- | ------ | ----------- |

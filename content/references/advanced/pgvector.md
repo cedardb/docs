@@ -4,7 +4,7 @@ weight: 20
 ---
 
 CedarDB supports working with vectors using the syntax from the [pgvector
-Postgres extension](https://github.com/pgvector/pgvector).
+PostgreSQL extension](https://github.com/pgvector/pgvector).
 
 All vectors are represented as a bracket-enclosed, comma-separated list of
 float values with the SQL type `vector`. You can optionally specify the number

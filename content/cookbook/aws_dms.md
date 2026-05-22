@@ -52,10 +52,10 @@ This **RDS _parameter group_** which will enable logical replication to DMS.
 
 ![Enable logical replication](./img/rds_parameter_group_5.jpg)
 
-## Deploy a new RDS Postgres instance
+## Deploy a new RDS PostgreSQL instance
 
-**If you want to use your existing RDS Postgres instance**, skip this section and head down to
-[Configure your existing RDS Postgres instance](#configure-your-existing-rds-postgres-instance).
+**If you want to use your existing RDS PostgreSQL instance**, skip this section and head down to
+[Configure your existing RDS PostgreSQL instance](#configure-your-existing-rds-postgresql-instance).
 
 ![Navigate to RDS](./img/rds_create_postgres_0.jpg)
 
@@ -79,9 +79,9 @@ This **RDS _parameter group_** which will enable logical replication to DMS.
 
 ![Create database](./img/rds_create_postgres_9.jpg)
 
-Now, wait a while for the RDS Postgres instance to come up.
+Now, wait a while for the RDS PostgreSQL instance to come up.
 
-## Configure your existing RDS Postgres instance
+## Configure your existing RDS PostgreSQL instance
 
 ![RDS Modify Step 1](./img/rds_modify_1.jpg)
 

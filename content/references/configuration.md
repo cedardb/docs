@@ -115,7 +115,7 @@ These settings must be set before starting CedarDB.
 ## Degree of parallelism
 
 CedarDB also uses _all_ threads of the system for best performance.
-This is intended behaviour, but might generate high load on your machine.
+This is intended behavior, but might generate high load on your machine.
 If you want to keep other applications responsive, consider starting CedarDB with `nice`.
 Alternatively, you can limit the number of threads CedarDB uses.
 Note, however, that this will limit the performance of CedarDB, since all queries will take advantage of the full

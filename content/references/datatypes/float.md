@@ -5,7 +5,7 @@ weight: 13
 ---
 
 The types `double precision`, `float`, and `real` are floating-point numbers. Depending on the precision, they are
-stored in an four or eight-byte
+stored in a four or eight-byte
 [IEEE&nbsp;754](https://en.wikipedia.org/wiki/IEEE_754) format.
 
 {{< callout type="warning" >}}

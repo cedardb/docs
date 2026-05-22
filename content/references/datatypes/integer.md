@@ -39,7 +39,7 @@ select id from example;
 | `integer`  | $-2^{31}$ | $2^{31}-1$ |
 | `bigint`   | $-2^{63}$ | $2^{63}-1$ |
 
-Storing values outside of the supported ranges will result in an overflow exception.
+Storing values outside the supported ranges will result in an overflow exception.
 Operations on integers are range checked, so that e.g., numeric overflows will never cause wrong results.
 To avoid overflows, it might be necessary to cast to a type that can represent a larger range.
 
