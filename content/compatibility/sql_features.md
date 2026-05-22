@@ -111,20 +111,20 @@ the [system table compatibility](../system_table) page.
 | **Feature**               | **Support State** | **Details**                                                                      |
 |---------------------------|-------------------|----------------------------------------------------------------------------------|
 | Table & View References   | Yes               |                                                                                  |
-| Inner Joins               | Yes               | [Documentation](/docs/references/queries/#joins)                    |
-| Outer Joins               | Yes               | [Documentation](/docs/references/queries/#joins)                    |
-| Semijoins                 | Yes               | [Documentation](/docs/references/queries/#joins)                    |
+| Inner Joins               | Yes               | [Documentation](/docs/references/queries/from/)                    |
+| Outer Joins               | Yes               | [Documentation](/docs/references/queries/from/)                    |
+| Semijoins                 | Yes               | [Documentation](/docs/references/queries/from/)                    |
 | Antijoins                 | Yes               |                                                                                  |
 | Table Functions           | Yes               |                                                                                  |
 | Lateral Subqueries        | Yes               |                                                                                  |
 | User-Specified Aliases    | Yes               |                                                                                  |
-| GROUP BY                  | Yes               | [Documentation](/docs/references/queries/#group-by)                 |
-| HAVING                    | Yes               | [Documentation](/docs/references/queries/#group-by)                 |
+| GROUP BY                  | Yes               | [Documentation](/docs/references/queries/groupby/)                 |
+| HAVING                    | Yes               | [Documentation](/docs/references/queries/groupby/)                 |
 | GROUPING SETS             | Yes               |                                                                                  |
 | CUBE                      | Yes               |                                                                                  |
 | ROLLUP                    | Yes               |                                                                                  |
-| WINDOW Functions          | Yes               | [Documentation](/docs/references/queries/#window-functions)         |
-| WITH                      | Yes               | [Documentation](/docs/references/queries/#common-table-expressions) |
+| WINDOW Functions          | Yes               | [Documentation](/docs/references/queries/window/)         |
+| WITH                      | Yes               | [Documentation](/docs/references/queries/with/) |
 | WITH RECURSIVE            | Yes               |                                                                                  |
 | UNION                     | Yes               |                                                                                  |
 | UNION ALL                 | Yes               |                                                                                  |

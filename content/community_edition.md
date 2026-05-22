@@ -3,20 +3,20 @@ title: "CedarDB Community Edition"
 weight: 5
 ---
 
-{{< tabs items="Docker,Local Install,Cloud Setup" >}}
-{{< tab >}}
+{{< tabs >}}
+{{< tab name="Docker" >}}
 ```shell
 docker pull cedardb/cedardb
 ```
 ...and visit our [**Run With Docker**](../get_started/install_with_docker) guide for more details.
 {{< /tab >}}
-{{< tab >}}
+{{< tab name="Local Install" >}}
 ```
 curl https://get.cedardb.com | bash
 ```
 ...and visit our [**Local Install**](../get_started/install_locally) guide for more details.
 {{< /tab >}}
-{{< tab >}}
+{{< tab name="Cloud Setup" >}}
 Visit [**Operate in the Cloud**](../get_started/operate_in_cloud) for more details.
 {{< /tab >}}
 {{< /tabs >}}

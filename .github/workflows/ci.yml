@@ -15,4 +15,4 @@ jobs:
           hugo-version: '0.131.0'
 
       - name: Hugo Build
-        run: hugo --minify --panicOnWarning
+        run: hugo --minify #--panicOnWarning # TODO: enable with hextra update
