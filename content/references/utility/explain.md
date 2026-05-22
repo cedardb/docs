@@ -21,7 +21,7 @@ group by o_orderpriority
 order by o_orderpriority
 ```
 
-```
+```text
                           plan                           
 ---------------------------------------------------------
  🖩 OUTPUT (Estimate: 5)                                 +
@@ -37,7 +37,7 @@ This plan shows an overview over how CedarDB plans to execute the query.
 Annotated in the plan are the estimated output sizes of the operators, which CedarDB uses to determine the best
 algorithms and execution order.
 
-How to read a plan: 
+How to read a plan:
 As a default, CedarDB's query plans are trees that are shown as text where child nodes are indented (only if a node has at least one child).
 The uppermost operator is the result output and the input tables are the most indented children.
 CedarDB generally executes plans starting at the input nodes going up in the plan.
@@ -54,7 +54,7 @@ In addition, CedarDB annotates timing information to identify costly operations.
 explain analyze select ...
 ```
 
-```
+```text
                                       plan                                      
 --------------------------------------------------------------------------------
  🖩 OUTPUT ()                                                                   +
@@ -80,7 +80,8 @@ enable `verbose` output:
 ```sql
 explain verbose select ...
 ```
-```
+
+```text
                                                                      plan                                                                     
 ----------------------------------------------------------------------------------------------------------------------------------------------
  🖩 OUTPUT (Estimate: 5)                                                                                                                      +
@@ -103,6 +104,7 @@ Here, you can now see the used index (`lineitem_pkey`), aggregated expressions (
 ## Format
 
 CedarDB can reconstruct the query plan in the following output formats:
+
 - flat (default)
 - tree
 - sql
@@ -116,7 +118,7 @@ For a graphical presentation of the query plan, you can use the tree format:
 explain (format tree) select ...
 ```
 
-```
+```text
                      plan                     
 ----------------------------------------------
              ┌────────────┐                  +
@@ -209,6 +211,7 @@ explain (step <step_value>) select ...
 For `step_value`, the number of optimization steps to be performed can be passed as an integer.
 Alternatively, the name of the last step to be applied can be used.
 The possible values are:
+
 - NoOptimizations
 - ExpressionSimplification
 - Unnesting

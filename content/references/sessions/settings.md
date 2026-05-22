@@ -11,7 +11,7 @@ Usage example:
 show TimeZone;
 ```
 
-```
+```text
    timezone    
 ---------------
  Europe/Berlin
@@ -22,7 +22,7 @@ show TimeZone;
 set timezone='US/Pacific';
 ```
 
-```
+```text
 SET 0
 ```
 

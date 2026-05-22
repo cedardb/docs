@@ -9,6 +9,7 @@ Binary blobs can store arbitrary data in opaque *binary* strings, which differen
 Input data can be specified as hex or PostgreSQL compatible [`bytea` escape format](https://www.postgresql.org/docs/current/datatype-binary.html).
 
 ## Usage Example
+
 ```sql
 create table example (
     data blob
@@ -18,7 +19,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
        data       
 ------------------
  \xdeadbeef

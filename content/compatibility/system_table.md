@@ -119,7 +119,7 @@ For more information on cold and hot data, see [this blog post](https://cedardb.
 
 This is an excerpt of the output for [TPCH](https://www.tpc.org/tpch/) with scale factor 1:
 
-```
+```text
 oid         tablename   attributename   datatype    encoding                compressedvaluesize compressedsize  uncompressedsize    tuplecount
 -----
 268435460   partsupp    ps_comment      text        simple dictionary       fourbyte            104230496       107284124           768830
@@ -266,4 +266,3 @@ select * from information_schema.tables;
 | view_routine_usage                    | 🟡            |         |
 | view_table_usage                      | 🟡            |         |
 | views                                 | 🟢            |         |
-

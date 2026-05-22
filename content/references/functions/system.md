@@ -9,13 +9,13 @@ CedarDB supports a variety of PostgreSQL functions. This page currently only des
 
 Similar to [PostgreSQL](https://www.postgresql.org/docs/current/explicit-locking.html#ADVISORY-LOCKS), CedarDB advisory locks provide a means for creating _application-defined locks_.  
 
-A common example is their use in database migration tools such as *Flyway* or *Liquibase*.  
+A common example is their use in database migration tools such as _Flyway_ or _Liquibase_.  
 When multiple instances of an application start simultaneously, they might all attempt to apply schema migrations at once.  
 To prevent race conditions or conflicting DDL changes, these tools use advisory locks to ensure that only one process runs migrations at a time.  
 
 There are two ways to acquire an advisory lock in CedarDB: _at the session level_ or _at the transaction level_.
 
-- _Session_-level advisory locks are held until explicitly released or the session ends. When a client disconnects, the session is closed and all locks held by it are automatically released. 
+- _Session_-level advisory locks are held until explicitly released or the session ends. When a client disconnects, the session is closed and all locks held by it are automatically released.
   They are not subject to transaction semantics—if a transaction that acquired a session-level lock is rolled back, the lock remains held.  
   Likewise, an unlock operation remains effective even if the transaction later fails.  
   A lock can be acquired multiple times by the same session; each acquisition must be matched by a corresponding unlock before the lock is fully released.
@@ -63,7 +63,7 @@ Each locking function comes in two variants:
 
 If waiting would lead to a deadlock, CedarDB automatically aborts the request with the runtime error:
 
-```
+```text
 ERROR: deadlock_detected (40P01)
 ```
 
@@ -77,85 +77,100 @@ Note that advisory locks can participate in deadlock cycles together with other 
 
 Below is an exhaustive list of all supported advisory lock functions in CedarDB:
 
-#### pg_advisory_lock
+### pg_advisory_lock
 
 Obtains an exclusive session-level advisory lock, waiting if necessary.
 
-```
+```text
 pg_advisory_lock (key Bigint) → Void
 pg_advisory_lock (key1 Integer, key2 Integer) → Void
 ```
 
-#### pg_advisory_lock_shared
+### pg_advisory_lock_shared
+
 Obtains a shared session-level advisory lock, waiting if necessary.
-```
+
+```text
 pg_advisory_lock_shared (key Bigint) → Void
 pg_advisory_lock_shared (key1 Integer, key2 Integer) → Void
 ```
 
+### pg_advisory_unlock
 
-#### pg_advisory_unlock
 Releases a previously acquired exclusive session-level advisory lock. Returns true if the lock is successfully released. If the lock was not held, false is returned, and in addition, an SQL warning will be reported by the server.
-```
+
+```text
 pg_advisory_unlock(key Bigint) → Boolean
 pg_advisory_unlock(key1 Integer, key2 Integer) → Boolean
 ```
 
-#### pg_advisory_unlock_all
+### pg_advisory_unlock_all
+
 Releases all session-level advisory locks held by the current session. (This function is implicitly invoked at session end, even if the client disconnects ungracefully.)
-```
+
+```text
 pg_advisory_unlock_all() → Void
 ```
 
-#### pg_advisory_unlock_shared
+### pg_advisory_unlock_shared
+
 Releases a previously acquired shared session-level advisory lock. Returns true if the lock is successfully released. If the lock was not held, false is returned, and in addition, an SQL warning will be reported by the server.
-```
+
+```text
 pg_advisory_unlock_shared(key Bigint) → Boolean
 pg_advisory_unlock_shared(key1 Integer, key2 Integer) → Boolean
 ```
 
-#### pg_advisory_xact_lock
+### pg_advisory_xact_lock
+
 Obtains an exclusive transaction-level advisory lock, waiting if necessary.
-```
+
+```text
 pg_advisory_xact_lock(key Bigint) → Void
 pg_advisory_xact_lock(key1 Integer, key2 Integer) → Void
 ```
 
+### pg_advisory_xact_lock_shared
 
-#### pg_advisory_xact_lock_shared
 Obtains a shared transaction-level advisory lock, waiting if necessary.
-```
+
+```text
 pg_advisory_xact_lock_shared(key Bigint) → Void
 pg_advisory_xact_lock_shared(key1 Integer, key2 Integer) → Void
 ```
 
-#### pg_try_advisory_lock
+### pg_try_advisory_lock
+
 Obtains an exclusive session-level advisory lock if available. This will either obtain the lock immediately and return true, or return false without waiting if the lock cannot be acquired immediately.
-```
+
+```text
 pg_try_advisory_lock(key Bigint) → Boolean
 pg_try_advisory_lock(key1 Integer, key2 Integer) → Boolean
 ```
 
+### pg_try_advisory_lock_shared
 
-#### pg_try_advisory_lock_shared
 Obtains a shared session-level advisory lock if available. This will either obtain the lock immediately and return true, or return false without waiting if the lock cannot be acquired immediately.
-```
+
+```text
 pg_try_advisory_lock_shared(key Bigint) → Boolean
 pg_try_advisory_lock_shared(key1 Integer, key2 Integer) → Boolean
 ```
 
+### pg_try_advisory_xact_lock
 
-#### pg_try_advisory_lock_shared
 Obtains an exclusive transaction-level advisory lock if available. This will either obtain the lock immediately and return true, or return false without waiting if the lock cannot be acquired immediately.
 
-```
+```text
 pg_try_advisory_xact_lock(key Bigint) → Boolean
 pg_try_advisory_xact_lock(key1 Integer, key2 Integer) → Boolean
 ```
 
-#### pg_try_advisory_xact_lock_shared
-```
+### pg_try_advisory_xact_lock_shared
+
+```text
 pg_try_advisory_xact_lock_shared(key Bigint) → Boolean
 pg_try_advisory_xact_lock_shared(key1 Integer, key2 Integer) → Boolean
 ```
+
 Obtains a shared transaction-level advisory lock if available. This will either obtain the lock immediately and return true, or return false without waiting if the lock cannot be acquired immediately.

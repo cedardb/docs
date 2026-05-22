@@ -46,7 +46,7 @@ returning m.name, m.gross_opening_week;
 
 Concurrent updates to rows might cause serialization failures, which show up in the form of:
 
-```
+```text
 ERROR:   conflict with concurrent transaction
 ```
 

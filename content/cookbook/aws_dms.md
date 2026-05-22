@@ -111,10 +111,12 @@ psql (17.4, server 16.3)
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)
 Type "help" for help.
 ```
+
 ```sql
 postgres=> \dn
 ```
-```
+
+```text
         List of schemas
    Name    |       Owner       
 -----------+-------------------
@@ -122,10 +124,12 @@ postgres=> \dn
  public    | pg_database_owner
 (2 rows)
 ```
+
 ```sql
 postgres=> \dt employees.*
 ```
-```
+
+```text
                  List of relations
   Schema   |        Name         | Type  |  Owner   
 -----------+---------------------+-------+----------
@@ -137,10 +141,12 @@ postgres=> \dt employees.*
  employees | title               | table | postgres
 (6 rows)
 ```
+
 ```sql
 postgres=> select count(*) from employees.department;
 ```
-```
+
+```text
  count 
 -------
      9
@@ -148,10 +154,12 @@ postgres=> select count(*) from employees.department;
 
 Time: 15.528 ms
 ```
+
 ```sql
 postgres=> select count(*) from employees.department_employee;
 ```
-```
+
+```text
  count  
 --------
  331603
@@ -159,10 +167,12 @@ postgres=> select count(*) from employees.department_employee;
 
 Time: 26.052 ms
 ```
+
 ```sql
 postgres=> select count(*) from employees.department_manager;
 ```
-```
+
+```text
  count 
 -------
     24
@@ -170,20 +180,25 @@ postgres=> select count(*) from employees.department_manager;
 
 Time: 18.947 ms
 ```
+
 ```sql
 postgres=> select count(*) from employees.employee;
 ```
-```
+
+```text
  count  
 --------
  300024
 (1 row)
 
 Time: 23.509 ms
+```
+
 ```sql
 postgres=> select count(*) from employees.salary;
 ```
-```
+
+```text
   count  
 ---------
  2844047
@@ -191,10 +206,12 @@ postgres=> select count(*) from employees.salary;
 
 Time: 82.885 ms
 ```
+
 ```sql
 postgres=> select count(*) from employees.title;
 ```
-```
+
+```text
  count  
 --------
  443308
@@ -250,10 +267,12 @@ psql (17.4, server 16.3 cedar v2025-06-20)
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)
 Type "help" for help.
 ```
+
 ```sql
 postgres=# \dn
 ```
-```
+
+```text
    List of schemas
    Name    |  Owner   
 -----------+----------
@@ -265,7 +284,8 @@ postgres=# \dn
 ```sql
 postgres=# \dt employees.*
 ```
-```
+
+```text
                  List of relations
   Schema   |        Name         | Type  |  Owner   
 -----------+---------------------+-------+----------
@@ -281,7 +301,8 @@ postgres=# \dt employees.*
 ```sql
 postgres=# select count(*) from employees.department;
 ```
-```
+
+```text
  count 
 -------
      9
@@ -293,7 +314,8 @@ Time: 17.725 ms
 ```sql
 postgres=# select count(*) from employees.department_employee;
 ```
-```
+
+```text
  count  
 --------
  331603
@@ -305,7 +327,8 @@ Time: 15.559 ms
 ```sql
 postgres=# select count(*) from employees.department_manager;
 ```
-```
+
+```text
  count 
 -------
     24
@@ -317,7 +340,8 @@ Time: 14.472 ms
 ```sql
 postgres=# select count(*) from employees.employee;
 ```
-```
+
+```text
  count  
 --------
  300024
@@ -329,7 +353,8 @@ Time: 21.151 ms
 ```sql
 postgres=# select count(*) from employees.salary;
 ```
-```
+
+```text
   count  
 ---------
  2844047
@@ -341,7 +366,8 @@ Time: 15.671 ms
 ```sql
 postgres=# select count(*) from employees.title;
 ```
-```
+
+```text
  count  
 --------
  443308
@@ -355,7 +381,7 @@ otherwise, you can close it.
 
 ## Verify that an UPDATE on the RDS Postgres instance is replicated to the CedarDB target
 
-### Log into the RDS Postgres instance.
+### Log into the RDS Postgres instance
 
 ```bash
 $ psql "postgresql://postgres:g3n0A3aRApaimA@rds-pg.ctkkwgwc2jnl.us-east-2.rds.amazonaws.com:5432/postgres?sslmode=require"
@@ -367,14 +393,15 @@ Type "help" for help.
 postgres=>
 ```
 
-### Using the employees.salary table, validate the initial state agrees both here on the source and on the CedarDB target.
+### Using the employees.salary table, validate the initial state agrees both here on the source and on the CedarDB target
 
 On the RDS Postgres instance:
 
 ```sql
 postgres=> select * from employees.salary where employee_id = 10004 order by from_date, to_date;
 ```
-```
+
+```text
  employee_id | amount | from_date  |  to_date
 -------------+--------+------------+------------
        10004 |  40054 | 1986-12-01 | 1987-12-01
@@ -403,7 +430,8 @@ On the CedarDB instance:
 ```sql
 postgres=# select * from employees.salary where employee_id = 10004 order by from_date, to_date;
 ```
-```
+
+```text
  employee_id | amount | from_date  |  to_date
 -------------+--------+------------+------------
        10004 |  40054 | 1986-12-01 | 1987-12-01
@@ -427,7 +455,7 @@ postgres=# select * from employees.salary where employee_id = 10004 order by fro
 Time: 31.985 ms
 ```
 
-### On the RDS Postgres instance, give the employee with ID 10004 a raise.
+### On the RDS Postgres instance, give the employee with ID 10004 a raise
 
 ```sql
 postgres=> begin;
@@ -449,7 +477,8 @@ Verify that raise:
 ```sql
 postgres=> select * from employees.salary where employee_id = 10004 and amount >= 74057 order by from_date;
 ```
-```
+
+```text
  employee_id | amount | from_date  |  to_date
 -------------+--------+------------+------------
        10004 |  74057 | 2001-11-27 | 2026-03-23
@@ -464,7 +493,8 @@ Time: 34.304 ms
 ```sql
 postgres=# select * from employees.salary where employee_id = 10004 and amount >= 74057 order by from_date;
 ```
-```
+
+```text
  employee_id | amount | from_date  |  to_date
 -------------+--------+------------+------------
        10004 |  74057 | 2001-11-27 | 2026-03-23
@@ -473,4 +503,3 @@ postgres=# select * from employees.salary where employee_id = 10004 and amount >
 
 Time: 26.653 ms
 ```
-

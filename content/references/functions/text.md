@@ -9,26 +9,26 @@ functions.
 
 ## Functions and Operators
 
-#### string_to_table
+### string_to_table
 
 The `string_to_table` function splits a _string_ at the _delimiter_ and replaces output words that match the
 _null_string_ by null. If the _delimiter_ is NULL, the _string_ is split into all its characters. If the _delimiter_ is
 empty, the _string_ is not split at all.
 The final result is returned as a column of type **text** where each output word is a row.
 
-##### **Syntax**
+#### **Syntax**
 
-```
+```text
 string_to_table(string Text, delimiter Text [, null_string Text])) -> setof Text
 ```
 
-##### **Examples**
+#### **Examples**
 
 ```sql
 select string_to_table('The General Sherman tree is the largest tree in the world.', ' ', 'the');
 ```
 
-```
+```text
  string_to_table
 -----------------
 The
@@ -61,7 +61,7 @@ matching case-insensitive.
 
 ##### **Syntax**
 
-```
+```text
 regexp_count(string Text, pattern Text [, start Integer [, flags Text]]) -> Integer
 ```
 
@@ -71,7 +71,7 @@ regexp_count(string Text, pattern Text [, start Integer [, flags Text]]) -> Inte
 select regexp_count('The General Sherman tree is the largest tree in the world.', 'Tree', 23, 'i');
 ```
 
-```
+```text
  regexp_count
 --------------
 1
@@ -91,7 +91,7 @@ defaults to 0, which leads to identifying the position of the whole match regard
 
 ##### **Syntax**
 
-```
+```text
 regexp_instr(string Text, pattern Text[, start Integer [, N Integer [, endpoint Integer [, flags Text [, subexpr Integer ]]]]]) -> Integer
 ```
 
@@ -100,7 +100,8 @@ regexp_instr(string Text, pattern Text[, start Integer [, N Integer [, endpoint 
 ```sql
 select regexp_instr('The General Sherman tree is the largest tree in the world.', 'Tree', 23, 1, 1, 'i');
 ```
-```
+
+```text
 regexp_instr
 --------------
 45
@@ -115,7 +116,7 @@ for example, the `i` flag makes the pattern matching case-insensitive.
 
 ##### **Syntax**
 
-```
+```text
 regexp_like(string Text, pattern Text [, flags Text])) -> Boolean
 ```
 
@@ -124,7 +125,8 @@ regexp_like(string Text, pattern Text [, flags Text])) -> Boolean
 ```sql
 select regexp_like('The General Sherman tree is the largest tree in the world.', 'Tree.*Largest', 'i');
 ```
-```
+
+```text
 regexp_like
 -------------
 t

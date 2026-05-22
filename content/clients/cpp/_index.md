@@ -11,18 +11,22 @@ CedarDB is compatible with the [PostgreSQL libpqxx](https://pqxx.org/development
 Before demonstrating the connection to CedarDB, we need to get the correct dependencies .
 libpqxx uses the libpq library internally.
 On Debian or Ubuntu you can simply get the dev files from an apt repository.
+
 ```bash
 sudo apt install libpqxx-dev
 ```
 
 After finishing the client (see at the full program at the bottom of the program), we need to first compile our program with `g++` and then execute it.
+
 ```bash
 g++ -std=c++17 main.cpp -lpqxx -lpq -o CedarDBClient
 ./CedarDBClient
 ```
 
 ## Connecting
+
 Connect to CedarDB like this:
+
 ```cpp
 // The connection string
 auto connectionString = "dbname=<dbname> user=<username> password=<password> host=localhost port=5432";
@@ -40,6 +44,7 @@ try {
 return 0;
 
 ```
+
 You now have an open connection to CedarDB that allows you to insert data or query the database.
 
 ## Inserting Data
@@ -55,6 +60,7 @@ auto createTable = "CREATE TABLE IF NOT EXISTS chatlog(userid integer, message t
 transaction.exec(createTable);
 transaction.commit();
 ```
+
 In the following, we first prepare a new insert statement, before we insert a new tuple using the `connection` instance:
 
 ```cpp
@@ -89,6 +95,7 @@ transaction.commit();
 ```
 
 ## Bulk Loading
+
 If you need to load a lot of data at once (e.g., for an initial import of your existing data set), inserting tuples one by one is too slow:
 jdbc has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
@@ -109,10 +116,9 @@ transaction.commit();
 
 This feature makes use of CedarDB's Postgres-compatible `COPY` mode to bulk transmit all data, leading to significantly higher throughput:
 
-```
+```text
 LOG: 100000 rows (0.000012 s parsing, 0.000374 s compilation, 0.025395 s transmission, 0.016492 s execution)
 ```
-
 
 ## Source Code
 

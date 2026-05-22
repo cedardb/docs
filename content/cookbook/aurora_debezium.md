@@ -6,13 +6,11 @@ weight: 102
 
 [Debezium](https://debezium.io/) is a popular platform for [Change Data Capture (CDC)](https://en.wikipedia.org/wiki/Change_data_capture).
 
-This guide shows you how you can replicate tables from your transactional Amazon Aurora PostgreSQL to CedarDB, allowing you to do fast analytics on data is it comes in without impacting your existing data infrastructure. 
-
+This guide shows you how you can replicate tables from your transactional Amazon Aurora PostgreSQL to CedarDB, allowing you to do fast analytics on data is it comes in without impacting your existing data infrastructure.
 
 ## Setting up Replication
 
 {{% steps %}}
-
 
 ### Starting an EC2 Instance
 
@@ -24,7 +22,6 @@ If you do not already know your requirements, we recommend using the `m6id.2xlar
 
 The rest of this instruction manual assumes you use Ubuntu 24.04 as your operating system. Since CedarDB runs inside its own docker image, you can choose any other OS as well but you might have to adapt the installation instructions accordingly.
 
-
 {{< callout type="info" >}}
 Configure the EBS volume where your root partition is mounted to be large enough to hold all of the data Debezium needs to store its CDC events.
 By default, it retains all events for one week and there will be one message per insert/update/delete of all replicated tables.
@@ -34,6 +31,7 @@ For playing around, the default of 8 GiB is fine.
 ### Setting up your EC2 Instance
 
 CedarDB loves fast SSDs. If your instance comes with an ephemeral SSD, mount it like this:
+
 ```shell
 sudo mkfs.ext4 -E nodiscard /dev/nvme1n1
 mkdir /home/ubuntu/db
@@ -42,6 +40,7 @@ sudo chown ubuntu:ubuntu db
 ```
 
 Next, we install docker:
+
 ```shell
 sudo apt update
 sudo apt install ca-certificates curl
@@ -58,6 +57,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 ```
 
 Before you can docker commands, you need to add your user to the docker group and re-login:
+
 ```shell
 sudo adduser ubuntu docker
 ```
@@ -68,7 +68,6 @@ Finally, build the docker image using the CedarDB Dockerfile.
 docker build --tag cedardb .
 ```
 
-
 ### Starting an Amazon Aurora PostgreSQL Cluster
 
 If you already have a cluster, you can skip this step.
@@ -76,7 +75,6 @@ If you already have a cluster, you can skip this step.
 {{< callout type="info" >}}
 If you do not already know your requirements, we recommend using the `db.r6gd.xlarge` instance type which comes with 32 GiB of memory and 4 vCPUs. You can definitely go cheaper here, if you just want to play around a little bit.
 {{< /callout >}}
-
 
 Make sure to connect it to your EC2 instance.
 In this example, we will assume you have created an admin user `postgresuser` with password `postgrespw`.
@@ -89,15 +87,14 @@ If you use such easily guessable credentials, make sure this cluster is only rea
 If you intend to do more than just play around, you should not give the Postgres user used for replication root access! Instead, it's best practice to [create a separate user with replication privileges](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-permissions).
 {{< /callout >}}
 
-
-
 ### Configuring your Amazon Aurora PostgreSQL Cluster
+
 Amazon Aurora PostgreSQL needs to be configured for logical replication to Debezium. You can take a look at the [Debezium documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-in-the-cloud) for details and instructions to check if your cluster is already set up correctly.
 
 If not, here are the steps to enable it:
 
 1. Create a new parameter group for your cluster
-   
+
     Call it, e.g., `logicalreplication`, set the engine type to `Aurora PostgreSQL`, the family to your PostgreSQL version, e.g. `aurora-postgresql15` and the type to `DB Cluster Parameter Group`.
 
     Then, within that parameter group, change the parameter `rds.logical_replication` to `1`.
@@ -105,10 +102,10 @@ If not, here are the steps to enable it:
 2. Apply this group to your cluster
 3. Restart your cluster (or wait for the next maintenance window)
 
-
 ### Starting CedarDB and Debezium
 
 Create a file `docker-compose.yml` with the following content:
+
 ```yml
 services:
   zookeeper:
@@ -158,16 +155,16 @@ Make sure that your docker container database is created somewhere on a fast SSD
 If you followed this guide, `/home/ubuntu/db` should point to your fast ephemeral ssd (if your instance has one).
 
 Then, start all services with the following command:
+
 ```shell
 docker compose up
 ```
 
-### Install psql to talk to CedarDB and Postgres:
+### Install psql to talk to CedarDB and Postgres
 
 ```shell
 sudo apt install posgresql-common postgresql-client-16
 ```
-   
 
 ### Creating a Source and Sink Configuration for Debezium
 
@@ -215,14 +212,13 @@ Create a file `sink.json` with the following contents:
         "schema.evolution": "basic",
         "delete.enabled": "true",
         "primary.key.mode": "record_key",
-	    "primary.key.fields": "lineitem_id",
+        "primary.key.fields": "lineitem_id",
         "table.name.format": "${source.table}"
     }
 }
 ```
 
 This configuration assumes we want to replicate a table called `lineitem` with a primary key called `lineitem_id`. Modify both files to work with your Amazon Aurora PostgreSQL and CedarDB credentials.
-
 
 ### Starting Source and Sink
 
@@ -238,13 +234,14 @@ It's possible that you need to restart all containers (`docker compose down` the
 
 {{< callout type="info" >}}
 If you want to delete source and sink, you can use the following commands:
+
 ```shell
 curl -i -X DELETE -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/postgres-source
 
 curl -i -X DELETE -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/cedar-sink
 ```
-{{< /callout >}}
 
+{{< /callout >}}
 
 {{% /steps %}}
 
@@ -282,7 +279,6 @@ INSERT INTO lineitem (lineitem_id,  transaction_id, product_id, quantity, unit_p
     (4, 1003, 2004, 7.00, 75.00, 3.00, 8.00, '2024-10-16', 'void', 'Voided line item for test purposes');
 ```
 
-
 ### Checking Replication in CedarDB
 
 Now connect to CedarDB (e.g., via `PGPASSWORD=postgres psql -h localhost -U postgres`) and check the replicated table:
@@ -292,6 +288,7 @@ select * from lineitem;
 ```
 
 ## Automate
+
 Let's create some more rows! Create a file `inserter.py` with the following content:
 
 ```python
@@ -354,10 +351,10 @@ finally:
     cur.close()
     conn.close()
 ```
-It requires psycopg2 which you can install via `sudo apt install python3-psycopg2`. 
 
-Then run `python3 inserter.py`. 
+It requires psycopg2 which you can install via `sudo apt install python3-psycopg2`.
 
+Then run `python3 inserter.py`.
 
 ## Running Analytical Queries
 

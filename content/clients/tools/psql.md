@@ -17,7 +17,7 @@ To start, connect psql with CedarDB with your connection parameters:
 psql -h localhost -d $DBNAME -U $USERNAME
 ```
 
-```
+```text
 psql (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 Type "help" for help.
 
@@ -33,7 +33,7 @@ Afterward, you have an open connection to your database, where you can enter any
 ## Creating a database
 
 psql is a handy too for one-time setup tasks like to create your database, set up user accounts, and to create schemas.
-See [here](/docs/get_started/quickstart).
+See the [quickstart guide](/docs/get_started/quickstart).
 Nevertheless, we recommend to keep such configuration in a separate `.sql` file in your version control system.
 In interactive mode, you can execute all SQL commands from such a file with the `\i` command:
 
@@ -66,7 +66,7 @@ You can show a list of all databases within the current system:
 \l
 ```
 
-```
+```text
                                                 List of databases
    Name   |  Owner   | Encoding | Locale Provider | Collate | Ctype | ICU Locale | ICU Rules | Access privileges 
 ----------+----------+----------+-----------------+---------+-------+------------+-----------+-------------------
@@ -81,7 +81,7 @@ You can also show a list of all tables in the current database:
 \d
 ```
 
-```
+```text
           List of relations
  Schema |   Name   | Type  |  Owner   
 --------+----------+-------+----------

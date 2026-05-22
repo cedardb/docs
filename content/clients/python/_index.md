@@ -11,8 +11,8 @@ CedarDB supports the older, but still very common `psycopg2`, as well as the new
 This article is about the newer `psycopg`(3).
 {{< /callout >}}
 
-
 ## Connecting
+
 Connect to CedarDB like this:
 
 ```python
@@ -20,9 +20,11 @@ connstr = "host=localhost port=5432 dbname=<dbname> user=<username> password=<pa
 with psycopg.connect(connstr) as conn:
     # Your code using your new connection goes here
 ```
+
 You now have an open connection to CedarDB that allows you to insert data or query the database.
 
 ## Inserting Data
+
 Let's use psycopg's `cursor` abstraction to create a new table storing the log of a public chat channel:
 
 ```python
@@ -56,6 +58,7 @@ with psycopg.connect(connstr) as conn:
 
 {{< callout type="info" >}}
 Be careful: To make sure that data is persisted, you
+
 - have to explicitly call the commit method of your connection object (like we did above) **or**
 - let the connection object go out of scope without encountering an exception **or**
 - explictly enable autocommit for your connection (`autocommit=True`).
@@ -105,6 +108,7 @@ Chatline(ts=datetime.datetime(2024, 4, 8, 11, 47, 46, 135798, tzinfo=zoneinfo.Zo
 ```
 
 ## Bulk Loading
+
 If you need to load a lot of data at once (e.g., for an initial import of your existing data set), inserting tuples one by one is too slow:
 psycopg has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
@@ -119,15 +123,16 @@ with psycopg.connect(connstr) as conn:
                 copy.write_row((ts + datetime.timedelta(seconds=i), i, "Hello!"))
         conn.commit()
 ```
+
 This feature makes use of CedarDB's Postgres-compatible `COPY` mode to bulk transmit all data, leading to significantly higher throughput:
 
-```
+```text
 LOG:     1000000 rows (0.000013 s parsing, 0.000310 s compilation, 3.967416 s transmission, 0.023089 s execution)
 
 ```
 
-
 For a moderate performance gain, you can also copy data formatted as raw binary stream. Just append `(FORMAT BINARY)` to the `COPY` statement and specify the data types:
+
 ```python
 with cur.copy("COPY chatlog (ts, userid, message) FROM STDIN (FORMAT BINARY)") as copy:
     copy.set_types(["timestamp","int4","text"])
@@ -136,17 +141,16 @@ with cur.copy("COPY chatlog (ts, userid, message) FROM STDIN (FORMAT BINARY)") a
 conn.commit()
 ```
 
-```
+```text
 LOG:     1000000 rows (0.000016 s parsing, 0.000344 s compilation, 3.677765 s transmission, 0.063557 s execution)
 ```
 
 Please familiarize yourself with the limits of psycopg's binary copy support in the [official docs](https://www.psycopg.org/psycopg3/docs/basic/copy.html).
 
-
 {{< callout type="info" >}}
 `execute()` and `executeMany()` automatically *prepare* statements that are executed multiple times in sequence.
-You can also override this setting by passing `prepare=True|False` to both methods. 
-Take a look [here](../../references/advanced/prepare), why preparing your statements is a *very good thing*.
+You can also override this setting by passing `prepare=True|False` to both methods.
+Take a look at the [prepared statements reference](../../references/advanced/prepare) to understand why preparing your statements is a *very good thing*.
 {{< /callout >}}
 
 ## Pipelining

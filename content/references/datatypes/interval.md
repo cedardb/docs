@@ -21,7 +21,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
     duration    
 ----------------
  90 00:00:00
@@ -45,7 +45,7 @@ using CedarDBs calendar for calculations.
 select date '2024-05-31' + interval '1' month, date '2024-05-31' + interval '2' month;
 ```
 
-```
+```text
       ?column?       |      ?column?       
 ---------------------+---------------------
  2024-06-30 00:00:00 | 2024-07-31 00:00:00
@@ -56,10 +56,9 @@ select date '2024-05-31' + interval '1' month, date '2024-05-31' + interval '2' 
 select date '2024-02-28' + interval '2' day;
 ```
 
-```
+```text
       ?column?       
 ---------------------
  2024-03-01 00:00:00
 (1 row)
 ```
-

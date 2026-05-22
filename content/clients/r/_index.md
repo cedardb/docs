@@ -40,7 +40,7 @@ dbExecute(con, "create table chatlog(userid integer, message text, ts timestamp)
 dbListTables(con)
 ```
 
-```
+```text
 [1] "chatlog"
 ```
 

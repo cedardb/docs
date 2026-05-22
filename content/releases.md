@@ -3,7 +3,7 @@ title: "CedarDB Releases"
 linkTitle: "Releases"
 ---
 
-### Current Release
+## Current Release
 
 You can automatically [install the latest release](/docs/get_started/install_locally) using our helper script:
 
@@ -30,6 +30,6 @@ For manual download, please choose the correct version for your system:
 
 {{< releasenotes current="true" >}}
 
-### Older Versions
+## Older Versions
 
 {{< releasenotes current="false" >}}

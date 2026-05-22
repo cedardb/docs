@@ -29,7 +29,7 @@ Now you can use these functions in regular SQL queries:
 select times_two(x::int) from generate_series(1, 3) s(x);
 ```
 
-```
+```text
  times_two 
 -----------
          2
@@ -42,7 +42,7 @@ select times_two(x::int) from generate_series(1, 3) s(x);
 select cowsay('Hello CedarDB!');
 ```
 
-```
+```text
             cowsay            
 ------------------------------
   ________________           +

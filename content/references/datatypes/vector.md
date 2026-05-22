@@ -22,7 +22,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
  word | embedding 
 ------+-----------
  cat  | [1,2,3]

@@ -11,8 +11,8 @@ This tutorial explains how to install and run the native CedarDB binary on your 
 CedarDB is distributed as a standalone binary.
 It runs out of the box on any Linux distribution with **glibc >= 2.27** (released in 2018).
 
-
 To automatically download and decompress the appropriate version, run:
+
 ```shell
 curl https://get.cedardb.com | bash
 ```
@@ -22,6 +22,7 @@ By using CedarDB, you agree to our [Terms and Conditions]({{< relref "/licensing
 {{< /callout >}}
 
 CedarDB supports two modes of operation:
+
 - **Server mode:** A PostgreSQL-compatible server for external clients.
 - **Interactive mode:** A SQL shell for direct, manual interaction with the database.
 
@@ -39,10 +40,10 @@ By default, CedarDB runs in server mode:
 
 This starts the server and creates the `mydb` database directory if it doesn't already exist.
 
-
 ### Connect via domain socket
 
 Initially, the server only accepts connections via local domain socket from the same OS user:
+
 ```shell
 psql -h /tmp -U postgres
 ```
@@ -57,18 +58,22 @@ create database test;
 ### Enable remote connections
 
 To accept external connections (e.g., over TCP), run:
+
 ```shell
 ./cedardb mydb --address=::
 ```
 
 Then connect using a PostgreSQL compatible client, e.g.:
+
 ```shell
 psql -h localhost -U test
 psql -h cedardb.example.com -U test
 ```
 
 ### Explore command line options
+
 To see all available flags and options, run:
+
 ```shell
 ./cedardb --help
 ```
@@ -77,16 +82,15 @@ To see all available flags and options, run:
 If you have obtained an enterprise license, refer to the [licensing page](../../licensing) for a step-by-step guide on how to activate it.
 {{< /callout >}}
 
-
-
 ## Run interactively
 
 Interactive mode launches a REPL-style SQL shell.
 You can use it to create, explore, and manipulate a database locally.
 
-
 ### Create a new persistent database
+
 To create and open a persistent database:
+
 ```shell
 ./cedardb --interactive --createdb mydb
 ```
@@ -99,7 +103,6 @@ You can also specify an absolute or relative path:
 ./cedardb --interactive --createdb /opt/dbs/movies
 ```
 
-
 {{< callout type="info" >}}
 Ensure the database is stored on a reasonably fast SSD for optimal performance.
 {{< /callout >}}
@@ -107,6 +110,7 @@ Ensure the database is stored on a reasonably fast SSD for optimal performance.
 ### Open an existing database
 
 If the database already exists, you can open it like this:
+
 ```shell
 ./cedardb --interactive mydb
 ```
@@ -121,30 +125,34 @@ Without the flag, CedarDB will only open an existing database and fail if none i
 ### Create a temporary in-memory database
 
 To launch an ephemeral, in-memory database:
+
 ```shell
 ./cedardb --interactive --inmemory
 ```
+
 This database exists only for the duration of the session and will be discarded upon exit.
 
 {{< callout type="info" >}}
 Since this database is held completely in-memory, working with large data sets can quickly exhaust system memory and cause OOM.
 {{< /callout >}}
 
-
 ### Running SQL in the shell
 
 Once in the SQL shell, you can run standard SQL:
+
 ```sql
 create table example(i int);
 insert into example values (42);
 ```
+
 The REPL supports:
+
 - Common readline keyboard shortcuts (e.g., CTRL + R to search the history)
 - Backslash commands:
+
 ```sql
 \i schema_definition.sql -- Run commands from a file
 \?                       -- View available commands
 ```
 
 For more details, see the [SQL Reference](/docs/references/).
-

@@ -12,8 +12,8 @@ While interactive querying of Parquet files is also possible, CedarDB is optimiz
 You should use parquet mainly to import data into CedarDB.
 {{</callout>}}
 
-
 ## Read a Parquet file
+
 ```sql
 -- Autodetect based on file suffix
 SELECT * FROM 'test.parquet';
@@ -35,17 +35,20 @@ SELECT * FROM parquet_view('test.parquet');
 ## Import Parquet into CedarDB
 
 You can either load parquet data directly into a table:
+
 ```sql
 CREATE TABLE test AS (SELECT * FROM 'test.parquet');
 ```
 
 Use `parquet_view` if the file name does not end in `.parquet`
+
 ```sql
 CREATE TABLE test AS (SELECT * FROM parquet_view('test'));
 ```
 
 Or you first create the table and insert afterward
 Copy data into an existing table via psql
+
 ```sql
 CREATE TABLE test (a integer, b integer);
 
@@ -57,6 +60,7 @@ COPY test from 'test.parquet' (format parquet);
 ```
 
 You can also specify only some columns
+
 ```sql
 -- Create a table with the columns you need
 CREATE TABLE onecol (c integer);
@@ -68,6 +72,7 @@ INSERT INTO onecol (SELECT a FROM 'test.parquet')
 ## Inspect Parquet Metadata
 
 Print the parquet file layout
+
 ```sql
 SELECT * FROM parquet_schema('test.parquet');
 ```
@@ -82,6 +87,7 @@ SELECT * FROM parquet_schema('test.parquet');
 ```
 
 Print the parquet file meta data footer:
+
 ```sql
 SELECT * FROM parquet_file('test.parquet');
 ```
@@ -94,6 +100,7 @@ SELECT * FROM parquet_file('test.parquet');
 ```
 
 Print all contained row groups:
+
 ```sql
 SELECT * FROM parquet_rowgroups('test.parquet');
 ```
@@ -105,6 +112,7 @@ SELECT * FROM parquet_rowgroups('test.parquet');
 ```
 
 Print all contained column chunks:
+
 ```sql
 SELECT * FROM parquet_colchunks('test.parquet');
 ```
@@ -128,82 +136,87 @@ Thus, you should always prefer importing the columns you need into CedarDB over 
 This page summarizes the available features supported by the CedarDB Parser.
 
 ### Legend
+
 - 🟢 **Supported**
 - 🟡 **Partially suported**: Details for partial support
 - 🔴 **Not yet supported**
 
 ### Physical Types
-|       Data Type      | Support |
-|:--------------------:|:-------:|
-| BOOLEAN              | 🟢       |
-| INT32                | 🟢       |
-| INT64                | 🟢       |
-| INT961               | 🟢       |
-| FLOAT                | 🟢       |
-| DOUBLE               | 🟢       |
-| BYTE_ARRAY           | 🟢       |
-| FIXED_LEN_BYTE_ARRAY | 🟡 (not for legacy string columns)   |
+
+|       Data Type      |              Support               |
+|:--------------------:|:----------------------------------:|
+| BOOLEAN              |                 🟢                 |
+| INT32                |                 🟢                 |
+| INT64                |                 🟢                 |
+| INT961               |                 🟢                 |
+| FLOAT                |                 🟢                 |
+| DOUBLE               |                 🟢                 |
+| BYTE_ARRAY           |                 🟢                 |
+| FIXED_LEN_BYTE_ARRAY | 🟡 (not for legacy string columns) |
 
 ### Logical Types
-|            Data Type           |        Support       |
-|:------------------------------:|:--------------------:|
-| STRING                         | 🟢                    |
-| ENUM                           | 🟡 (parsed as text)   |
-| UUID                           | 🟢                    |
-| Int8,16,32,64                  | 🟢                    |
-| UInt8,16,32,64                 | 🟢                    |
-| DECIMAL (INT32)                | 🟢                    |
-| DECIMAL (INT64)                | 🟢                    |
-| DECIMAL (BYTE_ARRAY)           | 🟢                    |
-| DECIMAL (FIXED_LEN_BYTE_ARRAY) | 🟢                    |
-| FLOAT16                        | 🔴                    |
-| DATE                           | 🟢                    |
-| TIME (INT32)                   | 🟢                    |
-| TIME (INT64)                   | 🟢                    |
-| TIMESTAMP (INT64)              | 🟢                    |
-| INTERVAL                       | 🔴                    |
+
+|            Data Type           |        Support        |
+|:------------------------------:|:---------------------:|
+| STRING                         |          🟢           |
+| ENUM                           |  🟡 (parsed as text)  |
+| UUID                           |          🟢           |
+| Int8,16,32,64                  |          🟢           |
+| UInt8,16,32,64                 |          🟢           |
+| DECIMAL (INT32)                |          🟢           |
+| DECIMAL (INT64)                |          🟢           |
+| DECIMAL (BYTE_ARRAY)           |          🟢           |
+| DECIMAL (FIXED_LEN_BYTE_ARRAY) |          🟢           |
+| FLOAT16                        |          🔴           |
+| DATE                           |          🟢           |
+| TIME (INT32)                   |          🟢           |
+| TIME (INT64)                   |          🟢           |
+| TIMESTAMP (INT64)              |          🟢           |
+| INTERVAL                       |          🔴           |
 | JSON                           | 🟡 (use text instead) |
-| BSON                           | 🔴                    |
-| VARIANT                        | 🔴                    |
-| GEOMETRY                       | 🔴                    |
-| GEOGRAPHY                      | 🔴                    |
-| LIST                           | 🔴                    |
-| MAP                            | 🔴                    |
-| UNKNOWN (always null)          | 🟢                    |
+| BSON                           |          🔴           |
+| VARIANT                        |          🔴           |
+| GEOMETRY                       |          🔴           |
+| GEOGRAPHY                      |          🔴           |
+| LIST                           |          🔴           |
+| MAP                            |          🔴           |
+| UNKNOWN (always null)          |          🟢           |
 
 ### Encodings
-|         Encoding        |        Support       |
-|:-----------------------:|:--------------------:|
-| PLAIN                   | 🟢                    |
-| PLAIN_DICTIONARY        | 🟢                    |
-| RLE_DICTIONARY          | 🟢                    |
-| RLE                     | 🟢                    |
-| BIT_PACKED (deprecated) | 🔴                    |
-| DELTA_BINARY_PACKED     | 🔴                    |
-| DELTA_LENGTH_BYTE_ARRAY | 🔴                    |
-| DELTA_BYTE_ARRAY        | 🔴                    |
-| BYTE_STREAM_SPLIT       | 🔴                    |
+
+|         Encoding        | Support  |
+|:-----------------------:|:--------:|
+| PLAIN                   |    🟢    |
+| PLAIN_DICTIONARY        |    🟢    |
+| RLE_DICTIONARY          |    🟢    |
+| RLE                     |    🟢    |
+| BIT_PACKED (deprecated) |    🔴    |
+| DELTA_BINARY_PACKED     |    🔴    |
+| DELTA_LENGTH_BYTE_ARRAY |    🔴    |
+| DELTA_BYTE_ARRAY        |    🔴    |
+| BYTE_STREAM_SPLIT       |    🔴    |
 
 ### Compression Codecs
-|      Compression      |        Support       |
-|:---------------------:|:--------------------:|
-| UNCOMPRESSED          | 🟢                    |
-| BROTLI                | 🔴                    |
-| GZIP                  | 🟢                    |
-| LZ4 (deprecated)      | 🔴                    |
-| LZ4_RAW               | 🟢                    |
-| LZO                   | 🔴                    |
-| SNAPPY                | 🟢                    |
-| ZSTD                  | 🟢                    |
+
+|      Compression      | Support |
+|:---------------------:|:-------:|
+| UNCOMPRESSED          |   🟢    |
+| BROTLI                |   🔴    |
+| GZIP                  |   🟢    |
+| LZ4 (deprecated)      |   🔴    |
+| LZ4_RAW               |   🟢    |
+| LZO                   |   🔴    |
+| SNAPPY                |   🟢    |
+| ZSTD                  |   🟢    |
 
 ### Enhanced Features
-|        Feature        |        Support       |
-|:---------------------:|:--------------------:|
-| Selective Column Read | 🟢                    |
-| Row-Group Skip        | 🔴                    |
-| DataPageHeaderV2      | 🟢                    |
-| Size Statistics       | 🔴                    |
-| Page Index            | 🔴                    |
-| Bloom Filter          | 🔴                    |
-| Nested Encodings      | 🔴                    |
 
+|        Feature        | Support  |
+|:---------------------:|:--------:|
+| Selective Column Read |    🟢    |
+| Row-Group Skip        |    🔴    |
+| DataPageHeaderV2      |    🟢    |
+| Size Statistics       |    🔴    |
+| Page Index            |    🔴    |
+| Bloom Filter          |    🔴    |
+| Nested Encodings      |    🔴    |

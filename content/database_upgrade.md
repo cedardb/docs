@@ -6,8 +6,8 @@ weight: 110
 This page contains instructions for upgrading to a newer version of CedarDB that is not backward compatible with previous database formats.
 Please check this page whenever a new release is listed in the release notes as incompatible with previous versions.
 
-
 ## Export your data
+
 For now, upgrading the database format requires exporting all user data held in tables.
 
 {{% steps %}}
@@ -33,9 +33,7 @@ Following, copy all your tables to CSV files by running the following command fo
 \copy {tablename} TO 'your/backup/path/{tablename}.csv' DELIMITER '|' CSV NULL '';
 ```
 
-
 {{% /steps %}}
-
 
 ## Upgrade CedarDB
 
@@ -71,7 +69,7 @@ Please follow the [installation guide](../get_started) to install and start the 
 
 Once the latest version of CedarDB is up and running, you can import your data back into it.
 
-{{% steps %}} 
+{{% steps %}}
 
 ### Re-create your schema
 
@@ -82,6 +80,7 @@ psql -h localhost -U {{username}} < schema.sql
 ```
 
 ### Copy data from CSV files
+
 Once your schema is created, copy the contents of all tables from the CSV backups you created earlier.
 Run for each table:
 

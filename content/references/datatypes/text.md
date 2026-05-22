@@ -6,10 +6,11 @@ weight: 12
 
 CedarDB's `text` data type stores string data.
 It considers all strings as Unicode in UTF-8 encoding.
-In addition to the unconstrained `text` data type, CedarDB support standard SQL blank-padded 
+In addition to the unconstrained `text` data type, CedarDB support standard SQL blank-padded
 `char(length)`, and length constrained `varchar(length)` types.
 
 ## Usage Example
+
 ```sql
 create table example (
     gender char(1),
@@ -21,7 +22,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
  gender | description 
 --------+-------------
  ⚧      | UwUUwU...
@@ -37,7 +38,7 @@ CedarDB specifies text length in *Unicode code points*:
 select length('🍍'), char_length('🍍'), octet_length('🍍');
 ```
 
-```
+```text
  length | char_length | octet_length 
 --------+-------------+--------------
       1 |           1 |            4
@@ -53,6 +54,7 @@ arbitrary binary data in string columns without additional encoding.
 For such data, consider using `bytea`.
 
 ## Performance Considerations
+
 Text and length-constrained string data types are handled equivalently.
 Strings with explicit length do not provide performance or storage benefits.
 Thus, we generally recommend against length-constraining string columns.
@@ -72,6 +74,7 @@ Collates can be specified as [Unicode CLDR locale identifiers](https://unicode.o
 with the additional tags `_ci` for case-insensitivity, and `_ai` for accent-insensitivity.
 
 For example, a case-insensitive collate can be useful for text comparison:
+
 ```sql
 with strings(a, b) as (
    values ('foo', 'FOO')
@@ -80,7 +83,7 @@ select a, b, a = b, a collate "en_US_ci" = b
 from strings;
 ```
 
-```
+```text
   a  |  b  | ?column? | ?column? 
 -----+-----+----------+----------
  foo | FOO | f        | t
@@ -88,22 +91,25 @@ from strings;
 ```
 
 ### Non-deterministic Results
-Be aware that queries using collates can lead to unexpected results, when values *look* different, but 
+
+Be aware that queries using collates can lead to unexpected results, when values *look* different, but
 are considered equivalent according to the specified collate!
 For example, for the following query, both, the lowercase and the uppercase result are equally valid:
+
 ```sql
 with strings(s) as (values ('foo'), ('FOO'))
 select distinct s collate "en_US_ci"
 from strings;
 ```
 
-```
+```text
  ?column? 
 ----------
  foo
 (1 row)
 ```
-```
+
+```text
  ?column? 
 ----------
  FOO
@@ -111,6 +117,7 @@ from strings;
 ```
 
 You can achieve a deterministic result by rewriting the query to output a `min()` aggregate in `binary` collate.
+
 ```sql
 select min(s collate "binary")
 from strings
@@ -118,6 +125,7 @@ group by s collate "en_US_ci";
 ```
 
 ### Choose the Right Locale
+
 The expected ordering of diacritics can depend on the specified collate. French Candians, for example, seem to have a specific preference about the lexicographical order of diacritics:
 
 ```sql
@@ -130,7 +138,7 @@ with strings(s) as (
 select s from strings order by s;
 ```
 
-```
+```text
   s
 ------
  cote
@@ -139,13 +147,12 @@ select s from strings order by s;
  côté
 (4 rows)
 ```
-
 
 ```sql
 select s from strings order by s collate "fr_CA";
 ```
 
-```
+```text
   s
 ------
  cote
@@ -154,4 +161,3 @@ select s from strings order by s collate "fr_CA";
  côté
 (4 rows)
 ```
-

@@ -27,12 +27,12 @@ Strengths may be highlighted in best-practices content.
   returned by CedarDB."
 - Never use "we" to describe product behavior. Use "CedarDB" or "the database."
 
-| Avoid | Prefer |
-|-------|--------|
+| Avoid                                           | Prefer                                                  |
+|-------------------------------------------------|---------------------------------------------------------|
 | We recommend creating an index before querying. | Create an index before querying for better performance. |
-| The user should call SELECT after INSERT. | Call SELECT after INSERT to verify the result. |
-| We fixed the bug in version 2.3. | CedarDB 2.3 fixes the issue where ... |
-| The result is returned by CedarDB. | CedarDB returns the result. |
+| The user should call SELECT after INSERT.       | Call SELECT after INSERT to verify the result.          |
+| We fixed the bug in version 2.3.                | CedarDB 2.3 fixes the issue where ...                   |
+| The result is returned by CedarDB.              | CedarDB returns the result.                             |
 
 ---
 
@@ -56,15 +56,15 @@ Strengths may be highlighted in best-practices content.
 Every SQL reference page follows this structure. Omit a section only if it
 genuinely does not apply. Do not leave sections empty or include placeholders.
 
-| Section | Required? | Purpose |
-|---------|-----------|---------|
-| One-paragraph summary | Yes | What the feature does. No examples yet. |
-| Quick example | Yes | Short, self-contained SQL showing the core concept. |
-| Syntax | Yes | Railroad diagram of the supported syntax, followed by a plain-text fallback block with `<placeholders>` and `[optional]` parts. Options listed as a table. |
-| Parameters and options | If applicable | Table of parameters, types, defaults, descriptions. |
-| Permissions | If applicable | Which roles can execute this and under what conditions. |
-| PostgreSQL differences | If any exist | Bulleted list of behavioral differences. See Section 5. |
-| Further examples | Recommended | Realistic scenarios covering edge cases. |
+| Section                | Required?     | Purpose                                                                                                                                                    |
+|------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| One-paragraph summary  | Yes           | What the feature does. No examples yet.                                                                                                                    |
+| Quick example          | Yes           | Short, self-contained SQL showing the core concept.                                                                                                        |
+| Syntax                 | Yes           | Railroad diagram of the supported syntax, followed by a plain-text fallback block with `<placeholders>` and `[optional]` parts. Options listed as a table. |
+| Parameters and options | If applicable | Table of parameters, types, defaults, descriptions.                                                                                                        |
+| Permissions            | If applicable | Which roles can execute this and under what conditions.                                                                                                    |
+| PostgreSQL differences | If any exist  | Bulleted list of behavioral differences. See Section 5.                                                                                                    |
+| Further examples       | Recommended   | Realistic scenarios covering edge cases.                                                                                                                   |
 
 Railroad diagrams are the primary way to communicate syntax. Use the
 `{{</* railroad */>}}` shortcode. Only document syntax that CedarDB actually
@@ -86,11 +86,11 @@ and edge cases later, clearly labeled.
 
 Use tables with a traffic-light status column using inline emoji:
 
-| Status | Emoji | Meaning |
-|--------|-------|---------|
-| Full | 🟢 | Core PostgreSQL functionality works. |
-| Partial | 🟡 | Meaningful, commonly-used functionality is missing. |
-| No | 🔴 | The feature is not supported at all. |
+| Status  | Emoji | Meaning                                             |
+|---------|-------|-----------------------------------------------------|
+| Full    | 🟢    | Core PostgreSQL functionality works.                |
+| Partial | 🟡    | Meaningful, commonly-used functionality is missing. |
+| No      | 🔴    | The feature is not supported at all.                |
 
 - Every entry with a reference page must link to it.
 - **Full** means core PostgreSQL functionality works. Minor missing sub-features
@@ -110,10 +110,10 @@ a reader sees when arriving at a section from a search result or a cross-link.
 
 Structure:
 
-| Part | Required? | Notes |
-|------|-----------|-------|
-| One-paragraph overview | Yes | What this section covers and why it exists as a group. No syntax, no examples. |
-| Member list | Yes | A bulleted or linked list of all pages in the section, each with a one-line description. |
+| Part                   | Required? | Notes                                                                                    |
+|------------------------|-----------|------------------------------------------------------------------------------------------|
+| One-paragraph overview | Yes       | What this section covers and why it exists as a group. No syntax, no examples.           |
+| Member list            | Yes       | A bulleted or linked list of all pages in the section, each with a one-line description. |
 
 Keep the overview to two or three sentences. It should answer "what will I find
 here?" and orient the reader before they click into a specific page. Do not
@@ -182,7 +182,8 @@ INSERT INTO trees VALUES (1, 'Oak', 12.4, '2015-03-10');
 -- Verify
 SELECT * FROM trees;
 ```
-```
+
+```text
  id | species | height_m |  planted
 ----+---------+----------+------------
   1 | Oak     |     12.4 | 2015-03-10
@@ -225,10 +226,10 @@ differences, omit the section entirely.
 Lead with what CedarDB can do. Limitations and PostgreSQL differences belong in
 a clearly labeled section near the bottom of the page, not in a warning at the top.
 
-| Avoid | Prefer |
-|-------|--------|
+| Avoid                                | Prefer                                                                   |
+|--------------------------------------|--------------------------------------------------------------------------|
 | Warning: CedarDB does not support X. | CedarDB supports Y and Z. Note: X is not yet available; see the roadmap. |
-| Partial support only -- see caveats. | Fully supported. The following options are not yet available: [list] |
+| Partial support only -- see caveats. | Fully supported. The following options are not yet available: [list]     |
 
 ---
 
@@ -311,13 +312,13 @@ fix it immediately in the same PR. Do not file "fix docs later" tickets.
 
 ## Quick Reference
 
-| Avoid | Prefer |
-|-------|--------|
-| Link to postgresql.org for more detail. | Document the detail here. |
-| Put limitations in a callout at the top. | Lead with what the feature does; limitations at the bottom. |
-| Write "we" for product behavior. | Write "CedarDB" or "the database." |
-| Assume readers have context from another page. | Make every example self-contained. |
-| Skip documenting simple features. | Document everything. Completeness signals maturity. |
-| Leave "No" entries in the compatibility matrix untested. | Test it. Update the entry. Update the reference page. |
-| Use passive voice by default. | Use active voice. |
-| Commit audit results to main. | Always commit on a dated branch. |
+| Avoid                                                    | Prefer                                                      |
+|----------------------------------------------------------|-------------------------------------------------------------|
+| Link to postgresql.org for more detail.                  | Document the detail here.                                   |
+| Put limitations in a callout at the top.                 | Lead with what the feature does; limitations at the bottom. |
+| Write "we" for product behavior.                         | Write "CedarDB" or "the database."                          |
+| Assume readers have context from another page.           | Make every example self-contained.                          |
+| Skip documenting simple features.                        | Document everything. Completeness signals maturity.         |
+| Leave "No" entries in the compatibility matrix untested. | Test it. Update the entry. Update the reference page.       |
+| Use passive voice by default.                            | Use active voice.                                           |
+| Commit audit results to main.                            | Always commit on a dated branch.                            |

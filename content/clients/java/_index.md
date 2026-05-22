@@ -10,12 +10,14 @@ CedarDB is compatible with the [PostgreSQL JDBC](https://jdbc.postgresql.org/) d
 
 Before demonstrating the connection to CedarDB, we need to get the correct dependencies and set the classpath.
 Note that you can simply [download](https://jdbc.postgresql.org/download/) the latest version of the JDBC.
+
 ```bash
 wget https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 ```
 
 After finishing the client (see at the full program at the bottom of the program), we need to first compile our java program with `javac` and then execute the class with the right classpath.
 This examples assumes that the java program has the name `CedarDBClient`.
+
 ```bash
 export CLASSPATH=".:postgresql-42.7.3.jar"
 javac CedarDBClient.java
@@ -23,7 +25,9 @@ java CedarDBClient
 ```
 
 ## Connecting
+
 Connect to CedarDB like this:
+
 ```Java
 // The connection string
 String jdbc = "jdbc:postgresql://localhost:5432/<dbname>";
@@ -51,6 +55,7 @@ try (Connection connection = DriverManager.getConnection(jdbc, props)) {
     System.err.println("Connection error: " + e.getMessage());
 }
 ```
+
 You now have an open connection to CedarDB that allows you to insert data or query the database.
 
 ## Inserting Data
@@ -62,6 +67,7 @@ Statement st = conn.createStatement();
 st.execute("CREATE TABLE IF NOT EXISTS chatlog(userid integer, message text, ts timestamptz)");
 st.close();
 ```
+
 In the following, we insert a new tuple using the `conn` instance:
 
 ```Java
@@ -94,6 +100,7 @@ statement.close();
 ```
 
 ## Bulk Loading
+
 If you need to load a lot of data at once (e.g., for an initial import of your existing data set), inserting tuples one by one is too slow:
 jdbc has to do a full roundtrip to CedarDB and back for each single insert, making the whole loading process severely network latency bound, even on a local connection.
 
@@ -113,10 +120,9 @@ System.out.println(rowsCopied + " rows inserted");
 
 This feature makes use of CedarDB's Postgres-compatible `COPY` mode to bulk transmit all data, leading to significantly higher throughput:
 
-```
+```text
 LOG: 100000 rows (0.000033 s parsing, 0.001294 s compilation, 0.263479 s transmission, 0.049921 s execution)
 ```
-
 
 ## Source Code
 

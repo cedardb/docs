@@ -20,7 +20,7 @@ with input(str) as (values ('42'), ('oops'))
 select str::int from input;
 ```
 
-```
+```text
 ERROR:  invalid number format for integer: no digits found in "oops"
 ```
 
@@ -31,7 +31,7 @@ with input(str) as (values ('42'), ('oops'))
 select try(str::int) from input;
 ```
 
-```
+```text
   try
 --------
      42
@@ -51,7 +51,7 @@ with input(str) as (values ('1'), ('0'), ('oops'))
 select try(1::numeric / str::int) from input;
 ```
 
-```
+```text
    try
 ----------
  1.000000

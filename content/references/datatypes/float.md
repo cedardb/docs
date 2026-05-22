@@ -27,7 +27,7 @@ insert into constants
 select * from constants;
 ```
 
-```
+```text
    name   |    value 
 ----------+--------------
  pi       |     3.14159
@@ -44,7 +44,7 @@ If you need IEEE&nbsp;754 *special values*, you need to enter them with explicit
 select real 'nan', real 'inf', real '-0';
 ```
 
-```
+```text
  ?column? | ?column? | ?column? 
 ----------+----------+----------
       NaN | Infinity |       -0
@@ -74,7 +74,7 @@ with x(i) as (
 select sum(i::double precision) from x;
 ```
 
-```
+```text
          sum          
 ----------------------
  5.55111512312578e-17
@@ -88,7 +88,7 @@ The result also is not stable, i.e., can change indeterministically when repeate
 CedarDB executes queries in parallel and thus cannot guarantee the order in which the numbers are added.
 For the above query, an equally valid result would be:
 
-```
+```text
          sum          
 ----------------------
  2.77555756156289e-17
@@ -105,7 +105,7 @@ The following example shows the behavior of CedarDB where PostgreSQL would give 
 select 1/0::float, 0/0::float, pow(-10, 999);
 ```
 
-```
+```text
  ?column? | ?column? |    pow    
 ----------+----------+-----------
  Infinity |      NaN | -Infinity

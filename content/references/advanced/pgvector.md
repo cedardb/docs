@@ -19,6 +19,7 @@ accuracy.
 ## Creating Vectors
 
 You can write vectors as string literals like this:
+
 ```sql
 -- Create a vector with three elements
 select '[1,1.5,2]'::vector;
@@ -28,6 +29,7 @@ select '[1,1.5,2]'::vector(3);
 
 Vectors must have at least one element and must not contain infinity or NaN
 values. So, all of these examples are invalid:
+
 ```sql
 -- Vector must contain at least one element
 select '[]'::vector;
@@ -43,6 +45,7 @@ You can also create vectors by casting them from arrays. Casting to a vector
 with a fixed number of dimensions will fail if the array does not have the same
 number of elements. But you can cast between different vector types which will
 truncate the vector or append zeroes, if necessary.
+
 ```sql
 -- Cast an array of doubles to a vector
 select cast('{1,2,3}'::double[] as vector);
@@ -119,6 +122,7 @@ select vector_cmp('[1,2,3]'::vector, '[0,1,2]'::vector);
 
 Since vectors support basic arithmetic and comparison, you can also use them
 with aggregation functions such as `sum`, `avg`, `min`, and `max`:
+
 ```sql
 create table my_vectors ( v vector not null );
 select sum(v), avg(v), min(v), max(v) from my_vectors;
@@ -169,7 +173,6 @@ select inner_product('[1,2,3]'::vector, '[4,5,6]'::vector);
 Currently, CedarDB has no vector similarity index. This may reduce vector similarity
 search performance when scanning multiple gigabytes of data.
 {{</callout>}}
-
 
 ### Miscellaneous Functions
 

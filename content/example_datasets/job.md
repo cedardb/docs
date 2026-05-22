@@ -13,6 +13,7 @@ This makes ordering joins in queries over this dataset challenging, hence the na
 assume uniform data distribution and instead has to rely on collected samples and statistics for join ordering.
 
 ## The Dataset
+
 The dataset comprises a total of 21 tables extracted from IMDB, containing information about the movie industry, such
 as movies, studios, actors, and their connections, such as roles of actors in movies.
 The full schema with information on all tables is available as an SQL file [schema.sql](https://www.cedardb.com/data/job/schema.sql).
@@ -33,6 +34,7 @@ CREATE TABLE cast_info (
 {{% steps %}}
 
 ### Obtain the data
+
 An excerpt of the IMDB dataset is available for non-commercial purposes through the [JOB paper](https://www.vldb.org/pvldb/vol9/p204-leis.pdf).
 To obtain the relevant data simply run
 
@@ -88,6 +90,7 @@ For more information and alternative options to server-relatives paths for CSV i
 {{% /steps %}}
 
 ## The Query Workload
+
 The queries of the Join Order Benchmarks were created, as the name already reveals, to contain challenging join order
 decisions for the optimizer.
 Queries in the join order benchmark, therefore, join at least 4 and up to 17 tables, with an average of 8 joins in a query.
@@ -97,6 +100,7 @@ want to know about movies.
 {{% steps %}}
 
 ### Run the benchmark queries
+
 All 113 JOB queries are available for [download](https://bonsai.cedardb.com/job/job.tgz).
 You can either run these queries manually one by one using the usual query interface.
 E.g., the first query, `1a`, tries to find movies in the top 250 that were not produced by Metro-Goldwyn-Mayer Pictures.
@@ -122,6 +126,7 @@ Alternatively, you can also include the query directly from the SQL file from wi
 ```
 
 ### Get started with your own queries
+
 In addition, you can of course play around with the dataset on your own however you like.
 Collect information on your favorite movies, update potentially outdated information, or enrich the data with external
 sources.
