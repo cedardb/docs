@@ -22,8 +22,8 @@ To avoid that the whole system becomes unresponsive when under high load, static
 available hardware resources to a single query, resulting in low overall utilization.
 
 <div class="columns-2">
-    <div class="w-full"> {{< asciinema key="htop_cedardb" scale="width" autoPlay=true >}} </div>
-    <div class="w-full"> {{< asciinema key="htop_postgresql" autoPlay=true >}} </div>
+    <div class="hx:w-full"> {{< asciinema key="htop_cedardb" scale="width" autoPlay=true >}} </div>
+    <div class="hx:w-full"> {{< asciinema key="htop_postgresql" autoPlay=true >}} </div>
 </div>
 
 In the image above, PostgreSQL uses only 10 cores, while CedarDB uses all 48 cores.

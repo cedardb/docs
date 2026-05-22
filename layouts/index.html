@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class='cedar-home-page mx-auto flex {{ partial "utils/page-width" . }}'>
+  <div class='cedar-home-page hx:mx-auto hextra-max-page-width'>
     {{ partial "sidebar.html" (dict "context" .) }}
     <main class="cedar-home-main">
       {{ .Content }}

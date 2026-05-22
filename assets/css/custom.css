@@ -48,7 +48,7 @@ article,
 }
 
 @media (min-width: 48rem) {
-    .sidebar-container {
+    .hextra-sidebar-container {
         background: transparent !important;
     }
 }
@@ -97,12 +97,12 @@ kbd,
     background: rgba(255, 255, 255, 0.96);
 }
 
-.nav-container-blur {
+.hextra-nav-container-blur {
     background: rgba(255, 255, 255, 0.88);
 }
 
 .dark .nav-container,
-.dark .nav-container-blur {
+.dark .hextra-nav-container-blur {
     background: rgba(13, 21, 34, 0.96);
 }
 
@@ -120,39 +120,39 @@ kbd,
     color: var(--cedar-accent);
 }
 
-.search-wrapper button,
-.search-wrapper input {
+.hextra-search-wrapper button,
+.hextra-search-wrapper input {
     border-color: var(--cedar-line) !important;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
 }
 
-.sidebar-container,
-.toc {
+.hextra-sidebar-container,
+.hextra-toc {
     backdrop-filter: none;
 }
 
-.sidebar-container .hextra-scrollbar,
+.hextra-sidebar-container .hextra-scrollbar,
 .hextra-toc > div,
 .hextra-toc .sticky,
-.sidebar-container [data-toggle-animation="show"] {
+.hextra-sidebar-container [data-toggle-animation="show"] {
     background: transparent !important;
     box-shadow: none !important;
     border-top-color: var(--cedar-line) !important;
 }
 
-.sidebar-container a,
-.toc a,
+.hextra-sidebar-container a,
+.hextra-toc a,
 .content {
     color: inherit;
 }
 
-.sidebar-container a {
+.hextra-sidebar-container a {
     border-radius: 0 !important;
 }
 
-.sidebar-container {
+.hextra-sidebar-container {
     border-right: 1px solid var(--cedar-line);
 }
 
@@ -165,18 +165,18 @@ kbd,
     padding: 8px;
 }
 
-.sidebar-active-item {
+.hextra-sidebar-active-item {
     border-left: 0;
     box-shadow: inset 2px 0 0 var(--cedar-accent);
     background: rgba(251, 119, 62, 0.04) !important;
 }
 
-.dark .sidebar-active-item {
+.dark .hextra-sidebar-active-item {
     background: rgba(251, 119, 62, 0.08) !important;
 }
 
-.sidebar-container > div,
-.toc > div,
+.hextra-sidebar-container > div,
+.hextra-toc > div,
 .content pre,
 .content blockquote,
 .hextra-card,
