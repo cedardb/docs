@@ -14,8 +14,8 @@ Here's a quick setup example for running CedarDB in the cloud.
 We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of writing).
 
 
-{{< tabs items="Native,Docker" >}}
-  {{< tab >}}
+{{< tabs >}}
+  {{< tab name="Native" >}}
 
     Install the psql shell:
 
@@ -34,7 +34,7 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
 
 
   {{< /tab >}}
-  {{< tab >}}
+  {{< tab name="Docker" >}}
 
     Install docker and the psql shell:
     ```shell

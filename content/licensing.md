@@ -23,14 +23,14 @@ After receiving your license key, activate it by setting the license.key option 
 In the following, we show the concrete steps needed to configure the license setting.
 For more information on setting configuration options, see our [configuration reference](/docs/references/configuration).
 
-{{< tabs items="Configuration File (preferred), Environment Variable" >}}
-{{< tab >}}
+{{< tabs >}}
+{{< tab name="Configuration File (preferred)" >}}
 Add a line with your license key to the CedarDB configuration file. The server will automatically load it at startup.  In this example, we will use the default configuration path, which is automatically loaded at CedarDB startup when no other config file is specified.
 ```shell
 echo "\"license.key\" = \"<your_key>\"" >> ~/.cedardb/config
 ```
 {{< /tab >}}
-{{< tab >}}
+{{< tab name="Environment Variable" >}}
 An alternative is to set the license in an environment variable.
 If you are running CedarDB directly on your host machine, then export your license key before starting CedarDB like this:
 ```shell
