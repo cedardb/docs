@@ -38,7 +38,7 @@ postgres= SELECT 1 as foo;
 
 ## Configuration
 
-The above setup is perfrect for quick testing, but you'll likely want more control.
+The above setup is perfect for quick testing, but you'll likely want more control.
 Here are a few ways to configure CedarDB in Docker.
 
 ### Make the database persistent
@@ -80,7 +80,7 @@ docker run --rm -p 5432:5432 \
   cedardb/cedardb
 ```
 
-This command creates a superuser `test` with password `test` and a a database named `db`.
+This command creates a superuser `test` with password `test` and a database named `db`.
 
 Connect like this:
 

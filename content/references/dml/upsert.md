@@ -74,7 +74,7 @@ ERROR:   conflict with concurrent transaction
 This might sound counterintuitive at first, since we have an execution path even for conflicts.
 However, the problem for upserts are *uncommitted* changes of other concurrent transactions.
 Since we don't know if these changes will be committed or rolled back, the upsert can neither proceed with inserting
-or updating the row.
+nor updating the row.
 
 In contrast to PostgreSQL, CedarDB does not lock the values for writes, since this might indefinitely block the
 transaction.

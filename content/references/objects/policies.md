@@ -78,7 +78,7 @@ DROP POLICY [ IF EXISTS ] name ON table_name
 
 Dropping the last policy on a table does not disable RLS — the default-deny behavior remains active until `ALTER TABLE ... DISABLE ROW LEVEL SECURITY` is called.
 
-## row_security_active
+## `row_security_active`
 
 `row_security_active(table_name)` returns whether RLS policies will be applied for the given table and the current user. Policies are active when:
 
@@ -95,7 +95,7 @@ SELECT row_security_active('secrets');
 -- true
 ```
 
-## row_security session setting
+## `row_security` session setting
 
 Setting `row_security = off` causes CedarDB to throw an error if any table in the query has active RLS, rather than silently filtering rows. This is useful for full-database dumps where filtered output would produce an incomplete backup.
 

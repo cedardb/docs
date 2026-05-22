@@ -81,7 +81,7 @@ select uuid '{a0eebc99-9c0b4ef8-bb6d6bb9-bd380a11}';
 
 ### uuid_extract_version
 
-Provided with a valid UUID, `uuid_extract_version` extracts the version in a `smallint`. Otherwise the function returns `NULL`.
+Provided with a valid UUID, `uuid_extract_version` extracts the version in a `smallint`. Otherwise, the function returns `NULL`.
 
 ```sql
 select uuid_extract_version(gen_random_uuid());
@@ -99,7 +99,7 @@ NULL
 
 ### uuid_extract_timestamp
 
-`uuid_extract_timestamp` extracts the timestamp with time zone of a uuid of version 1 or 7. Otherwise, the function returns `NULL`.
+`uuid_extract_timestamp` extracts the timestamp with time zone of a UUID of version 1 or 7. Otherwise, the function returns `NULL`.
 
 ```sql
 SET timezone = 'Europe/Berlin'; --The timestamp displayed depends on the timezone

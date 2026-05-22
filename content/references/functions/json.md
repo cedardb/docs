@@ -92,7 +92,7 @@ select data::text from json_data limit 1;
 For `jsonb` columns, CedarDB stores *semantically* equivalent documents, so you might get a *syntactically* different
 text representation in a `text::jsonb::text` conversion.
 In contrast, `json` columns are stored in a plain text representation, where such a conversion is character-by-character
-equivalent, but the access operations are slower, since they need to re-parse the JSON string.
+equivalent, but the access operations are slower, since they need to reparse the JSON string.
 
 ## Arrays
 
@@ -117,7 +117,7 @@ To relationalize arrays, you can use the `json_array_elements()` function, which
 multiple rows with the elements of the array.
 This is similar to the `unnest()` function for SQL arrays.
 
-For the example, you can get a `friends_with` relation from the json array:
+For the example, you can get a `friends_with` relation from the JSON array:
 
 ```sql
 select data->'id', json_array_elements(data->'friends')
@@ -153,7 +153,7 @@ select data->'name' from json_data where jsonb_contains(data, '{"friends": [2]}'
 (1 row)
 ```
 
-The `@>` operator performs the same operation when applied to json data.
+The `@>` operator performs the same operation when applied to JSON data.
 
 The `jsonb_exists` function and the equivalent `?` operator can determine if a given jsonb document has a given text as an object key or as an array value.
 

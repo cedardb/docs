@@ -33,7 +33,7 @@ select due_date from example;
 |------------:|------------:|
 | -4712-01-01 | 99999-12-31 |
 
-Storing values outside of the supported range will result in an overflow exception.
+Storing values outside the supported range will result in an overflow exception.
 Operations on dates are range checked, so that e.g., overflows will never cause wrong results.
 
 ## Input

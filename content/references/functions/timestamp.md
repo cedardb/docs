@@ -9,7 +9,7 @@ functions.
 
 ## Functions and Operators
 
-### to_char
+### `to_char`
 
 The `to_char` function formats a timestamp (with or without time zone) into a string based on a user-specified format pattern.
 

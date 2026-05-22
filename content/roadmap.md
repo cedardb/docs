@@ -8,7 +8,7 @@ This page provides a brief overview of the most important CedarDB [database](#da
 and [enterprise](#enterprise-features) features that are next on our roadmap.
 Information about intermediate status of features and minor features will be available in our release notes.
 
-We categorise the status of the features on this page as planned, in progress, and fully available:
+We categorize the status of the features on this page as planned, in progress, and fully available:
 
 | **State**          |        **Icon**        |
 |--------------------|:----------------------:|
@@ -40,7 +40,7 @@ CedarDB.
 | **Feature**                  |       **State**        | **Details**                                           |
 |------------------------------|:----------------------:|-------------------------------------------------------|
 | AsOf joins                   |    {{< icondone >}}    | [Documentation](/docs/references/advanced/asof_join/) |
-| Fulltext search              |  {{< iconplanned >}}   |                                                       |
+| Full-text search             |  {{< iconplanned >}}   |                                                       |
 | Enhanced graph query support |  {{< iconplanned >}}   |                                                       |
 | Range types                  | {{< iconinprogress >}} |                                                       |
 | Schema evolution             | {{< iconinprogress >}} | [Documentation](/docs/references/objects/)            |

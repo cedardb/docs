@@ -86,7 +86,7 @@ SELECT * FROM parquet_schema('test.parquet');
 (3 rows)
 ```
 
-Print the parquet file meta data footer:
+Print the parquet file metadata footer:
 
 ```sql
 SELECT * FROM parquet_file('test.parquet');
@@ -127,8 +127,8 @@ SELECT * FROM parquet_colchunks('test.parquet');
 ## Performance Considerations
 
 CedarDB's parquet scan is optimized for full parquet file imports.
-The scan is fully multi-threaded and only reads the columns that are queried by the user.
-We do not yet push-down filters into the parquet rowgroups to prune based on parquet statistics and metadata.
+The scan is fully multithreaded and only reads the columns that are queried by the user.
+We do not yet push down filters into the parquet rowgroups to prune based on parquet statistics and metadata.
 Thus, you should always prefer importing the columns you need into CedarDB over working on the parquet file directly.
 
 ## Implementation Status
@@ -138,7 +138,7 @@ This page summarizes the available features supported by the CedarDB Parser.
 ### Legend
 
 - 🟢 **Supported**
-- 🟡 **Partially suported**: Details for partial support
+- 🟡 **Partially supported**: Details for partial support
 - 🔴 **Not yet supported**
 
 ### Physical Types

@@ -1,0 +1,112 @@
+# PostgreSQL data types
+(?i)bigint
+(?i)bitwise
+(?i)boolean
+(?i)bytea
+(?i)cidr
+(?i)inet
+(?i)jsonb
+(?i)lseg
+(?i)macaddr
+(?i)oid
+(?i)ctid
+(?i)uuid
+(?i)xml
+
+# SQL terms
+(?i)async
+(?i)csv
+(?i)csvs
+(?i)enum
+(?i)enums
+(?i)json
+(?i)sql
+(?i)subquery
+(?i)subqueries
+(?i)subselect
+(?i)upsert
+(?i)upserts
+
+# Programming and tech abbreviations
+(?i)cli
+(?i)jdbc
+(?i)gzip
+(?i)kmeans
+(?i)libpq
+(?i)libpqxx
+(?i)npgsql
+(?i)psycopg
+(?i)psql
+(?i)ssd
+(?i)ssds
+(?i)stderr
+(?i)sysfs
+(?i)systemd
+
+# AWS and cloud tools
+(?i)aws
+(?i)gcloud
+(?i)Hyperdisk
+
+# Tools, ORMs, and frameworks
+(?i)DBeaver
+(?i)Debezium
+(?i)Grafana
+(?i)Liquibase
+(?i)Prisma
+(?i)Tokio
+(?i)glibc
+(?i)pgvector
+
+# Abbreviations
+(?i)CMU
+(?i)CPUs
+(?i)CTEs
+(?i)NVMe
+(?i)ORMs
+(?i)SSDs
+(?i)UUIDs
+(?i)vCPUs
+
+# CedarDB-specific terms
+(?i)Codecs
+(?i)Codegen
+(?i)Colibri
+(?i)autocommit
+(?i)csvview
+(?i)qpm
+
+# Person names (researchers and contributors)
+Alfons
+Amdahl
+Boncz
+Kahan
+Kemper
+Kohn
+Marsalek
+Neumann
+Viktor
+
+# Hugo shortcode names
+callout
+relref
+
+# Example dataset words
+catness
+dogness
+
+# Technical notation and abbreviations used in prose
+(?i)signup
+(?i)infos
+(?i)inlines
+(?i)Goto
+(?i)Mul
+(?i)config
+(?i)monday
+exa
+fd
+th
+N
+n
+dev
+env

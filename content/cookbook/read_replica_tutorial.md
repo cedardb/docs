@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: CedarDB as Postgres Read-Replica"
+title: "Tutorial: CedarDB as PostgreSQL Read-Replica"
 linkTitle: "Setting Up Read Replication"
 weight: 30
 draft: true
@@ -53,7 +53,7 @@ Next, we ensure the source PostgreSQL is correctly configured to publish changes
 
 ### Create the tables you want to replicate
 
-If not already existing, create the table(s) you want to replicate *from* in your PostgreSQL system like this:
+If not already existing, create the tables you want to replicate *from* in your PostgreSQL system like this:
 
 ```sql
 create table foo(a integer, b integer);

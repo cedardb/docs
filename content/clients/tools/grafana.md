@@ -33,7 +33,7 @@ If you want to update your dashboards more often, open `/etc/grafana/grafana.ini
 min_refresh_interval = 100ms
 ```
 
-Afterwards, restart Grafana to load the setting:
+Afterward, restart Grafana to load the setting:
 
 ```shell
 sudo systemctl restart grafana-server
@@ -112,11 +112,11 @@ PostgreSQL Version: 15
 Min time interval: 100ms 
 ```
 
-Then click on "Save & test". You will get an error message "Internal Server Error" with the message `ERROR:   schema "information_schema" does not exist` in the CedarDB logs. This is expected behaviour and fine for now.
+Then click on "Save & test". You will get an error message "Internal Server Error" with the message `ERROR:   schema "information_schema" does not exist` in the CedarDB logs. This is expected behavior and fine for now.
 
 ### Build a dashboard
 
-On the top right of the data source window, click on "Build a dashbaord", and then "Add visualization". Choose your new "CedarDB" data source.
+On the top right of the data source window, click on "Build a dashboard", and then "Add visualization". Choose your new "CedarDB" data source.
 
 In the Query builder, toggle the "Code" view on the far right and enter the statement
 
@@ -136,7 +136,7 @@ When choosing the correct interval (e.g., "Last 10 minutes") you should see an a
 
 ### Fiddle with the refresh intervals
 
-If you have changed the minimum refresh interval of Grafana earlier, you can set the auto refresh interval in the top right to a lower value (e.g., 100ms). Rerun your `watch` command in your psql shell:
+If you have changed the minimum refresh interval of Grafana earlier, you can set the auto refresh interval in the top right to a lower value (e.g., `100ms`). Rerun your `watch` command in your psql shell:
 
 ```sql
 insert into test values(current_timestamp, (random() * 100)::int);

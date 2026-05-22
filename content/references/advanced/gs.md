@@ -67,7 +67,7 @@ gcloud compute instances create cedardb_cloud_storage \
 
 ## Cost considerations
 
-Google cloud object storage is typically cheaper per GiB than local SSD, but requests and network egress are billed separately.
+Google Cloud object storage is typically cheaper per GiB than local SSD, but requests and network egress are billed separately.
 CedarDB writes large objects to keep per-request overhead low; still, budget for PUT, GET, and listing operations as your workload scales.
 See GCS pricing for storage classes, operations, and network egress.
 Note that it is important to co-locate the storage bucket and the instance (same region) to avoid any network cost.
@@ -75,7 +75,7 @@ Otherwise, expensive egress cost will be charged which may dominate the overall 
 
 ## CREATE SERVER Script
 
-You can create the create server statement with the help of the following python script.
+You can create the create server statement with the help of the following Python script.
 Just download the JSON key of your service account and specify the bucket and region when running the script.
 
 ```shell

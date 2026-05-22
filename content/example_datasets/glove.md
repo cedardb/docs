@@ -8,7 +8,7 @@ You can use it to check out CedarDB's vector capabilities.
 
 {{< callout type="info" >}}
 This example uses the syntax of the `pgvector` PostgreSQL extension.
-CedarDB implements compatible vector support, so this example can run in both CedarDB as well as PostgreSQL.
+CedarDB implements compatible vector support, so this example can run in both CedarDB and PostgreSQL.
 {{< /callout >}}
 
 ## The Dataset
@@ -36,7 +36,7 @@ cedar -0.035741 0.30627 -0.89386 -0.42192 0.4423 -0.0031244 0.1343 -0.1627 -0.56
 
 You can download the dataset from the [GloVe project website](https://nlp.stanford.edu/projects/glove/).
 There are multiple versions with differing training sets and vectors of different dimensionalities.
-Let's choose the biggest dataset "Common Crawl (840B tokens, 2.2M vocab, cased, 300d vectors".
+Let's choose the biggest dataset "Common Crawl (840B tokens, 2.2M vocab, cased, 300d vectors)".
 
 To obtain the data simply run
 

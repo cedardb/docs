@@ -42,7 +42,7 @@ client.execute("insert into chatlog values ($1, $2, $3)", &[&7, &"(☞ﾟ∀ﾟ)
 ```
 
 {{< callout type="info" >}}
-Under the hood, the Rust values are converted from/to Postgres types via the
+Under the hood, the Rust values are converted from/to PostgreSQL types via the
 [postgres_types](https://docs.rs/postgres-types/latest/postgres_types/trait.ToSql.html#types) crate.
 This example converts the parameters `i32` to an `integer`, a `&str` to a `text` and a `chrono::DateTime<Local>` to a
 `timestamptz`.

@@ -4,7 +4,7 @@ weight: 60
 ---
 
 CedarDB supports many advanced features.
-The following sub pages give an overview over the most important ones and explain how to use them most effectively.
+The following sub-pages give an overview over the most important ones and explain how to use them most effectively.
 
 * [AsOf joins](asof_join)
 * [Benchmarking](benchmarking)

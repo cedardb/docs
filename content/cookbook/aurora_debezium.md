@@ -23,7 +23,7 @@ If you do not already know your requirements, we recommend using the `m6id.2xlar
 The rest of this instruction manual assumes you use Ubuntu 24.04 as your operating system. Since CedarDB runs inside its own docker image, you can choose any other OS as well but you might have to adapt the installation instructions accordingly.
 
 {{< callout type="info" >}}
-Configure the EBS volume where your root partition is mounted to be large enough to hold all of the data Debezium needs to store its CDC events.
+Configure the EBS volume where your root partition is mounted to be large enough to hold all the data Debezium needs to store its CDC events.
 By default, it retains all events for one week and there will be one message per insert/update/delete of all replicated tables.
 For playing around, the default of 8 GiB is fine.
 {{< /callout >}}
@@ -56,7 +56,7 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Before you can docker commands, you need to add your user to the docker group and re-login:
+Before you can Docker commands, you need to add your user to the docker group and re-login:
 
 ```shell
 sudo adduser ubuntu docker

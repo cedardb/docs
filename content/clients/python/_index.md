@@ -61,7 +61,7 @@ Be careful: To make sure that data is persisted, you
 
 - have to explicitly call the commit method of your connection object (like we did above) **or**
 - let the connection object go out of scope without encountering an exception **or**
-- explictly enable autocommit for your connection (`autocommit=True`).
+- explicitly enable autocommit for your connection (`autocommit=True`).
 
 If you don't do anything of the above, your transaction will be rolled back and all data you thought you did insert will be discarded.
 {{< /callout >}}

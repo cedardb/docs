@@ -58,7 +58,7 @@ Specifying the sort order is useful to support top-k queries.
 When the order of the top-k query matches an index, CedarDB will use a matching index:
 
 ```sql
--- this query will be eligable to use the index 
+-- this query will be eligible to use the index 
 ... order by customer_id, article_id limit 10;
 ```
 

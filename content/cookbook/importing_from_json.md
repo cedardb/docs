@@ -26,7 +26,7 @@ create table stars_json (star json);
 copy stars_json from 'stars.json';
 ```
 
-Now you can use the json documents in SQL queries:
+Now you can use the JSON documents in SQL queries:
 
 ```sql
 select star->>'name' as name from stars_json where star->>'gender' = 'F';

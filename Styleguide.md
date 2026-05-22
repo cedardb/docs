@@ -163,7 +163,7 @@ strengths. Include benchmarks or explanations where relevant.
    demonstrated. Never use meaningless names like `t`, `a`, `b`, `foo`.
 6. **One concept per example.** Do not combine unrelated features.
 7. **Keep it short.** Under 10 lines preferred. 15 lines maximum for complex
-   features (transactions with savepoints, multi-step migrations).
+   features (transactions with savepoints, multistep migrations).
 
 ### Pattern
 
@@ -305,7 +305,7 @@ fix it immediately in the same PR. Do not file "fix docs later" tickets.
   warning (behavior that might surprise the reader or cause data loss).
 - Limit to one admonition per page section. If you need more, revise the prose
   to incorporate the information directly.
-- Use markdown tables for structured information. Keep cells simple. If a cell
+- Use Markdown tables for structured information. Keep cells simple. If a cell
   needs more than one sentence, use prose instead.
 
 ---

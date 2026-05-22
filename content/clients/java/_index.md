@@ -15,8 +15,8 @@ Note that you can simply [download](https://jdbc.postgresql.org/download/) the l
 wget https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 ```
 
-After finishing the client (see at the full program at the bottom of the program), we need to first compile our java program with `javac` and then execute the class with the right classpath.
-This examples assumes that the java program has the name `CedarDBClient`.
+After finishing the client (see at the full program at the bottom of the program), we need to first compile our Java program with `javac` and then execute the class with the right classpath.
+This examples assumes that the Java program has the name `CedarDBClient`.
 
 ```bash
 export CLASSPATH=".:postgresql-42.7.3.jar"
