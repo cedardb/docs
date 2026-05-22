@@ -53,17 +53,19 @@ article,
     }
 }
 
-a {
-    color: var(--cedar-accent);
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 3px;
-    text-decoration-color: transparent;
-    transition: text-decoration-color 0.15s ease;
-}
+@layer base {
+    a {
+        color: var(--cedar-accent);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 3px;
+        text-decoration-color: transparent;
+        transition: text-decoration-color 0.15s ease;
+    }
 
-a:hover,
-a:focus-visible {
-    text-decoration-color: currentColor;
+    a:hover,
+    a:focus-visible {
+        text-decoration-color: currentColor;
+    }
 }
 
 h1,
