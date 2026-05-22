@@ -4,26 +4,26 @@
 {{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
 {{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
 
-{{- $navWidth := "max-w-[90rem]" -}}
+{{- $navWidth := "hx:max-w-[90rem]" -}}
 {{- with .Site.Params.navbar.width -}}
   {{ if eq . "normal" -}}
-    {{ $navWidth = "max-w-screen-xl" -}}
+    {{ $navWidth = "hx:max-w-screen-xl" -}}
   {{ else if eq . "full" -}}
-    {{ $navWidth = "max-w-full" -}}
+    {{ $navWidth = "hx:max-w-full" -}}
   {{ end -}}
 {{- end -}}
 
-<div class="nav-container sticky top-0 z-20 w-full bg-transparent print:hidden">
-  <div class="hextra-nav-container-blur pointer-events-none absolute z-[-1] h-full w-full bg-white dark:bg-dark shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:shadow-[0_0_0_1px_#000] dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div>
+<div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
+  <div class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div>
 
-  <nav class="mx-auto flex items-center justify-end gap-2 h-16 px-6 {{ $navWidth }}">
-    <a class="flex items-center hover:opacity-75 ltr:mr-auto rtl:ml-auto" href="{{ $logoLink }}">
+  <nav class="hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6 {{ $navWidth }}">
+    <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ $logoLink }}">
       {{- if (.Site.Params.navbar.displayLogo | default true) }}
-        <img class="block dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
-        <img class="hidden dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:hidden hx:dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
       {{- end }}
       {{- if (.Site.Params.navbar.displayTitle | default true) }}
-        <span class="mx-2 font-extrabold inline select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
+        <span class="hx:mx-2 hx:font-extrabold hx:inline hx:select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
       {{- end }}
     </a>
 
@@ -43,9 +43,9 @@
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
           {{- $rel := cond (eq .Params.icon "mastodon") "noreferer me" "noreferer" }}
-          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
+          <a class="hx:p-2 hx:text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
-            <span class="sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
+            <span class="hx:sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
@@ -54,9 +54,9 @@
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
-            class="nav-text-link text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100 relative -ml-2 hidden whitespace-nowrap p-2 md:inline-block {{ $activeClass }}"
+            class="hx:nav-text-link hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
           >
-            <span class="text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
+            <span class="hx:text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- end -}}
       {{- end -}}
@@ -64,7 +64,7 @@
 
     {{ partial "theme-toggle.html" (dict "hideLabel" true) }}
 
-    <button type="button" aria-label="Menu" class="hextra-hamburger-menu -mr-2 rounded p-2 active:bg-gray-400/20 md:hidden">
+    <button type="button" aria-label="Menu" class="hextra-hamburger-menu hx:-mr-2 hx:rounded hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
     </button>
   </nav>

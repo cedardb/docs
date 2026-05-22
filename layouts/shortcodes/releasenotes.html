@@ -3,17 +3,17 @@
 {{ if or (and (eq 0 $index) (eq ($.Get "current") "true")) (and (ne 0 $index) (ne ($.Get "current") "true")) }}
     <h4>
         {{ $element.version }}
-        <span class="absolute -mt-20" id="{{ $element.version }}"></span>
-        <a href="#{{ $element.version }}" class="subheading-anchor" aria-label="Permalink for this section"></a>
+        <span class="hx:absolute hx:-mt-20" id="{{ $element.version }}"></span>
+        <a href="#{{ $element.version }}" class="hx:subheading-anchor" aria-label="Permalink for this section"></a>
     </h4>
     <i>{{ time.Format "2 Jan 2006" (time.AsTime $element.date) }}</i>
     {{ if $element.breaksdb }}
-    <div class="overflow-x-auto mt-6 flex rounded-lg border py-2 ltr:pr-4 rtl:pl-4 contrast-more:border-current contrast-more:dark:border-current border-yellow-100 bg-yellow-50 text-yellow-900 dark:border-yellow-200/30 dark:bg-yellow-700/30 dark:text-yellow-200">
-        <div class="ltr:pl-3 ltr:pr-2 rtl:pr-3 rtl:pl-2"><div class="select-none text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+    <div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200">
+        <div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2"><div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
               ⚠️
             </div></div>
-        <div class="w-full min-w-0 leading-7">
-          <div class="mt-6 leading-7 first:mt-0">
+        <div class="hx:w-full hx:min-w-0 hx:leading-7">
+          <div class="hx:mt-6 hx:leading-7 hx:first:mt-0">
             <b>This release is incompatible with previous CedarDB database formats!</b><br>
             Please refer to the <a href={{"../database_upgrade"}}>database upgrade guide</a> for more information.
           </div>

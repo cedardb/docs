@@ -72,7 +72,7 @@ h3,
 h4,
 h5,
 h6,
-.nav-container,
+.hextra-nav-container,
 .cedar-home__eyebrow,
 .cedar-home__index,
 .cedar-home__button {
@@ -91,7 +91,7 @@ kbd,
 }
 
 
-.nav-container {
+.hextra-nav-container {
     padding: 0;
     border-bottom: 1px solid var(--cedar-line);
     background: rgba(255, 255, 255, 0.96);
@@ -101,12 +101,12 @@ kbd,
     background: rgba(255, 255, 255, 0.88);
 }
 
-.dark .nav-container,
+.dark .hextra-nav-container,
 .dark .hextra-nav-container-blur {
     background: rgba(13, 21, 34, 0.96);
 }
 
-.nav-container nav {
+.hextra-nav-container nav {
     height: 4rem;
     max-width: var(--cedar-max);
 }
@@ -801,7 +801,7 @@ dd {
 }
 
 @media (max-width: 767px) {
-    .nav-container {
+    .hextra-nav-container {
         padding-top: 0;
     }
 
