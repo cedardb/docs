@@ -6,6 +6,7 @@ weight: 100
 
 `pgbench` is a benchmarking utility [included with PostgreSQL](https://www.postgresql.org/docs/current/pgbench.html),
 and widely available in package repositories:
+
 ```shell
 sudo apt install postgresql-contrib
 ```
@@ -24,6 +25,7 @@ transaction.
 ## Running pgbench
 
 pgbench runs its workloads on a simple four table schema:
+
 ```sql
 create table pgbench_history (tid int, bid int, aid int, delta int, mtime timestamp);
 create table pgbench_tellers (tid int primary key, bid int, tbalance int, filler char(84));
@@ -41,10 +43,12 @@ corresponds to 100k rows.
 A scale factor of 100 thus inserts 10M rows with about 200MB of data.
 
 In addition to the scale, you also need to specify the connection parameters, username and database name:
+
 ```shell
 pgbench --initialize -h localhost -U postgres postgres --scale=100
 ```
-```
+
+```text
 dropping old tables...
 creating tables...
 generating data (client-side)...
@@ -70,7 +74,8 @@ little load, but is mostly bound by the connection latency.
 ```shell
 pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=select
 ```
-```
+
+```text
 pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 starting vacuum...end.
 transaction type: <builtin: select only>
@@ -93,7 +98,8 @@ picture that allows you to judge how the system scales in a read-heavy scenario:
 ```shell
 pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=select --jobs=20 --client=200
 ```
-```
+
+```text
 tps = 1183279.095676 (without initial connection time)
 ```
 
@@ -107,7 +113,8 @@ For typical consumer SSDs, this is >1ms, but enterprise SSDs can have lower writ
 ```shell
 pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update
 ```
-```
+
+```text
 pgbench (16.3 (Ubuntu 16.3-0ubuntu0.24.04.1))
 starting vacuum...end.
 transaction type: <builtin: simple update>
@@ -130,6 +137,7 @@ bound.
 ```shell
 pgbench -h localhost -U postgres postgres -T 10 --protocol=prepared --builtin=simple-update --jobs=20 --client=200
 ```
-```
+
+```text
 tps = 45882.003693 (without initial connection time)
 ```

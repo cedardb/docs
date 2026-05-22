@@ -10,7 +10,6 @@ CedarDB automatically compresses data to columnar format on the fly when appendi
 Behind the scenes, our unified storage system [Colibri](https://cedardb.com/blog/colibri/) differentiates between hot and cold data.
 For more technical details, you can also read up on our [blog](https://cedardb.com/blog/colibri/).
 
-
 {{<callout type="info">}}
 CedarDB still uses a regular (local) storage device for metadata and recently updated (hot) data.
 {{</callout>}}
@@ -46,7 +45,8 @@ Please also provision a fast local disk (Persistent Disk SSD or Hyperdisk) with 
 CedarDB's hot set and metadata live there; size PD to hit the IOPS/MB/s you need, or consider Hyperdisk for higher ceilings.
 
 To create such an instance, you can use the following gcloud cli command as a starting point.
-```
+
+```text
 gcloud compute instances create cedardb_cloud_storage \
     --project=project \
     --zone=europe-west1-b \
@@ -72,7 +72,6 @@ CedarDB writes large objects to keep per-request overhead low; still, budget for
 See GCS pricing for storage classes, operations, and network egress.
 Note that it is important to co-locate the storage bucket and the instance (same region) to avoid any network cost.
 Otherwise, expensive egress cost will be charged which may dominate the overall cost.
-
 
 ## CREATE SERVER Script
 

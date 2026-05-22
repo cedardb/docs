@@ -44,7 +44,7 @@ the [Linux block sysfs](https://www.kernel.org/doc/Documentation/ABI/stable/sysf
 cat /sys/block/nvme0n1/queue/write_cache
 ```
 
-```
+```text
 write through
 ```
 
@@ -58,8 +58,8 @@ You can also verify if your NVMe SSD uses a volatile cache using the `nvme-cli` 
 sudo nvme id-ctrl /dev/nvme0n1 -H | grep 'Write Cache'
 ```
 
-```
-  [0:0] : 0	Volatile Write Cache Not Present
+```text
+  [0:0] : 0 Volatile Write Cache Not Present
 ```
 
 ## CedarDB Durability Guarantees

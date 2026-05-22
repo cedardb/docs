@@ -7,7 +7,7 @@ weight: 10
 [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM with a SQL-like query API and schema migration tooling.
 
 {{< callout type="info" >}}
-Drizzle support is currently **under active development**, already offering **full query API support**. 
+Drizzle support is currently **under active development**, already offering **full query API support**.
 However, certain advanced features are not yet available. Schema migrations (e.g. via `drizzle-kit push`) might not work as expected.
 {{< /callout >}}
 

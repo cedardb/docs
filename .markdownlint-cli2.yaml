@@ -1,0 +1,8 @@
+globs:
+  - "content/**/*.md"
+
+config:
+  MD013: false  # line-length: no hard limit for documentation prose
+  MD033: false  # no-inline-html: HTML used intentionally in Hugo templates
+  MD024:
+    siblings_only: true  # duplicate headings OK across different parent sections

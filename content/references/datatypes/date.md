@@ -8,6 +8,7 @@ Date is a day-accurate type without time of day references in ISO&nbsp;8601 `YYY
 CedarDB also accepts [PostgreSQL notation](https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-DATE-TABLE).
 
 ## Usage Example
+
 ```sql
 create table example (
     due_date date
@@ -18,7 +19,7 @@ insert into example
 select due_date from example;
 ```
 
-```
+```text
   due_date
 ------------
  2000-01-01
@@ -44,7 +45,8 @@ In a session, you can change the `DateStyle` setting, which determines the parsi
 set DateStyle = 'DMY';
 select '01/02/03';
 ```
-```
+
+```text
   ?column?  
 ------------
  2003-02-01
@@ -56,12 +58,10 @@ select '01/02/03';
 set DateStyle = 'MDY';
 select '01/02/03';
 ```
-```
+
+```text
   ?column?  
 ------------
  2003-01-02
 (1 row)
 ```
-
-
-

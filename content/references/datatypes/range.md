@@ -6,6 +6,7 @@ linkTitle: "Ranges"
 The range types are a convenient way to define a range of values between two bounds.
 
 CedarDB supports ranges with the following bound types:
+
 - `int4range` (range of [`int`](../integer.md))
 - `int8range` (range of [`bigint`](../integer.md))
 - `numrange` (range of [`bignumeric(38,6)`](../numeric.md))
@@ -35,7 +36,7 @@ FROM trees
 WHERE lower(height_range) >= 20;
 ```
 
-```
+```text
 species  | height_range
 ---------+--------------
 Oak      | [30,40)
@@ -49,7 +50,7 @@ FROM trees
 WHERE height_range @> 20;
 ```
 
-```
+```text
 species  | height_range
 ---------+--------------
 Cedar    | [15,40)
@@ -79,7 +80,7 @@ INSERT INTO trees VALUES
 SELECT * FROM trees;
 ```
 
-```
+```text
 species   | height_range
 ----------+--------------
 Cedar     | [15,40)
@@ -96,6 +97,6 @@ Appletree | [2,13) -- The upper bound has been canonicalized
 In PostgreSQL, canonicalization is only applied to `int4range`, `int8range` and `daterange`.
 In CedarDB, this is possible for all range types.
 
-CedarDB restricts the precision and scale of [`numerics`](../numeric.md) for performance reason. 
+CedarDB restricts the precision and scale of [`numerics`](../numeric.md) for performance reason.
 As the `numeric` datatype is used for the bound values of `numranges`, the restrictions apply here as well.
 In this case, CedarDB stores the bounds as `bignumeric(38,6)`.

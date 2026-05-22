@@ -17,10 +17,13 @@ All setting names are _case-insensitive_ and we support the following two ways t
 The recommended way to set option values is via a config file. By default, CedarDB looks for it at `~/.cedardb/config`.
 
 Each line in the file can either be a comment (starting with `#`) or a key-value pair of the form:
+
 ```text
 "settingName" = "value" # optional inline comment
 ```
+
 Example:
+
 ```shell
 cat ~/.cedardb/config
 # Comment only line
@@ -31,19 +34,21 @@ cat ~/.cedardb/config
 ```
 
 You can pass a custom path to the configuration file as a CLI option to `cedardb`, as shown in the following example:
+
 ```shell
 cedardb --configFile=/your/path/cedardb_config <remaining arguments>
 ```
 
 {{% callout type="info" %}}
-Note that both the setting name and value must be *double-quoted*, even if the value is an integer.
+Note that both the setting name and value must be _double-quoted_, even if the value is an integer.
 {{% /callout %}}
 
 ### Environment Variable
 
 You can also use environment variables for settings. Because dot (.) is not allowed in a variable name, you have to replace it with an underscore (_).
 The following example has the same effect as the previous one with the config file.
-```
+
+```text
 export VERBOSITY=debug5
 export BUFFERSIZE=1G
 export WORKMEMSIZE=3G
@@ -81,14 +86,15 @@ journalctl -u cedardb
 
 By default, CedarDB logs only a few messages -- primarily errors. You can adjust the verbosity using the setting:
 
-| **Setting Name** | **Description**                        | **Possible Values**                                                           | **Default** |
-|------------------|----------------------------------------|-------------------------------------------------------------------------------|-------------|
-| `verbosity`      | Sets the minimum level of log messages | debug5,...,debug1,info,notice,warning,error,log,fatal,panic | log         |
+| **Setting Name** | **Description**                        | **Possible Values**                                          | **Default** |
+|------------------|----------------------------------------|--------------------------------------------------------------|-------------|
+| `verbosity`      | Sets the minimum level of log messages | debug5,...,debug1,info,notice,warning,error,log,fatal,panic  | log         |
 
 For troubleshooting, it can be helpful to increase the verbosity to a higher level.
 This can have a noticeable impact on performance, and can generate lots of log messages.
 Especially in high-traffic instances, verbosity should be kept low.
 You can also change the verbosity at runtime through SQL:
+
 ```SQL
 SET verbosity = 'debug1';
 ```
@@ -101,15 +107,14 @@ while doing heavy query processing on big datasets, you may want to reduce this 
 
 These settings must be set before starting CedarDB.
 
-| **Setting Name**    | **Description**                                  | **Unit**                                | **Default**             |
-|---------------------|--------------------------------------------------|-----------------------------------------|-------------------------|
-| `buffersize`      | Buffer manager pool size                         | Size with unit suffix (5G, 256M, 1024K) | 45% of available memory |
-| `workmemsize` | Amount of memory to be used before spooling disk | Same as above                           | 45% of available memory |
-
+| **Setting Name** | **Description**                                  | **Unit**                                | **Default**             |
+|------------------|--------------------------------------------------|-----------------------------------------|-------------------------|
+| `buffersize`     | Buffer manager pool size                         | Size with unit suffix (5G, 256M, 1024K) | 45% of available memory |
+| `workmemsize`    | Amount of memory to be used before spooling disk | Same as above                           | 45% of available memory |
 
 ## Degree of parallelism
 
-CedarDB also uses *all* threads of the system for best performance.
+CedarDB also uses _all_ threads of the system for best performance.
 This is intended behaviour, but might generate high load on your machine.
 If you want to keep other applications responsive, consider starting CedarDB with `nice`.
 Alternatively, you can limit the number of threads CedarDB uses.
@@ -118,11 +123,12 @@ parallelism of the system.
 This stems from our superior [morsel-driven](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelization strategy.
 To change the parallelism, you can change the following setting:
 
-| **Setting Name**    | **Description**                | **Unit** | **Default**                             |
-|---------------------|--------------------------------|----------|-----------------------------------------|
-| `parallel`      | Number of threads CedarDB uses | Integer  | #hardware threads (logical cores/vCPUs) |
+| **Setting Name** | **Description**                | **Unit** | **Default**                             |
+|------------------|--------------------------------|----------|-----------------------------------------|
+| `parallel`       | Number of threads CedarDB uses | Integer  | #hardware threads (logical cores/vCPUs) |
 
 ## License
+
 Enterprise license are passed as a setting named `license.key` to CedarDB.
 We have detailed how to obtain one in the dedicated [licensing page](/docs/licensing).
 

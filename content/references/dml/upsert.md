@@ -7,7 +7,7 @@ Upserts allow [inserting](../insert) values into tables with a custom [update](.
 conflicting existing values.
 This allows, e.g., idempotent inserts, or to keep track of stateful data without knowledge of the previous state.
 
-## Usage examples:
+## Usage examples
 
 A sparse table with a per-user credit balance:
 
@@ -67,7 +67,7 @@ For the `credit_balance` example, this would be the current credit amount of a u
 
 Upserts can and will still conflict with concurrent transactions:
 
-```
+```text
 ERROR:   conflict with concurrent transaction
 ```
 

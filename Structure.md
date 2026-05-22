@@ -7,7 +7,7 @@ where new pages go.
 
 ## Top-Level Layout
 
-```
+```text
 content/
 ├── _index.md                    # Landing page
 ├── community_edition.md         # Community edition info
@@ -97,7 +97,7 @@ loading strategies, and when to use CedarDB-specific features.
 
 ### clients/ layout
 
-```
+```text
 clients/
 ├── python/
 │   └── _index.md            # psycopg driver
@@ -140,7 +140,7 @@ DDL documentation is organized by catalog object, not by SQL command. All
 operations on an object (CREATE, ALTER, DROP) live on the same page or in
 tightly linked pages within the same directory.
 
-```
+```text
 references/
 ├── datatypes/                   # One page per type family
 │   ├── _index.md
@@ -367,6 +367,7 @@ different purposes:
   and examples.
 
 When a feature's status changes:
+
 1. Update the compatibility matrix entry.
 2. Update (or create) the reference page.
 3. Both changes go in the same PR.

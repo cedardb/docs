@@ -18,20 +18,24 @@ Below, you can see an example of the data:
 ## Data Loading
 
 To load the data into CedarDB, you first need to download it locally:
+
 ```sh
 curl -O https://daten.offeneregister.de/de_companies_ocdata.jsonl.bz2
 bzip2 --decompress de_companies_ocdata.jsonl.bz2
 ```
+
 {{< callout type="info" >}}
 The bzip2 compressed download is about 250&nbsp;MB, which decompresses to about 4&nbsp;GB.
 {{< /callout >}}
 
 You can query the JSON file directly:
+
 ```sql
 select data from csvview('de_companies_ocdata.jsonl') d(data) limit 3;
 ```
 
 Or load it into CedarDB:
+
 ```sql
 create table register_json (data jsonb not null);
 copy register_json from 'de_companies_ocdata.jsonl';
@@ -40,7 +44,7 @@ copy register_json from 'de_companies_ocdata.jsonl';
 ## Relational Schema
 
 A relational schema allows efficient queries on the data.
-A simplified schema for the JSON data looks as follows: 
+A simplified schema for the JSON data looks as follows:
 
 ```sql
 create table companies (
@@ -62,6 +66,7 @@ create table officers (
 ```
 
 With a relational transformation, we can load the data into CedarDB:
+
 ```sql
 insert into companies(company_number, current_status, jurisdiction_code, name, registered_address, retrieved_at) 
     select distinct data->>'company_number',
@@ -103,4 +108,3 @@ with marsalek    as (select * from officers where name = 'Jan Marsalek' and city
                         (select company_number from marsalek_l2))
 select distinct name from marsalek_l3 order by name;
 ```
-

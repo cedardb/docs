@@ -36,6 +36,7 @@ returning *;
 
 Scans in the returning clause read the database after the delete is completed.
 That is why the exists statement in the returning clause does not match the deleted row with itself in the following example.
+
 ```sql
 delete from users
 where users.user_id = 42

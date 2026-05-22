@@ -60,7 +60,7 @@ for row in result {
 }
 ```
 
-```
+```text
 [2024-06-06 11:00:41.536369 +02:00]: User 7 wrote message "(☞ﾟ∀ﾟ)☞"
 ```
 

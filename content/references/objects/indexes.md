@@ -37,6 +37,7 @@ create index complaints_index on sales(...);
 CedarDB currently exclusively supports B-tree indexes.
 All indexes, thus, support range and prefix lookup.
 E.g., the example index on sales can be used for queries with predicates like:
+
 ```sql
 ... where customer_id = 42;
 ... where customer_id between 5 and 10;
@@ -48,6 +49,7 @@ Additionally, you can declare an index to be `unique`, which will create a corre
 ## Column Order
 
 You can also specify the ordering of columns within the index:
+
 * `asc`, `desc`
 * `nulls first`, `nulls last`
 

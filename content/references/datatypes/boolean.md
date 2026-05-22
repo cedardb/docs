@@ -7,6 +7,7 @@ weight: 23
 Booleans store logical truth values, and can be used to, e.g., store flags.
 
 ## Usage Example
+
 ```sql
 create table example (
      flag bool
@@ -17,7 +18,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
  flag 
 ------
  t
@@ -38,11 +39,12 @@ select * from example;
 Due to `null` values, boolean expressions in SQL have *ternary* logic, with sometimes unexpected results compared to
 other programming languages.
 However, this ternary logic is context-sensitive:
-* In predicates (e.g., for `where` conditions), `null`s are considered `false` and filter tuples. 
+
+* In predicates (e.g., for `where` conditions), `null`s are considered `false` and filter tuples.
   This is the intuitive behavior, that is used most often.
 * For value returning expressions (e.g., in a `select` result), boolean logic can result in `null`.
 
-The underlying reason for this ternary logic is that `null` values are considered an *unknown* value, and e.g., the 
+The underlying reason for this ternary logic is that `null` values are considered an *unknown* value, and e.g., the
 expression `42 < null` results in a `null` value, since we don't know how an arbitrary value compares to 42.
 Equality comparisons between values follow the same rules, i.e., `x = null` will always result in another `null`, even
 when the value of `x` is `null` as well.
@@ -59,7 +61,7 @@ select a.v as a, b.v as b, a and b as and, a or b as or
 from bools a, bools b;
 ```
 
-```
+```text
  a | b | and | or 
 ---+---+-----+----
  t | t | t   | t

@@ -9,6 +9,7 @@ CedarDB supports the standard SQL bit-string data types `bit(n)` and `bit varyin
 Bit strings can be specified with binary or hex digits: `b'1010' == x'a'`.
 
 ## Usage Example
+
 ```sql
 create table example (
     bits bit varying
@@ -18,7 +19,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
                bits               
 ----------------------------------
  00000000

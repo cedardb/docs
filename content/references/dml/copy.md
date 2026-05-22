@@ -48,6 +48,7 @@ CedarDB also supports a best-effort import mode:
   With this option, rows containing mismatching elements will be skipped on a best-effort basis.
 
 A query that uses all available copy options could look like this:
+
 ```sql
 COPY target_table (column1, column2, column3)
 FROM '/absolute/path/to/your_file.csv'

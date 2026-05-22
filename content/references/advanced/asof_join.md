@@ -69,7 +69,7 @@ where s.name = 'GME'
 limit 10;
 ```
 
-```
+```text
  stockid | orderid | side | market_price | orderprice |  delta
 ---------+---------+------+--------------+------------+---------
     3405 | 3655250 | BUY  |       5.8300 |     5.8400 | -0.0100

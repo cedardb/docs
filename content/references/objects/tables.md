@@ -52,10 +52,11 @@ create table orders (
 ```
 
 The `constraint <name>` part can be omitted entirely, in which case CedarDB automatically assigns a default name using the same conventions as PostgreSQL:
-- Primary key: `tablename_pkey`
-- Unique: `tablename_colname_key`
-- Foreign key: `tablename_colname_fkey`
-- Check: `tablename_colname_check`
+
+* Primary key: `tablename_pkey`
+* Unique: `tablename_colname_key`
+* Foreign key: `tablename_colname_fkey`
+* Check: `tablename_colname_check`
 
 These default names can be used just like explicit names, e.g., to drop a constraint with `alter table ... drop constraint <name>`.
 Naming is not supported for `not null`.
@@ -79,8 +80,6 @@ Create a table that stores all compressed data on remote server, which was creat
 ```sql
 create table table_name (...) with (server = remote_storage);
 ```
-
-
 
 ### Permissions
 
@@ -129,9 +128,11 @@ See [PostgreSQL: ALTER TABLE](https://www.postgresql.org/docs/current/sql-altert
 ### Column statements
 
 #### `RENAME COLUMN`
+
 ```sql
 ALTER TABLE IF EXISTS movies RENAME COLUMN runlength TO duration;
 ```
+
 Rename column of table with `table_name` and `current_column_name` to the `new_column_name`.
 If exists checks if the table exists and only tries to rename in the case of existence.
 
@@ -149,9 +150,10 @@ ALTER TABLE orders ADD CONSTRAINT orders_unique unique (customer, item);
 ```
 
 The `CONSTRAINT <name>` part can be omitted entirely, in which case CedarDB automatically assigns a default name using the same conventions as PostgreSQL:
-- Primary key: `tablename_pkey`
-- Unique: `tablename_colname_key`
-- Foreign key: `tablename_colname_fkey`
+
+* Primary key: `tablename_pkey`
+* Unique: `tablename_colname_key`
+* Foreign key: `tablename_colname_fkey`
 
 #### `DROP CONSTRAINT`
 

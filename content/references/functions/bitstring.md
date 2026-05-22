@@ -13,23 +13,29 @@ See [PostgreSQL: Bit string functions and operators](https://www.postgresql.org/
 
 ## General-purpose functions
 
-#### `bit & bit`
+### `bit & bit`
+
 Bitwise AND (inputs must be of equal length).
 Example:
+
 ```sql
 SELECT B'10011' & B'10101'; -> B'10001'
 ```
 
-#### `bit | bit`
+### `bit | bit`
+
 Bitwise OR (inputs must be of equal length).
 Example:
+
 ```sql
 SELECT B'10011' | B'10101'; -> B'10111'
 ```
 
-#### `bit # bit`
+### `bit # bit`
+
 Bitwise XOR (inputs must be of equal length).
 Example:
+
 ```sql
 SELECT B'10011' # B'10101'; -> B'00110'
 ```

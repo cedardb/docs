@@ -9,7 +9,6 @@ It covers the essential setup steps and walks you through simple examples to beg
 
 ## Installation
 
-
 To automatically download and decompress the appropriate CedarDB version, run:
 
 ```shell
@@ -54,9 +53,11 @@ create table starsIn (
 ```
 
 ## Load data
+
 Once the schema is in place, we can populate it using one of the following methods:
 
 ### Plain Inserts
+
 Use standard [`INSERT`](../../references/dml/insert) statements:
 
 ```sql
@@ -67,6 +68,7 @@ insert into movies values
 ```
 
 ### Import from CSV
+
 If your data is stored in a CSV file, like this:
 
 ```text {filename="stars.csv"}
@@ -75,11 +77,15 @@ If your data is stored in a CSV file, like this:
 3,Michelle Yeoh,https://en.wikipedia.org/wiki/Michelle_Yeoh,F,1962-08-06
 4,Jürgen Prochnow,https://en.wikipedia.org/wiki/Jürgen_Prochnow,M,1941-06-10
 ```
+
 You bulk import it:
+
 ```sql
 copy stars from 'stars.csv' delimiter ',';
 ```
+
 ### Importing an SQL dump
+
 To import a SQL dump file:
 
 ```sql {filename="dump.sql"}
@@ -96,9 +102,11 @@ Run it directly from the shell:
 ```
 
 ## Query your dataset
+
 CedarDB supports standard SQL queries.
 
 Example: The following query returns the average movie length:
+
 ```sql
 select avg(length) from movies;
 ```
@@ -127,24 +135,27 @@ Drama           83 years 10 mons 27 days
 ```
 
 {{< callout type="info" >}}
-**No tuning needed:** 
+**No tuning needed:**
 If you've worked with database systems before, you're probably familiar with techniques such as query decorrelation or schema denormalization to enhance query performance.
-However, with CedarDB, these practices are unnecessary. CedarDB automatically handles query decorrelation, even with complex queries containing hundreds of joins. 
+However, with CedarDB, these practices are unnecessary. CedarDB automatically handles query decorrelation, even with complex queries containing hundreds of joins.
 This means you can focus on the essential aspect: the business logic driving your queries.
 {{< /callout >}}
 
 ## Modify data
 
-
 ### Updates
+
 Update existing rows using the [`UPDATE`](../../references/dml/update) statement. For example:
+
 ```sql
 update stars set name = '杨紫琼' where name = 'Michelle Yeoh';
 ```
 
 ### Deletes
+
 Delete rows using [`DELETE`](../../references/dml/delete).
 For instance, to remove movies not linked to any stars:
+
 ```sql
 delete from movies m
 where not exists 

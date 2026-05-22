@@ -8,8 +8,6 @@ weight: 50
 NASDAQ provides [dumps of real-time orders for some trading days](https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/) free of charge.
 This guide will show you how to parse it and import it into CedarDB for analysis.
 
-
-
 ## What is order data?
 
 High-frequency traders, quantitative analysts, and institutional investors depend on knowing the exact state of the market at any time to base their investment decisions on.
@@ -44,18 +42,16 @@ The *market price* of AAPL is now $225.49 since this was the last price at which
 
 Issuer of order number 2 now notices nobody wants to buy at their price and reduces their ask:
 
-| ID | Ticker | Timestamp   | Side | Quantity | Price  | PrevOrderId |
-| -- | ------ | ----------- | ---- | -------- | ------ | ----------- |
-| 1  | AAPL   | 9:30:00:000 | BUY  | 3        | 225.49 | null        |
-| <s>2</s>  | <s>AAPL</s>   | <s>9:30:00:010</s> | <s>SELL</s> | <s>2</s>        | <s>225.52</s> | <s>null</s>        |
-| 3  | AAPL   | 9:31:00:000 | SELL | 2        | **225.50** | **2**       |
+| ID       | Ticker      | Timestamp          | Side        | Quantity | Price         | PrevOrderId |
+|----------|-------------|--------------------|-------------|----------|---------------|-------------|
+| 1        | AAPL        | 9:30:00:000        | BUY         | 3        | 225.49        | null        |
+| <s>2</s> | <s>AAPL</s> | <s>9:30:00:010</s> | <s>SELL</s> | <s>2</s> | <s>225.52</s> | <s>null</s> |
+| 3        | AAPL        | 9:31:00:000        | SELL        | 2        | **225.50**    | **2**       |
 
-As you can see, the updated order is a *new event*  which references the old event it supersedes. 
+As you can see, the updated order is a *new event*  which references the old event it supersedes.
 As orders are immutable, the system has to keep track of which orders are still active and which are replaced.
 
-
-Buy processing the order and execution streams, we can reconstruct the complete state of the exchange.
-
+By processing the order and execution streams, we can reconstruct the complete state of the exchange.
 
 ## Obtaining the data
 
@@ -71,10 +67,9 @@ It downloads the dataset directly from [NASDAQ](https://emi.nasdaq.com/ITCH/Nasd
 There is data for multiple full trading days (approx. one a year).
 We chose January 30, 2020 since it was the most busy and recent trading day available.
 
-
 The data comes in the [NASDAQ ITCH v5.0 protocol](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf) format:
 
-```
+```text
 $ hexdump -C -n 100 01302020.NASDAQ_ITCH50 
 00000000  00 0c 53 00 00 00 00 09  f6 49 c8 0c d3 4f 00 27  |..S......I...O.'|
 00000010  52 00 01 00 00 0a 37 d4  c8 05 0b 41 20 20 20 20  |R.....7....A    |
@@ -86,7 +81,7 @@ $ hexdump -C -n 100 01302020.NASDAQ_ITCH50
 00000064
 ```
 
-We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser.py) to transform this into human readable CSV files.
+We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser.py) to transform this into human-readable CSV files.
 It is automatically invoked by the `prepare.sh` script.
 
 {{< callout type="info" >}}
@@ -198,18 +193,15 @@ This cuts the import time from ~3 minutes to 1 minute!
 
 {{< /callout >}}
 
-
-
-
 ## Queries
+
 Let's run some queries to gain some insight!
 
 ### What was the price of one Apple share at end of day?
 
 The canonical stock price is by definition the price of the last executed order, i.e. the price where the timestamp is the largest.
-Since executions usually don't come with a price attached (except for some special cases), 
+Since executions usually don't come with a price attached (except for some special cases),
 we have to look up the price in the matching order if it is null.
-
 
 ```sql
 select arg_max(coalesce(e.price, o.price), e.timestamp) as price
@@ -219,7 +211,7 @@ where e.stockid = s.stockid
     and s.name = 'AAPL';
 ```
 
-```
+```text
   price   
 ----------
  323.5800
@@ -228,7 +220,6 @@ where e.stockid = s.stockid
 Time: 11.413 ms
 ```
 
-
 ### How many new orders in a trading day?
 
 All orders that don't supersede another order are new:
@@ -236,7 +227,8 @@ All orders that don't supersede another order are new:
 ```sql
 select count(*) as new from orders where prevOrder is null;
 ```
-```
+
+```text
     new    
 -----------
  181194793
@@ -257,8 +249,7 @@ with executions_per_order as (
 select num as executions, count(*) from executions_per_order group by num order by num asc;
 ```
 
-
-```
+```text
  executions |  count  
 ------------+---------
           1 | 5575247
@@ -304,7 +295,7 @@ where pe.stockid = s.stockid
 order by quantity * real_price desc limit 10;
 ```
 
-```
+```text
  ticker | quantity |   price   |    total     
 --------+----------+-----------+--------------
  TSLA   |    14549 |  647.0000 | 9413203.0000
@@ -321,7 +312,6 @@ order by quantity * real_price desc limit 10;
 
 Time: 716.949 ms
 ```
-
 
 ### Orders that took the longest to be executed
 
@@ -343,8 +333,7 @@ from exec_distance
 order by minutes desc limit 10;
 ```
 
-
-```
+```text
  ticker | side |  price  | orderquant | executedquant | minutes 
 --------+------+---------+------------+---------------+---------
  INO    | SELL |  5.0400 |       1000 |           950 |     611
@@ -366,7 +355,6 @@ Time: 896.267 ms
 
 Let's take a look at how the trading activity changes over the trading day.
 We can use `R` with `ggplot` to generate a nice graph of all activity:
-
 
 ```R {fileName=nasdaq.R}
 #!/usr/bin/Rscript

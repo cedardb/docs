@@ -18,7 +18,7 @@ insert into example
 select doc, doc->'x' from example;
 ```
 
-```
+```text
    doc   | ?column?
 ---------+----------
  {"x":1} | 1
@@ -35,7 +35,7 @@ It guarantees round-trip safety of an arbitrary JSON input (i.e., storing and th
 This means, that CedarDB returns a semantically equivalent representation, that may syntactically differ from the input.
 For example, JSONB is allowed to produce the following two semantically equivalent output objects.
 
-```
+```text
    doc
 ---------
 {"x": 1, "y": "10.00"}
@@ -46,6 +46,7 @@ For example, JSONB is allowed to produce the following two semantically equivale
 {"y": "10.00", "x": 1}
 (1 row)
 ```
+
 Because JSONB can be processed much faster, applications that do not require an explicit order of elements within documents, should use JSONB.
 
 ### Improving access performance

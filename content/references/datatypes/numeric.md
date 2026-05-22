@@ -9,11 +9,12 @@ Numerics are numbers that are typically used to represent counters or identifier
 They are useful when exact precision is needed and rounding errors need to be exact, e.g., when storing monetary amounts.
 Numeric types offer a fixed amount of decimal *precision*, and a fixed *scale* of fractional digits. Decimal *precision*
 is the total count of significant digits in the number to both sides of the decimal point. The *scale* is the count of
-decimal digits in the fractional part of the number. CedarDB supports two different storage widths, an eight-byte 
-`numeric`, and a sixteen-byte `bignumeric`. Type specifications can use both names, as well as `decimal(precision, scale)`, 
+decimal digits in the fractional part of the number. CedarDB supports two different storage widths, an eight-byte
+`numeric`, and a sixteen-byte `bignumeric`. Type specifications can use both names, as well as `decimal(precision, scale)`,
 interchangeably. CedarDB will choose the underlying representation automatically based on the specified precision.
 
 ## Usage Example
+
 ```sql
 create table example (
     price numeric(38, 3),
@@ -25,7 +26,7 @@ insert into example values
 select * from example;
 ```
 
-```
+```text
   price   | tax_rate 
 ----------+----------
   123.450 |     0.19
@@ -47,7 +48,6 @@ Operations on 16&nbsp;Byte types are expensive to compute.
 We recommend using a precision of 18 or less when possible for your application.
 {{< /callout >}}
 
-
 Storing values outside of the supported ranges will result in an overflow exception.
 Operations on numerics are range checked, so that e.g., numeric overflows will never cause wrong results.
 
@@ -67,7 +67,6 @@ The table below illustrates how CedarDB selects the precision and scale of the r
 | n1 % n2                                      | min(p1 - s1, p2 - s2) + max(s1, s2)     | max(s1, s2)         |
 | Other operations (such as UNION, CASE, etc.) | max(s1, s2) + max(p1 - s1, p2 - s2)     | max(s1, s2)         |
 
-
 As numerics in CedarDB have a maximum precision of 38, the resulting precisions and scales can sometimes exceed the system limits. In these cases, CedarDB adapts the scale and precision through a set of rules.
 
 ### Rules for All Operations Except Multiplication and Division
@@ -84,24 +83,29 @@ For example, if the resulting precision were 42 and the scale were 6, the precis
 ## Handling Overflows
 
 Example:
+
 ```sql
 create table numerics(i) as 
 values (power(2, 126)::numeric(38,0));
 ```
 
 The following will produce an overflow, since $2^{126} + 2^{126} > 2^{127}-1$.
+
 ```sql
 select i + i from integers;
 ```
-```
+
+```text
 ERROR:  numeric overflow
 ```
 
 Wrapping the operation in a [`try()`](/docs/references/expressions/try/) produces a `null` value for overflows:
+
 ```sql
 select try(i + i) from numerics;
 ```
-```
+
+```text
     try     
 ------------
            <---- null
@@ -110,7 +114,7 @@ select try(i + i) from numerics;
 
 ## PostgreSQL Compatibility
 
-PostgreSQL offers a maximum precision of 131072 and scale of 16383, where CedarDB restricts precision and scale to a 
+PostgreSQL offers a maximum precision of 131072 and scale of 16383, where CedarDB restricts precision and scale to a
 maximum of 38, for performance reasons.
 
 Additionally, PostgreSQL allows `NaN`, `+Infinity`, and `-Infinity` as special numeric values.
@@ -118,4 +122,4 @@ Since all operations on numerics are bounds-checked, these values cannot occur d
 However, PostgreSQL still allows entering them directly.
 
 CedarDB forbids entering these values as numeric data types.
-See [Float](/docs/references/datatypes/float) for data types supporting those special values. 
+See [Float](/docs/references/datatypes/float) for data types supporting those special values.

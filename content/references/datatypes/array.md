@@ -9,6 +9,7 @@ Arrays can have arbitrary underlying types, e.g, `int[]` or `text[]`, and an arb
 Similar to PostgreSQL, the length and dimensions of an array column do not need to be uniform.
 
 ## Usage Example
+
 ```sql
 create table example (
     numbers int[],
@@ -20,7 +21,7 @@ insert into example
 select * from example;
 ```
 
-```
+```text
     numbers    |    strings    
 ---------------+---------------
  {1,2,3}       | {a,b,c}
@@ -36,7 +37,8 @@ Contrary to most programming languages, access to arrays is **1-indexed**:
 with data(a) as (values (array[1, 2, 3]))
 select a[1] as first from data;
 ```
-```
+
+```text
  first 
 -------
      1
@@ -44,11 +46,12 @@ select a[1] as first from data;
 ```
 
 CedarDB supports arrays with a maximum of 4&nbsp;GB of underlying data.
-For most data types, this limits array to about one billion elements. 
+For most data types, this limits array to about one billion elements.
 
 ```sql
 select array_fill('x', array[1000000000]);
 ```
-```
+
+```text
 ERROR:   string length overflow
 ```

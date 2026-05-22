@@ -19,7 +19,7 @@ insert into example
 select meeting_time from example;
 ```
 
-```
+```text
  meeting_time 
 --------------
  08:00:00
@@ -36,7 +36,7 @@ Calculations with times automatically wrap around following the 24-hour clock.
 select time '11:00 pm' + interval '8' hour;
 ```
 
-```
+```text
  ?column? 
 ----------
  07:00:00

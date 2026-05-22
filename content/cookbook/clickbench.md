@@ -234,7 +234,7 @@ Now let's also do a full run with all queries and report the total time:
 cat <(echo '\\timing') queries.sql | psql -h localhost -U postgres | grep 'Time' | awk '{print "Q" NR-1 " " $0; sum += $2;} END {print "Total: " sum " ms = " NR*60000/sum " qpm";}'
 ```
 
-```
+```text
 Q0 Time: 11.032 ms
 Q1 Time: 13.756 ms
 Q2 Time: 65.314 ms
@@ -286,7 +286,7 @@ the `c6a.4xlarge` results from the dashboard.
 
 If you want to compare performance to a wider variety of hardware, Phoronix has a number of results for ClickHouse on
 OpenBenchmarking.org:
-https://openbenchmarking.org/test/pts/clickhouse  
+<https://openbenchmarking.org/test/pts/clickhouse>  
 Their results use the [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) for queries per minute (qpm).
 You can use the following command to get comparable qpm numbers.
 
@@ -294,7 +294,7 @@ You can use the following command to get comparable qpm numbers.
 cat <(echo '\\timing') queries.sql | psql -h localhost -U postgres | grep 'Time' | awk '{sum += log($2);} END {print "Geometric mean: " exp(1)^(sum/NR) " ms = " 60000/exp(1)^(sum/NR) " qpm ";}'
 ```
 
-```
+```text
 Geometric mean: 197.884 ms = 303.208 qpm
 ```
 

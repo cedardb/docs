@@ -23,7 +23,7 @@ When the key is not found, it returns `null`.
 select data->'name' from json_data;
 ```
 
-```
+```text
     name     
 -------------
  "philipp"
@@ -45,7 +45,7 @@ It returns `null` for out-of-bounds access.
 select data->'friends'->0 from json_data;
 ```
 
-```
+```text
  0 
 ---
  2
@@ -64,7 +64,7 @@ This converts any value, especially JSON strings, but also integers and nested o
 select data->>'name' from json_data;
 ```
 
-```
+```text
   name   
 ---------
  philipp
@@ -82,7 +82,7 @@ select data->>'name' from json_data;
 select data::text from json_data limit 1;
 ```
 
-```
+```text
                       text                       
 -------------------------------------------------
  {"id": 1, "name": "philipp", "friends": [2, 3]}
@@ -102,7 +102,7 @@ The `json_array_length()` function allows calculating the number of elements in 
 select json_array_length(data->'friends') from json_data;
 ```
 
-```
+```text
  json_array_length 
 -------------------
                  2
@@ -124,7 +124,7 @@ select data->'id', json_array_elements(data->'friends')
 from json_data;
 ```
 
-```
+```text
  id | json_array_elements 
 ----+---------------------
  3  | 1
@@ -137,39 +137,45 @@ from json_data;
 ```
 
 ## Containment and Existence
+
 The `jsonb_contains` function answers whether a given `jsonb` document is structurally contained within another `jsonb` document.
 
 For example, the following query finds the name of the people that consider Max as a friend.
+
 ```sql
 select data->'name' from json_data where jsonb_contains(data, '{"friends": [2]}');
 ```
-```
+
+```text
    name    
 -----------
  "philipp"
 (1 row)
 ```
 
-The `@>` operator performs the same operation when applied to json data. 
+The `@>` operator performs the same operation when applied to json data.
 
 The `jsonb_exists` function and the equivalent `?` operator can determine if a given jsonb document has a given text as an object key or as an array value.
 
 ```sql
 select data->'name', data->'nick' from json_data where data ? 'nick';
 ```
-```
+
+```text
     name     |  nick   
 -------------+---------
  "christian" | "chris"
 (1 row)
 ```
 
-Additionally, CedarDB supports the `jsonb_exists_all` (`?&` operator) and `jsonb_exists_any` (`?|`) variants, which check for the existence of all (or any) of a given set of keys. 
+Additionally, CedarDB supports the `jsonb_exists_all` (`?&` operator) and `jsonb_exists_any` (`?|`) variants, which check for the existence of all (or any) of a given set of keys.
+
 ```sql
 select data->'name', data->'nick' from json_data
 where jsonb_exists_any(data, ARRAY['nick', 'name']);
 ```
-```
+
+```text
     name     |  nick   
 -------------+---------
  "philipp"   | 
@@ -183,20 +189,25 @@ where jsonb_exists_any(data, ARRAY['nick', 'name']);
 select data->'name', data->'nick' from json_data
 where jsonb_exists_all(data, ARRAY['nick', 'name']);
 ```
-```
+
+```text
     name     |  nick   
 -------------+---------
  "christian" | "chris"
 (1 rows)
 ```
+
 For the full semantics, refer to the PostgreSQL documentation: [PostgreSQL JSONB containment and existence](https://www.postgresql.org/docs/17/datatype-json.html#JSON-CONTAINMENT)
 
 ## Concatenation
+
 The `jsonb_concat` operation concatenates two jsonb documents. To use it, call the `jsonb_concat` function or by providing `jsonb` as input to the `||` operator.
+
 ```sql
 select data || '{"country": "Germany"}' from jsonb_data.
 ```
-```
+
+```text
                                        ?column?                                        
 ---------------------------------------------------------------------------------------
  {"id": 1, "name": "philipp", "country": "Germany", "friends": [2, 3]}
@@ -209,7 +220,8 @@ select data || '{"country": "Germany"}' from jsonb_data.
 ```sql
 select (data->'friends') || (data->>'id')::jsonb as me_and_my_friends from json_data;
 ```
-```
+
+```text
  me_and_my_friends 
 -------------------
  [2, 3, 1]

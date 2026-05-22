@@ -6,7 +6,6 @@ weight: 40
 CedarDB is compatible with most features of PostgreSQL-compatible clients and drivers out of the box.
 If you want to use CedarDB in combination with a specific framework or language, take a look at the following sub pages.
 
-
 Programming languages:
 
 * [C#](csharp)
