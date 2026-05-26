@@ -16,7 +16,7 @@ assume uniform data distribution and instead has to rely on collected samples an
 
 The dataset comprises a total of 21 tables extracted from IMDB, containing information about the movie industry, such
 as movies, studios, actors, and their connections, such as roles of actors in movies.
-The full schema with information on all tables is available as an SQL file [schema.sql](https://www.cedardb.com/data/job/schema.sql).
+The full schema with information on all tables is available as an SQL file [schema.sql](https://cedardb.com/data/job/schema.sql).
 E.g., the `cast_info` table, which comprises the most rows by far, can be created as:
 
 ```sql
@@ -50,7 +50,7 @@ The compressed tarball is about 1.2&nbsp;GB to download, which decompresses to a
 
 ### Import the schema to CedarDB
 
-To create the full schema inside CedarDB, download the [schema.sql](https://www.cedardb.com/data/job/schema.sql) file and load it, either on a new connection using:
+To create the full schema inside CedarDB, download the [schema.sql](https://cedardb.com/data/job/schema.sql) file and load it, either on a new connection using:
 
 ```shell
 psql -h localhost -U {{username}} < your/path/schema.sql
@@ -78,7 +78,7 @@ Some strings in the IMDB dataset contain the separator `,`, so you have to use t
 more performant `TEXT` when importing the data.
 {{< /callout >}}
 
-For convenience, we provide an SQL file will all necessary copy commands [load.sql](https://www.cedardb.com/data/job/load.sql).
+For convenience, we provide an SQL file will all necessary copy commands [load.sql](https://cedardb.com/data/job/load.sql).
 Please note that you need to modify the include paths from `your/path` to the correct location relative to the CedarDB
 server.
 

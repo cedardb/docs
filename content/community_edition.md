@@ -38,7 +38,7 @@ The **CedarDB Community Edition**
 It is **the right choice** for everything from solo projects to small-scale production workloads. No strings attached!
 
 {{% callout type="info" %}}
-Looking for advanced features or enterprise support? Check out the **Enterprise Edition** or visit our [pricing page](https://cedardb.com/pricing).
+Looking for advanced features or enterprise support? Check out the **Enterprise Edition** or visit our [pricing page](https://cedardb.com/pricing/).
 {{% /callout %}}
 
 |                              | Community Edition                                                                                                 | Enterprise Edition        |

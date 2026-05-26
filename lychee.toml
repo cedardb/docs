@@ -1,0 +1,17 @@
+timeout = 30
+max_retries = 3
+max_concurrency = 32
+
+# Accept rate-limited responses as non-failures
+ accept = [200, 202, 204, 206, 429]
+
+# When links are available using HTTPS, treat HTTP links as errors.
+require_https = true
+
+exclude = [
+  # Local addresses
+  "https?://localhost",
+  "file://",
+  "https://bonsai.cedardb.com/slack",
+  "https://www.bka.de",
+]

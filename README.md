@@ -1,6 +1,6 @@
 # CedarDB Documentation
 
-This repository contains the code for the [CedarDB documentation](https://cedardb.com/docs).
+This repository contains the code for the [CedarDB documentation](https://cedardb.com/docs/).
 The documentation is built by the static-site-generator [Hugo](https://gohugo.io/) and uses the [Hextra](https://imfing.github.io/hextra/docs/guide/) theme.
 
 Clone repository:

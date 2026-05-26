@@ -1,0 +1,38 @@
+name: Link Checker
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        if: github.event_name == 'pull_request'
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.131.0'
+
+      - name: Build
+        if: github.event_name == 'pull_request'
+        run: hugo --minify
+
+      - name: Serve
+        if: github.event_name == 'pull_request'
+        run: python3 -m http.server 8080 --directory public &
+
+      - name: Check Links (PR)
+        if: github.event_name == 'pull_request'
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml --base-url 'http://localhost:8080' --verbose --no-progress './public/**/*.html'
+
+      - name: Check Links (Scheduled)
+        if: github.event_name == 'schedule'
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml --base-url 'https://cedardb.com' --verbose --no-progress './content/**/*.md'

@@ -1527,11 +1527,11 @@
 		"notes": [
 			{
 				"type": "feat",
-				"note": "Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#regexp_count\"><tt>regexp_count</tt> and <tt>regexp_instr</tt></a>."
+				"note": "Added support for <a href=\"https://cedardb.com/docs/references/functions/text/#regexp_count\"><tt>regexp_count</tt> and <tt>regexp_instr</tt></a>."
 			},
 			{
 				"type": "feat",
-				"note": "Added support for <a href=\"https://cedardb.com/docs/references/sqlreference/functions/text/#string_to_table\"><tt>string_to_table</tt></a>."
+				"note": "Added support for <a href=\"https://cedardb.com/docs/references/functions/text/#string_to_table\"><tt>string_to_table</tt></a>."
 			},
 			{
 				"type": "feat",
@@ -2334,7 +2334,7 @@
 			},
 			{
 				"type": "feat",
-				"note": "Output of <tt>explain</tt> is now flatter, allowing you to more easily read query plans of complex queries. For a full overview and instructions on how to get back the old behavior, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain>our docs</a>."
+				"note": "Output of <tt>explain</tt> is now flatter, allowing you to more easily read query plans of complex queries. For a full overview and instructions on how to get back the old behavior, please refer to <a href=https://cedardb.com/docs/references/utility/explain/>our docs</a>."
 			},
 			{
 				"type": "feat",
@@ -2496,7 +2496,7 @@
 		"notes": [
 			{
 				"type": "feat",
-				"note": "We have added support for explain statements after different query optimization steps. For example, <tt>explain (step Unnesting) select * from foo, bar where foo.a = bar.b</tt> shows the query tree after the 'Unnesting' optimization step but before the 'Predicate Pushdown' step. For the syntax and available steps, please refer to <a href=https://cedardb.com/docs/references/sqlreference/statements/explain/#step>our docs</a>."
+				"note": "We have added support for explain statements after different query optimization steps. For example, <tt>explain (step Unnesting) select * from foo, bar where foo.a = bar.b</tt> shows the query tree after the 'Unnesting' optimization step but before the 'Predicate Pushdown' step. For the syntax and available steps, please refer to <a href=https://cedardb.com/docs/references/utility/explain/#step>our docs</a>."
 			},
 			{
 				"type": "perf",
