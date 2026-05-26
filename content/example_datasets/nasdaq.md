@@ -81,7 +81,7 @@ $ hexdump -C -n 100 01302020.NASDAQ_ITCH50
 00000064
 ```
 
-We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser.py) to transform this into human-readable CSV files.
+We have written a [Python parser](https://github.com/cedardb/examples/blob/main/nasdaq/parser/parser.py) to transform this into human-readable CSV files.
 It is automatically invoked by the `prepare.sh` script.
 
 {{< callout type="info" >}}

@@ -51,7 +51,7 @@ the [official docs](https://dbeaver.com/docs/dbeaver/Create-Connection/).
 
 This is a brief overview of the features you can use with DBeaver.
 For more in-depth information, use
-[DBeaver's getting started guide](https://dbeaver.com/docs/dbeaver/Basic-operations-with-DBeaver/).
+[DBeaver's getting started guide](https://github.com/dbeaver/dbeaver/wiki/Basic-operations).
 
 ### Schema
 

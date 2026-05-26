@@ -71,7 +71,7 @@ for (const row of result.rows) {
 ### Bulk loading
 
 For large imports, use `COPY FROM STDIN` via the
-[pg-copy-streams](https://github.com/brianc/pg-copy-streams) package:
+[pg-copy-streams](https://github.com/brianc/node-pg-copy-streams) package:
 
 ```shell
 npm install pg-copy-streams

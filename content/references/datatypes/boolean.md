@@ -52,7 +52,7 @@ To opt-out of this behavior you can use `x is null`, which never returns `null`.
 The syntax to compare two values and consider `nulls` equal is somewhat verbose: `x is not distinct from y`.
 
 However, while most functions return `null` for any `null` input, for boolean logic, e.g., in `and`, a single `false`
-can determine the whole expressions&nbsp;[[1](http://databasearchitects.blogspot.com/2017/02/reasoning-in-presence-of-nulls.html), [2](https://doi.org/10.1109/ICDE.2018.00214)].
+can determine the whole expressions&nbsp;[[1](https://databasearchitects.blogspot.com/2017/02/reasoning-in-presence-of-nulls.html), [2](https://doi.org/10.1109/ICDE.2018.00214)].
 This results in more subtle ternary truth tables for booleans:
 
 ```sql
