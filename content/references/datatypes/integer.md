@@ -6,11 +6,14 @@ weight: 10
 ---
 
 Integers are whole numbers that are typically used to represent counters or identifiers.
-CedarDB supports three different widths of integers:
+CedarDB supports the following signed integer types:
 
-* A two-byte `smallint`,
-* a four-byte `integer`,
-* and an eight-byte `bigint`.
+* A one-byte `tinyint` (alias: `int1`),
+* a two-byte `smallint` (alias: `int2`),
+* a four-byte `integer` (alias: `int4`),
+* and an eight-byte `bigint` (alias: `int8`).
+
+CedarDB also supports unsigned variants for each width: `uint1`, `uint2`, `uint4`, and `uint8`.
 
 ## Usage Example
 
@@ -33,11 +36,18 @@ select id from example;
 
 ## Value Range
 
-| Type       |       Min |        Max |
-|------------|----------:|-----------:|
-| `smallint` | $-2^{15}$ | $2^{15}-1$ |
-| `integer`  | $-2^{31}$ | $2^{31}-1$ |
-| `bigint`   | $-2^{63}$ | $2^{63}-1$ |
+### Signed
+
+| Type                |       Min |        Max |
+|---------------------|----------:|-----------:|
+| `tinyint` (`int1`)  |  $-2^{7}$ |  $2^{7}-1$ |
+| `smallint` (`int2`) | $-2^{15}$ | $2^{15}-1$ |
+| `integer` (`int4`)  | $-2^{31}$ | $2^{31}-1$ |
+| `bigint` (`int8`)   | $-2^{63}$ | $2^{63}-1$ |
+| `uint1`             |       $0$ |  $2^{8}-1$ |
+| `uint2`             |       $0$ | $2^{16}-1$ |
+| `uint4`             |       $0$ | $2^{32}-1$ |
+| `uint8`             |       $0$ | $2^{64}-1$ |
 
 Storing values outside the supported ranges will result in an overflow exception.
 Operations on integers are range checked, so that e.g., numeric overflows will never cause wrong results.
