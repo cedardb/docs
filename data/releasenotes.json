@@ -1,5 +1,28 @@
 [
 	{
+		"version": "v2026-05-26",
+		"date": "2026-05-26",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "<tt>ALTER TABLE</tt> now supports adding and deleting columns if an index on the table exists."
+			},
+			{
+				"type": "feat",
+				"note": "Enable comparisons between unsigned types (<tt>uint{1,2,4,8}</tt>) and <tt>Numeric</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add casts from unsigned types (<tt>uint{1,2,4,8}</tt>) to <tt>BigNumeric</tt> and vice versa."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where CedarDB ran out of memory when evaluating <tt>generate_series()</tt> where the <tt>to</tt> arg was smaller than the <tt>from</tt> arg."
+			}
+		]
+	},
+	{
 		"version": "v2026-05-18",
 		"date": "2026-05-18",
 		"breaksdb": false,
