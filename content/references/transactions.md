@@ -39,17 +39,3 @@ We therefore recommend using larger transactions that batch data, and reduce the
 We also advise against very long-running transactions.
 Since transactions read the current snapshot when they start, CedarDB needs to keep the corresponding MVCC versions, which can cause high memory resource usage.
 As a guideline for fast query performance, transactions shouldn't require user interaction, and your application should use relatively low timeouts when waiting for external resources.
-
-## Bulk Write
-
-CedarDB supports *bulk write* transactions.
-Statements that operate on a large amount of data, e.g., alter table, automatically switch to bulk mode.
-You can also use explicit transaction control in bulk mode:
-
-```sql
-BEGIN BULK WRITE;
-```
-
-Bulk writes allow efficient ingestion of large datasets.
-Bulk operations take an exclusive write lock on the database system, which allows them to skip writing transaction-specific versions, which reduces CPU and memory overhead for large inserts.
-Although, bulk operations do not block concurrent read transactions, which read the state of the database before the bulk operation started, concurrent writers have to wait until the bulk operation commits.

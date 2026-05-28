@@ -82,7 +82,7 @@ if __name__ == '__main__':
                         copy.write_row((word, vec2))
             conn.commit()
 
-            cur.execute("commit; begin bulk write")
+            cur.execute("commit; begin")
             cur.execute("create index on words(word)")
             conn.commit()
 ```
