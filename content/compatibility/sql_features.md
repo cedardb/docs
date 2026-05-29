@@ -17,50 +17,75 @@ the [system table compatibility](../system_table) page.
 
 ### Table Creation & Deletion
 
-| **Feature**           | **Support State** | **Details**                                                            |
-|-----------------------|-------------------|------------------------------------------------------------------------|
-| CREATE TABLE          | Yes               | [Documentation](/docs/references/objects/tables/)                      |
-| DROP TABLE            | Yes               |                                                                        |
-| Default Values        | Yes               |                                                                        |
-| GENERATED             | Yes               | only AS IDENTITY                                                       |
-| Check Constraints     | No                |                                                                        |
-| Not-Null Constraints  | Yes               | [Documentation](/docs/references/objects/tables/)                      |
-| Unique Constraints    | Yes               | [Documentation](/docs/references/objects/tables/)                      |
-| Primary Keys          | Yes               | [Documentation](/docs/references/objects/tables/)                      |
-| Foreign Keys          | Yes               | Without ON DELETE<br>[Documentation](/docs/references/objects/tables/) |
-| Named Constraints     | No                |                                                                        |
-| Exclusion Constraints | No                |                                                                        |
-| System Columns        | Yes               | Only meaningful for tableoid and ctid                                  |
+| **Feature**                    | **Support State** | **Details**                                                                                                    |
+|--------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------|
+| CREATE TABLE                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
+| DROP TABLE                     | Yes               |                                                                                                                |
+| Default Values                 | Yes               |                                                                                                                |
+| GENERATED AS IDENTITY          | Yes               | Both `ALWAYS` and `BY DEFAULT` variants                                                                        |
+| GENERATED ALWAYS AS (computed) | No                |                                                                                                                |
+| Check Constraints              | Yes               | Only at CREATE TABLE time. [Documentation](/docs/references/objects/tables/#constraints)                       |
+| Not-Null Constraints           | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
+| Unique Constraints             | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
+| Primary Keys                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
+| Foreign Keys                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
+| FK ON DELETE CASCADE           | Yes               |                                                                                                                |
+| FK ON DELETE RESTRICT          | Yes               |                                                                                                                |
+| FK ON DELETE NO ACTION         | Yes               |                                                                                                                |
+| FK ON UPDATE CASCADE           | Yes               |                                                                                                                |
+| FK ON DELETE SET NULL          | No                |                                                                                                                |
+| FK ON DELETE SET DEFAULT       | No                |                                                                                                                |
+| Named Constraints              | Yes               | For PRIMARY KEY, UNIQUE, FOREIGN KEY, and CHECK. [Documentation](/docs/references/objects/tables/#constraints) |
+| Exclusion Constraints          | No                |                                                                                                                |
+| System Columns                 | Yes               | Only meaningful for tableoid and ctid                                                                          |
+| UNLOGGED TABLE                 | No                |                                                                                                                |
+| CREATE TABLE LIKE              | Partial           | Copies column names and types. `INCLUDING` options not supported                                               |
+| DROP TABLE CASCADE             | No                |                                                                                                                |
 
 ### Table Modification (ALTER TABLE)
 
-| **Feature**     | **Support State** | **Details** |
-|-----------------|-------------------|-------------|
-| ADD COLUMN      | Yes               |             |
-| DROP COLUMN     | Yes               |             |
-| ADD CHECK       | No                |             |
-| ADD CONSTRAINT  | Yes               |             |
-| ADD FOREIGN KEY | Yes               |             |
-| DROP CONSTRAINT | No                |             |
-| ALTER COLUMN    | No                |             |
-| SET DEFAULT     | No                |             |
-| DROP DEFAULT    | No                |             |
-| COLUMN TYPE     | No                |             |
-| RENAME COLUMN   | Yes               |             |
-| RENAME TO       | Yes               |             |
+| **Feature**                       | **Support State** | **Details**                                       |
+|-----------------------------------|-------------------|---------------------------------------------------|
+| ADD COLUMN                        | Yes               |                                                   |
+| ADD COLUMN IF NOT EXISTS          | Yes               |                                                   |
+| DROP COLUMN                       | Yes               |                                                   |
+| DROP COLUMN IF EXISTS             | Yes               |                                                   |
+| DROP COLUMN CASCADE               | Yes               |                                                   |
+| RENAME COLUMN                     | Yes               |                                                   |
+| RENAME TO                         | Yes               |                                                   |
+| ADD CHECK                         | No                | Only at CREATE TABLE time                         |
+| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
+| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/) |
+| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
+| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/) |
+| DROP CONSTRAINT IF EXISTS         | Yes               |                                                   |
+| DROP CONSTRAINT CASCADE           | Yes               |                                                   |
+| RENAME CONSTRAINT                 | No                |                                                   |
+| ALTER COLUMN SET/DROP DEFAULT     | No                |                                                   |
+| ALTER COLUMN SET/DROP NOT NULL    | No                |                                                   |
+| ALTER COLUMN TYPE                 | No                |                                                   |
+| SET SCHEMA                        | No                |                                                   |
+| OWNER TO                          | Yes               |                                                   |
+| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license      |
+| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                   |
+| SET TABLESPACE                    | No                |                                                   |
+| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                   |
+| ATTACH / DETACH PARTITION         | No                |                                                   |
+| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                      |
+| VALIDATE CONSTRAINT               | No                |                                                   |
 
 ### Privileges
 
-| **Feature**           | **Support State** | **Details**                                      |
-|-----------------------|-------------------|--------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)  |
-| OWNER TO              | Yes               |                                                  |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)  |
-| GRANT                 | Yes               | Only GRANT role to other_role                    |
-| REVOKE                | No                |                                                  |
-| SET ROLE              | No                |                                                  |
-| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/) |
-| Row Security Policies | No                |                                                  |
+| **Feature**           | **Support State** | **Details**                                                |
+|-----------------------|-------------------|------------------------------------------------------------|
+| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)            |
+| OWNER TO              | Yes               |                                                            |
+| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)            |
+| GRANT                 | Yes               | Requires an enterprise license                             |
+| REVOKE                | Yes               | Requires an enterprise license                             |
+| SET ROLE              | Yes               | Requires an enterprise license                             |
+| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/)           |
+| Row Security Policies | Yes               | Requires an enterprise license                             |
 
 ### Indexes
 
@@ -83,7 +108,7 @@ the [system table compatibility](../system_table) page.
 | DROP SCHEMA            | Yes               | Only if the schema is empty                                                             |
 | search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                        |
 | Table Inheritance      | No                |                                                                                         |
-| Table Partitioning     | Yes               | Only at creation, only by hash                                                          |
+| Table Partitioning     | Partial           | Only hash partitioning. Only at CREATE TABLE time                                       |
 | Foreign Data Wrappers  | No                |                                                                                         |
 | Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                        |
 | Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                    |
