@@ -8,7 +8,7 @@ CedarDB is compatible with the [PostgreSQL libpqxx](https://pqxx.org/development
 
 ## Installing
 
-Before demonstrating the connection to CedarDB, we need to get the correct dependencies .
+Before demonstrating the connection to CedarDB, we need to get the correct dependencies.
 libpqxx uses the libpq library internally.
 On Debian or Ubuntu you can simply get the dev files from an apt repository.
 
@@ -16,10 +16,23 @@ On Debian or Ubuntu you can simply get the dev files from an apt repository.
 sudo apt install libpqxx-dev
 ```
 
+{{% callout type="warning" %}}
+The `libpqxx-dev` package in Ubuntu 26.04 ships libpqxx 7.10, which [crashes on exit](https://github.com/jtv/libpqxx/issues/1195) due to a double-free in `pqxx::internal::demangle_type_name`. We recommend building libpqxx 8 from source instead:
+
+```bash
+sudo apt install cmake g++ libpq-dev
+git clone --depth 1 --branch 8.0.1 https://github.com/jtv/libpqxx.git /tmp/libpqxx
+cmake -S /tmp/libpqxx -B /tmp/libpqxx/build -DSKIP_BUILD_TEST=ON -DCMAKE_BUILD_TYPE=Release
+cmake --build /tmp/libpqxx/build -j$(nproc)
+sudo cmake --install /tmp/libpqxx/build
+```
+
+{{% /callout %}}
+
 After finishing the client (see at the full program at the bottom of the program), we need to first compile our program with `g++` and then execute it.
 
 ```bash
-g++ -std=c++17 main.cpp -lpqxx -lpq -o CedarDBClient
+g++ -std=c++23 main.cpp -lpqxx -lpq -o CedarDBClient
 ./CedarDBClient
 ```
 
@@ -69,12 +82,12 @@ pqxx::work transaction(connection);
 
 // Insert data
 connection.prepare("insert", "INSERT INTO chatlog VALUES ($1 , $2, $3)");
-string_view message = "(☞ﾟ∀ﾟ)☞"sv;
+std::string_view message = "(☞ﾟ∀ﾟ)☞"sv;
 auto id = 0;
-auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 std::stringstream ss;
 ss << std::put_time(std::localtime(&time), "%Y-%m-%d %X%z");
-transaction.exec_prepared("insert", id, message, ss);
+transaction.exec(pqxx::prepped{"insert"}, pqxx::params{id, message, ss.str()});
 transaction.commit();
 ```
 
@@ -129,7 +142,7 @@ LOG: 100000 rows (0.000012 s parsing, 0.000374 s compilation, 0.025395 s transmi
 #include <iostream>
 #include <pqxx/pqxx>
 
-using namespace std;
+using namespace std::string_view_literals;
 
 int main(int argc, char* argv[]) {
     auto connectionString = "dbname=<dbname> user=<username> password=<password> host=localhost port=5432";
@@ -137,7 +150,7 @@ int main(int argc, char* argv[]) {
         // Establishing a connection
         pqxx::connection connection(connectionString);
         if (!connection.is_open()) {
-            cerr << "Can't connect!" << endl;
+            std::cerr << "Can't connect!" << std::endl;
             return 1;
         }
 
@@ -156,12 +169,12 @@ int main(int argc, char* argv[]) {
 
             // Insert data
             connection.prepare("insert", "INSERT INTO chatlog VALUES ($1 , $2, $3)");
-            string_view message = "(☞ﾟ∀ﾟ)☞"sv;
+            std::string_view message = "(☞ﾟ∀ﾟ)☞"sv;
             auto id = 0;
-            auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             std::stringstream ss;
             ss << std::put_time(std::localtime(&time), "%Y-%m-%d %X%z");
-            transaction.exec_prepared("insert", id, message, ss);
+            transaction.exec(pqxx::prepped{"insert"}, pqxx::params{id, message, ss.str()});
             transaction.commit();
         }
         {
@@ -182,13 +195,13 @@ int main(int argc, char* argv[]) {
 
             // Read data
             auto readTable = "SELECT * FROM chatlog ORDER BY userid LIMIT 10"sv;
-            for (auto [id, message, time] : transaction.stream<int, string_view, string_view>(readTable)) {
+            for (auto [id, message, time] : transaction.stream<int, std::string_view, std::string_view>(readTable)) {
                 std::cout << id << "," << message << "," << time << "\n";
             }
             transaction.commit();
         }
     } catch (const std::exception& e) {
-        cerr << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
         return 1;
     }
     return 0;
