@@ -1,5 +1,108 @@
 [
 	{
+		"version": "v2026-06-23",
+		"date": "2026-06-23",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "The <tt>--createdb</tt> option now either reads the <tt>postgres</tt> super user password from the <tt>CEDAR_PASSWORD</tt> environment variable or creates a random password, which is printed to the startup logs."
+			},
+			{
+				"type": "feat",
+				"note": "Respect <tt>cgroup v2</tt> memory limits for memory pool sizing (e.g. when running CedarDB inside a Docker container)."
+			},
+			{
+				"type": "perf",
+				"note": "Significantly improve compression speed for text data, especially for columns with few distinct values."
+			},
+			{
+				"type": "perf",
+				"note": "Reduce contention for parallel table scans."
+			},
+			{
+				"type": "perf",
+				"note": "Improve parallel data insertion."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of array_agg() by up to 20x."
+			},
+			{
+				"type": "perf",
+				"note": "Reduce memory requirements of large transaction rollbacks."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>SHOW transaction_isolation</tt> now returns <tt>repeatable read</tt> instead of <tt>read committed</tt> which matches the snapshot isolation guarantees we provide."
+			},
+			{
+				"type": "pg",
+				"note": "Support <tt>RESET variable</tt> as alternative syntax for <tt>SET variable TO DEFAULT</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Expose log_min_duration as writable session setting."
+			},
+			{
+				"type": "pg",
+				"note": "Add line breaks to <tt>encode(<text>, 'base64')</tt> output for RFC 2045 compatibility."
+			},
+			{
+				"type": "fix",
+				"note": "Buffer manager allocation failures now produce more descriptive error messages."
+			},
+			{
+				"type": "fix",
+				"note": "Fix COPY from CSV file with custom column order."
+			},
+			{
+				"type": "fix",
+				"note": "Add more consistency checks when deleting tuples."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug that caused deleted tuples to become visible again."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a live-lock when running large scan queries on a very small page buffer."
+			},
+			{
+				"type": "fix",
+				"note": "Check for duplicates in the input values of an upsert."
+			},
+			{
+				"type": "fix",
+				"note": "Improve quality of <tt>EXPLAIN (FORMAT SQL)</tt> output."
+			},
+			{
+				"type": "fix",
+				"note": "Fix reordering of bandjoins in complex queries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix failing explain output in large queries with CTEs."
+			},
+			{
+				"type": "fix",
+				"note": "Support <tt>~</tt> in paths for installs using the CedarDB install script."
+			},
+			{
+				"type": "fix",
+				"note": "Fix stale output of <tt>license</tt> and <tt>check_version</tt> functions in prepared statements."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when rolling back transactions with large log entries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when rolling back large transactions where the same tuple was updated and then deleted."
+			}
+		]
+	},
+	{
 		"version": "v2026-05-26",
 		"date": "2026-05-26",
 		"breaksdb": false,
