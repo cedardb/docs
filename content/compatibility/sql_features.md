@@ -651,7 +651,7 @@ the [system table compatibility](../system_table) page.
 | ?                         | Yes               |             |
 | ?\|                       | Yes               |             |
 | ?&                        | Yes               |             |
-| \|\|                      | No                |             |
+| \|\|                      | Yes               |             |
 | -                         | No                |             |
 | #-                        | No                |             |
 | @?                        | No                |             |
@@ -660,10 +660,10 @@ the [system table compatibility](../system_table) page.
 | to_jsonb                  | No                |             |
 | array_to_json             | No                |             |
 | json_array                | No                |             |
-| row_to_json               | No                |             |
-| json_build_array          | No                |             |
+| row_to_json               | Yes               |             |
+| json_build_array          | Yes               |             |
 | jsonb_build_array         | No                |             |
-| json_build_object         | No                |             |
+| json_build_object         | Yes               |             |
 | jsonb_build_object        | No                |             |
 | json_object               | No                |             |
 | jsonb_object              | No                |             |
