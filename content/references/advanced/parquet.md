@@ -201,7 +201,7 @@ This page summarizes the available features supported by the CedarDB Parser.
 |      Compression      | Support |
 |:---------------------:|:-------:|
 | UNCOMPRESSED          |   🟢    |
-| BROTLI                |   🔴    |
+| BROTLI                |   🟢    |
 | GZIP                  |   🟢    |
 | LZ4 (deprecated)      |   🔴    |
 | LZ4_RAW               |   🟢    |

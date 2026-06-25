@@ -50,7 +50,7 @@ CedarDB.
 
 | **Feature**           |       **State**        | **Details**                                                |
 |-----------------------|:----------------------:|------------------------------------------------------------|
-| Parquet reader        |  {{< iconplanned >}}   |                                                            |
+| Parquet reader        |    {{< icondone >}}    | [Documentation](/docs/references/advanced/parquet/)        |
 | Parquet writer        |  {{< iconplanned >}}   |                                                            |
 | Iceberg support       |  {{< iconplanned >}}   |                                                            |
 | pg_dump compatibility | {{< iconinprogress >}} | [Documentation](/docs/cookbook/importing_from_postgresql/) |
