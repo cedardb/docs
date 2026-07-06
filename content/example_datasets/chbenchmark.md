@@ -3,6 +3,7 @@ title: CH-benCHmark
 linkTitle: "CH-benCHmark"
 weight: 20
 ---
+
 The [CH-benCHmark](https://db.in.tum.de/research/projects/CHbenCHmark/?lang=en) bridges the gap between TPC-C, an OLTP (i.e., transactional) benchmark, and TPC-H, an OLAP (i.e., analytical) benchmark.
 
 In contrast to many other benchmarks for hybrid workloads, CH-benCHmark runs its analytical queries on the same tables that are updated by the transactional queries.
@@ -15,31 +16,31 @@ It runs all 22 TPC-H queries in a slightly adapted form which uses the TPC-C bas
 
 ## Executing the benchmark
 
-CMU's benchmarking tool [benchbase](https://github.com/cmu-db/benchbase/) comes with a CH-benCHmark configuration and is compatible with PostgreSQL.
+CMU's benchmarking tool [BenchBase](https://github.com/cmu-db/benchbase/) comes with a CH-benCHmark configuration and is compatible with PostgreSQL.
 
 {{% steps %}}
 
 ### Prepare a CedarDB instance
 
-First install CedarDB [locally](../get_started/install_locally) or alternatively [via Docker](../get_started/install_with_docker).
+First start CedarDB [via Docker](../get_started/install_with_docker).
 
 ```shell
-curl https://get.cedardb.com | bash
-./cedar/cedardb
+docker pull cedardb/cedardb
+docker network create benchbase
+docker run --network benchbase --name cedardb -e CEDAR_PASSWORD=postgres -d --rm cedardb/cedardb
 ```
 
-### Set up benchbase
+### Set up BenchBase
 
-CedarDB requires a slight modification to the upstream benchbase project, which is maintained [in a fork](https://github.com/cedardb/benchbase/). 
-Following the [quickstart instructions](https://github.com/cedardb/benchbase/#quickstart), set up benchbase:
+CedarDB requires a slight modification through a dialect, which is maintained [in a fork](https://github.com/cedardb/benchbase/).
+Following the [Docker instructions](https://github.com/cedardb/benchbase/#how-use-with-docker), set up BenchBase:
 
 ```shell
 git clone --depth 1 https://github.com/cedardb/benchbase.git
-cd benchbase
-./mvnw clean package -P postgres
-cd target
-tar xvzf benchbase-postgres.tgz
-cd benchbase-postgres
+BENCHBASE_PROFILES=postgres SKIP_TESTS=true ./benchbase/docker/benchbase/build-full-image.sh
+
+# To run it on Mac, use
+CONTAINERUSER_GID=$(id -g) BENCHBASE_PROFILES=postgres SKIP_TESTS=true ./benchbase/docker/benchbase/build-full-image.sh
 ```
 
 The benchmark config file specifies the workload parameters.
@@ -48,9 +49,9 @@ The following file specifies the CH workload with scale factor 100, which is abo
 ```xml {filename="config.xml"}
 <parameters>
     <!-- Connection details,  -->
-    <type>POSTGRES</type>
+    <type>CEDARDB</type>
     <driver>org.postgresql.Driver</driver>
-    <url>jdbc:postgresql://localhost:5432/postgres?sslmode=disable&amp;ApplicationName=chbenchmark&amp;reWriteBatchedInserts=true</url>
+    <url>jdbc:postgresql://cedardb:5432/postgres?sslmode=disable&amp;ApplicationName=chbenchmark&amp;reWriteBatchedInserts=true</url>
     <username>postgres</username>
     <password>postgres</password>
     <reconnectOnConnectionFailure>true</reconnectOnConnectionFailure>
@@ -105,24 +106,24 @@ The following file specifies the CH workload with scale factor 100, which is abo
 
 ### Run the benchmark
 
-With CedarDB running and benchbase set up in the `benchbase-postgres` directory, the benchmark is ready to run.
+With CedarDB running and a BenchBase image, the benchmark is ready to be executed.
 
 ```shell
-# Set up the benchmark user for CedarDB using the same values as in config.xml
-psql -h /tmp -U postgres -c "alter user postgres with password 'postgres';"
-
-# Run the benchmark
-java -jar benchbase.jar -b tpcc,chbenchmark -c config.xml --create=true --load=true --execute=true
+# Run CH-benCHmark with the config file above
+docker run -it --rm --network benchbase \
+    -v ./config.xml:/tmp/config.xml benchbase-postgres:latest \
+    -b chbenchmark,tpcc -c /tmp/config.xml \
+    --create=true --load=true --execute=true
 ```
 
-Benchbase now generates and loads the initial dataset before running the workload query stream.
+BenchBase now generates and loads the initial dataset before running the workload query stream.
 The initial data loading takes about 5&nbsp;minutes, which can be skipped with `--create=false --load=false` after the first run.
 
 The config specifies a warm-up time of 60&nbsp;seconds to ensure data is cached, and afterward runs the benchmark for 120&nbsp;seconds.
 
 ### Results
 
-After the benchmark run, benchbase prints a detailed report of the workload.
+After the benchmark run, BenchBase prints a detailed report of the workload.
 The following is an example run on AWS with EBS. TODO: @ChrisWint please add the specifics.
 
 ```text
@@ -171,3 +172,12 @@ The two key CH-benCHmark metrics can be derived from these numbers:
 ```
 
 {{% /steps %}}
+
+### Clean-up
+
+To clean up the running CedarDB container and the Docker network, execute:
+
+```shell
+docker rm -f cedardb
+docker network rm -f benchbase
+```
