@@ -1,5 +1,92 @@
 [
 	{
+	    "version": "v2026-07-09",
+	    "date": "2026-07-09",
+	    "breaksdb": false,
+	    "notes": [
+		{
+		    "type": "feat",
+		    "note": "When setting user passwords, CedarDB now checks them for quality and rejects weak passwords."
+		},
+		{
+		    "type": "feat",
+		    "note": "Allow changing the sequence-owning table through <tt>ALTER SEQUENCE ... OWNED BY</tt>."
+		},
+		{
+		    "type": "feat",
+		    "note": "Allow changing sequence start, increment, type, minvalue and maxvalue through <tt>ALTER SEQUENCE ...</tt>."
+		},
+		{
+		    "type": "feat",
+		    "note": "Allow resetting a sequence through <tt>ALTER SEQUENCE ... RESTART</tt>."
+		},
+		{
+		    "type": "feat",
+		    "note": "Add support for indexes on enum types."
+		},
+		{
+		    "type": "perf",
+		    "note": "Query plans for prepared statements with parameters are significantly improved."
+		},
+		{
+		    "type": "perf",
+		    "note": "Reduce PostgreSQL message protocol overhead when running in pipeline mode."
+		},
+		{
+		    "type": "perf",
+		    "note": "Improve DictFSST random access performance."
+		},
+		{
+		    "type": "pg",
+		    "note": "Add support for <tt>AUTHORIZATION</tt> when creating schemas."
+		},
+		{
+		    "type": "pg",
+		    "note": "Adhere to PostgreSQL defaults for the <tt>LOGIN</tt> option for <tt>CREATE ROLE/USER/GROUP</tt>."
+		},
+		{
+		    "type": "pg",
+		    "note": "Align floating point output logic with PostgreSQL version 12 and above, printing the shortest possible representation that does not loose precision."
+		},
+		{
+		    "type": "pg",
+		    "note": "Ensure trigonometric functions for floating point values on special angles return results without rounding error, e.g., <tt>sind(90) == 1</tt>."
+		},
+		{
+		    "type": "pg",
+		    "note": "Support ordinality for all set returning system information functions."
+		},
+		{
+		    "type": "pg",
+		    "note": "Support argument-aware regproc and regprocedure casts with PostgreSQL compatible behaviour."
+		},
+		{
+		    "type": "pg",
+		    "note": "Ensure names are schema qualified for reg* to text casts if the object is not in the search path."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix a race condition with cloud-storage relations."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix a bug where we would not insert tuples into an index that is created in a concurrent transaction."
+		},
+		{
+		    "type": "fix",
+		    "note": "Remove throttling due to WAL memory pressure."
+		},
+		{
+		    "type": "fix",
+		    "note": "Avoid orphaning buffer pages during data removal."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix a crash in edge cases of <tt>CASE</tt> expressions over a mix of array constants and variables. See <a href='https://github.com/cedardb/issues/issues/71'>issue 71</a>."
+		}
+	    ]
+	},
+	{
 		"version": "v2026-06-23",
 		"date": "2026-06-23",
 		"breaksdb": false,
