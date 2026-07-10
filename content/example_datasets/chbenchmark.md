@@ -54,6 +54,7 @@ The following file specifies the CH workload with scale factor 100, which is abo
     <url>jdbc:postgresql://cedardb:5432/postgres?sslmode=disable&amp;ApplicationName=chbenchmark&amp;reWriteBatchedInserts=true</url>
     <username>postgres</username>
     <password>postgres</password>
+    <isolation>TRANSACTION_REPEATABLE_READ</isolation>
     <reconnectOnConnectionFailure>true</reconnectOnConnectionFailure>
     <batchsize>128</batchsize>
     <scalefactor>100</scalefactor>
