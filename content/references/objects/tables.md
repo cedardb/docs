@@ -115,6 +115,15 @@ Create a table that stores all compressed data on a remote server previously cre
 CREATE TABLE remote_species (...) WITH (server = remote_storage);
 ```
 
+Set the compression method used for cold on-disk data, in addition to CedarDB's lightweight
+encoding (see the `cedardb_compression_info` [system table](/docs/compatibility/system_table) for per-column
+compression statistics). Supported values are `zstd` (the default) and `none`:
+
+```sql
+CREATE TABLE species (...) WITH (compression = zstd);
+CREATE TABLE species_uncompressed (...) WITH (compression = none);
+```
+
 ### Identity Columns
 
 Identity columns automatically generate unique integer values:
@@ -324,6 +333,17 @@ Drop a constraint and cascade to dependent constraints:
 
 ```sql
 ALTER TABLE child_table DROP CONSTRAINT fk_constraint CASCADE;
+```
+
+### Storage Options
+
+Change the general-purpose compression codec used for on-disk column data.
+Supported values are `zstd` (the default) and `none`.
+This takes effect the next time affected data is written to disk:
+
+```sql
+ALTER TABLE species SET (compression = zstd);
+ALTER TABLE species SET (compression = none);
 ```
 
 ### Ownership
