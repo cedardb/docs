@@ -1,5 +1,60 @@
 [
 	{
+		"version": "v2026-07-22",
+		"date": "2026-07-22",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Compress cold data on disk using zstd compression by default, controllable through <tt>CREATE TABLE ... WITH (compression=zstd/none)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER POLICY RENAME TO</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Allow setting password expiration for roles using <tt>VALID UNTIL</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Allow re-naming roles through <tt>ALTER ROLE ... RENAME</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for database names in fully-qualified SQL identifiers. Cross-database references are still unsupported."
+			},
+			{
+				"type": "perf",
+				"note": "Avoid using FSST string encoding when general compression is enabled."
+			},
+			{
+				"type": "perf",
+				"note": "Improve data retrieval scheduling."
+			},
+			{
+				"type": "perf",
+				"note": "Improve compression for the last rows of a large bulk insert."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assertion error for <tt>date_trunc(text, interval)</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in the undo phase of the recovery."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an edge case in <tt>ALTER POLICY TO</tt> that could disable policies."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an optimizer crash when using UDFs as join keys."
+			}
+		]
+	},
+	{
 	    "version": "v2026-07-09",
 	    "date": "2026-07-09",
 	    "breaksdb": false,
