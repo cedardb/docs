@@ -59,6 +59,17 @@ export LICENSE_KEY=<your_key>
 A value set via an environment variable takes precedence over the value defined in the configuration file.
 {{% /callout %}}
 
+### ALTER SYSTEM
+
+You can also update the configuration file from a SQL session with the [`ALTER SYSTEM`](/docs/references/sessions/altersystem)
+statement, without editing the file by hand:
+
+```sql
+ALTER SYSTEM SET buffersize = '8G';
+```
+
+As with the config file, these changes only take effect after a restart.
+
 ## Logging
 
 CedarDB prints log messages to the standard error output stream (stderr, fd 2).

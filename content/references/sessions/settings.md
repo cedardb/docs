@@ -4,6 +4,8 @@ linkTitle: "Set/Show Setting"
 ---
 
 The `SHOW`, `SET`, and `RESET` statements allow you to inspect and change database and session settings.
+Changes made with `SET` are transient.
+To persist a configuration change across restarts, use [`ALTER SYSTEM`](/docs/references/sessions/altersystem) instead.
 
 Usage example:
 
