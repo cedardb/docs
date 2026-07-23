@@ -117,6 +117,7 @@ the [system table compatibility](../system_table) page.
 | Triggers               | No                |                                                                                         |
 | Prepared Statements    | Yes               |                                                                                         |
 | Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                      |
+| ALTER SYSTEM           | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                 |
 
 ## Data Manipulation
 
