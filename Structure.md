@@ -68,6 +68,7 @@ Organized into three subsections:
   programming language. The folder's `_index.md` covers the primary driver or
   adapter for that language. Additional pages in the same folder cover
   language-specific ORMs and frameworks (e.g., `javascript/drizzle.md`).
+- **`adbc/`** — ADBC database connectivity API (language-agnostic).
 - **`tools/`** — GUI clients, CLI tools, and observability integrations that are
   not tied to a specific programming language (DBeaver, DataGrip, psql, Grafana).
 
@@ -114,6 +115,8 @@ clients/
 ├── csharp/
 │   └── _index.md
 ├── r/
+│   └── _index.md
+├── adbc/                    # ADBC driver
 │   └── _index.md
 └── tools/                   # Not language-specific
     ├── psql.md
