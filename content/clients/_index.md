@@ -16,6 +16,10 @@ Programming languages:
 * [R](r)
 * [Rust](rust)
 
+Connectivity APIs:
+
+* [ADBC](adbc)
+
 Tools:
 
 * [DataGrip](tools/datagrip)
