@@ -1,5 +1,164 @@
 [
 	{
+		"version": "v2026-08-13",
+		"date": "2026-08-13",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER SYSTEM</tt> to write setting changes to a persistent config file."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER SERVER ... RENAME</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt> ALTER SERVER ... OWNER TO</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Allow comparisons with values that are not in the domain of the data type of filter predicates in table and index scans."
+			},
+			{
+				"type": "feat",
+				"note": "Support check constraints in <tt>pg_get_constraintdef</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Improve index selection for <tt>ORDER BY LIMIT</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>length(bit)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for Unicode <tt>IS NORMALIZED</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER TABLE ... ALTER COLUMN ... SET/DROP DEFAULT</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER TABLE ... ALTER COLUMN ... SET/DROP NOT NULL</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "CedarDB now logs client IPs for failed login attempts."
+			},
+			{
+				"type": "feat",
+				"note": "Add basic <tt>pg_sys_*</tt> tables."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>jsonb_build_array</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Consider role <tt>connection_limit</tt> enforcement."
+			},
+			{
+				"type": "perf",
+				"note": "<tt>ALTER TABLE DROP COLUMN</tt> no longer triggers a table rewrite."
+			},
+			{
+				"type": "perf",
+				"note": "Switch to SCRAM-SHA-256 authentication."
+			},
+			{
+				"type": "pg",
+				"note": "Support pg_depend and pg_shdepend."
+			},
+			{
+				"type": "pg",
+				"note": "Improve output of the <tt>pg_constraint</tt> system table."
+			},
+			{
+				"type": "pg",
+				"note": "Add columns for sequences and indexes to pg_attribute."
+			},
+			{
+				"type": "pg",
+				"note": "Switch to PostgreSQL compatible <tt>ssl_key_file</tt> and <tt>ssl_cert_file</tt> configuration parameters. Please consult our documentation on how to configure SSL."
+			},
+			{
+				"type": "pg",
+				"note": "Keep metadata of dropped columns for system table output."
+			},
+			{
+				"type": "pg",
+				"note": "Consistently use 1-based column ids in system tables and system information functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>DEALLOCATE</tt> a single prepared statement."
+			},
+			{
+				"type": "fix",
+				"note": "Ignore already deleted objects when checking for role dependencies which triggered an internal assert."
+			},
+			{
+				"type": "fix",
+				"note": "Add type promotion for <tt>sum/avg</tt> to unsigned types to avoid overflows."
+			},
+			{
+				"type": "fix",
+				"note": "Avoid unnecessary <tt>float8</tt> conversions on binary operations with mixed signedness operands."
+			},
+			{
+				"type": "fix",
+				"note": "Fix out-of-bounds values in window aggregates."
+			},
+			{
+				"type": "fix",
+				"note": "Use https as the default for all object storage connections."
+			},
+			{
+				"type": "fix",
+				"note": "Fix edge case reporting wrong null information on freshly inserted nullable range types."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent query failures caused by inconsistent expression types after query optimization."
+			},
+			{
+				"type": "fix",
+				"note": "Return correct results for VALUES lists that mix nullable and non-null volatile expressions."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent <tt>INSERT</tt> and <tt>UPSERT</tt> failures when source and target values differ only in nullability."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent valid outer-join queries from failing internal type validation."
+			},
+			{
+				"type": "fix",
+				"note": "Preserve correct nullability in recursive CTE queries."
+			},
+			{
+				"type": "fix",
+				"note": "Return correct results when expressions are simplified after join nullability changes."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent prepared statements with joins from failing during replanning."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent prepared UPDATE FROM queries with CASE-based join conditions from failing."
+			},
+			{
+				"type": "fix",
+				"note": "Fix handling check constraints that are constant null."
+			}
+		]
+	},
+	{
 		"version": "v2026-07-22",
 		"date": "2026-07-22",
 		"breaksdb": false,
