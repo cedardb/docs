@@ -70,6 +70,23 @@ ALTER SYSTEM SET buffersize = '8G';
 
 As with the config file, these changes only take effect after a restart.
 
+## SSL configuration
+
+CedarDB supports encrypted client/server connections by default.
+The standard configuration sets up SSL / TLS with a self-signed certificate.
+The key material is stored in the database directory as `server.key` and `server.crt`.
+
+```shell
+# Regular SSL mode works out of the box
+psql 'postgresql://postgres@localhost:5432/postgres?sslmode=require'
+```
+
+Certificate verification needs either a signature by a public CA, or connections need to specify `sslrootcert` explicitly:
+
+```shell
+psql 'postgresql://postgres@localhost:5432/postgres?sslmode=verify-ca&sslrootcert=/path/to/server.crt'
+```
+
 ## Logging
 
 CedarDB prints log messages to the standard error output stream (stderr, fd 2).
