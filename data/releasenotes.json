@@ -82,7 +82,7 @@
 			},
 			{
 				"type": "pg",
-				"note": "Switch to PostgreSQL compatible <tt>ssl_key_file</tt> and <tt>ssl_cert_file</tt> configuration parameters. Please consult our documentation on how to configure SSL."
+				"note": "Switch to PostgreSQL compatible <tt>ssl_key_file</tt> and <tt>ssl_cert_file</tt> configuration parameters. Please consult <a href=https://cedardb.com/docs/references/configuration/#ssl-configuration>our documentation</a> on how to configure SSL."
 			},
 			{
 				"type": "pg",
