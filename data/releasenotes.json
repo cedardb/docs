@@ -1,5 +1,112 @@
 [
 	{
+	    "version": "v2026-08-20",
+	    "date": "2026-08-20",
+	    "breaksdb": false,
+	    "notes": [
+		{
+		    "type": "feat",
+		    "note": "Support multiple new DDL functionality, e.g. drop cascade and more alter functionality that needs dependency tracking."
+		},
+		{
+		    "type": "feat",
+		    "note": "Allow creating indexes on tables created in the same transaction."
+		},
+		{
+		    "type": "feat",
+		    "note": "Allow constraints to reference later-listed columns in <tt>CREATE TABLE</tt> statements."
+		},
+		{
+		    "type": "pg",
+		    "note": "Add support for <tt>ALTER COLUMN ... ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY</tt>."
+		},
+		{
+		    "type": "pg",
+		    "note": "Enforce proper access control for system tables."
+		},
+		{
+		    "type": "pg",
+		    "note": "Properly distinguish between still-default permissions and permissions that match default values again in acl output."
+		},
+		{
+		    "type": "pg",
+		    "note": "Add support for <tt>acldefault</tt> system information function."
+		},
+		{
+		    "type": "pg",
+		    "note": "Fix output of <tt>pg_has_role</tt> for non-<tt>MEMBER</tt> privilege types."
+		},
+		{
+		    "type": "pg",
+		    "note": "Support <tt>aclitem</tt> as a dedicated output type."
+		},
+		{
+		    "type": "pg",
+		    "note": "Support postgres-compatible function body syntax starting with <tt>SELECT</tt>. Existing functions are converted automatically."
+		},
+		{
+		    "type": "pg",
+		    "note": "System tables now show the correct information if typmod is set for a type."
+		},
+		{
+		    "type": "pg",
+		    "note": "System tables now show the correct type names for all types."
+		},
+		{
+		    "type": "pg",
+		    "note": "System tables now show the correct collations for all databases."
+		},
+		{
+		    "type": "pg",
+		    "note": "The <tt>sql_sizings</tt> information schema table now shows the correct limits for identifier lengths."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fixed a crash when re-planning prepared statements."
+		},
+		{
+		    "type": "fix",
+		    "note": "Preserve user-provided names for foreign key constraints."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fixed a race condition during recreation of blocks that already had a failed attempt."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix several assert triggers when re-optimizing prepared statements."
+		},
+		{
+		    "type": "fix",
+		    "note": "Correctly parse negative decimals numbers in Parquet."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fixed a rare crash when a transaction that deleted rows it had inserted was rolled back, which could leave the database unable to restart."
+		},
+		{
+		    "type": "fix",
+		    "note": "Improve stability of late materialization on TEMP tables"
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix asserts triggered by indexes on nullable range types."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix an assertion triggering when changing the nullability of a range-type column which also has an index."
+		},
+		{
+		    "type": "fix",
+		    "note": "Improve logging around WAL file size due to long running transactions."
+		},
+		{
+		    "type": "fix",
+		    "note": "Fix edge case where <tt>ALTER TABLE ADD COLUMN</tt> on a large table could lose existing values."
+		}
+	    ]
+	},
+	{
 		"version": "v2026-08-13",
 		"date": "2026-08-13",
 		"breaksdb": false,
