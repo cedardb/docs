@@ -7,12 +7,15 @@ weight: 70
 Create function allows creating user-defined functions.
 Functions can help you to encapsulate common logic that can be reused.
 
+The body of a SQL function is a `select` statement of the form `select <expression>`, matching PostgreSQL's syntax for SQL-language functions.
+SQL functions must return the result of one scalar expression and cannot reference tables or subqueries.
+
 ```sql
 create function times_two(x int) returns int language sql as
-    'x * 2';
+    'select x * 2';
     
 create function cowsay(t text) returns text language sql as $$
-  ' ' || repeat('_', length(t) + 2) || E'\n' ||
+  select ' ' || repeat('_', length(t) + 2) || E'\n' ||
   '< ' || t || E' >\n' ||
   ' ' || repeat('-', length(t) + 2) || E'\n' ||
  E'        \\   ^__^\n' ||
