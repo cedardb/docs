@@ -1,0 +1,38 @@
+<div class="banner" id="banner">
+  <a href="https://demo.cedardb.cloud" class="banner__link">CedarDB Cloud</a> coming soon! 
+  <a class="js-modal-trigger button hx:whitespace-nowrap hx:px-2" data-target="modal-waitlist" href="#">Join our waitlist →</a>
+  <button type="button" class="banner__close" id="banner-close" aria-label="Dismiss">&times;</button>
+</div>
+<script>
+  (function () {
+    var banner = document.getElementById("banner");
+    if (!banner) return;
+
+    if (sessionStorage.getItem("waitlist-banner-closed") === "true") {
+      banner.classList.add("hide");
+      return;
+    }
+
+    document.getElementById("banner-close").addEventListener("click", function () {
+      banner.classList.add("hide");
+      sessionStorage.setItem("waitlist-banner-closed", "true");
+    });
+  })();
+</script>
+<div id="modal-waitlist" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card hx:p-1">
+        <div class="modal-card-body hx:p-6 hx:has-background-color-secondary hx:is-rounded-small">
+            <div class="hx:title hx:has-text-left hx:mb-6" style="font-size: 2rem; color: white; margin-bottom: 10px;">Join our Waitlist</div>
+            <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
+            <script>
+              hbspt.forms.create({
+                region: "eu1",
+                portalId: "144471709",
+                formId: "a9d14ba0-afcf-40c4-8a1c-4543a9d7c9fa",
+              });
+            </script>
+            <button class="hx:delete hx:is-right modal-close-button" aria-label="close"></button>
+        </div>
+    </div>
+</div>
