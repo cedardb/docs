@@ -113,6 +113,46 @@ kbd,
     max-width: var(--cedar-max);
 }
 
+.banner {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem 2.5rem;
+    background: #fb773e;
+    color: #192134;
+}
+
+.banner__cta {
+    white-space: nowrap;
+    padding: 0 0.5rem;
+    color: #ffffff;
+}
+
+.banner.hide {
+    display: none;
+}
+
+.banner__link {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+}
+
+.banner__close {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background: none;
+    border: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 1.25rem;
+    color: inherit;
+    cursor: pointer;
+}
+
 .nav-text-link {
     border-radius: 0;
 }
