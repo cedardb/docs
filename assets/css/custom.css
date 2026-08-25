@@ -119,6 +119,14 @@ kbd,
     text-align: center;
     font-size: 1rem;
     padding: 0.5rem 2.5rem;
+    background: #fb773e;
+    color: #192134;
+}
+
+.banner__cta {
+    white-space: nowrap;
+    padding: 0 0.5rem;
+    color: #ffffff;
 }
 
 .banner.hide {
