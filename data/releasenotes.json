@@ -1,5 +1,116 @@
 [
 	{
+		"version": "v2026-09-03",
+		"date": "2026-09-03",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add missing <tt>system_stats</tt> tables: <tt>pg_sys_os_info</tt>, <tt>pg_sys_cpu_info</tt>, <tt>pg_sys_process_info</tt>, <tt>pg_sys_cpu_memory_by_process</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add Unicode <tt>normalize()</tt> function."
+			},
+			{
+				"type": "feat",
+				"note": "Experimental backups now include the config and certificates."
+			},
+			{
+				"type": "perf",
+				"note": "Improve network utilization of TLS connections."
+			},
+			{
+				"type": "pg",
+				"note": "Fix <tt>SHOW setting-name</tt> casing."
+			},
+			{
+				"type": "pg",
+				"note": "Fix <tt>SET TIME ZONE</tt> sign for bare numeric offsets to match PostgreSQL instead of POSIX."
+			},
+			{
+				"type": "pg",
+				"note": "Catalog columns that PostgreSQL types as <tt>\"char\"</tt> are no longer reported as <tt>character</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Catalog name columns such as <tt>relname</tt>, <tt>typname</tt> and <tt>attname</tt> are now reported as <tt>name</tt> instead of <tt>text</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_init_privs.initprivs</tt> is now reported as <tt>aclitem[]</tt>, and <tt>pg_proc.proargmodes</tt> and <tt>pg_statistic_ext.stxkind</tt> as <tt>\"char\"[]</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "A <tt>varchar</tt> without a length limit is now reported as <tt>character varying</tt> instead of <tt>text</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>text</tt>, <tt>name</tt> and <tt>aclitem</tt> now correctly reject a type modifier, i.e., you can no longer specify <tt>text(20)</tt>. Use <tt>varchar(20)</tt> instead."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>varchar(0)</tt> is now correctly rejected."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>upper</tt>, <tt>lower</tt>, <tt>initcap</tt>, <tt>md5</tt>, <tt>reverse</tt>, <tt>quote_ident</tt> and <tt>trim</tt> now return <tt>text</tt> instead of <tt>varchar</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>format_type()</tt> now reports the same type names as PostgreSQL, including array element types and length or precision modifiers."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for <tt>*_send</tt> io functions for types."
+			},
+			{
+				"type": "pg",
+				"note": "Report <tt>*_send</tt> and <tt>*_recv</tt> functions in pg_type, fixing issues for some clients."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a server crash when rolling back a transaction that wrote a single write-ahead log record larger 256 MB."
+			},
+			{
+				"type": "fix",
+				"note": "Fix lost writes when writing into leaf pages with no data blocks."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a segfault triggered by copying data from disk into a table with certain forms of check constraints enabled on it."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a silent schema corruption when recovering a recent <tt>CREATE DATABASE</tt> after a crash."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a segfault when providing an invalid delimiter in a <tt>COPY FROM</tt> statement via the legacy <tt>delimiters</tt> option."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a scan on tables with deleted rows that could return rows not matching the query's filter."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash on restart if an index was created on a later added column."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>md5</tt> no longer inherits the length limit of its argument, which could declare a column too short for the hash it held."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB no longer accepts (unimplemented) <tt>timetz</tt> columns and silently drops the <tt>with timezone</tt> modifier."
+			},
+			{
+				"type": "fix",
+				"note": "Fix torn PostgreSQL column messages when outputting array types in binary mode."
+			}
+		]
+	},
+	{
 	    "version": "v2026-08-20",
 	    "date": "2026-08-20",
 	    "breaksdb": false,
