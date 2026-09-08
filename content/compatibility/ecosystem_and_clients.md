@@ -57,3 +57,9 @@ CedarDB supports vector similarity search with the same interface and behavior a
 extension [pgvector](https://github.com/pgvector/pgvector).
 A more detailed description can be found in
 our [vector functionality documentation](/docs/references/advanced/pgvector/).
+
+### sytem_stats
+
+CedarDB features tables compatible to the PostgreSQL extension
+[system_stats](https://github.com/EnterpriseDB/system_stats).
+A more detailed description can be found in our [system_stats documentation](/docs/references/functions/system_stats)

@@ -11,6 +11,7 @@ Functions are usually type specific, but are often overloaded to work with diffe
 * [Aggregation functions](./aggregation)
 * System functions
   * [PostgreSQL support (`pg_`)](./system)
+  * [System_stats extension (`pg_sys_`)](./system_stats)
 * Type specific functions
   * [Bit string functions](bitstring)
   * [JSON functions](json)
