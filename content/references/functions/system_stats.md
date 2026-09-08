@@ -30,7 +30,7 @@ The `pg_sys_` tables can be queried by superusers and users with the `pg_read_al
 
 `pg_sys_cpu_info`
 : Information on the CPU. Fields `processor_type`, `logical_processor`, and `cpu_type`
-are stubbed for compatiblity and always return `NULL`.
+are stubbed for compatibility and always return `NULL`.
 
 `pg_sys_cpu_usage_info`
 : Information on CPU usage. Values are a percentage of time spent by CPUs for all operations, divided by type of CPU operation.

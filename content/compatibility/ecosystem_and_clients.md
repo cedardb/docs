@@ -58,7 +58,7 @@ extension [pgvector](https://github.com/pgvector/pgvector).
 A more detailed description can be found in
 our [vector functionality documentation](/docs/references/advanced/pgvector/).
 
-### sytem_stats
+### system_stats
 
 CedarDB features tables compatible to the PostgreSQL extension
 [system_stats](https://github.com/EnterpriseDB/system_stats).

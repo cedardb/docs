@@ -56,7 +56,9 @@
 (?i)Prisma
 (?i)Tokio
 (?i)glibc
+(?i)RPostgres
 (?i)pgvector
+(?i)system_stats
 
 # Abbreviations
 (?i)CMU
