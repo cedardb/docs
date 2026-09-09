@@ -754,8 +754,8 @@ kbd,
 }
 
 .modal-card-body {
-    background-color: var(--cedar-terminal-bg) !important;
-    color: var(--cedar-terminal-fg);
+    background-color: var(--cedar-panel-strong) !important;
+    color: var(--cedar-ink);
     border: 1px solid var(--cedar-line);
     flex-grow: 1;
     flex-shrink: 1;
