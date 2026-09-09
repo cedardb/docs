@@ -23,23 +23,23 @@ range of PostgreSQL connectors for end-user tools like Grafana and programming l
 
 ### Applications
 
-| **Application** | **Version** | **Support State** | **Details**                                    |
-|-----------------|-------------|-------------------|------------------------------------------------|
+| **Application** | **Version** | **Support State** | **Details**                                                |
+| --------------- | ----------- | ----------------- | ---------------------------------------------------------- |
 | DataGrip        | 2024.2.2    | Partial           | [Documentation]({{< relref "/clients/tools/datagrip/" >}}) |
 | DBeaver         | 24.2.2      | Partial           | [Documentation]({{< relref "/clients/tools/dbeaver/" >}})  |
 | Grafana         | 10.4.2      | Partial           | [Documentation]({{< relref "/clients/tools/grafana/" >}})  |
 
 ### Programming Language Libraries
 
-| **Language** | **Framework**  | **Version** | **Support State** | **Details**                                        |
-|--------------|----------------|-------------|-------------------|----------------------------------------------------|
+| **Language** | **Framework**  | **Version** | **Support State** | **Details**                                                    |
+| ------------ | -------------- | ----------- | ----------------- | -------------------------------------------------------------- |
 | C#           | Npgsql         | 8.0.4       | Full              | [Documentation]({{< relref "/clients/csharp/" >}})             |
 | C++          | libpqxx        | 7.9.1       | Full              | [Documentation]({{< relref "/clients/cpp/" >}})                |
 | Java         | JDBC           | 42.7.4      | Full              | [Documentation]({{< relref "/clients/java/" >}})               |
 | JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation]({{< relref "/clients/javascript/" >}})         |
 |              | drizzle-orm    | 0.45.1      | Partial           | [Documentation]({{< relref "/clients/javascript/drizzle/" >}}) |
 |              | prisma-orm     | 7.7.0       | Partial           | [Documentation]({{< relref "/clients/javascript/prisma/" >}})  |
-| Python       | psycopg2       | 2.9.10      | Full              |                                                    |
+| Python       | psycopg2       | 2.9.10      | Full              |                                                                |
 |              | psycopg        | 3.2.3       | Full              | [Documentation]({{< relref "/clients/python/" >}})             |
 | R            | RPostgres      | 1.4.7       | Full              | [Documentation]({{< relref "/clients/r/" >}})                  |
 | Rust         | tokio-postgres | 0.7.12      | Full              | [Documentation]({{< relref "/clients/rust/" >}})               |

@@ -11,7 +11,7 @@ Information about intermediate status of features and minor features will be ava
 We categorize the status of the features on this page as planned, in progress, and fully available:
 
 | **State**          |        **Icon**        |
-|--------------------|:----------------------:|
+| ------------------ | :--------------------: |
 | Planned            |  {{< iconplanned >}}   |
 | Under Construction | {{< iconinprogress >}} |
 | Available          |    {{< icondone >}}    |
@@ -37,31 +37,31 @@ CedarDB.
 
 ### Data Model & Domain-Specific Features
 
-| **Feature**                  |       **State**        | **Details**                                           |
-|------------------------------|:----------------------:|-------------------------------------------------------|
+| **Feature**                  |       **State**        | **Details**                                                       |
+| ---------------------------- | :--------------------: | ----------------------------------------------------------------- |
 | AsOf joins                   |    {{< icondone >}}    | [Documentation]({{< relref "/references/advanced/asof_join/" >}}) |
-| Full-text search             |  {{< iconplanned >}}   |                                                       |
-| Enhanced graph query support |  {{< iconplanned >}}   |                                                       |
-| Range types                  | {{< iconinprogress >}} |                                                       |
+| Full-text search             |  {{< iconplanned >}}   |                                                                   |
+| Enhanced graph query support |  {{< iconplanned >}}   |                                                                   |
+| Range types                  | {{< iconinprogress >}} |                                                                   |
 | Schema evolution             | {{< iconinprogress >}} | [Documentation]({{< relref "/references/objects/" >}})            |
 | Vector support               | {{< iconinprogress >}} | [Documentation]({{< relref "/references/advanced/pgvector/" >}})  |
 
 ### Data Formats
 
-| **Feature**           |       **State**        | **Details**                                                |
-|-----------------------|:----------------------:|------------------------------------------------------------|
+| **Feature**           |       **State**        | **Details**                                                            |
+| --------------------- | :--------------------: | ---------------------------------------------------------------------- |
 | Parquet reader        |    {{< icondone >}}    | [Documentation]({{< relref "/references/advanced/parquet/" >}})        |
-| Parquet writer        |  {{< iconplanned >}}   |                                                            |
-| Iceberg support       |  {{< iconplanned >}}   |                                                            |
+| Parquet writer        |  {{< iconplanned >}}   |                                                                        |
+| Iceberg support       |  {{< iconplanned >}}   |                                                                        |
 | pg_dump compatibility | {{< iconinprogress >}} | [Documentation]({{< relref "/cookbook/importing_from_postgresql/" >}}) |
 
 ### Connectivity
 
-| **Feature**                    |       **State**        | **Details**                                        |
-|--------------------------------|:----------------------:|----------------------------------------------------|
+| **Feature**                    |       **State**        | **Details**                                                    |
+| ------------------------------ | :--------------------: | -------------------------------------------------------------- |
 | PostgreSQL system tables       |    {{< icondone >}}    | [Documentation]({{< relref "/compatibility/system_table/" >}}) |
 | information_schema support     |    {{< icondone >}}    | [Documentation]({{< relref "/compatibility/system_table/" >}}) |
-| PostgreSQL Logical replication | {{< iconinprogress >}} |                                                    |
+| PostgreSQL Logical replication | {{< iconinprogress >}} |                                                                |
 | Support for more CDC tools     | {{< iconinprogress >}} | [Documentation]({{< relref "/cookbook/aurora_debezium/" >}})   |
 
 ## Enterprise Features
@@ -74,7 +74,7 @@ production use of CedarDB. These features may not be available to all CedarDB us
 ### Operations
 
 | **Feature**                 |      **State**      | **Details** |
-|-----------------------------|:-------------------:|-------------|
+| --------------------------- | :-----------------: | ----------- |
 | Read replication to CedarDB | {{< iconplanned >}} |             |
 | Automatic failover          | {{< iconplanned >}} |             |
 | Automatic backups           | {{< iconplanned >}} |             |
@@ -85,7 +85,7 @@ production use of CedarDB. These features may not be available to all CedarDB us
 ### Multi Tenancy
 
 | **Feature**                            |       **State**        | **Details** |
-|----------------------------------------|:----------------------:|-------------|
+| -------------------------------------- | :--------------------: | ----------- |
 | Resource limits for individual tenants |  {{< iconplanned >}}   |             |
 | Extended role & grant management       | {{< iconinprogress >}} |             |
 | Fair scheduling over multiple tenants  |  {{< iconplanned >}}   |             |
