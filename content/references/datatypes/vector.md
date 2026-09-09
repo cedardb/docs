@@ -32,8 +32,8 @@ select * from example;
 
 This creates a basic [word embedding](https://en.wikipedia.org/wiki/Word_embedding), where you can quickly retrieve the
 embedding vector for a specific word.
-Vectors can be converted to and from [arrays](../array), but provide optimized vector search operations.
-You can find details about the operations on vectors in the [advanced section](/docs/references/advanced/pgvector).
+Vectors can be converted to and from [arrays]({{< relref "/references/datatypes/array" >}}), but provide optimized vector search operations.
+You can find details about the operations on vectors in the [advanced section]({{< relref "/references/advanced/pgvector" >}}).
 
 CedarDB also supports vectors with different dimensions in the same column as `vector` (without the dimension parameter
 in `vector(3)`).

@@ -99,7 +99,7 @@ select i + i from integers;
 ERROR:  numeric overflow
 ```
 
-Wrapping the operation in a [`try()`](/docs/references/expressions/try/) produces a `null` value for overflows:
+Wrapping the operation in a [`try()`]({{< relref "/references/expressions/try/" >}}) produces a `null` value for overflows:
 
 ```sql
 select try(i + i) from numerics;
@@ -122,4 +122,4 @@ Since all operations on numerics are bounds-checked, these values cannot occur d
 However, PostgreSQL still allows entering them directly.
 
 CedarDB forbids entering these values as numeric data types.
-See [Float](/docs/references/datatypes/float) for data types supporting those special values.
+See [Float]({{< relref "/references/datatypes/float" >}}) for data types supporting those special values.

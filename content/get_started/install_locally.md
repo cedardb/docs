@@ -79,7 +79,7 @@ To see all available flags and options, run:
 ```
 
 {{< callout type="info" >}}
-If you have obtained an enterprise license, refer to the [licensing page](../../licensing) for a step-by-step guide on how to activate it.
+If you have obtained an enterprise license, refer to the [licensing page]({{< relref "/licensing" >}}) for a step-by-step guide on how to activate it.
 {{< /callout >}}
 
 ## Run interactively
@@ -155,4 +155,4 @@ The REPL supports:
 \?                       -- View available commands
 ```
 
-For more details, see the [SQL Reference](/docs/references/).
+For more details, see the [SQL Reference]({{< relref "/references/" >}}).

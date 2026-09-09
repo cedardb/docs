@@ -24,7 +24,7 @@ create table sorting.orders(...);
 ## Using Schemas
 
 You can always refer to tables with their fully schema-qualified name.
-However, if you only operate in certain schemas, you can explicitly [set the `search_path` setting](/docs/references/sessions/settings):
+However, if you only operate in certain schemas, you can explicitly [set the `search_path` setting]({{< relref "/references/sessions/settings" >}}):
 
 ```sql
 set search_path = 'sales';

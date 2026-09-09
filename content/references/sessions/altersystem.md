@@ -4,7 +4,7 @@ linkTitle: "Alter System"
 ---
 
 `ALTER SYSTEM` changes a server-wide configuration parameter and persists the new value across restarts.
-Instead of editing the [configuration file](/docs/references/configuration) by hand, you can write the value directly
+Instead of editing the [configuration file]({{< relref "/references/configuration" >}}) by hand, you can write the value directly
 from a SQL session, and CedarDB stores it in the configuration file for you.
 Changes take effect the next time CedarDB starts.
 
@@ -15,7 +15,7 @@ ALTER SYSTEM SET buffersize = '8G';
 ```
 
 The new value is only written to CedarDB's configuration file and applies after the next restart.
-To inspect the current value of a setting, use [`SHOW`](/docs/references/sessions/settings).
+To inspect the current value of a setting, use [`SHOW`]({{< relref "/references/sessions/settings" >}}).
 
 To restore a setting to its default value and delete the explicitly set value from configuration file, use `RESET`:
 
@@ -30,7 +30,7 @@ Like `ALTER SYSTEM SET`, this takes effect after the next restart.
 `ALTER SYSTEM` only changes the persisted value, but does not change the behavior of the running server.
 CedarDB reads its configuration once at startup, so a restart is required for any `ALTER SYSTEM` change to become active.
 
-To change a setting for your current session without persisting it, use [`SET`](/docs/references/sessions/settings) instead.
+To change a setting for your current session without persisting it, use [`SET`]({{< relref "/references/sessions/settings" >}}) instead.
 `SET` applies immediately but is discarded when the session ends, whereas `ALTER SYSTEM` persists across restarts
 but does not affect running sessions.
 
@@ -40,5 +40,5 @@ Only superusers can run `ALTER SYSTEM`, because it changes server-wide configura
 
 ## PostgreSQL Differences
 
-- `ALTER SYSTEM` writes to CedarDB's [configuration file](/docs/references/configuration) (by default `~/.cedardb/config`).
+- `ALTER SYSTEM` writes to CedarDB's [configuration file]({{< relref "/references/configuration" >}}) (by default `~/.cedardb/config`).
 - All changes require a restart. CedarDB does not reload configuration live.

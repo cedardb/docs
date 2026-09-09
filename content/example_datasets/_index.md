@@ -10,8 +10,8 @@ Whether you're a developer looking to test CedarDB's performance with large data
 
 Example datasets:
 
-* [CH-benCHmark](./chbenchmark)
-* [GloVe: Global Vectors for Word Representation](./glove)
-* [Handelsregister](./handelsregister)
-* [Join Order Benchmark](./job)
-* [NASDAQ Level 3 Order Data](./nasdaq)
+* [CH-benCHmark]({{< relref "/example_datasets/chbenchmark" >}})
+* [GloVe: Global Vectors for Word Representation]({{< relref "/example_datasets/glove" >}})
+* [Handelsregister]({{< relref "/example_datasets/handelsregister" >}})
+* [Join Order Benchmark]({{< relref "/example_datasets/job" >}})
+* [NASDAQ Level 3 Order Data]({{< relref "/example_datasets/nasdaq" >}})

@@ -6,7 +6,7 @@ weight: 92
 CedarDB is compatible with the PostgreSQL protocol version 3 and aims to support many PostgreSQL-compatible tools and
 connectors out of the box.
 Since CedarDB does not share a codebase with PostgreSQL, and we are still in the process of achieving
-full [system table compatibility](../system_table), not all functionality will work out of the box.
+full [system table compatibility]({{< relref "/compatibility/system_table" >}}), not all functionality will work out of the box.
 This page contains a list of clients, libraries, and other ecosystem components that we have verified to work with
 CedarDB.
 This list is by no means exhaustive, and many other tools should work as well.
@@ -18,31 +18,31 @@ on [Slack](https://bonsai.cedardb.com/slack) or [add it to the docs](https://git
 
 ## Supported Clients and Libraries
 
-Through both [SQL dialect](../sql_features) and [system table](../system_table) compatibility, CedarDB works with a wide
+Through both [SQL dialect]({{< relref "/compatibility/sql_features" >}}) and [system table]({{< relref "/compatibility/system_table" >}}) compatibility, CedarDB works with a wide
 range of PostgreSQL connectors for end-user tools like Grafana and programming language drivers like JDBC.
 
 ### Applications
 
 | **Application** | **Version** | **Support State** | **Details**                                    |
 |-----------------|-------------|-------------------|------------------------------------------------|
-| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/tools/datagrip/) |
-| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/tools/dbeaver/)  |
-| Grafana         | 10.4.2      | Partial           | [Documentation](/docs/clients/tools/grafana/)  |
+| DataGrip        | 2024.2.2    | Partial           | [Documentation]({{< relref "/clients/tools/datagrip/" >}}) |
+| DBeaver         | 24.2.2      | Partial           | [Documentation]({{< relref "/clients/tools/dbeaver/" >}})  |
+| Grafana         | 10.4.2      | Partial           | [Documentation]({{< relref "/clients/tools/grafana/" >}})  |
 
 ### Programming Language Libraries
 
 | **Language** | **Framework**  | **Version** | **Support State** | **Details**                                        |
 |--------------|----------------|-------------|-------------------|----------------------------------------------------|
-| C#           | Npgsql         | 8.0.4       | Full              | [Documentation](/docs/clients/csharp/)             |
-| C++          | libpqxx        | 7.9.1       | Full              | [Documentation](/docs/clients/cpp/)                |
-| Java         | JDBC           | 42.7.4      | Full              | [Documentation](/docs/clients/java/)               |
-| JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation](/docs/clients/javascript/)         |
-|              | drizzle-orm    | 0.45.1      | Partial           | [Documentation](/docs/clients/javascript/drizzle/) |
-|              | prisma-orm     | 7.7.0       | Partial           | [Documentation](/docs/clients/javascript/prisma/)  |
+| C#           | Npgsql         | 8.0.4       | Full              | [Documentation]({{< relref "/clients/csharp/" >}})             |
+| C++          | libpqxx        | 7.9.1       | Full              | [Documentation]({{< relref "/clients/cpp/" >}})                |
+| Java         | JDBC           | 42.7.4      | Full              | [Documentation]({{< relref "/clients/java/" >}})               |
+| JavaScript   | node-postgres  | 8.13.0      | Full              | [Documentation]({{< relref "/clients/javascript/" >}})         |
+|              | drizzle-orm    | 0.45.1      | Partial           | [Documentation]({{< relref "/clients/javascript/drizzle/" >}}) |
+|              | prisma-orm     | 7.7.0       | Partial           | [Documentation]({{< relref "/clients/javascript/prisma/" >}})  |
 | Python       | psycopg2       | 2.9.10      | Full              |                                                    |
-|              | psycopg        | 3.2.3       | Full              | [Documentation](/docs/clients/python/)             |
-| R            | RPostgres      | 1.4.7       | Full              | [Documentation](/docs/clients/r/)                  |
-| Rust         | tokio-postgres | 0.7.12      | Full              | [Documentation](/docs/clients/rust/)               |
+|              | psycopg        | 3.2.3       | Full              | [Documentation]({{< relref "/clients/python/" >}})             |
+| R            | RPostgres      | 1.4.7       | Full              | [Documentation]({{< relref "/clients/r/" >}})                  |
+| Rust         | tokio-postgres | 0.7.12      | Full              | [Documentation]({{< relref "/clients/rust/" >}})               |
 
 ## Extensions
 
@@ -56,10 +56,10 @@ integrate the functionality of the most popular extensions into CedarDB with lan
 CedarDB supports vector similarity search with the same interface and behavior as the PosgreSQL
 extension [pgvector](https://github.com/pgvector/pgvector).
 A more detailed description can be found in
-our [vector functionality documentation](/docs/references/advanced/pgvector/).
+our [vector functionality documentation]({{< relref "/references/advanced/pgvector/" >}}).
 
 ### system_stats
 
 CedarDB features tables compatible to the PostgreSQL extension
 [system_stats](https://github.com/EnterpriseDB/system_stats).
-A more detailed description can be found in our [system_stats documentation](/docs/references/functions/system_stats)
+A more detailed description can be found in our [system_stats documentation]({{< relref "/references/functions/system_stats" >}})

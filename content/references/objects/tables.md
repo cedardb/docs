@@ -26,7 +26,7 @@ After executing this statement, you can find the created table in the `pg_tables
 Column definitions are specified as: `name type constraint`.
 Column names can be any identifier; however, for arbitrary character sequences, you need to enclose them in double
 quotes: `"complex name"`.
-You can find a list of supported types in the [data types reference](/docs/references/datatypes).
+You can find a list of supported types in the [data types reference]({{< relref "/references/datatypes" >}}).
 
 CedarDB supports the following column-level constraints:
 
@@ -109,14 +109,14 @@ CREATE TABLE observations (
 ```
 
 Create a table that stores all compressed data on a remote server previously created with name `remote_storage`
-(see [CREATE SERVER](/docs/references/advanced/createserver) for more information):
+(see [CREATE SERVER]({{< relref "/references/advanced/createserver" >}}) for more information):
 
 ```sql
 CREATE TABLE remote_species (...) WITH (server = remote_storage);
 ```
 
 Set the compression method used for cold on-disk data, in addition to CedarDB's lightweight
-encoding (see the `cedardb_compression_info` [system table](/docs/compatibility/system_table) for per-column
+encoding (see the `cedardb_compression_info` [system table]({{< relref "/compatibility/system_table" >}}) for per-column
 compression statistics). Supported values are `zstd` (the default) and `none`:
 
 ```sql
@@ -201,7 +201,7 @@ The data types and names of the created columns can be surprising for queries wi
 E.g., CedarDB promotes the precision of numeric types to avoid overflows,
 or infers that columns are guaranteed not-null from query predicates.
 For more control over the schema, consider using the regular
-[CREATE TABLE](/docs/references/objects/tables) statement.
+[CREATE TABLE]({{< relref "/references/objects/tables" >}}) statement.
 
 ## DROP TABLE
 

@@ -33,7 +33,7 @@ Afterward, you have an open connection to your database, where you can enter any
 ## Creating a database
 
 psql is a handy too for one-time setup tasks like to create your database, set up user accounts, and to create schemas.
-See the [quickstart guide](/docs/get_started/quickstart).
+See the [quickstart guide]({{< relref "/get_started/quickstart" >}}).
 Nevertheless, we recommend to keep such configuration in a separate `.sql` file in your version control system.
 In interactive mode, you can execute all SQL commands from such a file with the `\i` command:
 
@@ -54,8 +54,8 @@ create table example2(i int);
 EOF
 ```
 
-psql is also a good tool to copy data [from CSV](/docs/cookbook/working_with_csv), or
-from [PostgreSQL dumps](/docs/cookbook/importing_from_postgresql).
+psql is also a good tool to copy data [from CSV]({{< relref "/cookbook/working_with_csv" >}}), or
+from [PostgreSQL dumps]({{< relref "/cookbook/importing_from_postgresql" >}}).
 
 ## Inspecting a database
 

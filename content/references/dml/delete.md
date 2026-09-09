@@ -14,11 +14,11 @@ where status = 'canceled';
 
 We recommend always specifying a `where` clause for delete statements.
 If you want to delete all rows of a table, consider using
-[`truncate`](../truncate) instead.
+[`truncate`]({{< relref "/references/dml/truncate" >}}) instead.
 
 ## Returning Deleted Rows
 
-Delete queries are similar in their expressiveness to [read-only select queries](/docs/references/queries).
+Delete queries are similar in their expressiveness to [read-only select queries]({{< relref "/references/queries" >}}).
 You can use arbitrary CTEs in a `with` clause, and you can specify additional tables to be joined in a `using` clause.
 This can be combined with a `returning` clause to get data out of the database *exactly once*, while simultaneously
 enriching it with related data.

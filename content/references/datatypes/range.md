@@ -7,12 +7,12 @@ The range types are a convenient way to define a range of values between two bou
 
 CedarDB supports ranges with the following bound types:
 
-- `int4range` (range of [`int`](../integer.md))
-- `int8range` (range of [`bigint`](../integer.md))
-- `numrange` (range of [`bignumeric(38,6)`](../numeric.md))
-- `daterange` (range of [`date`](../date.md))
-- `tsrange` (range of [`timestamp`](../timestamp.md) without time zone)
-- `tstzrange` (range of [`timestamptz`](../timestamp.md))
+- `int4range` (range of [`int`]({{< relref "/references/datatypes/integer.md" >}}))
+- `int8range` (range of [`bigint`]({{< relref "/references/datatypes/integer.md" >}}))
+- `numrange` (range of [`bignumeric(38,6)`]({{< relref "/references/datatypes/numeric.md" >}}))
+- `daterange` (range of [`date`]({{< relref "/references/datatypes/date.md" >}}))
+- `tsrange` (range of [`timestamp`]({{< relref "/references/datatypes/timestamp.md" >}}) without time zone)
+- `tstzrange` (range of [`timestamptz`]({{< relref "/references/datatypes/timestamp.md" >}}))
 
 ## Usage example
 
@@ -97,6 +97,6 @@ Appletree | [2,13) -- The upper bound has been canonicalized
 In PostgreSQL, canonicalization is only applied to `int4range`, `int8range` and `daterange`.
 In CedarDB, this is possible for all range types.
 
-CedarDB restricts the precision and scale of [`numerics`](../numeric.md) for performance reason.
+CedarDB restricts the precision and scale of [`numerics`]({{< relref "/references/datatypes/numeric.md" >}}) for performance reason.
 As the `numeric` datatype is used for the bound values of `numranges`, the restrictions apply here as well.
 In this case, CedarDB stores the bounds as `bignumeric(38,6)`.

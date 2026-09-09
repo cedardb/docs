@@ -63,7 +63,7 @@ docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test --name cedardb_test cedardb
 
 ### Connect via psql and create a Grafana user
 
-Connect to CedardB via [psql](/docs/clients/tools/psql):
+Connect to CedardB via [psql]({{< relref "/clients/tools/psql" >}}):
 
 ```shell
 psql -h localhost -U postgres
@@ -149,4 +149,4 @@ to get a more responsive Grafana.
 
 ## Next Steps
 
-Use more sophisticated data (maybe from on of our [sample datasets](/docs/example_datasets/)?) or take a look at the [Grafana docs](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/) to see which kinds of visualization are possible.
+Use more sophisticated data (maybe from on of our [sample datasets]({{< relref "/example_datasets/" >}})?) or take a look at the [Grafana docs](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/) to see which kinds of visualization are possible.

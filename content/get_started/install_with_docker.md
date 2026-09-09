@@ -115,7 +115,7 @@ Files in `/docker-entrypoint-initdb.d/` are executed or sourced during container
 
 #### Example: Creating an additional user at DB initialization
 
-Initialization files let you create additional [users and databases](/docs/references/objects/roles) during first-time setup. Provide usernames and passwords via environment variables or Docker secrets.
+Initialization files let you create additional [users and databases]({{< relref "/references/objects/roles" >}}) during first-time setup. Provide usernames and passwords via environment variables or Docker secrets.
 
 ```shell {filename="users/create-user.sh"}
 #!/bin/bash
@@ -216,5 +216,5 @@ postgres= select * from foo;
 ```
 
 {{< callout type="info" >}}
-If you have obtained an enterprise license, refer to the [licensing page](../../licensing) for a step-by-step guide on how to activate it.
+If you have obtained an enterprise license, refer to the [licensing page]({{< relref "/licensing" >}}) for a step-by-step guide on how to activate it.
 {{< /callout >}}

@@ -42,7 +42,7 @@ arbitrarily among them. However, multiple `arg_max` aggregates over the same `ma
 : Returns the `x` value for the minimum `min` value. The same caveats as for `arg_max` apply.
 
 `array_agg(x)`
-: Collect all incoming values (including `null`) in an [array](/docs/references/datatypes/array).
+: Collect all incoming values (including `null`) in an [array]({{< relref "/references/datatypes/array" >}}).
 The order in the array is arbitrary, except when explicitly specified as `array_agg(x order by x)`.
 
 `avg(x)`
@@ -74,7 +74,7 @@ The order in the array is arbitrary, except when explicitly specified as `array_
 
 `max(x)`
 : Determine the maximum value. For equivalent maximum values (e.g., with
-[case-insensitive collate](/docs/references/datatypes/text/#unicode-collation-support)) returns an arbitrary one.
+[case-insensitive collate]({{< relref "/references/datatypes/text/#unicode-collation-support" >}})) returns an arbitrary one.
 
 `min(x)`
 : Determine the minimum value. For equivalent minimum values returns an arbitrary one.

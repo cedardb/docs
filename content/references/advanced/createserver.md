@@ -4,7 +4,7 @@ linkTitle: "Create Server"
 ---
 
 Create server adds a new remote server to the database catalog.
-Those servers can then be used for remote tables (see [create table](/docs/references/objects/tables)).
+Those servers can then be used for remote tables (see [create table]({{< relref "/references/objects/tables" >}})).
 
 The following example defines a server that can later be referenced as `server_name`.
 

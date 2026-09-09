@@ -3,7 +3,7 @@ title: System Table Compatibility
 weight: 93
 ---
 
-Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_features), CedarDB also supports a large
+Besides compatibility with the PostgreSQL [SQL dialect and protocol]({{< relref "/compatibility/sql_features" >}}), CedarDB also supports a large
 part of the PostgreSQL system table catalog in the `pg_catalog` schema.
 These system tables contain information about the *system* state in the form of metadata.
 This metadata is often used by external tools and clients to interact with the database system for introspection and
@@ -21,7 +21,7 @@ Additionally, CedarDB exposes information that are not available in PostgreSQL i
 
 System tables provide a raw view into the state of the database system.
 In contrast to PostgreSQL, system tables in CedarDB are *read-only*, and can only be indirectly influenced through
-[DDL statements](/docs/references/objects/).
+[DDL statements]({{< relref "/references/objects/" >}}).
 
 System tables often contain many low-level details.
 For more accessible and friendly access to the same information, consider using the
@@ -112,7 +112,7 @@ For more information on cold and hot data, see [this blog post](https://cedardb.
 | attributename      | Text    | The name of the attribute.                                                                                                                                                                |
 | datatype           | Text    | The type of the attribute.                                                                                                                                                                |
 | encoding           | Text    | The lightweight encoding scheme used for this value, e.g. dictionary or frame-of-reference encoding.                                                                                      |
-| generalcompression | Text    | The general-purpose compression method applied on top of the lightweight encoding. Currently either `none` or `zstd` (see [compression option](/docs/references/objects/tables#options)). |
+| generalcompression | Text    | The general-purpose compression method applied on top of the lightweight encoding. Currently either `none` or `zstd` (see [compression option]({{< relref "/references/objects/tables#options" >}})). |
 | encodedvaluewidth  | Text    | The maximum number of bytes required to encode a value using the lightweight encoding. For instance, if a dictionary has at most 256 keys, each value can be encoded using just one byte. |
 | uncompressedsize   | Bigint  | The size of the uncompressed data in bytes. For strings, this includes additional meta data to be able to query the data.                                                                 |
 | encodedsize        | Bigint  | The size of the data in bytes after the lightweight encoding, before any general-purpose compression is applied.                                                                          |

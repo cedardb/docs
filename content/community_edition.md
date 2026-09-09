@@ -10,7 +10,7 @@ weight: 5
 docker pull cedardb/cedardb
 ```
 
-...and visit our [**Run With Docker**](../get_started/install_with_docker) guide for more details.
+...and visit our [**Run With Docker**]({{< relref "/get_started/install_with_docker" >}}) guide for more details.
 {{< /tab >}}
 {{< tab name="Local Install" >}}
 
@@ -18,10 +18,10 @@ docker pull cedardb/cedardb
 curl https://get.cedardb.com | bash
 ```
 
-...and visit our [**Local Install**](../get_started/install_locally) guide for more details.
+...and visit our [**Local Install**]({{< relref "/get_started/install_locally" >}}) guide for more details.
 {{< /tab >}}
 {{< tab name="Cloud Setup" >}}
-Visit [**Operate in the Cloud**](../get_started/operate_in_cloud) for more details.
+Visit [**Operate in the Cloud**]({{< relref "/get_started/operate_in_cloud" >}}) for more details.
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -56,8 +56,8 @@ The CedarDB docker image also works on macOS.
 
 CedarDB can be installed in multiple environments:
 
-- [Run locally](../get_started/install_locally) on your own hardware
-- [Use Docker](../get_started/install_with_docker) for a quick setup
-- [Deploy to the cloud](../get_started/operate_in_cloud) on your preferred infrastructure
+- [Run locally]({{< relref "/get_started/install_locally" >}}) on your own hardware
+- [Use Docker]({{< relref "/get_started/install_with_docker" >}}) for a quick setup
+- [Deploy to the cloud]({{< relref "/get_started/operate_in_cloud" >}}) on your preferred infrastructure
 
-For the fastest setup, follow the [Quickstart Guide](../get_started/quickstart).
+For the fastest setup, follow the [Quickstart Guide]({{< relref "/get_started/quickstart" >}}).

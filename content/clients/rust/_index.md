@@ -108,7 +108,7 @@ let insert = client.prepare("insert into chatlog values ($1, $2, $3)").await?;
 }
 ```
 
-This example starts an explicit [transaction](/docs/references/transactions/), and commits only once.
+This example starts an explicit [transaction]({{< relref "/references/transactions/" >}}), and commits only once.
 This writes significantly faster to the database than executing the statements individually.
 However, you need to make sure that you explicitly commit the transaction, or otherwise all changes will be rolled back.
 
