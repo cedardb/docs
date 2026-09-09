@@ -3,7 +3,7 @@ name: Link Checker
 on:
   pull_request:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
 
 jobs:
   linkChecker:
@@ -15,7 +15,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.154.5'
+          hugo-version: "0.154.5"
 
       - name: Build
         if: github.event_name == 'pull_request'
@@ -23,7 +23,10 @@ jobs:
 
       - name: Serve
         if: github.event_name == 'pull_request'
-        run: python3 -m http.server 8080 --directory public &
+        run: |
+          mkdir -p serve_root
+          ln -s "$(pwd)/public" serve_root/docs
+          python3 -m http.server 8080 --directory serve_root &
 
       - name: Check Links (PR)
         if: github.event_name == 'pull_request'
