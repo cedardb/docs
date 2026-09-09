@@ -1,0 +1,11 @@
+.content {
+  /* Definition list */
+  :where(dl):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    dt {
+      @apply hx:mt-3 hx:mb-3 hx:font-semibold;
+    }
+    dd {
+      @apply hx:my-2 hx:mt-3 hx:ps-6;
+    }
+  }
+}
