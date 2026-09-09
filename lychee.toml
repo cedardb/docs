@@ -9,6 +9,7 @@ max_concurrency = 32
 require_https = true
 
 exclude = [
+  "https://localhost:3000/",
   "file://",
   "https://bonsai.cedardb.com/slack",
   "https://www.bka.de",
