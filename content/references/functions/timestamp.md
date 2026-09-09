@@ -3,8 +3,8 @@ title: "Reference: Timestamp Functions"
 linkTitle: "Timestamp"
 ---
 
-CedarDB supports a variety of functions for the [timestamp](/docs/references/datatypes/timestamp) data type. This page currently
-only describes a subset of those. See [SQL features](/docs/compatibility/sql_features) for a full list of supported
+CedarDB supports a variety of functions for the [timestamp]({{< relref "/references/datatypes/timestamp" >}}) data type. This page currently
+only describes a subset of those. See [SQL features]({{< relref "/compatibility/sql_features" >}}) for a full list of supported
 functions.
 
 ## Functions and Operators

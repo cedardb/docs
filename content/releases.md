@@ -5,20 +5,20 @@ linkTitle: "Releases"
 
 ## Current Release
 
-You can automatically [install the latest release](/docs/get_started/install_locally) using our helper script:
+You can automatically [install the latest release]({{< relref "/get_started/install_locally" >}}) using our helper script:
 
 ```shell
 curl https://get.cedardb.com | bash
 ```
 
-Or use the [CedarDB Docker container](/docs/get_started/install_with_docker):
+Or use the [CedarDB Docker container]({{< relref "/get_started/install_with_docker" >}}):
 
 ```shell
 docker pull cedardb/cedardb
 ```
 
 {{% callout type="info" %}}
-Try our [Quick Start](/docs/get_started/quickstart/). Fast to deploy. Faster to query.
+Try our [Quick Start]({{< relref "/get_started/quickstart/" >}}). Fast to deploy. Faster to query.
 {{% /callout %}}
 
 For manual download, please choose the correct version for your system:

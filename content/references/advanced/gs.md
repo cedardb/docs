@@ -16,8 +16,8 @@ CedarDB still uses a regular (local) storage device for metadata and recently up
 
 ## Creating a Table on Google Cloud Storage
 
-Before creating tables that work on remote data, you need to use the [CREATE SERVER](../../advanced/createserver/) statement to first define the location of the data (e.g., the bucket) and the credentials.
-After defining the remote server, the [CREATE TABLE](../../objects/tables/) statement uses the information of the remote server to store the data on disaggregated storage.
+Before creating tables that work on remote data, you need to use the [CREATE SERVER]({{< relref "/references/advanced/createserver" >}}) statement to first define the location of the data (e.g., the bucket) and the credentials.
+After defining the remote server, the [CREATE TABLE]({{< relref "/references/objects/tables" >}}) statement uses the information of the remote server to store the data on disaggregated storage.
 Multiple tables can share the same remote server (e.g., the same bucket).
 
 ```sql
@@ -40,7 +40,7 @@ After setting up a table that uses Google Cloud Storage as backend storage, you 
 ## GCP performance considerations
 
 To get the most out of tables using Google Cloud Storage, it is crucial to choose an instance with enough network bandwidth.
-For remote data processing, we recommend using [general-purpose instances](../../../get_started/operate_in_cloud/#recommended-gcp-instance-types) (such as the c4 family) with `50 Gbit/s` or more.
+For remote data processing, we recommend using [general-purpose instances]({{< relref "/get_started/operate_in_cloud#recommended-gcp-instance-types" >}}) (such as the c4 family) with `50 Gbit/s` or more.
 Please also provision a fast local disk (Persistent Disk SSD or Hyperdisk) with sufficient IOPS/throughput.
 CedarDB's hot set and metadata live there; size PD to hit the IOPS/MB/s you need, or consider Hyperdisk for higher ceilings.
 

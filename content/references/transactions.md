@@ -33,7 +33,7 @@ CedarDB implements this with an in-memory optimized multi-version concurrency co
 ## Performance Considerations
 
 For read-only transactions, transactions have negligible overhead, while providing a consistent snapshot across multiple statements.
-Transactions that write data are more expensive, as they need to synchronize which transactions are globally visible, and additionally [flush data to disk](/docs/references/writecache).
+Transactions that write data are more expensive, as they need to synchronize which transactions are globally visible, and additionally [flush data to disk]({{< relref "/references/writecache" >}}).
 We therefore recommend using larger transactions that batch data, and reduce the number of explicit commits.
 
 We also advise against very long-running transactions.

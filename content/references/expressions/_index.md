@@ -7,13 +7,13 @@ weight: 30
 CedarDB supports many expressions that manipulate data:
 
 * Abs (`@`)
-* [Access `->`, `->>`](/docs/references/functions/json#dictionary-access)
+* [Access `->`, `->>`]({{< relref "/references/functions/json#dictionary-access" >}})
 * And (`&&`)
 * At time zone
 * Between, between symmetric
-* Bit and (`&`) on [bitstrings](/docs/references/functions/bitstring#bit--bit)
-* Bit or (`|`) on [bitstrings](/docs/references/functions/bitstring#bit--bit-1)
-* Bit xor (`#`) on [bitstrings](/docs/references/functions/bitstring#bit--bit-2)
+* Bit and (`&`) on [bitstrings]({{< relref "/references/functions/bitstring#bit--bit" >}})
+* Bit or (`|`) on [bitstrings]({{< relref "/references/functions/bitstring#bit--bit-1" >}})
+* Bit xor (`#`) on [bitstrings]({{< relref "/references/functions/bitstring#bit--bit-2" >}})
 * Case-insensitive like (`ilike`, `~~*`), negated (`not ilike`, `!~~*`)
 * Case-insensitive regular expression (`~*`), negated (`!~*`)
 * Casting (`::`)
@@ -49,5 +49,5 @@ CedarDB supports many expressions that manipulate data:
 * Shift right bitwise (`>>`)
 * Similar to
 * Square root (`|/`)
-* [Try](try)
+* [Try]({{< relref "/references/expressions/try" >}})
 * Unique subquery

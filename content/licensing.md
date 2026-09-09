@@ -21,7 +21,7 @@ CedarDB is available in three editions to suit different needs, from free usage 
 
 After receiving your license key, activate it by setting the license.key option to the token provided.
 In the following, we show the concrete steps needed to configure the license setting.
-For more information on setting configuration options, see our [configuration reference](/docs/references/configuration).
+For more information on setting configuration options, see our [configuration reference]({{< relref "/references/configuration" >}}).
 
 {{< tabs >}}
 {{< tab name="Configuration File (preferred)" >}}

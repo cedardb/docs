@@ -11,213 +11,213 @@ This page gives a **non-exhaustive** overview of currently supported core SQL fu
 CedarDB strives for full PostgreSQL compatibility, and features not currently supported will be added over time.
 
 For PostgreSQL-specific functionality, such as system table support, see
-the [system table compatibility](../system_table) page.
+the [system table compatibility]({{< relref "/compatibility/system_table" >}}) page.
 
 ## Data Definition
 
 ### Table Creation & Deletion
 
-| **Feature**                    | **Support State** | **Details**                                                                                                    |
-|--------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------|
-| CREATE TABLE                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
-| DROP TABLE                     | Yes               |                                                                                                                |
-| Default Values                 | Yes               |                                                                                                                |
-| GENERATED AS IDENTITY          | Yes               | Both `ALWAYS` and `BY DEFAULT` variants                                                                        |
-| GENERATED ALWAYS AS (computed) | No                |                                                                                                                |
-| Check Constraints              | Yes               | Only at CREATE TABLE time. [Documentation](/docs/references/objects/tables/#constraints)                       |
-| Not-Null Constraints           | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
-| Unique Constraints             | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
-| Primary Keys                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
-| Foreign Keys                   | Yes               | [Documentation](/docs/references/objects/tables/)                                                              |
-| FK ON DELETE CASCADE           | Yes               |                                                                                                                |
-| FK ON DELETE RESTRICT          | Yes               |                                                                                                                |
-| FK ON DELETE NO ACTION         | Yes               |                                                                                                                |
-| FK ON UPDATE CASCADE           | Yes               |                                                                                                                |
-| FK ON DELETE SET NULL          | No                |                                                                                                                |
-| FK ON DELETE SET DEFAULT       | No                |                                                                                                                |
-| Named Constraints              | Yes               | For PRIMARY KEY, UNIQUE, FOREIGN KEY, and CHECK. [Documentation](/docs/references/objects/tables/#constraints) |
-| Exclusion Constraints          | No                |                                                                                                                |
-| System Columns                 | Yes               | Only meaningful for tableoid and ctid                                                                          |
-| UNLOGGED TABLE                 | No                |                                                                                                                |
-| CREATE TABLE LIKE              | Partial           | Copies column names and types. `INCLUDING` options not supported                                               |
-| DROP TABLE CASCADE             | No                |                                                                                                                |
+| **Feature**                    | **Support State** | **Details**                                                                                                                |
+| ------------------------------ | ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| CREATE TABLE                   | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}})                                                              |
+| DROP TABLE                     | Yes               |                                                                                                                            |
+| Default Values                 | Yes               |                                                                                                                            |
+| GENERATED AS IDENTITY          | Yes               | Both `ALWAYS` and `BY DEFAULT` variants                                                                                    |
+| GENERATED ALWAYS AS (computed) | No                |                                                                                                                            |
+| Check Constraints              | Yes               | Only at CREATE TABLE time. [Documentation]({{< relref "/references/objects/tables/#constraints" >}})                       |
+| Not-Null Constraints           | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}})                                                              |
+| Unique Constraints             | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}})                                                              |
+| Primary Keys                   | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}})                                                              |
+| Foreign Keys                   | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}})                                                              |
+| FK ON DELETE CASCADE           | Yes               |                                                                                                                            |
+| FK ON DELETE RESTRICT          | Yes               |                                                                                                                            |
+| FK ON DELETE NO ACTION         | Yes               |                                                                                                                            |
+| FK ON UPDATE CASCADE           | Yes               |                                                                                                                            |
+| FK ON DELETE SET NULL          | No                |                                                                                                                            |
+| FK ON DELETE SET DEFAULT       | No                |                                                                                                                            |
+| Named Constraints              | Yes               | For PRIMARY KEY, UNIQUE, FOREIGN KEY, and CHECK. [Documentation]({{< relref "/references/objects/tables/#constraints" >}}) |
+| Exclusion Constraints          | No                |                                                                                                                            |
+| System Columns                 | Yes               | Only meaningful for tableoid and ctid                                                                                      |
+| UNLOGGED TABLE                 | No                |                                                                                                                            |
+| CREATE TABLE LIKE              | Partial           | Copies column names and types. `INCLUDING` options not supported                                                           |
+| DROP TABLE CASCADE             | No                |                                                                                                                            |
 
 ### Table Modification (ALTER TABLE)
 
-| **Feature**                       | **Support State** | **Details**                                       |
-|-----------------------------------|-------------------|---------------------------------------------------|
-| ADD COLUMN                        | Yes               |                                                   |
-| ADD COLUMN IF NOT EXISTS          | Yes               |                                                   |
-| DROP COLUMN                       | Yes               |                                                   |
-| DROP COLUMN IF EXISTS             | Yes               |                                                   |
-| DROP COLUMN CASCADE               | Yes               |                                                   |
-| RENAME COLUMN                     | Yes               |                                                   |
-| RENAME TO                         | Yes               |                                                   |
-| ADD CHECK                         | No                | Only at CREATE TABLE time                         |
-| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
-| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/) |
-| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
-| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/) |
-| DROP CONSTRAINT IF EXISTS         | Yes               |                                                   |
-| DROP CONSTRAINT CASCADE           | Yes               |                                                   |
-| RENAME CONSTRAINT                 | No                |                                                   |
-| ALTER COLUMN SET/DROP DEFAULT     | No                |                                                   |
-| ALTER COLUMN SET/DROP NOT NULL    | No                |                                                   |
-| ALTER COLUMN TYPE                 | No                |                                                   |
-| SET SCHEMA                        | No                |                                                   |
-| OWNER TO                          | Yes               |                                                   |
-| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license      |
-| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                   |
-| SET TABLESPACE                    | No                |                                                   |
-| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                   |
-| ATTACH / DETACH PARTITION         | No                |                                                   |
-| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                      |
-| VALIDATE CONSTRAINT               | No                |                                                   |
+| **Feature**                       | **Support State** | **Details**                                                   |
+| --------------------------------- | ----------------- | ------------------------------------------------------------- |
+| ADD COLUMN                        | Yes               |                                                               |
+| ADD COLUMN IF NOT EXISTS          | Yes               |                                                               |
+| DROP COLUMN                       | Yes               |                                                               |
+| DROP COLUMN IF EXISTS             | Yes               |                                                               |
+| DROP COLUMN CASCADE               | Yes               |                                                               |
+| RENAME COLUMN                     | Yes               |                                                               |
+| RENAME TO                         | Yes               |                                                               |
+| ADD CHECK                         | No                | Only at CREATE TABLE time                                     |
+| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}}) |
+| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}}) |
+| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}}) |
+| DROP CONSTRAINT                   | Yes               | [Documentation]({{< relref "/references/objects/tables/" >}}) |
+| DROP CONSTRAINT IF EXISTS         | Yes               |                                                               |
+| DROP CONSTRAINT CASCADE           | Yes               |                                                               |
+| RENAME CONSTRAINT                 | No                |                                                               |
+| ALTER COLUMN SET/DROP DEFAULT     | No                |                                                               |
+| ALTER COLUMN SET/DROP NOT NULL    | No                |                                                               |
+| ALTER COLUMN TYPE                 | No                |                                                               |
+| SET SCHEMA                        | No                |                                                               |
+| OWNER TO                          | Yes               |                                                               |
+| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license                  |
+| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                               |
+| SET TABLESPACE                    | No                |                                                               |
+| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                               |
+| ATTACH / DETACH PARTITION         | No                |                                                               |
+| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                                  |
+| VALIDATE CONSTRAINT               | No                |                                                               |
 
 ### Privileges
 
-| **Feature**           | **Support State** | **Details**                                                |
-|-----------------------|-------------------|------------------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)            |
-| OWNER TO              | Yes               |                                                            |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)            |
-| GRANT                 | Yes               | Requires an enterprise license                             |
-| REVOKE                | Yes               | Requires an enterprise license                             |
-| SET ROLE              | Yes               | Requires an enterprise license                             |
-| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/)           |
-| Row Security Policies | Yes               | Requires an enterprise license                             |
+| **Feature**           | **Support State** | **Details**                                                  |
+| --------------------- | ----------------- | ------------------------------------------------------------ |
+| CREATE ROLE           | Yes               | [Documentation]({{< relref "/references/objects/roles" >}})  |
+| OWNER TO              | Yes               |                                                              |
+| ALTER ROLE            | Yes               | [Documentation]({{< relref "/references/objects/roles" >}})  |
+| GRANT                 | Yes               | Requires an enterprise license                               |
+| REVOKE                | Yes               | Requires an enterprise license                               |
+| SET ROLE              | Yes               | Requires an enterprise license                               |
+| INHERIT               | Yes               | [Documentation]({{< relref "/references/objects/roles/" >}}) |
+| Row Security Policies | Yes               | Requires an enterprise license                               |
 
 ### Indexes
 
-| **Feature**            | **Support State** | **Details**                                                            |
-|------------------------|-------------------|------------------------------------------------------------------------|
-| CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation](/docs/references/objects/indexes/) |
-| GIN                    | No                |                                                                        |
-| BRIN                   | No                |                                                                        |
-| Multicolumn Indexes    | Yes               | [Documentation](/docs/references/objects/indexes/)                     |
-| Ordered Indexes        | Yes               | [Documentation](/docs/references/objects/indexes/#column-order)        |
-| Unique Indexes         | Yes               |                                                                        |
-| Indexes on Expressions | No                |                                                                        |
-| Partial Indexes        | No                |                                                                        |
+| **Feature**            | **Support State** | **Details**                                                                        |
+| ---------------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation]({{< relref "/references/objects/indexes/" >}}) |
+| GIN                    | No                |                                                                                    |
+| BRIN                   | No                |                                                                                    |
+| Multicolumn Indexes    | Yes               | [Documentation]({{< relref "/references/objects/indexes/" >}})                     |
+| Ordered Indexes        | Yes               | [Documentation]({{< relref "/references/objects/indexes/#column-order" >}})        |
+| Unique Indexes         | Yes               |                                                                                    |
+| Indexes on Expressions | No                |                                                                                    |
+| Partial Indexes        | No                |                                                                                    |
 
 ### Misc
 
-| **Feature**            | **Support State** | **Details**                                                                             |
-|------------------------|-------------------|-----------------------------------------------------------------------------------------|
-| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                      |
-| DROP SCHEMA            | Yes               | Only if the schema is empty                                                             |
-| search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                        |
-| Table Inheritance      | No                |                                                                                         |
-| Table Partitioning     | Partial           | Only hash partitioning. Only at CREATE TABLE time                                       |
-| Foreign Data Wrappers  | No                |                                                                                         |
-| Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                        |
-| Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                    |
-| Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language |
-| Custom Types           | No                |                                                                                         |
-| Triggers               | No                |                                                                                         |
-| Prepared Statements    | Yes               |                                                                                         |
-| Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                      |
-| ALTER SYSTEM           | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                 |
+| **Feature**            | **Support State** | **Details**                                                                                         |
+| ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| CREATE SCHEMA          | Yes               | [Documentation]({{< relref "/references/objects/schemas/" >}})                                      |
+| DROP SCHEMA            | Yes               | Only if the schema is empty                                                                         |
+| search_path            | Yes               | [Documentation]({{< relref "/references/objects/schemas/#using-schemas" >}})                        |
+| Table Inheritance      | No                |                                                                                                     |
+| Table Partitioning     | Partial           | Only hash partitioning. Only at CREATE TABLE time                                                   |
+| Foreign Data Wrappers  | No                |                                                                                                     |
+| Views                  | Yes               | [Documentation]({{< relref "/references/objects/views/" >}})                                        |
+| Databases              | Yes               | [Documentation]({{< relref "/references/objects/databases/" >}})                                    |
+| Functions & Procedures | Yes               | [Documentation]({{< relref "/references/objects/functions/" >}}) <br> Also in cedar_script language |
+| Custom Types           | No                |                                                                                                     |
+| Triggers               | No                |                                                                                                     |
+| Prepared Statements    | Yes               |                                                                                                     |
+| Advisory Locks         | Yes               | [Documentation]({{< relref "/references/functions/system/#advisory-locks" >}})                      |
+| ALTER SYSTEM           | Yes               | [Documentation]({{< relref "/references/sessions/altersystem/" >}})                                 |
 
 ## Data Manipulation
 
-| **Feature** | **Support State** | **Details**                                             |
-|-------------|-------------------|---------------------------------------------------------|
-| INSERT      | Yes               | [Documentation](/docs/references/dml/insert/)           |
-| UPDATE      | Yes               | [Documentation](/docs/references/dml/update/)           |
-| DELETE      | Yes               | [Documentation](/docs/references/dml/delete/)           |
-| TRUNCATE    | Yes               | [Documentation](/docs/references/dml/truncate/)         |
-| RETURNING   | Yes               | [Documentation](/docs/references/dml/insert/#returning) |
-| COPY FROM   | Yes               | [Documentation](/docs/references/dml/copy/)             |
-| COPY TO     | Yes               | [Documentation](/docs/references/dml/copy/)             |
-| ON CONFLICT | Yes               | [Documentation](/docs/references/dml/upsert/)           |
+| **Feature** | **Support State** | **Details**                                                         |
+| ----------- | ----------------- | ------------------------------------------------------------------- |
+| INSERT      | Yes               | [Documentation]({{< relref "/references/dml/insert/" >}})           |
+| UPDATE      | Yes               | [Documentation]({{< relref "/references/dml/update/" >}})           |
+| DELETE      | Yes               | [Documentation]({{< relref "/references/dml/delete/" >}})           |
+| TRUNCATE    | Yes               | [Documentation]({{< relref "/references/dml/truncate/" >}})         |
+| RETURNING   | Yes               | [Documentation]({{< relref "/references/dml/insert/#returning" >}}) |
+| COPY FROM   | Yes               | [Documentation]({{< relref "/references/dml/copy/" >}})             |
+| COPY TO     | Yes               | [Documentation]({{< relref "/references/dml/copy/" >}})             |
+| ON CONFLICT | Yes               | [Documentation]({{< relref "/references/dml/upsert/" >}})           |
 
 ## Queries
 
-| **Feature**               | **Support State** | **Details**                                        |
-|---------------------------|-------------------|----------------------------------------------------|
-| Table & View References   | Yes               |                                                    |
-| Inner Joins               | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Outer Joins               | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Semijoins                 | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Antijoins                 | Yes               |                                                    |
-| Table Functions           | Yes               |                                                    |
-| Lateral Subqueries        | Yes               |                                                    |
-| User-Specified Aliases    | Yes               |                                                    |
-| GROUP BY                  | Yes               | [Documentation](/docs/references/queries/groupby/) |
-| HAVING                    | Yes               | [Documentation](/docs/references/queries/groupby/) |
-| GROUPING SETS             | Yes               |                                                    |
-| CUBE                      | Yes               |                                                    |
-| ROLLUP                    | Yes               |                                                    |
-| WINDOW Functions          | Yes               | [Documentation](/docs/references/queries/window/)  |
-| WITH                      | Yes               | [Documentation](/docs/references/queries/with/)    |
-| WITH RECURSIVE            | Yes               |                                                    |
-| UNION                     | Yes               |                                                    |
-| UNION ALL                 | Yes               |                                                    |
-| INTERSECT                 | Yes               |                                                    |
-| EXCEPT                    | Yes               |                                                    |
-| ORDER BY                  | Yes               |                                                    |
-| LIMIT                     | Yes               |                                                    |
-| OFFSET                    | Yes               |                                                    |
-| Table Generating Function | Yes               |                                                    |
+| **Feature**               | **Support State** | **Details**                                                    |
+| ------------------------- | ----------------- | -------------------------------------------------------------- |
+| Table & View References   | Yes               |                                                                |
+| Inner Joins               | Yes               | [Documentation]({{< relref "/references/queries/from/" >}})    |
+| Outer Joins               | Yes               | [Documentation]({{< relref "/references/queries/from/" >}})    |
+| Semijoins                 | Yes               | [Documentation]({{< relref "/references/queries/from/" >}})    |
+| Antijoins                 | Yes               |                                                                |
+| Table Functions           | Yes               |                                                                |
+| Lateral Subqueries        | Yes               |                                                                |
+| User-Specified Aliases    | Yes               |                                                                |
+| GROUP BY                  | Yes               | [Documentation]({{< relref "/references/queries/groupby/" >}}) |
+| HAVING                    | Yes               | [Documentation]({{< relref "/references/queries/groupby/" >}}) |
+| GROUPING SETS             | Yes               |                                                                |
+| CUBE                      | Yes               |                                                                |
+| ROLLUP                    | Yes               |                                                                |
+| WINDOW Functions          | Yes               | [Documentation]({{< relref "/references/queries/window/" >}})  |
+| WITH                      | Yes               | [Documentation]({{< relref "/references/queries/with/" >}})    |
+| WITH RECURSIVE            | Yes               |                                                                |
+| UNION                     | Yes               |                                                                |
+| UNION ALL                 | Yes               |                                                                |
+| INTERSECT                 | Yes               |                                                                |
+| EXCEPT                    | Yes               |                                                                |
+| ORDER BY                  | Yes               |                                                                |
+| LIMIT                     | Yes               |                                                                |
+| OFFSET                    | Yes               |                                                                |
+| Table Generating Function | Yes               |                                                                |
 
 ## Data Types
 
 ### Types
 
-| **Feature**                             | **Support State** |                                                     **Details** |
-|-----------------------------------------|-------------------|----------------------------------------------------------------:|
-| array                                   | Yes               |         [Array Documentation](/docs/references/datatypes/array) |
-| bigint                                  | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
-| bigserial                               | Yes               |                                                                 |
-| bit [ (n) ]                             | Yes               |             [Bit Documentation](/docs/references/datatypes/bit) |
-| bit varying [ (n) ]                     | Yes               |             [Bit Documentation](/docs/references/datatypes/bit) |
-| boolean                                 | Yes               |     [Boolean Documentation](/docs/references/datatypes/boolean) |
-| box                                     | No                |                                                                 |
-| bytea                                   | Yes               |           [Blob Documentation](/docs/references/datatypes/blob) |
-| character [ (n) ]                       | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
-| character varying [ (n) ]               | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
-| cidr                                    | No                |                                                                 |
-| circle                                  | No                |                                                                 |
-| date                                    | Yes               |           [Date Documentation](/docs/references/datatypes/date) |
-| double precision                        | Yes               |        [Double Documentation](/docs/references/datatypes/float) |
-| inet                                    | No                |                                                                 |
-| integer                                 | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
-| interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation](/docs/references/datatypes/interval) |
-| json                                    | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |
-| jsonb                                   | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |
-| line                                    | No                |                                                                 |
-| lseg                                    | No                |                                                                 |
-| macaddr                                 | No                |                                                                 |
-| macaddr8                                | No                |                                                                 |
-| money                                   | No                |                                                                 |
-| numeric [ (p, s) ]                      | Yes               |     [Numeric Documentation](/docs/references/datatypes/numeric) |
-| path                                    | No                |                                                                 |
-| pg_lsn                                  | No                |                                                                 |
-| pg_snapshot                             | No                |                                                                 |
-| point                                   | No                |                                                                 |
-| polygon                                 | No                |                                                                 |
-| real                                    | Yes               |         [Float Documentation](/docs/references/datatypes/float) |
-| smallint                                | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
-| smallserial                             | Yes               |                                                                 |
-| serial                                  | Yes               |                                                                 |
-| text                                    | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
-| time [ (p) ] [ without time zone ]      | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
-| time [ (p) ] with time zone             | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
-| timestamp [ (p) ] [ without time zone ] | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
-| timestamp [ (p) ] with time zone        | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
-| tsquery                                 | No                |                                                                 |
-| tsvector                                | No                |                                                                 |
-| txid_snapshot                           | No                |                                                                 |
-| uuid                                    | Yes               |           [UUID Documentation](/docs/references/datatypes/uuid) |
-| xml                                     | No                |                                                                 |
+| **Feature**                             | **Support State** |                                                                 **Details** |
+| --------------------------------------- | ----------------- | --------------------------------------------------------------------------: |
+| array                                   | Yes               |         [Array Documentation]({{< relref "/references/datatypes/array" >}}) |
+| bigint                                  | Yes               |     [Integer Documentation]({{< relref "/references/datatypes/integer" >}}) |
+| bigserial                               | Yes               |                                                                             |
+| bit [ (n) ]                             | Yes               |             [Bit Documentation]({{< relref "/references/datatypes/bit" >}}) |
+| bit varying [ (n) ]                     | Yes               |             [Bit Documentation]({{< relref "/references/datatypes/bit" >}}) |
+| boolean                                 | Yes               |     [Boolean Documentation]({{< relref "/references/datatypes/boolean" >}}) |
+| box                                     | No                |                                                                             |
+| bytea                                   | Yes               |           [Blob Documentation]({{< relref "/references/datatypes/blob" >}}) |
+| character [ (n) ]                       | Yes               |           [Text Documentation]({{< relref "/references/datatypes/text" >}}) |
+| character varying [ (n) ]               | Yes               |           [Text Documentation]({{< relref "/references/datatypes/text" >}}) |
+| cidr                                    | No                |                                                                             |
+| circle                                  | No                |                                                                             |
+| date                                    | Yes               |           [Date Documentation]({{< relref "/references/datatypes/date" >}}) |
+| double precision                        | Yes               |        [Double Documentation]({{< relref "/references/datatypes/float" >}}) |
+| inet                                    | No                |                                                                             |
+| integer                                 | Yes               |     [Integer Documentation]({{< relref "/references/datatypes/integer" >}}) |
+| interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation]({{< relref "/references/datatypes/interval" >}}) |
+| json                                    | Yes               |           [JSON Documentation]({{< relref "/references/datatypes/json" >}}) |
+| jsonb                                   | Yes               |           [JSON Documentation]({{< relref "/references/datatypes/json" >}}) |
+| line                                    | No                |                                                                             |
+| lseg                                    | No                |                                                                             |
+| macaddr                                 | No                |                                                                             |
+| macaddr8                                | No                |                                                                             |
+| money                                   | No                |                                                                             |
+| numeric [ (p, s) ]                      | Yes               |     [Numeric Documentation]({{< relref "/references/datatypes/numeric" >}}) |
+| path                                    | No                |                                                                             |
+| pg_lsn                                  | No                |                                                                             |
+| pg_snapshot                             | No                |                                                                             |
+| point                                   | No                |                                                                             |
+| polygon                                 | No                |                                                                             |
+| real                                    | Yes               |         [Float Documentation]({{< relref "/references/datatypes/float" >}}) |
+| smallint                                | Yes               |     [Integer Documentation]({{< relref "/references/datatypes/integer" >}}) |
+| smallserial                             | Yes               |                                                                             |
+| serial                                  | Yes               |                                                                             |
+| text                                    | Yes               |           [Text Documentation]({{< relref "/references/datatypes/text" >}}) |
+| time [ (p) ] [ without time zone ]      | Yes               |           [Time Documentation]({{< relref "/references/datatypes/time" >}}) |
+| time [ (p) ] with time zone             | Yes               |           [Time Documentation]({{< relref "/references/datatypes/time" >}}) |
+| timestamp [ (p) ] [ without time zone ] | Yes               | [Timestamp Documentation]({{< relref "/references/datatypes/timestamp" >}}) |
+| timestamp [ (p) ] with time zone        | Yes               | [Timestamp Documentation]({{< relref "/references/datatypes/timestamp" >}}) |
+| tsquery                                 | No                |                                                                             |
+| tsvector                                | No                |                                                                             |
+| txid_snapshot                           | No                |                                                                             |
+| uuid                                    | Yes               |           [UUID Documentation]({{< relref "/references/datatypes/uuid" >}}) |
+| xml                                     | No                |                                                                             |
 
 ### Operators & Functions
 
 #### Logical
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | AND         | Yes               |             |
 | OR          | Yes               |             |
 | NOT         | Yes               |             |
@@ -225,7 +225,7 @@ the [system table compatibility](../system_table) page.
 #### Comparison
 
 | **Feature**     | **Support State** | **Details** |
-|-----------------|-------------------|-------------|
+| --------------- | ----------------- | ----------- |
 | <               | Yes               |             |
 | >               | Yes               |             |
 | <=              | Yes               |             |
@@ -249,7 +249,7 @@ the [system table compatibility](../system_table) page.
 #### Mathematical
 
 | **Feature**   | **Support State** |                                                                       **Details** |
-|---------------|-------------------|----------------------------------------------------------------------------------:|
+| ------------- | ----------------- | --------------------------------------------------------------------------------: |
 | +             | Yes               |                                                                                   |
 | -             | Yes               |                                                                                   |
 | *             | Yes               |                                                                                   |
@@ -320,57 +320,57 @@ the [system table compatibility](../system_table) page.
 
 #### Text
 
-| **Feature**           | **Support State** |                                           **Details** |
-|-----------------------|-------------------|------------------------------------------------------:|
-| \|\|                  | Yes               |                                                       |
-| btrim                 | Yes               |                                                       |
-| bit_length            | Yes               |                                                       |
-| char_length           | Yes               |                                                       |
-| lower                 | Yes               |                                                       |
-| lpad                  | Yes               |                                                       |
-| ltrim                 | Yes               |                                                       |
-| normalize             | No                |                                                       |
-| octet_length          | Yes               |                                                       |
-| overlay               | Yes               |                                                       |
-| position              | Yes               |                                                       |
-| rpad                  | Yes               |                                                       |
-| rtrim                 | Yes               |                                                       |
-| substring             | Yes               | Currently not supporting regular expression arguments |
-| trim                  | Yes               |                                                       |
-| upper                 | Yes               |                                                       |
-| ^@                    | No                |                                                       |
-| ascii                 | Yes               |                                                       |
-| chr                   | Yes               |                                                       |
-| concat                | Yes               |                                                       |
-| concat_ws             | Yes               |                                                       |
-| format                | Yes               |                                                       |
-| initcap               | Yes               |                                                       |
-| left                  | Yes               |                                                       |
-| length                | Yes               |                                                       |
-| md5                   | Yes               |                                                       |
-| parse_ident           | Yes               |                                                       |
-| quote_ident           | Yes               |                                                       |
-| quote_literal         | Yes               |                                                       |
-| quote_nullable        | Yes               |                                                       |
-| repeat                | Yes               |                                                       |
-| replace               | Yes               |                                                       |
-| reverse               | Yes               |                                                       |
-| right                 | Yes               |                                                       |
-| split_part            | Yes               |                                                       |
-| starts_with           | Yes               |                                                       |
-| string_to_array       | Yes               |                                                       |
-| string_to_table       | Yes               |                                                       |
-| strpos                | Yes               |                                                       |
-| substr                | Yes               |                                                       |
-| to_ascii              | No                |                                                       |
-| to_hex                | Yes               |                                                       |
-| translate             | Yes               |                                                       |
-| unistr                | No                |                                                       |
+| **Feature**     | **Support State** |                                           **Details** |
+| --------------- | ----------------- | ----------------------------------------------------: |
+| \|\|            | Yes               |                                                       |
+| btrim           | Yes               |                                                       |
+| bit_length      | Yes               |                                                       |
+| char_length     | Yes               |                                                       |
+| lower           | Yes               |                                                       |
+| lpad            | Yes               |                                                       |
+| ltrim           | Yes               |                                                       |
+| normalize       | No                |                                                       |
+| octet_length    | Yes               |                                                       |
+| overlay         | Yes               |                                                       |
+| position        | Yes               |                                                       |
+| rpad            | Yes               |                                                       |
+| rtrim           | Yes               |                                                       |
+| substring       | Yes               | Currently not supporting regular expression arguments |
+| trim            | Yes               |                                                       |
+| upper           | Yes               |                                                       |
+| ^@              | No                |                                                       |
+| ascii           | Yes               |                                                       |
+| chr             | Yes               |                                                       |
+| concat          | Yes               |                                                       |
+| concat_ws       | Yes               |                                                       |
+| format          | Yes               |                                                       |
+| initcap         | Yes               |                                                       |
+| left            | Yes               |                                                       |
+| length          | Yes               |                                                       |
+| md5             | Yes               |                                                       |
+| parse_ident     | Yes               |                                                       |
+| quote_ident     | Yes               |                                                       |
+| quote_literal   | Yes               |                                                       |
+| quote_nullable  | Yes               |                                                       |
+| repeat          | Yes               |                                                       |
+| replace         | Yes               |                                                       |
+| reverse         | Yes               |                                                       |
+| right           | Yes               |                                                       |
+| split_part      | Yes               |                                                       |
+| starts_with     | Yes               |                                                       |
+| string_to_array | Yes               |                                                       |
+| string_to_table | Yes               |                                                       |
+| strpos          | Yes               |                                                       |
+| substr          | Yes               |                                                       |
+| to_ascii        | No                |                                                       |
+| to_hex          | Yes               |                                                       |
+| translate       | Yes               |                                                       |
+| unistr          | No                |                                                       |
 
 #### Bytea
 
 | **Feature**  | **Support State** |             **Details** |
-|--------------|-------------------|------------------------:|
+| ------------ | ----------------- | ----------------------: |
 | \|\|         | Yes               |                         |
 | bit_length   | Yes               |                         |
 | btrim        | Yes               |                         |
@@ -401,7 +401,7 @@ the [system table compatibility](../system_table) page.
 #### Bit
 
 | **Feature**  | **Support State** | **Details** |
-|--------------|-------------------|------------:|
+| ------------ | ----------------- | ----------: |
 | \|\|         | No                |             |
 | &            | No                |             |
 | \|           | No                |             |
@@ -422,7 +422,7 @@ the [system table compatibility](../system_table) page.
 #### Pattern Matching
 
 | **Feature**           | **Support State** |                                   **Details** |
-|-----------------------|-------------------|----------------------------------------------:|
+| --------------------- | ----------------- | --------------------------------------------: |
 | LIKE                  | Yes               |                                               |
 | SIMILAR TO            | Yes               |                                               |
 | regexp_count          | Yes               |                                               |
@@ -438,7 +438,7 @@ the [system table compatibility](../system_table) page.
 #### Data Type Formatting
 
 | **Feature**  | **Support State** | **Details**        |
-|--------------|-------------------|--------------------|
+| ------------ | ----------------- | ------------------ |
 | to_char      | Yes               | Most used patterns |
 | to_date      | No                |                    |
 | to_number    | No                |                    |
@@ -447,7 +447,7 @@ the [system table compatibility](../system_table) page.
 #### Date/Time
 
 | **Feature**           | **Support State** | **Details**      |
-|-----------------------|-------------------|------------------|
+| --------------------- | ----------------- | ---------------- |
 | +                     | Yes               |                  |
 | -                     | Yes               |                  |
 | *                     | Yes               |                  |
@@ -485,7 +485,7 @@ the [system table compatibility](../system_table) page.
 #### Enum
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | enum_first  | No                |             |
 | enum_last   | No                |             |
 | enum_range  | No                |             |
@@ -493,7 +493,7 @@ the [system table compatibility](../system_table) page.
 #### Geometric
 
 | **Feature**  | **Support State** | **Details** |
-|--------------|-------------------|-------------|
+| ------------ | ----------------- | ----------- |
 | +            | No                |             |
 | -            | No                |             |
 | *            | No                |             |
@@ -548,7 +548,7 @@ the [system table compatibility](../system_table) page.
 #### Network
 
 | **Feature**      | **Support State** | **Details** |
-|------------------|-------------------|-------------|
+| ---------------- | ----------------- | ----------- |
 | \<\<             | No                |             |
 | \<\<=            | No                |             |
 | \>\>             | No                |             |
@@ -575,7 +575,7 @@ the [system table compatibility](../system_table) page.
 #### Text Search
 
 | **Feature**           | **Support State** | **Details** |
-|-----------------------|-------------------|-------------|
+| --------------------- | ----------------- | ----------- |
 | @@                    | No                |             |
 | \|\|                  | No                |             |
 | &&                    | No                |             |
@@ -614,7 +614,7 @@ the [system table compatibility](../system_table) page.
 #### UUID
 
 | **Feature**            | **Support State** | **Details** |
-|------------------------|-------------------|-------------|
+| ---------------------- | ----------------- | ----------- |
 | get_random_uuid        | Yes               |             |
 | uuid_extract_timestamp | No                |             |
 | uuid_extract_version   | No                |             |
@@ -622,7 +622,7 @@ the [system table compatibility](../system_table) page.
 #### XML
 
 | **Feature**        | **Support State** | **Details** |
-|--------------------|-------------------|-------------|
+| ------------------ | ----------------- | ----------- |
 | xmltext            | No                |             |
 | xmlcomment         | No                |             |
 | xmlconcat          | No                |             |
@@ -642,7 +642,7 @@ the [system table compatibility](../system_table) page.
 #### JSON
 
 | **Feature**               | **Support State** | **Details** |
-|---------------------------|-------------------|-------------|
+| ------------------------- | ----------------- | ----------- |
 | ->                        | Yes               |             |
 | -\>\>                     | Yes               |             |
 | #>                        | No                |             |
@@ -699,7 +699,7 @@ the [system table compatibility](../system_table) page.
 #### Sequence Manipulation
 
 | **Feature**            | **Support State** | **Details** |
-|------------------------|-------------------|-------------|
+| ---------------------- | ----------------- | ----------- |
 | nextval                | Yes               |             |
 | setval                 | Yes               |             |
 | currval                | No                |             |
@@ -709,7 +709,7 @@ the [system table compatibility](../system_table) page.
 #### Conditional
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | CASE        | Yes               |             |
 | COALESCE    | Yes               |             |
 | NULLIF      | Yes               |             |
@@ -719,7 +719,7 @@ the [system table compatibility](../system_table) page.
 #### Array
 
 | **Feature**       | **Support State** | **Details**              |
-|-------------------|-------------------|--------------------------|
+| ----------------- | ----------------- | ------------------------ |
 | @>                | Yes               |                          |
 | <@                | Yes               |                          |
 | &&                | No                |                          |
@@ -746,7 +746,7 @@ the [system table compatibility](../system_table) page.
 #### Range
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | @>          | Yes               |             |
 | <@          | Yes               |             |
 | &&          | Yes               |             |
@@ -773,64 +773,64 @@ the [system table compatibility](../system_table) page.
 
 ##### Generic
 
-| **Feature**           | **Support State** |                                                                                           **Details** |
-|-----------------------|-------------------|------------------------------------------------------------------------------------------------------:|
-| any_value             | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| array_agg             | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| avg                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| bit_and               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| bit_or                | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| bit_xor               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| bool_and              | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| bool_or               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| count(*)              | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| count("any")          | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| json(b)_agg           | No                |                                                                                                       |
-| json(b)_objectagg     | No                |                                                                                                       |
-| json(b)_object_agg    | No                |                                                                                                       |
-| json_arrayagg         | No                |                                                                                                       |
-| max                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| min                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| range(_intersect)_agg | No                |                                                                                                       |
-| string_agg            | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| sum                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| xmlagg                | No                |                                                                                                       |
+| **Feature**           | **Support State** |                                                                                                       **Details** |
+| --------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------: |
+| any_value             | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| array_agg             | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| avg                   | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| bit_and               | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| bit_or                | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| bit_xor               | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| bool_and              | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| bool_or               | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| count(*)              | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| count("any")          | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| json(b)_agg           | No                |                                                                                                                   |
+| json(b)_objectagg     | No                |                                                                                                                   |
+| json(b)_object_agg    | No                |                                                                                                                   |
+| json_arrayagg         | No                |                                                                                                                   |
+| max                   | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| min                   | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| range(_intersect)_agg | No                |                                                                                                                   |
+| string_agg            | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| sum                   | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#general-purpose-functions" >}}) |
+| xmlagg                | No                |                                                                                                                   |
 
 ##### Statistical
 
-| **Feature**    | **Support State** |                                                                                        **Details** |
-|----------------|-------------------|---------------------------------------------------------------------------------------------------:|
-| corr           | No                |                                                                                                    |
-| covar_pop      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| covar_samp     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_avgx      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_avgy      | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_count     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_intercept | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_r2        | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_slope     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_sxx       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_sxy       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_syy       | No                |                                                                                                    |
-| stddev         | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| stddev_pop     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| stddev_samp    | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| variance       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| var_pop        | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| var_samp       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| **Feature**    | **Support State** |                                                                                                    **Details** |
+| -------------- | ----------------- | -------------------------------------------------------------------------------------------------------------: |
+| corr           | No                |                                                                                                                |
+| covar_pop      | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| covar_samp     | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_avgx      | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_avgy      | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_count     | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_intercept | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_r2        | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_slope     | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_sxx       | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_sxy       | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| regr_syy       | No                |                                                                                                                |
+| stddev         | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| stddev_pop     | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| stddev_samp    | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| variance       | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| var_pop        | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
+| var_samp       | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#statistical-aggregates" >}}) |
 
 ##### Ordered-Set
 
-| **Feature**     | **Support State** |                                                                                                   **Details** |
-|-----------------|-------------------|--------------------------------------------------------------------------------------------------------------:|
-| mode            | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_cont | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_disc | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| **Feature**     | **Support State** |                                                                                                             **Details** |
+| --------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------: |
+| mode            | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#ordered-set-aggregate-functions" >}}) |
+| percentile_cont | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#ordered-set-aggregate-functions" >}}) |
+| percentile_disc | Yes               | [Aggregate Function Documentation]({{< relref "/references/functions/aggregation/#ordered-set-aggregate-functions" >}}) |
 
 #### Window
 
 | **Feature**  | **Support State** | **Details** |
-|--------------|-------------------|-------------|
+| ------------ | ----------------- | ----------- |
 | row_number   | Yes               |             |
 | rank         | Yes               |             |
 | dense_rank   | Yes               |             |
@@ -846,7 +846,7 @@ the [system table compatibility](../system_table) page.
 #### Subquery
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | EXISTS      | Yes               |             |
 | IN          | Yes               |             |
 | NOT IN      | Yes               |             |
@@ -856,7 +856,7 @@ the [system table compatibility](../system_table) page.
 #### Array Comparison
 
 | **Feature** | **Support State** | **Details** |
-|-------------|-------------------|-------------|
+| ----------- | ----------------- | ----------- |
 | EXISTS      | Yes               |             |
 | IN          | Yes               |             |
 | NOT IN      | Yes               |             |
@@ -866,6 +866,6 @@ the [system table compatibility](../system_table) page.
 #### Set Returning
 
 | **Feature**        | **Support State** | **Details** |
-|--------------------|-------------------|-------------|
+| ------------------ | ----------------- | ----------- |
 | generate_series    | Yes               |             |
 | generate_subscript | Yes               |             |

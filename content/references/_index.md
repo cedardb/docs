@@ -9,14 +9,14 @@ largest part of the [query language](https://www.postgresql.org/docs/current/que
 
 On the following pages, you can find an in-depth overview of CedarDB's features:
 
-* [Advanced features](./advanced)
-* [Catalog objects](./objects)
-* [Configuration](./configuration)
-* [Data types](./datatypes)
-* [DML](./dml) — `insert`, `copy`, `update`, `delete`, `truncate`, `upsert`
-* [Expressions](./expressions)
-* [Functions](./functions)
-* [Queries](./queries) — `select`, `from`, `where`
-* [Sessions](./sessions) — `discard`, `set`, `show`
-* [Transactions](./transactions) — `begin`, `commit`, `rollback`
-* [Utility](./utility) — `analyze`, `explain`
+* [Advanced features]({{< relref "/references/advanced" >}})
+* [Catalog objects]({{< relref "/references/objects" >}})
+* [Configuration]({{< relref "/references/configuration" >}})
+* [Data types]({{< relref "/references/datatypes" >}})
+* [DML]({{< relref "/references/dml" >}}) — `insert`, `copy`, `update`, `delete`, `truncate`, `upsert`
+* [Expressions]({{< relref "/references/expressions" >}})
+* [Functions]({{< relref "/references/functions" >}})
+* [Queries]({{< relref "/references/queries" >}}) — `select`, `from`, `where`
+* [Sessions]({{< relref "/references/sessions" >}}) — `discard`, `set`, `show`
+* [Transactions]({{< relref "/references/transactions" >}}) — `begin`, `commit`, `rollback`
+* [Utility]({{< relref "/references/utility" >}}) — `analyze`, `explain`

@@ -6,9 +6,9 @@ weight: 25
 
 Data manipulation statements read and modify rows in tables.
 
-* [Copy](./copy) — bulk load or export data from files
-* [Delete](./delete) — remove rows from a table
-* [Insert](./insert) — add rows to a table
-* [Truncate](./truncate) — remove all rows from a table
-* [Update](./update) — modify existing rows
-* [Upsert](./upsert) — insert with conflict handling (`ON CONFLICT`)
+* [Copy]({{< relref "/references/dml/copy" >}}) — bulk load or export data from files
+* [Delete]({{< relref "/references/dml/delete" >}}) — remove rows from a table
+* [Insert]({{< relref "/references/dml/insert" >}}) — add rows to a table
+* [Truncate]({{< relref "/references/dml/truncate" >}}) — remove all rows from a table
+* [Update]({{< relref "/references/dml/update" >}}) — modify existing rows
+* [Upsert]({{< relref "/references/dml/upsert" >}}) — insert with conflict handling (`ON CONFLICT`)

@@ -150,7 +150,7 @@ Please familiarize yourself with the limits of psycopg's binary copy support in 
 {{< callout type="info" >}}
 `execute()` and `executeMany()` automatically *prepare* statements that are executed multiple times in sequence.
 You can also override this setting by passing `prepare=True|False` to both methods.
-Take a look at the [prepared statements reference](../../references/advanced/prepare) to understand why preparing your statements is a *very good thing*.
+Take a look at the [prepared statements reference]({{< relref "/references/advanced/prepare" >}}) to understand why preparing your statements is a *very good thing*.
 {{< /callout >}}
 
 ## Pipelining

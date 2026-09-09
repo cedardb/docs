@@ -97,8 +97,8 @@ This uses CedarDB's `COPY` protocol and is significantly faster than individual 
 
 If you prefer a higher-level interface, CedarDB works with two TypeScript ORMs:
 
-- [Drizzle](drizzle) — SQL-like query builder with schema migration tooling
-- [Prisma](prisma) — declarative schema with auto-generated type-safe client
+- [Drizzle]({{< relref "/clients/javascript/drizzle" >}}) - SQL-like query builder with schema migration tooling
+- [Prisma]({{< relref "/clients/javascript/prisma" >}}) - declarative schema with auto-generated type-safe client
 
 ## JavaScript
 

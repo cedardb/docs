@@ -3,9 +3,9 @@ title: System Table Compatibility
 weight: 93
 ---
 
-Besides compatibility with the PostgreSQL [SQL dialect and protocol](../sql_features), CedarDB also supports a large
+Besides compatibility with the PostgreSQL [SQL dialect and protocol]({{< relref "/compatibility/sql_features" >}}), CedarDB also supports a large
 part of the PostgreSQL system table catalog in the `pg_catalog` schema.
-These system tables contain information about the *system* state in the form of metadata.
+These system tables contain information about the _system_ state in the form of metadata.
 This metadata is often used by external tools and clients to interact with the database system for introspection and
 reflection, e.g., to show which tables exist.
 
@@ -20,15 +20,15 @@ Additionally, CedarDB exposes information that are not available in PostgreSQL i
 ## System Tables
 
 System tables provide a raw view into the state of the database system.
-In contrast to PostgreSQL, system tables in CedarDB are *read-only*, and can only be indirectly influenced through
-[DDL statements](/docs/references/objects/).
+In contrast to PostgreSQL, system tables in CedarDB are _read-only_, and can only be indirectly influenced through
+[DDL statements]({{< relref "/references/objects/" >}}).
 
 System tables often contain many low-level details.
 For more accessible and friendly access to the same information, consider using the
 built-in [system views](#system-views), or the SQL-standard [information schema](#information-schema).
 
 | Feature                                                                                                   | Support State | Details                                                                                   |
-|-----------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------|
+| --------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
 | [pg_aggregate](https://www.postgresql.org/docs/current/catalog-pg-aggregate.html)                         | 🟡            | Stores information about aggregate functions.                                             |
 | [pg_am](https://www.postgresql.org/docs/current/catalog-pg-am.html)                                       | 🟢            | Contains information about access methods; amhandler is unset.                            |
 | [pg_amop](https://www.postgresql.org/docs/current/catalog-pg-amop.html)                                   | 🟡            | Stores information about operators associated with access methods.                        |
@@ -97,7 +97,7 @@ built-in [system views](#system-views), or the SQL-standard [information schema]
 ### CedarDB System Tables
 
 CedarDB provides additional information in its system-specific system tables.
-As the PostgreSQL system tables, those system tables are *read-only*.
+As the PostgreSQL system tables, those system tables are _read-only_.
 
 #### cedardb_compression_info
 
@@ -105,19 +105,19 @@ This system table contains information about how tables and columns are compress
 Note that CedarDB can use different compression schemes within the same column and that this table currently only includes statistics on cold data.
 For more information on cold and hot data, see [this blog post](https://cedardb.com/blog/colibri/).
 
-| Column             | Type    | Description                                                                                                                                                                               |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| oid                | Integer | The [Object Identifier](https://www.postgresql.org/docs/current/datatype-oid.html) of the table.                                                                                          |
-| tablename          | Text    | The name of the table.                                                                                                                                                                    |
-| attributename      | Text    | The name of the attribute.                                                                                                                                                                |
-| datatype           | Text    | The type of the attribute.                                                                                                                                                                |
-| encoding           | Text    | The lightweight encoding scheme used for this value, e.g. dictionary or frame-of-reference encoding.                                                                                      |
-| generalcompression | Text    | The general-purpose compression method applied on top of the lightweight encoding. Currently either `none` or `zstd` (see [compression option](/docs/references/objects/tables#options)). |
-| encodedvaluewidth  | Text    | The maximum number of bytes required to encode a value using the lightweight encoding. For instance, if a dictionary has at most 256 keys, each value can be encoded using just one byte. |
-| uncompressedsize   | Bigint  | The size of the uncompressed data in bytes. For strings, this includes additional meta data to be able to query the data.                                                                 |
-| encodedsize        | Bigint  | The size of the data in bytes after the lightweight encoding, before any general-purpose compression is applied.                                                                          |
-| compressedsize     | Bigint  | The size of the data on disk in bytes, after both the lightweight encoding and the general-purpose compression have been applied.                                                         |
-| tuplecount         | Bigint  | The number of encoded tuples.                                                                                                                                                             |
+| Column             | Type    | Description                                                                                                                                                                                           |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| oid                | Integer | The [Object Identifier](https://www.postgresql.org/docs/current/datatype-oid.html) of the table.                                                                                                      |
+| tablename          | Text    | The name of the table.                                                                                                                                                                                |
+| attributename      | Text    | The name of the attribute.                                                                                                                                                                            |
+| datatype           | Text    | The type of the attribute.                                                                                                                                                                            |
+| encoding           | Text    | The lightweight encoding scheme used for this value, e.g. dictionary or frame-of-reference encoding.                                                                                                  |
+| generalcompression | Text    | The general-purpose compression method applied on top of the lightweight encoding. Currently either `none` or `zstd` (see [compression option]({{< relref "/references/objects/tables#options" >}})). |
+| encodedvaluewidth  | Text    | The maximum number of bytes required to encode a value using the lightweight encoding. For instance, if a dictionary has at most 256 keys, each value can be encoded using just one byte.             |
+| uncompressedsize   | Bigint  | The size of the uncompressed data in bytes. For strings, this includes additional meta data to be able to query the data.                                                                             |
+| encodedsize        | Bigint  | The size of the data in bytes after the lightweight encoding, before any general-purpose compression is applied.                                                                                      |
+| compressedsize     | Bigint  | The size of the data on disk in bytes, after both the lightweight encoding and the general-purpose compression have been applied.                                                                     |
+| tuplecount         | Bigint  | The number of encoded tuples.                                                                                                                                                                         |
 
 This is an excerpt of the output for [TPCH](https://www.tpc.org/tpch/) with scale factor 1:
 
@@ -148,7 +148,7 @@ System tables often contain numeric identifiers, e.g., for the owner of tables.
 The views instead use more human-readable symbolic names.
 
 | Feature                                                                                                              | Support State | Details                                                                         |
-|----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------------------------------------------------|
+| -------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------- |
 | [pg_available_extensions](https://www.postgresql.org/docs/current/view-pg-available-extensions.html)                 | 🟡            | Lists available extensions.                                                     |
 | [pg_available_extension_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) | 🟡            | Shows available versions of extensions.                                         |
 | [pg_backend_memory_contexts](https://www.postgresql.org/docs/current/view-pg-backend-memory-contexts.html)           | 🟡            | Displays memory contexts of the backend.                                        |
@@ -224,7 +224,7 @@ the [PostgreSQL Information Schema](https://www.postgresql.org/docs/current/info
 which matches the [ISO/IEC 9075-11](https://www.iso.org/standard/76586.html) standard.
 
 {{< callout type="info" >}}
-The information schema views are *not* included in the default search path, so queries on it need to use the
+The information schema views are _not_ included in the default search path, so queries on it need to use the
 fully qualified name:
 
 ```sql
@@ -234,7 +234,7 @@ select * from information_schema.tables;
 {{< /callout >}}
 
 | Table name                            | Support State | Details |
-|---------------------------------------|---------------|---------|
+| ------------------------------------- | ------------- | ------- |
 | information_schema_catalog_name       | 🟢            |         |
 | administrable_role_authorizations     | 🟢            |         |
 | applicable_roles                      | 🟢            |         |

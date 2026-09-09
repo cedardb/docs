@@ -61,7 +61,7 @@ For docker deployments, `your/path` is the path which was mounted as a docker vo
 
 ### Install latest version
 
-Please follow the [installation guide](../get_started) to install and start the latest CedarDB version.
+Please follow the [installation guide]({{< relref "/get_started" >}}) to install and start the latest CedarDB version.
 
 {{% /steps %}}
 

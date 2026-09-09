@@ -61,7 +61,7 @@ A value set via an environment variable takes precedence over the value defined 
 
 ### ALTER SYSTEM
 
-You can also update the configuration file from a SQL session with the [`ALTER SYSTEM`](/docs/references/sessions/altersystem)
+You can also update the configuration file from a SQL session with the [`ALTER SYSTEM`]({{< relref "/references/sessions/altersystem" >}})
 statement, without editing the file by hand:
 
 ```sql
@@ -158,7 +158,7 @@ To change the parallelism, you can change the following setting:
 ## License
 
 Enterprise license are passed as a setting named `license.key` to CedarDB.
-We have detailed how to obtain one in the dedicated [licensing page](/docs/licensing).
+We have detailed how to obtain one in the dedicated [licensing page]({{< relref "/licensing" >}}).
 
 ## Advanced configuration
 

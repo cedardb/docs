@@ -8,17 +8,17 @@ If you want to use CedarDB in combination with a specific framework or language,
 
 Programming languages:
 
-* [C#](csharp)
-* [C++](cpp)
-* [Java](java)
-* [JavaScript](javascript) — [Drizzle](javascript/drizzle), [Prisma](javascript/prisma)
-* [Python](python)
-* [R](r)
-* [Rust](rust)
+* [C#]({{< relref "/clients/csharp" >}})
+* [C++]({{< relref "/clients/cpp" >}})
+* [Java]({{< relref "/clients/java" >}})
+* [JavaScript]({{< relref "/clients/javascript" >}}) — [Drizzle]({{< relref "/clients/javascript/drizzle" >}}), [Prisma]({{< relref "/clients/javascript/prisma" >}})
+* [Python]({{< relref "/clients/python" >}})
+* [R]({{< relref "/clients/r" >}})
+* [Rust]({{< relref "/clients/rust" >}})
 
 Tools:
 
-* [DataGrip](tools/datagrip)
-* [DBeaver](tools/dbeaver)
-* [Grafana](tools/grafana)
-* [psql](tools/psql)
+* [DataGrip]({{< relref "/clients/tools/datagrip" >}})
+* [DBeaver]({{< relref "/clients/tools/dbeaver" >}})
+* [Grafana]({{< relref "/clients/tools/grafana" >}})
+* [psql]({{< relref "/clients/tools/psql" >}})

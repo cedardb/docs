@@ -127,7 +127,7 @@ The result seems reasonable:
 ```
 
 {{< callout type="info" >}}
-We're using the cosine distance (`<=>`) as metric. CedarDB also supports other distance metrics. For a full list, take a look at the [vector reference](/docs/references/datatypes/vector).
+We're using the cosine distance (`<=>`) as metric. CedarDB also supports other distance metrics. For a full list, take a look at the [vector reference]({{< relref "/references/datatypes/vector" >}}).
 {{< /callout >}}
 
 {{< callout type="info" >}}

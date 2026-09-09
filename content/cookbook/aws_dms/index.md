@@ -25,15 +25,15 @@ Note the following values for the CedarDB instance:
 * _Private IPv4 addresses_ and _VPC ID_ values from the EC2 dashboard view for the resulting instance (see below)
 * The values shown in the _Outputs_ tab in the CloudFormation UI
 
-![CloudFormation outputs](./img/cloudformation_complete.jpg)
+![CloudFormation outputs](cloudformation_complete.jpg)
 
-![EC2 instance details](./img/cedardb_ec2_note_vpc_and_private_ip.jpg)
+![EC2 instance details](cedardb_ec2_note_vpc_and_private_ip.jpg)
 
 ## Create the DMS Replication instance
 
-![Create replication instance step 1](./img/dms_create_replication_instance_1.jpg)
+![Create replication instance step 1](dms_create_replication_instance_1.jpg)
 
-![Create replication instance step 2](./img/dms_create_replication_instance_2.jpg)
+![Create replication instance step 2](dms_create_replication_instance_2.jpg)
 
 Finally, click the "Create replication instance" button. This process will take a while, so you can continue
 and check on the replication instance later.
@@ -42,54 +42,54 @@ and check on the replication instance later.
 
 This **RDS _parameter group_** which will enable logical replication to DMS.
 
-![Create parameter group 1](./img/rds_parameter_group_1.jpg)
+![Create parameter group 1](rds_parameter_group_1.jpg)
 
-![Create parameter group 2](./img/rds_parameter_group_2.jpg)
+![Create parameter group 2](rds_parameter_group_2.jpg)
 
-![Select new parameter group](./img/rds_parameter_group_3.jpg)
+![Select new parameter group](rds_parameter_group_3.jpg)
 
-![Edit new parameter group](./img/rds_parameter_group_4.jpg)
+![Edit new parameter group](rds_parameter_group_4.jpg)
 
-![Enable logical replication](./img/rds_parameter_group_5.jpg)
+![Enable logical replication](rds_parameter_group_5.jpg)
 
 ## Deploy a new RDS PostgreSQL instance
 
 **If you want to use your existing RDS PostgreSQL instance**, skip this section and head down to
 [Configure your existing RDS PostgreSQL instance](#configure-your-existing-rds-postgresql-instance).
 
-![Navigate to RDS](./img/rds_create_postgres_0.jpg)
+![Navigate to RDS](rds_create_postgres_0.jpg)
 
-![Click Create](./img/rds_create_postgres_0a.jpg)
+![Click Create](rds_create_postgres_0a.jpg)
 
-![Choose PostgreSQL](./img/rds_create_postgres_1.jpg)
+![Choose PostgreSQL](rds_create_postgres_1.jpg)
 
-![Version, dev test, single AZ](./img/rds_create_postgres_2.jpg)
+![Version, dev test, single AZ](rds_create_postgres_2.jpg)
 
-![Credentials](./img/rds_create_postgres_3.jpg)
+![Credentials](rds_create_postgres_3.jpg)
 
-![Instance type and storage](./img/rds_create_postgres_4.jpg)
+![Instance type and storage](rds_create_postgres_4.jpg)
 
-![Choose VPC, public access](./img/rds_create_postgres_5.jpg)
+![Choose VPC, public access](rds_create_postgres_5.jpg)
 
-![Security group](./img/rds_create_postgres_6.jpg)
+![Security group](rds_create_postgres_6.jpg)
 
-![More options](./img/rds_create_postgres_7.jpg)
+![More options](rds_create_postgres_7.jpg)
 
-![Apply parameter group](./img/rds_create_postgres_8.jpg)
+![Apply parameter group](rds_create_postgres_8.jpg)
 
-![Create database](./img/rds_create_postgres_9.jpg)
+![Create database](rds_create_postgres_9.jpg)
 
 Now, wait a while for the RDS PostgreSQL instance to come up.
 
 ## Configure your existing RDS PostgreSQL instance
 
-![RDS Modify Step 1](./img/rds_modify_1.jpg)
+![RDS Modify Step 1](rds_modify_1.jpg)
 
-![RDS Modify Step 2](./img/rds_modify_2.jpg)
+![RDS Modify Step 2](rds_modify_2.jpg)
 
-![RDS Modify Step 3](./img/rds_modify_3.jpg)
+![RDS Modify Step 3](rds_modify_3.jpg)
 
-![RDS Modify Step 4](./img/rds_modify_4.jpg)
+![RDS Modify Step 4](rds_modify_4.jpg)
 
 ## (optional) Load a data set into the RDS instance
 
@@ -222,41 +222,41 @@ Time: 27.676 ms
 
 ## Create the DMS source endpoint
 
-![DMS source step 1](./img/dms_source_db_1.jpg)
+![DMS source step 1](dms_source_db_1.jpg)
 
-![DMS source step 2](./img/dms_source_db_2.jpg)
+![DMS source step 2](dms_source_db_2.jpg)
 
-![DMS source step 3](./img/dms_source_db_3.jpg)
+![DMS source step 3](dms_source_db_3.jpg)
 
 ## Create the DMS target endpoint
 
-![DMS target step 1](./img/dms_target_db_1.jpg)
+![DMS target step 1](dms_target_db_1.jpg)
 
-![DMS target step 2](./img/dms_target_db_2.jpg)
+![DMS target step 2](dms_target_db_2.jpg)
 
-![DMS target step 3](./img/dms_target_db_3.jpg)
+![DMS target step 3](dms_target_db_3.jpg)
 
-![DMS endpoints created](./img/dms_endpoints_created.jpg)
+![DMS endpoints created](dms_endpoints_created.jpg)
 
 ## Create the DMS migration task
 
-![Create task step 1](./img/dms_create_migration_task.jpg)
+![Create task step 1](dms_create_migration_task.jpg)
 
-![Create task step 2](./img/dms_create_migration_task_2.jpg)
+![Create task step 2](dms_create_migration_task_2.jpg)
 
-![Create task step 3](./img/dms_create_migration_task_3.jpg)
+![Create task step 3](dms_create_migration_task_3.jpg)
 
-![Create task step 4](./img/dms_create_migration_task_4.jpg)
+![Create task step 4](dms_create_migration_task_4.jpg)
 
-![Create task step 5](./img/dms_create_migration_task_5.jpg)
+![Create task step 5](dms_create_migration_task_5.jpg)
 
 ## Monitor DMS migration
 
-![Migration started](./img/dms_task_started.jpg)
+![Migration started](dms_task_started.jpg)
 
-![Migration finished](./img/dms_task_finished.jpg)
+![Migration finished](dms_task_finished.jpg)
 
-![Migration summary](./img/dms_task_summary.jpg)
+![Migration summary](dms_task_summary.jpg)
 
 ## Verify tables and row counts on the CedarDB target
 

@@ -50,7 +50,7 @@ Concurrent updates to rows might cause serialization failures, which show up in 
 ERROR:   conflict with concurrent transaction
 ```
 
-This is caused by CedarDB's MVCC [transaction isolation](/docs/references/transactions), where a
+This is caused by CedarDB's MVCC [transaction isolation]({{< relref "/references/transactions" >}}), where a
 transaction will read the latest committed version.
 When two updates run concurrently on the same data, the second update will not observe the updated version and would
 blindly overwrite the row.

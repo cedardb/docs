@@ -104,10 +104,10 @@ If you start a second connection, use a thread pool, or reconnect after a timeou
 
 Most database drivers, however, offer far more comfortable abstractions to make use of them without you having to do extra work.
 
-For example, in [Python's `psycopg`](/docs/clients/python) you can use the `executeMany()` call when executing the same SQL statements multiple times.
+For example, in [Python's `psycopg`]({{< relref "/clients/python" >}}) you can use the `executeMany()` call when executing the same SQL statements multiple times.
 `psycopg` then internally instructs CedarDB to prepare the statement, when a certain threshold is reached.
 
-Have a look at the ["Clients" section](/docs/clients) to see how your favorite client can be used efficiently with prepared statements.
+Have a look at the ["Clients" section]({{< relref "/clients" >}}) to see how your favorite client can be used efficiently with prepared statements.
 
 ## How CedarDB treats prepared statements
 

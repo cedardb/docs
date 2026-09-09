@@ -3,8 +3,8 @@ title: "Reference: Text Functions"
 linkTitle: "Text"
 ---
 
-CedarDB supports a variety of functions for the [text](/docs/references/datatypes/text) data type. This page currently
-only describes a  subset of those. See [SQL features](/docs/compatibility/sql_features) for a full list of supported
+CedarDB supports a variety of functions for the [text]({{< relref "/references/datatypes/text" >}}) data type. This page currently
+only describes a  subset of those. See [SQL features]({{< relref "/compatibility/sql_features" >}}) for a full list of supported
 functions.
 
 ## Functions and Operators

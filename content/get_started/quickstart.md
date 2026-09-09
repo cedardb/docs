@@ -58,7 +58,7 @@ Once the schema is in place, we can populate it using one of the following metho
 
 ### Plain Inserts
 
-Use standard [`INSERT`](../../references/dml/insert) statements:
+Use standard [`INSERT`]({{< relref "/references/dml/insert" >}}) statements:
 
 ```sql
 insert into movies values
@@ -145,7 +145,7 @@ This means you can focus on the essential aspect: the business logic driving you
 
 ### Updates
 
-Update existing rows using the [`UPDATE`](../../references/dml/update) statement. For example:
+Update existing rows using the [`UPDATE`]({{< relref "/references/dml/update" >}}) statement. For example:
 
 ```sql
 update stars set name = '杨紫琼' where name = 'Michelle Yeoh';
@@ -153,7 +153,7 @@ update stars set name = '杨紫琼' where name = 'Michelle Yeoh';
 
 ### Deletes
 
-Delete rows using [`DELETE`](../../references/dml/delete).
+Delete rows using [`DELETE`]({{< relref "/references/dml/delete" >}}).
 For instance, to remove movies not linked to any stars:
 
 ```sql
@@ -164,6 +164,6 @@ where not exists
 
 ## What's next?
 
-* Want to go beyond basic examples? Explore the [Data Cookbook](../../cookbook) to import your own datasets.
-* Curious about CedarDB's performance in complex scenarios? Check out our [sample datasets](../../example_datasets).
-* Looking for detailed documentation? Visit the [reference section](../../references) to dive deeper into CedarDB's features.
+* Want to go beyond basic examples? Explore the [Data Cookbook]({{< relref "/cookbook" >}}) to import your own datasets.
+* Curious about CedarDB's performance in complex scenarios? Check out our [sample datasets]({{< relref "/example_datasets" >}}).
+* Looking for detailed documentation? Visit the [reference section]({{< relref "/references" >}}) to dive deeper into CedarDB's features.

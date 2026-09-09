@@ -28,7 +28,7 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
     ./cedar/cedardb mydb --address=::
     ```
 
-    For more details, see the [local installation guide](../install_locally).
+    For more details, see the [local installation guide]({{< relref "/get_started/install_locally" >}}).
 
   {{< /tab >}}
   {{< tab name="Docker" >}}
@@ -43,7 +43,7 @@ We recommend using the latest **Ubuntu LTS** release (i.e., Ubuntu 24.04 as of w
     ```shell
     docker run -p 5432:5432 -e CEDAR_PASSWORD=test cedardb/cedardb
     ```
-    For advanced usage and customization, refer to the [Docker setup guide](../install_with_docker).
+    For advanced usage and customization, refer to the [Docker setup guide]({{< relref "/get_started/install_with_docker" >}}).
 
   {{< /tab >}}
 {{< /tabs >}}
@@ -93,6 +93,6 @@ AWS recommendations by use case:
 - **Ephemeral storage for temporary workloads:** If you don't need persistence across instance shutdowns, instances with attached ephemeral NVMe SSDs offer fast, low-latency storage at a lower price. This is a good fit for: Batch workloads, temporary database instances, or situations where data is already backed up elsewhere.
 
 {{% callout type="info" %}}
-Want to store your data on [AWS S3](../../references/advanced/s3/) or [Google Cloud Storage](../../references/advanced/gs/) instead for increased performance and much lower cost?
+Want to store your data on [AWS S3]({{< relref "/references/advanced/s3" >}}) or [Google Cloud Storage]({{< relref "/references/advanced/gs" >}}) instead for increased performance and much lower cost?
 [Sign up](https://console.cedardb.com) for our Enterprise trial license or [contact us](mailto:sales@cedardb.com)!
 {{% /callout %}}

@@ -4,7 +4,7 @@ linkTitle: "Timestamp"
 weight: 26
 ---
 
-Timestamps combine the [date](../date) and [time](../time) types to a single column in microsecond resolution.
+Timestamps combine the [date]({{< relref "/references/datatypes/date" >}}) and [time]({{< relref "/references/datatypes/time" >}}) types to a single column in microsecond resolution.
 Timestamps optionally support time zones, either by specifying `with time zone` or by using the `timestamptz` alias.
 
 ## Usage Example
@@ -49,4 +49,4 @@ can eliminate this dependency on implicit state:
 set timezone to 'UTC';
 ```
 
-When the time of day is *not* relevant for your use case, e.g., when dealing with birthdates for age verification, consider using the [date](../date) type instead.
+When the time of day is *not* relevant for your use case, e.g., when dealing with birthdates for age verification, consider using the [date]({{< relref "/references/datatypes/date" >}}) type instead.

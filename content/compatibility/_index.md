@@ -15,13 +15,13 @@ CedarDB and PostgreSQL.
 ## Core SQL
 
 CedarDB already supports the vast majority of the PostgreSQL syntax, with more to come over time. You can find a list of
-supported statements, types and functions in our [Core SQL Compatibility](sql_features) documentation.
+supported statements, types and functions in our [Core SQL Compatibility]({{< relref "/compatibility/sql_features" >}}) documentation.
 
 ## Ecosystem and Clients
 
 CedarDB is already fully wire protocol compatible with PostgreSQL. We are currently testing and adding support for all
 relevant programming language integrations and front-end applications.
-For an overview of those we have already validated, see the [Ecosystem and Client Compatibility](ecosystem_and_clients)
+For an overview of those we have already validated, see the [Ecosystem and Client Compatibility]({{< relref "/compatibility/ecosystem_and_clients" >}})
 page.
 
 If you think an important client you depend on is missing, do not hesitate to contact us!
@@ -30,7 +30,7 @@ If you think an important client you depend on is missing, do not hesitate to co
 
 To ensure client compatibility, CedarDB is also compatible with a large number of PostgreSQL system tables, views and
 functions. While these are probably not relevant to most users of either CedarDB or PostgreSQL, tools and tool
-developers rely heavily on this functionality. For more details, see the [system table compatibility](system_table)
+developers rely heavily on this functionality. For more details, see the [system table compatibility]({{< relref "/compatibility/system_table" >}})
 page.
 
 ## Unsupported features
@@ -50,4 +50,4 @@ likely differ from PostgreSQL's types and interfaces.
 CedarDB is built from the ground up independent of PostgreSQL.
 Since extensions rely heavily on the internal structure of PostgreSQL, CedarDB is not compatible with them.
 However, we are integrating functionality from the most popular extensions into CedarDB.
-For more information, see our information on [extensions](ecosystem_and_clients#extensions).
+For more information, see our information on [extensions]({{< relref "/compatibility/ecosystem_and_clients#extensions" >}}).
