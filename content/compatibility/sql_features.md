@@ -663,7 +663,7 @@ the [system table compatibility](../system_table) page.
 | json_array                | No                |             |
 | row_to_json               | Yes               |             |
 | json_build_array          | Yes               |             |
-| jsonb_build_array         | No                |             |
+| jsonb_build_array         | Yes               |             |
 | json_build_object         | Yes               |             |
 | jsonb_build_object        | No                |             |
 | json_object               | No                |             |
