@@ -1,5 +1,200 @@
 [
 	{
+		"version": "v2026-09-16",
+		"date": "2026-09-16",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add support for the <tt>make_interval()</tt> function."
+			},
+			{
+				"type": "feat",
+				"note": "Allow multiple DDL statements in the same transaction. We previously required <tt>ALTER</tt> / <tt>CREATE statements</tt> to be executed in autocommit mode. Now, we support multiple DDL statements in a one transaction provided that they are not mixed with <tt>SELECT</tt> / <tt>INSERT</tt> statements."
+			},
+			{
+				"type": "feat",
+				"note": "Add load history collection metrics for transactions, disk usage, memory usage, and network usage."
+			},
+			{
+				"type": "feat",
+				"note": "Support materialized views, including <tt>REFRESH</tt>, <tt>WITH NO DATA</tt> and indexes on them."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>IF NOT EXISTS</tt> modifier in <tt>CREATE TYPE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Improve log messages during recovery."
+			},
+			{
+				"type": "feat",
+				"note": "Add the concatenation operator <tt>||</tt> for bit strings."
+			},
+			{
+				"type": "perf",
+				"note": "Add datablock skipping filters for singleton joins."
+			},
+			{
+				"type": "perf",
+				"note": "Optimize unsigned division by constants."
+			},
+			{
+				"type": "perf",
+				"note": "Consider range predicates for index joins."
+			},
+			{
+				"type": "perf",
+				"note": "Optimize <tt>min()</tt> / <tt>max()</tt> queries to skip blocks that can't contribute to the result."
+			},
+			{
+				"type": "pg",
+				"note": "All <tt>system_stats</tt> tables now check for role <tt>pg_read_all_stats</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implement <tt>string_agg(bytea, bytea)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Accept <tt>UNLOGGED</tt> qualifier for tables for compatibility purposes. These tables are still properly logged."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>ON CONFLICT DO NOTHING</tt> no longer reports an index violation if the same value is inserted twice, and instead inserts an arbitrary one, just like postgres."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a failed <tt>UPDATE</tt> leaving invalid records in the write-ahead log, which could disrupt crash recovery."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rows becoming permanently inaccessible when an <tt>UPDATE</tt> or bulk insert ran out of memory, leaving the affected page locked for the rest of the session."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash or memory corruption when updating a row with several hundred columns."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an internal error when planning queries that read a CTE from multiple <tt>UNION ALL</tt> branches without using its computed columns."
+			},
+			{
+				"type": "fix",
+				"note": "Fix parser assertion errors for multiple not yet supported features."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare case where a triggered assertion aborted a query during very complex recursive queries."
+			},
+			{
+				"type": "fix",
+				"note": "Improve table statistics after <tt>TRUNCATE</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Improve stability when using <tt>TEMP</tt> tables in transactions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an edge case on delete cascade with deleted foreign keys."
+			},
+			{
+				"type": "fix",
+				"note": "Fix potentially lost SSL keys on quick DB shutdown."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when a CTE that was used multiple times was inlined."
+			},
+			{
+				"type": "fix",
+				"note": "Fix \\copy from parquet file to stream parquet file over psql."
+			},
+			{
+				"type": "fix",
+				"note": "Abort failed uploads to remote servers due to already closed sockets instead of retrying."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a query hang when scanning incomplete on-disk data."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a potential referential integrity violation when adding <tt>FOREIGN KEY</tt>s with concurrent deletes."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash for certain complex <tt>UPDATE</tt> / <tt>DELETE</tt> queries with subselects."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>arg_min()</tt> and <tt>arg_max()</tt> types when working with strings."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when running <tt>explain (verbose)</tt> on window functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in psql <tt>\\df</tt> for functions returning void."
+			},
+			{
+				"type": "fix",
+				"note": "Fix indexes restored after an unclean shutdown being unusable for writes and returning wrong index lookup results."
+			},
+			{
+				"type": "fix",
+				"note": "Fix livelock when starting up a corrupted database."
+			},
+			{
+				"type": "fix",
+				"note": "Some queries missed some result rows under very high load and concurrency (> 100 cores)."
+			},
+			{
+				"type": "fix",
+				"note": "Allow <tt>LOCK TABLE</tt> inside read-only transactions, which unblocks pg_dump."
+			},
+			{
+				"type": "fix",
+				"note": "Stop <tt>pg_dump</tt> from truncating the last character of every view definition."
+			},
+			{
+				"type": "fix",
+				"note": "Correctly check for mistakenly added extra parameters in <tt>EXECUTE</tt> statements."
+			},
+			{
+				"type": "fix",
+				"note": "Fix ordering of strings with collations in <tt>min()</tt> / <tt>max()</tt> aggregates."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>INSERT .. ON CONFLICT ...</tt> against a unique constraint wrongly disallowed nulls to be inserted if the index already contained a null."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>INSERT ... ON CONFLICT DO UPDATE</tt> ignored the <tt>WHERE</tt> clause - it doesn't anymore."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a case where <tt>regr_r2()</tt> could return a wrong NULL result."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a case where statistical aggregates like <tt>var_samp()</tt> would return 0 instead of NULL."
+			},
+			{
+				"type": "fix",
+				"note": "Fix swapped <tt>regr_avgx()</tt> and <tt>regr_avgy()</tt> aggregates."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug that canceled TLS connections to remote S3 tables."
+			}
+		]
+	},
+	{
 		"version": "v2026-09-03",
 		"date": "2026-09-03",
 		"breaksdb": false,
