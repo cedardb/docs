@@ -14,3 +14,4 @@ The following sub-pages give an overview over the most important ones and explai
 * [pgvector compatibility](pgvector)
 * [Prepared statements](prepare)
 * [Tables stored on S3](s3)
+* [Load history collection](loadhistory)
