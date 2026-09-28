@@ -31,8 +31,10 @@ Most aggregation functions ignore `null` values and return `null` when they aggr
 `approx_count_distinct(x)`
 : Approximate a count of the distinct `x` values (i.e., `count(distinct x)`).
 While a precise `count(distinct x)` needs to store all elements, this approximate version only uses a fixed state for a
-[HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) sketch independent of the data size.
+[HyperLogLog (HLL)](https://en.wikipedia.org/wiki/HyperLogLog) sketch independent of the data size.
 This function can be very useful to compute distinct counts over huge data sets efficiently.
+CedarDB's implementation uses 1024&nbsp;Bytes of state for HLL, resulting in an accuracy of σ = 1.04/sqrt(1024) = 3.25%.
+Note that this is a statistical value, errors exceeding >13% = 4σ are unlikely, but nevertheless possible.
 
 `arg_max(x, max)`
 : Returns the `x` value for the maximum `max` value. When there are multiple equal `max` values, the `x` value is chosen
