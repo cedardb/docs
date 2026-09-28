@@ -7,6 +7,7 @@ weight: 30
 You can use create view to define a *virtual* table, specified by a query.
 When you reference the view, CedarDB reruns the query as if you would have specified the table as a subselect.
 Views are similar to common table expressions (CTEs), but they survive connection and server restarts.
+To store the result of a query instead of rerunning it, use a [materialized view](/docs/references/objects/materialized_views).
 
 Usage example:
 
