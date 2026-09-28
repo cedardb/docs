@@ -182,7 +182,7 @@ the [system table compatibility](../system_table) page.
 | circle                                  | No                |                                                                 |
 | date                                    | Yes               |           [Date Documentation](/docs/references/datatypes/date) |
 | double precision                        | Yes               |        [Double Documentation](/docs/references/datatypes/float) |
-| inet                                    | No                |                                                                 |
+| inet                                    | Partial           |           [Inet Documentation](/docs/references/datatypes/inet) |
 | integer                                 | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation](/docs/references/datatypes/interval) |
 | json                                    | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |

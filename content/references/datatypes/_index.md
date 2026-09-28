@@ -24,6 +24,7 @@ The complete list of supported data types in CedarDB is as follows:
 * [`double precision`](float)
 * [`enum`](enums)
 * [`float`](float)
+* [`inet`](inet)
 * [`integer`](integer) (`int4`)
 * [`interval`](interval)
 * [`json`](json)
