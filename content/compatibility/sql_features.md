@@ -111,6 +111,7 @@ the [system table compatibility](../system_table) page.
 | Table Partitioning     | Partial           | Only hash partitioning. Only at CREATE TABLE time                                       |
 | Foreign Data Wrappers  | No                |                                                                                         |
 | Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                        |
+| Materialized Views     | Yes               | [Documentation](/docs/references/objects/materialized_views/)                           |
 | Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                    |
 | Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language |
 | Custom Types           | No                |                                                                                         |

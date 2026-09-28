@@ -10,8 +10,9 @@ Each page covers all operations on that object type: creating, altering, and dro
 * [Databases](./databases) — `CREATE`, `ALTER`, `DROP DATABASE`
 * [Functions](./functions) — `CREATE`, `ALTER`, `DROP FUNCTION`/`PROCEDURE`, `DO`, `CALL`
 * [Indexes](./indexes) — `CREATE`, `DROP INDEX`, index types, partial and expression indexes
+* [Materialized Views](./materialized_views) — `CREATE`, `ALTER`, `DROP MATERIALIZED VIEW`, `REFRESH`
 * [Policies](./policies) — `CREATE`, `ALTER`, `DROP POLICY`, row level security
 * [Roles](./roles) — `CREATE`, `ALTER`, `DROP ROLE`, `GRANT`, `REVOKE`
 * [Schemas](./schemas) — `CREATE`, `ALTER`, `DROP SCHEMA`, `search_path`
 * [Tables](./tables) — `CREATE`, `ALTER`, `DROP TABLE`, constraints, partitioning
-* [Views](./views) — `CREATE`, `DROP VIEW`, materialized views, `REFRESH`
+* [Views](./views) — `CREATE`, `DROP VIEW`
