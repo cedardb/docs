@@ -21,6 +21,26 @@ Afterward, you can connect to the freshly created database:
 psql -h localhost -U postgres -d newdb
 ```
 
+## Session defaults
+
+`ALTER DATABASE ... SET` stores a default value for a [setting](/docs/references/sessions/settings).
+Every new session connecting to this database starts with this value:
+
+```sql
+alter database newdb set statement_timeout = '30s';
+```
+
+Note that this does not affect currently running sessions, for this use an explicit `SET`.
+[Role defaults](/docs/references/objects/roles#session-defaults) for the same setting, override this default.
+
+`RESET` removes defaults again:
+
+```sql
+alter database newdb reset statement_timeout;
+alter database newdb reset all;
+```
+
 ## Permissions
 
 To create a database, you need to have superuser or `createdb` permissions.
+To change the session defaults of a database, you need to be its owner or a superuser.
