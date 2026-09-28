@@ -55,12 +55,33 @@ alter role admin with superuser;
 
 For a full list of permissions, see the [CREATE ROLE](#create-role) section above.
 
+### Session defaults
+
+`ALTER ROLE ... SET` stores a default value for a [setting](/docs/references/sessions/settings).
+Every new session of this role starts with this value:
+
+```sql
+alter role dbuser set search_path = app, public;
+alter role dbuser set statement_timeout = '30s';
+```
+
+Note that this does not affect currently running sessions, for this use an explicit `SET`.
+Role defaults take precedence over [database defaults](/docs/references/objects/databases#session-defaults).
+
+`RESET` removes defaults again:
+
+```sql
+alter role dbuser reset search_path;
+alter role dbuser reset all;
+```
+
 ### Permissions
 
-Users are only allowed to change their own password without special permissions:
+Users are only allowed to change their own password or their session defaults without special permissions:
 
 ```sql
 alter user current_user password '1234';
+alter role current_user set search_path = app;
 ```
 
 For all other role modifications, the user executing the alter either needs to be a superuser or have the `createrole`
