@@ -1,5 +1,168 @@
 [
 	{
+		"version": "v2026-09-29",
+		"date": "2026-09-29",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add basic <tt>inet</tt> type support."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for savepoints."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for default setting with <tt>ALTER ROLE SET</tt> / <tt>ALTER DATABASE SET</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add basic support for <tt>ALTER COLUMN TYPE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>jsonb_array_length(json_array jsonb)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>gen_random_bytes(count int)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>pg_indexam_has_property(am oid, property text)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>array_to_json(array anyarray [, pretty bool])</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Increase resolution for <tt>approx_count_distinct(value anyelement)</tt> aggregates, reducing the expected error to 3.25%."
+			},
+			{
+				"type": "feat",
+				"note": "Results in <tt>--interactive</tt> mode are now formatted as a psql-style table."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>jsonb_build_object(VARIADIC \"any\")</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add <tt>inet_client_addr()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "By default, CedarDB now validates functions at <tt>CREATE</tt>. This can be configures with the <tt>check_function_bodies</tt> setting."
+			},
+			{
+				"type": "pg",
+				"note": "Implemented undocumented postgres functions: <tt>hasthtext(value text)</tt> and <tt>hashtextextended(value text, seed int)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Volatile functions such as <tt>nextval(regclass)</tt>, <tt>random()</tt> and user-defined functions with side effects now run exactly once per row, as in PostgreSQL."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_proc.provolatile</tt> now reports each built-in function's actual volatility instead of claiming they are all \"stable\"."
+			},
+			{
+				"type": "fix",
+				"note": "Fix calling UDFs with <tt>DEFAULT</tt> arguments."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an issue where inserts during a <tt>ALTER TABLE</tt> operation were lost."
+			},
+			{
+				"type": "fix",
+				"note": "Reduce memory consumption for large result sizes."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an internal consistency error in correlated subqueries aggregating a <tt>NOT NULL</tt> column with no matching rows."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent database corruption when the database crashes shortly after recovery."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an optimizer bug where functions where <tt>STABLE</tt> functions where incorrectly folded."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an index corruption when queries were ran while a table with an index is populated with a <tt>COPY</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Throw proper errors for write conflicts in DDL statements."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare deadlock when running DDL and <tt>VACUUM</tt> statements in parallel."
+			},
+			{
+				"type": "fix",
+				"note": "Fix edge case behavior for <tt>GROUP BY GROUPING SETS</tt> / <tt>ROLLUP</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Correctly roll back all session state on transaction rollback, including session settings and session auth."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where we incorrectly failed to convert nullable columns to json(b)."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with jsonb utf-8 validation."
+			},
+			{
+				"type": "fix",
+				"note": "Fix inconsistent jsonb encoding for numeric large values."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with enum-to-json conversion."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with float-to-json conversion."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug with array-to-json conversion."
+			},
+			{
+				"type": "fix",
+				"note": "CedarDB now supports up to 64k result columns. We previously refused to output more than 32k."
+			},
+			{
+				"type": "fix",
+				"note": "Fix rare cases of database crashes when an assert was triggered during a <tt>CREATE INDEX</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a \"column reference is ambiguous\" error in <tt>UPDATE  ... FROM</tt> when the target table has a <tt>CHECK</tt> constraint on a column that also appears in the <tt>FROM</tt> of the update."
+			},
+			{
+				"type": "fix",
+				"note": "Fix string <tt>concat()</tt> function accidentally choosing array overload."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a <tt>bad optional access</tt> error when executing a prepared <tt>INSERT</tt>, <tt>UPDATE</tt>, or <tt>DELETE</tt> after its table was dropped and recreated."
+			},
+			{
+				"type": "fix",
+				"note": "Prepared statements now return the current value of transaction-dependent functions such as <tt>txid_current()</tt> instead of the value from when the statement was prepared."
+			}
+		]
+	},
+	{
 		"version": "v2026-09-16",
 		"date": "2026-09-16",
 		"breaksdb": false,
