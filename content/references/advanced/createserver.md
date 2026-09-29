@@ -15,13 +15,23 @@ create server server_name foreign data wrapper s3 options (location 's3://bucket
 
 ## Foreign Data Wrapper
 
-CedarDB currently supports S3 and requires the following options.
+CedarDB currently supports S3 and S3-compatible object storage (e.g., MinIO, Ceph, or other self-hosted storage), and requires the following options.
 
 ## Options
 
-* location: The bucket location of the data, in the form `s3://bucketname:region`.
+* location: The bucket location of the data, in the form `s3://bucketname:region` for AWS S3, or `minio://host:port/bucketname:region` for S3-compatible storage.
 * id: This is the access key.
 * secret: This is the secret that belongs to the access key.
+
+## S3-compatible storage
+
+To use a self-hosted, S3-compatible storage such as MinIO or Ceph, use the `minio://` prefix and add the endpoint (host and port) in front of the bucket.
+The region has to match the region configured on your storage server.
+CedarDB connects to such endpoints via plain HTTP.
+
+```sql
+create server server_name foreign data wrapper s3 options (location 'minio://127.0.0.1:9000/bucketname:local', id '<access key>', secret '<secret key>');
+```
 
 ## Creating access keys
 
