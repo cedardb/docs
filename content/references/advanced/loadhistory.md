@@ -97,6 +97,9 @@ All metrics are in bytes.
 `db_file_size`
 : The size of the `db` file
 
+`datablocks_size`
+: The total size of all datablocks
+
 `page_file_size`
 : The size of the `db.pages` file
 
