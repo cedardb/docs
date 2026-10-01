@@ -4,9 +4,9 @@ linkTitle: "ADBC"
 weight: 15
 ---
 
-CedarDB is compatible with the PostgreSQL [ADBC](https://arrow.apache.org/adbc/) (Arrow Database Connectivity) driver.
+CedarDB is compatible with the [ADBC](https://arrow.apache.org/adbc/) PostgreSQL driver for Arrow-native database access.
 
-## Installing
+## Installing Driver
 
 Install the PostgreSQL ADBC driver with [dbc](https://docs.columnar.tech/dbc/):
 
@@ -14,10 +14,14 @@ Install the PostgreSQL ADBC driver with [dbc](https://docs.columnar.tech/dbc/):
 dbc install postgresql
 ```
 
-Then install the ADBC client library for your language:
+## Connecting to CedarDB
+
+Pick your language to install the ADBC client library and connect to CedarDB:
 
 {{< tabs >}}
 {{< tab name="C++" >}}
+
+### Installing the C++ Client
 
 Install the Arrow C++ and ADBC libraries with your system package manager.
 
@@ -27,76 +31,7 @@ On Debian or Ubuntu:
 sudo apt install libarrow-dev libadbc-driver-manager-dev
 ```
 
-{{< /tab >}}
-{{< tab name="C#" >}}
-
-```shell
-dotnet add package Apache.Arrow.Adbc
-```
-
-{{< /tab >}}
-{{< tab name="Go" >}}
-
-```shell
-go get github.com/apache/arrow-adbc/go/adbc
-```
-
-{{< /tab >}}
-{{< tab name="JavaScript" >}}
-
-```shell
-npm install @apache-arrow/adbc-driver-manager apache-arrow
-```
-
-{{< /tab >}}
-{{< tab name="Python" >}}
-
-```shell
-pip install adbc-driver-manager pyarrow
-```
-
-{{< /tab >}}
-{{< tab name="R" >}}
-
-```r
-install.packages(c("adbcdrivermanager", "arrow", "tibble"))
-```
-
-{{< /tab >}}
-{{< tab name="Ruby" >}}
-
-Install the native Arrow and ADBC GLib libraries, then the `red-adbc` gem.
-
-On macOS with Homebrew:
-
-```shell
-brew install apache-arrow-glib apache-arrow-adbc-glib
-gem install red-adbc
-```
-
-On Debian or Ubuntu:
-
-```shell
-sudo apt install libarrow-glib-dev libadbc-glib-dev
-gem install red-adbc
-```
-
-{{< /tab >}}
-{{< tab name="Rust" >}}
-
-```shell
-cargo add adbc_core adbc_driver_manager
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## Connecting
-
-Connect to CedarDB and run a query like this:
-
-{{< tabs >}}
-{{< tab name="C++" >}}
+### Connecting with C++
 
 ```cpp
 #include <cstdlib>
@@ -148,6 +83,14 @@ int main() {
 {{< /tab >}}
 {{< tab name="C#" >}}
 
+### Installing the C# Client
+
+```shell
+dotnet add package Apache.Arrow.Adbc
+```
+
+### Connecting with C\#
+
 ```csharp
 using Apache.Arrow.Adbc;
 using Apache.Arrow.Adbc.DriverManager;
@@ -182,6 +125,14 @@ while (await stream.ReadNextRecordBatchAsync() is { } batch)
 
 {{< /tab >}}
 {{< tab name="Go" >}}
+
+### Installing the Go Client
+
+```shell
+go get github.com/apache/arrow-adbc/go/adbc
+```
+
+### Connecting with Go
 
 ```go
 package main
@@ -243,13 +194,21 @@ func main() {
 {{< /tab >}}
 {{< tab name="JavaScript" >}}
 
+### Installing the JavaScript Client
+
+```shell
+npm install @apache-arrow/adbc-driver-manager apache-arrow
+```
+
+### Connecting with JavaScript
+
 ```javascript
-import { AdbcDatabase } from '@apache-arrow/adbc-driver-manager';
+import { AdbcDatabase } from "@apache-arrow/adbc-driver-manager";
 
 const db = new AdbcDatabase({
-  driver: 'postgresql',
+  driver: "postgresql",
   databaseOptions: {
-    uri: 'postgresql://<username>:<password>@localhost:5432/<dbname>',
+    uri: "postgresql://<username>:<password>@localhost:5432/<dbname>",
   },
 });
 
@@ -257,8 +216,8 @@ let conn, stmt;
 try {
   conn = await db.connect();
   stmt = await conn.createStatement();
-  stmt.setOption('adbc.postgresql.use_copy', 'false');
-  await stmt.setSqlQuery('SELECT version()');
+  stmt.setOption("adbc.postgresql.use_copy", "false");
+  await stmt.setSqlQuery("SELECT version()");
   const reader = await stmt.executeQuery();
   for await (const batch of reader) {
     console.log(batch.toArray());
@@ -272,6 +231,14 @@ try {
 
 {{< /tab >}}
 {{< tab name="Python" >}}
+
+### Installing the Python Client
+
+```shell
+pip install adbc-driver-manager pyarrow
+```
+
+### Connecting with Python
 
 ```python
 from adbc_driver_manager import dbapi
@@ -293,6 +260,14 @@ print(table)
 
 {{< /tab >}}
 {{< tab name="R" >}}
+
+### Installing the R Client
+
+```r
+install.packages(c("adbcdrivermanager", "arrow", "tibble"))
+```
+
+### Connecting with R
 
 ```r
 library(adbcdrivermanager)
@@ -323,6 +298,26 @@ tibble::as_tibble(stream)
 {{< /tab >}}
 {{< tab name="Ruby" >}}
 
+### Installing the Ruby Client
+
+Install the native Arrow and ADBC GLib libraries, then the `red-adbc` gem.
+
+On Debian or Ubuntu:
+
+```shell
+sudo apt install libarrow-glib-dev libadbc-glib-dev
+gem install red-adbc
+```
+
+On macOS with Homebrew:
+
+```shell
+brew install apache-arrow-glib apache-arrow-adbc-glib
+gem install red-adbc
+```
+
+### Connecting with Ruby
+
 ```ruby
 require "adbc"
 
@@ -349,6 +344,14 @@ end
 
 {{< /tab >}}
 {{< tab name="Rust" >}}
+
+### Installing the Rust Client
+
+```shell
+cargo add adbc_core adbc_driver_manager
+```
+
+### Connecting with Rust
 
 ```rust
 use adbc_core::options::{AdbcVersion, OptionDatabase, OptionStatement, OptionValue};

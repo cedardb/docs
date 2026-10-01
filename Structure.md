@@ -20,7 +20,7 @@ content/
 ├── get_started/                 # First-time setup
 ├── cookbook/                    # Task-oriented how-to guides
 ├── example_datasets/            # Worked examples with real data
-├── clients/                     # Drivers, ORMs, GUI tools (see below)
+├── clients/                     # Drivers, APIs, ORMs, GUI tools (see below)
 ├── best_practices/              # Optimization, strengths, recommendations
 ├── references/                  # Feature reference (see below)
 ├── compatibility/               # PostgreSQL compatibility matrices
@@ -68,7 +68,7 @@ Organized into three subsections:
   programming language. The folder's `_index.md` covers the primary driver or
   adapter for that language. Additional pages in the same folder cover
   language-specific ORMs and frameworks (e.g., `javascript/drizzle.md`).
-- **`adbc/`** — ADBC database connectivity API (language-agnostic).
+- **`apis/`** — APIs like ADBC for language-agnostic Arrow database connectivity.
 - **`tools/`** — GUI clients, CLI tools, and observability integrations that are
   not tied to a specific programming language (DBeaver, DataGrip, psql, Grafana).
 
@@ -116,8 +116,8 @@ clients/
 │   └── _index.md
 ├── r/
 │   └── _index.md
-├── adbc/                    # ADBC driver
-│   └── _index.md
+├── apis
+│   └── adbc.md              # ADBC api
 └── tools/                   # Not language-specific
     ├── psql.md
     ├── dbeaver.md
