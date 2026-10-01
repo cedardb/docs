@@ -24,7 +24,7 @@ Install the Arrow C++ and ADBC libraries with your system package manager.
 On Debian or Ubuntu:
 
 ```shell
-sudo apt install libarrow-dev libarrow-adbc-dev
+sudo apt install libarrow-dev libadbc-driver-manager-dev
 ```
 
 {{< /tab >}}
@@ -85,7 +85,7 @@ gem install red-adbc
 {{< tab name="Rust" >}}
 
 ```shell
-cargo add adbc_core adbc_driver_manager arrow arrow-array
+cargo add adbc_core adbc_driver_manager
 ```
 
 {{< /tab >}}
@@ -175,7 +175,7 @@ while (await stream.ReadNextRecordBatchAsync() is { } batch)
 {
     using (batch)
     {
-        BatchPrinter.Print(batch);
+        Console.WriteLine(((Apache.Arrow.StringArray)batch.Column(0)).GetString(0));
     }
 }
 ```
@@ -315,8 +315,9 @@ adbc_statement_set_options(
 )
 adbc_statement_set_sql_query(stmt, "SELECT version()")
 
-adbc_statement_execute_query(stmt) |>
-  tibble::as_tibble()
+stream <- nanoarrow::nanoarrow_allocate_array_stream()
+adbc_statement_execute_query(stmt, stream)
+tibble::as_tibble(stream)
 ```
 
 {{< /tab >}}
@@ -353,8 +354,6 @@ end
 use adbc_core::options::{AdbcVersion, OptionDatabase, OptionStatement, OptionValue};
 use adbc_core::{Connection, Database, Driver, LOAD_FLAG_DEFAULT, Optionable, Statement};
 use adbc_driver_manager::ManagedDriver;
-use arrow::util::pretty;
-use arrow_array::RecordBatch;
 
 fn main() {
     let mut driver = ManagedDriver::load_from_name(
@@ -385,9 +384,10 @@ fn main() {
         .unwrap();
     statement.set_sql_query("SELECT version()").unwrap();
     let reader = statement.execute().unwrap();
-    let batches: Vec<RecordBatch> = reader.collect::<Result<_, _>>().unwrap();
 
-    pretty::print_batches(&batches).expect("Failed to print batches");
+    for batch in reader {
+        println!("{:?}", batch.unwrap());
+    }
 }
 ```
 
