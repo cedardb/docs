@@ -18,7 +18,7 @@ Programming languages:
 
 Connectivity APIs:
 
-* [ADBC](adbc)
+* [ADBC](apis/adbc)
 
 Tools:
 
