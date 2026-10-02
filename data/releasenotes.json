@@ -2863,7 +2863,7 @@
 			},
 			{
 				"type": "feat",
-				"note": "Add support for most <tt>information_schema</tt> tables, as defined by the SQL standard. You can see the implementation progress <a href=../compatibility/backend>here</a>."
+				"note": "Add support for most <tt>information_schema</tt> tables, as defined by the SQL standard. You can see the implementation progress <a href=../compatibility/system_table/>here</a>."
 			},
 			{
 				"type": "feat",
@@ -3887,11 +3887,11 @@
 			},
 			{
 				"type": "feat",
-				"note": "Added support for <a href=/docs/references/sqlreference/statements/upsert target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>."
+				"note": "Added support for <a href=../references/dml/upsert/ target=_blank>upserts</a> through <tt>ON CONFLICT DO UPDATE</tt> and <tt>ON CONFLICT DO NOTHING</tt>."
 			},
 			{
 				"type": "feat",
-				"note": "Added support for additional <a href=/docs/references/sqlreference/functions/aggregation/ target=_blank>aggregation functions</a>."
+				"note": "Added support for additional <a href=../references/functions/aggregation/ target=_blank>aggregation functions</a>."
 			},
 			{
 				"type": "fix",
