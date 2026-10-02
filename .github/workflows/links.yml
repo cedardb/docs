@@ -19,17 +19,13 @@ jobs:
 
       - name: Build
         if: github.event_name == 'pull_request'
-        run: hugo --minify
-
-      - name: Serve
-        if: github.event_name == 'pull_request'
-        run: python3 -m http.server 8080 --directory public &
+        run: hugo --minify --destination public/docs
 
       - name: Check Links (PR)
         if: github.event_name == 'pull_request'
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config lychee.toml --base-url 'http://localhost:8080' --verbose --no-progress './public/**/*.html'
+          args: --config lychee.toml --root-dir '${{ github.workspace }}/public' --include '^file://' --verbose --no-progress './public/**/*.html'
 
       - name: Check Links (Scheduled)
         if: github.event_name == 'schedule'
