@@ -98,16 +98,6 @@ This copies the column names and types, but not constraints or defaults:
 CREATE TABLE species_archive (LIKE species);
 ```
 
-Create a table partitioned by a hash of a column:
-
-```sql
-CREATE TABLE observations (
-    id      int,
-    species int,
-    site    text
-) PARTITION BY HASH (id);
-```
-
 Create a table that stores all compressed data on a remote server previously created with name `remote_storage`
 (see [CREATE SERVER](/docs/references/advanced/createserver) for more information):
 
@@ -123,6 +113,30 @@ compression statistics). Supported values are `zstd` (the default) and `none`:
 CREATE TABLE species (...) WITH (compression = zstd);
 CREATE TABLE species_uncompressed (...) WITH (compression = none);
 ```
+
+### Partitioning
+
+You can create a table partitioned by a hash of one or more columns:
+
+```sql
+CREATE TABLE observations (
+    id      int,
+    species int,
+    site    text
+) PARTITION BY HASH (id);
+```
+
+Unlike PostgreSQL, CedarDB partitions hash-partitioned tables automatically.
+So, you don't need to create individual partitions with `CREATE TABLE ... PARTITION OF ... FOR VALUES WITH (MODULUS ..., REMAINDER ...)`.
+Instead, CedarDB creates up to 1024 partitions per table, with lazily created partitions on the first insert into them.
+The table behaves like a single table for all queries and modifications.
+
+Partitioning has the following restrictions:
+
+* Only `HASH` partitioning is supported. `RANGE` and `LIST` partitioning are not yet implemented.
+* The partition key must consist of plain column names. Expressions, `COLLATE`, and operator classes are not supported.
+* Explicit partitions (`PARTITION OF`) and `ALTER TABLE ... ATTACH / DETACH PARTITION` are not supported.
+* You can't drop a column that is part of the partition key.
 
 ### Identity Columns
 

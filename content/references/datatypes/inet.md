@@ -9,7 +9,7 @@ For example, `192.168.1.5/24` describes the host `192.168.1.5` in the subnet `19
 
 {{< callout type="info" >}}
 CedarDB currently only supports basic `inet` functionality.
-PostgreSQL's network operators, functions (for example, `<<`, `host()`, or `masklen()`), the `cidr` type, and 
+PostgreSQL's network operators, functions (for example, `<<`, `host()`, or `masklen()`), the `cidr` type, and
 non-standard prefix-only IPs (`10/24`) are not yet supported.
 {{< /callout >}}
 
