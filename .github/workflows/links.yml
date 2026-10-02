@@ -19,7 +19,7 @@ jobs:
 
       - name: Build
         if: github.event_name == 'pull_request'
-        run: hugo --minify
+        run: hugo --minify --baseURL 'http://localhost:8080/docs/' --destination public/docs
 
       - name: Serve
         if: github.event_name == 'pull_request'
@@ -29,7 +29,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config lychee.toml --base-url 'http://localhost:8080' --verbose --no-progress './public/**/*.html'
+          args: --config lychee.toml --base-url 'http://localhost:8080' --include '^http://localhost:8080' --verbose --no-progress './public/**/*.html'
 
       - name: Check Links (Scheduled)
         if: github.event_name == 'schedule'
