@@ -76,16 +76,16 @@ the [system table compatibility](../system_table) page.
 
 ### Privileges
 
-| **Feature**           | **Support State** | **Details**                                                |
-|-----------------------|-------------------|------------------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)            |
-| OWNER TO              | Yes               |                                                            |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)            |
-| GRANT                 | Yes               | Requires an enterprise license                             |
-| REVOKE                | Yes               | Requires an enterprise license                             |
-| SET ROLE              | Yes               | Requires an enterprise license                             |
-| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/)           |
-| Row Security Policies | Yes               | Requires an enterprise license                             |
+| **Feature**           | **Support State** | **Details**                                      |
+|-----------------------|-------------------|--------------------------------------------------|
+| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)  |
+| OWNER TO              | Yes               |                                                  |
+| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)  |
+| GRANT                 | Yes               | Requires an enterprise license                   |
+| REVOKE                | Yes               | Requires an enterprise license                   |
+| SET ROLE              | Yes               | Requires an enterprise license                   |
+| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/) |
+| Row Security Policies | Yes               | Requires an enterprise license                   |
 
 ### Indexes
 
@@ -102,23 +102,23 @@ the [system table compatibility](../system_table) page.
 
 ### Misc
 
-| **Feature**            | **Support State** | **Details**                                                                             |
-|------------------------|-------------------|-----------------------------------------------------------------------------------------|
-| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                      |
-| DROP SCHEMA            | Yes               | Only if the schema is empty                                                             |
-| search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                        |
-| Table Inheritance      | No                |                                                                                         |
-| Table Partitioning     | Partial           | Only hash partitioning. Only at CREATE TABLE time                                       |
-| Foreign Data Wrappers  | No                |                                                                                         |
-| Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                        |
-| Materialized Views     | Yes               | [Documentation](/docs/references/objects/materialized_views/)                           |
-| Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                    |
-| Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language |
-| Custom Types           | No                |                                                                                         |
-| Triggers               | No                |                                                                                         |
-| Prepared Statements    | Yes               |                                                                                         |
-| Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                      |
-| ALTER SYSTEM           | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                 |
+| **Feature**            | **Support State** | **Details**                                                                                                                  |
+|------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------|
+| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                                                           |
+| DROP SCHEMA            | Yes               | Only if the schema is empty                                                                                                  |
+| search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                                                             |
+| Table Inheritance      | No                |                                                                                                                              |
+| Table Partitioning     | Partial           | Only hash partitioning, partitions are created automatically. [Documentation](/docs/references/objects/tables/#partitioning) |
+| Foreign Data Wrappers  | No                |                                                                                                                              |
+| Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                                                             |
+| Materialized Views     | Yes               | [Documentation](/docs/references/objects/materialized_views/)                                                                |
+| Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                                                         |
+| Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language                                      |
+| Custom Types           | No                |                                                                                                                              |
+| Triggers               | No                |                                                                                                                              |
+| Prepared Statements    | Yes               |                                                                                                                              |
+| Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                                                           |
+| ALTER SYSTEM           | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                                                      |
 
 ## Data Manipulation
 
@@ -321,52 +321,52 @@ the [system table compatibility](../system_table) page.
 
 #### Text
 
-| **Feature**           | **Support State** |                                           **Details** |
-|-----------------------|-------------------|------------------------------------------------------:|
-| \|\|                  | Yes               |                                                       |
-| btrim                 | Yes               |                                                       |
-| bit_length            | Yes               |                                                       |
-| char_length           | Yes               |                                                       |
-| lower                 | Yes               |                                                       |
-| lpad                  | Yes               |                                                       |
-| ltrim                 | Yes               |                                                       |
-| normalize             | No                |                                                       |
-| octet_length          | Yes               |                                                       |
-| overlay               | Yes               |                                                       |
-| position              | Yes               |                                                       |
-| rpad                  | Yes               |                                                       |
-| rtrim                 | Yes               |                                                       |
-| substring             | Yes               | Currently not supporting regular expression arguments |
-| trim                  | Yes               |                                                       |
-| upper                 | Yes               |                                                       |
-| ^@                    | No                |                                                       |
-| ascii                 | Yes               |                                                       |
-| chr                   | Yes               |                                                       |
-| concat                | Yes               |                                                       |
-| concat_ws             | Yes               |                                                       |
-| format                | Yes               |                                                       |
-| initcap               | Yes               |                                                       |
-| left                  | Yes               |                                                       |
-| length                | Yes               |                                                       |
-| md5                   | Yes               |                                                       |
-| parse_ident           | Yes               |                                                       |
-| quote_ident           | Yes               |                                                       |
-| quote_literal         | Yes               |                                                       |
-| quote_nullable        | Yes               |                                                       |
-| repeat                | Yes               |                                                       |
-| replace               | Yes               |                                                       |
-| reverse               | Yes               |                                                       |
-| right                 | Yes               |                                                       |
-| split_part            | Yes               |                                                       |
-| starts_with           | Yes               |                                                       |
-| string_to_array       | Yes               |                                                       |
-| string_to_table       | Yes               |                                                       |
-| strpos                | Yes               |                                                       |
-| substr                | Yes               |                                                       |
-| to_ascii              | No                |                                                       |
-| to_hex                | Yes               |                                                       |
-| translate             | Yes               |                                                       |
-| unistr                | No                |                                                       |
+| **Feature**     | **Support State** |                                           **Details** |
+|-----------------|-------------------|------------------------------------------------------:|
+| \|\|            | Yes               |                                                       |
+| btrim           | Yes               |                                                       |
+| bit_length      | Yes               |                                                       |
+| char_length     | Yes               |                                                       |
+| lower           | Yes               |                                                       |
+| lpad            | Yes               |                                                       |
+| ltrim           | Yes               |                                                       |
+| normalize       | No                |                                                       |
+| octet_length    | Yes               |                                                       |
+| overlay         | Yes               |                                                       |
+| position        | Yes               |                                                       |
+| rpad            | Yes               |                                                       |
+| rtrim           | Yes               |                                                       |
+| substring       | Yes               | Currently not supporting regular expression arguments |
+| trim            | Yes               |                                                       |
+| upper           | Yes               |                                                       |
+| ^@              | No                |                                                       |
+| ascii           | Yes               |                                                       |
+| chr             | Yes               |                                                       |
+| concat          | Yes               |                                                       |
+| concat_ws       | Yes               |                                                       |
+| format          | Yes               |                                                       |
+| initcap         | Yes               |                                                       |
+| left            | Yes               |                                                       |
+| length          | Yes               |                                                       |
+| md5             | Yes               |                                                       |
+| parse_ident     | Yes               |                                                       |
+| quote_ident     | Yes               |                                                       |
+| quote_literal   | Yes               |                                                       |
+| quote_nullable  | Yes               |                                                       |
+| repeat          | Yes               |                                                       |
+| replace         | Yes               |                                                       |
+| reverse         | Yes               |                                                       |
+| right           | Yes               |                                                       |
+| split_part      | Yes               |                                                       |
+| starts_with     | Yes               |                                                       |
+| string_to_array | Yes               |                                                       |
+| string_to_table | Yes               |                                                       |
+| strpos          | Yes               |                                                       |
+| substr          | Yes               |                                                       |
+| to_ascii        | No                |                                                       |
+| to_hex          | Yes               |                                                       |
+| translate       | Yes               |                                                       |
+| unistr          | No                |                                                       |
 
 #### Bytea
 
@@ -822,11 +822,11 @@ the [system table compatibility](../system_table) page.
 
 ##### Ordered-Set
 
-| **Feature**     | **Support State** |                                                                                                   **Details** |
-|-----------------|-------------------|--------------------------------------------------------------------------------------------------------------:|
-| mode            | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_cont | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_disc | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| **Feature**     | **Support State** |                                                                                                  **Details** |
+|-----------------|-------------------|-------------------------------------------------------------------------------------------------------------:|
+| mode            | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| percentile_cont | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| percentile_disc | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
 
 #### Window
 
