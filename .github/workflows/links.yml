@@ -25,7 +25,13 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config lychee.toml --root-dir '${{ github.workspace }}/public' --include '^file://' --verbose --no-progress './public/**/*.html'
+          args: >-
+            --config lychee.toml
+            --root-dir '${{ github.workspace }}/public'
+            --remap 'https://cedardb.com/docs file://${{ github.workspace }}/public/docs'
+            --include '^file://'
+            --verbose --no-progress
+            './public/**/*.html'
 
       - name: Check Links (Scheduled)
         if: github.event_name == 'schedule'
