@@ -64,7 +64,6 @@ int main() {
   struct ArrowArrayStream stream = {};
   int64_t rows_affected = -1;
 
-  AdbcStatementSetOption(&statement, "adbc.postgresql.use_copy", "false", &error);
   AdbcStatementSetSqlQuery(&statement, "SELECT version()", &error);
   AdbcStatementExecuteQuery(&statement, &stream, &rows_affected, &error);
 
@@ -108,7 +107,6 @@ using AdbcDatabase db = driver.Open(new Dictionary<string, string>
 using AdbcConnection conn = db.Connect(null);
 using AdbcStatement stmt = conn.CreateStatement();
 
-stmt.SetOption("adbc.postgresql.use_copy", "false");
 stmt.SqlQuery = "SELECT version()";
 
 QueryResult result = stmt.ExecuteQuery();
@@ -169,9 +167,6 @@ func main() {
     }
     defer stmt.Close()
 
-    if err := stmt.SetOption("adbc.postgresql.use_copy", "false"); err != nil {
-        log.Fatal(err)
-    }
     if err := stmt.SetSqlQuery("SELECT version()"); err != nil {
         log.Fatal(err)
     }
@@ -216,7 +211,6 @@ let conn, stmt;
 try {
   conn = await db.connect();
   stmt = await conn.createStatement();
-  stmt.setOption("adbc.postgresql.use_copy", "false");
   await stmt.setSqlQuery("SELECT version()");
   const reader = await stmt.executeQuery();
   for await (const batch of reader) {
@@ -250,7 +244,7 @@ with (
             "uri": "postgresql://<username>:<password>@localhost:5432/<dbname>",
         },
     ) as connection,
-    connection.cursor(adbc_stmt_kwargs={"adbc.postgresql.use_copy": False}) as cursor,
+    connection.cursor() as cursor,
 ):
     cursor.execute("SELECT version()")
     table = cursor.fetch_arrow_table()
@@ -282,12 +276,6 @@ db <- adbc_database_init(
 con <- adbc_connection_init(db)
 
 stmt <- adbc_statement_init(con)
-adbc_statement_set_options(
-  stmt,
-  list(
-    "adbc.postgresql.use_copy" = "false"
-  )
-)
 adbc_statement_set_sql_query(stmt, "SELECT version()")
 
 stream <- nanoarrow::nanoarrow_allocate_array_stream()
@@ -331,7 +319,6 @@ begin
 
   database.connect do |connection|
     connection.open_statement do |statement|
-      statement.set_option("adbc.postgresql.use_copy", "false")
       statement.sql_query = "SELECT version()"
       table, = statement.execute
       puts(table)
@@ -354,8 +341,8 @@ cargo add adbc_core adbc_driver_manager
 ### Connecting with Rust
 
 ```rust
-use adbc_core::options::{AdbcVersion, OptionDatabase, OptionStatement, OptionValue};
-use adbc_core::{Connection, Database, Driver, LOAD_FLAG_DEFAULT, Optionable, Statement};
+use adbc_core::options::{AdbcVersion, OptionDatabase};
+use adbc_core::{Connection, Database, Driver, LOAD_FLAG_DEFAULT, Statement};
 use adbc_driver_manager::ManagedDriver;
 
 fn main() {
@@ -379,12 +366,6 @@ fn main() {
     let mut conn = db.new_connection().expect("Failed to create connection");
 
     let mut statement = conn.new_statement().unwrap();
-    statement
-        .set_option(
-            OptionStatement::Other("adbc.postgresql.use_copy".into()),
-            OptionValue::String("false".into()),
-        )
-        .unwrap();
     statement.set_sql_query("SELECT version()").unwrap();
     let reader = statement.execute().unwrap();
 
@@ -398,8 +379,3 @@ fn main() {
 {{< /tabs >}}
 
 Query results are returned in [Apache Arrow](https://arrow.apache.org/) format.
-
-{{< callout type="info" >}}
-Be sure to set the statement option `adbc.postgresql.use_copy` to `false` when querying CedarDB.
-The PostgreSQL ADBC driver defaults to a `COPY`-based fast path to read results, which CedarDB does not yet support.
-{{< /callout >}}
