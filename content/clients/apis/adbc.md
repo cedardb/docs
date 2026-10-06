@@ -14,9 +14,16 @@ Install the PostgreSQL ADBC driver with [dbc](https://docs.columnar.tech/dbc/):
 dbc install postgresql
 ```
 
-## Connecting to CedarDB
+## Connecting and Querying
 
-Pick your language to install the ADBC client library and connect to CedarDB:
+The examples below load the [2015 NYC Street Tree Census](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh) into a `trees` table with ADBC bulk ingestion and then query the three cedars with the thickest trunks.
+Download the dataset (~220 MB) into your project directory:
+
+```shell
+curl -L -o trees.csv "https://data.cityofnewyork.us/api/views/uvpi-gqnh/rows.csv?accessType=DOWNLOAD"
+```
+
+Then pick your preferred language to install the ADBC client library and run the example:
 
 {{< tabs >}}
 {{< tab name="C++" >}}
@@ -31,46 +38,78 @@ On Debian or Ubuntu:
 sudo apt install libarrow-dev libadbc-driver-manager-dev
 ```
 
-### Connecting with C++
+### Connecting and Querying with C++
 
 ```cpp
 #include <cstdlib>
-#include <cstring>
 #include <iostream>
 
 #include <arrow-adbc/adbc.h>
 #include <arrow-adbc/adbc_driver_manager.h>
+#include <arrow/api.h>
 #include <arrow/c/bridge.h>
-#include <arrow/record_batch.h>
+#include <arrow/csv/api.h>
+#include <arrow/io/api.h>
+
+void Check(AdbcStatusCode status, AdbcError* error) {
+  if (status != ADBC_STATUS_OK) {
+    std::cerr << error->message << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+}
 
 int main() {
+  // Read trees.csv into Arrow
+  auto input = arrow::io::ReadableFile::Open("trees.csv").ValueOrDie();
+  auto trees = arrow::csv::TableReader::Make(arrow::io::default_io_context(), input,
+                                             arrow::csv::ReadOptions::Defaults(),
+                                             arrow::csv::ParseOptions::Defaults(),
+                                             arrow::csv::ConvertOptions::Defaults())
+                   .ValueOrDie()
+                   ->Read()
+                   .ValueOrDie();
+
+  // Connect to CedarDB
   AdbcError error = {};
 
   AdbcDatabase database = {};
-  AdbcDatabaseNew(&database, &error);
-  AdbcDatabaseSetOption(&database, "driver", "postgresql", &error);
-  AdbcDatabaseSetOption(&database, "uri",
-                        "postgresql://<username>:<password>@localhost:5432/<dbname>", &error);
-  AdbcDriverManagerDatabaseSetLoadFlags(&database, ADBC_LOAD_FLAG_DEFAULT, &error);
-  AdbcDatabaseInit(&database, &error);
+  Check(AdbcDatabaseNew(&database, &error), &error);
+  Check(AdbcDatabaseSetOption(&database, "driver", "postgresql", &error), &error);
+  Check(AdbcDatabaseSetOption(&database, "uri",
+                              "postgresql://<username>:<password>@localhost:5432/<dbname>", &error),
+        &error);
+  Check(AdbcDriverManagerDatabaseSetLoadFlags(&database, ADBC_LOAD_FLAG_DEFAULT, &error), &error);
+  Check(AdbcDatabaseInit(&database, &error), &error);
 
   AdbcConnection connection = {};
-  AdbcConnectionNew(&connection, &error);
-  AdbcConnectionInit(&connection, &database, &error);
+  Check(AdbcConnectionNew(&connection, &error), &error);
+  Check(AdbcConnectionInit(&connection, &database, &error), &error);
 
   AdbcStatement statement = {};
-  AdbcStatementNew(&connection, &statement, &error);
+  Check(AdbcStatementNew(&connection, &statement, &error), &error);
 
+  // Create the trees table and bulk load the data
   struct ArrowArrayStream stream = {};
-  int64_t rows_affected = -1;
+  arrow::ExportRecordBatchReader(std::make_shared<arrow::TableBatchReader>(trees), &stream).ok();
+  Check(AdbcStatementSetOption(&statement, ADBC_INGEST_OPTION_TARGET_TABLE, "trees", &error),
+        &error);
+  Check(AdbcStatementSetOption(&statement, ADBC_INGEST_OPTION_MODE,
+                               ADBC_INGEST_OPTION_MODE_REPLACE, &error),
+        &error);
+  Check(AdbcStatementBindStream(&statement, &stream, &error), &error);
+  Check(AdbcStatementExecuteQuery(&statement, nullptr, nullptr, &error), &error);
 
-  AdbcStatementSetSqlQuery(&statement, "SELECT version()", &error);
-  AdbcStatementExecuteQuery(&statement, &stream, &rows_affected, &error);
+  // Run the query
+  Check(AdbcStatementSetSqlQuery(&statement,
+                                 "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees "
+                                 "WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3",
+                                 &error),
+        &error);
+  Check(AdbcStatementExecuteQuery(&statement, &stream, nullptr, &error), &error);
 
+  // Fetch and print the results
   auto reader = arrow::ImportRecordBatchReader(&stream).ValueOrDie();
-  while (auto batch = reader->Next().ValueOrDie()) {
-    std::cout << batch->ToString() << std::endl;
-  }
+  std::cout << reader->ToTable().ValueOrDie()->ToString() << std::endl;
 
   AdbcStatementRelease(&statement, &error);
   AdbcConnectionRelease(&connection, &error);
@@ -88,13 +127,50 @@ int main() {
 dotnet add package Apache.Arrow.Adbc
 ```
 
-### Connecting with C\#
+### Connecting and Querying with C\#
 
 ```csharp
+using Apache.Arrow;
 using Apache.Arrow.Adbc;
 using Apache.Arrow.Adbc.DriverManager;
 using Apache.Arrow.Ipc;
+using Microsoft.VisualBasic.FileIO;
 
+// Read trees.csv into Arrow
+// (.NET has no CSV reader that infers types, so read only the queried columns)
+Int64Array.Builder treeId = new();
+StringArray.Builder species = new();
+Int32Array.Builder trunkDiameter = new();
+StringArray.Builder address = new();
+StringArray.Builder borough = new();
+
+using (TextFieldParser csv = new("trees.csv"))
+{
+    csv.SetDelimiters(",");
+    string[] header = csv.ReadFields()!;
+    int Column(string name) => System.Array.IndexOf(header, name);
+    (int id, int spc, int dbh, int addr, int boro) =
+        (Column("tree_id"), Column("spc_common"), Column("tree_dbh"), Column("address"), Column("borough"));
+
+    while (csv.ReadFields() is { } row)
+    {
+        treeId.Append(long.Parse(row[id]));
+        species.Append(row[spc]);
+        trunkDiameter.Append(int.Parse(row[dbh]));
+        address.Append(row[addr]);
+        borough.Append(row[boro]);
+    }
+}
+
+RecordBatch trees = new RecordBatch.Builder()
+    .Append("tree_id", false, treeId.Build())
+    .Append("spc_common", true, species.Build())
+    .Append("tree_dbh", false, trunkDiameter.Build())
+    .Append("address", true, address.Build())
+    .Append("borough", true, borough.Build())
+    .Build();
+
+// Connect to CedarDB
 using AdbcDriver driver = AdbcDriverManager.FindLoadDriver(
     "postgresql",
     loadOptions: AdbcLoadFlags.Default);
@@ -105,18 +181,40 @@ using AdbcDatabase db = driver.Open(new Dictionary<string, string>
 });
 
 using AdbcConnection conn = db.Connect(null);
-using AdbcStatement stmt = conn.CreateStatement();
 
-stmt.SqlQuery = "SELECT version()";
+// Create the trees table and bulk load the data
+using (AdbcStatement ingest = conn.CreateStatement())
+{
+    ingest.SetOption("adbc.ingest.target_table", "trees");
+    ingest.SetOption("adbc.ingest.mode", "adbc.ingest.mode.replace");
+    ingest.Bind(trees, trees.Schema);
+    ingest.ExecuteUpdate();
+}
+
+// Run the query
+using AdbcStatement stmt = conn.CreateStatement();
+stmt.SqlQuery =
+    "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees " +
+    "WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3";
 
 QueryResult result = stmt.ExecuteQuery();
 using IArrowArrayStream stream = result.Stream!;
 
+// Fetch and print the results
 while (await stream.ReadNextRecordBatchAsync() is { } batch)
 {
     using (batch)
     {
-        Console.WriteLine(((Apache.Arrow.StringArray)batch.Column(0)).GetString(0));
+        var ids = (Int64Array)batch.Column("tree_id");
+        var names = (StringArray)batch.Column("spc_common");
+        var diameters = (Int32Array)batch.Column("tree_dbh");
+        var addresses = (StringArray)batch.Column("address");
+        var boroughs = (StringArray)batch.Column("borough");
+        for (int i = 0; i < batch.Length; i++)
+        {
+            Console.WriteLine($"{ids.GetValue(i)}  {names.GetString(i)}  {diameters.GetValue(i)} in  " +
+                              $"{addresses.GetString(i)}, {boroughs.GetString(i)}");
+        }
     }
 }
 ```
@@ -127,10 +225,10 @@ while (await stream.ReadNextRecordBatchAsync() is { } batch)
 ### Installing the Go Client
 
 ```shell
-go get github.com/apache/arrow-adbc/go/adbc
+go get github.com/apache/arrow-adbc/go/adbc github.com/apache/arrow-go/v18
 ```
 
-### Connecting with Go
+### Connecting and Querying with Go
 
 ```go
 package main
@@ -139,11 +237,45 @@ import (
     "context"
     "fmt"
     "log"
+    "os"
 
+    "github.com/apache/arrow-adbc/go/adbc"
     "github.com/apache/arrow-adbc/go/adbc/drivermgr"
+    "github.com/apache/arrow-go/v18/arrow"
+    "github.com/apache/arrow-go/v18/arrow/array"
+    "github.com/apache/arrow-go/v18/arrow/csv"
 )
 
 func main() {
+    ctx := context.Background()
+
+    // Read trees.csv into Arrow
+    file, err := os.Open("trees.csv")
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close()
+
+    csvReader := csv.NewInferringReader(file,
+        csv.WithHeader(true), csv.WithChunk(65536), csv.WithNullReader(true, ""))
+    defer csvReader.Release()
+
+    var batches []arrow.RecordBatch
+    for csvReader.Next() {
+        batch := csvReader.RecordBatch()
+        batch.Retain()
+        batches = append(batches, batch)
+    }
+    if err := csvReader.Err(); err != nil {
+        log.Fatal(err)
+    }
+    trees, err := array.NewRecordReader(csvReader.Schema(), batches)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer trees.Release()
+
+    // Connect to CedarDB
     var drv drivermgr.Driver
 
     db, err := drv.NewDatabase(map[string]string{
@@ -155,28 +287,52 @@ func main() {
     }
     defer db.Close()
 
-    conn, err := db.Open(context.Background())
+    conn, err := db.Open(ctx)
     if err != nil {
         log.Fatal(err)
     }
     defer conn.Close()
 
+    // Create the trees table and bulk load the data
+    ingest, err := conn.NewStatement()
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer ingest.Close()
+
+    if err := ingest.SetOption(adbc.OptionKeyIngestTargetTable, "trees"); err != nil {
+        log.Fatal(err)
+    }
+    if err := ingest.SetOption(adbc.OptionKeyIngestMode, adbc.OptionValueIngestModeReplace); err != nil {
+        log.Fatal(err)
+    }
+    if err := ingest.BindStream(ctx, trees); err != nil {
+        log.Fatal(err)
+    }
+    if _, err := ingest.ExecuteUpdate(ctx); err != nil {
+        log.Fatal(err)
+    }
+
+    // Run the query
     stmt, err := conn.NewStatement()
     if err != nil {
         log.Fatal(err)
     }
     defer stmt.Close()
 
-    if err := stmt.SetSqlQuery("SELECT version()"); err != nil {
+    err = stmt.SetSqlQuery("SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees " +
+        "WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3")
+    if err != nil {
         log.Fatal(err)
     }
 
-    stream, _, err := stmt.ExecuteQuery(context.Background())
+    stream, _, err := stmt.ExecuteQuery(ctx)
     if err != nil {
         log.Fatal(err)
     }
     defer stream.Release()
 
+    // Fetch and print the results
     for stream.Next() {
         fmt.Println(stream.RecordBatch())
     }
@@ -192,14 +348,23 @@ func main() {
 ### Installing the JavaScript Client
 
 ```shell
-npm install @apache-arrow/adbc-driver-manager apache-arrow
+npm install @apache-arrow/adbc-driver-manager apache-arrow csv-parse
 ```
 
-### Connecting with JavaScript
+### Connecting and Querying with JavaScript
 
 ```javascript
-import { AdbcDatabase } from "@apache-arrow/adbc-driver-manager";
+import { AdbcDatabase, IngestMode } from "@apache-arrow/adbc-driver-manager";
+import { tableFromJSON } from "apache-arrow";
+import { readFileSync } from "node:fs";
+import { parse } from "csv-parse/sync";
 
+// Read trees.csv into Arrow
+const trees = tableFromJSON(
+  parse(readFileSync("trees.csv"), { columns: true, cast: true }),
+);
+
+// Connect to CedarDB
 const db = new AdbcDatabase({
   driver: "postgresql",
   databaseOptions: {
@@ -207,17 +372,21 @@ const db = new AdbcDatabase({
   },
 });
 
-let conn, stmt;
+let conn;
 try {
   conn = await db.connect();
-  stmt = await conn.createStatement();
-  await stmt.setSqlQuery("SELECT version()");
-  const reader = await stmt.executeQuery();
-  for await (const batch of reader) {
-    console.log(batch.toArray());
-  }
+  // Create the trees table and bulk load the data
+  await conn.ingest("trees", trees, { mode: IngestMode.Replace });
+
+  // Run the query and fetch the results
+  const table = await conn.query(
+    "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees " +
+      "WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3",
+  );
+
+  // Print the results
+  console.table(table.toArray());
 } finally {
-  await stmt?.close();
   await conn?.close();
   await db.close();
 }
@@ -232,11 +401,16 @@ try {
 pip install adbc-driver-manager pyarrow
 ```
 
-### Connecting with Python
+### Connecting and Querying with Python
 
 ```python
+import pyarrow.csv
 from adbc_driver_manager import dbapi
 
+# Read trees.csv into Arrow
+trees = pyarrow.csv.read_csv("trees.csv")
+
+# Connect to CedarDB
 with (
     dbapi.connect(
         driver="postgresql",
@@ -246,10 +420,18 @@ with (
     ) as connection,
     connection.cursor() as cursor,
 ):
-    cursor.execute("SELECT version()")
-    table = cursor.fetch_arrow_table()
+    # Create the trees table and bulk load the data
+    cursor.adbc_ingest("trees", trees, mode="replace")
+    connection.commit()
 
-print(table)
+    # Run the query
+    cursor.execute(
+        "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees "
+        "WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3"
+    )
+
+    # Fetch and print the results
+    print(cursor.fetch_arrow_table())
 ```
 
 {{< /tab >}}
@@ -261,26 +443,33 @@ print(table)
 install.packages(c("adbcdrivermanager", "arrow", "tibble"))
 ```
 
-### Connecting with R
+### Connecting and Querying with R
 
 ```r
 library(adbcdrivermanager)
 
-drv <- adbc_driver("postgresql")
+# Read trees.csv into Arrow
+trees <- arrow::read_csv_arrow("trees.csv", as_data_frame = FALSE)
 
+# Connect to CedarDB
 db <- adbc_database_init(
-  drv,
+  adbc_driver("postgresql"),
   uri = "postgresql://<username>:<password>@localhost:5432/<dbname>"
 )
-
 con <- adbc_connection_init(db)
 
-stmt <- adbc_statement_init(con)
-adbc_statement_set_sql_query(stmt, "SELECT version()")
+# Create the trees table and bulk load the data
+write_adbc(trees, con, "trees", mode = "replace")
 
-stream <- nanoarrow::nanoarrow_allocate_array_stream()
-adbc_statement_execute_query(stmt, stream)
-tibble::as_tibble(stream)
+# Run the query and fetch the results
+result <- read_adbc(
+  con,
+  "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees
+   WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3"
+)
+
+# Print the results
+print(tibble::as_tibble(result))
 ```
 
 {{< /tab >}}
@@ -290,7 +479,7 @@ tibble::as_tibble(stream)
 
 Install the native Arrow and ADBC GLib libraries, then the `red-adbc` gem.
 
-On Debian or Ubuntu:
+On Debian or Ubuntu, add the [Apache Arrow APT repository](https://arrow.apache.org/install/) first:
 
 ```shell
 sudo apt install libarrow-glib-dev libadbc-glib-dev
@@ -304,11 +493,19 @@ brew install apache-arrow-glib apache-arrow-adbc-glib
 gem install red-adbc
 ```
 
-### Connecting with Ruby
+{{< callout type="info" >}}
+If `gem install` reports that Apache Arrow C++ isn't found, install the `red-arrow` version that matches your Arrow C++ version (`pkg-config --modversion arrow`), for example `gem install red-arrow -v "~> 24.0"`.
+{{< /callout >}}
+
+### Connecting and Querying with Ruby
 
 ```ruby
 require "adbc"
 
+# Read trees.csv into Arrow
+trees = Arrow::Table.load("trees.csv")
+
+# Connect to CedarDB
 database = ADBC::Database.new
 
 begin
@@ -318,9 +515,24 @@ begin
   database.init
 
   database.connect do |connection|
+    # Create the trees table and bulk load the data
     connection.open_statement do |statement|
-      statement.sql_query = "SELECT version()"
+      statement.ingest_target_table = "trees"
+      statement.set_option("adbc.ingest.mode", "adbc.ingest.mode.replace")
+      statement.bind(trees) do
+        statement.execute(need_result: false)
+      end
+    end
+
+    # Run the query and fetch the results
+    connection.open_statement do |statement|
+      statement.sql_query = <<~SQL
+        SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees
+        WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3
+      SQL
       table, = statement.execute
+
+      # Print the results
       puts(table)
     end
   end
@@ -336,42 +548,69 @@ end
 
 ```shell
 cargo add adbc_core adbc_driver_manager
+cargo add arrow --features prettyprint
 ```
 
-### Connecting with Rust
+{{< callout type="info" >}}
+`arrow` must be a version that `adbc_core` supports.
+If the build reports two versions of `arrow_array`, add the version shown by `cargo tree -p adbc_core`, for example `cargo add arrow@59 --features prettyprint`.
+{{< /callout >}}
+
+### Connecting and Querying with Rust
 
 ```rust
-use adbc_core::options::{AdbcVersion, OptionDatabase};
-use adbc_core::{Connection, Database, Driver, LOAD_FLAG_DEFAULT, Statement};
-use adbc_driver_manager::ManagedDriver;
+use std::fs::File;
+use std::io::Seek;
+use std::sync::Arc;
 
-fn main() {
+use adbc_core::options::{AdbcVersion, IngestMode, OptionDatabase, OptionStatement};
+use adbc_core::{Connection, Database, Driver, LOAD_FLAG_DEFAULT, Optionable, Statement};
+use adbc_driver_manager::ManagedDriver;
+use arrow::csv::{ReaderBuilder, reader::Format};
+use arrow::record_batch::RecordBatch;
+use arrow::util::pretty::print_batches;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Read trees.csv into Arrow
+    let mut file = File::open("trees.csv")?;
+    let (schema, _) = Format::default().with_header(true).infer_schema(&mut file, None)?;
+    file.rewind()?;
+    let trees = ReaderBuilder::new(Arc::new(schema)).with_header(true).build(file)?;
+
+    // Connect to CedarDB
     let mut driver = ManagedDriver::load_from_name(
         "postgresql",
         None,
         AdbcVersion::default(),
         LOAD_FLAG_DEFAULT,
         None,
-    )
-    .expect("Failed to load driver");
-
+    )?;
     let opts = [(
         OptionDatabase::Uri,
         "postgresql://<username>:<password>@localhost:5432/<dbname>".into(),
     )];
-    let db = driver
-        .new_database_with_opts(opts)
-        .expect("Failed to create database handle");
+    let db = driver.new_database_with_opts(opts)?;
+    let mut conn = db.new_connection()?;
 
-    let mut conn = db.new_connection().expect("Failed to create connection");
+    // Create the trees table and bulk load the data
+    let mut ingest = conn.new_statement()?;
+    ingest.set_option(OptionStatement::TargetTable, "trees".into())?;
+    ingest.set_option(OptionStatement::IngestMode, IngestMode::Replace.into())?;
+    ingest.bind_stream(Box::new(trees))?;
+    ingest.execute_update()?;
 
-    let mut statement = conn.new_statement().unwrap();
-    statement.set_sql_query("SELECT version()").unwrap();
-    let reader = statement.execute().unwrap();
+    // Run the query
+    let mut query = conn.new_statement()?;
+    query.set_sql_query(
+        "SELECT tree_id, spc_common, tree_dbh, address, borough FROM trees \
+         WHERE spc_common ILIKE '%cedar%' ORDER BY tree_dbh DESC LIMIT 3",
+    )?;
+    let results = query.execute()?;
 
-    for batch in reader {
-        println!("{:?}", batch.unwrap());
-    }
+    // Fetch and print the results
+    let batches = results.collect::<Result<Vec<RecordBatch>, _>>()?;
+    print_batches(&batches)?;
+    Ok(())
 }
 ```
 
