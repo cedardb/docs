@@ -40,39 +40,39 @@ the [system table compatibility](../system_table) page.
 | System Columns                 | Yes               | Only meaningful for tableoid and ctid                                                                          |
 | UNLOGGED TABLE                 | No                |                                                                                                                |
 | CREATE TABLE LIKE              | Partial           | Copies column names and types. `INCLUDING` options not supported                                               |
-| DROP TABLE CASCADE             | No                |                                                                                                                |
+| DROP TABLE CASCADE             | Yes               | [Documentation](/docs/references/objects/tables/#drop-table)                                                   |
 
 ### Table Modification (ALTER TABLE)
 
-| **Feature**                       | **Support State** | **Details**                                       |
-|-----------------------------------|-------------------|---------------------------------------------------|
-| ADD COLUMN                        | Yes               |                                                   |
-| ADD COLUMN IF NOT EXISTS          | Yes               |                                                   |
-| DROP COLUMN                       | Yes               |                                                   |
-| DROP COLUMN IF EXISTS             | Yes               |                                                   |
-| DROP COLUMN CASCADE               | Yes               |                                                   |
-| RENAME COLUMN                     | Yes               |                                                   |
-| RENAME TO                         | Yes               |                                                   |
-| ADD CHECK                         | No                | Only at CREATE TABLE time                         |
-| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
-| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/) |
-| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/) |
-| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/) |
-| DROP CONSTRAINT IF EXISTS         | Yes               |                                                   |
-| DROP CONSTRAINT CASCADE           | Yes               |                                                   |
-| RENAME CONSTRAINT                 | No                |                                                   |
-| ALTER COLUMN SET/DROP DEFAULT     | No                |                                                   |
-| ALTER COLUMN SET/DROP NOT NULL    | No                |                                                   |
-| ALTER COLUMN TYPE                 | No                |                                                   |
-| SET SCHEMA                        | No                |                                                   |
-| OWNER TO                          | Yes               |                                                   |
-| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license      |
-| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                   |
-| SET TABLESPACE                    | No                |                                                   |
-| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                   |
-| ATTACH / DETACH PARTITION         | No                |                                                   |
-| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                      |
-| VALIDATE CONSTRAINT               | No                |                                                   |
+| **Feature**                       | **Support State** | **Details**                                                         |
+|-----------------------------------|-------------------|---------------------------------------------------------------------|
+| ADD COLUMN                        | Yes               |                                                                     |
+| ADD COLUMN IF NOT EXISTS          | Yes               |                                                                     |
+| DROP COLUMN                       | Yes               |                                                                     |
+| DROP COLUMN IF EXISTS             | Yes               |                                                                     |
+| DROP COLUMN CASCADE               | Yes               |                                                                     |
+| RENAME COLUMN                     | Yes               |                                                                     |
+| RENAME TO                         | Yes               |                                                                     |
+| ADD CHECK                         | No                | Only at CREATE TABLE time                                           |
+| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                   |
+| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/)                   |
+| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                   |
+| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/)                   |
+| DROP CONSTRAINT IF EXISTS         | Yes               |                                                                     |
+| DROP CONSTRAINT CASCADE           | Yes               |                                                                     |
+| RENAME CONSTRAINT                 | Yes               | [Documentation](/docs/references/objects/tables/#rename-constraint) |
+| ALTER COLUMN SET/DROP DEFAULT     | Yes               | [Documentation](/docs/references/objects/tables/#set-default)       |
+| ALTER COLUMN SET/DROP NOT NULL    | Yes               | [Documentation](/docs/references/objects/tables/#set-not-null)      |
+| ALTER COLUMN TYPE                 | No                |                                                                     |
+| SET SCHEMA                        | Yes               | [Documentation](/docs/references/objects/tables/#set-schema)        |
+| OWNER TO                          | Yes               |                                                                     |
+| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license                        |
+| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                                     |
+| SET TABLESPACE                    | No                |                                                                     |
+| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                                     |
+| ATTACH / DETACH PARTITION         | No                |                                                                     |
+| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                                        |
+| VALIDATE CONSTRAINT               | No                |                                                                     |
 
 ### Privileges
 
