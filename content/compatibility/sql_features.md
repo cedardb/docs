@@ -135,6 +135,8 @@ the [system table compatibility](../system_table) page.
 | Materialized Views     | Yes               | [Documentation](/docs/references/objects/materialized_views/)                                                                |
 | Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                                                         |
 | Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language                                      |
+| Sequences              | Yes               | [Documentation](/docs/references/objects/sequences/)                                                                         |
+| Temporary Sequences    | Yes               | [Documentation](/docs/references/objects/sequences/#temporary-sequences)                                                     |
 | Custom Types           | No                |                                                                                                                              |
 | Triggers               | No                |                                                                                                                              |
 | Prepared Statements    | Yes               |                                                                                                                              |
@@ -720,13 +722,13 @@ the [system table compatibility](../system_table) page.
 
 #### Sequence Manipulation
 
-| **Feature**            | **Support State** | **Details** |
-|------------------------|-------------------|-------------|
-| nextval                | Yes               |             |
-| setval                 | Yes               |             |
-| currval                | No                |             |
-| lastval                | No                |             |
-| pg_get_serial_sequence | Yes               |             |
+| **Feature**            | **Support State** | **Details**                                                             |
+|------------------------|-------------------|-------------------------------------------------------------------------|
+| nextval                | Yes               | [Documentation](/docs/references/objects/sequences/#sequence-functions) |
+| setval                 | Yes               | [Documentation](/docs/references/objects/sequences/#sequence-functions) |
+| currval                | No                |                                                                         |
+| lastval                | No                |                                                                         |
+| pg_get_serial_sequence | Yes               |                                                                         |
 
 #### Conditional
 
