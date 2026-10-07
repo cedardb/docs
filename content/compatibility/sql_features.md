@@ -72,8 +72,8 @@ the [system table compatibility](../system_table) page.
 | ALTER COLUMN ADD/DROP IDENTITY    | Yes               | [Documentation](/docs/references/objects/tables/#identity-columns)  |
 | SET SCHEMA                        | Yes               | [Documentation](/docs/references/objects/tables/#set-schema)        |
 | OWNER TO                          | Yes               | [Documentation](/docs/references/objects/tables/#ownership)         |
-| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license                        |
-| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                                     |
+| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | [Documentation](/docs/references/objects/policies/)                 |
+| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               | [Documentation](/docs/references/objects/policies/)                 |
 | SET TABLESPACE                    | No                |                                                                     |
 | CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                                     |
 | ATTACH / DETACH PARTITION         | No                |                                                                     |
@@ -82,21 +82,22 @@ the [system table compatibility](../system_table) page.
 
 ### Privileges
 
-| **Feature**               | **Support State** | **Details**                                                |
-|---------------------------|-------------------|------------------------------------------------------------|
-| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)            |
-| OWNER TO                  | Yes               |                                                            |
-| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)            |
-| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role) |
-| GRANT                     | Yes               | Requires an enterprise license                             |
-| REVOKE                    | Yes               | Requires an enterprise license                             |
-| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
-| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
-| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)           |
-| Column Privileges         | No                |                                                            |
-| REASSIGN OWNED            | No                |                                                            |
-| DROP OWNED                | No                |                                                            |
-| Row Security Policies     | Yes               | Requires an enterprise license                             |
+| **Feature**               | **Support State** | **Details**                                                   |
+|---------------------------|-------------------|---------------------------------------------------------------|
+| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)               |
+| OWNER TO                  | Yes               |                                                               |
+| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)               |
+| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role)    |
+| GRANT                     | Yes               | Requires an enterprise license                                |
+| REVOKE                    | Yes               | Requires an enterprise license                                |
+| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
+| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
+| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)              |
+| Column Privileges         | No                |                                                               |
+| REASSIGN OWNED            | No                |                                                               |
+| DROP OWNED                | No                |                                                               |
+| Row Security Policies     | Yes               | [Documentation](/docs/references/objects/policies/)           |
+| BYPASSRLS                 | Yes               | [Documentation](/docs/references/objects/policies/#bypassrls) |
 
 ### Indexes
 

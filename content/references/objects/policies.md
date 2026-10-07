@@ -35,12 +35,18 @@ SELECT * FROM secrets;
 ```
 
 {{< callout type="info" >}}
-Row level security is an enterprise feature and requires an enterprise license to create or alter policies.
+Row level security is an enterprise feature and requires an enterprise license to create policies.
+
+`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`, `ALTER POLICY`, and `DROP POLICY` work without a license, and existing policies stay enforced.
+{{< /callout >}}
+
+{{< callout type="info" >}}
+Without any policy, only the owner (unless RLS is forced), superusers, and roles with `BYPASSRLS` can access a table with RLS enabled.
 {{< /callout >}}
 
 ## CREATE POLICY
 
-```sql
+```text
 CREATE POLICY name ON table_name
     [ AS { PERMISSIVE | RESTRICTIVE } ]
     [ FOR { ALL | SELECT | INSERT | UPDATE | DELETE } ]
@@ -55,28 +61,89 @@ The policy name must be unique within the table but can be reused across differe
 
 `ALL`, `SELECT`, `INSERT`, `UPDATE`, and `DELETE` specify which statements the policy applies to.
 
-If no role is specified, `PUBLIC` is used. The table owner is exempt from policies by default; use `ALTER TABLE ... FORCE ROW LEVEL SECURITY` to override this.
+If no role is specified, `PUBLIC` is used. If `PUBLIC` is listed together with other roles, the policy applies to `PUBLIC` only. The table owner is exempt from policies by default; use `ALTER TABLE ... FORCE ROW LEVEL SECURITY` to override this.
 
 `USING` expressions filter rows when scanning (`ALL`, `SELECT`, `UPDATE`, `DELETE` policies). `WITH CHECK` expressions validate rows before writing (`ALL`, `INSERT`, `UPDATE` policies).
+Both expressions must return `boolean` and cannot contain aggregate or window functions.
+CedarDB rejects `USING` on `INSERT` policies and `WITH CHECK` on `SELECT` and `DELETE` policies.
+
+A policy without `WITH CHECK` uses its `USING` expression to check new rows.
+An `UPDATE` policy checks the new row of an `UPDATE`, and an `ALL` policy checks new rows of both `INSERT` and `UPDATE`.
+A single `USING` expression on an `ALL` policy therefore restricts reads and writes alike:
+
+```sql
+CREATE TABLE plants (id integer, gardener text);
+ALTER TABLE plants ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_plants ON plants
+    USING (gardener = current_user);
+GRANT SELECT, INSERT, UPDATE, DELETE ON plants TO PUBLIC;
+```
+
+Add a `WITH CHECK` expression if new rows must satisfy a different condition than visible rows.
+
+A policy depends on the columns, tables, and functions its expressions reference.
+Renaming, dropping, or changing the type of such a column or table fails unless you drop the policy first or use `DROP ... CASCADE`.
+
+After creating a policy, you can find it in the `pg_policies` system view and in `pg_policy`.
+
+### Permissions
+
+To create a policy, you must own the table, be a member of the owning role, or be a superuser.
+You also need the `USAGE` privilege on all schemas that the `USING` and `WITH CHECK` expressions reference.
 
 ## ALTER POLICY
 
-```sql
+```text
 ALTER POLICY name ON table_name
     [ TO { role_name | PUBLIC | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, ...] ]
     [ USING ( using_expression ) ]
     [ WITH CHECK ( check_expression ) ]
+
+ALTER POLICY name ON table_name RENAME TO new_name
 ```
 
-Only the role, `USING`, and `WITH CHECK` expressions can be changed with `ALTER POLICY`. To change other attributes, drop and recreate the policy.
+Only the roles, the `USING` and `WITH CHECK` expressions, and the name can be changed with `ALTER POLICY`. To change other attributes, such as `PERMISSIVE`/`RESTRICTIVE` or the command, drop and recreate the policy.
+A clause you omit keeps its current value. `TO` replaces the whole role list.
+The new expressions follow the same rules as in `CREATE POLICY`: CedarDB rejects `USING` on `INSERT` policies and `WITH CHECK` on `SELECT` and `DELETE` policies.
+
+```sql
+ALTER POLICY own_plants ON plants TO PUBLIC USING (gardener = session_user);
+ALTER POLICY own_plants ON plants RENAME TO gardener_plants;
+```
+
+### Permissions
+
+To alter a policy, you must own the table, be a member of the owning role, or be a superuser.
+You also need the `USAGE` privilege on all schemas that the new `USING` and `WITH CHECK` expressions reference.
 
 ## DROP POLICY
 
-```sql
+```text
 DROP POLICY [ IF EXISTS ] name ON table_name
 ```
 
 Dropping the last policy on a table does not disable RLS — the default-deny behavior remains active until `ALTER TABLE ... DISABLE ROW LEVEL SECURITY` is called.
+Dropping a table also drops its policies. `CASCADE` and `RESTRICT` are accepted and have no effect.
+
+### Permissions
+
+To drop a policy, you must own the table, be a member of the owning role, or be a superuser.
+
+## ENABLE and FORCE ROW LEVEL SECURITY
+
+```sql
+ALTER TABLE plants ENABLE ROW LEVEL SECURITY;
+ALTER TABLE plants DISABLE ROW LEVEL SECURITY;
+ALTER TABLE plants FORCE ROW LEVEL SECURITY;
+ALTER TABLE plants NO FORCE ROW LEVEL SECURITY;
+```
+
+`ENABLE` turns on policy checks for the table. `FORCE` also applies them to the table owner.
+The two settings are independent: `DISABLE` keeps the `FORCE` flag.
+These settings are visible in `pg_class.relrowsecurity` and `pg_class.relforcerowsecurity`.
+Row level security works on regular and temporary tables. Views, materialized views, and sequences do not support it.
+
+Only the table owner (or a member of the owning role, or a superuser) can change these settings.
 
 ## `row_security_active`
 
@@ -98,6 +165,25 @@ SELECT row_security_active('secrets');
 ## `row_security` session setting
 
 Setting `row_security = off` causes CedarDB to throw an error if any table in the query has active RLS, rather than silently filtering rows. This is useful for full-database dumps where filtered output would produce an incomplete backup.
+
+```sql
+SET row_security = off;
+SELECT * FROM secrets;
+-- ERROR:  query would be affected by row-level security policy for table "secrets"
+```
+
+For superusers, roles with `BYPASSRLS`, and table owners without forced RLS, the query runs normally.
+`BYPASSRLS` roles are exempt even from forced RLS on tables they own.
+
+## BYPASSRLS
+
+Roles with the `BYPASSRLS` attribute are not subject to row level security, like superusers:
+
+```sql
+CREATE ROLE auditor LOGIN BYPASSRLS;
+```
+
+See [Roles](/docs/references/objects/roles#create-role) for who can grant this attribute.
 
 ## Evaluation of policies
 
@@ -129,6 +215,7 @@ CREATE TABLE books (id integer, author text, title text);
 ALTER TABLE books ENABLE ROW LEVEL SECURITY;
 CREATE POLICY books_select ON books FOR SELECT USING (true);
 CREATE POLICY books_insert ON books FOR INSERT WITH CHECK (id NOT IN (SELECT id FROM books));
+GRANT SELECT, INSERT ON books TO normal_user;
 
 SET ROLE normal_user;
 -- Both rows share id = 1; the self-referencing check does not catch this
@@ -157,3 +244,16 @@ Update policies may have both a `USING` and a `WITH CHECK` expression. The `USIN
 ### DELETE policies
 
 Delete policies silently skip rows that the current user is not permitted to delete.
+
+### Other statements and views
+
+- Policies apply only after the table privileges are checked: a role without `INSERT` on the table gets `permission denied`, not a policy violation.
+- `COPY ... TO` returns only the rows that `SELECT` policies allow; `COPY ... FROM` checks `INSERT` policies.
+- `TRUNCATE` is not subject to policies.
+- Expressions in policies run with the privileges of the querying role. A subquery in a policy needs `SELECT` on the referenced table.
+- A query on a view applies the policies for the view owner, not for the querying role. If a superuser owns the view, the view returns all rows.
+
+## PostgreSQL differences
+
+- `DROP POLICY IF EXISTS` does not emit a notice for a missing policy, and fails if the table does not exist.
+- Listing `PUBLIC` together with other roles does not emit a warning.
