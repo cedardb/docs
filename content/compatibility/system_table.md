@@ -44,7 +44,7 @@ built-in [system views](#system-views), or the SQL-standard [information schema]
 | [pg_conversion](https://www.postgresql.org/docs/current/catalog-pg-conversion.html)                       | 🟡            | Contains information about encoding conversions.                                          |
 | [pg_database](https://www.postgresql.org/docs/current/catalog-pg-database.html)                           | 🟢            | Stores information about databases.                                                       |
 | [pg_db_role_setting](https://www.postgresql.org/docs/current/catalog-pg-db-role-setting.html)             | 🟢            | Contains per-role and per-database configuration settings.                                |
-| [pg_default_acl](https://www.postgresql.org/docs/current/catalog-pg-default-acl.html)                     | 🟡            | Stores default access privileges.                                                         |
+| [pg_default_acl](https://www.postgresql.org/docs/current/catalog-pg-default-acl.html)                     | 🟢            | Stores default access privileges.                                                         |
 | [pg_depend](https://www.postgresql.org/docs/current/catalog-pg-depend.html)                               | 🟡            | Tracks dependencies between database objects.                                             |
 | [pg_description](https://www.postgresql.org/docs/current/catalog-pg-description.html)                     | 🟢            | Stores optional descriptions (comments) for database objects.                             |
 | [pg_enum](https://www.postgresql.org/docs/current/catalog-pg-enum.html)                                   | 🟡            | Contains information about enum types.                                                    |
@@ -269,11 +269,11 @@ select * from information_schema.tables;
 | referential_constraints               | 🟢            |         |
 | role_column_grants                    | 🟡            |         |
 | role_routine_grants                   | 🟡            |         |
-| role_table_grants                     | 🟡            |         |
+| role_table_grants                     | 🟢            |         |
 | role_udt_grants                       | 🟡            |         |
 | role_usage_grants                     | 🟢            |         |
 | routine_column_usage                  | 🟡            |         |
-| routine_privileges                    | 🟡            |         |
+| routine_privileges                    | 🟢            |         |
 | routine_routine_usage                 | 🟡            |         |
 | routine_sequence_usage                | 🟡            |         |
 | routine_table_usage                   | 🟡            |         |
@@ -285,13 +285,13 @@ select * from information_schema.tables;
 | sql_parts                             | 🟡            |         |
 | sql_sizing                            | 🟡            |         |
 | table_constraints                     | 🟢            |         |
-| table_privileges                      | 🟡            |         |
+| table_privileges                      | 🟢            |         |
 | tables                                | 🟢            |         |
 | transforms                            | 🟡            |         |
 | triggered_update_columns              | 🟡            |         |
 | triggers                              | 🟡            |         |
-| udt_privileges                        | 🟡            |         |
-| usage_privileges                      | 🟡            |         |
+| udt_privileges                        | 🟢            |         |
+| usage_privileges                      | 🟢            |         |
 | user_defined_types                    | 🟡            |         |
 | user_mapping_options                  | 🟡            |         |
 | user_mappings                         | 🟡            |         |
