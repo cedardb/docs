@@ -74,6 +74,30 @@ select data->>'name' from json_data;
 (4 rows)
 ```
 
+## Path Access
+
+The `#>` operator follows a path of object keys and array indexes, given as a `text[]`, and returns the `json` element at that path.
+The `#>>` operator does the same, but returns `text`.
+When the path does not exist, both return `null`.
+Negative array indexes in a path count from the end of the array.
+
+```sql
+select data->>'name' as name,
+       data #> '{friends,0}' as first_friend,
+       data #>> '{friends,-1}' as last_friend
+from json_data;
+```
+
+```text
+   name    | first_friend | last_friend 
+-----------+--------------+-------------
+ philipp   | 2            | 3
+ max       | 1            | 1
+ moritz    | 1            | 4
+ christian | 3            | 3
+(4 rows)
+```
+
 ## Conversions
 
 `Json` and `jsonb` columns can be converted to and from `text` using standard conversion functions.
@@ -197,14 +221,14 @@ where jsonb_exists_all(data, ARRAY['nick', 'name']);
 (1 rows)
 ```
 
-For the full semantics, refer to the PostgreSQL documentation: [PostgreSQL JSONB containment and existence](https://www.postgresql.org/docs/17/datatype-json.html#JSON-CONTAINMENT)
+Containment is structural: an object contains another object if it has all of its keys with contained values, and an array contains another array if every element of the second array appears somewhere in the first one, regardless of order or duplicates.
 
 ## Concatenation
 
 The `jsonb_concat` operation concatenates two jsonb documents. To use it, call the `jsonb_concat` function or by providing `jsonb` as input to the `||` operator.
 
 ```sql
-select data || '{"country": "Germany"}' from jsonb_data.
+select data::jsonb || '{"country": "Germany"}' from json_data;
 ```
 
 ```text
@@ -230,3 +254,55 @@ select (data->'friends') || (data->>'id')::jsonb as me_and_my_friends from json_
  [3, 4]
 (4 rows)
 ```
+
+## Construction
+
+Build JSON values from SQL values:
+
+| Function                                               | Description                                                 | Example result           |
+|--------------------------------------------------------|-------------------------------------------------------------|--------------------------|
+| `json_build_object(k1, v1, ...)`, `jsonb_build_object` | Object from alternating keys and values.                    | `{"a" : 1}`              |
+| `json_build_array(v1, ...)`, `jsonb_build_array`       | Array from the arguments.                                   | `[1, "a"]`               |
+| `to_json(value)`                                       | JSON representation of any SQL value.                       | `"x"`                    |
+| `row_to_json(record)`                                  | Object with one key per column of a row.                    | `{"f1" : 1, "f2" : "a"}` |
+| `array_to_json(array)`                                 | JSON array from an SQL array.                               | `[1,2]`                  |
+| `json_agg(value)`                                      | Aggregate: JSON array of all input values, including nulls. | `[1, null, 3]`           |
+| `json_arrayagg(value)`                                 | Aggregate: JSON array of all non-null input values.         | `[1, 3]`                 |
+
+```sql
+CREATE TABLE trees (id int, species text, height_m numeric);
+INSERT INTO trees VALUES (1, 'Oak', 21.5), (2, 'Birch', 9.0);
+
+SELECT json_agg(json_build_object('species', species, 'height', height_m)) FROM trees;
+```
+
+```text
+                                        json_agg                                         
+-----------------------------------------------------------------------------------------
+ [{"species" : "Oak", "height" : 21.500000}, {"species" : "Birch", "height" : 9.000000}]
+(1 row)
+```
+
+`json_agg` keeps null inputs as JSON `null`. `json_arrayagg` skips them by default; write `json_arrayagg(x ORDER BY x NULL ON NULL)` to keep them. Both aggregates accept an `ORDER BY` clause:
+
+```sql
+SELECT json_arrayagg(species ORDER BY species) FROM trees;
+```
+
+```text
+     ?column?     
+------------------
+ ["Birch", "Oak"]
+(1 row)
+```
+
+`jsonb_array_length()` and `jsonb_array_elements()` work like their `json` counterparts.
+
+## PostgreSQL Differences
+
+- The deletion operators `-` and `#-` and the JSON path operators `@?` and `@@` are not supported.
+- `->` and `->>` with a negative array index return `null` instead of counting from the end of the array. Use `#>` or `#>>` with a negative index in the path, e.g., `data #> '{friends,-1}'`.
+- `json_arrayagg` names its result column `?column?` instead of `json_arrayagg`.
+- `jsonb` subscripting, e.g., `data['name']`, is not supported. Use `->` and `->>`.
+- Not supported: `to_jsonb`, `jsonb_agg`, `json_object_agg`, `jsonb_object_agg`, `json_object`, `jsonb_object`, `json_each` and `jsonb_each` (also `_text`), `json_object_keys`, `jsonb_object_keys`, `json_array_elements_text`, `jsonb_array_elements_text`, `json_typeof`, `jsonb_typeof`, `jsonb_set`, `jsonb_set_lax`, `jsonb_insert`, `json_strip_nulls`, `jsonb_strip_nulls`, `jsonb_pretty`, the `json_populate_record` and `json_to_record` families, and the `jsonb_path_*` functions.
+- Of the SQL/JSON constructors and functions, only `JSON_ARRAYAGG` is supported. `JSON_ARRAY`, `JSON_OBJECT`, `JSON_OBJECTAGG`, `IS JSON`, `JSON_QUERY`, `JSON_VALUE`, `JSON_EXISTS`, `JSON_SCALAR`, `JSON_SERIALIZE`, and `JSON_TABLE` are not supported.
