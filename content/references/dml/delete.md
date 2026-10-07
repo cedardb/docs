@@ -46,3 +46,15 @@ user_id | ?column?
 --------+----------
   42     | f
 ```
+
+## Permissions
+
+To delete from a table, you need the `DELETE` privilege on it, and `USAGE` on its schema.
+If the statement reads columns of the table, in `WHERE` or `RETURNING`, you also need the `SELECT` privilege.
+Tables in `USING` require the `SELECT` privilege.
+
+## PostgreSQL Differences
+
+- `RETURNING` requires the `SELECT` privilege on the table, even if it does not reference a column, such as `RETURNING 1`.
+  PostgreSQL only requires `SELECT` on the columns that `RETURNING` references.
+- `WHERE CURRENT OF` is not supported.
