@@ -125,8 +125,38 @@ In many cases, CedarDB infers parameter types from the surrounding query, and an
 However, in some cases it is not possible to infer the data type, which results in an error:
 
 ```sql
-prepare echo as select $1;
+prepare isempty as select $1 is null;
 ERROR:  unable to infer the data type for parameter $1
 ```
 
 In such cases, you can explicitly cast the parameter to a type, e.g.: `$1::int`.
+If a parameter is only used as an output column, such as in `prepare echo as select $1;`, CedarDB uses the type `text`.
+
+You can list the prepared statements of your session in the `pg_prepared_statements` system view:
+
+```sql
+prepare add as select $1::int + $2::int as sum;
+select name, parameter_types, result_types from pg_prepared_statements where name <> '';
+```
+
+```text
+ name |  parameter_types  | result_types
+------+-------------------+--------------
+ add  | {integer,integer} | {integer}
+(1 row)
+```
+
+## Permissions
+
+`PREPARE` does not check any privileges.
+CedarDB checks the privileges of the prepared statement each time you run it with `EXECUTE`:
+
+```sql
+-- As a role without the SELECT privilege on trees
+prepare findtree as select * from trees where id = $1;
+-- PREPARE succeeds
+execute findtree(1);
+ERROR:  permission denied for table 'trees'
+```
+
+`DEALLOCATE` requires no privileges.
