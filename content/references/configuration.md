@@ -65,7 +65,7 @@ You can also update the configuration file from a SQL session with the [`ALTER S
 statement, without editing the file by hand:
 
 ```sql
-ALTER SYSTEM SET buffersize = '8G';
+ALTER SYSTEM SET debug.buffersize = '8G';
 ```
 
 As with the config file, these changes only take effect after a restart.

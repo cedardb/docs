@@ -27,5 +27,11 @@ discard all;
   CedarDB automatically re-plans queries periodically, so you should not need to execute this manually.
 * `sequences`
   Discard cached sequence state. This currently has no effect.
-* `temp`
-  Drop all temporary tables.
+* `temp`, `temporary`
+  Drop all temporary tables, views, sequences, and functions of the session.
+
+`DISCARD ALL` cannot run inside a transaction block.
+
+## Permissions
+
+`DISCARD` requires no privileges.
