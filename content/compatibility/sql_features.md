@@ -157,7 +157,18 @@ the [system table compatibility](../system_table) page.
 | Range Types (user-defined)      | No                |                                                                                                                              |
 | Domains                         | No                |                                                                                                                              |
 | Triggers                        | No                |                                                                                                                              |
-| Prepared Statements             | Yes               |                                                                                                                              |
+| Prepared Statements             | Yes               | [Documentation](/docs/references/advanced/prepare/)                                                                          |
+| Cursors (DECLARE / FETCH)       | No                |                                                                                                                              |
+| LISTEN / NOTIFY                 | No                |                                                                                                                              |
+| SET / SHOW / RESET              | Yes               | [Documentation](/docs/references/sessions/settings/)                                                                         |
+| SET LOCAL                       | No                |                                                                                                                              |
+| statement_timeout               | Yes               | [Documentation](/docs/references/sessions/settings/#timeouts)                                                                |
+| DISCARD                         | Yes               | [Documentation](/docs/references/sessions/discard/)                                                                          |
+| EXPLAIN                         | Yes               | [Documentation](/docs/references/utility/explain/)                                                                           |
+| ANALYZE                         | Yes               | [Documentation](/docs/references/utility/analyze/)                                                                           |
+| VACUUM                          | Yes               |                                                                                                                              |
+| CHECKPOINT                      | No                |                                                                                                                              |
+| COMMENT ON                      | No                |                                                                                                                              |
 | Advisory Locks                  | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                                                           |
 | ALTER SYSTEM                    | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                                                      |
 
