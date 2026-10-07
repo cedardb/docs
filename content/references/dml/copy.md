@@ -20,6 +20,7 @@ Copy supports a number of options controlling the format.
 
 * `Format`:
   `csv`, `text`, `binary`. Only for copy to: `numpy`.
+  `binary` uses PostgreSQL's binary `COPY` format, which starts with the `PGCOPY` signature, and works with `STDIN` and `STDOUT`.
 * `Delimiter`:
   The record separator for `text` and `csv` formats.
   By default `\t`, and `,`.
@@ -64,3 +65,20 @@ WITH (
     ON_ERROR ignore
 );
 ```
+
+## Permissions
+
+`COPY FROM` requires the `INSERT` privilege on the table, and `COPY TO` requires the `SELECT` privilege on the table or the privileges to run the query.
+Both also require `USAGE` on the schema of the table.
+Reading or writing files on the server additionally requires superuser, or membership in `pg_read_server_files` (for `COPY FROM`) or `pg_write_server_files` (for `COPY TO`).
+Otherwise, CedarDB rejects the statement with `file access denied`.
+`COPY ... FROM STDIN` and `COPY ... TO STDOUT`, e.g., via psql's `\copy`, do not need file access.
+
+## PostgreSQL Differences
+
+* `FORMAT binary` is not supported for `COPY TO` a file. `COPY ... TO STDOUT` and `COPY ... FROM STDIN` support it.
+* `COPY ... WHERE`, `FORCE_QUOTE`, the `DEFAULT` option, and `COPY FROM PROGRAM` are not supported.
+  `COPY TO PROGRAM` only prints a warning and does not run the program.
+* `ON_ERROR ignore` skips rows that fail to parse, instead of stopping.
+* `HEADER` has no effect for `COPY TO` in `text` format. `HEADER match` does not skip or check the header line.
+* `COPY TO` and `COPY FROM` accept relative file paths and resolve them against the server's working directory. PostgreSQL rejects relative paths for `COPY TO`.
