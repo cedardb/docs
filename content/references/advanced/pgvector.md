@@ -121,12 +121,14 @@ select vector_cmp('[1,2,3]'::vector, '[0,1,2]'::vector);
 ```
 
 Since vectors support basic arithmetic and comparison, you can also use them
-with aggregation functions such as `sum`, `avg`, `min`, and `max`:
+with the aggregation functions `sum`, `min`, and `max`:
 
 ```sql
 create table my_vectors ( v vector not null );
-select sum(v), avg(v), min(v), max(v) from my_vectors;
+select sum(v), min(v), max(v) from my_vectors;
 ```
+
+`avg` is not supported for vectors.
 
 ## Vector Functions and Operators
 
@@ -144,6 +146,11 @@ in the following table:
 For compatibility with pgvector, the `inner_product` function returns the inner
 product of two vectors but the `<#>` operator returns the *negative* inner
 product.
+
+If the two vectors have different dimensions, CedarDB pads the smaller vector
+with zeros, as for arithmetic. For example,
+`l2_distance('[1,2]'::vector, '[1,2,3]'::vector)` returns `3`. The pgvector
+extension raises an error in this case.
 
 Here are some examples:
 
