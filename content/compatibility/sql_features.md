@@ -349,7 +349,7 @@ the [system table compatibility](../system_table) page.
 | &             | Yes               |                                                                                   |
 | \|            | Yes               |                                                                                   |
 | #             | Yes               |                                                                                   |
-| ~             | Yes               |                                                                                   |
+| ~             | No                |                                                                                   |
 | \<\<          | Yes               |                                                                                   |
 | \>\>          | Yes               |                                                                                   |
 | abs           | Yes               |                                                                                   |
@@ -360,13 +360,13 @@ the [system table compatibility](../system_table) page.
 | erf           | No                |                                                                                   |
 | erfc          | No                |                                                                                   |
 | exp           | Yes               |                                                                                   |
-| factorial     | Yes               |                                                          Also exists as ! operand |
+| factorial     | Yes               |                                        Also available as the `!!` prefix operator |
 | floor         | Yes               |                                                                                   |
 | gcd           | Yes               |               Missing support for numeric input type. Supports int4, uint8, int8. |
 | lcm           | No                |                                                                                   |
 | ln            | Yes               |                                                                                   |
 | log           | Yes               |                                                                                   |
-| log10         | Yes               |                                                                                   |
+| log10         | No                |                                                                                   |
 | min_scale     | No                |                                                                                   |
 | mod           | Yes               |                                                                                   |
 | pi            | Yes               |                                                                                   |
@@ -407,52 +407,52 @@ the [system table compatibility](../system_table) page.
 
 #### Text
 
-| **Feature**     | **Support State** |                                           **Details** |
-|-----------------|-------------------|------------------------------------------------------:|
-| \|\|            | Yes               |                                                       |
-| btrim           | Yes               |                                                       |
-| bit_length      | Yes               |                                                       |
-| char_length     | Yes               |                                                       |
-| lower           | Yes               |                                                       |
-| lpad            | Yes               |                                                       |
-| ltrim           | Yes               |                                                       |
-| normalize       | No                |                                                       |
-| octet_length    | Yes               |                                                       |
-| overlay         | Yes               |                                                       |
-| position        | Yes               |                                                       |
-| rpad            | Yes               |                                                       |
-| rtrim           | Yes               |                                                       |
-| substring       | Yes               | Currently not supporting regular expression arguments |
-| trim            | Yes               |                                                       |
-| upper           | Yes               |                                                       |
-| ^@              | No                |                                                       |
-| ascii           | Yes               |                                                       |
-| chr             | Yes               |                                                       |
-| concat          | Yes               |                                                       |
-| concat_ws       | Yes               |                                                       |
-| format          | Yes               |                                                       |
-| initcap         | Yes               |                                                       |
-| left            | Yes               |                                                       |
-| length          | Yes               |                                                       |
-| md5             | Yes               |                                                       |
-| parse_ident     | Yes               |                                                       |
-| quote_ident     | Yes               |                                                       |
-| quote_literal   | Yes               |                                                       |
-| quote_nullable  | Yes               |                                                       |
-| repeat          | Yes               |                                                       |
-| replace         | Yes               |                                                       |
-| reverse         | Yes               |                                                       |
-| right           | Yes               |                                                       |
-| split_part      | Yes               |                                                       |
-| starts_with     | Yes               |                                                       |
-| string_to_array | Yes               |                                                       |
-| string_to_table | Yes               |                                                       |
-| strpos          | Yes               |                                                       |
-| substr          | Yes               |                                                       |
-| to_ascii        | No                |                                                       |
-| to_hex          | Yes               |                                                       |
-| translate       | Yes               |                                                       |
-| unistr          | No                |                                                       |
+| **Feature**           | **Support State** |                                           **Details** |
+|-----------------------|-------------------|------------------------------------------------------:|
+| \|\|                  | Yes               |                                                       |
+| btrim                 | Yes               |                                                       |
+| bit_length            | Yes               |                                                       |
+| char_length           | Yes               |                                                       |
+| lower                 | Yes               |                                                       |
+| lpad                  | Yes               |                                                       |
+| ltrim                 | Yes               |                                                       |
+| normalize             | Yes               |                                                       |
+| octet_length          | Yes               |                                                       |
+| overlay               | Yes               |                                                       |
+| position              | Yes               |                                                       |
+| rpad                  | Yes               |                                                       |
+| rtrim                 | Yes               |                                                       |
+| substring             | Yes               | Currently not supporting regular expression arguments |
+| trim                  | Yes               |                                                       |
+| upper                 | Yes               |                                                       |
+| ^@                    | No                |                                                       |
+| ascii                 | Yes               |                                                       |
+| chr                   | Yes               |                                                       |
+| concat                | Yes               |                                                       |
+| concat_ws             | Yes               |                                                       |
+| format                | Yes               |                                                       |
+| initcap               | Yes               |                                                       |
+| left                  | Yes               |                                                       |
+| length                | Yes               |                                                       |
+| md5                   | Yes               |                                                       |
+| parse_ident           | Yes               |                                                       |
+| quote_ident           | Yes               |                                                       |
+| quote_literal         | Yes               |                                                       |
+| quote_nullable        | Yes               |                                                       |
+| repeat                | Yes               |                                                       |
+| replace               | Yes               |                                                       |
+| reverse               | Yes               |                                                       |
+| right                 | Yes               |                                                       |
+| split_part            | Yes               |                                                       |
+| starts_with           | Yes               |                                                       |
+| string_to_array       | Yes               |                                                       |
+| string_to_table       | Yes               |                                                       |
+| strpos                | Yes               |                                                       |
+| substr                | Yes               |                                                       |
+| to_ascii              | No                |                                                       |
+| to_hex                | Yes               |                                                       |
+| translate             | Yes               |                                                       |
+| unistr                | No                |                                                       |
 
 #### Bytea
 
@@ -469,7 +469,7 @@ the [system table compatibility](../system_table) page.
 | substring    | Yes               |                         |
 | trim         | Yes               | Only for BOTH direction |
 | bit_count    | No                |                         |
-| get_bit      | No                |                         |
+| get_bit      | Yes               |                         |
 | get_byte     | Yes               |                         |
 | length       | Yes               |                         |
 | md5          | Yes               |                         |
@@ -489,16 +489,16 @@ the [system table compatibility](../system_table) page.
 
 | **Feature**  | **Support State** | **Details** |
 |--------------|-------------------|------------:|
-| \|\|         | No                |             |
-| &            | No                |             |
-| \|           | No                |             |
-| #            | No                |             |
+| \|\|         | Yes               |             |
+| &            | Yes               |             |
+| \|           | Yes               |             |
+| #            | Yes               |             |
 | ~            | No                |             |
 | \<\<         | No                |             |
 | \>\>         | No                |             |
 | bit_count    | Yes               |             |
 | bit_length   | Yes               |             |
-| length       | No                |             |
+| length       | Yes               |             |
 | octet_length | Yes               |             |
 | overlay      | Yes               |             |
 | position     | Yes               |             |
@@ -545,7 +545,7 @@ the [system table compatibility](../system_table) page.
 | current_time          | Yes               |                  |
 | current_timestamp     | Yes               |                  |
 | date_add              | No                | possible with +  |
-| date_bin              | No                |                  |
+| date_bin              | Yes               |                  |
 | date_part             | Yes               |                  |
 | date_subtract         | No                | possible with -  |
 | date_trunc            | Yes               | Without timezone |
@@ -560,7 +560,7 @@ the [system table compatibility](../system_table) page.
 | make_interval         | No                |                  |
 | make_time             | No                |                  |
 | make_timestamp        | No                |                  |
-| make_timestamptz      | Yes               |                  |
+| make_timestamptz      | No                |                  |
 | now                   | Yes               |                  |
 | statement_timestamp   | No                |                  |
 | timeofday             | No                |                  |
@@ -702,9 +702,11 @@ the [system table compatibility](../system_table) page.
 
 | **Feature**            | **Support State** | **Details** |
 |------------------------|-------------------|-------------|
-| get_random_uuid        | Yes               |             |
-| uuid_extract_timestamp | No                |             |
-| uuid_extract_version   | No                |             |
+| gen_random_uuid        | Yes               |             |
+| uuid_extract_timestamp | Yes               |             |
+| uuid_extract_version   | Yes               |             |
+| uuidv4                 | Yes               |             |
+| uuidv7                 | Yes               |             |
 
 #### XML
 
@@ -732,8 +734,8 @@ the [system table compatibility](../system_table) page.
 |---------------------------|-------------------|-------------|
 | ->                        | Yes               |             |
 | -\>\>                     | Yes               |             |
-| #>                        | No                |             |
-| #\>\>                     | No                |             |
+| #>                        | Yes               |             |
+| #\>\>                     | Yes               |             |
 | @>                        | Yes               |             |
 | <@                        | Yes               |             |
 | ?                         | Yes               |             |
@@ -746,13 +748,13 @@ the [system table compatibility](../system_table) page.
 | @@                        | No                |             |
 | to_json                   | Yes               |             |
 | to_jsonb                  | No                |             |
-| array_to_json             | No                |             |
+| array_to_json             | Yes               |             |
 | json_array                | No                |             |
 | row_to_json               | Yes               |             |
 | json_build_array          | Yes               |             |
 | jsonb_build_array         | Yes               |             |
 | json_build_object         | Yes               |             |
-| jsonb_build_object        | No                |             |
+| jsonb_build_object        | Yes               |             |
 | json_object               | No                |             |
 | jsonb_object              | No                |             |
 | IS JSON                   | No                |             |
@@ -761,7 +763,7 @@ the [system table compatibility](../system_table) page.
 | json_array_elements_text  | No                |             |
 | jsonb_array_elements_text | No                |             |
 | json_array_length         | Yes               |             |
-| jsonb_array_length        | No                |             |
+| jsonb_array_length        | Yes               |             |
 | json_each                 | No                |             |
 | jsonb_each                | No                |             |
 | json_each_text            | No                |             |
@@ -809,8 +811,8 @@ the [system table compatibility](../system_table) page.
 |-------------------|-------------------|--------------------------|
 | @>                | Yes               |                          |
 | <@                | Yes               |                          |
-| &&                | No                |                          |
-| \|\|              | Yes               | Not for multidimensional |
+| &&                | Yes               |                          |
+| \|\|              | Yes               |                          |
 | array_append      | Yes               |                          |
 | array_cat         | Yes               |                          |
 | array_dims        | Yes               |                          |
@@ -826,9 +828,9 @@ the [system table compatibility](../system_table) page.
 | array_shuffle     | No                |                          |
 | array_to_string   | Yes               |                          |
 | array_upper       | Yes               |                          |
-| array_cardinality | Yes               |                          |
+| cardinality       | Yes               |                          |
 | trim_array        | Yes               |                          |
-| unnest            | Yes               | No multi-array expansion |
+| unnest            | Yes               |                          |
 
 #### Range
 
@@ -839,8 +841,8 @@ the [system table compatibility](../system_table) page.
 | &&          | Yes               |             |
 | \<\<        | Yes               |             |
 | \>\>        | Yes               |             |
-| &<          | Yes               |             |
-| &>          | Yes               |             |
+| &<          | No                |             |
+| &>          | No                |             |
 | -\|-        | No                |             |
 | +           | No                |             |
 | *           | No                |             |
@@ -872,10 +874,10 @@ the [system table compatibility](../system_table) page.
 | bool_or               | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | count(*)              | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | count("any")          | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
-| json(b)_agg           | No                |                                                                                                       |
+| json(b)_agg           | Partial           |                          [JSON Function Documentation](/docs/references/functions/json/#construction) |
 | json(b)_objectagg     | No                |                                                                                                       |
 | json(b)_object_agg    | No                |                                                                                                       |
-| json_arrayagg         | No                |                                                                                                       |
+| json_arrayagg         | Yes               |                          [JSON Function Documentation](/docs/references/functions/json/#construction) |
 | max                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | min                   | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#general-purpose-functions) |
 | range(_intersect)_agg | No                |                                                                                                       |
@@ -897,7 +899,7 @@ the [system table compatibility](../system_table) page.
 | regr_r2        | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
 | regr_slope     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
 | regr_sxx       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
-| regr_sxy       | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
+| regr_sxy       | No                |                                                                                                    |
 | regr_syy       | No                |                                                                                                    |
 | stddev         | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
 | stddev_pop     | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation/#statistical-aggregates) |
@@ -910,9 +912,9 @@ the [system table compatibility](../system_table) page.
 
 | **Feature**     | **Support State** |                                                                                                  **Details** |
 |-----------------|-------------------|-------------------------------------------------------------------------------------------------------------:|
-| mode            | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_cont | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
-| percentile_disc | Yes               | [Aggregate Function Documentation](/docs/references/functions/aggregation//#ordered-set-aggregate-functions) |
+| mode            | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation/#ordered-set-aggregate-functions) |
+| percentile_cont | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation/#ordered-set-aggregate-functions) |
+| percentile_disc | Yes               |  [Aggregate Function Documentation](/docs/references/functions/aggregation/#ordered-set-aggregate-functions) |
 
 #### Window
 

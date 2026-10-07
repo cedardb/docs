@@ -132,3 +132,10 @@ regexp_like
 t
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- `quote_nullable(NULL)` returns the quoted string `'NULL'` instead of the unquoted keyword `NULL`. Dynamic SQL built with it stores the text `NULL` instead of a null value.
+- `substring` does not accept regular expression patterns (`substring(text FROM pattern)`, `SIMILAR ... ESCAPE`). Use `regexp_substr` instead.
+- `regexp_replace` does not accept the `start` and `N` arguments.
+- `^@`, `unistr`, and `to_ascii` are not supported.
