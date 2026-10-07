@@ -74,8 +74,10 @@ CedarDB supports the following referential actions on foreign keys:
 * `ON DELETE RESTRICT`: prevents deletion if child rows exist.
 * `ON DELETE NO ACTION`: same as RESTRICT, and the default.
 * `ON UPDATE CASCADE`: updates child rows when the referenced key value changes.
+* `ON UPDATE RESTRICT`: prevents updating the referenced key if child rows exist.
+* `ON UPDATE NO ACTION`: same as RESTRICT, and the default.
 
-`ON DELETE SET NULL` and `ON DELETE SET DEFAULT` are not yet implemented.
+`ON DELETE SET NULL`, `ON DELETE SET DEFAULT`, and `ON UPDATE SET NULL` are not yet implemented.
 
 ### Options
 
@@ -159,7 +161,7 @@ With `GENERATED ALWAYS AS IDENTITY`, you need to use `OVERRIDING SYSTEM VALUE` t
 ### Permissions
 
 To create a table, you need the `CREATE` privilege on the target schema.
-By default, every role has the `CREATE` privilege on the `public` schema.
+Creating a `TEMPORARY` table instead requires the `TEMPORARY` privilege on the current database, which every role has by default.
 
 ## CREATE TABLE AS
 
@@ -237,13 +239,24 @@ Drop multiple tables in one statement:
 DROP TABLE staging_data, temp_results;
 ```
 
-If another table has a foreign key referencing the table being dropped, the DROP fails with an error.
-Drop the dependent table first.
-`DROP TABLE CASCADE` is not yet supported.
+By default, CedarDB refuses to drop a table that other objects depend on, such as a foreign key from another table or a view built on it.
+Use `CASCADE` to drop the table together with all objects that depend on it:
+
+```sql
+DROP TABLE species CASCADE;
+```
+
+Dependent foreign key constraints and views are removed along with the table.
+`RESTRICT` is the default behavior and rejects the drop if any object still depends on the table:
+
+```sql
+DROP TABLE species RESTRICT;
+```
 
 ### Permissions
 
-To drop a table you must own it, own its schema, or be a database superuser.
+To drop a table you must own it, own its schema, or own the database.
+Superusers can drop any table.
 
 ## ALTER TABLE
 
@@ -289,6 +302,35 @@ ALTER TABLE species RENAME COLUMN botanical_name TO scientific_name;
 
 Renaming a column does not rename any constraints whose default name was derived from the old column name.
 For example, a unique constraint with the default name `species_botanical_name_key` keeps that name after the column is renamed.
+
+#### SET DEFAULT
+
+Set the default value applied to a column when no value is supplied on INSERT:
+
+```sql
+ALTER TABLE species ALTER COLUMN iucn_status SET DEFAULT 'not evaluated';
+```
+
+Remove an existing default:
+
+```sql
+ALTER TABLE species ALTER COLUMN iucn_status DROP DEFAULT;
+```
+
+#### SET NOT NULL
+
+Add a not-null constraint to an existing column.
+CedarDB validates the current rows and fails if the column already contains null values:
+
+```sql
+ALTER TABLE species ALTER COLUMN botanical_name SET NOT NULL;
+```
+
+Remove a not-null constraint:
+
+```sql
+ALTER TABLE species ALTER COLUMN botanical_name DROP NOT NULL;
+```
 
 #### RENAME TABLE
 
@@ -349,6 +391,14 @@ Drop a constraint and cascade to dependent constraints:
 ALTER TABLE child_table DROP CONSTRAINT fk_constraint CASCADE;
 ```
 
+#### RENAME CONSTRAINT
+
+Rename an existing constraint, using either its explicit name or its default name:
+
+```sql
+ALTER TABLE orders RENAME CONSTRAINT orders_pkey TO orders_primary;
+```
+
 ### Storage Options
 
 Change the general-purpose compression codec used for on-disk column data.
@@ -359,6 +409,16 @@ This takes effect the next time affected data is written to disk:
 ALTER TABLE species SET (compression = zstd);
 ALTER TABLE species SET (compression = none);
 ```
+
+### SET SCHEMA
+
+Move a table to a different schema:
+
+```sql
+ALTER TABLE species SET SCHEMA taxonomy;
+```
+
+The target schema must already exist, and you need the `CREATE` privilege on it.
 
 ### Ownership
 
@@ -388,5 +448,5 @@ This feature requires an enterprise license.
 
 ### Permissions
 
-To alter a table you must be its owner.
-Superusers can alter any table.
+To alter a table you must be its owner. Superusers can alter any table.
+`SET SCHEMA` additionally requires the `CREATE` privilege on the destination schema, and `OWNER TO` requires the ability to set your role to the new owner.
