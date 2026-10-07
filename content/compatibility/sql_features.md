@@ -76,16 +76,20 @@ the [system table compatibility](../system_table) page.
 
 ### Privileges
 
-| **Feature**           | **Support State** | **Details**                                      |
-|-----------------------|-------------------|--------------------------------------------------|
-| CREATE ROLE           | Yes               | [Documentation](/docs/references/objects/roles)  |
-| OWNER TO              | Yes               |                                                  |
-| ALTER ROLE            | Yes               | [Documentation](/docs/references/objects/roles)  |
-| GRANT                 | Yes               | Requires an enterprise license                   |
-| REVOKE                | Yes               | Requires an enterprise license                   |
-| SET ROLE              | Yes               | Requires an enterprise license                   |
-| INHERIT               | Yes               | [Documentation](/docs/references/objects/roles/) |
-| Row Security Policies | Yes               | Requires an enterprise license                   |
+| **Feature**               | **Support State** | **Details**                                                |
+|---------------------------|-------------------|------------------------------------------------------------|
+| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)            |
+| OWNER TO                  | Yes               |                                                            |
+| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)            |
+| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role) |
+| GRANT                     | Yes               | Requires an enterprise license                             |
+| REVOKE                    | Yes               | Requires an enterprise license                             |
+| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
+| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
+| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)           |
+| REASSIGN OWNED            | No                |                                                            |
+| DROP OWNED                | No                |                                                            |
+| Row Security Policies     | Yes               | Requires an enterprise license                             |
 
 ### Indexes
 
