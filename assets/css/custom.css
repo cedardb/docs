@@ -184,6 +184,11 @@ kbd,
     border-top-color: var(--cedar-line) !important;
 }
 
+.dark .hextra-toc > div > div:last-child {
+    background: var(--cedar-panel-strong) !important;
+    box-shadow: 0 -12px 16px var(--cedar-panel-strong) !important;
+}
+
 .hextra-sidebar-container a,
 .hextra-toc a,
 .content {
