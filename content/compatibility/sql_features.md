@@ -132,6 +132,10 @@ the [system table compatibility](../system_table) page.
 | Table Partitioning         | Partial           | Only hash partitioning, partitions are created automatically. [Documentation](/docs/references/objects/tables/#partitioning) |
 | Foreign Data Wrappers      | No                |                                                                                                                              |
 | Views                      | Yes               | [Documentation](/docs/references/objects/views/)                                                                             |
+| Temporary Views            | Yes               | [Documentation](/docs/references/objects/views/#temporary-views)                                                             |
+| Updatable Views            | No                |                                                                                                                              |
+| WITH CHECK OPTION          | No                |                                                                                                                              |
+| Recursive Views            | No                |                                                                                                                              |
 | Materialized Views         | Yes               | [Documentation](/docs/references/objects/materialized_views/)                                                                |
 | Databases                  | Yes               | [Documentation](/docs/references/objects/databases/)                                                                         |
 | Functions & Procedures     | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language                                      |
