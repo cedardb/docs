@@ -176,6 +176,22 @@ the [system table compatibility](../system_table) page.
 | MERGE                     | No                |                                                         |
 | WITH (data-modifying CTE) | Partial           | [Documentation](/docs/references/queries/with/)         |
 
+## Transactions
+
+| **Feature**                       | **Support State** | **Details**                                                            |
+|-----------------------------------|-------------------|------------------------------------------------------------------------|
+| BEGIN / COMMIT / ROLLBACK         | Yes               | [Documentation](/docs/references/transactions/)                        |
+| SAVEPOINT / RELEASE / ROLLBACK TO | Yes               | [Documentation](/docs/references/transactions/#savepoints)             |
+| READ ONLY Transactions            | Yes               | [Documentation](/docs/references/transactions/#begin)                  |
+| SET TRANSACTION                   | Yes               | [Documentation](/docs/references/transactions/#set-transaction)        |
+| REPEATABLE READ                   | Yes               | [Documentation](/docs/references/transactions/#transaction-semantics)  |
+| READ COMMITTED                    | Partial           | [Documentation](/docs/references/transactions/#postgresql-differences) |
+| SERIALIZABLE                      | No                |                                                                        |
+| LOCK TABLE                        | Partial           | [Documentation](/docs/references/transactions/#postgresql-differences) |
+| SET CONSTRAINTS                   | No                |                                                                        |
+| COMMIT / ROLLBACK AND CHAIN       | No                |                                                                        |
+| PREPARE TRANSACTION               | No                |                                                                        |
+
 ## Queries
 
 | **Feature**                       | **Support State** | **Details**                                                                      |
@@ -207,7 +223,7 @@ the [system table compatibility](../system_table) page.
 | DISTINCT ON                       | Yes               | [Documentation](/docs/references/queries/select/#distinct)                       |
 | FETCH FIRST                       | Yes               | [Documentation](/docs/references/queries/orderby/)                               |
 | FETCH FIRST ... WITH TIES         | No                |                                                                                  |
-| Row Locking (FOR UPDATE/SHARE)    | No                |                                                                                  |
+| Row Locking (FOR UPDATE/SHARE)    | Partial           | [Documentation](/docs/references/transactions/#row-locks)                        |
 | WITH ORDINALITY                   | Yes               | [Documentation](/docs/references/queries/from/#table-functions)                  |
 | ROWS FROM                         | No                |                                                                                  |
 | Window Frames (ROWS/RANGE/GROUPS) | Yes               | [Documentation](/docs/references/queries/window/#window-frames)                  |
