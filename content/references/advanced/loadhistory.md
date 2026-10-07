@@ -44,6 +44,25 @@ Setting this to `0` disables load history collection altogether.
 Setting `loadhistory.retention` specifies the number of measurements that are stored before they will be dropped. The default value for this setting is `8640`.
 For an interval of 10 seconds, this will retain values for 24 hours.
 
+Set both values at startup in the [configuration file or as environment variables](../../configuration), for example `LOADHISTORY_INTERVAL=5000`.
+In SQL, the settings appear as `debug.loadhistory.interval` and `debug.loadhistory.retention`:
+
+```sql
+select name, setting from pg_settings where name like 'debug.loadhistory%';
+```
+
+```text
+            name             | setting
+-----------------------------+---------
+ debug.loadhistory.interval  | 10000
+ debug.loadhistory.retention | 8640
+(2 rows)
+```
+
+Without an enterprise license, querying a `cedardb_*_load_history` table fails with `ERROR: Load history collection requires an enterprise license to be executed.`
+CedarDB only collects measurements if the license is active at startup, i.e., set in the configuration file or as the `LICENSE_KEY` environment variable.
+If you activate the license with `SET license.key` in a running server, the tables stay empty until the next restart.
+
 ## Metrics and Tables
 
 All `cedardb_*_load_history` tables have as their first column the `timestamp` of when the measurement was taken.
