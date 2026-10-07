@@ -22,7 +22,7 @@ psql -h /tmp -U postgres
 ```
 
 ```sql
-create user myuser with password 'mypassword' superuser;
+create user myuser with password 'CorrectHorseBatteryStaple' superuser;
 create database mydb;
 ```
 
@@ -73,7 +73,7 @@ npx prisma init --datasource-provider postgresql --output ../generated/prisma
 This creates a `prisma/schema.prisma` and a `.env` file. Set your CedarDB connection string in `.env`:
 
 ```shell {filename=".env"}
-DATABASE_URL="postgresql://myuser:mypassword@localhost:5432/mydb?schema=public"
+DATABASE_URL="postgresql://myuser:CorrectHorseBatteryStaple@localhost:5432/mydb?schema=public"
 ```
 
 Instantiate the Prisma client in `lib/prisma.ts`:

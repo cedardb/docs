@@ -177,7 +177,7 @@ Let's load the data into CedarDB:
 If we mount the data directly into the CedarDB docker container, we can considerably speed up the import process:
 
 ```shell
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=postgres -v /path/to/the/csvs:/data cedardb
+docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=CorrectTreeBatteryStaple -v /path/to/the/csvs:/data cedardb
 ```
 
 ```sql
@@ -363,7 +363,7 @@ library(RPostgres)
 library(ggplot2)
 
 # Connect to CedarDB
-con <- dbConnect(RPostgres::Postgres(), host="localhost", user="postgres", password="postgres", dbname="postgres")
+con <- dbConnect(RPostgres::Postgres(), host="localhost", user="postgres", password="CorrectTreeBatteryStaple", dbname="postgres")
 on.exit(dbDisconnect(con))
 
 ordersHistogram <- dbGetQuery(con, "

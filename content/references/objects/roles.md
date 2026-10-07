@@ -13,9 +13,9 @@ Usage example:
 
 ```sql
 -- Create a new user
-create role dbuser login with password '1234';
+create role dbuser login with password 'CorrectHorseBatteryStaple';
 -- Create user implies a "login" role
-create user admin with createdb createrole password 'admin';
+create user admin with createdb createrole password 'CorrectHorseBatteryStaple';
 ```
 
 ### Options
@@ -80,7 +80,7 @@ alter role dbuser reset all;
 Users are only allowed to change their own password or their session defaults without special permissions:
 
 ```sql
-alter user current_user password '1234';
+alter user current_user password 'CorrectHorseBatteryStaple';
 alter role current_user set search_path = app;
 ```
 

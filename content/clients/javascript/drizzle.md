@@ -23,7 +23,7 @@ psql -h /tmp -U postgres
 ```
 
 ```sql
-create user myuser with password 'mypassword' superuser;
+create user myuser with password 'CorrectHorseBatteryStaple' superuser;
 create database mydb;
 ```
 
@@ -49,7 +49,7 @@ npm install --save-dev drizzle-kit tsx @types/pg
 Create a `.env` file with your CedarDB connection string:
 
 ```shell {filename=".env"}
-DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/mydb
+DATABASE_URL=postgresql://myuser:CorrectHorseBatteryStaple@localhost:5432/mydb
 ```
 
 Initialize the Drizzle client in `src/index.ts`:
