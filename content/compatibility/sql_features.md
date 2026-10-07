@@ -100,16 +100,25 @@ the [system table compatibility](../system_table) page.
 
 ### Indexes
 
-| **Feature**            | **Support State** | **Details**                                                            |
-|------------------------|-------------------|------------------------------------------------------------------------|
-| CREATE INDEX           | Yes               | Only B-Tree Indexes [Documentation](/docs/references/objects/indexes/) |
-| GIN                    | No                |                                                                        |
-| BRIN                   | No                |                                                                        |
-| Multicolumn Indexes    | Yes               | [Documentation](/docs/references/objects/indexes/)                     |
-| Ordered Indexes        | Yes               | [Documentation](/docs/references/objects/indexes/#column-order)        |
-| Unique Indexes         | Yes               |                                                                        |
-| Indexes on Expressions | No                |                                                                        |
-| Partial Indexes        | No                |                                                                        |
+| **Feature**               | **Support State** | **Details**                                                       |
+|---------------------------|-------------------|-------------------------------------------------------------------|
+| CREATE INDEX              | Yes               | [Documentation](/docs/references/objects/indexes/)                |
+| DROP INDEX                | Yes               | [Documentation](/docs/references/objects/indexes/#drop-index)     |
+| ALTER INDEX               | No                |                                                                   |
+| REINDEX                   | No                |                                                                   |
+| B-Tree                    | Yes               | [Documentation](/docs/references/objects/indexes/#b-tree-lookups) |
+| Hash                      | Partial           | Accepted for compatibility, converted to a B-Tree index           |
+| GIN                       | No                |                                                                   |
+| GiST                      | No                |                                                                   |
+| SP-GiST                   | No                |                                                                   |
+| BRIN                      | No                |                                                                   |
+| Multicolumn Indexes       | Yes               | [Documentation](/docs/references/objects/indexes/)                |
+| Ordered Indexes           | Yes               | [Documentation](/docs/references/objects/indexes/#column-order)   |
+| Unique Indexes            | Yes               | [Documentation](/docs/references/objects/indexes/#unique-indexes) |
+| Indexes on Expressions    | No                |                                                                   |
+| Partial Indexes           | No                |                                                                   |
+| INCLUDE Columns           | No                |                                                                   |
+| CREATE INDEX CONCURRENTLY | Partial           | [Documentation](/docs/references/objects/indexes/#create-index)   |
 
 ### Misc
 
