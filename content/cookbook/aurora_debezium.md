@@ -133,7 +133,7 @@ services:
        target: /var/lib/cedardb/data
     environment:
      - CEDAR_USER=postgres
-     - CEDAR_PASSWORD=postgres
+     - CEDAR_PASSWORD=CorrectTreeBatteryStaple
      - CEDAR_DB=postgres
   connect:
     image: quay.io/debezium/connect:2.7
@@ -206,7 +206,7 @@ Create a file `sink.json` with the following contents:
         "topics.regex": "postgres.public.lineitem",
         "connection.url": "jdbc:postgresql://cedardb:5432/postgres?stringtype=unspecified",
         "connection.username": "postgres",
-        "connection.password": "postgres",
+        "connection.password": "CorrectTreeBatteryStaple",
         "delete.handling.mode": "none",
         "insert.mode": "upsert",
         "schema.evolution": "basic",
@@ -281,7 +281,7 @@ INSERT INTO lineitem (lineitem_id,  transaction_id, product_id, quantity, unit_p
 
 ### Checking Replication in CedarDB
 
-Now connect to CedarDB (e.g., via `PGPASSWORD=postgres psql -h localhost -U postgres`) and check the replicated table:
+Now connect to CedarDB (e.g., via `PGPASSWORD=CorrectTreeBatteryStaple psql -h localhost -U postgres`) and check the replicated table:
 
 ```sql
 select * from lineitem;

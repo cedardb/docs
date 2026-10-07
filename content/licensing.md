@@ -44,7 +44,7 @@ export LICENSE_KEY='<your_key>'
 If you use docker, then pass the license key as environment variable when starting CedarDB (e.g., via `docker run`):
 
 ```Shell
-docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=test -e LICENSE_KEY='<your_key>' cedardb/cedardb
+docker run --rm -p 5432:5432 -e CEDAR_PASSWORD=CorrectTreeBatteryStaple -e LICENSE_KEY='<your_key>' cedardb/cedardb
 ```
 
 {{< /tab >}}
