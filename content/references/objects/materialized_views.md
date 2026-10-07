@@ -117,6 +117,7 @@ The `ispopulated` column of `pg_matviews` and the `relispopulated` column of `pg
 
 You can create regular and unique [indexes](/docs/references/objects/indexes) on a materialized view.
 CedarDB maintains them on every refresh.
+To create an index, you must own the materialized view (or be a member of the owning role) and have the `CREATE` privilege on its schema.
 If a refresh produces rows that violate a unique index, the refresh fails and the view keeps its previous contents:
 
 ```sql
@@ -135,6 +136,12 @@ REFRESH MATERIALIZED VIEW tree_species;
 
 To create a materialized view, you need the `CREATE` privilege on the target schema and the `SELECT` privilege on all relations that the query reads.
 The creating role becomes the owner of the view.
+Default privileges defined with `ALTER DEFAULT PRIVILEGES ... ON TABLES` also apply to new materialized views.
+For example, let `bi` read every materialized view that `analytics` creates from now on:
+
+```sql
+ALTER DEFAULT PRIVILEGES FOR ROLE analytics GRANT SELECT ON TABLES TO bi;
+```
 
 Other roles only need the `SELECT` privilege on the materialized view itself to read it.
 They do not need any privileges on the underlying tables:
@@ -186,8 +193,16 @@ To keep a view up to date, run `REFRESH MATERIALIZED VIEW` periodically or after
 
 ### Permissions
 
-Only the owner of a materialized view can refresh it.
+Only the owner of a materialized view, members of the owning role, and superusers can refresh it.
+To let another role refresh a view, make it a member of the owning role (see [Roles](/docs/references/objects/roles#role-membership)):
+
+```sql
+GRANT analytics TO etl;  -- etl can now refresh views owned by analytics
+```
+
 The owner needs the `SELECT` privilege on all relations that the query reads.
+The refresh always runs with the privileges of the owner, also when a superuser runs it.
+If the owner loses this privilege, the refresh fails with `permission denied for table '<name>'`, and the view keeps its previous contents.
 
 ## ALTER MATERIALIZED VIEW
 
@@ -224,8 +239,10 @@ It rejects changes that only apply to tables, such as adding columns or constrai
 
 ### Permissions
 
-To alter a materialized view, you must be its owner.
+To alter a materialized view, you must be its owner or a member of the owning role.
 Superusers can alter any materialized view.
+Renaming the view also requires the `CREATE` privilege on its schema, and `SET SCHEMA` requires `CREATE` on the new schema.
+For `OWNER TO`, you must be able to `SET ROLE` to the new owner, and the new owner needs `CREATE` on the schema.
 
 ## DROP MATERIALIZED VIEW
 
@@ -263,10 +280,12 @@ To drop a materialized view, you must own it, own its schema, or be a superuser.
 A materialized view depends on all tables and views its query reads.
 While the materialized view exists, CedarDB refuses to drop these relations or the columns the view reads, unless you use `CASCADE`.
 
-You also cannot rename these relations or move them to another schema while the materialized view exists.
+You also cannot rename these relations or the columns the view reads, or move the relations to another schema, while the materialized view exists.
+Columns that the view does not read can be renamed and dropped.
 
 ## PostgreSQL Differences
 
 - `REFRESH MATERIALIZED VIEW` never blocks readers, as CedarDB uses snapshot isolation.
   `CONCURRENTLY` is accepted as a synonym for a regular refresh, does not require a unique index, and can be combined with `WITH NO DATA`.
-- CedarDB refuses to rename or move a table, view, or materialized view to another schema while a materialized view reads from it.
+- CedarDB refuses to rename a table, view, or materialized view, rename a column the view reads, or move a relation to another schema while a materialized view reads from it.
+- CedarDB refuses `ALTER TABLE ... ADD COLUMN` on a table that a view or materialized view reads from.
