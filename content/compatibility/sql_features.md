@@ -82,22 +82,24 @@ the [system table compatibility](../system_table) page.
 
 ### Privileges
 
-| **Feature**               | **Support State** | **Details**                                                   |
-|---------------------------|-------------------|---------------------------------------------------------------|
-| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)               |
-| OWNER TO                  | Yes               |                                                               |
-| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)               |
-| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role)    |
-| GRANT                     | Yes               | Requires an enterprise license                                |
-| REVOKE                    | Yes               | Requires an enterprise license                                |
-| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
-| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
-| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)              |
-| Column Privileges         | No                |                                                               |
-| REASSIGN OWNED            | No                |                                                               |
-| DROP OWNED                | No                |                                                               |
-| Row Security Policies     | Yes               | [Documentation](/docs/references/objects/policies/)           |
-| BYPASSRLS                 | Yes               | [Documentation](/docs/references/objects/policies/#bypassrls) |
+| **Feature**               | **Support State** | **Details**                                                                 |
+|---------------------------|-------------------|-----------------------------------------------------------------------------|
+| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)                             |
+| OWNER TO                  | Yes               |                                                                             |
+| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)                             |
+| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role)                  |
+| GRANT                     | Yes               | [Documentation](/docs/references/objects/roles/#object-privileges)          |
+| WITH GRANT OPTION         | Yes               | [Documentation](/docs/references/objects/roles/#grant-options-and-grantors) |
+| ALTER DEFAULT PRIVILEGES  | Yes               | [Documentation](/docs/references/objects/roles/#alter-default-privileges)   |
+| REVOKE                    | Yes               | [Documentation](/docs/references/objects/roles/#revoking-privileges)        |
+| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)                   |
+| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)                   |
+| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)                            |
+| Column Privileges         | No                |                                                                             |
+| REASSIGN OWNED            | No                |                                                                             |
+| DROP OWNED                | No                |                                                                             |
+| Row Security Policies     | Yes               | [Documentation](/docs/references/objects/policies/)                         |
+| BYPASSRLS                 | Yes               | [Documentation](/docs/references/objects/policies/#bypassrls)               |
 
 ### Indexes
 

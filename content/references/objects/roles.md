@@ -341,6 +341,215 @@ Only superusers can use it to switch to another role.
 
 You can `SET ROLE` to any role you are a member of with the `SET` option, or to any role if you are a superuser.
 
+## Object privileges
+
+`GRANT` and `REVOKE` give roles privileges on individual database objects.
+The privileges that apply depend on the object type and are described on the object pages:
+[databases](/docs/references/objects/databases#database-privileges),
+[schemas](/docs/references/objects/schemas#schema-privileges),
+[tables, views, and materialized views](/docs/references/objects/tables#table-privileges),
+[sequences](/docs/references/objects/sequences#sequence-privileges),
+[functions and procedures](/docs/references/objects/functions#function-privileges), and
+[types](/docs/references/objects/types#type-privileges).
+
+{{< callout type="info" >}}
+`GRANT`, `REVOKE`, and `ALTER DEFAULT PRIVILEGES` require an enterprise license.
+{{< /callout >}}
+
+```text
+GRANT { <privilege> [, ...] | ALL [ PRIVILEGES ] }
+    ON { [ TABLE ] <name> [, ...]
+       | ALL TABLES IN SCHEMA <schema_name> [, ...]
+       | SEQUENCE <name> [, ...] | ALL SEQUENCES IN SCHEMA <schema_name> [, ...]
+       | { FUNCTION | PROCEDURE | ROUTINE } <name> [ ( <arg_type> [, ...] ) ] [, ...]
+       | ALL { FUNCTIONS | PROCEDURES | ROUTINES } IN SCHEMA <schema_name> [, ...]
+       | SCHEMA <name> [, ...] | DATABASE <name> [, ...] | TYPE <name> [, ...] }
+    TO { <role_name> | PUBLIC | CURRENT_USER | CURRENT_ROLE | SESSION_USER } [, ...]
+    [ WITH GRANT OPTION ]
+    [ GRANTED BY { CURRENT_USER | CURRENT_ROLE | SESSION_USER } ]
+
+REVOKE [ GRANT OPTION FOR ] { <privilege> [, ...] | ALL [ PRIVILEGES ] }
+    ON <object> [, ...]
+    FROM { <role_name> | PUBLIC | CURRENT_USER | CURRENT_ROLE | SESSION_USER } [, ...]
+    [ GRANTED BY { CURRENT_USER | CURRENT_ROLE | SESSION_USER } ]
+    [ CASCADE | RESTRICT ]
+```
+
+`ALL TABLES IN SCHEMA` covers tables, views, and materialized views, but not sequences.
+`ALL FUNCTIONS IN SCHEMA` covers only functions, `ALL PROCEDURES IN SCHEMA` only procedures, and `ALL ROUTINES IN SCHEMA` both.
+These forms only affect objects that exist when you run the statement. Use [`ALTER DEFAULT PRIVILEGES`](#alter-default-privileges) for future objects.
+
+`PUBLIC` stands for all roles, including roles created later.
+A role has all privileges granted to itself, to `PUBLIC`, and to the roles it is a member of (with the `INHERIT` option).
+Owners have all privileges on their objects, and superusers bypass all privilege checks.
+An owner can revoke privileges from itself, e.g., to protect a table from accidental writes.
+
+### Grant options and grantors
+
+CedarDB records the grantor of every privilege, and shows it in the access control lists of the catalogs, such as `pg_class.relacl`.
+Each entry has the form `grantee=privileges/grantor`; an empty grantee means `PUBLIC`, and `*` marks a privilege with grant option.
+Each privilege is shown as a single letter:
+
+| Letter | Privilege    |
+|--------|--------------|
+| `r`    | `SELECT`     |
+| `a`    | `INSERT`     |
+| `w`    | `UPDATE`     |
+| `d`    | `DELETE`     |
+| `D`    | `TRUNCATE`   |
+| `x`    | `REFERENCES` |
+| `t`    | `TRIGGER`    |
+| `X`    | `EXECUTE`    |
+| `U`    | `USAGE`      |
+| `C`    | `CREATE`     |
+| `c`    | `CONNECT`    |
+| `T`    | `TEMPORARY`  |
+
+A `NULL` access control list means that the object still has its built-in privileges, which `acldefault()` returns.
+For example, after a chain of grants:
+
+```sql
+CREATE TABLE trees (id int, species text);
+CREATE ROLE maple LOGIN;
+CREATE ROLE birch LOGIN;
+
+GRANT SELECT ON trees TO maple WITH GRANT OPTION;
+SET ROLE maple;
+GRANT SELECT ON trees TO birch;
+RESET ROLE;
+
+SELECT relacl FROM pg_class WHERE relname = 'trees';
+```
+
+```text
+                           relacl
+-------------------------------------------------------------
+ {postgres=arwdDxt/postgres,maple=r*/postgres,birch=r/maple}
+```
+
+Use `aclexplode()` to turn an access control list into rows of grantor, grantee, privilege, and grant option.
+Call it with `CROSS JOIN LATERAL` to list the entries of a table:
+
+```sql
+SELECT a.grantor::regrole, a.grantee::regrole, a.privilege_type, a.is_grantable
+FROM pg_class c CROSS JOIN LATERAL aclexplode(c.relacl) a
+WHERE c.relname = 'trees' AND a.grantee <> c.relowner;
+```
+
+```text
+ grantor  | grantee | privilege_type | is_grantable
+----------+---------+----------------+--------------
+ postgres | maple   | SELECT         | t
+ maple    | birch   | SELECT         | f
+```
+
+Who can grant a privilege, and which grantor CedarDB records:
+
+* The owner of an object, and members of the owning role (with the `INHERIT` option), grant as the owner.
+* A superuser who does not own the object also grants as the owner.
+* A role that holds a privilege `WITH GRANT OPTION`, directly or through an inherited membership, grants as the role that holds the option.
+* A role without the grant option gets `WARNING: no privileges were granted`.
+  If it has only some of the requested grant options, `WARNING: not all privileges were granted`.
+  This also applies if the role holds other privileges on the object with grant option.
+  A role without any privilege on the object gets `permission denied`.
+
+Granting or revoking privileges on an object in a schema also requires the `USAGE` privilege on that schema.
+
+`GRANTED BY` only accepts the current role.
+
+### Revoking privileges
+
+`REVOKE` only removes privileges that the current role granted (or the owner, for owners and superusers).
+If two roles granted the same privilege to a grantee, the grantee keeps it until both grants are revoked.
+
+If the grantee has passed a privilege on to other roles, `REVOKE` fails with `dependent privileges exist`.
+`CASCADE` also revokes the dependent privileges, recursively.
+`REVOKE GRANT OPTION FOR` keeps the privilege but removes the grant option, and also requires `CASCADE` when dependent privileges exist.
+
+A role cannot grant a privilege with grant option back to the role that granted it, so revoking the root grant always removes the whole chain.
+
+When you change the owner of an object with `ALTER ... OWNER TO`, CedarDB rewrites the privileges granted by the old owner so that the new owner is their grantor.
+
+## ALTER DEFAULT PRIVILEGES
+
+`ALTER DEFAULT PRIVILEGES` defines privileges that CedarDB grants automatically when objects are created in the future.
+Existing objects are not affected.
+
+```text
+ALTER DEFAULT PRIVILEGES
+    [ FOR { ROLE | USER } <target_role> [, ...] ]
+    [ IN SCHEMA <schema_name> [, ...] ]
+    { GRANT <privileges> ON <object_class> TO <grantee> [, ...] [ WITH GRANT OPTION ]
+    | REVOKE [ GRANT OPTION FOR ] <privileges> ON <object_class> FROM <grantee> [, ...] [ CASCADE | RESTRICT ] }
+
+<object_class>: TABLES | SEQUENCES | FUNCTIONS | ROUTINES | TYPES | SCHEMAS
+```
+
+Let `analysts` read all tables that `etl_user` creates in the schema `reports` from now on:
+
+```sql
+CREATE ROLE etl_user LOGIN;
+CREATE ROLE analysts;
+CREATE SCHEMA reports AUTHORIZATION etl_user;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE etl_user IN SCHEMA reports
+    GRANT SELECT ON TABLES TO analysts;
+```
+
+| Clause                  | Description                                                                                                                  |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `FOR ROLE`              | The defaults apply to objects created by these roles. Defaults to the current role. Requires membership in the target roles. |
+| `IN SCHEMA`             | The defaults apply only to objects created in these schemas. Without it, they apply in all schemas.                          |
+| `TABLES`                | Tables, views, and materialized views, including tables created with `CREATE TABLE AS` and `SELECT INTO`.                    |
+| `SEQUENCES`             | Sequences, including the sequences of `serial` and identity columns.                                                         |
+| `FUNCTIONS`, `ROUTINES` | Functions and procedures.                                                                                                    |
+| `TYPES`                 | Types.                                                                                                                       |
+| `SCHEMAS`               | Schemas. Cannot be combined with `IN SCHEMA`.                                                                                |
+
+Rules:
+
+* Defaults only apply to objects created afterward by the target role, not to objects created by other members of that role.
+* Schema-specific defaults add to the global defaults. They cannot remove privileges granted by global defaults.
+* With `WITH GRANT OPTION`, the new objects carry the grant option, with the creating role as grantor.
+* `CREATE OR REPLACE` on an existing object does not apply the defaults again.
+* Defaults also apply to temporary tables, views, sequences, and functions.
+
+Remove built-in defaults, such as the `EXECUTE` privilege of `PUBLIC` on new functions:
+
+```sql
+ALTER DEFAULT PRIVILEGES REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
+```
+
+The `pg_default_acl` catalog lists all default privileges.
+You cannot drop a role while default privileges mention it.
+Find the entries, and remove them with `ALTER DEFAULT PRIVILEGES FOR ROLE ... REVOKE`:
+
+```sql
+SELECT defaclrole::regrole, defaclnamespace::regnamespace, defaclobjtype, defaclacl
+FROM pg_default_acl;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE etl_user IN SCHEMA reports
+    REVOKE ALL ON TABLES FROM analysts;
+```
+
+## Inspecting privileges
+
+| Function or view                                                         | Returns                                                                                |
+|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `has_table_privilege`, `has_schema_privilege`, `has_database_privilege`  | Whether a role has a privilege on a table, schema, or database.                        |
+| `has_sequence_privilege`, `has_function_privilege`, `has_type_privilege` | The same for sequences, functions, and types.                                          |
+| `has_column_privilege`, `has_any_column_privilege`                       | Whether a role has a privilege on a column, or on any column of a table.               |
+| `pg_has_role`                                                            | Whether a role is a member of another role.                                            |
+| `aclexplode(<acl>)`                                                      | The entries of an access control list as rows.                                         |
+| `acldefault(<type>, <owner>)`                                            | The built-in privileges of a new object, e.g., `acldefault('r', 'postgres'::regrole)`. |
+| `information_schema.table_privileges`, `role_table_grants`               | Table privileges per grantee.                                                          |
+| `information_schema.column_privileges`, `role_column_grants`             | Table privileges per grantee, with one row per column.                                 |
+| `information_schema.routine_privileges`, `role_routine_grants`           | Function and procedure privileges per grantee.                                         |
+| `information_schema.usage_privileges`, `role_usage_grants`               | `USAGE` privileges on sequences, collations, and foreign-data wrappers.                |
+
+Without a role argument, the `has_*_privilege` functions check the current role, e.g., `has_table_privilege('trees', 'SELECT')`.
+Append `WITH GRANT OPTION` to the privilege to check for the grant option, e.g., `'SELECT WITH GRANT OPTION'`.
+
 ## Predefined roles
 
 CedarDB creates these roles in every installation:
@@ -368,3 +577,8 @@ GRANT pg_read_all_data TO auditor;
 * CedarDB enforces password complexity requirements for plaintext passwords.
 * `ALTER ROLE ... RENAME TO` can safely rename the current user and the session user. PostgreSQL rejects this with `session user cannot be renamed`.
 * `COMMENT ON ROLE` is not supported.
+* Column privileges, such as `GRANT SELECT (species) ON trees`, are not supported.
+* The privileges of system objects cannot be changed: `GRANT` and `REVOKE` on system tables such as `pg_class`, on built-in functions and types, and on the schemas `pg_catalog` and `information_schema` fail.
+* `has_table_privilege` with a sequence name fails with `table ... does not exist`. Use `has_sequence_privilege`, or pass the sequence to `has_table_privilege` as `regclass`, e.g., `'seedling_ids'::regclass`.
+* `has_tablespace_privilege`, `has_language_privilege`, `has_parameter_privilege`, `makeaclitem`, and `aclcontains` are not available.
+* `DROP OWNED` is not available to remove default privileges before dropping a role. Use `ALTER DEFAULT PRIVILEGES FOR ROLE ... REVOKE`.
