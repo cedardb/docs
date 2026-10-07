@@ -47,11 +47,3 @@ select a[1] as first from data;
 
 CedarDB supports arrays with a maximum of 4&nbsp;GB of underlying data.
 For most data types, this limits array to about one billion elements.
-
-```sql
-select array_fill('x', array[1000000000]);
-```
-
-```text
-ERROR:   string length overflow
-```

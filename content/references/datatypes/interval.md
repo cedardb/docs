@@ -22,18 +22,19 @@ select * from example;
 ```
 
 ```text
-    duration    
-----------------
- 90 00:00:00
- 21 00:00:00
- 0-1 1 00:00:00
+  duration
+-------------
+ 90 days
+ 21 days
+ 1 mon 1 day
 (3 rows)
 ```
 
 {{< callout type="info" >}}
-By default, CedarDB uses the SQL standard format, which has a terse syntax.
-If you prefer human-readable output, consider changing the output format to PostgreSQL style:  
-`set IntervalStyle to 'postgres';`
+By default, CedarDB prints intervals in the PostgreSQL style shown above.
+You can change the output format with the `IntervalStyle` setting, for example to the terse SQL standard format:  
+`set IntervalStyle to 'sql_standard';`  
+CedarDB supports the styles `postgres`, `postgres_verbose`, `sql_standard`, and `iso_8601`.
 {{< /callout >}}
 
 ## Why Intervals?
@@ -62,3 +63,8 @@ select date '2024-02-28' + interval '2' day;
  2024-03-01 00:00:00
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- A fractional value combined with a separate field qualifier, such as `interval '1.5' day`, is rejected. PostgreSQL accepts it.
+- CedarDB accepts a fractional-second precision such as `interval(0)` but ignores it: values always keep microsecond resolution.
