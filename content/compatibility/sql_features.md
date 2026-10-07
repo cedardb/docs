@@ -163,16 +163,18 @@ the [system table compatibility](../system_table) page.
 
 ## Data Manipulation
 
-| **Feature** | **Support State** | **Details**                                             |
-|-------------|-------------------|---------------------------------------------------------|
-| INSERT      | Yes               | [Documentation](/docs/references/dml/insert/)           |
-| UPDATE      | Yes               | [Documentation](/docs/references/dml/update/)           |
-| DELETE      | Yes               | [Documentation](/docs/references/dml/delete/)           |
-| TRUNCATE    | Yes               | [Documentation](/docs/references/dml/truncate/)         |
-| RETURNING   | Yes               | [Documentation](/docs/references/dml/insert/#returning) |
-| COPY FROM   | Yes               | [Documentation](/docs/references/dml/copy/)             |
-| COPY TO     | Yes               | [Documentation](/docs/references/dml/copy/)             |
-| ON CONFLICT | Yes               | [Documentation](/docs/references/dml/upsert/)           |
+| **Feature**               | **Support State** | **Details**                                             |
+|---------------------------|-------------------|---------------------------------------------------------|
+| INSERT                    | Yes               | [Documentation](/docs/references/dml/insert/)           |
+| UPDATE                    | Yes               | [Documentation](/docs/references/dml/update/)           |
+| DELETE                    | Yes               | [Documentation](/docs/references/dml/delete/)           |
+| TRUNCATE                  | Yes               | [Documentation](/docs/references/dml/truncate/)         |
+| RETURNING                 | Yes               | [Documentation](/docs/references/dml/insert/#returning) |
+| COPY FROM                 | Yes               | [Documentation](/docs/references/dml/copy/)             |
+| COPY TO                   | Yes               | [Documentation](/docs/references/dml/copy/)             |
+| ON CONFLICT               | Yes               | [Documentation](/docs/references/dml/upsert/)           |
+| MERGE                     | No                |                                                         |
+| WITH (data-modifying CTE) | Partial           | [Documentation](/docs/references/queries/with/)         |
 
 ## Queries
 
