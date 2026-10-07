@@ -28,3 +28,18 @@ select * from example;
  11001010111111101011101010111110
 (4 rows)
 ```
+
+## Operators
+
+| Operator | Description           | Example                 | Result |
+|----------|-----------------------|-------------------------|--------|
+| `\|\|`   | Concatenation         | `B'10' \|\| B'01'`      | `1001` |
+| `&`      | Bitwise AND           | `B'1010' & B'0110'`     | `0010` |
+| `\|`     | Bitwise OR            | `B'1010' \| B'0101'`    | `1111` |
+| `#`      | Bitwise XOR           | `B'1010' # B'0110'`     | `1100` |
+
+For functions on bit strings, such as `length`, `bit_count`, `get_bit`, and `set_bit`, see [bit string functions](/docs/references/functions/bitstring).
+
+## PostgreSQL Differences
+
+- The bitwise NOT operator `~` and the shift operators `<<` and `>>` are not supported for bit strings.
