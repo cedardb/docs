@@ -103,15 +103,15 @@ from strings;
 ```
 
 ```text
- ?column? 
-----------
+  s
+-----
  foo
 (1 row)
 ```
 
 ```text
- ?column? 
-----------
+  s
+-----
  FOO
 (1 row)
 ```
@@ -119,23 +119,27 @@ from strings;
 You can achieve a deterministic result by rewriting the query to output a `min()` aggregate in `binary` collate.
 
 ```sql
+with strings(s) as (values ('foo'), ('FOO'))
 select min(s collate "binary")
 from strings
 group by s collate "en_US_ci";
 ```
 
+```text
+ min
+-----
+ FOO
+(1 row)
+```
+
 ### Choose the Right Locale
 
-The expected ordering of diacritics can depend on the specified collate. French Candians, for example, seem to have a specific preference about the lexicographical order of diacritics:
+The expected ordering of diacritics can depend on the specified collate. French Canadians, for example, seem to have a specific preference about the lexicographical order of diacritics:
 
 ```sql
-with strings(s) as (
-   values ('cote'),
-          ('coté'),
-          ('côte'),
-          ('côté')
-)
-select s from strings order by s;
+create table words (s text);
+insert into words values ('cote'), ('coté'), ('côte'), ('côté');
+select s from words order by s;
 ```
 
 ```text
@@ -148,8 +152,12 @@ select s from strings order by s;
 (4 rows)
 ```
 
+To sort by a locale, declare the collation on the column:
+
 ```sql
-select s from strings order by s collate "fr_CA";
+create table words_fr (s text collate "fr_CA");
+insert into words_fr values ('cote'), ('coté'), ('côte'), ('côté');
+select s from words_fr order by s;
 ```
 
 ```text
@@ -161,3 +169,8 @@ select s from strings order by s collate "fr_CA";
  côté
 (4 rows)
 ```
+
+## PostgreSQL Differences
+
+- Inserting a string into a `varchar(n)` column fails if it is longer than `n`, even if the excess characters are spaces. PostgreSQL silently removes the excess trailing spaces. An explicit cast such as `'abc   '::varchar(3)` truncates in both systems.
+- A `COLLATE` clause in `ORDER BY <column> COLLATE <collation>` and on constant expressions such as `'a' COLLATE "en_US_ci" = 'A'` is ignored. Collations declared on a column, or applied to a column in the select list, `WHERE`, or `GROUP BY`, take effect.

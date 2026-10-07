@@ -261,8 +261,11 @@ the [system table compatibility](../system_table) page.
 | cidr                                    | No                |                                                                 |
 | circle                                  | No                |                                                                 |
 | date                                    | Yes               |           [Date Documentation](/docs/references/datatypes/date) |
+| daterange                               | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
 | double precision                        | Yes               |        [Double Documentation](/docs/references/datatypes/float) |
 | inet                                    | Partial           |           [Inet Documentation](/docs/references/datatypes/inet) |
+| int4range                               | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
+| int8range                               | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
 | integer                                 | Yes               |     [Integer Documentation](/docs/references/datatypes/integer) |
 | interval [ fields ] [ (p) ]             | Yes               |   [Interval Documentation](/docs/references/datatypes/interval) |
 | json                                    | Yes               |           [JSON Documentation](/docs/references/datatypes/json) |
@@ -273,6 +276,7 @@ the [system table compatibility](../system_table) page.
 | macaddr8                                | No                |                                                                 |
 | money                                   | No                |                                                                 |
 | numeric [ (p, s) ]                      | Yes               |     [Numeric Documentation](/docs/references/datatypes/numeric) |
+| numrange                                | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
 | path                                    | No                |                                                                 |
 | pg_lsn                                  | No                |                                                                 |
 | pg_snapshot                             | No                |                                                                 |
@@ -284,10 +288,12 @@ the [system table compatibility](../system_table) page.
 | serial                                  | Yes               |                                                                 |
 | text                                    | Yes               |           [Text Documentation](/docs/references/datatypes/text) |
 | time [ (p) ] [ without time zone ]      | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
-| time [ (p) ] with time zone             | Yes               |           [Time Documentation](/docs/references/datatypes/time) |
+| time [ (p) ] with time zone             | No                |                                                                 |
 | timestamp [ (p) ] [ without time zone ] | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
 | timestamp [ (p) ] with time zone        | Yes               | [Timestamp Documentation](/docs/references/datatypes/timestamp) |
 | tsquery                                 | No                |                                                                 |
+| tsrange                                 | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
+| tstzrange                               | Yes               |         [Range Documentation](/docs/references/datatypes/range) |
 | tsvector                                | No                |                                                                 |
 | txid_snapshot                           | No                |                                                                 |
 | uuid                                    | Yes               |           [UUID Documentation](/docs/references/datatypes/uuid) |

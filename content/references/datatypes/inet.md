@@ -99,6 +99,25 @@ select a from (values
 (5 rows)
 ```
 
+## Constraints
+
+You can declare `PRIMARY KEY` and `UNIQUE` constraints on `inet` columns.
+Two values are equal if they have the same address and netmask length, so `10.0.0.1` and `10.0.0.1/32` are duplicates.
+
+```sql
+create table gateways (
+    address inet primary key,
+    site text
+);
+insert into gateways values ('10.0.0.1', 'greenhouse');
+insert into gateways values ('10.0.0.1/32', 'nursery');
+```
+
+```text
+ERROR:  duplicate key value violates unique constraint "gateways_pkey"
+DETAIL:  Key (address)=(10.0.0.1) already exists.
+```
+
 ## Functions
 
 ### inet_client_addr
@@ -116,3 +135,10 @@ select inet_client_addr();
  192.168.1.42
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- The `cidr`, `macaddr`, and `macaddr8` types are not supported.
+- The network operators, such as `<<`, `>>`, `&&`, `~`, `&`, `|`, `+`, and `-`, are not supported.
+- The network functions, such as `masklen`, `family`, and `abbrev`, are not supported.
+- The aggregates `min` and `max`, and arrays of `inet` (`inet[]`), are not supported.

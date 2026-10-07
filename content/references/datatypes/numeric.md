@@ -92,7 +92,7 @@ values (power(2, 126)::numeric(38,0));
 The following will produce an overflow, since $2^{126} + 2^{126} > 2^{127}-1$.
 
 ```sql
-select i + i from integers;
+select i + i from numerics;
 ```
 
 ```text
@@ -116,10 +116,21 @@ select try(i + i) from numerics;
 
 PostgreSQL offers a maximum precision of 131072 and scale of 16383, where CedarDB restricts precision and scale to a
 maximum of 38, for performance reasons.
+A `numeric` column or cast without precision and scale uses `numeric(38, 6)`, so values keep at most six fractional digits.
 
 Additionally, PostgreSQL allows `NaN`, `+Infinity`, and `-Infinity` as special numeric values.
 Since all operations on numerics are bounds-checked, these values cannot occur during regular operations.
 However, PostgreSQL still allows entering them directly.
-
 CedarDB forbids entering these values as numeric data types.
 See [Float](/docs/references/datatypes/float) for data types supporting those special values.
+
+When CedarDB converts a value to a `numeric` with fewer fractional digits, the result depends on the source and the
+target precision:
+
+| Conversion                                                 | Example               | Result                                            |
+|------------------------------------------------------------|-----------------------|---------------------------------------------------|
+| Numeric value to precision 18 or less                      | `1.5::numeric(3,0)`   | `2` (rounded, as in PostgreSQL)                   |
+| Numeric value to precision 19 to 38, or to plain `numeric` | `1.5::numeric(38,0)`  | `1` (excess digits are truncated)                 |
+| String to any `numeric`                                    | `'1.5'::numeric(3,0)` | `ERROR: invalid number format: loss of precision` |
+
+PostgreSQL rounds in all three cases.

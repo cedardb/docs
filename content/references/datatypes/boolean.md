@@ -57,7 +57,7 @@ This results in more subtle ternary truth tables for booleans:
 
 ```sql
 with bools(v) as (values (true), (null), (false))
-select a.v as a, b.v as b, a and b as and, a or b as or
+select a.v as a, b.v as b, a.v and b.v as "and", a.v or b.v as "or"
 from bools a, bools b;
 ```
 
