@@ -122,26 +122,30 @@ the [system table compatibility](../system_table) page.
 
 ### Misc
 
-| **Feature**            | **Support State** | **Details**                                                                                                                  |
-|------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------|
-| CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                                                           |
-| ALTER SCHEMA           | Yes               | [Documentation](/docs/references/objects/schemas/#alter-schema)                                                              |
-| DROP SCHEMA            | Yes               | [Documentation](/docs/references/objects/schemas/#drop-schema)                                                               |
-| search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                                                             |
-| Table Inheritance      | No                |                                                                                                                              |
-| Table Partitioning     | Partial           | Only hash partitioning, partitions are created automatically. [Documentation](/docs/references/objects/tables/#partitioning) |
-| Foreign Data Wrappers  | No                |                                                                                                                              |
-| Views                  | Yes               | [Documentation](/docs/references/objects/views/)                                                                             |
-| Materialized Views     | Yes               | [Documentation](/docs/references/objects/materialized_views/)                                                                |
-| Databases              | Yes               | [Documentation](/docs/references/objects/databases/)                                                                         |
-| Functions & Procedures | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language                                      |
-| Sequences              | Yes               | [Documentation](/docs/references/objects/sequences/)                                                                         |
-| Temporary Sequences    | Yes               | [Documentation](/docs/references/objects/sequences/#temporary-sequences)                                                     |
-| Custom Types           | No                |                                                                                                                              |
-| Triggers               | No                |                                                                                                                              |
-| Prepared Statements    | Yes               |                                                                                                                              |
-| Advisory Locks         | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                                                           |
-| ALTER SYSTEM           | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                                                      |
+| **Feature**                | **Support State** | **Details**                                                                                                                  |
+|----------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------|
+| CREATE SCHEMA              | Yes               | [Documentation](/docs/references/objects/schemas/)                                                                           |
+| ALTER SCHEMA               | Yes               | [Documentation](/docs/references/objects/schemas/#alter-schema)                                                              |
+| DROP SCHEMA                | Yes               | [Documentation](/docs/references/objects/schemas/#drop-schema)                                                               |
+| search_path                | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                                                             |
+| Table Inheritance          | No                |                                                                                                                              |
+| Table Partitioning         | Partial           | Only hash partitioning, partitions are created automatically. [Documentation](/docs/references/objects/tables/#partitioning) |
+| Foreign Data Wrappers      | No                |                                                                                                                              |
+| Views                      | Yes               | [Documentation](/docs/references/objects/views/)                                                                             |
+| Materialized Views         | Yes               | [Documentation](/docs/references/objects/materialized_views/)                                                                |
+| Databases                  | Yes               | [Documentation](/docs/references/objects/databases/)                                                                         |
+| Functions & Procedures     | Yes               | [Documentation](/docs/references/objects/functions/) <br> Also in cedar_script language                                      |
+| Sequences                  | Yes               | [Documentation](/docs/references/objects/sequences/)                                                                         |
+| Temporary Sequences        | Yes               | [Documentation](/docs/references/objects/sequences/#temporary-sequences)                                                     |
+| Custom Types               | Partial           | [Documentation](/docs/references/objects/types/)                                                                             |
+| Enum Types                 | Yes               | [Documentation](/docs/references/objects/types/)                                                                             |
+| Composite Types            | No                |                                                                                                                              |
+| Range Types (user-defined) | No                |                                                                                                                              |
+| Domains                    | No                |                                                                                                                              |
+| Triggers                   | No                |                                                                                                                              |
+| Prepared Statements        | Yes               |                                                                                                                              |
+| Advisory Locks             | Yes               | [Documentation](/docs/references/functions/system/#advisory-locks)                                                           |
+| ALTER SYSTEM               | Yes               | [Documentation](/docs/references/sessions/altersystem/)                                                                      |
 
 ## Data Manipulation
 
