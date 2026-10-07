@@ -26,3 +26,7 @@ expressions.
 Due to their probabilistic nature, these statistics might be inaccurate by chance.
 When a query runs slowly due to a bad query plan, running `analyze` on the queried tables might result in a different
 plan.
+
+## PostgreSQL Differences
+
+- Analyzing specific columns, e.g., `ANALYZE orders (customer_id)`, is not supported. Analyze the whole table instead.
