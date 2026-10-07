@@ -49,54 +49,55 @@ the [system table compatibility](../system_table) page.
 
 ### Table Modification (ALTER TABLE)
 
-| **Feature**                       | **Support State** | **Details**                                                         |
-|-----------------------------------|-------------------|---------------------------------------------------------------------|
-| ADD COLUMN                        | Yes               |                                                                     |
-| ADD COLUMN IF NOT EXISTS          | Yes               |                                                                     |
-| DROP COLUMN                       | Yes               |                                                                     |
-| DROP COLUMN IF EXISTS             | Yes               |                                                                     |
-| DROP COLUMN CASCADE               | Yes               |                                                                     |
-| RENAME COLUMN                     | Yes               |                                                                     |
-| RENAME TO                         | Yes               |                                                                     |
-| ADD CHECK                         | No                |                                                                     |
-| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                   |
-| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/)                   |
-| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                   |
-| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/)                   |
-| DROP CONSTRAINT IF EXISTS         | Yes               |                                                                     |
-| DROP CONSTRAINT CASCADE           | Yes               |                                                                     |
-| RENAME CONSTRAINT                 | Yes               | [Documentation](/docs/references/objects/tables/#rename-constraint) |
-| ALTER COLUMN SET/DROP DEFAULT     | Yes               | [Documentation](/docs/references/objects/tables/#set-default)       |
-| ALTER COLUMN SET/DROP NOT NULL    | Yes               | [Documentation](/docs/references/objects/tables/#set-not-null)      |
-| ALTER COLUMN TYPE                 | Yes               | [Documentation](/docs/references/objects/tables/#alter-column-type) |
-| ALTER COLUMN ADD/DROP IDENTITY    | Yes               | [Documentation](/docs/references/objects/tables/#identity-columns)  |
-| SET SCHEMA                        | Yes               | [Documentation](/docs/references/objects/tables/#set-schema)        |
-| OWNER TO                          | Yes               | [Documentation](/docs/references/objects/tables/#ownership)         |
-| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | CREATE POLICY requires an enterprise license                        |
-| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               |                                                                     |
-| SET TABLESPACE                    | No                |                                                                     |
-| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                                     |
-| ATTACH / DETACH PARTITION         | No                |                                                                     |
-| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                                        |
-| VALIDATE CONSTRAINT               | No                |                                                                     |
+| **Feature**                       | **Support State** | **Details**                                                                             |
+|-----------------------------------|-------------------|-----------------------------------------------------------------------------------------|
+| ADD COLUMN                        | Yes               |                                                                                         |
+| ADD COLUMN IF NOT EXISTS          | Yes               |                                                                                         |
+| DROP COLUMN                       | Yes               |                                                                                         |
+| DROP COLUMN IF EXISTS             | Yes               |                                                                                         |
+| DROP COLUMN CASCADE               | Yes               |                                                                                         |
+| RENAME COLUMN                     | Yes               |                                                                                         |
+| RENAME TO                         | Yes               |                                                                                         |
+| ADD CHECK                         | No                |                                                                                         |
+| ADD CONSTRAINT (PRIMARY KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                                       |
+| ADD CONSTRAINT (UNIQUE)           | Yes               | [Documentation](/docs/references/objects/tables/)                                       |
+| ADD CONSTRAINT (FOREIGN KEY)      | Yes               | [Documentation](/docs/references/objects/tables/)                                       |
+| DROP CONSTRAINT                   | Yes               | [Documentation](/docs/references/objects/tables/)                                       |
+| DROP CONSTRAINT IF EXISTS         | Yes               |                                                                                         |
+| DROP CONSTRAINT CASCADE           | Yes               |                                                                                         |
+| RENAME CONSTRAINT                 | Yes               | [Documentation](/docs/references/objects/tables/#rename-constraint)                     |
+| ALTER COLUMN SET/DROP DEFAULT     | Yes               | [Documentation](/docs/references/objects/tables/#set-default)                           |
+| ALTER COLUMN SET/DROP NOT NULL    | Yes               | [Documentation](/docs/references/objects/tables/#set-not-null)                          |
+| ALTER COLUMN TYPE                 | Yes               | [Documentation](/docs/references/objects/tables/#alter-column-type)                     |
+| ALTER COLUMN ADD/DROP IDENTITY    | Yes               | [Documentation](/docs/references/objects/tables/#identity-columns)                      |
+| SET SCHEMA                        | Yes               | [Documentation](/docs/references/objects/tables/#set-schema)                            |
+| OWNER TO                          | Yes               | [Documentation](/docs/references/objects/tables/#ownership)                             |
+| ENABLE/DISABLE ROW LEVEL SECURITY | Yes               | [Documentation](/docs/references/objects/policies/#enable-and-force-row-level-security) |
+| FORCE/NO FORCE ROW LEVEL SECURITY | Yes               | [Documentation](/docs/references/objects/policies/#enable-and-force-row-level-security) |
+| SET TABLESPACE                    | No                |                                                                                         |
+| CLUSTER ON / SET WITHOUT CLUSTER  | No                |                                                                                         |
+| ATTACH / DETACH PARTITION         | No                |                                                                                         |
+| ENABLE/DISABLE TRIGGER            | No                | Triggers are not implemented                                                            |
+| VALIDATE CONSTRAINT               | No                |                                                                                         |
 
 ### Privileges
 
-| **Feature**               | **Support State** | **Details**                                                |
-|---------------------------|-------------------|------------------------------------------------------------|
-| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)            |
-| OWNER TO                  | Yes               |                                                            |
-| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)            |
-| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role) |
-| GRANT                     | Yes               | Requires an enterprise license                             |
-| REVOKE                    | Yes               | Requires an enterprise license                             |
-| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
-| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)  |
-| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)           |
-| Column Privileges         | No                |                                                            |
-| REASSIGN OWNED            | No                |                                                            |
-| DROP OWNED                | No                |                                                            |
-| Row Security Policies     | Yes               | Requires an enterprise license                             |
+| **Feature**               | **Support State** | **Details**                                                   |
+|---------------------------|-------------------|---------------------------------------------------------------|
+| CREATE ROLE               | Yes               | [Documentation](/docs/references/objects/roles)               |
+| OWNER TO                  | Yes               |                                                               |
+| ALTER ROLE                | Yes               | [Documentation](/docs/references/objects/roles)               |
+| DROP ROLE                 | Yes               | [Documentation](/docs/references/objects/roles/#drop-role)    |
+| GRANT                     | Yes               | Requires an enterprise license                                |
+| REVOKE                    | Yes               | Requires an enterprise license                                |
+| SET ROLE                  | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
+| SET SESSION AUTHORIZATION | Yes               | [Documentation](/docs/references/objects/roles/#set-role)     |
+| INHERIT                   | Yes               | [Documentation](/docs/references/objects/roles/)              |
+| Column Privileges         | No                |                                                               |
+| REASSIGN OWNED            | No                |                                                               |
+| DROP OWNED                | No                |                                                               |
+| Row Security Policies     | Yes               | [Documentation](/docs/references/objects/policies/)           |
+| BYPASSRLS                 | Yes               | [Documentation](/docs/references/objects/policies/#bypassrls) |
 
 ### Indexes
 
