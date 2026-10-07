@@ -20,6 +20,29 @@ They have no performance overhead for your queries and make the structure much m
 CedarDB automatically inlines CTEs and optimizes across all subqueries.
 {{< /callout >}}
 
+## Recursive CTEs
+
+`WITH RECURSIVE` defines a CTE that references itself.
+The first part of the `UNION` is evaluated once. The second part is evaluated repeatedly on the rows of the previous iteration until it returns no rows:
+
+```sql
+CREATE TABLE taxonomy (id int, parent_id int, name text);
+INSERT INTO taxonomy VALUES (1, NULL, 'Plants'), (2, 1, 'Trees'), (3, 2, 'Oaks');
+
+WITH RECURSIVE lineage (id, name, depth) AS (
+    SELECT id, name, 0 FROM taxonomy WHERE parent_id IS NULL
+  UNION ALL
+    SELECT t.id, t.name, l.depth + 1
+    FROM taxonomy t JOIN lineage l ON t.parent_id = l.id
+)
+SELECT * FROM lineage ORDER BY depth;
+```
+
+With `UNION` instead of `UNION ALL`, CedarDB discards duplicate rows, which stops cycles.
+
+`MATERIALIZED` and `NOT MATERIALIZED` are accepted, e.g., `WITH c AS MATERIALIZED (...)`.
+CedarDB's optimizer decides on its own how to evaluate the CTE.
+
 ## Data-modifying statements in WITH
 
 A CTE can contain an `INSERT`, `UPDATE`, or `DELETE` statement with a `RETURNING` clause.
@@ -55,5 +78,7 @@ Always give the statement a `RETURNING` clause and read all of its rows, as `cou
 
 ## PostgreSQL Differences
 
+- The `SEARCH` and `CYCLE` clauses of recursive CTEs are not supported.
+- A query can contain only one data-modifying statement.
 - A data-modifying statement in `WITH` is not always executed to completion. PostgreSQL always runs it completely, even if the main query does not read its output.
 - A data-modifying statement in `WITH` must have a `RETURNING` clause.

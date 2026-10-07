@@ -178,32 +178,42 @@ the [system table compatibility](../system_table) page.
 
 ## Queries
 
-| **Feature**               | **Support State** | **Details**                                        |
-|---------------------------|-------------------|----------------------------------------------------|
-| Table & View References   | Yes               |                                                    |
-| Inner Joins               | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Outer Joins               | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Semijoins                 | Yes               | [Documentation](/docs/references/queries/from/)    |
-| Antijoins                 | Yes               |                                                    |
-| Table Functions           | Yes               |                                                    |
-| Lateral Subqueries        | Yes               |                                                    |
-| User-Specified Aliases    | Yes               |                                                    |
-| GROUP BY                  | Yes               | [Documentation](/docs/references/queries/groupby/) |
-| HAVING                    | Yes               | [Documentation](/docs/references/queries/groupby/) |
-| GROUPING SETS             | Yes               |                                                    |
-| CUBE                      | Yes               |                                                    |
-| ROLLUP                    | Yes               |                                                    |
-| WINDOW Functions          | Yes               | [Documentation](/docs/references/queries/window/)  |
-| WITH                      | Yes               | [Documentation](/docs/references/queries/with/)    |
-| WITH RECURSIVE            | Yes               |                                                    |
-| UNION                     | Yes               |                                                    |
-| UNION ALL                 | Yes               |                                                    |
-| INTERSECT                 | Yes               |                                                    |
-| EXCEPT                    | Yes               |                                                    |
-| ORDER BY                  | Yes               |                                                    |
-| LIMIT                     | Yes               |                                                    |
-| OFFSET                    | Yes               |                                                    |
-| Table Generating Function | Yes               |                                                    |
+| **Feature**                       | **Support State** | **Details**                                                                      |
+|-----------------------------------|-------------------|----------------------------------------------------------------------------------|
+| Table & View References           | Yes               |                                                                                  |
+| Inner Joins                       | Yes               | [Documentation](/docs/references/queries/from/)                                  |
+| Outer Joins                       | Yes               | [Documentation](/docs/references/queries/from/)                                  |
+| Semijoins                         | Yes               | [Documentation](/docs/references/queries/from/)                                  |
+| Antijoins                         | Yes               |                                                                                  |
+| Table Functions                   | Yes               |                                                                                  |
+| Lateral Subqueries                | Yes               | [Documentation](/docs/references/queries/from/#lateral)                          |
+| User-Specified Aliases            | Yes               |                                                                                  |
+| GROUP BY                          | Yes               | [Documentation](/docs/references/queries/groupby/)                               |
+| HAVING                            | Yes               | [Documentation](/docs/references/queries/groupby/)                               |
+| GROUPING SETS                     | Yes               | [Documentation](/docs/references/queries/groupby/#grouping-sets-rollup-and-cube) |
+| CUBE                              | Yes               | [Documentation](/docs/references/queries/groupby/#grouping-sets-rollup-and-cube) |
+| ROLLUP                            | Yes               | [Documentation](/docs/references/queries/groupby/#grouping-sets-rollup-and-cube) |
+| WINDOW Functions                  | Yes               | [Documentation](/docs/references/queries/window/)                                |
+| WITH                              | Yes               | [Documentation](/docs/references/queries/with/)                                  |
+| WITH RECURSIVE                    | Yes               | [Documentation](/docs/references/queries/with/#recursive-ctes)                   |
+| UNION                             | Yes               | [Documentation](/docs/references/queries/setops/)                                |
+| UNION ALL                         | Yes               | [Documentation](/docs/references/queries/setops/)                                |
+| INTERSECT                         | Yes               | [Documentation](/docs/references/queries/setops/)                                |
+| EXCEPT                            | Yes               | [Documentation](/docs/references/queries/setops/)                                |
+| ORDER BY                          | Yes               | [Documentation](/docs/references/queries/orderby/)                               |
+| LIMIT                             | Yes               | [Documentation](/docs/references/queries/orderby/)                               |
+| OFFSET                            | Yes               | [Documentation](/docs/references/queries/orderby/)                               |
+| Table Generating Function         | Yes               |                                                                                  |
+| DISTINCT ON                       | Yes               | [Documentation](/docs/references/queries/select/#distinct)                       |
+| FETCH FIRST                       | Yes               | [Documentation](/docs/references/queries/orderby/)                               |
+| FETCH FIRST ... WITH TIES         | No                |                                                                                  |
+| Row Locking (FOR UPDATE/SHARE)    | No                |                                                                                  |
+| WITH ORDINALITY                   | Yes               | [Documentation](/docs/references/queries/from/#table-functions)                  |
+| ROWS FROM                         | No                |                                                                                  |
+| Window Frames (ROWS/RANGE/GROUPS) | Yes               | [Documentation](/docs/references/queries/window/#window-frames)                  |
+| Aggregate FILTER                  | Yes               | [Documentation](/docs/references/queries/groupby/#filter)                        |
+| INTERSECT ALL / EXCEPT ALL        | Yes               | [Documentation](/docs/references/queries/setops/)                                |
+| CTE SEARCH / CYCLE                | No                |                                                                                  |
 
 ## Data Types
 
