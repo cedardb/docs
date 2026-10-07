@@ -105,7 +105,8 @@ the [system table compatibility](../system_table) page.
 | **Feature**            | **Support State** | **Details**                                                                                                                  |
 |------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------|
 | CREATE SCHEMA          | Yes               | [Documentation](/docs/references/objects/schemas/)                                                                           |
-| DROP SCHEMA            | Yes               | Only if the schema is empty                                                                                                  |
+| ALTER SCHEMA           | Yes               | [Documentation](/docs/references/objects/schemas/#alter-schema)                                                              |
+| DROP SCHEMA            | Yes               | [Documentation](/docs/references/objects/schemas/#drop-schema)                                                               |
 | search_path            | Yes               | [Documentation](/docs/references/objects/schemas/#using-schemas)                                                             |
 | Table Inheritance      | No                |                                                                                                                              |
 | Table Partitioning     | Partial           | Only hash partitioning, partitions are created automatically. [Documentation](/docs/references/objects/tables/#partitioning) |
