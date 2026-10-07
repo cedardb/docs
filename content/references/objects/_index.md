@@ -16,4 +16,5 @@ Each page covers all operations on that object type: creating, altering, and dro
 * [Schemas](./schemas) — `CREATE`, `ALTER`, `DROP SCHEMA`, `search_path`
 * [Sequences](./sequences) — `CREATE`, `ALTER`, `DROP SEQUENCE`, `nextval`, `setval`
 * [Tables](./tables) — `CREATE`, `ALTER`, `DROP TABLE`, constraints, partitioning
+* [Types](./types) — `CREATE`, `ALTER`, `DROP TYPE` for user-defined enum types
 * [Views](./views) — `CREATE`, `DROP VIEW`
