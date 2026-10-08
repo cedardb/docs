@@ -33,8 +33,16 @@ jobs:
             --verbose --no-progress
             './public/**/*.html'
 
+      - name: Collect Pages (Scheduled)
+        if: github.event_name == 'schedule'
+        run: |
+          curl -fsSL https://cedardb.com/docs/sitemap.xml \
+            | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g' > pages.txt
+          echo "Found $(wc -l < pages.txt) pages"
+          test -s pages.txt
+
       - name: Check Links (Scheduled)
         if: github.event_name == 'schedule'
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config lychee.toml --base-url 'https://cedardb.com' --verbose --no-progress './content/**/*.md'
+          args: --config lychee.toml --verbose --no-progress --files-from pages.txt
