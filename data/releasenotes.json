@@ -1,5 +1,348 @@
 [
 	{
+		"version": "v2026-10-08",
+		"date": "2026-10-08",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add support for <tt>GRANTED BY</tt> in grant operations and allow running grant/revoke as a non-superuser."
+			},
+			{
+				"type": "feat",
+				"note": "Add size of datablocks to the <tt>cedardb_disk_load_history</tt> system table."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>on update set null/set default</tt> and <tt>on delete set null/set default</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>SELECT ... FOR UPDATE</tt> with <tt>NOWAIT</tt> and <tt>SKIP LOCKED</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Implement the JSON path operators <tt>#></tt> and <tt>#>></tt> for json and jsonb."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for default permission changes through <tt>ALTER DEFAULT PRIVILEGES</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>COPY TO STDOUT (FORMAT binary)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for the binary format for jsonb."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>CLOSE ALL</tt>, <tt>UNLISTEN</tt> and <tt>RESET ALL</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Allow <tt>ALTER TABLE ... RENAME</tt> on views."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>to_timestamp()</tt> and <tt>to_date()</tt> with format strings."
+			},
+			{
+				"type": "feat",
+				"note": "Add inet <tt>host()</tt>, <tt>netmask()</tt>, <tt>network()</tt>, and <tt>broadcast()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>ALTER TABLE ... ALTER COLUMN TYPE ... USING</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>IS NULL</tt> and <tt>IS NOT NULL</tt> on whole-row references."
+			},
+			{
+				"type": "feat",
+				"note": "Undo of large transactions is now reusing segments, significantly reducing the recovery on-disk footprint."
+			},
+			{
+				"type": "feat",
+				"note": "Implemented <tt>pg_cancel_backend(pid)</tt> and <tt>pg_terminate_backend(pid, timeout default 0)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for the <tt>has_foreign_data_wrapper_privilege</tt> function."
+			},
+			{
+				"type": "feat",
+				"note": "Add spooling statistics to the <tt>EXPLAIN ANALYZE</tt> output of the group by operator."
+			},
+			{
+				"type": "perf",
+				"note": "Top-K queries now properly prune before loading data from disk."
+			},
+			{
+				"type": "perf",
+				"note": "Significantly reduce memory requirements of the recovery process."
+			},
+			{
+				"type": "perf",
+				"note": "Improve cardinality estimates for tables with many <tt>UPDATEs</tt> or <tt>DELETEs</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of <tt>ANALYZE</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Report the PostgreSQL routine name RevalidateCachedQuery on errors about prepared statements invalidated by a schema change."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>pg_index.indoption</tt> now correctly shows whether an index orders nulls first or last."
+			},
+			{
+				"type": "pg",
+				"note": "Untyped bind parameters in binary operators and functions such are now typed like in PostgreSQL, so queries that clients that send bare parameters without type casts don't fail with \"invalid arguments\"."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for the <tt>pg_collation_is_visible()</tt> function."
+			},
+			{
+				"type": "pg",
+				"note": "Don't show <tt>pg_temp</tt>  in <tt>pg_namespace</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Always report view columns as nullable in <tt>pg_attribute.attnotnull</tt>, even if we can prove they're not nullable (like Postgres)."
+			},
+			{
+				"type": "pg",
+				"note": "Date and time arithmetic with a quoted interval, such as now() + '1 hour', now works."
+			},
+			{
+				"type": "pg",
+				"note": "Add support for named arguments in built-in functions that have named parameters, such as <tt>make_interval(secs => 30)</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now honors the maxRows field in pg wire protocol <tt>EXECUTE</tt> messages."
+			},
+			{
+				"type": "pg",
+				"note": "Add warning about missing permissions in <tt>VACUUM</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Report the right dependencies and columns of foreign keys in <tt>pg_catalog</tt> and <tt>information_schema</tt> interfaces."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>NULLS LAST</tt> ordering in <tt>DESC</tt> indexes."
+			},
+			{
+				"type": "fix",
+				"note": "Fix incorrectly accepted <tt>NULL</tt> values for <tt>ADD COLUMN NOT NULL</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix several ordered aggregates sharing the same <tt>ORDER BY</tt> returning only the last value per group when one of them aggregates a computed expression."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>LIMIT NULL</tt> applying a limit of 1."
+			},
+			{
+				"type": "fix",
+				"note": "<tt>pg_get_constraintdef()</tt> now correctly prints foreign key actions (e.g.,  <tt>on delete cascade</tt>) if they are different than the default."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in the interactive shell when reconnecting with \\c after a write statement or an advisory lock."
+			},
+			{
+				"type": "fix",
+				"note": "Fix several edge cases in permission handling."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a query crash when creating a table with a foreign key constraint referencing the table itself."
+			},
+			{
+				"type": "fix",
+				"note": "Fix days and months being swapped in binary interval values sent and received by clients such as asyncpg and psycopg 3."
+			},
+			{
+				"type": "fix",
+				"note": "Report the session's actual <tt>DateStyle</tt> and <tt>IntervalStyle</tt> at connection startup."
+			},
+			{
+				"type": "fix",
+				"note": "Report <tt>client_encoding</tt> as <tt>UTF8</tt> at connection startup regardless of how the client spelled it."
+			},
+			{
+				"type": "fix",
+				"note": "Detect overflow when parsing binary numeric parameters instead of silently storing a wrong value."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when executing a prepared <tt>EXECUTE</tt> statement after its target statement was deallocated."
+			},
+			{
+				"type": "fix",
+				"note": "Return <tt>NULL</tt> instead of the text 'null' for a JSON null in the json <tt>->></tt> operator."
+			},
+			{
+				"type": "fix",
+				"note": "Recognize schema-qualified self-referencing foreign keys in <tt>CREATE TABLE</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Report <tt>MERGE ... WHEN NOT MATCHED THEN INSERT</tt> as not yet supported instead of failing an internal assertion."
+			},
+			{
+				"type": "fix",
+				"note": "Support user-defined types such as enums as declared parameter types in prepared statements."
+			},
+			{
+				"type": "fix",
+				"note": "Send the correct element lengths in binary enum arrays, which psycopg previously crashed on."
+			},
+			{
+				"type": "fix",
+				"note": "Name the rejected value in the error for an unsupported <tt>client_encoding</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Quote control characters in text array output the PostgreSQL way instead of with JSON escapes."
+			},
+			{
+				"type": "fix",
+				"note": "Reject invalid UTF-8 in binary \"char\" parameters."
+			},
+			{
+				"type": "fix",
+				"note": "Fix format('%L', NULL) and quote_nullable(NULL) returning 'NULL' in quotes instead of NULL."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in joins against a subquery or filter that returned at most one row."
+			},
+			{
+				"type": "fix",
+				"note": "Fix the error \"cannot get physical types for row type\" for scalar subqueries that the optimizer can prove return no rows, such as (SELECT x FROM t WHERE false)."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash which sometimes manifested in table scans with more than 40 conditions on one table."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>ARRAY(SELECT ... ORDER BY ... LIMIT n) ignoring </tt>LIMIT<tt> and </tt>OFFSET`."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>json_agg()</tt> in a correlated subquery returning an extra ] when several outer rows have the same correlated value."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in scans that filter on several nullable columns with <tt>IS NOT TRUE</tt> and similar conditions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when trying to drop a schema that doesn't exist as non-superuser."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>LEFT JOIN</tt> and <tt>NOT EXISTS</tt> returning too few rows when part of the query matched nothing."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>EXISTS</tt> or <tt>IN</tt> checks combined with <tt>OR</tt> returning too few rows when the compared column was <tt>NULL</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when calling <tt>json_array_length(json)</tt>, <tt>jsonb_array_length(json)</tt> or a vector function with a non-text constant."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed <tt>DISTINCT ON</tt> with a column position, or with a column name that appears in more than one joined table."
+			},
+			{
+				"type": "fix",
+				"note": "Reject temporary views and <tt>SELECT INTO</tt> in materialized views."
+			},
+			{
+				"type": "fix",
+				"note": "Fix several edge cases around schema <tt>USAGE</tt> permission checks."
+			},
+			{
+				"type": "fix",
+				"note": "Protect builtin roles and schemas from modification."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent <tt>ALTER TABLE</tt>from invalidating views, materialized views and RLS policies."
+			},
+			{
+				"type": "fix",
+				"note": "Fixed a bug where CedarDB inlined CTEs and computed them multiple times even when it contained volatile functions which may only run once."
+			},
+			{
+				"type": "fix",
+				"note": "Check for hidden column when <tt>SELECT *</tt> is called in a view and do not display them."
+			},
+			{
+				"type": "fix",
+				"note": "Fall back to <tt>USING</tt> policy when an <tt>ALL</tt> policy omits an existing <tt>WITH CHECK</tt> instead of blanket denying an insert."
+			},
+			{
+				"type": "fix",
+				"note": "When a client disconnects while running a query, this query is now canceled."
+			},
+			{
+				"type": "fix",
+				"note": "Accept any supported privilege in <tt>has_X_privilege</tt> function instead of requiring all of them."
+			},
+			{
+				"type": "fix",
+				"note": "List <tt>INET</tt> type in pg_catalog."
+			},
+			{
+				"type": "fix",
+				"note": "Correctly print sequence precision in <tt>information_schema.sequences</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Display all temporary objects in <tt>pg_catalog</tt>, independent of the session they belong to."
+			},
+			{
+				"type": "fix",
+				"note": "Reject SELECT FOR UPDATE on views and materialized views."
+			},
+			{
+				"type": "fix",
+				"note": "Return timestamp with timezone range instead of timestamp range if <tt>tstzrange</tt> is called."
+			},
+			{
+				"type": "fix",
+				"note": "Some fixes where <tt>Collation</tt> was ignored."
+			},
+			{
+				"type": "fix",
+				"note": "Check full permissions for <tt>EXPLAIN</tt> statements."
+			},
+			{
+				"type": "fix",
+				"note": "Do not ALTER or DROP user defined functions if the parameter types are different."
+			},
+			{
+				"type": "fix",
+				"note": "Run data-modifying CTEs exactly once and to completion."
+			}
+		]
+	},
+	{
 		"version": "v2026-09-29",
 		"date": "2026-09-29",
 		"breaksdb": false,
