@@ -12,13 +12,26 @@ Usage example:
 -- Example schema
 create table humidity(measure_time timestamp, value double);
 create table temperature(measure_time timestamp, value double);
+insert into humidity values ('2024-06-01 07:00', 40), ('2024-06-01 08:00', 50), ('2024-06-01 09:00', 55);
+insert into temperature values ('2024-06-01 07:30', 20), ('2024-06-01 08:45', 21);
 
 -- Get combined measurements, e.g., to calculate a "feels like" heat index
 select h.measure_time, t.measure_time, h.value as humidity, t.value as temperature
 from humidity h
 asof join temperature t
-on h.measure_time >= t.measure_time;
+on h.measure_time >= t.measure_time
+order by h.measure_time;
 ```
+
+```text
+    measure_time     |    measure_time     | humidity | temperature
+---------------------+---------------------+----------+-------------
+ 2024-06-01 08:00:00 | 2024-06-01 07:30:00 |       50 |          20
+ 2024-06-01 09:00:00 | 2024-06-01 08:45:00 |       55 |          21
+(2 rows)
+```
+
+The 07:00 humidity measurement has no earlier temperature reading, so it does not appear in the result.
 
 In this example, we get the latest temperature for a humidity measurement, even when the times do not line up precisely.
 Expressing this query in standard SQL is more involved and usually results in slower execution, see
@@ -33,6 +46,46 @@ In contrast to regular joins, AsOf joins are asymmetric:
 `L asof join R` does not produce the same result as `R asof join L`!
 AsOf joins produce *at most* one tuple on the left side with the matching tuple from the right.
 Tuples that do not find a matching value are filtered out.
+
+The following example groups matches with an additional equality condition.
+For each tree, it returns the latest soil moisture reading of the same tree at or before the time of the height measurement:
+
+```sql
+create table tree_heights(tree_id int, measured_at int, height_m numeric);
+create table soil_moisture(tree_id int, measured_at int, moisture int);
+insert into tree_heights values (1, 10, 4.2), (2, 10, 3.1), (1, 5, 4.0);
+insert into soil_moisture values (1, 1, 30), (1, 8, 35), (2, 3, 41), (2, 9, 44);
+
+select h.tree_id, h.measured_at, h.height_m, m.measured_at as moisture_at, m.moisture
+from tree_heights h
+asof join soil_moisture m
+  on h.tree_id = m.tree_id and h.measured_at >= m.measured_at
+order by h.tree_id, h.measured_at;
+```
+
+```text
+ tree_id | measured_at | height_m | moisture_at | moisture
+---------+-------------+----------+-------------+----------
+       1 |           5 | 4.000000 |           1 |       30
+       1 |          10 | 4.200000 |           8 |       35
+       2 |          10 | 3.100000 |           9 |       44
+(3 rows)
+```
+
+If several rows of the right side are equally close, CedarDB returns only one of them.
+
+The `on` condition must contain exactly one ordering comparison, optionally combined with equality conditions using `and`.
+Otherwise, CedarDB raises an error:
+
+* Only equality conditions: `ERROR: missing ASOF JOIN inequality`
+* More than one ordering comparison: `ERROR: ASOF JOIN does not support multiple inequality conditions`
+* Other expressions, e.g., `or`: `ERROR: ASOF JOIN only supports simple equality and a single ordering condition`
+
+{{< callout type="warning" >}}
+CedarDB only supports the inner `asof join`.
+The parser also accepts `asof left join`, `asof right join`, and `asof full join`, but these currently behave like an inner `asof join` and drop rows without a match.
+`asof join ... using (...)` without an ordering comparison behaves like a regular equi-join.
+{{< /callout >}}
 
 {{< callout type="info" >}}
 CedarDB currently does not use any indexes for AsOf joins.

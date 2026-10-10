@@ -24,7 +24,7 @@ CREATE TABLE trees (
 );
 
 -- Insert some trees
-INSERT INTO tree VALUES
+INSERT INTO trees VALUES
    ('Cedar', '[15,40)'::int4range),
    ('Oak', '[30,40)'::int4range),
    ('Maple', '[35,40)'::int4range);
@@ -74,7 +74,7 @@ INSERT INTO trees VALUES
   ('Birch', '(10,30)'), -- Both bounds are exclusive
   ('Sequoia', '[100,)'), -- There is no value for the upper bound, claiming that sequoia trees can reach arbitrary height
   ('Pine', int4range(15, 25)), -- Using the constructor function with the default bounds '[)'
-  ('Appletree', int4range(2, 12, '[]')) -- Using the constructor function with explicit bounds
+  ('Appletree', int4range(2, 12, '[]')); -- Using the constructor function with explicit bounds
 
 -- Get all trees
 SELECT * FROM trees;
@@ -86,10 +86,10 @@ species   | height_range
 Cedar     | [15,40)
 Oak       | [30,40)
 Maple     | [35,40)
-Birch     | [11,30) -- The lower bound has been canonicalized
+Birch     | [11,30)
 Sequoia   | [100,)
 Pine      | [15,25)
-Appletree | [2,13) -- The upper bound has been canonicalized
+Appletree | [2,13)
 ```
 
 ## PostgreSQL Compatibility
@@ -100,3 +100,12 @@ In CedarDB, this is possible for all range types.
 CedarDB restricts the precision and scale of [`numerics`](../numeric/) for performance reason.
 As the `numeric` datatype is used for the bound values of `numranges`, the restrictions apply here as well.
 In this case, CedarDB stores the bounds as `bignumeric(38,6)`.
+
+CedarDB supports the range operators `@>`, `<@`, `&&`, `<<`, and `>>`, and the functions `lower`, `upper`, `isempty`,
+`lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf`.
+The following PostgreSQL range features are not supported:
+
+- The operators `&<`, `&>`, `-|-`, `+` (union), `*` (intersection), and `-` (difference).
+- The function `range_merge`.
+- Multirange types such as `int4multirange`.
+- User-defined range types (`CREATE TYPE ... AS RANGE`).

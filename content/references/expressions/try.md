@@ -59,3 +59,16 @@ select try(1::numeric / str::int) from input;
    <null>
 (3 rows)
 ```
+
+`try` catches errors that the wrapped expression raises while processing a row, for example:
+
+* Invalid input in casts, such as `'oops'::int`, `'2024-13-45'::date`, or `'{bad'::jsonb`
+* Division by zero, including modulo (`%`)
+* Numeric overflow, such as `2147483647 + 1` or `100000::smallint`
+
+Errors from mathematical functions with invalid arguments, such as `ln(0)` or `sqrt(-1)` on column values, are not caught and still terminate the query.
+Errors that are not raised by the wrapped expression itself, such as a scalar subquery that returns more than one row, are not caught either.
+
+{{< callout type="warning" >}}
+An explicit cast to a length-limited type such as `varchar(3)` truncates longer values outside of `try`, but returns `null` inside `try`.
+{{< /callout >}}

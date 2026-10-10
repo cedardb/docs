@@ -4,6 +4,18 @@ linkTitle: "Tables"
 weight: 10
 ---
 
+A table stores rows with a fixed set of typed columns.
+This page covers creating, altering, and dropping tables, temporary tables, and table privileges.
+
+```sql
+CREATE TABLE trees (
+    id        int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    species   text    NOT NULL,
+    height_m  numeric CHECK (height_m > 0)
+);
+INSERT INTO trees (species, height_m) VALUES ('Oak', 12.4);
+```
+
 ## CREATE TABLE
 
 CREATE TABLE creates a new relation with the specified columns.
@@ -24,7 +36,7 @@ After executing this statement, you can find the created table in the `pg_tables
 ### Columns
 
 Column definitions are specified as: `name type constraint`.
-Column names can be any identifier; however, for arbitrary character sequences, you need to enclose them in double
+Column names can be any identifier. However, for arbitrary character sequences, you need to enclose them in double
 quotes: `"complex name"`.
 You can find a list of supported types in the [data types reference](/docs/references/datatypes).
 
@@ -37,6 +49,7 @@ CedarDB supports the following column-level constraints:
 * `PRIMARY KEY`: equivalent to UNIQUE and NOT NULL. Only one is allowed per table.
 * `REFERENCES other_table(col)`: foreign key into another table.
 * `CHECK (condition)`: rejects rows that do not satisfy the condition.
+* `COLLATE collation`: the [collation](/docs/references/datatypes/text/#unicode-collation-support) for a text column.
 
 ### Constraints
 
@@ -73,13 +86,44 @@ CedarDB supports the following referential actions on foreign keys:
 * `ON DELETE CASCADE`: deletes child rows when the referenced row is deleted.
 * `ON DELETE RESTRICT`: prevents deletion if child rows exist.
 * `ON DELETE NO ACTION`: same as RESTRICT, and the default.
+* `ON DELETE SET NULL`: sets the referencing columns of child rows to null.
+* `ON DELETE SET DEFAULT`: sets the referencing columns of child rows to their default value.
 * `ON UPDATE CASCADE`: updates child rows when the referenced key value changes.
+* `ON UPDATE RESTRICT`: prevents updating the referenced key if child rows exist.
+* `ON UPDATE NO ACTION`: same as RESTRICT, and the default.
+* `ON UPDATE SET NULL` and `ON UPDATE SET DEFAULT`: like the `ON DELETE` variants, when the referenced key value changes.
 
-`ON DELETE SET NULL` and `ON DELETE SET DEFAULT` are not yet implemented.
+```sql
+CREATE TABLE genus (id int PRIMARY KEY, name text);
+CREATE TABLE species (
+    id        int PRIMARY KEY,
+    genus_id  int REFERENCES genus (id) ON DELETE SET NULL
+);
+INSERT INTO genus VALUES (1, 'Quercus');
+INSERT INTO species VALUES (10, 1);
+DELETE FROM genus WHERE id = 1;
+SELECT * FROM species;
+```
+
+```text
+ id | genus_id
+----+----------
+ 10 |
+```
+
+For a multi-column foreign key, `ON DELETE SET NULL (column, ...)` and `ON DELETE SET DEFAULT (column, ...)` change only the listed columns.
+With `SET DEFAULT`, the default value must exist in the referenced table, otherwise the `DELETE` or `UPDATE` fails with a foreign key violation.
+A column without a default is set to null.
+
+A foreign key can reference a primary key or a unique constraint of the referenced table.
+Foreign keys between a temporary and a permanent table are not supported, in either direction.
+
+CedarDB checks foreign keys immediately, at the end of each statement.
+Deferred constraint checking is not supported: column constraints with `DEFERRABLE` will fail and `DEFERRABLE` / `INITIALLY DEFERRED` on a table constraint (`FOREIGN KEY` or `UNIQUE`) is accepted but will be ignored.
 
 ### Options
 
-Create a temporary table that exists only for the current session:
+Create a temporary table that exists only for the current session (see [Temporary tables](#temporary-tables)):
 
 ```sql
 CREATE TEMP TABLE temp_results (id int, score numeric);
@@ -92,7 +136,8 @@ CREATE TABLE IF NOT EXISTS species (id int PRIMARY KEY, common_name text);
 ```
 
 Create a table using the column layout of an existing table.
-This copies the column names and types, but not constraints or defaults:
+This copies the column names, types, and `NOT NULL` constraints, but not other constraints, defaults, identity columns, or indexes.
+`INCLUDING` options are not supported:
 
 ```sql
 CREATE TABLE species_archive (LIKE species);
@@ -159,7 +204,11 @@ With `GENERATED ALWAYS AS IDENTITY`, you need to use `OVERRIDING SYSTEM VALUE` t
 ### Permissions
 
 To create a table, you need the `CREATE` privilege on the target schema.
-By default, every role has the `CREATE` privilege on the `public` schema.
+Creating a `TEMPORARY` table instead requires the `TEMPORARY` privilege on the current database, which every role has by default.
+A foreign key additionally requires the `REFERENCES` privilege on the referenced table.
+A table on a remote server (`WITH (server = ...)`) additionally requires the `USAGE` privilege on the [server](/docs/references/advanced/createserver#permissions).
+`CREATE TABLE AS` and `SELECT INTO` additionally require the privileges to run the query.
+The creator owns the new table.
 
 ## CREATE TABLE AS
 
@@ -237,13 +286,24 @@ Drop multiple tables in one statement:
 DROP TABLE staging_data, temp_results;
 ```
 
-If another table has a foreign key referencing the table being dropped, the DROP fails with an error.
-Drop the dependent table first.
-`DROP TABLE CASCADE` is not yet supported.
+By default, CedarDB refuses to drop a table that other objects depend on, such as a foreign key from another table or a view built on it.
+Use `CASCADE` to drop the table together with all objects that depend on it:
+
+```sql
+DROP TABLE species CASCADE;
+```
+
+Dependent foreign key constraints and views are removed along with the table.
+`RESTRICT` is the default behavior and rejects the drop if any object still depends on the table:
+
+```sql
+DROP TABLE species RESTRICT;
+```
 
 ### Permissions
 
-To drop a table you must own it, own its schema, or be a database superuser.
+To drop a table, you must own it, own its schema, or be a superuser.
+Members of the owning role count as owners.
 
 ## ALTER TABLE
 
@@ -262,6 +322,15 @@ Add a column only if it does not already exist:
 ```sql
 ALTER TABLE species ADD COLUMN IF NOT EXISTS iucn_status text;
 ```
+
+A new column can have a `DEFAULT`, `NOT NULL`, `UNIQUE`, `REFERENCES`, or identity constraint.
+Existing rows get the default value:
+
+```sql
+ALTER TABLE species ADD COLUMN assessed boolean NOT NULL DEFAULT false;
+```
+
+Adding a column with a `CHECK` constraint is not yet supported.
 
 #### DROP COLUMN
 
@@ -290,11 +359,91 @@ ALTER TABLE species RENAME COLUMN botanical_name TO scientific_name;
 Renaming a column does not rename any constraints whose default name was derived from the old column name.
 For example, a unique constraint with the default name `species_botanical_name_key` keeps that name after the column is renamed.
 
+#### ALTER COLUMN TYPE
+
+Change the data type of a column:
+
+```sql
+CREATE TABLE seedlings (id int, height_cm int, label varchar(20));
+ALTER TABLE seedlings ALTER COLUMN height_cm TYPE bigint;
+ALTER TABLE seedlings ALTER COLUMN label SET DATA TYPE varchar(50);
+```
+
+Without a `USING` clause, CedarDB converts the existing values automatically.
+This works when the old type can be converted to the new type without an explicit cast, e.g., from `int` to `bigint`, or from `text` to `varchar(n)`.
+Other conversions, such as from `text` to `int` or from `numeric` to `int`, fail with `column "<name>" cannot be cast automatically to type <type>`.
+
+For these conversions, specify how to compute the new value with `USING`, e.g., `USING round(amount)` to convert a `numeric` column to `int`.
+The expression can reference all columns of the row:
+
+```sql
+CREATE TABLE saplings (id int, height text, planted text);
+INSERT INTO saplings VALUES (1, '12', 'yes'), (2, '30', 'no');
+ALTER TABLE saplings ALTER COLUMN height TYPE int USING height::int;
+ALTER TABLE saplings ALTER COLUMN planted TYPE boolean USING planted = 'yes';
+SELECT * FROM saplings;
+```
+
+```text
+ id | height | planted
+----+--------+---------
+  1 |     12 | t
+  2 |     30 | f
+```
+
+If the expression fails for any row, or a new value violates a constraint of the column, the statement fails and the table is unchanged.
+You cannot change the type of a column that a view or materialized view uses, and `ALTER COLUMN ... TYPE ... COLLATE` is not supported.
+
+#### Identity columns
+
+Turn an existing `NOT NULL` column into an identity column, or turn an identity column back into a regular column:
+
+```sql
+CREATE TABLE seedlings (id int NOT NULL, label text);
+ALTER TABLE seedlings ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY;
+ALTER TABLE seedlings ALTER COLUMN id DROP IDENTITY;
+```
+
+`DROP IDENTITY IF EXISTS` does not throw an error if the column is not an identity column.
+The new identity sequence starts at 1, regardless of the values already in the column.
+
+#### SET DEFAULT
+
+Set the default value applied to a column when no value is supplied on INSERT:
+
+```sql
+ALTER TABLE species ALTER COLUMN iucn_status SET DEFAULT 'not evaluated';
+```
+
+Remove an existing default:
+
+```sql
+ALTER TABLE species ALTER COLUMN iucn_status DROP DEFAULT;
+```
+
+#### SET NOT NULL
+
+Add a not-null constraint to an existing column.
+CedarDB validates the current rows and fails if the column already contains null values:
+
+```sql
+ALTER TABLE species ALTER COLUMN botanical_name SET NOT NULL;
+```
+
+Remove a not-null constraint:
+
+```sql
+ALTER TABLE species ALTER COLUMN botanical_name DROP NOT NULL;
+```
+
 #### RENAME TABLE
 
 ```sql
 ALTER TABLE species RENAME TO plant_species;
 ```
+
+While a [view](/docs/references/objects/views) or [materialized view](/docs/references/objects/materialized_views) reads from a table, you cannot rename the table or the columns the view uses.
+Drop the dependent views first, rename, and recreate them.
 
 ### Constraint statements
 
@@ -328,6 +477,10 @@ If any row would violate the constraint, the statement fails.
 Adding a `CHECK` constraint to an existing table is not yet supported.
 `CHECK` constraints can only be specified at `CREATE TABLE` time.
 
+When adding a `UNIQUE` or `PRIMARY KEY` constraint, CedarDB validates all existing rows as well.
+`NOT VALID` is accepted, but CedarDB still validates the existing rows.
+`VALIDATE CONSTRAINT` and `ALTER CONSTRAINT` are not supported.
+
 #### DROP CONSTRAINT
 
 Removes a constraint by name:
@@ -349,6 +502,14 @@ Drop a constraint and cascade to dependent constraints:
 ALTER TABLE child_table DROP CONSTRAINT fk_constraint CASCADE;
 ```
 
+#### RENAME CONSTRAINT
+
+Rename an existing constraint, using either its explicit name or its default name:
+
+```sql
+ALTER TABLE orders RENAME CONSTRAINT orders_pkey TO orders_primary;
+```
+
 ### Storage Options
 
 Change the general-purpose compression codec used for on-disk column data.
@@ -359,6 +520,17 @@ This takes effect the next time affected data is written to disk:
 ALTER TABLE species SET (compression = zstd);
 ALTER TABLE species SET (compression = none);
 ```
+
+### SET SCHEMA
+
+Move a table to a different schema:
+
+```sql
+ALTER TABLE species SET SCHEMA taxonomy;
+```
+
+The target schema must already exist, and you need the `CREATE` privilege on it.
+While a view or materialized view reads from the table, `SET SCHEMA` will fail.
 
 ### Ownership
 
@@ -388,5 +560,146 @@ This feature requires an enterprise license.
 
 ### Permissions
 
-To alter a table you must be its owner.
-Superusers can alter any table.
+To alter a table, you must own it or be a superuser.
+Members of the owning role count as owners.
+In addition, you need the `USAGE` privilege on the schema of the table, and:
+
+* `SET SCHEMA` requires the `CREATE` privilege on the destination schema.
+* `OWNER TO` requires that you can `SET ROLE` to the new owner, and that the new owner has the `CREATE` privilege on the schema of the table.
+* `ADD CONSTRAINT ... FOREIGN KEY` requires the `REFERENCES` privilege on the referenced table.
+
+## Temporary tables
+
+A temporary table exists only in the session that created it.
+CedarDB drops it automatically when the session ends.
+Other sessions cannot see it, so several sessions can each have a temporary table with the same name.
+
+```sql
+CREATE TEMP TABLE seedling_batch (
+    id       int PRIMARY KEY,
+    species  text NOT NULL,
+    sown     date DEFAULT current_date
+);
+INSERT INTO seedling_batch (id, species) VALUES (1, 'Birch');
+```
+
+`TEMP` and `TEMPORARY` are synonyms.
+CedarDB accepts `LOCAL` and `GLOBAL` for compatibility and ignores them.
+Temporary tables support the same column definitions, constraints, indexes, and `ALTER TABLE` statements as regular tables.
+You can also create them with `CREATE TEMP TABLE ... AS`, `CREATE TEMP TABLE ... (LIKE ...)`, and `SELECT ... INTO TEMP`.
+
+### ON COMMIT
+
+The `ON COMMIT` clause controls what happens to a temporary table at the end of each transaction:
+
+| Option                    | Behavior                                             |
+|---------------------------|------------------------------------------------------|
+| `ON COMMIT PRESERVE ROWS` | Keep the rows. This is the default.                  |
+| `ON COMMIT DELETE ROWS`   | Delete all rows at every commit.                     |
+| `ON COMMIT DROP`          | Drop the table when the current transaction commits. |
+
+```sql
+BEGIN;
+CREATE TEMP TABLE todays_plantings (id int, species text) ON COMMIT DROP;
+INSERT INTO todays_plantings VALUES (1, 'Maple');
+SELECT count(*) FROM todays_plantings;
+COMMIT;
+-- todays_plantings no longer exists
+```
+
+Outside of an explicit transaction block, each statement is its own transaction.
+Then a table with `ON COMMIT DROP` is dropped right after `CREATE`, and `ON COMMIT DELETE ROWS` deletes rows right after each `INSERT`.
+`ON COMMIT` is only allowed for temporary tables.
+
+Creating and dropping temporary tables is transactional: a `ROLLBACK` undoes the `CREATE TEMP TABLE` or `DROP TABLE`.
+
+### Name resolution
+
+Temporary tables live in a session-specific schema named `pg_temp_<n>`.
+`pg_my_temp_schema()` returns its OID, and `pg_temp` always refers to it.
+Unless you list `pg_temp` in `search_path` explicitly, CedarDB searches it first.
+A temporary table therefore hides a permanent table with the same name:
+
+```sql
+CREATE TABLE forests (id int, name text);
+CREATE TEMP TABLE forests (id int, name text);
+
+SELECT * FROM forests;          -- the temporary table
+SELECT * FROM public.forests;   -- the permanent table
+SELECT * FROM pg_temp.forests;  -- the temporary table
+```
+
+You cannot create a temporary table in a regular schema (`CREATE TEMP TABLE public.x` fails), and you cannot move a temporary table to another schema with `SET SCHEMA`.
+`CREATE TABLE pg_temp.x (...)` creates a temporary table.
+
+`DISCARD TEMP` and `DISCARD ALL` drop all temporary tables of the session.
+
+In `pg_class`, temporary tables have `relpersistence = 't'`.
+`information_schema.tables` shows them with `table_type = 'LOCAL TEMPORARY'`.
+
+### Permissions
+
+To create a temporary table, you need the `TEMPORARY` privilege on the current database.
+`PUBLIC` has this privilege by default.
+The creator owns the temporary table.
+
+## Table privileges
+
+Table privileges control what other roles can do with a table.
+The owner of a table has all privileges on it.
+
+| Privilege          | Allows                                                             |
+|--------------------|--------------------------------------------------------------------|
+| `SELECT`           | Reading rows.                                                      |
+| `INSERT`           | Inserting rows, also with `COPY FROM`.                             |
+| `UPDATE`           | Updating rows.                                                     |
+| `DELETE`           | Deleting rows.                                                     |
+| `TRUNCATE`         | Emptying the table with `TRUNCATE`.                                |
+| `REFERENCES`       | Creating foreign keys that reference the table.                    |
+| `TRIGGER`          | Accepted for compatibility. CedarDB does not support triggers.     |
+| `ALL [PRIVILEGES]` | All of the above.                                                  |
+
+A role also needs the `USAGE` privilege on the [schema](/docs/references/objects/schemas#schema-privileges) of the table.
+
+{{< callout type="info" >}}
+All `GRANT` and `REVOKE` statements on tables, including `ALTER DEFAULT PRIVILEGES`, require an enterprise license.
+{{< /callout >}}
+
+```sql
+CREATE TABLE trees (id int PRIMARY KEY, species text);
+CREATE ROLE forester LOGIN;
+
+GRANT SELECT, INSERT ON trees TO forester;
+REVOKE INSERT ON trees FROM forester;
+```
+
+Grant a privilege on all existing tables, views, and materialized views of a schema:
+
+```sql
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO forester;
+```
+
+This does not affect tables that you create later.
+To grant privileges on future tables automatically, use `ALTER DEFAULT PRIVILEGES`:
+
+```sql
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO forester;
+```
+
+Privileges on individual columns, such as `GRANT SELECT (species) ON trees`, are not supported.
+
+## PostgreSQL Differences
+
+* Generated columns (`GENERATED ALWAYS AS (...) STORED`) are not supported. Identity columns are.
+* `UNIQUE NULLS NOT DISTINCT` is not supported.
+* Table partitioning only supports `PARTITION BY HASH`, and you do not need to create or attach individual partitions.
+  `PARTITION BY RANGE` and `PARTITION BY LIST` are not supported.
+* Table inheritance (`INHERITS`), typed tables (`OF type`), `TABLESPACE`, and exclusion constraints are not supported.
+* Unknown storage parameters in `WITH (...)`, such as `fillfactor`, are ignored with a warning on `CREATE TABLE`, and rejected on `ALTER TABLE ... SET`.
+* `ALTER TABLE ... ADD COLUMN` fails while any view or materialized view reads the table. Renaming a table or a column that a view uses, and changing the type of such a column, also fail.
+* `DEFERRABLE` constraints are not supported. On a table constraint, `DEFERRABLE` and `INITIALLY DEFERRED` are accepted but ignored, and CedarDB checks the constraint immediately.
+* Any `RETURNING` clause requires the `SELECT` privilege on the table, even one that does not reference a column, such as `RETURNING 1`.
+  PostgreSQL only requires `SELECT` on the columns that `RETURNING` references.
+* Foreign keys between temporary and permanent tables are not supported. PostgreSQL allows a temporary table to reference a permanent table.
+* Temporary tables of other sessions do not appear in `pg_class`.
+* Column privileges, `COMMENT ON TABLE`, and `COMMENT ON COLUMN` are not supported.

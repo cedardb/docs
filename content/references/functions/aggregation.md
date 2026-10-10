@@ -132,9 +132,6 @@ the (x, y) points.
 `regr_sxx`
 : Compute the *sum of squares* of the `x` variable , i.e., `sum(x^2) - sum(x)^2/count(*)`.
 
-`regr_sxy`
-: Compute the *sum of products* of `x` times `y`, i.e., `sum(x*y) - sum(x) * sum(y)/count(*)`.
-
 `stddev(x)`
 : Compute the standard deviation, alias for `stddev_samp`.
 
@@ -169,3 +166,8 @@ The continuous percentile interpolates between values if necessary.
 : Compute the discrete `n`th [percentile](https://en.wikipedia.org/wiki/Percentile) with the given `n` as a fraction
 between 0 and 1.
 The discrete percentile returns the first value exceeding the percentile.
+
+## PostgreSQL Differences
+
+- `corr`, `regr_sxy`, `regr_syy`, `range_agg`, `range_intersect_agg`, `jsonb_agg`, `json_object_agg`, and `jsonb_object_agg` are not supported.
+- Hypothetical-set aggregates (`rank(...) WITHIN GROUP (...)`, `dense_rank`, `percent_rank`, `cume_dist`) and the array form of `percentile_cont` and `percentile_disc` are not supported.

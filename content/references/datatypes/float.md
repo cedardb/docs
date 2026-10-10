@@ -21,18 +21,18 @@ create table constants (
     value real
 );
 insert into constants
-    values ('pi', 3.141592653589793238462643383279502884),
+    values ('pi', 3.14159265),
            ('planck', 6.62607015e-34),
            ('avogadro', 6.02214076e23);
 select * from constants;
 ```
 
 ```text
-   name   |    value 
-----------+--------------
- pi       |     3.14159
- planck   | 6.62607e-34
- avogadro | 6.02214e+23
+   name   |     value
+----------+---------------
+ pi       |     3.1415927
+ planck   |   6.62607e-34
+ avogadro | 6.0221406e+23
 (3 rows)
 ```
 
@@ -67,17 +67,17 @@ Consider, e.g., the following query:
 
 ```sql
 with x(i) as (
-    values (0.1), 
-           (0.2), 
-           (-0.3)
-) 
-select sum(i::double precision) from x;
+    values (0.1::double precision),
+           (0.2::double precision),
+           (-0.3::double precision)
+)
+select sum(i) from x;
 ```
 
 ```text
-         sum          
-----------------------
- 5.55111512312578e-17
+          sum
+-----------------------
+ 5.551115123125783e-17
 (1 row)
 ```
 
@@ -89,9 +89,9 @@ CedarDB executes queries in parallel and thus cannot guarantee the order in whic
 For the above query, an equally valid result would be:
 
 ```text
-         sum          
-----------------------
- 2.77555756156289e-17
+          sum
+------------------------
+ 2.7755575615628914e-17
 (1 row)
 ```
 

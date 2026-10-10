@@ -42,3 +42,8 @@ select time '11:00 pm' + interval '8' hour;
  07:00:00
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- `time with time zone` (`timetz`) is not supported. `current_time` returns a `time` value without time zone.
+- CedarDB accepts a fractional-second precision such as `time(0)` but ignores it: values always keep microsecond resolution.
