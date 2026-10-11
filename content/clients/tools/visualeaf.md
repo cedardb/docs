@@ -54,7 +54,7 @@ tables, views, sequences, and procedures.
 ### Queries
 
 To write SQL queries, right-click the database and choose **New SQL Editor**.
-In this editor, you can enter SQL scripts and run them against CedarDB with **Run All** (<kbd>F5</kbd>) or run the
-current statement with **Run** (<kbd>F9</kbd>). Results are shown in a grid below the editor.
+In this editor, you can enter SQL scripts and run them against CedarDB with **Run All** (<kbd>F5</kbd>) or run only the
+selected text with **Run** (<kbd>F9</kbd>). Results are shown in a grid below the editor.
 
 ![query results](/images/visualeaf/6_query_results.png)
