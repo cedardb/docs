@@ -23,11 +23,13 @@ range of PostgreSQL connectors for end-user tools like Grafana and programming l
 
 ### Applications
 
-| **Application** | **Version** | **Support State** | **Details**                                    |
-|-----------------|-------------|-------------------|------------------------------------------------|
-| DataGrip        | 2024.2.2    | Partial           | [Documentation](/docs/clients/tools/datagrip/) |
-| DBeaver         | 24.2.2      | Partial           | [Documentation](/docs/clients/tools/dbeaver/)  |
-| Grafana         | 10.4.2      | Partial           | [Documentation](/docs/clients/tools/grafana/)  |
+| **Application** | **Version**                   | **Support State** | **Details**                                          |
+|-----------------|-------------------------------|-------------------|------------------------------------------------------|
+| Airbyte         | 3.0.23 (Postgres destination) | Partial           | [Documentation](/docs/clients/data_import/airbyte/)  |
+| DataGrip        | 2024.2.2                      | Partial           | [Documentation](/docs/clients/tools/datagrip/)       |
+| DBeaver         | 24.2.2                        | Partial           | [Documentation](/docs/clients/tools/dbeaver/)        |
+| Debezium        | 3.7.0.Final                   | Partial           | [Documentation](/docs/clients/data_import/debezium/) |
+| Grafana         | 10.4.2                        | Partial           | [Documentation](/docs/clients/tools/grafana/)        |
 
 ### Programming Language Libraries
 
