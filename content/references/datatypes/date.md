@@ -5,7 +5,7 @@ weight: 14
 ---
 
 Date is a day-accurate type without time of day references in ISO&nbsp;8601 `YYYY-MM-DD` format.
-CedarDB also accepts [PostgreSQL notation](https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-DATE-TABLE).
+CedarDB also accepts the common PostgreSQL input formats, such as `January 8, 1999`, `1999-Jan-08`, `19990108`, and `J2451187`.
 
 ## Usage Example
 
@@ -39,15 +39,17 @@ Operations on dates are range checked, so that e.g., overflows will never cause 
 ## Input
 
 In a session, you can change the `DateStyle` setting, which determines the parsing when entering ambiguous dates.
+The default is `ISO, YMD`.
+CedarDB accepts the field orders `DMY`, `MDY`, and `YMD`, optionally prefixed with `ISO` and a comma, e.g., `ISO, DMY`.
 
 ```sql
 -- The common "little-endian" date style
 set DateStyle = 'DMY';
-select '01/02/03';
+select date '01/02/03';
 ```
 
 ```text
-  ?column?  
+  ?column?
 ------------
  2003-02-01
 (1 row)
@@ -56,12 +58,17 @@ select '01/02/03';
 ```sql
 -- US "middle-endian" date style
 set DateStyle = 'MDY';
-select '01/02/03';
+select date '01/02/03';
 ```
 
 ```text
-  ?column?  
+  ?column?
 ------------
  2003-01-02
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- The special values `infinity` and `-infinity` are not supported.
+- CedarDB always prints dates in ISO format. The `DateStyle` output styles `SQL`, `Postgres`, and `German` are not supported.

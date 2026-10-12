@@ -132,3 +132,9 @@ regexp_like
 t
 (1 row)
 ```
+
+## PostgreSQL Differences
+
+- `substring` does not accept regular expression patterns (`substring(text FROM pattern)`, `SIMILAR ... ESCAPE`). Use `regexp_substr` instead.
+- `regexp_replace` does not accept the `start` and `N` arguments.
+- `^@`, `unistr`, and `to_ascii` are not supported.

@@ -80,3 +80,20 @@ To get durable writes on commodity hardware, you can force synchronous commits i
 ```sql
 set async_commit = off;
 ```
+
+`async_commit` accepts `on`, `off`, and `default`. With `default`, CedarDB chooses based on the detected hardware as described above.
+Check the current value with `show async_commit`:
+
+```sql
+set async_commit = off;
+show async_commit;
+```
+
+```text
+ async_commit
+--------------
+ off
+(1 row)
+```
+
+Any role can change `async_commit` for its own session. Use `set async_commit = default` to return to automatic detection.

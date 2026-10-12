@@ -14,5 +14,7 @@ Each page covers all operations on that object type: creating, altering, and dro
 * [Policies](./policies) — `CREATE`, `ALTER`, `DROP POLICY`, row level security
 * [Roles](./roles) — `CREATE`, `ALTER`, `DROP ROLE`, `GRANT`, `REVOKE`
 * [Schemas](./schemas) — `CREATE`, `ALTER`, `DROP SCHEMA`, `search_path`
+* [Sequences](./sequences) — `CREATE`, `ALTER`, `DROP SEQUENCE`, `nextval`, `setval`
 * [Tables](./tables) — `CREATE`, `ALTER`, `DROP TABLE`, constraints, partitioning
+* [Types](./types) — `CREATE`, `ALTER`, `DROP TYPE` for user-defined enum types
 * [Views](./views) — `CREATE`, `DROP VIEW`

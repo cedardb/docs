@@ -9,8 +9,6 @@ linkTitle: "Bit String Functions and Operators"
 Bitstring functions ignore `null` values and return `null` when one input is `null`.
 {{< /callout >}}
 
-See [PostgreSQL: Bit string functions and operators](https://www.postgresql.org/docs/current/functions-bitstring.html) for the PostgreSQL documentation.
-
 ## General-purpose functions
 
 ### `bit & bit`
@@ -39,3 +37,18 @@ Example:
 ```sql
 SELECT B'10011' # B'10101'; -> B'00110'
 ```
+
+### `bit || bit`
+
+Concatenation.
+Example:
+
+```sql
+SELECT B'10001' || B'011'; -> B'10001011'
+```
+
+In addition, `length`, `bit_length`, `octet_length`, `bit_count`, `position`, `substring`, `overlay`, `get_bit`, and `set_bit` work on bit strings, and integers can be cast to and from `bit(n)`.
+
+## PostgreSQL Differences
+
+- The bitwise NOT operator `~` and the shift operators `<<` and `>>` are not supported for bit strings.

@@ -9,13 +9,6 @@ For benchmarking purposes, we support several advanced settings in CedarDB's int
 ## Repetition of queries
 
 To validate performance, it is important to run queries multiple times.
-To repeat a query, you can either repeat the execution (`e`), the compilation (`c`), or both (`a`).
-To change the repetition mode, simply query this command.
-
-```text
-\set repeatmode 'a'
-```
-
 The number of repetitions can be set with the following command.
 
 ```text

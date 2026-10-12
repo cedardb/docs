@@ -50,3 +50,9 @@ set timezone to 'UTC';
 ```
 
 When the time of day is *not* relevant for your use case, e.g., when dealing with birthdates for age verification, consider using the [date](../date) type instead.
+
+## PostgreSQL Differences
+
+- The special values `infinity` and `-infinity` are not supported.
+- CedarDB accepts a fractional-second precision such as `timestamp(0)` or `timestamp(3) with time zone` but ignores it: values always keep microsecond resolution.
+- The shorthand `timestamptz(p)` is not supported. Use `timestamp(p) with time zone` instead.

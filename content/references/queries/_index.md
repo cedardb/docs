@@ -10,7 +10,9 @@ CedarDB automatically compiles your queries to efficient code and executes it in
 gigabytes per second with ease.
 
 * [FROM / JOIN](./from) — FROM clause, all JOIN types, LATERAL
-* [GROUP BY](./groupby) — GROUP BY, HAVING
-* [SELECT](./select) — SELECT clause, DISTINCT, column aliases
+* [GROUP BY](./groupby) — GROUP BY, HAVING, GROUPING SETS, ROLLUP, CUBE
+* [ORDER BY / LIMIT](./orderby) — ORDER BY, LIMIT, OFFSET, FETCH FIRST
+* [SELECT](./select) — SELECT clause, DISTINCT, DISTINCT ON, VALUES
+* [Set Operations](./setops) — UNION, INTERSECT, EXCEPT
 * [Window functions](./window) — window functions, OVER clause
 * [WITH](./with) — CTEs, recursive CTEs
