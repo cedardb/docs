@@ -1,7 +1,8 @@
 ---
 title: "Use AWS DMS to replicate data from RDS PostgreSQL to CedarDB"
-linkTitle: "Replicating via AWS DMS"
-weight: 102
+linkTitle: "Replicate with AWS DMS"
+aliases:
+  - /cookbook/aws_dms/
 ---
 
 ## Overview
