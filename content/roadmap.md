@@ -62,7 +62,7 @@ CedarDB.
 | PostgreSQL system tables       |    {{< icondone >}}    | [Documentation](/docs/compatibility/system_table/) |
 | information_schema support     |    {{< icondone >}}    | [Documentation](/docs/compatibility/system_table/) |
 | PostgreSQL Logical replication | {{< iconinprogress >}} |                                                    |
-| Support for more CDC tools     | {{< iconinprogress >}} | [Documentation](/docs/cookbook/aurora_debezium/)   |
+| Support for more CDC tools     | {{< iconinprogress >}} | [Documentation](/docs/clients/data_import/)        |
 
 ## Enterprise Features
 

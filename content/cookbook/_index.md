@@ -9,9 +9,12 @@ step-by-step instructions on how to accomplish them using CedarDB.
 
 * [Import data from JSON](importing_from_json)
 * [Import data from PostgreSQL](importing_from_postgresql)
+  * [Copy with pg_dump](importing_from_postgresql/pg_dump)
+  * [Migrate with minimal downtime](importing_from_postgresql/minimal_downtime)
+  * [Replicate with AWS DMS](importing_from_postgresql/aws_dms)
 * [Importing and working with CSV data](working_with_csv)
-* [Replicating data from Amazon Aurora PostgreSQL via Debezium](aurora_debezium)
-* [Use AWS DMS to replicate data from RDS PostgreSQL to CedarDB](aws_dms)
+
+To replicate data continuously with Debezium or load data with Airbyte, see [Data Import and CDC](/docs/clients/data_import/).
 
 In addition, you can also find some recipes for performance evaluation:
 

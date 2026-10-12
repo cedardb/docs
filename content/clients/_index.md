@@ -20,6 +20,11 @@ Connectivity APIs:
 
 * [ADBC](apis/adbc)
 
+Data import and CDC:
+
+* [Airbyte](data_import/airbyte)
+* [Debezium](data_import/debezium)
+
 Tools:
 
 * [DataGrip](tools/datagrip)
