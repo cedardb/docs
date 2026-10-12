@@ -29,7 +29,7 @@
 
   <div class="hx:w-full hx:min-w-0 hx:leading-7">
     <div class="hx:leading-7">
-      {{ .Inner | markdownify }}
+      {{ .Inner | markdownify | chomp }}
     </div>
   </div>
 </div>

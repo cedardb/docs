@@ -46,6 +46,10 @@ One page per task. Each page is self-contained: the reader follows it from
 top to bottom and completes the task without consulting other pages. Include
 prerequisites at the top.
 
+When one task has several alternative recipes, put them in a folder with an
+`_index.md` that compares them, for example `importing_from_postgresql/`
+with `pg_dump.md`, `minimal_downtime.md`, and `aws_dms.md`.
+
 Add a page when a task involves multiple steps, requires specific tooling,
 or combines multiple features in a non-obvious way. Simple single-feature
 usage belongs in the reference section.
@@ -62,7 +66,7 @@ to reference pages for feature details.
 
 ### clients/
 
-Organized into three subsections:
+Organized into four subsections:
 
 - **Language folders** (`python/`, `javascript/`, `java/`, etc.) — one folder per
   programming language. The folder's `_index.md` covers the primary driver or
@@ -71,6 +75,10 @@ Organized into three subsections:
 - **`apis/`** — APIs like ADBC for language-agnostic Arrow database connectivity.
 - **`tools/`** — GUI clients, CLI tools, and observability integrations that are
   not tied to a specific programming language (DBeaver, DataGrip, psql, Grafana).
+- **`data_import/`** — data integration and change data capture (CDC) tools that
+  load data into CedarDB or keep it in sync with another database (Airbyte, Debezium).
+  Multi-tool, task-oriented procedures (e.g. migrating from PostgreSQL) stay in
+  `cookbook/` and link to these pages.
 
 Each page covers installation, connection setup, and a minimal working example.
 Focus on what is specific to CedarDB. Do not rewrite the client library's own
@@ -118,6 +126,10 @@ clients/
 │   └── _index.md
 ├── apis
 │   └── adbc.md              # ADBC api
+├── data_import/             # Data integration and CDC tools
+│   ├── _index.md
+│   ├── airbyte.md
+│   └── debezium.md
 └── tools/                   # Not language-specific
     ├── psql.md
     ├── dbeaver.md
@@ -292,13 +304,16 @@ jump directly to it.
 11. **Is it about a GUI client, CLI tool, or BI/observability integration?**
     Go to `clients/tools/<tool>.md`
 
-12. **Is it an optimization guideline or recommended pattern?**
+12. **Is it about a data integration or CDC tool (Airbyte, Debezium, ...)?**
+    Go to `clients/data_import/<tool>.md`
+
+13. **Is it an optimization guideline or recommended pattern?**
     Go to `best_practices/<topic>.md`
 
-13. **Is it a compatibility status update?**
+14. **Is it a compatibility status update?**
     Go to `compatibility/<area>.md`
 
-14. **None of the above?**
+15. **None of the above?**
     Flag for team discussion. Do not create new top-level sections without agreement.
 
 ---
@@ -348,14 +363,14 @@ to any handwritten member list in an `_index.md`.
 ## File Naming
 
 - Lowercase, snake_case when more than one word is needed (`asof_join.md`,
-  `importing_from_postgresql.md`). Single-word names have no separator (`tables.md`).
+  `working_with_csv.md`). Single-word names have no separator (`tables.md`).
 - Object pages by object name: `tables.md`, `indexes.md`, `roles.md`
 - Data types by common name: `integer.md`, `json.md`, `text.md`
 - Function categories by domain: `aggregation.md`, `timestamp.md`, `json.md`
-- Cookbooks with descriptive slugs: `importing_from_postgresql.md`, `working_with_csv.md`
+- Cookbooks with descriptive slugs: `working_with_csv.md`, `importing_from_postgresql/`
 - Language client folders by language name: `python/`, `javascript/`, `java/`
 - ORM pages within the language folder: `javascript/drizzle.md`, `javascript/prisma.md`
-- Tool pages by tool name: `tools/grafana.md`, `tools/dbeaver.md`
+- Tool pages by tool name: `tools/grafana.md`, `tools/dbeaver.md`, `data_import/debezium.md`
 
 ---
 

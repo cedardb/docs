@@ -37,9 +37,9 @@ Database for PostgreSQL, and for self-hosted CedarDB and CedarDB Cloud alike.
 
 ## Related tool documentation
 
-| Tool                                                                    | Description                                                                                                                                                                          |
-|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Airbyte](/docs/clients/data_import/airbyte/)                           | Load data with Airbyte's Postgres connectors, once or with CDC, also from sources other than PostgreSQL. Creates its own tables with extra Airbyte columns, without keys or indexes. |
-| [Debezium](/docs/clients/data_import/debezium/)                         | Keep CedarDB continuously in sync with PostgreSQL through Kafka, or copy a snapshot once. Creates tables with columns and primary keys.                                              |
-| [psql](/docs/clients/tools/psql/)                                       | The PostgreSQL command-line client used in the recipes.                                                                                                                              |
-| [Importing and working with CSV data](/docs/cookbook/working_with_csv/) | `COPY` options for CSV files.                                                                                                                                                        |
+| Tool                                                                    | Description                                                                                                                                                               |
+|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Airbyte](/docs/clients/data_import/airbyte/)                           | Copy tables once with Airbyte's Postgres connectors, also from sources other than PostgreSQL. Creates its own tables with extra Airbyte columns, without keys or indexes. |
+| [Debezium](/docs/clients/data_import/debezium/)                         | Keep CedarDB continuously in sync with PostgreSQL through Kafka, or copy a snapshot once. Creates tables with columns and primary keys.                                   |
+| [psql](/docs/clients/tools/psql/)                                       | The PostgreSQL command-line client used in the recipes.                                                                                                                   |
+| [Importing and working with CSV data](/docs/cookbook/working_with_csv/) | `COPY` options for CSV files.                                                                                                                                             |
