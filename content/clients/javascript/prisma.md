@@ -4,50 +4,65 @@ linkTitle: "Prisma"
 weight: 20
 ---
 
-[Prisma ORM](https://www.prisma.io/) is a TypeScript-first ORM with a declarative schema, auto-generated type-safe client, and visual database browser.
+[Prisma ORM](https://www.prisma.io/) is a TypeScript ORM with a declarative schema, a generated type-safe client, and
+the migration tool Prisma Migrate.
+CedarDB works with Prisma's `postgresql` provider and the `@prisma/adapter-pg` driver adapter, so you can define your
+schema, manage it with migrations, and query it like a PostgreSQL database.
+Apply schema changes with `prisma db push`, or create versioned migrations with `prisma migrate dev` and apply them
+with `prisma migrate deploy`.
 
-{{< callout type="info" >}}
-Prisma support is currently **under active development**. Automatic schema migrations via `prisma migrate` are not yet supported. Use `npx prisma db push` from a clean database instead.
-{{< /callout >}}
+This page was tested with `prisma`, `@prisma/client`, and `@prisma/adapter-pg` 7.10.0, `pg` 8.23.1, and CedarDB
+v2026-10-08.
 
-The [official getting-started tutorial](https://www.prisma.io/docs/prisma-orm/quickstart/postgresql) works out of the box with CedarDB, with minor adjustments noted below.
+This page is a self-contained example that you can follow from start to finish.
+It points out what is specific to CedarDB.
+For all features, see Prisma's documentation of
+[the Prisma schema](https://www.prisma.io/docs/orm/prisma-schema),
+[Prisma Migrate](https://www.prisma.io/docs/orm/prisma-migrate), and
+[Prisma Client](https://www.prisma.io/docs/orm/prisma-client).
 
-## Setting up CedarDB
+## Prerequisites
 
-Start CedarDB in server mode and create a user and database:
+* Node.js 20 or later.
+* A running CedarDB server that accepts TCP connections (see [Install CedarDB locally](/docs/get_started/install_locally/)).
+* A CedarDB superuser to create the application role and database.
 
-```shell
-./cedardb --createdb mydb
-psql -h /tmp -U postgres
-```
+## Set up CedarDB
+
+Connect to CedarDB as a superuser and create a role for your application that owns its database:
 
 ```sql
-create user myuser with password 'CorrectHorseBatteryStaple' superuser;
-create database mydb;
+CREATE ROLE myuser WITH LOGIN CREATEDB PASSWORD 'CorrectHorseBatteryStaple';
+CREATE DATABASE mydb OWNER myuser;
 ```
 
-Then enable TCP connections:
+As the database owner, Prisma can create tables, types, and indexes without further privileges.
+`CREATEDB` allows `prisma migrate dev` to create and drop a temporary
+[shadow database](https://www.prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/shadow-database).
+If you only use `prisma db push` or `prisma migrate deploy`, you can omit it.
+This works in every CedarDB edition.
+Granting privileges with `GRANT` instead requires a CedarDB [enterprise license](/docs/licensing/).
 
-```shell
-./cedardb mydb --address=::
-```
+## Set up the project
 
-For more details, see the [installation guide]({{< relref "/get_started/install_locally.md" >}}).
+{{% steps %}}
 
-## Installing
+### Install Prisma
 
-Create a new Node.js project and install Prisma with the PostgreSQL adapter:
+Create a Node.js project and install Prisma 7 with the PostgreSQL driver adapter:
 
 ```shell
 mkdir hello-prisma && cd hello-prisma
 npm init -y
-npm install typescript tsx @types/node --save-dev
-npx tsc --init
-npm install prisma @types/pg --save-dev
-npm install @prisma/client @prisma/adapter-pg pg dotenv
+npm pkg set type=module
+npm install --save-dev prisma@7 typescript tsx @types/node @types/pg
+npm install @prisma/client@7 @prisma/adapter-pg@7 pg dotenv
 ```
 
-Set `"type": "module"` in `package.json` and configure `tsconfig.json` for ESM:
+Pin the major version: the `latest` tag of the `prisma` package can point to a release candidate of the next major
+version.
+
+Create a `tsconfig.json`:
 
 ```json {filename="tsconfig.json"}
 {
@@ -62,7 +77,7 @@ Set `"type": "module"` in `package.json` and configure `tsconfig.json` for ESM:
 }
 ```
 
-## Connecting
+### Configure the connection
 
 Initialize Prisma:
 
@@ -70,32 +85,34 @@ Initialize Prisma:
 npx prisma init --datasource-provider postgresql --output ../generated/prisma
 ```
 
-This creates a `prisma/schema.prisma` and a `.env` file. Set your CedarDB connection string in `.env`:
+Set your CedarDB connection string in `.env`:
 
 ```shell {filename=".env"}
 DATABASE_URL="postgresql://myuser:CorrectHorseBatteryStaple@localhost:5432/mydb?schema=public"
 ```
 
-Instantiate the Prisma client in `lib/prisma.ts`:
+Make sure `prisma.config.ts` loads the connection string:
 
-```typescript {filename="lib/prisma.ts"}
+```typescript {filename="prisma.config.ts"}
 import "dotenv/config";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../generated/prisma/client";
+import { defineConfig } from "prisma/config";
 
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
-
-export { prisma };
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  datasource: {
+    url: process.env["DATABASE_URL"],
+  },
+});
 ```
 
-## Defining a Schema
+### Define the schema
 
 Edit `prisma/schema.prisma` to define your models:
 
-```prisma {filename="prisma/schema.prisma"}
+``` {filename="prisma/schema.prisma"}
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -105,10 +122,16 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+  role  Role    @default(MEMBER)
   posts Post[]
 }
 
@@ -117,61 +140,176 @@ model Post {
   title     String
   content   String?
   published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
+  price     Decimal @default(0) @db.Decimal(10, 2)
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  Int
+
+  @@index([authorId])
 }
 ```
 
-## Applying the Schema
+### Create the client
 
-Push the schema to CedarDB using `prisma db push` (note: `prisma migrate` is not yet supported):
+Instantiate Prisma Client with the driver adapter in `lib/prisma.ts`:
+
+```typescript {filename="lib/prisma.ts"}
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client";
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
+
+export { prisma };
+```
+
+{{% /steps %}}
+
+## Create and change the schema
+
+Choose one of two workflows:
+
+* **`prisma db push`** applies the schema directly, without migration files.
+  Use it for prototyping.
+* **Versioned migrations** with `prisma migrate dev` keep every change as a SQL file that you review and commit.
+  `prisma migrate deploy` applies them to other environments, such as production.
+
+### Push the schema
+
+Push the schema to CedarDB and generate Prisma Client:
 
 ```shell
 npx prisma db push
-```
-
-Then generate the Prisma client:
-
-```shell
 npx prisma generate
 ```
 
-## Querying
+After you change `prisma/schema.prisma`, run both commands again.
+Prisma compares the schema with the tables in CedarDB and applies only the difference, for example with
+`ALTER TABLE ... ADD COLUMN` or `DROP COLUMN`.
+If a change can lose data, Prisma asks for confirmation.
 
-Create a `script.ts` to run queries against CedarDB:
+### Use versioned migrations
+
+{{% steps %}}
+
+#### Create the first migration
+
+Create a migration from the schema, apply it, and generate Prisma Client:
+
+```shell
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+Prisma Migrate writes the SQL to `prisma/migrations/<timestamp>_init/migration.sql` and records the applied migration
+in the table `_prisma_migrations`.
+
+#### Change the schema
+
+Edit `prisma/schema.prisma`, for example add a field to `User`:
+
+```prisma {filename="prisma/schema.prisma"}
+model User {
+  // ...
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+}
+```
+
+CedarDB stores timestamps with microsecond precision.
+Declare `DateTime` fields with `@db.Timestamp(6)` so that the column type matches, because Prisma uses `timestamp(3)`
+by default.
+
+Create and apply a migration for the change:
+
+```shell
+npx prisma migrate dev --name add_created_at
+npx prisma generate
+```
+
+Review each migration before you commit it.
+
+#### Deploy the migrations
+
+Apply all pending migrations to another database, for example in production:
+
+```shell
+npx prisma migrate deploy
+```
+
+`prisma migrate deploy` does not need a shadow database.
+
+{{% /steps %}}
+
+### Reset a development database
+
+To start over, drop and recreate the database, then push the schema or apply the migrations again:
+
+```sql
+DROP DATABASE mydb;
+CREATE DATABASE mydb OWNER myuser;
+```
+
+## Query data
+
+Create a `script.ts` that runs queries against CedarDB:
 
 ```typescript {filename="script.ts"}
 import { prisma } from "./lib/prisma";
 
 async function main() {
-  // Create a user with a related post
-  const user = await prisma.user.create({
+  // Start from empty tables, deletes cascade to the posts
+  await prisma.user.deleteMany();
+
+  // Create a user with related posts
+  const alice = await prisma.user.create({
     data: {
       name: "Alice",
       email: "alice@prisma.io",
       posts: {
-        create: {
-          title: "Hello World",
-          content: "This is my first post!",
-          published: true,
-        },
+        create: [
+          { title: "Hello World", content: "This is my first post!", published: true, price: "9.99" },
+          { title: "Draft" },
+        ],
       },
     },
-    include: {
-      posts: true,
-    },
   });
-  console.log("Created user:", user);
+
+  // Filter on a relation and count related records
+  const authors = await prisma.user.findMany({
+    where: { posts: { some: { published: true } } },
+    select: { email: true, _count: { select: { posts: true } } },
+  });
+
+  // Aggregate and group
+  const stats = await prisma.post.aggregate({ _sum: { price: true }, _count: true });
+  const byRole = await prisma.user.groupBy({ by: ["role"], _count: { _all: true } });
+
+  // Interactive transaction
+  await prisma.$transaction(async (tx) => {
+    const bob = await tx.user.create({ data: { email: "bob@prisma.io", name: "Bob" } });
+    await tx.post.create({ data: { title: "Bob's post", authorId: bob.id } });
+  });
+
+  // Upsert
+  await prisma.user.upsert({
+    where: { email: "bob@prisma.io" },
+    update: { role: "ADMIN" },
+    create: { email: "bob@prisma.io", role: "ADMIN" },
+  });
 
   // Fetch all users with their posts
-  const allUsers = await prisma.user.findMany({
-    include: { posts: true },
-  });
-  console.log("All users:", JSON.stringify(allUsers, null, 2));
+  const allUsers = await prisma.user.findMany({ include: { posts: true }, orderBy: { id: "asc" } });
+
+  // Delete, cascades to the posts
+  await prisma.user.delete({ where: { id: alice.id } });
+
+  console.log(JSON.stringify({ authors, stats, byRole, allUsers }, null, 2));
 }
 
 main()
-  .then(async () => { await prisma.$disconnect(); })
+  .then(async () => {
+    await prisma.$disconnect();
+  })
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();
@@ -182,36 +320,16 @@ main()
 Run the script:
 
 ```shell
-$ npx tsx script.ts
-User created successfully.
-All users:  [
-  {
-    "id": 1,
-    "email": "alice@prisma.io",
-    "name": "Alice",
-    "posts": [
-      {
-        "id": 1,
-        "title": "Hello World",
-        "content": "This is my first post!",
-        "published": true,
-        "authorId": 1
-      }
-    ]
-  }
-]
+npx tsx script.ts
 ```
 
-## Known Limitations
+## CedarDB limitations
 
-CedarDB's Prisma support is actively being developed. The following are known limitations:
-
-**Schema migrations** (`prisma migrate dev`) are not supported. Use `npx prisma db push` to apply schema changes directly to the database instead.
-
-**Drop database** of non-empty databases is not supported. To reset your database, manually drop all contained objects and recreate it via `psql`:
-
-```sql
-<drop all contained objects>
-drop database mydb;
-create database mydb;
-```
+* `Decimal` fields without a native type are created as `decimal(65,30)`, which exceeds the maximum precision of 38
+  (see [Numeric](/docs/references/datatypes/numeric/)).
+  Add a native type with a precision of at most 38, for example `@db.Decimal(10, 2)`.
+* `@db.Xml`, `@db.Timetz`, `@db.Cidr`, and `@db.MacAddr` fields are not supported.
+* Full-text search (the `fullTextSearchPostgres` preview feature) is not supported.
+* The isolation level `Serializable` is not supported.
+  CedarDB runs all transactions with snapshot isolation and accepts the other isolation levels
+  (see [Transactions](/docs/references/transactions/)).
