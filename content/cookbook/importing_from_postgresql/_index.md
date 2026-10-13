@@ -17,7 +17,7 @@ Database for PostgreSQL, and for self-hosted CedarDB and CedarDB Cloud alike.
 |----------------------------------------------------|------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | [Copy with pg_dump](pg_dump/)                      | For the duration of the copy | Complete schema with keys, indexes, defaults, identity columns, views, owners, and privileges | You want the simplest setup and can stop writes to PostgreSQL while the data is copied. Needs only the PostgreSQL client tools.     |
 | [Migrate with minimal downtime](minimal_downtime/) | During the switchover only   | Complete schema, as with `pg_dump`                                                            | Your application must keep writing to PostgreSQL until a short switchover. Uses `pg_dump` for the schema and Debezium for the data. |
-| [Replicate with AWS DMS](aws_dms/)                 | During the switchover only   | Tables created by the DMS task                                                                | Your PostgreSQL runs on Amazon RDS or Aurora and you want a managed AWS service.                                                    |
+| [Replicate with AWS DMS](aws_dms/)                 | During the switchover only   | Tables created by DMS with columns and primary keys, or the schema you created beforehand     | Your PostgreSQL runs on Amazon RDS or Aurora and you want a managed AWS service.                                                    |
 
 ## What to expect
 

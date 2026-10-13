@@ -1,506 +1,369 @@
 ---
-title: "Use AWS DMS to replicate data from RDS PostgreSQL to CedarDB"
+title: "Replicating from Amazon RDS for PostgreSQL with AWS DMS"
 linkTitle: "Replicate with AWS DMS"
 aliases:
   - /cookbook/aws_dms/
 ---
 
+This recipe uses
+the [AWS Database Migration Service (DMS)](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) to copy tables
+from Amazon RDS for PostgreSQL into CedarDB and to keep replicating changes afterward.
+DMS connects to CedarDB as a regular PostgreSQL target, so it works for self-hosted CedarDB and CedarDB Cloud alike.
+Your application keeps writing to PostgreSQL until you switch it over to CedarDB.
+
+The example replicates a small table `shop.customers`.
+The setup also works for other hosted or self-managed PostgreSQL databases, such as Aurora PostgreSQL.
+Only enabling logical replication and the replication privileges of the DMS user differ,
+see [Using a PostgreSQL database as an AWS DMS source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html)
+for how to configure other sources.
+
+## Prerequisites
+
+* An Amazon RDS for PostgreSQL instance, or the permissions to create one.
+  The example uses PostgreSQL 16.
+* A CedarDB instance and the connection details of a superuser.
+* The `psql` client to run the SQL statements in this recipe.
+
 ## Overview
 
-* Set up a CedarDB instance in EC2 using whichever approach suits you.  I prefer CloudFormation
-templates, for their repeatability.
-* When the CedarDB instance is running, note its VPC and deploy the remaining components into that same VPC.
-* Deploy an RDS Postgres instance, **or** enable logical replication for your existing instance.
-* Create a schema in RDS and load it with some data.
-* Verify that schema and data gets replicated from RDS Postgres to CedarDB.
-
-## Deploy your CedarDB instance
-
-Here, I've used two CloudFormation templates:
-
-* [Networking setup](https://cedardb-public.s3.us-east-1.amazonaws.com/aws-ec2-networking.yaml)
-* [CedarDB deployment](https://cedardb-public.s3.us-east-1.amazonaws.com/cedardb-x86-existing-vpc-cloudformation.yaml)
-
-Note the following values for the CedarDB instance:
-
-* _Private IPv4 addresses_ and _VPC ID_ values from the EC2 dashboard view for the resulting instance (see below)
-* The values shown in the _Outputs_ tab in the CloudFormation UI
-
-![CloudFormation outputs](./img/cloudformation_complete.jpg)
-
-![EC2 instance details](./img/cedardb_ec2_note_vpc_and_private_ip.jpg)
-
-## Create the DMS Replication instance
-
-![Create replication instance step 1](./img/dms_create_replication_instance_1.jpg)
-
-![Create replication instance step 2](./img/dms_create_replication_instance_2.jpg)
-
-Finally, click the "Create replication instance" button. This process will take a while, so you can continue
-and check on the replication instance later.
-
-## Configure an RDS parameter group
-
-This **RDS _parameter group_** which will enable logical replication to DMS.
-
-![Create parameter group 1](./img/rds_parameter_group_1.jpg)
-
-![Create parameter group 2](./img/rds_parameter_group_2.jpg)
-
-![Select new parameter group](./img/rds_parameter_group_3.jpg)
-
-![Edit new parameter group](./img/rds_parameter_group_4.jpg)
-
-![Enable logical replication](./img/rds_parameter_group_5.jpg)
-
-## Deploy a new RDS PostgreSQL instance
-
-**If you want to use your existing RDS PostgreSQL instance**, skip this section and head down to
-[Configure your existing RDS PostgreSQL instance](#configure-your-existing-rds-postgresql-instance).
-
-![Navigate to RDS](./img/rds_create_postgres_0.jpg)
-
-![Click Create](./img/rds_create_postgres_0a.jpg)
-
-![Choose PostgreSQL](./img/rds_create_postgres_1.jpg)
-
-![Version, dev test, single AZ](./img/rds_create_postgres_2.jpg)
-
-![Credentials](./img/rds_create_postgres_3.jpg)
-
-![Instance type and storage](./img/rds_create_postgres_4.jpg)
-
-![Choose VPC, public access](./img/rds_create_postgres_5.jpg)
-
-![Security group](./img/rds_create_postgres_6.jpg)
-
-![More options](./img/rds_create_postgres_7.jpg)
-
-![Apply parameter group](./img/rds_create_postgres_8.jpg)
-
-![Create database](./img/rds_create_postgres_9.jpg)
-
-Now, wait a while for the RDS PostgreSQL instance to come up.
-
-## Configure your existing RDS PostgreSQL instance
-
-![RDS Modify Step 1](./img/rds_modify_1.jpg)
-
-![RDS Modify Step 2](./img/rds_modify_2.jpg)
-
-![RDS Modify Step 3](./img/rds_modify_3.jpg)
-
-![RDS Modify Step 4](./img/rds_modify_4.jpg)
-
-## (optional) Load a data set into the RDS instance
-
-If this is just an exercise or demo, you will need some data to migrate. I
-chose [this data
-set](https://github.com/neondatabase-labs/postgres-sample-dbs?tab=readme-ov-file#employees-database).
-
-```bash
-pg_restore -d postgres://postgres:pr3deb1tAmUSement@rds-pg.cfyqge68kqxu.us-east-1.rds.amazonaws.com/postgres \
-  -Fc employees.sql.gz -c -v --no-owner --no-privileges
+```text
+RDS PostgreSQL ──logical replication──► DMS replication instance ──PostgreSQL protocol──► CedarDB
 ```
 
-Verify the tables have been created and loaded:
+DMS reads the changes from a logical replication slot in PostgreSQL and writes them to CedarDB with regular SQL
+statements.
+A DMS *task* first copies the existing rows (full load) and then applies the ongoing changes (change data capture, CDC).
 
-```bash
-$ psql "postgres://postgres:pr3deb1tAmUSement@rds-pg.cfyqge68kqxu.us-east-1.rds.amazonaws.com/postgres"
-Timing is on.
-psql (17.4, server 16.3)
-SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)
-Type "help" for help.
-```
+The steps:
+
+1. [Enable logical replication in RDS](#enable-logical-replication-in-rds)
+2. [Prepare PostgreSQL](#prepare-postgresql)
+3. [Prepare CedarDB](#prepare-cedardb)
+4. [Create the replication instance](#create-the-replication-instance)
+5. [Create the source and target endpoints](#create-the-source-and-target-endpoints)
+6. [Create and start the task](#create-and-start-the-task)
+7. [Verify the replication](#verify-the-replication)
+
+The console labels in this recipe match the AWS console as of October 2026.
+
+## Enable logical replication in RDS
+
+DMS needs logical replication, which you enable through a DB parameter group.
+In the RDS console, open **Parameter groups** and click **Create parameter group**:
+
+| Field                  | Value                                                  |
+|------------------------|--------------------------------------------------------|
+| Parameter group name   | `cedardb-dms-source`                                   |
+| Engine type            | PostgreSQL                                             |
+| Parameter group family | The major version of your instance, e.g., `postgres16` |
+| Type                   | DB Parameter Group                                     |
+
+Open the new group, click **Edit**, and set these parameters:
+
+| Parameter                 | Value | Purpose                                                           |
+|---------------------------|-------|-------------------------------------------------------------------|
+| `rds.logical_replication` | `1`   | Sets `wal_level` to `logical` and enables replication slots       |
+| `wal_sender_timeout`      | `0`   | Prevents PostgreSQL from closing idle DMS replication connections |
+
+Attach the parameter group to your RDS instance.
+For a new instance, choose it under **Additional configuration → DB parameter group**.
+For an existing instance, choose **Modify**, select the parameter group, and apply the change.
+`rds.logical_replication` only takes effect after a reboot of the instance.
+
+Check the setting with `psql`:
 
 ```sql
-postgres=> \dn
+SHOW wal_level;
 ```
 
 ```text
-        List of schemas
-   Name    |       Owner       
------------+-------------------
- employees | postgres
- public    | pg_database_owner
-(2 rows)
+ wal_level
+-----------
+ logical
 ```
 
+## Prepare PostgreSQL
+
+The example replicates this table in the source database:
+
 ```sql
-postgres=> \dt employees.*
+CREATE SCHEMA shop;
+CREATE TABLE shop.customers
+(
+    id         integer PRIMARY KEY,
+    name       text        NOT NULL,
+    email      text,
+    created_at timestamptz NOT NULL DEFAULT now()
+);
+INSERT INTO shop.customers (id, name, email)
+VALUES (1, 'Ada Lovelace', 'ada@example.com'),
+       (2, 'Alan Turing', 'alan@example.com'),
+       (3, 'Grace Hopper', 'grace@example.com');
+```
+
+{{< callout type="info" >}}
+As with any DMS replication from PostgreSQL, the source tables need a primary key.
+This is a limitation of DMS on the PostgreSQL side and applies to every target database.
+For tables without a primary key, DMS only replicates inserts, not updates and deletes.
+With `ALTER TABLE ... REPLICA IDENTITY FULL`, it also replicates updates and deletes, but leaves out the LOB columns of
+such tables, which includes `text` columns.
+See [Using a PostgreSQL database as an AWS DMS source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html)
+for details.
+{{< /callout >}}
+
+DMS only needs to read the replicated tables and to use logical replication.
+Create a dedicated user in the source database:
+
+```sql
+CREATE USER dms_user WITH PASSWORD '<password>';
+GRANT rds_replication TO dms_user;
+GRANT USAGE ON SCHEMA shop TO dms_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA shop TO dms_user;
+```
+
+Grant `SELECT` on tables before adding them to a DMS task.
+
+## Prepare CedarDB
+
+DMS can create the tables in CedarDB itself.
+The tables get the columns, types, and primary key of the source, but no column defaults, secondary indexes, or other
+constraints.
+That is enough to for most replication cases but might be insufficient for a full migration.
+For a migration, create the full schema in CedarDB before you start the task, for example with `pg_dump --schema-only`
+as described in [Copy with pg_dump](../pg_dump/), and let DMS only load the data.
+
+In both cases DMS also creates additional tables to track progress, prefixed `awsdms_*` in CedarDB.
+
+## Create the replication instance
+
+The replication instance is the EC2 machine that runs the DMS tasks.
+It must reach both PostgreSQL and CedarDB on port 5432.
+The example puts all AWS resources in the default VPC.
+
+1. In the EC2 console, create a security group `dms-replication-sg` in the VPC, without inbound rules.
+2. In the security group of your RDS instance, add an inbound rule for **PostgreSQL** (port 5432) with the source
+   `dms-replication-sg`.
+3. In the DMS console, open **Subnet groups**, click **Create subnet group**, name it `cedardb-dms`, select the VPC, and
+   add its subnets.
+4. Open **Provisioned instances** and click **Create replication instance**:
+
+| Field                    | Value                                                                         |
+|--------------------------|-------------------------------------------------------------------------------|
+| Name                     | `cedardb-dms`                                                                 |
+| Instance class           | `dms.r6i.large` for small tables, see [Sizing](#sizing-for-high-change-rates) |
+| High availability        | Dev or test workload (Single-AZ)                                              |
+| Allocated storage        | 50 GiB                                                                        |
+| VPC                      | The VPC of your RDS instance                                                  |
+| Replication subnet group | `cedardb-dms`                                                                 |
+| Public accessible        | Yes, if CedarDB runs outside the VPC (e.g., CedarDB Cloud)                    |
+| VPC security groups      | `dms-replication-sg`                                                          |
+
+If CedarDB runs outside the VPC, the replication instance needs internet access.
+In a public subnet, such as those of the default VPC, it needs a public IP address and thus **Public accessible**.
+In a private subnet, it needs a NAT gateway instead.
+
+The replication instance takes about 10 minutes to become available.
+
+## Create the source and target endpoints
+
+In the DMS console, open **Endpoints** and click **Create endpoint** for the source:
+
+| Field                          | Value                                  |
+|--------------------------------|----------------------------------------|
+| Endpoint type                  | Source endpoint                        |
+| Select RDS DB instance         | Checked, then choose your RDS instance |
+| Endpoint identifier            | `rds-source`                           |
+| Source engine                  | PostgreSQL                             |
+| Access to endpoint database    | Provide access information manually    |
+| User name / Password           | `dms_user` and its password            |
+| Secure Socket Layer (SSL) mode | `require`                              |
+| Database name                  | `postgres`                             |
+| Endpoint settings              | `CaptureDdls` = `false`                |
+
+The example assumes a stable schema and turns off the replication of schema changes, so `dms_user` only needs read and
+replication privileges.
+Apply schema changes to CedarDB yourself before you make them in PostgreSQL.
+To let DMS replicate schema changes instead, keep `CaptureDdls` enabled and connect with a user that can create event
+triggers, such as the RDS master user.
+
+Create a second endpoint for CedarDB:
+
+| Field                       | Value                                      |
+|-----------------------------|--------------------------------------------|
+| Endpoint type               | Target endpoint                            |
+| Endpoint identifier         | `cedardb-target`                           |
+| Target engine               | PostgreSQL                                 |
+| Access to endpoint database | Provide access information manually        |
+| Server name / Port          | Host name of your CedarDB instance, `5432` |
+| User name / Password        | A CedarDB superuser                        |
+| SSL mode                    | `require`                                  |
+| Database name               | `postgres`                                 |
+
+{{< callout type="info" >}}
+CedarDB Cloud uses a self-signed certificate.
+Use the SSL mode `require`, which encrypts the connection without verifying the certificate.
+The modes `verify-ca` and `verify-full` fail.
+{{< /callout >}}
+
+For both endpoints, use **Test endpoint connection** with the replication instance `cedardb-dms` before you create them.
+
+## Create and start the task
+
+In the DMS console, open **Database migration tasks** and click **Create task**:
+
+| Field                                | Value                                                                  |
+|--------------------------------------|------------------------------------------------------------------------|
+| Task identifier                      | `shop-to-cedardb`                                                      |
+| Source / Target database endpoint    | `rds-source` / `cedardb-target`                                        |
+| Replication instance                 | `cedardb-dms`                                                          |
+| Migration type                       | Migrate and replicate                                                  |
+| Target table preparation mode        | Drop tables on target                                                  |
+| LOB column settings                  | Limited LOB mode, maximum LOB size 32 KB                               |
+| Task logs                            | Turn on CloudWatch logs                                                |
+| Turn on batch-optimized apply        | Optional for small tables, see [Sizing](#sizing-for-high-change-rates) |
+| Premigration assessment              | Off                                                                    |
+| Migration task startup configuration | Automatically on create                                                |
+
+Under **Table mappings**, add a selection rule with schema `shop`, source table name `%`, and action **Include**.
+
+With **Drop tables on target**, DMS creates the tables in CedarDB.
+If you created the schema in CedarDB beforehand, choose **Truncate** instead, which keeps your tables, indexes, and
+defaults.
+
+DMS treats PostgreSQL `text` columns as LOBs.
+In limited LOB mode, DMS truncates values longer than the maximum LOB size, so set it above your longest `text` value.
+
+## Verify the replication
+
+Once the task status is **Load complete, replication ongoing**, the tab **Table statistics** shows the copied rows.
+Check the rows in CedarDB:
+
+```sql
+SELECT *
+FROM shop.customers
+ORDER BY id;
 ```
 
 ```text
-                 List of relations
-  Schema   |        Name         | Type  |  Owner   
------------+---------------------+-------+----------
- employees | department          | table | postgres
- employees | department_employee | table | postgres
- employees | department_manager  | table | postgres
- employees | employee            | table | postgres
- employees | salary              | table | postgres
- employees | title               | table | postgres
-(6 rows)
+ id |     name     |       email       |          created_at
+----+--------------+-------------------+-------------------------------
+  1 | Ada Lovelace | ada@example.com   | 2026-10-13 15:16:13.975097+00
+  2 | Alan Turing  | alan@example.com  | 2026-10-13 15:16:13.975097+00
+  3 | Grace Hopper | grace@example.com | 2026-10-13 15:16:13.975097+00
+(3 rows)
 ```
 
+Change some rows in PostgreSQL:
+
 ```sql
-postgres=> select count(*) from employees.department;
+BEGIN;
+INSERT INTO shop.customers (id, name, email)
+VALUES (4, 'Edsger Dijkstra', 'edsger@example.com');
+UPDATE shop.customers
+SET email = 'grace.hopper@example.com'
+WHERE id = 3;
+DELETE
+FROM shop.customers
+WHERE id = 2;
+COMMIT;
+```
+
+After a few seconds, CedarDB shows the changes:
+
+```sql
+SELECT id, name, email
+FROM shop.customers
+ORDER BY id;
 ```
 
 ```text
- count 
--------
-     9
-(1 row)
-
-Time: 15.528 ms
+ id |      name       |          email
+----+-----------------+--------------------------
+  1 | Ada Lovelace    | ada@example.com
+  3 | Grace Hopper    | grace.hopper@example.com
+  4 | Edsger Dijkstra | edsger@example.com
+(3 rows)
 ```
+
+Changes that DMS could not apply appear in `awsdms_apply_exceptions`, which should be empty:
 
 ```sql
-postgres=> select count(*) from employees.department_employee;
+SELECT count(*)
+FROM public.awsdms_apply_exceptions;
 ```
 
-```text
- count  
---------
- 331603
-(1 row)
+## Switch over to CedarDB
 
-Time: 26.052 ms
-```
+1. Stop the writes of your application to PostgreSQL.
+2. Wait until the last changes arrived in CedarDB, i.e., the metric `CDCLatencyTarget` of the task drops to a few
+   seconds and the row counts match.
+3. Stop and delete the task.
+4. Point your application to CedarDB.
+
+## Sizing for high change rates
+
+DMS writes changes to CedarDB in one of two modes:
+
+* **Transactional apply** (default) replays each change as a single statement, in the order of the source transactions.
+  It suits low change rates.
+* **Batch-optimized apply** collects changes, copies them into the staging table `awsdms_changes<id>` with `COPY`, and
+  applies them with a few set-based `INSERT`, `UPDATE`, and `DELETE` statements per table.
+  Use it for high change rates, because CedarDB processes such set-based statements efficiently.
+  DMS applies a batch after at most `BatchApplyTimeoutMax` seconds (default 30) or once the batch reaches
+  `BatchApplyMemoryLimit` (default 500 MB), so the replication lag is up to 30 seconds by default.
+
+With high change rates, the replication instance usually limits the throughput, not CedarDB.
+A task reads and decodes the changes from PostgreSQL in only a few threads, so it uses about two cores, regardless of
+the instance size.
+DMS reports `CPUUtilization` across all cores, so 200% means two fully used cores.
+
+To replicate high change rates:
+
+* Turn on batch-optimized apply.
+* Choose a replication instance with fast cores and enough memory rather than many cores.
+* If a task cannot keep up, split the tables across several tasks.
+  Each task uses its own replication slot and threads.
+* Avoid stopping a task under load.
+  While it is stopped, PostgreSQL retains the WAL for the replication slot to continue the task at a later point.
+  Catching up again is bound to take much longer than the task was stopped for.
+
+## Monitoring
+
+The task tab **Monitoring** and CloudWatch (namespace **DMS**, dimension **ReplicationTaskIdentifier** with the task
+resource ID) show:
+
+| Metric               | Meaning                                                         |
+|----------------------|-----------------------------------------------------------------|
+| `CDCLatencySource`   | How far DMS lags behind when reading changes from PostgreSQL    |
+| `CDCLatencyTarget`   | How far CedarDB lags behind PostgreSQL                          |
+| `CDCIncomingChanges` | Changes that DMS has read but not yet applied                   |
+| `CPUUtilization`     | CPU usage of the replication instance or task, across all cores |
+
+If `CDCLatencySource` is close to `CDCLatencyTarget`, the replication instance is the bottleneck.
+
+In PostgreSQL, check how much WAL the replication slot retains:
 
 ```sql
-postgres=> select count(*) from employees.department_manager;
+SELECT slot_name,
+       active,
+       pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), confirmed_flush_lsn)) AS backlog
+FROM pg_replication_slots;
 ```
 
-```text
- count 
--------
-    24
-(1 row)
+The slot name starts with the resource ID of the task, which is the last part of the task ARN.
 
-Time: 18.947 ms
-```
+## Clean up
 
-```sql
-postgres=> select count(*) from employees.employee;
-```
+Deleting a task also drops its replication slot in PostgreSQL.
+A stopped task keeps its slot, and PostgreSQL retains all WAL from that point on until the storage fills up.
+So make sure to delete the task fully if you plan to keep using the source instance.
 
-```text
- count  
---------
- 300024
-(1 row)
+You can check `pg_replication_slots` to make sure the replication slot was properly cleaned up on task deletion.
 
-Time: 23.509 ms
-```
+## Related tool documentation
 
-```sql
-postgres=> select count(*) from employees.salary;
-```
-
-```text
-  count  
----------
- 2844047
-(1 row)
-
-Time: 82.885 ms
-```
-
-```sql
-postgres=> select count(*) from employees.title;
-```
-
-```text
- count  
---------
- 443308
-(1 row)
-
-Time: 27.676 ms
-```
-
-## Create the DMS source endpoint
-
-![DMS source step 1](./img/dms_source_db_1.jpg)
-
-![DMS source step 2](./img/dms_source_db_2.jpg)
-
-![DMS source step 3](./img/dms_source_db_3.jpg)
-
-## Create the DMS target endpoint
-
-![DMS target step 1](./img/dms_target_db_1.jpg)
-
-![DMS target step 2](./img/dms_target_db_2.jpg)
-
-![DMS target step 3](./img/dms_target_db_3.jpg)
-
-![DMS endpoints created](./img/dms_endpoints_created.jpg)
-
-## Create the DMS migration task
-
-![Create task step 1](./img/dms_create_migration_task.jpg)
-
-![Create task step 2](./img/dms_create_migration_task_2.jpg)
-
-![Create task step 3](./img/dms_create_migration_task_3.jpg)
-
-![Create task step 4](./img/dms_create_migration_task_4.jpg)
-
-![Create task step 5](./img/dms_create_migration_task_5.jpg)
-
-## Monitor DMS migration
-
-![Migration started](./img/dms_task_started.jpg)
-
-![Migration finished](./img/dms_task_finished.jpg)
-
-![Migration summary](./img/dms_task_summary.jpg)
-
-## Verify tables and row counts on the CedarDB target
-
-```bash
-$ psql "postgresql://postgres:pr3deb1tAmUSement@ec2-100-26-195-182.compute-1.amazonaws.com:5432/postgres"
-Timing is on.
-psql (17.4, server 16.3 cedar v2025-06-20)
-SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)
-Type "help" for help.
-```
-
-```sql
-postgres=# \dn
-```
-
-```text
-   List of schemas
-   Name    |  Owner   
------------+----------
- employees | postgres
- public    | postgres
-(2 rows)
-```
-
-```sql
-postgres=# \dt employees.*
-```
-
-```text
-                 List of relations
-  Schema   |        Name         | Type  |  Owner   
------------+---------------------+-------+----------
- employees | department          | table | postgres
- employees | department_employee | table | postgres
- employees | department_manager  | table | postgres
- employees | employee            | table | postgres
- employees | salary              | table | postgres
- employees | title               | table | postgres
-(6 rows)
-```
-
-```sql
-postgres=# select count(*) from employees.department;
-```
-
-```text
- count 
--------
-     9
-(1 row)
-
-Time: 17.725 ms
-```
-
-```sql
-postgres=# select count(*) from employees.department_employee;
-```
-
-```text
- count  
---------
- 331603
-(1 row)
-
-Time: 15.559 ms
-```
-
-```sql
-postgres=# select count(*) from employees.department_manager;
-```
-
-```text
- count 
--------
-    24
-(1 row)
-
-Time: 14.472 ms
-```
-
-```sql
-postgres=# select count(*) from employees.employee;
-```
-
-```text
- count  
---------
- 300024
-(1 row)
-
-Time: 21.151 ms
-```
-
-```sql
-postgres=# select count(*) from employees.salary;
-```
-
-```text
-  count  
----------
- 2844047
-(1 row)
-
-Time: 15.671 ms
-```
-
-```sql
-postgres=# select count(*) from employees.title;
-```
-
-```text
- count  
---------
- 443308
-(1 row)
-
-Time: 18.557 ms
-```
-
-If you intend to follow the next procedure, keep that CedarDB client connection open;
-otherwise, you can close it.
-
-## Verify that an UPDATE on the RDS Postgres instance is replicated to the CedarDB target
-
-### Log into the RDS Postgres instance
-
-```bash
-$ psql "postgresql://postgres:g3n0A3aRApaimA@rds-pg.ctkkwgwc2jnl.us-east-2.rds.amazonaws.com:5432/postgres?sslmode=require"
-Timing is on.
-psql (18.1, server 17.6)
-SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)
-Type "help" for help.
-
-postgres=>
-```
-
-### Using the employees.salary table, validate the initial state agrees both here on the source and on the CedarDB target
-
-On the RDS Postgres instance:
-
-```sql
-postgres=> select * from employees.salary where employee_id = 10004 order by from_date, to_date;
-```
-
-```text
- employee_id | amount | from_date  |  to_date
--------------+--------+------------+------------
-       10004 |  40054 | 1986-12-01 | 1987-12-01
-       10004 |  42283 | 1987-12-01 | 1988-11-30
-       10004 |  42542 | 1988-11-30 | 1989-11-30
-       10004 |  46065 | 1989-11-30 | 1990-11-30
-       10004 |  48271 | 1990-11-30 | 1991-11-30
-       10004 |  50594 | 1991-11-30 | 1992-11-29
-       10004 |  52119 | 1992-11-29 | 1993-11-29
-       10004 |  54693 | 1993-11-29 | 1994-11-29
-       10004 |  58326 | 1994-11-29 | 1995-11-29
-       10004 |  60770 | 1995-11-29 | 1996-11-28
-       10004 |  62566 | 1996-11-28 | 1997-11-28
-       10004 |  64340 | 1997-11-28 | 1998-11-28
-       10004 |  67096 | 1998-11-28 | 1999-11-28
-       10004 |  69722 | 1999-11-28 | 2000-11-27
-       10004 |  70698 | 2000-11-27 | 2001-11-27
-       10004 |  74057 | 2001-11-27 | 9999-01-01
-(16 rows)
-
-Time: 33.390 ms
-```
-
-On the CedarDB instance:
-
-```sql
-postgres=# select * from employees.salary where employee_id = 10004 order by from_date, to_date;
-```
-
-```text
- employee_id | amount | from_date  |  to_date
--------------+--------+------------+------------
-       10004 |  40054 | 1986-12-01 | 1987-12-01
-       10004 |  42283 | 1987-12-01 | 1988-11-30
-       10004 |  42542 | 1988-11-30 | 1989-11-30
-       10004 |  46065 | 1989-11-30 | 1990-11-30
-       10004 |  48271 | 1990-11-30 | 1991-11-30
-       10004 |  50594 | 1991-11-30 | 1992-11-29
-       10004 |  52119 | 1992-11-29 | 1993-11-29
-       10004 |  54693 | 1993-11-29 | 1994-11-29
-       10004 |  58326 | 1994-11-29 | 1995-11-29
-       10004 |  60770 | 1995-11-29 | 1996-11-28
-       10004 |  62566 | 1996-11-28 | 1997-11-28
-       10004 |  64340 | 1997-11-28 | 1998-11-28
-       10004 |  67096 | 1998-11-28 | 1999-11-28
-       10004 |  69722 | 1999-11-28 | 2000-11-27
-       10004 |  70698 | 2000-11-27 | 2001-11-27
-       10004 |  74057 | 2001-11-27 | 9999-01-01
-(16 rows)
-
-Time: 31.985 ms
-```
-
-### On the RDS Postgres instance, give the employee with ID 10004 a raise
-
-```sql
-postgres=> begin;
-BEGIN
-Time: 28.403 ms
-postgres=*> update employees.salary set to_date = now()::date where employee_id = 10004 and to_date = '9999-01-01'::date;
-UPDATE 1
-Time: 29.223 ms
-postgres=*> insert into employees.salary (employee_id, amount, from_date, to_date) values (10004, 74057 + 5000, now()::date, '9999-01-01'::date);
-INSERT 0 1
-Time: 28.012 ms
-postgres=*> commit;
-COMMIT
-Time: 113.268 ms
-```
-
-Verify that raise:
-
-```sql
-postgres=> select * from employees.salary where employee_id = 10004 and amount >= 74057 order by from_date;
-```
-
-```text
- employee_id | amount | from_date  |  to_date
--------------+--------+------------+------------
-       10004 |  74057 | 2001-11-27 | 2026-03-23
-       10004 |  79057 | 2026-03-23 | 9999-01-01
-(2 rows)
-
-Time: 34.304 ms
-```
-
-### Back on the CedarDB instance, verify that transaction was replicated
-
-```sql
-postgres=# select * from employees.salary where employee_id = 10004 and amount >= 74057 order by from_date;
-```
-
-```text
- employee_id | amount | from_date  |  to_date
--------------+--------+------------+------------
-       10004 |  74057 | 2001-11-27 | 2026-03-23
-       10004 |  79057 | 2026-03-23 | 9999-01-01
-(2 rows)
-
-Time: 26.653 ms
-```
+| Tool                                            | Description                                                         |
+|-------------------------------------------------|---------------------------------------------------------------------|
+| [Debezium](/docs/clients/data_import/debezium/) | Replicate from PostgreSQL to CedarDB through Kafka, outside of AWS. |
+| [Copy with pg_dump](../pg_dump/)                | Create the full schema in CedarDB before you start the DMS task.    |
+| [psql](/docs/clients/tools/psql/)               | The PostgreSQL command-line client used in this recipe.             |
