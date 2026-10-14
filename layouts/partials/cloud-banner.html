@@ -1,0 +1,21 @@
+<div class="banner" id="banner">
+  CedarDB Cloud is live!
+  <a href="https://app.cedardb.cloud/signup/" target="_blank" rel="noopener noreferrer" class="banner__link banner__cta">Get started for free &rarr;</a>
+  <button type="button" class="banner__close" id="banner-close" aria-label="Dismiss">&times;</button>
+</div>
+<script>
+  (function () {
+    var banner = document.getElementById("banner");
+    if (!banner) return;
+
+    if (sessionStorage.getItem("cloud-banner-closed") === "true") {
+      banner.classList.add("hide");
+      return;
+    }
+
+    document.getElementById("banner-close").addEventListener("click", function () {
+      banner.classList.add("hide");
+      sessionStorage.setItem("cloud-banner-closed", "true");
+    });
+  })();
+</script>
