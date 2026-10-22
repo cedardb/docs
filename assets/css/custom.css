@@ -175,7 +175,11 @@ kbd,
     backdrop-filter: none;
 }
 
-.hextra-sidebar-container .hextra-scrollbar,
+.hextra-sidebar-container .hextra-scrollbar {
+    box-shadow: none !important;
+    border-top-color: var(--cedar-line) !important;
+}
+
 .hextra-toc > div,
 .hextra-toc .sticky,
 .hextra-sidebar-container [data-toggle-animation="show"] {
