@@ -1,5 +1,280 @@
 [
 	{
+		"version": "v2026-10-22",
+		"date": "2026-10-22",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Support <tt>DROP DATABASE WITH FORCE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>to_jsonb()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support row values in <tt>IN</tt> lists."
+			},
+			{
+				"type": "feat",
+				"note": "<tt>generate_series()</tt> now also works for timestamps."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of inserts into indexes."
+			},
+			{
+				"type": "perf",
+				"note": "Speed up <tt>DROP</tt> and <tt>ALTER</tt> statements if many Catalog objects exist."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of batched inserts."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of <tt>COPY FROM STDIN</tt> / <tt>\\copy</tt>"
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of server connection handling and reduce fd usage for already terminated connections."
+			},
+			{
+				"type": "perf",
+				"note": "Speed up queries of the pattern <tt>ORDER BY ... LIMIT ...</tt> which order against the original tuple insertion order."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the throughput of batched transactions with synchronous commits."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the statistics for queries using <tt>now()</tt>"
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance on scanning hot data from very wide tables."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of transactions re-reading tuples they just wrote."
+			},
+			{
+				"type": "perf",
+				"note": "Queries that cross join a single-row table or CTE into a larger join no longer get underestimated row counts, which could lead to very slow query plans."
+			},
+			{
+				"type": "perf",
+				"note": "Significantly speed up recovery when the WAL exceeds main memory size."
+			},
+			{
+				"type": "perf",
+				"note": "Significantly lower the memory usage of recovery."
+			},
+			{
+				"type": "perf",
+				"note": "Prepared statements whose filters use only parameters no longer pick a poor index for joins."
+			},
+			{
+				"type": "perf",
+				"note": "<tt>GROUP BY</tt> queries use much less memory and run faster when the optimizer overestimates the number of groups."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance on machines with a lot of cores."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the index scan selection for freshly inserted data."
+			},
+			{
+				"type": "perf",
+				"note": "Sped up queries with parametrized limits (i.e.,  <tt>... LIMIT $1</tt>)."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the row estimates for <tt>generate_series</tt> calls whose bounds come from table columns, leading to better query plans for queries that expand ranges per row."
+			},
+			{
+				"type": "perf",
+				"note": "Table scans over hot data of tables that have many rows (> 100) are now 10% faster on average."
+			},
+			{
+				"type": "perf",
+				"note": "Queries that filter one column with several <tt>OR</tt> conditions, such as keyset pagination, now run up to 10x faster."
+			},
+			{
+				"type": "perf",
+				"note": "Improve the performance of <tt>LIMIT</tt> on nullable columns."
+			},
+			{
+				"type": "pg",
+				"note": "Support <tt>enable_indexscan = off</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>array_agg()</tt> over an empty array no returns <tt>null</tt>, like in Postgres."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now supports <tt>to_regclass()</tt>, <tt>to_regnamespace()</tt>, <tt>to_regproc()</tt> and <tt>to_regrole()</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>regexp_matches()</tt> now returns an empty string instead of <tt>NULL</tt> for a capture group that matched nothing, as in PostgreSQL."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>SELECT DISTINCT ON</tt> now accepts <tt>ORDER BY</tt> expressions that are not in the select list, as in PostgreSQL."
+			},
+			{
+				"type": "pg",
+				"note": "Accept type modifiers for <tt>timestamptz</tt>, <tt>timestamp</tt>, and <tt>time</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Prevent dropping constraint-backing indexes."
+			},
+			{
+				"type": "pg",
+				"note": "Accept unknown datestyles in connection startup with an error message."
+			},
+			{
+				"type": "pg",
+				"note": "Accept <tt>timezone(zone, value)</tt> as alias for <tt> value at timezone zone</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Support per-database <tt>C</tt> collates: <tt>C</tt>, <tt>POSIX</tt>, <tt>C.UTF-8</tt>, and <tt>C.UTF8</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Implement <tt>octet_length()</tt> for fixed length character types."
+			},
+			{
+				"type": "pg",
+				"note": "Support schema qualified <tt>SCHEMA NAME</tt> clauses in identity column specs."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now treats jsonb scalars as a one-element array for integer subscripts, like Postgres, so <tt>'\"4000\"'::jsonb ->> 0</tt> is 4000."
+			},
+			{
+				"type": "pg",
+				"note": "Allow setting session local settings <tt>optimizer.forceindexscans</tt>, <tt>optimizer.forceindexjoins</tt>, and <tt>optimizer.indexoverhead</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare race condition where checkpoints could miss recent changes."
+			},
+			{
+				"type": "fix",
+				"note": "Use the correct database in dependency tracking for search path and Oid resolution."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a data corruption issue that could happen during upserts under high contention. It manifested by inserts of that table getting out of sync. Dropping and re-creating the indexes fixes it."
+			},
+			{
+				"type": "fix",
+				"note": "Fix wrong results when computing the remainder on numerics."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an issue where CedarDB deadlocked when running an index scan while many parallel writers updated the same index."
+			},
+			{
+				"type": "fix",
+				"note": "Reduce the overhead of preparing statements without executing them."
+			},
+			{
+				"type": "fix",
+				"note": "Don't count skipped leading <tt>NULL</tt>s towards <tt>LIMIT</tt> and <tt>OFFSET</tt> of ordered index scans."
+			},
+			{
+				"type": "fix",
+				"note": "Fix arare segfault in a race between connection teardown and error reporting."
+			},
+			{
+				"type": "fix",
+				"note": "Drop as serial defined default if a Sequence is dropped with cascade."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a segfault when an unknown type is combined with an array in prepare."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when running queries of the pattern <tt>ORDER BY ... LIMIT $1</tt> where $1 is 0 at runtime."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when evaulating <tt>ANY()</tt> over an array of strings longer than 12 characters."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where queries of the pattern <tt>... FROM generate_series(..., ...) WHERE $1</tt> wrongly ignored the <tt>WHERE</tt> condition."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when slicing a dimensionless array."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in <tt>to_char</tt> when the format contains a comma, such as <tt>'YYYY,MM'</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assert triggered by <tt>row_to_json</tt> with full table rows."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an assert caused by selecting from <tt>information_schema.role_routine_grants</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Improve the error message handling around polymorphic arguments and unsupported json functions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix getting out of sync between a table and an index if a deletion of the index gets rolled back."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>DROP TABLE</tt> and <tt>ALTER TABLE</tt> failing while another session had an uncommitted table with a serial column or an uncommitted view."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>ALTER TABLE</tt> failing with a false foreign key violation on tables with a self-referencing foreign key."
+			},
+			{
+				"type": "fix",
+				"note": "Invalidate prepared statements of a session after a catalog change rolled back."
+			},
+			{
+				"type": "fix",
+				"note": "Print the correct schema of constraints in system tables."
+			},
+			{
+				"type": "fix",
+				"note": "Fix edge cases around numeric casts."
+			},
+			{
+				"type": "fix",
+				"note": "Fix queries failing with \"the scheduler was stopped before the task group finished\" when <tt>debug.parallel</tt> is changed while they run."
+			},
+			{
+				"type": "fix",
+				"note": "Casting jsonb numbers to numerics (without type modifier) now works correctly."
+			},
+			{
+				"type": "fix",
+				"note": "Include the failed statement in error messages."
+			}
+		]
+	},
+	{
 		"version": "v2026-10-08",
 		"date": "2026-10-08",
 		"breaksdb": false,
