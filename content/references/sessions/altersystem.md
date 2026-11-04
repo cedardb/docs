@@ -11,7 +11,7 @@ Changes take effect the next time CedarDB starts.
 Usage example:
 
 ```sql
-ALTER SYSTEM SET debug.buffersize = '8G';
+ALTER SYSTEM SET debug.memorysize = '8G';
 ```
 
 The new value is only written to CedarDB's configuration file and applies after the next restart.
@@ -20,7 +20,7 @@ To inspect the current value of a setting, use [`SHOW`](/docs/references/session
 To restore a setting to its default value and delete the explicitly set value from configuration file, use `RESET`:
 
 ```sql
-ALTER SYSTEM RESET debug.buffersize;
+ALTER SYSTEM RESET debug.memorysize;
 ```
 
 Like `ALTER SYSTEM SET`, this takes effect after the next restart.
@@ -38,7 +38,7 @@ but does not affect running sessions.
 
 `ALTER SYSTEM` accepts CedarDB server settings that are listed in `pg_settings`, such as `verbosity` and `compilationmode`.
 Session settings, such as `statement_timeout`, fail with `ALTER SYSTEM of session settings not supported`.
-Startup-only settings, such as `buffersize`, `workmemsize`, and `parallel`, require a `debug.` prefix.
+Startup-only settings, such as `memorysize`, `buffersize`, `workmemsize`, and `parallel`, require a `debug.` prefix.
 
 ## Permissions
 

@@ -28,8 +28,7 @@ Example:
 cat ~/.cedardb/config
 # Comment only line
 "verbosity" = "debug5" # Inline comment
-"buffersize" = "1G" # Buffer pool size (cf. Memory Usage section)
-"workmemsize" = "3G"
+"memorysize" = "4G" # Total memory for buffers and working memory (cf. Memory Usage section)
 "license.key" = "<your_key>"
 ```
 
@@ -50,8 +49,7 @@ The following example has the same effect as the previous one with the config fi
 
 ```text
 export VERBOSITY=debug5
-export BUFFERSIZE=1G
-export WORKMEMSIZE=3G
+export MEMORYSIZE=4G
 export LICENSE_KEY=<your_key>
 ```
 
@@ -65,7 +63,7 @@ You can also update the configuration file from a SQL session with the [`ALTER S
 statement, without editing the file by hand:
 
 ```sql
-ALTER SYSTEM SET debug.buffersize = '8G';
+ALTER SYSTEM SET debug.memorysize = '8G';
 ```
 
 As with the config file, these changes only take effect after a restart.
@@ -129,16 +127,32 @@ SET verbosity = 'debug1';
 
 ## Memory Usage
 
-By default, CedarDB uses 45% of available system memory for its buffer manager and 45% as working memory during query processing.
-If you are running applications beside CedarDB on your machine (e.g., your IDE or your browser)
-while doing heavy query processing on big datasets, you may want to reduce this amount.
+By default, CedarDB uses 90% of available system memory (or of the cgroup memory limit in containers).
+The buffer manager and the working memory for query processing share this memory dynamically.
+For 10&nbsp;GB system memory, CedarDB uses up to 9&nbsp;GB for cached table data when queries need little working memory.
+Memory-intensive queries can take up to three quarters of it (6.75&nbsp;GB), evicting cached data if necessary.
+If queries need even more working memory, CedarDB spills to disk.
+
+If you are running applications beside CedarDB on your machine (e.g., your IDE or your browser) while doing heavy query
+processing on big datasets, you may want to reduce `memorysize`.
+Usually, `memorysize` is the only memory setting you need, but you can additionally cap the buffer manager or the
+working memory individually.
 
 These settings must be set before starting CedarDB.
 
-| **Setting Name** | **Description**                                  | **Unit**                                | **Default**             |
-|------------------|--------------------------------------------------|-----------------------------------------|-------------------------|
-| `buffersize`     | Buffer manager pool size                         | Size with unit suffix (5G, 256M, 1024K) | 45% of available memory |
-| `workmemsize`    | Amount of memory to be used before spooling disk | Same as above                           | 45% of available memory |
+| **Setting Name** | **Description**                                                     | **Unit**                                | **Default**             |
+|------------------|---------------------------------------------------------------------|-----------------------------------------|-------------------------|
+| `memorysize`     | Total memory shared by the buffer manager and the working memory    | Size with unit suffix (5G, 256M, 1024K) | 90% of available memory |
+| `buffersize`     | Maximum size of the buffer manager pool                             | Same as above                           | `memorysize`            |
+| `workmemsize`    | Maximum working memory for query processing before spilling to disk | Same as above                           | 75% of `memorysize`     |
+
+The buffer manager always keeps at least the memory that the working memory cannot take, i.e.,
+`memorysize - workmemsize` (by default 25% of `memorysize`).
+
+{{% callout type="info" %}}
+Before release v2026-11-04, CedarDB used static, separate pools with 45% of available memory each for `buffersize` and `workmemsize`.
+Existing configurations with explicit `buffersize` and `workmemsize` keep working, but now act as upper limits for a shared pool.
+{{% /callout %}}
 
 ## Degree of parallelism
 
