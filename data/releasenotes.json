@@ -1,5 +1,208 @@
 [
 	{
+		"version": "v2026-11-04",
+		"date": "2026-11-04",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add <tt>zstd_compress(data: bytea, int: level)</tt> and <tt>zstd_decompress(bytea)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>DISTINCT ORDER BY</tt> aggregations."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>JSON_VALUE</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Fill basic values of <tt>pg_statistic</tt> / <tt>pg_stats</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support <tt>COMMENT ON</tt> and show the comments in <tt>pg_description</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Support session start up settings, e.g., options and search_path."
+			},
+			{
+				"type": "feat",
+				"note": "CedarDB now dynamically assigns working memory and buffer memory. The total memory can be configured with the <tt>memorysize</tt> setting."
+			},
+			{
+				"type": "perf",
+				"note": "<tt>FROM t, unnest(t.a)</tt> no longer slows down quadratically with the array length."
+			},
+			{
+				"type": "perf",
+				"note": "Improve row estimates for values computed with <tt>greatest</tt>, <tt>least</tt>, <tt>coalesce</tt>, or the window functions <tt>lag</tt>, <tt>lead</tt>, <tt>first_value</tt>, <tt>last_value</tt> and <tt>nth_value</tt>."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance on many-core machines: aggregations with many groups, such as <tt>GROUP BY</tt> on string columns, no longer slow down by up to 3x because of memory contention between worker threads."
+			},
+			{
+				"type": "perf",
+				"note": "Short queries on many-core machines use less CPU, because idle table-scan threads no longer spin while they wait for data blocks."
+			},
+			{
+				"type": "perf",
+				"note": "Catalog queries (<tt>pg_class</tt>, <tt>information_schema.columns</tt>) and <tt>DROP</tt> statements are now fast on databases with very wide tables that have many column defaults. Previously they could take several seconds."
+			},
+			{
+				"type": "perf",
+				"note": "Improve window partitioning with many duplicates by up to 1000x."
+			},
+			{
+				"type": "perf",
+				"note": "Avoid needless and expensive overflow checks on known-safe numeric upcasts."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance of table scans."
+			},
+			{
+				"type": "pg",
+				"note": "Return <tt>NULL</tt> for strict functions on <tt>NULL</tt> input."
+			},
+			{
+				"type": "pg",
+				"note": "Support row expressions in <tt>COUNT DISTINCT</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Justify the result of timestamp subtraction with <tt>justify_hours</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Show cache size from 1 in <tt>pg_sequence</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Casts from real and double precision to numeric and integer types now round like PostgreSQL instead of truncating."
+			},
+			{
+				"type": "pg",
+				"note": "<tt>COLLATE</tt> now accepts PostgreSQL's predefined collation names <tt>unicode</tt>, <tt>C</tt>, <tt>POSIX</tt>, <tt>ucs_basic</tt> and <tt>C.utf8</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Comparisons between two parameters of unspecified type, such as <tt>$1 <> $2</tt>, now compare them as text like PostgreSQL does, instead of failing with \"unable to infer data type\"."
+			},
+			{
+				"type": "pg",
+				"note": "CedarDB now only warns (instead of failing the transaction) when it encounters a <tt>begin</tt> inside an already active transaction."
+			},
+			{
+				"type": "pg",
+				"note": "Use the same default index names as postgres."
+			},
+			{
+				"type": "pg",
+				"note": "Storing a string that is too long for a <tt>varchar(n)</tt> or <tt>char(n)</tt> column only because of trailing spaces, now cuts the spaces off like PostgreSQL does instead of failing with \"exceeds maximum length\"."
+			},
+			{
+				"type": "fix",
+				"note": "Comparing numerics with a precision above 18 to floating-point values no longer matches the wrong row."
+			},
+			{
+				"type": "fix",
+				"note": "Resolve untyped literal arguments in UDF calls."
+			},
+			{
+				"type": "fix",
+				"note": "Update Brotli due to security vulnerability."
+			},
+			{
+				"type": "fix",
+				"note": "Function calls now prefer an exact overload over a polymorphic <tt>anyelement</tt> one."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>NTILE</tt> results for uneven distributions of row and bucket counts."
+			},
+			{
+				"type": "fix",
+				"note": "Ignore filtered out values in percentile aggregates with <tt>FILTER</tt> clause."
+			},
+			{
+				"type": "fix",
+				"note": "Apply <tt>FILTER</tt> clauses on the ungrouped inputs of aggregate functions instead of the aggregated results, which previously lead to query errors during decorrelation."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>WINDOW</tt> queries with frame bounds exceeding a partitions size."
+			},
+			{
+				"type": "fix",
+				"note": "Fix that <tt>@></tt> and <tt><@</tt> on <tt>text[]</tt> could not infer the type of an untyped parameter."
+			},
+			{
+				"type": "fix",
+				"note": "Fix skipping tuples in index scans when we have wrong visibility information because of multiple concurrent rollbacks."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug in comparison of arrays in the where clause."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>array_fill</tt> with dimensions being zero."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a rare livelock for full table scans with concurrent deletes."
+			},
+			{
+				"type": "fix",
+				"note": "Check type for compare optimization to ensure timestamp like."
+			},
+			{
+				"type": "fix",
+				"note": "Fix visibility bug under high contention."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash when a prepared statement filtered an indexed column with both an equality and parameterized range conditions, e.g. <tt>WHERE d = true AND d <= $1 AND d < $2</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a potential data corruption when individually inserting long strings."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>ORDER BY col COLLATE \u2026</tt> ignoring the given collation when col also appeared in the select list."
+			},
+			{
+				"type": "fix",
+				"note": "Fix storing jsonb text columns that contain numerical values."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where the <tt>returning</tt> clause of a <tt>delete</tt> statement could not see deleted tuples."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where a <tt>with</tt> clause updates a table and the outer <tt>select</tt> references the same table through a join to the CTE. CedarDB returned the already updated rows instead of the original ones."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a bug where filters on compressed double precision or real columns could return wrong rows when a block of the table held only negative values."
+			},
+			{
+				"type": "fix",
+				"note": "Tuples could become visible again when large inserts and large delete transactions were executed concurrently."
+			},
+			{
+				"type": "fix",
+				"note": "Fix potential duplicate key errors in indexes with deleted keys."
+			}
+		]
+	},
+	{
 		"version": "v2026-10-22",
 		"date": "2026-10-22",
 		"breaksdb": false,
