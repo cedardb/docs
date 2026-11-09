@@ -19,4 +19,4 @@ On the following pages, you can find an in-depth overview of CedarDB's features:
 * [Queries](./queries) — `select`, `from`, `where`
 * [Sessions](./sessions) — `discard`, `set`, `show`
 * [Transactions](./transactions) — `begin`, `commit`, `rollback`
-* [Utility](./utility) — `analyze`, `explain`
+* [Utility](./utility) — `analyze`, `backup`, `explain`
