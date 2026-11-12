@@ -18,6 +18,7 @@ content/
 ├── releases.md                  # Release notes
 │
 ├── get_started/                 # First-time setup
+├── cloud/                       # CedarDB Cloud features (see below)
 ├── cookbook/                    # Task-oriented how-to guides
 ├── example_datasets/            # Worked examples with real data
 ├── clients/                     # Drivers, APIs, ORMs, GUI tools (see below)
@@ -37,6 +38,17 @@ First-time setup. Get CedarDB running as fast as possible.
 One page per deployment method (Docker, local install, cloud). Minimal
 explanation. Link to reference pages for deeper understanding. Do not add
 feature documentation here.
+
+### cloud/
+
+CedarDB Cloud, the managed service: getting started, and anything that works
+only through CedarDB Cloud or its services, such as monitoring, backups, or AI
+agents over MCP. One page per feature. Features of CedarDB itself belong in
+`references/`, even when CedarDB Cloud runs them.
+
+A page with its own images or videos is a page bundle: a folder with an
+`index.md` and the media beside it, e.g. `cloud/backups/index.md` and
+`cloud/backups/backup.mp4`.
 
 ### cookbook/
 
