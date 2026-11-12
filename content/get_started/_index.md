@@ -9,6 +9,10 @@ This guide is designed to help you quickly get started with CedarDB, a SQL datab
 
 Get CedarDB up and running locally within seconds. The [Quick Start](./quickstart) page will guide you through the setup process and running your first queries.
 
+## CedarDB Cloud
+
+Let CedarDB Cloud run CedarDB for you. [Get started with CedarDB Cloud](../cloud/get_started) to create a project and connect to it in minutes.
+
 ## Install CedarDB
 
 - [**Docker:**](./install_with_docker) This method offers several convenience features, including automated database upgrades and parameterized user initialization. If you're using macOS, Docker is required.
