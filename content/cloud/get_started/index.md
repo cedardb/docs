@@ -12,6 +12,7 @@ With CedarDB Cloud, you can:
 
 - Run analytical and transactional queries on the same data.
 - Back up a project and restore it in a few clicks.
+- Let AI agents like Claude and ChatGPT query your data, with table-level access you control.
 - Try it with a free trial for your first project.
 
 This guide takes you from sign-up to your first query.
@@ -111,3 +112,4 @@ The [Clients](../../clients) section shows how to connect from your language, OR
 - [Manage Projects](../manage_projects): start and stop a project, reset its password, or delete it.
 - [Monitoring](../monitoring): follow how your instance is doing.
 - [Backups](../backups): back up your project and restore it.
+- [AI Agents (MCP)](../ai_agents): let Claude, Claude Code, and ChatGPT query your project.
