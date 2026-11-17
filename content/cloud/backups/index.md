@@ -38,7 +38,8 @@ You can back up a project while it runs or while it is stopped.
 A running database keeps serving queries during a backup.
 
 The **Overview** shows when the project's last backup was taken and how much storage its backups use.
-If the newest backup failed, the tab says so above the backup history.
+
+If the newest backup failed, the **Backup & Restore** tab says so above the backup history.
 Select **Show error** next to the failed backup to see why.
 
 ## Restore a backup

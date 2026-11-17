@@ -27,7 +27,7 @@ Switch them on before you connect your AI client, so it finds the project right 
 
 Open the project in CedarDB Cloud and go to its **Agents** tab.
 Select **Switch on**.
-After a moment, the status reads **Agents are on**.
+The status changes to **Agents are on** when your instance is ready for agent access.
 
 ### Choose the tables agents can use
 
@@ -145,6 +145,10 @@ GRANT SELECT ON trees TO cedar_mcp;
 REVOKE SELECT ON trees FROM cedar_mcp;
 ```
 
+Agents never see a database password.
+CedarDB Cloud keeps the password of `cedar_mcp` and runs each query for the agent.
+It gives `cedar_mcp` a new password every time the project starts and whenever you switch agents off.
+
 ## Switch agents off and revoke clients
 
 - **Switch agents off for a project.**
@@ -162,7 +166,7 @@ REVOKE SELECT ON trees FROM cedar_mcp;
 
 ### Explore and answer questions
 
-Agents find their way around an unfamiliar schema and answer questions that would take several queries to answer by hand.
+Agents find their way around an unfamiliar schema and answer questions that would be cumbersome to answer by hand as they need multiple queries.
 
 ```text
 Which customers ordered more this quarter than last, and what do they have in common?
@@ -209,5 +213,6 @@ Create a table daily_revenue with revenue per region and day, and fill it from o
 | The agent can't find a table.                 | Give agents at least **Reader** access to it on the **Agents** tab.   |
 | The agent can't find a project.               | Switch agents on in the project's **Agents** tab.                     |
 | The agent reports the project isn't running.  | Start the project in CedarDB Cloud.                                   |
+| The agent can't log in to the project.        | Restart the project. This gives `cedar_mcp` a new password.           |
 | The agent reports the connection was revoked. | Connect your AI client again.                                         |
 | The sign-in says the request expired.         | Start connecting again from your AI client.                           |

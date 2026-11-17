@@ -30,6 +30,12 @@ Below the summary, charts show how these metrics develop over time, including CP
 Keep an eye on disk usage in particular.
 Since storage is provisioned up front, contact support early if you expect to outgrow it.
 
+## Log
+
+Below the charts, the **Log** card shows the most recent lines of your instance's log.
+Select **Load log** to fetch them, and **Refresh** to fetch the latest ones.
+The newest lines are at the bottom.
+
 ## Sessions
 
 The **Connections** chart links to the **Sessions** tab, where you can see what each connection is currently doing.

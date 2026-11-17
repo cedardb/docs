@@ -21,19 +21,21 @@ This guide takes you from sign-up to your first query.
 
 1. Open the [CedarDB Cloud sign-up page](https://app.cedardb.cloud/signup/).
 2. Enter your details and confirm your email address.
+   If the confirmation email doesn't arrive within a few minutes, check your spam folder.
 3. Sign in at [app.cedardb.cloud](https://app.cedardb.cloud).
 
-Your account comes with an organization.
-It groups your projects and holds your billing details and limits.
-Each database you run lives in its own project, with its own storage, connection details, and backups.
+When you first sign in, CedarDB Cloud asks you to set up your organization.
+Give it a name, usually your company or team, and its billing country.
+The organization groups your projects and holds your billing details and limits.
+Each project runs its own CedarDB instance, with its own storage, connection details, and backups.
 
 ### Free trial
 
 Your organization's first project can run as a free trial for 30 days.
 The trial runs on a Cloud I2 instance with up to 64 GiB of storage.
 
-Before your first project starts, also for the trial, you add a payment card.
-CedarDB Cloud verifies it before it creates the project.
+Before your first project starts, you need to add a payment card, which CedarDB Cloud verifies.
+You're never charged for the trial project before the trial ends.
 
 ## Create a project
 
@@ -61,11 +63,10 @@ The form shows the project's monthly price.
 ### Create the project
 
 Select **Create project**.
-If you haven't added a payment card yet, CedarDB Cloud asks you for one first.
 
 {{% /steps %}}
 
-CedarDB Cloud then creates the project and starts its instance.
+CedarDB Cloud then creates the project and starts your database instance.
 Once the project's status reads **Running**, the instance is ready.
 
 ## Connect to your project
