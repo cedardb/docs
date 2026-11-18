@@ -1,5 +1,152 @@
 [
 	{
+		"version": "v2026-11-18",
+		"date": "2026-11-18",
+		"breaksdb": false,
+		"notes": [
+			{
+				"type": "feat",
+				"note": "Add backup functionality."
+			},
+			{
+				"type": "feat",
+				"note": "CSV reading now attempts to infer the correct dialect when options are not explicitly specified. This can be turned off with <tt>auto_detect=false</tt> or the <tt>csv_autodetect</tt> setting."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>avg(bool)</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for <tt>isfinite()</tt>."
+			},
+			{
+				"type": "feat",
+				"note": "Add support for table-level <tt>NOT NULL</tt> constraints."
+			},
+			{
+				"type": "feat",
+				"note": "Implement quantified expression of multi dimensional arrays."
+			},
+			{
+				"type": "feat",
+				"note": "Add an explicit <tt>CHECKPOINT</tt> command."
+			},
+			{
+				"type": "perf",
+				"note": "Significantly improve the performance of hash joins on AArch64 systems."
+			},
+			{
+				"type": "perf",
+				"note": "Improve transactional performance by reusing the double write buffers used to sync the data to disk."
+			},
+			{
+				"type": "perf",
+				"note": "Improve performance when telemetry is disabled."
+			},
+			{
+				"type": "perf",
+				"note": "Improve plan caching of prepared statements. We previously invalidated them every 60 seconds sharp. Now this time is jittered and plans that don't change keep their compiled binary."
+			},
+			{
+				"type": "perf",
+				"note": "Chains of array concatenations (<tt>a || b || c ...</tt>) and multidimensional array constructors (<tt>ARRAY[ARRAY[...], ...]</tt>) now run in linear time instead of quadratic time in the number of arrays."
+			},
+			{
+				"type": "perf",
+				"note": "Reduce memory footprint of deletes and updates, allowing larger-than-memory truncates."
+			},
+			{
+				"type": "perf",
+				"note": "Make commits faster in workloads with many short-running writing transactions."
+			},
+			{
+				"type": "pg",
+				"note": "Support precision for <tt>time</tt>, <tt>timestamp</tt> and <tt>timestamptz</tt>."
+			},
+			{
+				"type": "pg",
+				"note": "Remove identity column values from <tt>pg_attrdef</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Drop support for legacy linux distributions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix type resolution of unknown placeholders in prepared statements with comparisons."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>LIMIT</tt> with 0 parameter not applying with for <tt>DISTINCT ON</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Parquet scan refused using non-nullable <tt>REQUIRED</tt> columns in outer joins."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a crash in complex correlated subqueries."
+			},
+			{
+				"type": "fix",
+				"note": "Fix incorrect results in LeftMark Bandjoins with many nullable values."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a hang in the optimizer when filtering parquet scan over multiple files."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a potential crash when implicitly converting enum values."
+			},
+			{
+				"type": "fix",
+				"note": "We don't compress already dead tables any longer."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>to_char</tt> SSSS crash for zero seconds since midnight."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an invalid memory access during array prepend and remove operations."
+			},
+			{
+				"type": "fix",
+				"note": "Fix <tt>generate_series</tt> with numeric bounds from a group by."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a potential deadlock when running in memory constrained setup with many versions."
+			},
+			{
+				"type": "fix",
+				"note": "Fix array concatenation chains (<tt>a || b || c ...</tt>) over large arrays returning missing or garbled elements."
+			},
+			{
+				"type": "fix",
+				"note": "Fix overwriting data in recovery if we crashed during asynchronous unlinks of double write buffers."
+			},
+			{
+				"type": "fix",
+				"note": "Fix a data corruption during <tt>CREATE INDEX</tt> on long string columns."
+			},
+			{
+				"type": "fix",
+				"note": "Fix an index corruption during concurrent <tt>CREATE INDEX</tt>."
+			},
+			{
+				"type": "fix",
+				"note": "Prevent several edge cases that could lead to deadlocks when multiple tables were accessed in a single pipeline."
+			},
+			{
+				"type": "fix",
+				"note": "Refuse to start CedarDB if WAL checksums show that the log is corrupted."
+			}
+		]
+	},
+	{
 		"version": "v2026-11-04",
 		"date": "2026-11-04",
 		"breaksdb": false,
