@@ -12,3 +12,4 @@ are not tied to a specific programming language.
 * [DBeaver](./dbeaver) — cross-platform SQL GUI
 * [Grafana](./grafana) — observability dashboards backed by CedarDB
 * [psql](./psql) — the standard PostgreSQL command-line client
+* [VisuaLeaf](./visualeaf) — cross-platform desktop SQL client
